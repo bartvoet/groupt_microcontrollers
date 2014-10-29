@@ -1,5 +1,6 @@
 all:
-	pandoc nl/chapter1/book.txt -o cursus.epub
-	pandoc nl/chapter1/presentation.txt -o presentation.epub
+	pandoc nl/chapter1/book.md -o cursus.epub
+	pandoc nl/chapter1/presentation. -o presentation.epub
 clean:
-	rm cursus.epub
+	rm nl/chapter1/cursus.epub
+  rm nl/chapter1/presentation.epub
