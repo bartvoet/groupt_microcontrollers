@@ -1,6 +1,6 @@
 all:
-	pandoc nl/chapter1/book.md -o cursus.epub
-	pandoc nl/chapter1/presentation. -o presentation.epub
+	cd nl/chapter1 && pandoc book.md -o ../../cursus.epub
+	pandoc nl/chapter1/presentation.md -o presentation.epub
 clean:
-	rm nl/chapter1/cursus.epub
-  rm nl/chapter1/presentation.epub
+	rm cursus.epub
+	rm presentation.epub
