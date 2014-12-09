@@ -191,4 +191,49 @@ bits van deze instructie. Rd en Rs zijn het bestemmings en bron register.
 ![Data directe adresseringsmethode](../pictures/avr_data_direct_adressingmethod.png)
 
 **Voorbeeld:**  
-Onderstaande figur toont een bepalade being situatie:
+Onderstaande figur toont een specifieke start-situatie:  
+
+|Register | Inhoud | | Gegeheugen adress | Inhoud geheugen-cel |
+|-|-|-|-|
+|R1|**F0**||0x0200|**F3**|
+|R15|C5||0x0201|1A|
+||||0x0202|32|
+||||0x0203|BE|
+
+Wij voeren enkele Instructies uit, namelijk:
+```
+LDS R1, 0x0202
+STS 0x0200, R15
+```
+
+Wat is de inhoud van register R1 en R15 na deze 2 instructies?
+```
+LDS R1, 0x0202  ; De inhoud uit geheugen cel 0x0202 geladen en wordt in
+                ; register R1 geschreven
+STS 0x0200, R15 ; De inhoud van R15 (dus C5) wordt in data geheugen cel
+                ; 0x0200 opgeslagen (STD = STORE Direct to SRAM)
+```
+De fysische gevolgen van bovenstaande instructies zijn hieronder visueel weergegeven:
+
+|Register | Inhoud | | Gegeheugen adress | Inhoud geheugen-cel |
+|-|-|-|-|
+|R1|**32**||0x0200|**C5**|
+|R15|C5||0x0201|1A|
+||||0x0202|32|
+||||0x0203|BE|
+
+>Opmerking:  
+>De instructie LDS = Load Direct to SRAM bevat als operands een register en een direct data adres. Dit data adres kunnen we echter ook indirect meegeven (adhv een pointer register).  
+De instructie ```LDS R1, 0x0202```  
+kunnen we ook schrijven als ```LDS R1, X```  
+Waarbij X het X-register is dat opgebouwd is uit 2 registers.  
+Deze 2 registers zijn
+geladen met de waarde 0x02 en 0x02.  
+Dit principe is het data indirect adresseren dat we later bespreken (zie...)
+
+### Data Indirecte adresseringsmethode
+
+Deze adresseringsmethode komt zeer overeen met de Data Direct mode, wat is het verschil?
+
+#### Data direct
+Eén van de 2 operands is een expliciet gespecifieerd geheugenadres, hetzij om data in op te slaan hetzij uit te lezen.
