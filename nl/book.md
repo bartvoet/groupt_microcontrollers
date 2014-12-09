@@ -1,7 +1,44 @@
+introductie: getting started (programmeren en omgeving)
+content:
+    wat is wat
+    mcu vs computer (bekenste elementen)
+    diepgang voor later
+  tools leren kennen (command line en toolchain)
+  principe copy/paste en een led doen blinken
+resultaat:
+* men begrijpt wat een mcu
+
+# Basis van programmeren
+content:
+* variabelen en expressies
+* condities
+* loops
+resultaat:
+* men kan een eenvoudig command-line schrijven
+
+
+met bits spelen
+  getal-representaties
+
+met pointers spelen
+
+structs
+macros
+
+# memory (soorten memory in c)
+* stack
+* heap
+
+diepgang:
+  steek eens zelf een mcu in elkaar
+resultaat:
+  herhaling van
+
+
 <!--- Comment -->
 
 # Introductie
-## Wat is een microcontroller
+## Wat is een microcontroller?
 ### waar worden microcontrollers voor gebruikt
 
 * Hoe zit een computer-systeem in elkaar
