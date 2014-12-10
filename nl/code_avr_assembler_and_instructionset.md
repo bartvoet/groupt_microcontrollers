@@ -415,12 +415,12 @@ Deze logische bewerkingen kunnen uitgevoerd worden tussen twee registers  of tus
 **Voorbeeld:**  
 Aan poort D, pin 7 is een motor aangesloten. Deze moet uitgeschakeld worden en tegelijkertijd moet de smeerpomp, die aangesloten is aan pin 2 van poort D ook uitgeschakeld worden. Alle andere pennen aan poort D blijven onveranderd.
 
-| A | B | Q |  
-|---|---|---|  
-0|0|0|
-0|1|0|
-0|0|0|
-1|1|1|
+| A | B | Q |
+|---|---|---|
+|0|0|0|
+|0|1|0|
+|0|0|0|
+|1|1|1|
 
 ```
 ANDI   R1, $01111011B
