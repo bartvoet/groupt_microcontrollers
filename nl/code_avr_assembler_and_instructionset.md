@@ -29,7 +29,7 @@ instructie (vb het aantal bytes)
 De operand is de date waarop de instructie wordt uitgevoerd of dit kan ook een geheugenadres zijn.  
 
 Schematisch kan een instructie er als volgt uit zien:
-![Assembler instructie](../pictures/avr_assembler_instruction.png)
+![Assembler instructie](../pictures/avr_assembler_instruction.png?raw=true)
 
 
 De meest algemene vorm van een instructie is:  
