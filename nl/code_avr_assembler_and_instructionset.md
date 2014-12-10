@@ -453,12 +453,12 @@ Stel volgende opstelling
 
 De draaizin van de motor moet omgeschakeld worden. De andere bits van de poort mogen daarbij niet beinvloed worden.
 
-|A|B|Q|
-|-|-|-|
-|0|0|0|
-|0|1|1|
-|0|0|1|
-|1|1|0|
+| A | B | Q |
+| - | - | - |
+| 0 | 0 | 0 |
+| 0 | 1 | 1 |
+| 0 | 0 | 1 |
+| 1 | 1 | 0 |
 
 ```
 EOR    R1, $00010000B
