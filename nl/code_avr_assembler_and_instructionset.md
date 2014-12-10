@@ -415,12 +415,12 @@ Deze logische bewerkingen kunnen uitgevoerd worden tussen twee registers  of tus
 **Voorbeeld:**  
 Aan poort D, pin 7 is een motor aangesloten. Deze moet uitgeschakeld worden en tegelijkertijd moet de smeerpomp, die aangesloten is aan pin 2 van poort D ook uitgeschakeld worden. Alle andere pennen aan poort D blijven onveranderd.
 
-A|B|Q
--|-|-
-0|0|0
-0|1|0
-0|0|0
-1|1|1
+|A|B|Q|
+|-|-|-|
+0|0|0|
+0|1|0|
+0|0|0|
+1|1|1|
 
 ```
 ANDI   R1, $01111011B
@@ -431,12 +431,12 @@ Wanneer één ingang van de en-functie 0 is dan zal de uitgang steeds nul zijn. 
 #### De OR functie
 Deze keer willen we de betroffen motoren inschakelen.  
 
-A|B|Q
--|-|-
-0|0|0
-0|1|1
-0|0|1
-1|1|1
+|A|B|Q|
+|-|-|-|
+|0|0|0|
+|0|1|1|
+|0|0|1|
+|1|1|1|
 
 ```
 ORI    R1, $01111011B
@@ -453,12 +453,12 @@ Stel volgende opstelling
 
 De draaizin van de motor moet omgeschakeld worden. De andere bits van de poort mogen daarbij niet beinvloed worden.
 
-A|B|Q
--|-|-
-0|0|0
-0|1|1
-0|0|1
-1|1|0
+|A|B|Q|
+|-|-|-|
+|0|0|0|
+|0|1|1|
+|0|0|1|
+|1|1|0|
 
 ```
 EOR    R1, $00010000B
