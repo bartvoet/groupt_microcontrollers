@@ -193,8 +193,8 @@ bits van deze instructie. Rd en Rs zijn het bestemmings en bron register.
 **Voorbeeld:**  
 Onderstaande figur toont een specifieke start-situatie:  
 
-|Register | Inhoud | | Gegeheugen adress | Inhoud geheugen-cel |
-|-|-|-|-|
+|Register | Inhoud | <-> | Gegeheugen adress | Inhoud geheugen-cel |  
+|---------|--------|-----|-------------------|---------------------|  
 |R1|**F0**||0x0200|**F3**|
 |R15|C5||0x0201|1A|
 ||||0x0202|32|
@@ -213,8 +213,8 @@ STS 0x0200, R15 ; The content of R15 (C5) is stored in data memory cell 0x0200 (
 ```
 De fysische gevolgen van bovenstaande instructies zijn hieronder visueel weergegeven:
 
-|Register | Inhoud | | Gegeheugen adress | Inhoud geheugen-cel |
-|-|-|-|-|
+|Register | Inhoud | <-> | Gegeheugen adress | Inhoud geheugen-cel |  
+|---------|--------|-----|-------------------|---------------------|  
 |R1|**32**||0x0200|**C5**|
 |R15|C5||0x0201|1A|
 ||||0x0202|32|
@@ -256,8 +256,8 @@ Data verplaatsen:
 **Voorbeeld:**  
 We beschouwen volgende vertreksituatie:  
 
-|Register | Inhoud | | Gegeheugen adress | Inhoud geheugen-cel |
-|-|-|-|-|
+|Register | Inhoud | <-> | Gegeheugen adress | Inhoud geheugen-cel |  
+|---------|--------|-----|-------------------|---------------------|  
 |R0|**0x00**||0x0200|**0xF3**|
 |R26|0x00||0x0201|0x1A|
 |R27|0x02||0x0202|0x32|
@@ -270,12 +270,12 @@ LD     R0,X; LD = loads data from memory-location
            ;02=content of R27=MSB
            ;00=content of R26=LSB
 ```
-|Register | Inhoud | | Gegeheugen adress | Inhoud geheugen-cel |
-|-|-|-|-|
-|R0|**0xF3**|<=|**0x0200**|**0xF3**|
-|R26|0x00||0x0201|0x1A|
-|R27|0x02||0x0202|0x32|
-||||0x0203|BE|
+|Register | Inhoud | <-> | Gegeheugen adress | Inhoud geheugen-cel |  
+|---------|--------|-----|-------------------|---------------------|  
+|R0|**0xF3**| <= |**0x0200**|**0xF3**|  
+|R26|0x00||0x0201|0x1A|  
+|R27|0x02||0x0202|0x32|  
+||||0x0203|BE|  
 
 De inhoud van de geheugenplaats waar naar register X wijst wordt in register R0. Dus Register R0, die bij
 aanvang de waarde 0x00 had, bevat nu de waarde 0xF3. Dit is hierboven visueel weergeven.
@@ -287,7 +287,7 @@ R26=0x10
 R27=0x03  
 
 | Gegeheugen adress | Inhoud geheugen-cel |
-|-|-|
+|-------------------|---------------------|
 |0x0200|**C5**|
 |0x0201|1A|
 |0x0202|32|
@@ -415,8 +415,8 @@ Deze logische bewerkingen kunnen uitgevoerd worden tussen twee registers  of tus
 **Voorbeeld:**  
 Aan poort D, pin 7 is een motor aangesloten. Deze moet uitgeschakeld worden en tegelijkertijd moet de smeerpomp, die aangesloten is aan pin 2 van poort D ook uitgeschakeld worden. Alle andere pennen aan poort D blijven onveranderd.
 
-|A|B|Q|
-|-|-|-|
+| A | B | Q |  
+|---|---|---|  
 0|0|0|
 0|1|0|
 0|0|0|
@@ -431,8 +431,8 @@ Wanneer één ingang van de en-functie 0 is dan zal de uitgang steeds nul zijn. 
 #### De OR functie
 Deze keer willen we de betroffen motoren inschakelen.  
 
-|A|B|Q|
-|-|-|-|
+| A | B | Q |  
+|---|---|---|  
 |0|0|0|
 |0|1|1|
 |0|0|1|
@@ -454,7 +454,7 @@ Stel volgende opstelling
 De draaizin van de motor moet omgeschakeld worden. De andere bits van de poort mogen daarbij niet beinvloed worden.  
 
 | A | B | Q |  
-|--|--|--|  
+|---|---|---|  
 | 0 | 0 | 0 |  
 | 0 | 1 | 1 |  
 | 0 | 0 | 1 |  
