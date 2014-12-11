@@ -39,4 +39,21 @@ We gaan er vanuit dat niet alle studenten ervaring hebben met programmeren en me
   * IDE Eclipse (of alternatieven naar keuze)  
   * Toolchain: compilers en buildtools  
 
+
+* Programmeren van een AVR
+  * Kennismaking met hardware
+  * Flash programmers
+  * Blinking LED (Arduino)
+  * Hello world (blinking LED)
+
+#### Basis of microcontrollers
+* Algemene opbouw van een microcontroller
+
+* Bits en byte
+
+* I/O op een microcontroller (GPIO)
+
+####  
+
+
 TODO: under construction
