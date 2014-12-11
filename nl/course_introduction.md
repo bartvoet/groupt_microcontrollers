@@ -38,3 +38,5 @@ We gaan er vanuit dat niet alle studenten ervaring hebben met programmeren en me
 * Kennismaking en introductie met C-tools:  
   * IDE Eclipse (of alternatieven naar keuze)  
   * Toolchain: compilers en buildtools  
+
+TODO: under construction
