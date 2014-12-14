@@ -1,9 +1,9 @@
-# I2C (Inter-Integrated Circuit)
+## I2C (Inter-Integrated Circuit)
 
 I2C is (net zoals SPI) een serieel synchroon (werkt met clock) protocol, het is relatief goedkoop en is low-speed (100 kbps in standard mode, and 400 kbps in fast mode).  
 I2C (beheerd door NXP) wordt ook wel officieus TWI genoemd (Two Wire Interface), het gebruikt slechts 2 draden om communicatie te voorzien tussen de master en slaves.
 
-## Bidirectionaliteit
+### Bidirectionaliteit
 
 Deze 2 draden – SDA (seriele data) en SCL (seriele clock) – zijn bidirectioneel.  
 Zowel de transmissie van de master naar slave als het antwoord van de slave(s) naar de master worden gedeeld over dezelfde (SDA) data-lijn (dit in tegenstelling tot SPI die voor beide richtingen een data-lijn nodig heeft).  
@@ -18,7 +18,7 @@ Beide draden (SDA en SCL) moeten verbonden aan een positieve spannings-bron via 
 Deze open-collector-pins op de IC kunnen de spanning naar beneden trekken door (principe van open collector via een transistor  zoals de tekening hierboven) stroom te trekken via deze pull-up weerstand.  
 Wanneer deze interne transistor echter gesloten wordt zal de spanning natuurlijk hoog blijven (tenzij een andere aangesloten IC deze naar beneden trekt.
 
-## Transactie
+### Transactie
 Bij niet-activiteit (idle) blijven deze lijnen dus hoog, een master kan echter een “I2C-transactie” initieren door:
 * De SDA-lijn naar beneden te trekken (laag)
 * Gevolgd door SCL.
@@ -36,12 +36,12 @@ Deze transactie wordt beëindigd via een “stop-conditie”:
 
 Door dit “aankondiging-systeem” kunnen er zich ook meerdere masters zich bevinden op deze “I2C-bus”, bij gelijktijdig gebruik zal de bus die de lijn hoog wil laten maar laag wordt getrokken zijn transactie stoppen en een error-conditie genereren.
 
-## Bytes
+### Bytes
 I2C stuurt bytes door, de MSB wordt eerst doorgestuurd en de LSB laatst.  Elk van deze bytes moet worden bevestigd door de slave (ACK).  
 Deze ACK – dit is eigenlijk de 9ste bit –  wordt bereikt door – na de 8 bits – een extra clock-puls te geven en de receiver controle te geven over de SDA-lijn.  
 Als deze receiver de lijn laag trekt wordt dit dan gezien als een “acknowledgment” (of bevestiging van ontvangst), zoniet wordt de transactie afgebroken (error).  
 
-### Boodschap of pakket-transmissie:
+#### Boodschap of pakket-transmissie:
 De eerste byte van een i2c boodschap is een de adres-byte die bestaat uit:  
 * 7 adres bits
 * gevolgd door 1 richting bit.
@@ -53,7 +53,7 @@ De eerste byte van een i2c boodschap is een de adres-byte die bestaat uit:
 
 Daarna volgt er een dataframe waarbij de ontvanger (slave bij '0' en master bij '1') elke byte zal bevestigen tot dat we aan de stop-conditie komen.
 
-## Voorbeeld van een i2c-uitwisseling:
+### Voorbeeld van een i2c-uitwisseling:
 Veel moderne sensors stellen hun data ter beschikking via een digtale interface, in vele gevallen is dit i2c (als slave).  
 Een typisch gebruik is om een MCU eerst een commando versturen - waar de adres-byte een richting bit '0' bevat - met als data-frame daaropvolgend commando-informatie naar de sensor toe (1 of meerdere bytes).
 De sensor ondertussen start een meting en de MCU zal (afhangende van de duurtijd van de meting beschreven in de datasheet van de sensor) een lees-instructie versturen (richting-bit = '1').  

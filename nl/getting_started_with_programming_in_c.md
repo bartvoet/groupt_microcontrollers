@@ -1,8 +1,8 @@
-#Inleiding tot programmeren  
+## Inleiding tot programmeren  
 
 
 
-##Elementen van een software-applicatie:  
+### Elementen van een software-applicatie:  
 
 ```
 /* This is your first programm*/
@@ -18,4 +18,4 @@ void main(void)
 
 ```
 
-## Embedded c?
+### Embedded c?

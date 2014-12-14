@@ -1,6 +1,6 @@
-#Serial peripheral interface (SPI)
+## Serial peripheral interface (SPI)
 
-##Bustopologie
+### Bustopologie
 
 SPI maakt over het algemeen gebruik van 4 draden, hoewel 3-draads verbindingen ook een
 mogelijkheid zijn (indien slave niets terug zend kan MISO weggelaten worden).
@@ -21,7 +21,7 @@ waarmee hij wil commmuniceren.
 
 ![Topologie SPI](../pictures/spi_topology.png)
 
-##Communicatie
+### Communicatie
 
 SPI kan full duplex communiceren met een slave, dit betekent dat er gelijktijdig data kan verzonden en
 ontvangen worden, dit in tegenstelling tot de eerder geziene I2C-bus die slechts half duplex kan zenden
@@ -42,7 +42,7 @@ Indien CPHA = 1 en CPOL = 1 wordt de data gewijzigd op de falling en gesampled o
 
 ![Klokfase en Polariteit](../pictures/spi_clockphase_and_polarity.png)
 
-##SPI op de ATMEGA
+### SPI op de ATMEGA
 
 Net zoals voor de tellers, TWI, Uart enzovoort, beschikt de Atmega ook over een hardwarematige SPI-eenheid.  
 Het blokdiagram hiervan is geillustreerd op de onderstaande figuur:
