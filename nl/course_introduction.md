@@ -6,54 +6,92 @@ Dit is de cursus microcontrollers gegeven in ACE Groep T.
 Na digitale combinatorische logica en digitale sequentiële schakelingen, waar de studenten leerden om Programmeerbare logische devices te programmeren, is het nu de beurt aan de microcontroller.  
 
 De doelstellingen van deze cursus zijn inzicht verwerven in en te leren werken met:  
-* De basis van C (programmeertaal)
+* De basis van de programmeertaal C
+* AVR-assembler (enkel de noties)
 * Basis I/O periferieën en het leren aansturen ervan in de programmeertaal C
 * Algemene communicatie-protocollen zoals i2c, spi, usart,
 * De architectuur van een AVR microcontroller (en vergelijking met andere architecturen)
-* Het geheugen en registeropbouw in een microcontroller (en coputersystemen in het algemeen).
+* Het geheugen en registeropbouw in een microcontroller (en coputersystemen in het algemeen)
+
 
 > Opmerking:  
 De student mag gebruik maken van de computers voorzien in het labo.  
-Als hij/zij deze cursus wil uitproberen, de gebruikte software en toolchains zijn open en beschikbaar (+ getest) op de volgende OS:
+Als hij/zij deze cursus wil uitproberen op de eigen PC, de gebruikte software en toolchains zijn open en beschikbaar (+ getest) op de volgende OS:
 * Linux (getest op Ubuntu 14.10)
 * Mac OS X (getest op Maverics)
 * Windows (getest op Windows 7)
-* FreeBSD is ongoing
+* FreeBSD is ongoing  
 
-### Opbouw van de cursus:  
-De cursus is chronologisch opgebouwd in verschillende fases
+## Opbouw van de cursus:  
+De cursus is chronologisch opgebouwd in verschillende fases of hoodstukken.  
+In elk van deze hoofdstukken vind je 3 aspecten terug:
+### 4 niveau's:
+* **Code:**  
+Het aanleren van programmeren met een focus op de C-programmeertaal.  
+Dit is meestal de start van een hoofdstuk waar we de nodige elementen aanleren die nodig zijn in de 2 in het toepassing-niveau (en ook niet meer want C is al voldoende complex).  
+Dit wordt telkens ingeoefend aan de hand van korte labo-oefeningen op PC voor dat we dit toepassen op een microcontroller-omgeving.  
 
-#### Getting started
+* **Architectuur en low-level**  
+Het low-level en embedded programmeren steunt op een goede kennis van het platform.
+Afhangende van het onderwerp zullen dieper ingaan op instructie-sets, processsor-architectuur, opbouw van communicatie-protocols, ADC, ...  
 
-We gaan er vanuit dat niet alle studenten ervaring hebben met programmeren en meer specifiek het programmeren van microcontrollers dus we starten van de basis.
+* ** Elektronica **  
+Herhaling van leerstof waar van toepassing
 
-* Introductie in programmeren:  
-  * Opbouw van een command-line programma
-  * Variabelen en expressies  
-  * Condities  
-  * While loops  
-  * Hello world C-programma  
+* **Toepassing en labo**  
+1 (of meerdere) labo's om de aangeleerde theorie en c-skills toe te passen.
 
+### Onderdelen
+#### Introductie:  
+##### Introductie van programmeren  
+* Basis van programmeren en intro in C (condities, loops, variabelen)
+* Kennismaking en introductie met de tools om te ontwikkelen
 
-* Kennismaking en introductie met C-tools:  
-  * IDE Eclipse (of alternatieven naar keuze)  
-  * Toolchain: compilers en buildtools  
+##### Introductie van programmeren op microcontroller
+* Leren werken met toolchain voor microcontroller
+* Structuur van een microcontroller-programma
+* 1ste maal programmeren van een AVR (knipperlicht-labo op Arduino)
 
+#### Basis GPIO programmeren
+* Externe opbouw van een microcontroller (pins en poorten)
+* Vervolg programmeren in C: functies en procedures
+* Werken met data-types, bits en bytes, ...
+* Input en output op een microcontroller (GPIO)
+* Werken met hardware-programmers
 
-* Programmeren van een AVR
-  * Kennismaking met hardware
-  * Flash programmers
-  * Blinking LED (Arduino)
-  * Hello world (blinking LED)
-
-#### Basis of microcontrollers
-* Algemene opbouw van een microcontroller
-
-* Bits en byte
-
-* I/O op een microcontroller (GPIO)
-
-####  
+#### Timers en interrupts
+* Macros
+* Registers
 
 
-TODO: under construction
+#### Seriele protocollen UART
+
+
+#### Seriele protocollen I2C en SPI
+* Sensors
+* I2C
+* SPI
+
+
+#### Motoren
+
+
+
+
+
+---------------------------------------
+
+#### Te verdelen
+##### Seriele communicatie
+
+##### Interrupts
+
+##### ADC
+
+##### Memory
+
+##### EEProm
+
+#### Float
+
+* Labo met nunchuk
