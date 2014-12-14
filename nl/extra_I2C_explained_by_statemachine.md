@@ -1,6 +1,6 @@
-# Illustratie hardware-implementatie I2C
+## Illustratie hardware-implementatie I2C
 
-## Elementen voorbeeld hardware-implementatie (master):
+### Elementen voorbeeld hardware-implementatie (master):
 Voor een master te ontwikkelen (7-bits-adressering niet de uitgebreide 10-bits-specificatie) heb je hardware matig moet je slechte 2 pins naar buiten openstellen(de common ground en Vcc buiten beschouwing gelaten), namelijk SDA en SCL.  
 
 Intern naar de controller-unit (MCU) dien je een aantal hardware-registers open te stellen:
@@ -21,7 +21,7 @@ In HDL-termen ga je 2 processen nodig hebben:
 Voor de de SCL-clock kan je in principe de 50 mHz-clock van een spartan-bord afdelen naar 400kHz (/125).
 Deze SCL-clock wordt dan gebruikt als input (en cadans) van de volgende state-machine.
 
-## I2C Statemachine:  
+### I2C Statemachine:  
 Het systeem start altijd op in de 'ready'-status, wanneer het 'enable'-signaal (en) '1' wordt zal het naar de 'start'-status gaan.
 
 Deze start-status zal de start-conditie initiëren op de i2c-bus (SDA eerst laag dan SCL laag).

@@ -1,5 +1,5 @@
-# De instructieset  
-## Inleiding  
+## De instructieset  
+### Inleiding  
 
 Dit hoofdstuk is enkel bedoeld om een indruk te schetsen hoe instructies worden uitgevoerd op processor niveau.  De assembly taal komt hierbij aan bod. Hoewel wij tijdens de labo zittingen werken met de programmeertaal C is dit hoofdstuk zeer belangrijk om de basis kennis en de structurele opbouw van een microcontroller te begrijpen.
 
@@ -51,7 +51,7 @@ instructie set beschrijving. (http://www.atmel.com/Images/doc0856.pdf)
 
 > ![Assembler vs instructie](../pictures/avr_assembler_vs_machine_code.png)  
 
-## Overzicht van de instructieset  
+### Overzicht van de instructieset  
 
 De instructies van de microcontroller kunnen in verschillende categorieën worden ingedeeld, afhankelijk van de manier waarop de instructies:  
 * de data benaderen (directe of indirecte adressering)  
@@ -89,7 +89,7 @@ X,Y,Z |indirect adres register
 A     |I/O locatie adres (poort adres)  
 q     |isplacement for direct adressing (6-bit)  
 
-## Adresseringsmethoden  
+### Adresseringsmethoden  
 
 Om de instructieset van de controller te begrijpen, moet je weten hoe de CPU variabelen in het
 systeem kan adresseren. Hiervoor zijn meerdere methoden denkbaar.
@@ -102,12 +102,12 @@ systeem kan adresseren. Hiervoor zijn meerdere methoden denkbaar.
 * Indirect Program Addressing
 * Relative Program Addressing  
 
-### Register Direct adresseringsmethode
+#### Register Direct adresseringsmethode
 
 Deze adresseringsmethode is werkzaam op elk van de 32 registers in de Register File (zie...). Zowel
 instructies tussen twee registers als instructies op één enkel register zijn denkbaar.  
 
-#### Één enkel register: Rd
+##### Één enkel register: Rd
 
 **Instructie formaat:**  
 
@@ -118,7 +118,7 @@ instructies tussen twee registers als instructies op één enkel register zijn d
 INC R15   ;increment the content of register 15 with 1
 CLR R2    ;clear the content of register R2 (all bits on "0")
 ```
-#### Twee registers: Rd en Rr
+##### Twee registers: Rd en Rr
 
 De microcontroller leest de data uit de registers Rd en Rs. Voert de instructie uit op de registers. Slaat het
 resultaat terug op in het bestemmingsregister Rd
@@ -132,7 +132,7 @@ ADD R2, R5  ;add the content of both registers, the sum is stored in R2
             ;regiser R5 remains unchanged
 ```
 
-#### Twee-register versus één-regiser directe adressering
+##### Twee-register versus één-regiser directe adressering
 
 Onderstaande figuur geeft het eerder besproken instructieformaat voor het direct en indirect adresseren van een geheugenplaats weer. De operands in deze afbeelding is beschreven met afkortingen. (zie ook eerder -> verklaring van de operands)
 
@@ -140,7 +140,7 @@ Onderstaande figuur geeft het eerder besproken instructieformaat voor het direct
 
 Het is belangrijk te leren werken met datasheets, deze beschrijvingen zijn een samenvatting van de datasheet http://www.atmel.com/Images/doc0856.pdf. De uitgebreide, in woorden beschreven, instructie formaten zullen achterwegen gelaten worden.
 
-### I/O Direct adresseringsmethode  
+#### I/O Direct adresseringsmethode  
 I/O directe adressering wordt gebruikt om de I/O geheugenruimte te bereiken (I/O registers en
 poorten).
 I/O registers worden enkel aangesproken met de instructies IN en OUT
@@ -166,7 +166,7 @@ OUT PORTA, R16    ;Information of R16 is pushed in R16
 >![Data memory](../pictures/avr_data_memory_related_to_direct_memory.png)  
 De AVR ATmega165P controller heeft meer randsytemen aan boord dan er door de 64 I/O registers kunnen ondersteund worden. De 160 Extended I/O geheugenplaatsen kunnen enkel bereikt worden via de data adresseringsmethode. I/O adressing is enkel mogelijk voor de 64 I/O registers.  
 
-### Immediate adresseringsmethode  
+#### Immediate adresseringsmethode  
 Een constante (immediate data) kan weg geschreven worden naar één van de 32 General Purpose
 Registers. Deze data is rechtstreeks, als operand, opgenomen in de instructie. Een immediate instructie
 is duidelijk herkenbaar doordat de mnemonic code uitgebreid is met een “i”.
@@ -179,7 +179,7 @@ LDI  R2, 0X62    ;Loads the hex-number in register R2
 > Opmerking:  
 > Merk op dat we een constant hexadecimaal invoeren.  En dat we hiervoor de suffix 0x gebruiken.  
 
-### Data directe adresseringsmethode
+#### Data directe adresseringsmethode
 
 Tot op heden hebben we steeds met de registers in het General Purpose register gewerkt. We kunnen
 echter ook data gaan lezen en schrijven uit bijvoorbeeld het SRAM geheugen en/of het extern I/O
@@ -229,14 +229,14 @@ Deze 2 registers zijn
 geladen met de waarde 0x02 en 0x02.  
 Dit principe is het data indirect adresseren dat we later bespreken (zie...)
 
-### Data Indirecte adresseringsmethode
+#### Data Indirecte adresseringsmethode
 
 Deze adresseringsmethode komt zeer overeen met de Data Direct mode, wat is het verschil?
 
-#### Data direct
+##### Data direct
 Eén van de 2 operands is een expliciet gespecifieerd geheugenadres, hetzij om data in op te slaan hetzij uit te lezen.
 
-#### Data indirect
+##### Data indirect
 Hier is het adres gespecifieerd als de inhoud van het X, Y of Z register, waarbij:  
 * X=combinatie van R26 en R27
 * Y=combinatie van R28 en R29
@@ -280,7 +280,7 @@ LD     R0,X; LD = loads data from memory-location
 De inhoud van de geheugenplaats waar naar register X wijst wordt in register R0. Dus Register R0, die bij
 aanvang de waarde 0x00 had, bevat nu de waarde 0xF3. Dit is hierboven visueel weergeven.
 
-#### Oefening
+##### Oefening
 * Gegeven:  
 R0=0x41  
 R26=0x10  
@@ -301,10 +301,10 @@ Wat is de inhoud van R0 na de instructie ```Lds R0,X```?
 X = R27 als MSB + R26 als LSB  
 X= 0x0310
 
-### Data indirecte adressering: Uitbreiding  
+#### Data indirecte adressering: Uitbreiding  
 De data indirecte adressering is een zeer populaire adresserings-methode en wordt voor verschillende doeleinden gebruikt.  
 
-#### Post-increment/Pre-decrement
+##### Post-increment/Pre-decrement
 De pointer registers X, Y of Z kunnen ook:  
 * Vermeerderd worden met 1 alvorens de instructie uit te voeren (post-increment)  
 * Eerst verminderd worden met 1 alvorens de instructie uit te voeren (pré-decrement)
@@ -328,7 +328,7 @@ ST -X, r15; Verminder het X-register met één en sla de inhoud van
           ; register R15 indirect op.
 ```
 
-#### Indirect adresseren met offset (Y en Z register)  
+##### Indirect adresseren met offset (Y en Z register)  
 De adres operand is het resultaat van de som van het Y of Z register EN de off-set operand q.
 **Voorbeeld**  
 ```
@@ -336,14 +336,14 @@ LDD R0, Z+0x10 ; Laad indirect de inhoud van het register Z+0x10 in register R0
                ; Dit is hieronder visueel weer gegeven
 ```
 ![Indirecte adressering met OFFSET](../pictures/AVR_indirect_adressing_with_offset.png)  
-#### Indirecte programmageheugen adressering (z register)
+##### Indirecte programmageheugen adressering (z register)
 Om het 16K grootte programmageheugen aan te spreken gebruiken we het Z-register als pointer voor indirecte sprongen of subroutines. Instructies die hiervoor gebruikt worden zijn bijvoorbeeld IJMP of ICALL.
 
 Indien één van deze instructies gebruikt wordt moet men eerst het Z-register laden. De instructie IJMP laadt de waarde van het Z-register in de programcounter (PC). De programcounter wijst naar het adres van de volgende uit te voeren instructie.
 
 ![Indirecte programmageheugen adressering](../pictures/AVR_indirect_program_memory_adressing_with_offset.png)
 
-#### Relatieve programmageheugen adresseringsmethode
+##### Relatieve programmageheugen adresseringsmethode
 De instructies rjmp en rcall werken volgens deze methode. Voor de relatieve programma geheugen adressering gebruikt men de PC als pointer.
 
 ![Relatieve programmageheugen adressering](../pictures/AVR_relative_programming_memory_adressing.png)
@@ -364,12 +364,12 @@ ok:     NOP             ; Dit is de bestemming van de relatieve sprong
 De NOP instructie wordt door de CPU uit het geheugen gelezen, zodat ze een bepaalde tijd duurt.  
 Bij uitvoering van de instructie gebeurt er niets.
 
-## Programma en machine controle  
+### Programma en machine controle  
 In de datasheet is de instructie set overzicht terug te vinden. De instructie set bevat de zogenaamde BRANCH instructies. Deze instructies laten toe om het programmaverloop te wijzigen, al of niet afhankelijk van de toestand van een (bit)variabele. Hierdoor is het niet alleen mogelijk om het programma een andere weg te laten volgen, afhankelijk van het resultaat van een berekening of variabele, maar ook om bepaalde delen programma vanuit verschillende plaatsen op te roepen.
 
 We kunnen een duidelijk verschil maken tussen de sprong (**JUMP**) instructies en de “roep op” **CALL** instructies.  
 
-### De jump instructies  
+#### De jump instructies  
 Deze instructies voeren een, al of niet voorwaardelijke sprong uit naar het adres dat in de instructie is opgenomen. Men wil, na de sprong, niet terugkeren naar het adres dat door de sprong verlaten werd. Dit zogenaamde terugkeeradres, of ook wel returnadres genoemd, wil men dan ook niet bewaren; Bij een voorwaardelijke sprong zullen we het programmaverloop afhankelijk willen maken van de toestand van een variabele.  
 
 In jump instructies kan men nog een onderscheid maken:  
@@ -383,7 +383,7 @@ In jump instructies kan men nog een onderscheid maken:
  * Onvoorwaardelijke (unconditional jumps)
 Bij deze spronginstructies wordt de sprong steeds gemaakt.
 
-### De CALL instructies  
+#### De CALL instructies  
 
 Deze onvoorwaardelijke instructies hebben tot doel om subroutines te kunnen oproepen. Een subroutine is een stuk programma dat we op verschillende plaatsen in het hoofdprogramma willen uitvoeren. Het is dus wel de bedoeling om terug te keren naar het adres van waar de subroutine opgeroepen werd. Het return adres wordt door de cpu op de stack geplaatst, en bij een return (RET) instructie van de stack gehaald, en in de programcounter (PC) geplaatst.
 
@@ -403,14 +403,14 @@ Een subroutine of een interrupt routine moet afgesloten worden met een instructi
 > Opmerking:  
 Interruptroutines worden door hardware opgestart, en het is dan ook onmogelijk om ten opziche van het hoofdprogramma te weten wanneer ze uitgevoerd gaan worden. Je weet niet welke registers op dat ogenblik in gebruik zijn en welke gebruikt mogen worden door de interruptroutine. De oplossing hier voor zijn de PUSH en POP instructies waarmee we tijdelijk bepaalde registers kunnen vrijmaken.  
 
-## Instructievoorbeelden  
-### Logische instructies  
+### Instructievoorbeelden  
+#### Logische instructies  
 De logische operaties die ATmega165P kan uitvoeren zijn de AND, OR en XOR instructies.
 ![Logische functies](../pictures/avr_logical_functions.png)
 
 Deze logische bewerkingen kunnen uitgevoerd worden tussen twee registers  of tussen een register en een constante.
 
-#### De AND functie  
+##### De AND functie  
 
 **Voorbeeld:**  
 Aan poort D, pin 7 is een motor aangesloten. Deze moet uitgeschakeld worden en tegelijkertijd moet de smeerpomp, die aangesloten is aan pin 2 van poort D ook uitgeschakeld worden. Alle andere pennen aan poort D blijven onveranderd.
@@ -428,7 +428,7 @@ OUT    PORTD, R1
 ```
 Wanneer één ingang van de en-functie 0 is dan zal de uitgang steeds nul zijn. Door bit 7 en 4 van poort D te AND’en met 0 worden de betroffen motoren uitgeschakeld (indien de motoren + geschakeld zijn)
 
-#### De OR functie
+##### De OR functie
 Deze keer willen we de betroffen motoren inschakelen.  
 
 | A | B | Q |  
@@ -465,6 +465,6 @@ EOR    R1, $00010000B
 OUT    PORTD, R1
 ```  
 
-## Besluit  
+### Besluit  
 
 In dit hoofdstuk hebben we zaken besproken die noodzakelijk zijn om een inzicht te verwerven in de signaal verwerking en registeradressering op hardware niveau. In het labo gaan wij werken met een hogere programmeer taal waardoor we niet geconfronteerd worden met voorgaande zaken; Daarom gaan we ook niet verder in detail in op dit onderwerp.

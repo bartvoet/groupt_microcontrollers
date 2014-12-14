@@ -1,18 +1,18 @@
-# Bit-wise operaties
+## Bit-wise operaties
 
-## Bitwise operatoren in c
+### Bitwise operatoren in c
 
-### Logical operators
+#### Logical operators
 
-### Bit-shifting
+#### Bit-shifting
 
 
-## Bits manipuleren
+### Bits manipuleren
 
-### Bits lezen
+#### Bits lezen
 
-### Bits wijzigen naar 1 (met or)
+#### Bits wijzigen naar 1 (met or)
 
-### Bits wijzigen naar 0 (met and)
+#### Bits wijzigen naar 0 (met and)
 
-### Bits wisselen (met xor)
+#### Bits wisselen (met xor)

@@ -1,6 +1,6 @@
-# Interne opbouw AVR
+## Interne opbouw AVR
 
-## De AVR CPU_CORE
+### De AVR CPU_CORE
 
 Onderstaande figuur toont de architectuur van de microcontroller, die bovendien gebaseerd is op de **Harvard structuur**, waarbij geheugens en bussen voor instructies (programma) en data gescheiden zijn.  De instructies in het programmageheugen worden uitgevoerd volgens het principe **single level pipelining**.
 
@@ -24,7 +24,7 @@ De blokken die blauw ingekleurd zijn, zijn de typische componenten die standard 
 | Instructie i+2 |                    |                     | Instructie ophalen  | Instructieuitvoeren |                     |
 | Instructie i+3 |                    |                     |                     | Instructie ophalen  | InstructieUitvoeren |
 
-## ALU – Arithmetic Logic Unit
+### ALU – Arithmetic Logic Unit
 De ALU is als rekeneenheid het centraal staande onderdeel van de processor. De ALU voert
 rekenkundige en logische bewerkingen uit. Deze bewerkingen zijn binair. De basis bewerkingen van de
 ALU zijn:
@@ -44,7 +44,7 @@ De ALU geeft na ELKE bewerking een extra informatie bij een bepaald resultaat. D
 Deze bits zijn weergegeven in het Status Register.  
 Het status register wordt na elke bewerking geupdate.
 
-## Het status register
+### Het status register
 
 De ALU geeft na ELKE bewerking een extra informatie bij een bepaald resultaat. Dit resultaat zijn vlaggen in de vorm van bits. Deze bits zijn weergegeven in het Status Register. Het status register wordt na elke bewerking geupdate.
 
@@ -102,7 +102,7 @@ routine, het status register (zoals het was vóór de subroutine) niet automatis
 terug opgeroepen. De gebruiker moet dit zelf zo programmeren!
 
 
-## General Purpose Register File
+### General Purpose Register File
 Het **General Purpose Register** is speciaal ontworpen voor de AVR met RISC instructieset. Doordat deze registers zeer dicht bij het geheugen staan zijn ze zeer snel en flexibel.
 ![General purpose register file](../pictures/avr_general_purpose_register_file.png)
 
@@ -128,8 +128,8 @@ Om het overzichtelijk te houden zijn de eerste 32 adressen van het datageheugen 
 > fysiek niet geïmplementeerd als SRAM locatie. De geheugenstructuur wordt in een
 > later hoofdstuk verder behandeld.
 
-## Stack en stackpointer
-### De stack  
+### Stack en stackpointer
+#### De stack  
 
 De stack, ook wel Stapelgeheugen genoemd, is een gereserveerd
 geheugengebied dat gebruikt wordt voor het opslaan van tijdelijke data,
@@ -142,7 +142,7 @@ Men kan dit visueel voorstellen door houten schijven rond een paaltje in de gron
 Het aantal geheugenlocaties dat gereserveerd moet worden is afhankelijk van het programma dat uitgevoerd wordt. Wordt er te veel geheugen gereserveerd voor de stack, dan blijven een heel deel stack registers, die nodig kunnen zijn als data geheugen, ongebruikt.  
 Worden er te weinig registers gereserveerd dan kan het programma vast lopen. In principe moet men, na het afwerken van een programma, controleren hoeveel stackregisters er nodig zijn, en indien nodig de stack aanpassen.
 
-### De stack pointer
+#### De stack pointer
 
 Bij de stack hoort ook een stackpointer. Deze pointer is in het I/O geheugen (op adres 0x5E en 0x5D) opgenomen als twee 8-bit registers (SPH en SPL). De stackpointer wijst naar het data SRAM stack-gebied waar de subroutine en interrupt stacks gelokaliseerd zijn. De stackpointer MOET boven 0xFF geïnitialiseerd worden.
 
@@ -176,7 +176,7 @@ Hier in dit voorbeeld, in assembly code met instructies uit de instructieset, wo
 ![AVR Stackpointer](../pictures/avr_stackpointer_initalization.png)
 ![AVR Stackpointer](../pictures/avr_stackpointer_initalization_2.png)
 
-## Geheugen
+### Geheugen
 
 De ATmega165P controller heeft verschillende soorten geheugen, namelijk:
 * 16 K Programmageheugen
@@ -193,11 +193,11 @@ De ATmega165P controller heeft verschillende soorten geheugen, namelijk:
 
 ![Geheugen overzicht](../pictures/avr_overview_memory.png)
 
-### "In System" herprogrammeerbaar flash programma geheugen
+#### "In System" herprogrammeerbaar flash programma geheugen
 
 Dit is geheugen van het type Flash. Na het laden van een programa in dit geheugen blijft het programma behouden, ook wanneer de voedingspanning van de microcontroller wegvalt.
 
-### SRAM Data geheugen
+#### SRAM Data geheugen
 
 Het datageheugen kan in 4 onderdelen worden opgesplitst. Belangrijk om weten is dat al deze
 onderdelen, hoewel wij ze zo tekenen, niet fysisch in één geheugen IC zijn ondergebracht.
@@ -226,7 +226,7 @@ Het betreft hier volgende adresseringsmodes:
 * Indirect met Pré-decrement: de adresregisters X, Y en Z worden verminderd
 * Indirect met Post-increment: De adresregisters X, Y en Z worden vermeerderd
 
-### EEPROM Data Geheugen
+#### EEPROM Data Geheugen
 
 De ATmega165P controller bevat 512 bytes, afzonderlijk, EEPROM data geheugen waarin zuiver bytes geschreven kunnen worden. EEPROM toegang registers zijn bereikbaar in de I/O data ruimte.
 We kunnen als gebruiker in dit geheugen gaan schrijven en lezen. Hiervoor moeten we enkele I/O registers initialiseren. Meer info hier omtrent is terug te vinden in de datasheet.
@@ -247,7 +247,7 @@ Aan dit geheugen zijn 4 Registers gekoppeld, namelijk:
     * Bit 3: EERIE (EEPROM Ready Interrupt Enable)
 Meer info over de write/read procedure van de EEPROM is terug te vinden in de datasheet.
 
-### IO Data Geheugen
+#### IO Data Geheugen  
 
 De gedefinieerde functies van de I/O data geheugens is beschreven in de “Register Summary” in de datasheet.
 We werden reeds, bij de bespreking van het stackpointer register, geconfronteerd met de I/O registers en merkten op dat het register 2 adressen heeft. Dit is ook zichtbaar in het register overzicht dat besproken wordt in de datasheet.
@@ -278,7 +278,7 @@ Al deze I/O locaties kunnen, teneinde datatransport tussen de 32 General Purpose
 programmeren. In het hoofdstuk Embedded C zal aan de hand van het “Hello World”
 voorbeeld programma duidelijk worden hoe we deze registers gaan gebruiken.  
 
-### General Purpose Registers.  
+#### General Purpose Registers.  
 
 Zoals eerder besproken bezit de ATmega165P controller een ingewikkeld kloksysteem. Een schematisch overzicht is hieronder weergegeven. Op een bepaald moment zal elke klok eens actief zijn. De niet-gebruikte klokken kunnen, teneinde het verbruik te verlagen, in een slaapmodus geplaatst worden.  
 Dit powermanagement valt echter buiten het doel van deze cursus en is volledig beschreven in de datasheet.
@@ -288,7 +288,7 @@ Deze registers bevinden zich op volgende adressen:
 * GPIOR1: 0x2A (0x4A)
 * GPIOR2: 0x2B (0x4B)  
 
-## De systeemklok en klokopties  
+### De systeemklok en klokopties  
 
 Zoals eerder besproken bezit de ATmega165P controller een ingewikkeld kloksysteem. Een schematisch overzicht is hieronder weergegeven. Op een bepaald moment zal elke klok eens actief zijn. De niet-gebruikte klokken kunnen, teneinde het verbruik te verlagen, in een slaapmodus geplaatst worden. Dit powermanagement valt echter buiten het doel van deze cursus en is volledig beschreven in de datasheet.
 
@@ -310,7 +310,7 @@ Dit specifiek klok domein staat toe om de timer/teller als real-time teller te g
 **ADC klok (clk ADC )**  
 De analoog-digitaal convertor heeft een eigen klok domein. Dit moet ruis, gegenereerd door het digitaal circuit, verminderen en een dus een meer accurate conversie teweeg brengen.
 
-### Klokbronnen
+#### Klokbronnen
 
 Er zijn verschillende manieren waarop we een klok kunnen genereren voor onze controller. Zo kunnen we bijvoorbeeld een externe klok die "éénen" en "nullen" produceert, een extern kristal of keramiek oscillator aansluiten.  
 Onze microcontroller bezit zelfs een ingebouwde RC trillingsgenerator.  
@@ -339,12 +339,12 @@ Fabrieksnieuw is de controller ingesteld met volgende fusebits:
 Een maximale start-up tijd heeft als doel een stabiele controllervoeding te waarborgen alvorens instructies beginnen uit te voeren.  
 Meer info mbt de “SUT” fuse bit is terug te vinden in de datasheet.
 
-#### Keuzes in clock-controllers:
+##### Keuzes in clock-controllers:
 
-##### Interne RC oscillator (fuse bits CKSEL3...0 = “0010”)  
+###### Interne RC oscillator (fuse bits CKSEL3...0 = “0010”)  
 Deze oscillator, die geen externe componenten nodig heeft, genereert een kloksignaal van **+/- 8MHz** die bij levering door 8 gedeeld wordt. De frequentie is afhankelijk van de voedingsspanning VCC en de temperatuur. Om deze reden kan men deze oscillator voor een grotere nauwkeurigheid gaan hercalibreren via het Oscillator Calibration register OSCCAL. (meer info in datasheet)  
 
-##### Kristal oscillator  
+###### Kristal oscillator  
 ![AVR Klok-bronnen](../pictures/avr_crystal_oscilator.png)
 
 Via de penaansluitingen XTAL1 en XTAL2, die respectievelijk in- en uitgang zijn van een inverterende versterker, kan een quartz kristal of een keramische resonator aangesloten worden om een klok te genereren.  
@@ -360,23 +360,23 @@ Indien een kristal met lage frequentie gebruikt wordt dient men rekening te houd
 vervangingsweerstanden.  
 Meer technische info hieromtrent is terug te vinden in de datasheet.
 
-##### Externe klok (fuse bits CKSEL3...0 = “0000”)  
+###### Externe klok (fuse bits CKSEL3...0 = “0000”)  
 Fuse bits: 0000  
 XTAL1 = Extern klok signaal  
 XTAL2 = niet aangesloten  
 Frequentiebereik = 0-16MHz  
 
-##### Welke klok kies ik?  
+###### Welke klok kies ik?  
 Dit hangt af van meerdere factoren.  
 Indien hoge nauwkeurigheid een must is, dan gebruikt men best de externe klok of kristal.  
 Indien de kost laag moet blijven dan kan men de interne oscillator of de keramische resonator gebruiken.  
 Deze laatste zijn uiteindelijk ook de meest makkelijke oplossingen.
 
-#### Clock output  
+##### Clock output  
 
 Wederom met behulp van een fuse bit, namelijk CKOUT, kunnen we de systeemklok naar buiten brengen om zo ook andere apparaten aan te kunnen sturen die buiten de controller liggen.
 
-#### De system klok prescaler  
+##### De system klok prescaler  
 
 Om de systeemklok frequentie te kunnen verlagen en om zo eveneens het verbruik, op niet-kritische momenten, te reduceren kunnen we een prescaler gebruiken.  
 Deze prescaler kan de klokfrequentie delen door 1,2,4,8,16,32,64,128 of 256.  

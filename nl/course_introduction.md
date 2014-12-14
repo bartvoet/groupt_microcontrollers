@@ -43,14 +43,14 @@ Herhaling van leerstof waar van toepassing
 
 ### Onderdelen
 #### Introductie:  
-##### Introductie van programmeren  
-* Basis van programmeren en intro in C (condities, loops, variabelen)
-* Kennismaking en introductie met de tools om te ontwikkelen
-
-##### Introductie van programmeren op microcontroller
-* Leren werken met toolchain voor microcontroller
-* Structuur van een microcontroller-programma
-* 1ste maal programmeren van een AVR (knipperlicht-labo op Arduino)
+* Kennismaking
+* Introductie van programmeren  
+ * Basis van programmeren en intro in C (condities, loops, variabelen)
+ * Kennismaking en opzetten van de software-tools
+* Introductie van programmeren op microcontroller
+ * Leren werken met toolchain voor microcontroller
+ * Structuur van een microcontroller-programma
+ * 1ste maal programmeren van een AVR (knipperlicht-labo op Arduino)
 
 #### Basis GPIO programmeren
 * Externe opbouw van een microcontroller (pins en poorten)
@@ -62,13 +62,16 @@ Herhaling van leerstof waar van toepassing
 #### Timers en interrupts
 * Macros
 * Registers
+* Timer- en interupts
+  * Architectuur
+  * Registers
 
 
 #### Seriele protocollen UART
 
 
 #### Seriele protocollen I2C en SPI
-* Sensors
+* Sensors (en "internet of things")
 * I2C
 * SPI
 

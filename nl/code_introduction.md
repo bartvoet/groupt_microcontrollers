@@ -1,6 +1,6 @@
-# Eerste kennismaking met programmmeren
+## Eerste kennismaking met programmmeren
 
-Programmeren is **moeillijk** en kan snel **demotiveren** bij de verkeerde en ongefundeerde aanpak.    
+Programmeren is **moeillijk** en kan snel **demotiveren** bij de verkeerde en ongefundeerde aanpak.
 In dit hoofdstuk proberen we dit te omzeilen door eerst de basis-concepten van een programma uit te leggen.  
 In het eerste deel proberen we dit uit te leggen aan de hand van een visuele programmeertaal genoemd scratch.  
 
@@ -14,23 +14,23 @@ Na deze introductie (en labo-oefeningen) hernemen passen deze concepten toe op d
 > Opmerking:  
 Dit is enkel ter introductie elk van deze elementen wordt dieper ingegaan gedurende de cursus.
 
-## Illustratie met scratch  
+### Illustratie met scratch  
 
 ![Mogelijkheden met scratch](../pictures/scratch_code_bloks.png)
 
-### Beslissingen  
-### Herhalingen  
-### Variabelen en data-types  
-### Input en output  
-### Functies en procedures  
-### Events  
-### Arrays en lijsten  
+#### Beslissingen  
+#### Herhalingen  
+#### Variabelen en data-types  
+#### Input en output  
+#### Functies en procedures  
+#### Events  
+#### Arrays en lijsten  
 
-## Toegepast in C  
-### Beslissingen  
-### Herhalingen  
-### Variabelen en data-types  
-### Input en output  
-### Functies en procedures  
-### Events  
-### Arrays en lijsten  
+### Toegepast in C  
+#### Beslissingen  
+#### Herhalingen  
+#### Variabelen en data-types  
+#### Input en output  
+#### Functies en procedures  
+#### Events  
+#### Arrays en lijsten  
