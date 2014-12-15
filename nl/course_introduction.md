@@ -44,7 +44,7 @@ Het is de bedoeling dat we met de gehele klas dezelfde thema's aanvatten en beei
 
 ### Opbouw van de cursus:  
 De cursus is chronologisch opgebouwd in verschillende fases of hoodstukken.  
-In elk van deze hoofdstukken vind je 3 aspecten terug:
+In elk van deze hoofdstukken vind je volgende aspecten terug:
 #### 4 niveau's:
 * **Code:**  
 Het aanleren van programmeren met een focus op de C-programmeertaal.  
