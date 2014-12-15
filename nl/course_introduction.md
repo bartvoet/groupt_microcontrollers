@@ -22,8 +22,25 @@ Als hij/zij deze cursus wil uitproberen op de eigen PC, de gebruikte software en
 * Windows (getest op Windows 7)
 * FreeBSD is ongoing  
 
-### Top-down
-...
+### We starten van nul
+Starten met programmeren (en zeker in C) is moeillijk en kan snel tot frustraties leiden indien niet correct onderbouwd.  
+De cursus start daarom met
+Wel starten we reeds tijdens de 2de les
+
+### Principes
+De meeste hoofdstukken bestaan in tijd uit:
+* 1/4 theorie
+* 2/4 labo's (tools, programmeren en hardware setup)
+* 1/4 evaluatie  
+
+Deze hoofdstukken worden over het algemeen gespreid over 2-3 lesdagen uitgewerkt.  
+De oefeningen worden in 2 verdeeld:
+* **Basis-oefeningen**  
+Oefeningen die iedereen dient te verwerken
+* **Uitbreidings-oefeningen**  
+Oefeningen voor de studenten die voorop lopen.
+
+Het is de bedoeling dat we met de gehele klas dezelfde thema's aanvatten en beeindigen.
 
 ### Opbouw van de cursus:  
 De cursus is chronologisch opgebouwd in verschillende fases of hoodstukken.  
