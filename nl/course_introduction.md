@@ -1,8 +1,8 @@
-# Microcontrollers
+## Microcontrollers
 
 Dit is de cursus microcontrollers gegeven in ACE Groep T.  
 
-## Situering van de module in de opleiding
+### Situering van de module in de opleiding
 Na digitale combinatorische logica en digitale sequentiële schakelingen, waar de studenten leerden om Programmeerbare logische devices te programmeren, is het nu de beurt aan de microcontroller.  
 
 De doelstellingen van deze cursus zijn inzicht verwerven in en te leren werken met:  
@@ -22,10 +22,13 @@ Als hij/zij deze cursus wil uitproberen op de eigen PC, de gebruikte software en
 * Windows (getest op Windows 7)
 * FreeBSD is ongoing  
 
-## Opbouw van de cursus:  
+### Top-down
+...
+
+### Opbouw van de cursus:  
 De cursus is chronologisch opgebouwd in verschillende fases of hoodstukken.  
 In elk van deze hoofdstukken vind je 3 aspecten terug:
-### 4 niveau's:
+#### 4 niveau's:
 * **Code:**  
 Het aanleren van programmeren met een focus op de C-programmeertaal.  
 Dit is meestal de start van een hoofdstuk waar we de nodige elementen aanleren die nodig zijn in de 2 in het toepassing-niveau (en ook niet meer want C is al voldoende complex).  
@@ -38,11 +41,11 @@ Afhangende van het onderwerp zullen dieper ingaan op instructie-sets, processsor
 * ** Elektronica **  
 Herhaling van leerstof waar van toepassing
 
-* **Toepassing en labo**  
+* **Toepassing: tools en labo's**  
 1 (of meerdere) labo's om de aangeleerde theorie en c-skills toe te passen.
 
-### Onderdelen
-#### Introductie:  
+#### Onderdelen
+##### Introductie:  
 * Kennismaking
 * Introductie van programmeren  
  * Basis van programmeren en intro in C (condities, loops, variabelen)
@@ -52,14 +55,14 @@ Herhaling van leerstof waar van toepassing
  * Structuur van een microcontroller-programma
  * 1ste maal programmeren van een AVR (knipperlicht-labo op Arduino)
 
-#### Basis GPIO programmeren
+##### Basis GPIO programmeren
 * Externe opbouw van een microcontroller (pins en poorten)
 * Vervolg programmeren in C: functies en procedures
 * Werken met data-types, bits en bytes, ...
 * Input en output op een microcontroller (GPIO)
 * Werken met hardware-programmers
 
-#### Timers en interrupts
+##### Timers en interrupts
 * Macros
 * Registers
 * Timer- en interupts
@@ -67,16 +70,16 @@ Herhaling van leerstof waar van toepassing
   * Registers
 
 
-#### Seriele protocollen UART
+##### Seriele protocollen UART
 
 
-#### Seriele protocollen I2C en SPI
+##### Seriele protocollen I2C en SPI
 * Sensors (en "internet of things")
 * I2C
 * SPI
 
 
-#### Motoren
+##### Motoren
 
 
 
@@ -84,17 +87,17 @@ Herhaling van leerstof waar van toepassing
 
 ---------------------------------------
 
-#### Te verdelen
-##### Seriele communicatie
+##### Te verdelen
+###### Seriele communicatie
 
-##### Interrupts
+###### Interrupts
 
-##### ADC
+###### ADC
 
-##### Memory
+###### Memory
 
-##### EEProm
+###### EEProm
 
-#### Float
+##### Float
 
 * Labo met nunchuk
