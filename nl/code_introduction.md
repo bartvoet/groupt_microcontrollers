@@ -29,15 +29,9 @@ Binnen zo een programma zijn er verschillende soorten instructies:
 > In somige gevallen kunnen deze instructies zelfs opgeroepen worden bij bepaalde events (wordt pas later besproken)
 
 Hoe dat dit in zijn werk gaat bekijken we aan de hand van een programmeer-taal.  
-Er bestaan veel verschillende programmeer-talen zoals:  
-* C
-* C++
-* Java
-* Python
-* C#
-* ...
+Er bestaan veel verschillende programmeer-talen zoals C, C++, Java, Python, C#, ...
 
-In deze cursus - die rond microcontrollers draait - doen we dit met C.  
+In deze cursus - die rond microcontrollers draait - gebruiken we hiervoor C.  
 Momenteel nog altijd de meest gebruikte programmeertaal in de wereld van microctrollers en embedded programming.
 
 #### Programmeer-taal C
@@ -48,7 +42,7 @@ Voor dit aan te maken heb je niet meer nodig dan een teksteditor (zoals bv. note
 ![](../pictures/intro_printscreen_of_editor.png)
 
 ##### Compileren en linken
-
+Deze tekst kan je echter niet direct door een CPU laten uitvoeren.  
 Alvorens je dat programma kan uitvoeren op het platform naar keuze (computer, microcontroller ...) moet deze tekst-file getransformeerd worden naar een uitvoerbare binaire file (in het geval van C).  
 
 ![](../pictures/intro_position_of_writing_code.png)
@@ -70,11 +64,12 @@ Vooraleer te starten met microcontrollers oefenen we de basis van programmeren m
 Hierover volgt in de volgende hoofdstukken nog zeer veel diepgang, voorlopig focussen we ons op de eerste activiteit, namelijk het schrijven  van code.
 
 ### Basis-elementen en structuur van een progamma
-Een C-programma (en ook programma's in andere talen zoals Java, Python, C#, ...) bevatten allemaal de volgende elementen:
+
+Zoals hierboven reeds beschreven bevat een C-programma (en ook programma's in andere talen zoals Java, Python, C#, ...) verschillende elementen:
 
 ![](../pictures/basic_structure_programm.png)
 
-Deze basis-elementen gaan we stap voor stap uitleggen aan de hand van een aantal voorbeelden.
+Deze basis-elementen gaan we **stap voor stap** uitleggen aan de hand van een aantal **voorbeelden**.
 
 #### Voorbeeld 0: skelet en body van een programma
 Een klassiek c-programma begint meestal met:  
