@@ -1,25 +1,36 @@
-## Introductie in programmmeren
+## Introductie in programmeren
 
-Programmeren kan **moeillijk** zijn en kan snel **demotiveren** bij de verkeerde en ongefundeerde aanpak.  
+Dit is een introductie en/of eerste kennismaking met programmeren aan de hand van de programmeer-taal C.
 
-Om deze reden pakken we dit stap-voor-stap en starten we enkel met de absolute basis:
+We pakken dit stap-voor-stap en starten ook enkel met de absolute basis:
+
 * Basis-structuur van een applicatie
-  * Variabelen en constanten
-  * Statements en expressies
-  * Assignments
-* Input en output verweken van een command-line
+    * Statements en expressies
+    * Operatoren en functies (aanroepen)
+    * Variabelen en constanten
+    * Assignments
+* Input en output verweken in een command-line-applicatie
 
-In dit eerste hoofdstuk proberen we dit te omzeilen door eerst de basis-concepten van een programma uit te leggen.  
+>**Nota:**  
+>Sommige zaken worden in dit hoofdstuk uitermate vereenvoudigd en onvolledige voorgesteld.   
+>Waarom?  
+>Programmeren is niet de meest eenvoudige activiteit en we willen niet te snel vooruit lopen om iedereen (met of zonder eerdere programmeer-ervaring) van in het begin dezelfde basis (en kansen) te geven.
 
-### Wat doet een programma (vanop 10000 meter hoogte)?
-Een programma (en software in het algemeen) is in essentie:
+
+### Wat is een (software-)programma?
+In essentie is bestaat een (uitvoerbaar) programma (executable) uit :
 
 * een (of meerdere) **bestand**(en)  die een welbepaalde **sequentie van instructies** bevatten
-* die door een **computer** (meer bepaald een processor) worden **uitgevoerd**.
+* deze instructies worden door een **computer** (meer bepaald een processor) **geïnterpreteerd** en  **uitgevoerd**.
+
+Binnen een computer is een **CPU (processor)** verantwoordelijk voor het 1 voor 1 verwerken van deze instructies.  
+In de praktijd gaat deze **CPU**:
+
+* het programma van een hard-disk of een ander medium afhalen
+* de instructies van dit programma in het RAM-geheugen laden
+en heeft toegang tot het geheugen voor het opslaan van data.
 
 ![](../pictures/intro_external_logical_computer_view.png)
-
-Een **CPU (processor)** is in een computer verantwoordelijk voor het 1 voor 1 verwerken van deze instructies en heeft toegang tot een geheugen voor het opslaan van data.
 
 ### Soorten van instructies  
 
@@ -60,10 +71,10 @@ Alvorens je dat programma kan uitvoeren op het platform naar keuze (computer, mi
 Deze transformatie wordt uitgevoerd door  3 programma's:
 
 * Een assembler die je code vertaalt naar assembler (zie later)  
-* Een **compiler** die deze assembler vertaalt naar binarie objecten
+* Een **compiler** die deze assembler vertaalt naar binaire objecten
 * Een **linker** die deze binaire objecten linkt tot een uitvoerbaar programma
 
-Dit programma kan dan rechtstreeks geinterpreteerd worden door een CPU
+Dit programma kan dan rechtstreeks geïnterpreteerd worden door een CPU
 
 ##### Command-line
 In de praktijk zijn er programma's die dat voor jou doen.  Voorbeelden van zulke compilers zijn gcc en msc.
@@ -79,14 +90,14 @@ om een uitvoerbaar command-line applicatie te verkrijgen.
 
 > Vooraleer te starten met microcontrollers oefenen we de basis van programmeren met c in aan de hand van dit soort programma's dat je van de command-line kan aanroepen.
 
-> Hierover volgt in de volgende hoofdstukken nog zeer veel diepgang, voorlopig focussen we ons op de eerste activiteit, namelijk het schrijven  van code.
+> Hierover volgt in de volgende hoofdstukken nog zeer veel diepgang, voorlopig focussen we ons op de eerste activiteit, namelijk het schrijven  van code zelf   .
 
 ### Eerste stap in programmeren
 
 #### Voorbeeld 0: Body van een programma
 
 Hieronder zie je een leeg programma.  
-Als je dit programma zou aanroepen zou dit direct beindigen zonder iets te doen.
+Als je dit programma zou aanroepen zou dit direct beëindigen zonder iets te doen.
 
 ```
 void main ()
@@ -94,17 +105,23 @@ void main ()
 
 }
 ```
-Wat moet je hieruit onthouden is:
+
+##### Resultaat
+Zoals je ziet doet dit programma niets, het voert uit en print geen resultaat uit
+
+![](../pictures/code_example_result_empty.png) 
+
+##### Wat je echter moet onthouden hieruit:
+Ondanks dit leeg resulaat hebben we hier iets uit kunnen observeren/leren: 
+
 * Een c-programma start met "void main()"
 * Tussen de accolades kan je een sequentie van instructies schrijven.
-* Wat er tussen deze acolades staat wordt ook wel de **body** van je programma genoemd.
+* Wat er tussen deze accolades staat wordt ook wel de **body** van je programma genoemd.
 
-> Er zijn natuurlijk veel variaties op, maar dat is momenteel nog niet aan de orde.
+#### Voorbeeld: Schrijven naar een console (deel 1)
 
-### Voorbeeld: Output van een programma (deel 1)
-
-Het eerste programma dat altijd wordt gebruikt om een taal te leren kennen is een programma dat een tekst-boodschap afrdukt
-Zie ook http://en.wikipedia.org/wiki/List_of_Hello_world_program_examples hoe dit wordt toegepast in zowat alle talen
+Een eerste gewoonte bij het aanleren van programmeer-taal te leren kennen is het schrijven van programma dat een tekst-boodschap afrdukt.
+Men noemt dit ook een "Hello World" (zie ook http://en.wikipedia.org/wiki/List_of_Hello_world_program_examples) met voorbeelden voor zowat alle talen:
 
 ```
 #include <stdio.h>
@@ -113,21 +130,47 @@ void main ()
   printf("Hello World");
 }
 ```
-2 nieuwe elementen kunen we hier onderscheiden:  
+**2 nieuwe elementen** kunnen we hier onderscheiden:  
 
+##### Aanroepen van een functie
+
+De bibliotheek (of libary) die we hier willen gebruiken bevat een aantal functies die we willen gebruiken voor het lezen van en schrijven naar een scherm.
+
+In dit geval bevat deze bibliotheek (library) een functie genaamd printf.  
+```
+printf("Hello World");
+```
+Dit is de eerste instructie die bekijken, een functie-aanroep.
+Zo een functie kan je aanroepen onder de volgende vorm
+```
+<naam van de functie>(<argument>,<argument>,...);
+```  
+
+Eerst geef je de naam van deze functie en dan kan je een aantal argumenten meegeven.
+In het voorbeeld eerder beschreven moet je maar 1 argument meegeven en dat is de tekst die je wil afdrukken.
+Let wel, deze tekst moet omsloten zijn door dubbele quote ("tekst")
+
+> Deze functies kan je ook zelf definieren, dit komt later in de cursus aan bode
+
+##### Importeren van een library (of header-file)
+Om deze functie te kunnen gebruiken echter, moet je aanduiden (voor de compiler) dat je functies wilt gebruiken die gerelateerd zijn aan het printen van boodschappen naar het scherm.  
+Dit wordt gedaan via de volgende lijn code:
 ```
 #include <stdio.h>
 ```  
-Deze lijn duidt eigenlijk aan dat we een voorgedefinieerde bibliotheek met functies willen gebruiken.  
-De bibliotheek (of libary) die we hier willen gebruiken bevat een aantal functies die we willen gebruiken voor het lezen van en schrijven naar een scherm.
+Deze lijn zorgt ervoor dat je een lijst van voorgedefinieerde functies ter beschikking krijgt die je kan gebruiken die gerelateerd zijn aan het printen.
 
-```
-printf("Hello World");
-```  
+Voorlopig gaan we hier niet verder op ingaan, voorlopig gaan we van de stelling uit dat (tot nader order) al onze volgende programma's starten met deze lijn.
 
+#### Resultaat
+Als je nu dit programma uitvoert via een terminal print, deze de boodschap die we hebben hebt gecodeerd.
+
+![](../pictures/code_example_result_helloworld.png) 
 
 
 ### Voorbeeld: Meerdere statements sequentiel na elkaar
+Tot nog toe hadden we enkel 1 instructie doorgegeven, je kan ook **meerdere instructies** na mekaar doorgeven.  
+In het volgende programma, hebben we 2-maal een printf-functie-aanroep geplaatst: 
 
 ```
 #include <stdio.h>
@@ -137,14 +180,24 @@ void main ()
     printf(" is een typisch voorbeeld-programma");
 }
 ```
+##### Resultaat
+Als je dit aanroept:  
+
+![](../pictures/code_example_result_doublestatement.png) 
+
+zien we dat de 2 statements na mekaar zijn uit gevoerd
+
+##### Observaties
+
+Wat leren we hieruit:  
+
 * Een c-programma is een opeenvolging van een aantal statements in dit geval:  
     * ```printf("Hello world")```
     * ```printf(" is een typisch voorbeeld-programma")```
 * Elk van deze statements wordt gescheiden door een punt-komma
     * ```;```
 
-
-### Voorbeeld 2: Variabelen en assignments
+### Voorbeeld: Variabelen en assignments
 ```
 #include <stdio.h>
 int main ()
@@ -179,6 +232,17 @@ int main ()
 }
 ```
 
+#### Operatoren
+
+| Operator | Operatie        |
+|----------|-----------------|
+|+         |optellen         |
+|-         |aftrekken        |
+|*         |vermenigvuldigen |
+|/         |delen            |
+|%         |rest             |
+
+
 ------------------------------
 TODO voorbeelden te includeren
 
@@ -187,13 +251,7 @@ Variable => plekje in het geheugen dat je kan gebruiken om een waarde op te slaa
   Variabele initialiseren
 Expressie => iets dat je kan evalueren en een waarde kan geven
   Wiskundige expressies met operators
-  |Operator|Operation|
-  |--------|---------|
-  |+|optellen|
-  |-|aftrekken|
-  |*|vermenigvuldigen|
-  |/|delen|
-  |%|rest|
+
 
   Volgorde van uitvoeren (pemal - h-vdr-oa- van links naar rechts)
   Afronden (voorlopig bespreken we enkel ints, later volgen andere)
