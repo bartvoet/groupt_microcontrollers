@@ -94,7 +94,7 @@ om een uitvoerbaar command-line applicatie te verkrijgen.
 
 ### Eerste stap in programmeren
 
-#### Voorbeeld 0: Body van een programma
+#### Voorbeeld: Body van een programma
 
 Hieronder zie je een leeg programma.  
 Als je dit programma zou aanroepen zou dit direct beëindigen zonder iets te doen.
@@ -105,11 +105,18 @@ void main ()
 
 }
 ```
+Hoewel dit programma niets doet is het wel een geldig programma.
+Als je dit programma compileert en vervolgens uitvoert zie je dat dit programma niets afprint
 
-##### Resultaat
-Zoals je ziet doet dit programma niets, het voert uit en print geen resultaat uit
+```
+$ gcc empty.c -o empty
+$ ls
+$ empty.c empty
+$ ./empty
+$ 
+```
 
-![](../pictures/code_example_result_empty.png) 
+
 
 ##### Wat je echter moet onthouden hieruit:
 Ondanks dit leeg resulaat hebben we hier iets uit kunnen observeren/leren: 
@@ -118,7 +125,7 @@ Ondanks dit leeg resulaat hebben we hier iets uit kunnen observeren/leren:
 * Tussen de accolades kan je een sequentie van instructies schrijven.
 * Wat er tussen deze accolades staat wordt ook wel de **body** van je programma genoemd.
 
-#### Voorbeeld: Schrijven naar een console (deel 1)
+#### Voorbeeld: Schrijven naar een console  
 
 Een eerste gewoonte bij het aanleren van programmeer-taal te leren kennen is het schrijven van programma dat een tekst-boodschap afrdukt.
 Men noemt dit ook een "Hello World" (zie ook http://en.wikipedia.org/wiki/List_of_Hello_world_program_examples) met voorbeelden voor zowat alle talen:
@@ -130,43 +137,70 @@ void main ()
   printf("Hello World");
 }
 ```
-**2 nieuwe elementen** kunnen we hier onderscheiden:  
+Als je nu dit programma compileert en uitvoert zie je dat het via via een terminal print de boodschap print die we aan deze functie hebben meegegeven.
+```
+$ gcc helloworld.c -o helloworld
+$ ls
+$ helloworld helloworld.c
+$ ./helloworld
+$ Hello World
+$
+```
 
-##### Aanroepen van een functie
+Tegenover het vorige programma hebben we **2 nieuwe elementen** kunnen we hier onderscheiden:  
 
-De bibliotheek (of libary) die we hier willen gebruiken bevat een aantal functies die we willen gebruiken voor het lezen van en schrijven naar een scherm.
+* Aanroepen van een functie
+* Gebruikt van test (string)
+* Importeren van een bibliotheek/library
 
-In dit geval bevat deze bibliotheek (library) een functie genaamd printf.  
+##### Aanroepen van een procedure  
+
+De eerste instructie die we bekijken is het **aanroepen van een procedure**.  
+Een **procedure** zelf - is in essentie - een stuk **herbruikbare** functionaliteit (code).
+
+Die functionaliteit (zoals het printen) kan je dan aanroepen met de volgende syntax  
+```
+<naam van de procedure>(<argument>,<argument>,...);
+```  
+Je typt de naam van de procedure, en daarna (tussen de haakjes) een lijst van argumenten (gescheiden met komma's als er meerdere argumenten zijn).
+
 ```
 printf("Hello World");
 ```
-Dit is de eerste instructie die bekijken, een functie-aanroep.
-Zo een functie kan je aanroepen onder de volgende vorm
+> Later in deze cursus gaan we procedures nog verder bekijken: 
+>
+> * Beter overzicht van bestaande procedures 
+> * Procedures (en functies) zelf maken
+> * Functies, die voortbouwen op het het concept van procedures  
+>
+> Voorlopig zijn we echter enkel geïnteresseerd in het schrijven van tekst naar de console, we komen hier later op de cursus nog op terug.
+
+##### Gebruik van tekst
+
+Bij deze hebben we dan ook ineens  data-element gezien dat je in een programma kunt gebruiken, namelijk de string (algemene naam voor tekst in programmeer-talen).  
+
+In C kan je een stuk tekst uitdrukken/definiëren met quotes rond (dubbele haakjes)
 ```
-<naam van de functie>(<argument>,<argument>,...);
-```  
-
-Eerst geef je de naam van deze functie en dan kan je een aantal argumenten meegeven.
-In het voorbeeld eerder beschreven moet je maar 1 argument meegeven en dat is de tekst die je wil afdrukken.
-Let wel, deze tekst moet omsloten zijn door dubbele quote ("tekst")
-
-> Deze functies kan je ook zelf definieren, dit komt later in de cursus aan bode
+"Deze tekst staat tussen dubbele haakjes"
+```
+> Net zoals procedures gaan we het concept van Strings gedurende de cursus veel verder onderzoeken.  
 
 ##### Importeren van een library (of header-file)
-Om deze functie te kunnen gebruiken echter, moet je aanduiden (voor de compiler) dat je functies wilt gebruiken die gerelateerd zijn aan het printen van boodschappen naar het scherm.  
+Deze procedures (en functies) staan meestal gegroepeerd in **bibliotheken** (libraries).
+
+De procedure die wij gebruiken (printf) staat samen met andere procedures (en functies) gedefinieerd in een **header-file**.  
+Zo'n header-file kan je beschouwen als de catalogus van deze procedure-file, je krijgt daar een oplijsting van de procedures die je kan gebruiken.
+
+Concreet gezien, om de procedure uit zo'n een bibliotheek te kunnen gebruiken moet je deze header-file aanduiden bij de start van je programma.  
 Dit wordt gedaan via de volgende lijn code:
 ```
 #include <stdio.h>
 ```  
-Deze lijn zorgt ervoor dat je een lijst van voorgedefinieerde functies ter beschikking krijgt die je kan gebruiken die gerelateerd zijn aan het printen.
+De naam van de header-file staat tussen < en > geplaatst.  
+Met deze include of import van deze file zorg je ervoor dat je programma beschikking krijgt tot een serie van procedures (functies) gerelateerd aan io (input/output).
 
-Voorlopig gaan we hier niet verder op ingaan, voorlopig gaan we van de stelling uit dat (tot nader order) al onze volgende programma's starten met deze lijn.
-
-#### Resultaat
-Als je nu dit programma uitvoert via een terminal print, deze de boodschap die we hebben hebt gecodeerd.
-
-![](../pictures/code_example_result_helloworld.png) 
-
+> Deze bibliotheek (of library) is by default voor zien door je omgeving, en moet je niets meer doen dan deze include-statement te voorzien bij de start je programma.  
+> Later gaan we andere libraries zien en ook hoe dat je zelf je eigen libraries kan definieren.
 
 ### Voorbeeld: Meerdere statements sequentiel na elkaar
 Tot nog toe hadden we enkel 1 instructie doorgegeven, je kan ook **meerdere instructies** na mekaar doorgeven.  
@@ -180,30 +214,31 @@ void main ()
     printf(" is een typisch voorbeeld-programma");
 }
 ```
-##### Resultaat
-Als je dit aanroept:  
+Als je dit programma uitvoert krijg je het volgende resultaat:  
 
-![](../pictures/code_example_result_doublestatement.png) 
+```
+$ gcc doublestatement.c -o doublestatement
+$ ./doublestatement
+Hello World is een typisch voorbeeld programma
+$
+```
+We zien we dat er 2 statements sequentieel na mekaar zijn uit gevoerd
 
-zien we dat de 2 statements na mekaar zijn uit gevoerd
+Ter herhaling, de nieuwigheid tov het vorig voorbeeld is:
 
-##### Observaties
+* dat je meerdere statements na elkaar kan uitvoeren  
+* deze statements worden van elkaar gescheiden door elk statement te eindigen met een **";"**
 
-Wat leren we hieruit:  
+### Voorbeeld: Variabelen 
+De C-programmeertaal laat je ook toe van - tijdens het uitvoeren van je programma - bepaalde waardes bij te houden in het geheugen.
 
-* Een c-programma is een opeenvolging van een aantal statements in dit geval:  
-    * ```printf("Hello world")```
-    * ```printf(" is een typisch voorbeeld-programma")```
-* Elk van deze statements wordt gescheiden door een punt-komma
-    * ```;```
-
-### Voorbeeld: Variabelen en assignments
 ```
 #include <stdio.h>
 int main ()
 {
     int getal1 = 5; 	// Geheel getal 1 = 5
     printf("Het getal is: %i",som);
+    printf("Nog 1 maal printen van %i",som);
 }
 ```
 
@@ -223,7 +258,7 @@ We gaan hier de volgende hoofdstukken dieper op in.
 Belangrijk om met onze variabelen en constanten iets te kunnen doen.
 ```
 #include <stdio.h>
-int main ()
+void main ()
 {
     int getal1 = 5; 	// Geheel getal 1 = 5
     int getal2 = 7;	// Geheel getal 2 = 7
