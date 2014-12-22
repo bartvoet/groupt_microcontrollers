@@ -263,9 +263,9 @@ $ Het getal is: 5
 Dit lijkt vrij overbodig want ```printf("Het getal is: 5");``` geeft hetzelfde formaat.  
 Bij het volgende begrip "variabelen" gaat het nut hiervan duidelijker worden.
 
-### Voorbeeld: Variabelen en data-types
-De C-programmeertaal laat je ook toe van - tijdens het uitvoeren van je programma - bepaalde waardes bij te houden in het geheugen.
+### Voorbeeld: Variabelen en data-types  
 
+De C-programmeertaal laat je ook toe van - tijdens het uitvoeren van je programma - bepaalde waardes bij te houden in het geheugen.
 
 ```
 #include <stdio.h>
