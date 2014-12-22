@@ -2,26 +2,26 @@
 
 Dit is een introductie en/of eerste kennismaking met programmeren aan de hand van de programmeer-taal C.
 
-We pakken dit stap-voor-stap en starten ook enkel met de absolute basis:
+We pakken dit stap-voor-stap en starten ook enkel met de absolute basis (niet meer dan nog om een basis command-line-programma te schrijven):
 
 * Basis-structuur van een applicatie
     * Statements en expressies
     * Operatoren en functies (aanroepen)
     * Variabelen en constanten
     * Assignments
-* Input en output verweken in een command-line-applicatie
+* Input en output verwerken in een command-line-applicatie
 
 >**Nota:**  
->Sommige zaken worden in dit hoofdstuk uitermate vereenvoudigd en onvolledige voorgesteld.   
+>Sommige zaken worden in dit hoofdstuk uitermate vereenvoudigd en zelfs onvolledig voorgesteld.   
 >Waarom?  
->Programmeren is niet de meest eenvoudige activiteit en we willen niet te snel vooruit lopen om iedereen (met of zonder eerdere programmeer-ervaring) van in het begin dezelfde basis (en kansen) te geven.
+>Programmeren is niet de meest eenvoudige activiteit en we willen niet te snel vooruit lopen om iedereen (met of zonder eerdere programmeer-ervaring) van in het begin dezelfde basis (en kansen) mee te geven.
 
 
 ### Wat is een (software-)programma?
 In essentie is bestaat een (uitvoerbaar) programma (executable) uit :
 
 * een (of meerdere) **bestand**(en)  die een welbepaalde **sequentie van instructies** bevatten
-* deze instructies worden door een **computer** (meer bepaald een processor) **geïnterpreteerd** en  **uitgevoerd**.
+* deze instructies worden door een **computer** (meer bepaald een processor) **geïnterpreteerd** en **uitgevoerd**.
 
 Binnen een computer is een **CPU (processor)** verantwoordelijk voor het 1 voor 1 verwerken van deze instructies.  
 In de praktijd gaat deze **CPU**:
@@ -77,26 +77,27 @@ Deze transformatie wordt uitgevoerd door  3 programma's:
 Dit programma kan dan rechtstreeks geïnterpreteerd worden door een CPU
 
 ##### Command-line
-In de praktijk zijn er programma's die dat voor jou doen.  Voorbeelden van zulke compilers zijn gcc en msc.
+In de praktijk zijn er programma's die dat voor jou doen.  Voorbeelden van zulke compilers zijn gcc en msc.  
+Ter illustratie zie je hieronder een voorbeeld van hoe dat je met GCC (via de terminal) een tekstbestand (helloworld.c) transformeert naar een programma (helloworld)
 
 ![](../pictures/intro_printscreen_of_gcc.png)
 
-Ter illustratie zie je hierboven een voorbeeld van hoe dat je met GCC (via de terminal) een tekstbestand (helloworld.c) transformeert naar een programma (helloworld)
 
 Hoe dat precies in zijn werk gaat wordt in het volgend hoofdstuk uitgelegd.  
 Voorlopig kan je er vanuit gaan (indien gcc geinstalleerd is) je dit onder de volgende vorm kan aanroepen:  
 ```gcc <c-file> -o <programmanaam>```  
-om een uitvoerbaar command-line applicatie te verkrijgen.
+om een uitvoerbaar command-line applicatie te verkrijgen.  
+Het gebruik van deze tools wordt in een volgend hoofdstuk uitgelegd zodat we zelf de voorbeelden en labo's kunnen kunnen compileren en uitvoeren.
 
 > Vooraleer te starten met microcontrollers oefenen we de basis van programmeren met c in aan de hand van dit soort programma's dat je van de command-line kan aanroepen.
 
 > Hierover volgt in de volgende hoofdstukken nog zeer veel diepgang, voorlopig focussen we ons op de eerste activiteit, namelijk het schrijven  van code zelf   .
 
-### Eerste stap in programmeren
+### Eerste stappen in programmeren
 
 #### Voorbeeld: Body van een programma
 
-Hieronder zie je een leeg programma.  
+De basis-structuur van een C-programma kunnen we illustreren aan de hand van een e een leeg programma.  
 Als je dit programma zou aanroepen zou dit direct beëindigen zonder iets te doen.
 
 ```
@@ -105,6 +106,7 @@ void main ()
 
 }
 ```
+
 Hoewel dit programma niets doet is het wel een geldig programma.
 Als je dit programma compileert en vervolgens uitvoert zie je dat dit programma niets afprint
 
@@ -116,10 +118,7 @@ $ ./empty
 $ 
 ```
 
-
-
-##### Wat je echter moet onthouden hieruit:
-Ondanks dit leeg resulaat hebben we hier iets uit kunnen observeren/leren: 
+**Wat je echter moet onthouden naar de volgende voorbeelden toe:**
 
 * Een c-programma start met "void main()"
 * Tussen de accolades kan je een sequentie van instructies schrijven.
@@ -128,7 +127,8 @@ Ondanks dit leeg resulaat hebben we hier iets uit kunnen observeren/leren:
 #### Voorbeeld: Schrijven naar een console  
 
 Een eerste gewoonte bij het aanleren van programmeer-taal te leren kennen is het schrijven van programma dat een tekst-boodschap afrdukt.
-Men noemt dit ook een "Hello World" (zie ook http://en.wikipedia.org/wiki/List_of_Hello_world_program_examples) met voorbeelden voor zowat alle talen:
+Men noemt dit ook een "Hello World" (zie ook http://en.wikipedia.org/wiki/List_of_Hello_world_program_examples) met voorbeelden voor zowat alle talen.
+In C bestaat er een specifieke instructie hiervoor genaamd "printf"
 
 ```
 #include <stdio.h>
@@ -147,9 +147,9 @@ $ Hello World
 $
 ```
 
-Tegenover het vorige programma hebben we **2 nieuwe elementen** kunnen we hier onderscheiden:  
+Tegenover het vorige programma hebben we **3 nieuwe elementen** kunnen we hier onderscheiden:  
 
-* Aanroepen van een functie
+* Het aanroepen van een procedure
 * Gebruikt van test (string)
 * Importeren van een bibliotheek/library
 
@@ -171,24 +171,24 @@ printf("Hello World");
 >
 > * Beter overzicht van bestaande procedures 
 > * Procedures (en functies) zelf maken
-> * Functies, die voortbouwen op het het concept van procedures  
+> * Functies, zijnde procedures die een waarde teruggeven (eigenlijk is printf een functie maar daarover later meer)  
 >
 > Voorlopig zijn we echter enkel geïnteresseerd in het schrijven van tekst naar de console, we komen hier later op de cursus nog op terug.
 
-##### Gebruik van tekst
+##### Gebruik van tekst(string)
 
-Bij deze hebben we dan ook ineens  data-element gezien dat je in een programma kunt gebruiken, namelijk de string (algemene naam voor tekst in programmeer-talen).  
+We hebben met dit voorbeeld reeds ons eerste data-element gezien dat je in een programma kunt gebruiken, namelijk het data-type string (algemene naam voor tekst in programmeer-talen).  
 
-In C kan je een stuk tekst uitdrukken/definiëren met quotes rond (dubbele haakjes)
+In C kan je dus een stuk tekst uitdrukken/definiëren met quotes rond (dubbele haakjes)
 ```
 "Deze tekst staat tussen dubbele haakjes"
 ```
 > Net zoals procedures gaan we het concept van Strings gedurende de cursus veel verder onderzoeken.  
 
 ##### Importeren van een library (of header-file)
-Deze procedures (en functies) staan meestal gegroepeerd in **bibliotheken** (libraries).
+Procedures (en functies) staan dikwijls (in het geval van printf bijvoorbeeld) gegroepeerd in **bibliotheken** (libraries).
 
-De procedure die wij gebruiken (printf) staat samen met andere procedures (en functies) gedefinieerd in een **header-file**.  
+De procedure die wij kunnen gebruiken (printf) staat samen met andere procedures (en functies) gedefinieerd in een **header-file**.  
 Zo'n header-file kan je beschouwen als de catalogus van deze procedure-file, je krijgt daar een oplijsting van de procedures die je kan gebruiken.
 
 Concreet gezien, om de procedure uit zo'n een bibliotheek te kunnen gebruiken moet je deze header-file aanduiden bij de start van je programma.  
@@ -202,9 +202,9 @@ Met deze include of import van deze file zorg je ervoor dat je programma beschik
 > Deze bibliotheek (of library) is by default voor zien door je omgeving, en moet je niets meer doen dan deze include-statement te voorzien bij de start je programma.  
 > Later gaan we andere libraries zien en ook hoe dat je zelf je eigen libraries kan definieren.
 
-### Voorbeeld: Meerdere statements sequentiel na elkaar
-Tot nog toe hadden we enkel 1 instructie doorgegeven, je kan ook **meerdere instructies** na mekaar doorgeven.  
-In het volgende programma, hebben we 2-maal een printf-functie-aanroep geplaatst: 
+### Voorbeeld: Meerdere statements sequentieel na elkaar uitvoeren (meerdere print-statements)
+Tot nog toe hadden we enkel 1 instructie doorgegeven, je kan het programma ook **meerdere instructies** na mekaar laten uitvoeren.  
+In het programma hieronder, hebben we 2-maal een printf-functie-aanroep geplaatst: 
 
 ```
 #include <stdio.h>
@@ -222,27 +222,62 @@ $ ./doublestatement
 Hello World is een typisch voorbeeld programma
 $
 ```
-We zien we dat er 2 statements sequentieel na mekaar zijn uit gevoerd
+We zien we dat er 2 statements sequentieel na mekaar zijn uit gevoerd en dat de 2 stukken test naar de console worden afgedrukt.
 
-Ter herhaling, de nieuwigheid tov het vorig voorbeeld is:
+Ter herhaling, de nieuwigheid t.o.v. het vorig  voorbeeld is:
 
 * dat je meerdere statements na elkaar kan uitvoeren  
 * deze statements worden van elkaar gescheiden door elk statement te eindigen met een **";"**
 
-### Voorbeeld: Variabelen 
+
+### Voorbeeld: Werken met getallen 
+
+We hadden reeds een eerste **datatype** bekeken tot nog toe, namelijk **string** (tekst).  
+C ondersteunt echter **veel meer datatypes**, 1 van deze datatypes is een **integer**. 
+
+Een getal in C - in het voorbeeld hieronder een extra argument aan printf - wordt uitgedrukt door gewoon het getal te typen.  
+In tegenstelling tot een string moet je hier **geen quotes** rond plaatsen.
+
+```
+#include <stdio.h>
+void main ()
+{
+    printf("Het getal is: %i\n",5);
+}
+```
+
+In het voorbeeld hierboven voegen we 2 nieuwe zaken toe: 
+
+* Een integer/getal meegeven als aan printf  
+* Het gebruik van placeholders aan printf  
+
+De functie printf kan niet rechtstreeks getallen afdrukken.  
+Daarvoor bestaat er specifieke syntax, je kan namelijk binnen het eerste (string-)argument de plek waar je het getal wil printen met %i markeren.  
+De functie printf zal deze dan deze placeholder (%i) vervangen door het getal bij het afdrukken. 
+
+```
+$ gcc printnumber.c -o printnumber
+$ ./printnumber
+$ Het getal is: 5
+
+Dit lijkt vrij overbodig want ```printf("Het getal is: 5");``` geeft hetzelfde formaat.  
+Bij het volgende begrip "variabelen" gaat het nut hiervan duidelijker worden.
+
+### Voorbeeld: Variabelen en data-types
 De C-programmeertaal laat je ook toe van - tijdens het uitvoeren van je programma - bepaalde waardes bij te houden in het geheugen.
+
 
 ```
 #include <stdio.h>
 int main ()
 {
-    int getal1 = 5; 	// Geheel getal 1 = 5
-    printf("Het getal is: %i",som);
-    printf("Nog 1 maal printen van %i",som);
+    int getal = 5; 	// Geheel getal 1 = 5
+    printf("Het getal is: %i",getal);
+    printf("Nog 1 maal printen van %i",getal);
 }
 ```
 
-Variabele is een plekje geheugen waar je een waarde kan opslaan.
+Een variabele is een plekje geheugen waar je een waarde (in dit geval 5) kan opslaan en een naam kan toekennen (in dit geval getal).
 
 Kenmerken van variabelen:  
 
