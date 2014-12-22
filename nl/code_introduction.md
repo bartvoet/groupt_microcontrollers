@@ -259,6 +259,7 @@ De functie printf zal deze dan deze placeholder (%i) vervangen door het getal bi
 $ gcc printnumber.c -o printnumber
 $ ./printnumber
 $ Het getal is: 5
+```
 
 Dit lijkt vrij overbodig want ```printf("Het getal is: 5");``` geeft hetzelfde formaat.  
 Bij het volgende begrip "variabelen" gaat het nut hiervan duidelijker worden.
