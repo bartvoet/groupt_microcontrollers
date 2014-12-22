@@ -230,7 +230,7 @@ Ter herhaling, de nieuwigheid t.o.v. het vorig  voorbeeld is:
 * deze statements worden van elkaar gescheiden door elk statement te eindigen met een **";"**
 
 
-### Voorbeeld: Werken met getallen 
+#### Voorbeeld: Werken met getallen 
 
 We hadden reeds een eerste **datatype** bekeken tot nog toe, namelijk **string** (tekst).  
 C ondersteunt echter **veel meer datatypes**, 1 van deze datatypes is een **integer**. 
@@ -264,7 +264,7 @@ $ Het getal is: 5
 Dit lijkt vrij overbodig want ```printf("Het getal is: 5");``` geeft hetzelfde formaat.  
 Bij het volgende begrip "variabelen" gaat het nut hiervan duidelijker worden.
 
-### Voorbeeld: Variabelen en data-types  
+#### Voorbeeld: Variabelen en data-types  
 
 De C-programmeertaal laat je ook toe van - tijdens het uitvoeren van je programma - bepaalde waardes bij te houden in het geheugen.
 
@@ -290,7 +290,7 @@ Kenmerken van variabelen:
 een belangrijk kenmerk van een variabele, namelijk geheugen-adres hebben we express niet vermeld.  
 We gaan hier de volgende hoofdstukken dieper op in.
 
-### Voorbeeld 3: operatoren en expressies
+#### Voorbeeld: operatoren en expressies
 Belangrijk om met onze variabelen en constanten iets te kunnen doen.
 ```
 #include <stdio.h>
@@ -303,7 +303,7 @@ void main ()
 }
 ```
 
-#### Operatoren
+##### Overzicht operatoren
 
 | Operator | Operatie        |
 |----------|-----------------|
@@ -313,6 +313,10 @@ void main ()
 |/         |delen            |
 |%         |rest             |
 
+
+#### Voorbeeld precedence
+
+#### Voorbeeld: printf met meerdere placeholders
 
 ------------------------------
 TODO voorbeelden te includeren
