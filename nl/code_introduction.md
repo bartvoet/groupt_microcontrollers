@@ -1,101 +1,8 @@
-## Introductie in programmeren
-
-Dit is een introductie en/of eerste kennismaking met programmeren aan de hand van de programmeer-taal C.
-
-We pakken dit stap-voor-stap en starten ook enkel met de absolute basis (niet meer dan nog om een basis command-line-programma te schrijven):
-
-* Basis-structuur van een applicatie
-    * Statements en expressies
-    * Operatoren en functies (aanroepen)
-    * Variabelen en constanten
-    * Assignments
-* Input en output verwerken in een command-line-applicatie
-
->**Nota:**  
->Sommige zaken worden in dit hoofdstuk uitermate vereenvoudigd en zelfs onvolledig voorgesteld.   
->Waarom?  
->Programmeren is niet de meest eenvoudige activiteit en we willen niet te snel vooruit lopen om iedereen (met of zonder eerdere programmeer-ervaring) van in het begin dezelfde basis (en kansen) mee te geven.
 
 
-### Wat is een (software-)programma?
-In essentie is bestaat een (uitvoerbaar) programma (executable) uit :
+## Eerste stappen in programmeren
 
-* een (of meerdere) **bestand**(en)  die een welbepaalde **sequentie van instructies** bevatten
-* deze instructies worden door een **computer** (meer bepaald een processor) **geïnterpreteerd** en **uitgevoerd**.
-
-Binnen een computer is een **CPU (processor)** verantwoordelijk voor het 1 voor 1 verwerken van deze instructies.  
-In de praktijd gaat deze **CPU**:
-
-* het programma van een hard-disk of een ander medium afhalen
-* de instructies van dit programma in het RAM-geheugen laden
-en heeft toegang tot het geheugen voor het opslaan van data.
-
-![](../pictures/intro_external_logical_computer_view.png)
-
-### Soorten van instructies  
-
-Binnen zo een programma zijn er verschillende soorten instructies:  
-
-* Berekeningen maken
-* Afdrukken van het resultaat op een scherm of een andere medium
-* Herhalen van instructies
-* Aanroepen van functies en procedures
-* Enkel uitvoeren van deze instructies onder bepaalde voorwaarden
-* Lezen van randapparatuur (bv. scherm, toetsenbord, ...)  
-* ...
-
-![](../pictures/basic_structure_programm.png)
-
-> In somige gevallen kunnen deze instructies zelfs pas opgeroepen worden bij bepaalde events (wordt pas binnen een paar lessen besproken)
-
-### Programmeertalen
-
-Hoe dat dit in zijn werk gaat bekijken we aan de hand van een programmeertaal.  
-Er bestaan veel verschillende programmeer-talen zoals C, C++, Java, Python, C#, ...
-
-Voor deze cursus gaan we dit bekijken aan de hand van de programmeertaal C, momenteel nog altijd de meest gebruikte programmeertaal in de wereld van microctrollers en embedded programming.
-
-### Programmeer-taal C
-
-In praktijk start een C-programma zijn leven als 1 (of meerdere) tekst-files.
-Voor dit aan te maken heb je niet meer nodig dan een teksteditor (zoals bv. notepad, vim, notepad++, emacs, ...) zoals geillustreerd hieronder:
-
-![](../pictures/intro_printscreen_of_editor.png)
-
-##### Compileren en linken
-Deze tekst kan je echter niet direct door een CPU laten uitvoeren.  
-Alvorens je dat programma kan uitvoeren op het platform naar keuze (computer, microcontroller ...) moet deze tekst-file getransformeerd worden naar een uitvoerbare binaire file (in het geval van C).  
-
-![](../pictures/intro_position_of_writing_code.png)
-
-Deze transformatie wordt uitgevoerd door  3 programma's:
-
-* Een assembler die je code vertaalt naar assembler (zie later)  
-* Een **compiler** die deze assembler vertaalt naar binaire objecten
-* Een **linker** die deze binaire objecten linkt tot een uitvoerbaar programma
-
-Dit programma kan dan rechtstreeks geïnterpreteerd worden door een CPU
-
-##### Command-line
-In de praktijk zijn er programma's die dat voor jou doen.  Voorbeelden van zulke compilers zijn gcc en msc.  
-Ter illustratie zie je hieronder een voorbeeld van hoe dat je met GCC (via de terminal) een tekstbestand (helloworld.c) transformeert naar een programma (helloworld)
-
-![](../pictures/intro_printscreen_of_gcc.png)
-
-
-Hoe dat precies in zijn werk gaat wordt in het volgend hoofdstuk uitgelegd.  
-Voorlopig kan je er vanuit gaan (indien gcc geinstalleerd is) je dit onder de volgende vorm kan aanroepen:  
-```gcc <c-file> -o <programmanaam>```  
-om een uitvoerbaar command-line applicatie te verkrijgen.  
-Het gebruik van deze tools wordt in een volgend hoofdstuk uitgelegd zodat we zelf de voorbeelden en labo's kunnen kunnen compileren en uitvoeren.
-
-> Vooraleer te starten met microcontrollers oefenen we de basis van programmeren met c in aan de hand van dit soort programma's dat je van de command-line kan aanroepen.
-
-> Hierover volgt in de volgende hoofdstukken nog zeer veel diepgang, voorlopig focussen we ons op de eerste activiteit, namelijk het schrijven  van code zelf   .
-
-### Eerste stappen in programmeren
-
-#### Voorbeeld: Body van een programma
+### Voorbeeld: Body van een programma
 
 De basis-structuur van een C-programma kunnen we illustreren aan de hand van een e een leeg programma.  
 Als je dit programma zou aanroepen zou dit direct beëindigen zonder iets te doen.
@@ -124,7 +31,7 @@ $
 * Tussen de accolades kan je een sequentie van instructies schrijven.
 * Wat er tussen deze accolades staat wordt ook wel de **body** van je programma genoemd.
 
-#### Voorbeeld: Schrijven naar een console  
+### Voorbeeld: Schrijven naar een console  
 
 Een eerste gewoonte bij het aanleren van programmeer-taal te leren kennen is het schrijven van programma dat een tekst-boodschap afrdukt.
 Men noemt dit ook een "Hello World" (zie ook http://en.wikipedia.org/wiki/List_of_Hello_world_program_examples) met voorbeelden voor zowat alle talen.
@@ -153,7 +60,7 @@ Tegenover het vorige programma hebben we **3 nieuwe elementen** kunnen we hier o
 * Gebruikt van test (string)
 * Importeren van een bibliotheek/library
 
-##### Aanroepen van een procedure  
+#### Aanroepen van een procedure  
 
 De eerste instructie die we bekijken is het **aanroepen van een procedure**.  
 Een **procedure** zelf - is in essentie - een stuk **herbruikbare** functionaliteit (code).
@@ -175,7 +82,7 @@ printf("Hello World");
 >
 > Voorlopig zijn we echter enkel geïnteresseerd in het schrijven van tekst naar de console, we komen hier later op de cursus nog op terug.
 
-##### Gebruik van tekst(string)
+#### Gebruik van tekst(string)
 
 We hebben met dit voorbeeld reeds ons eerste data-element gezien dat je in een programma kunt gebruiken, namelijk het data-type string (algemene naam voor tekst in programmeer-talen).  
 
@@ -185,7 +92,7 @@ In C kan je dus een stuk tekst uitdrukken/definiëren met quotes rond (dubbele h
 ```
 > Net zoals procedures gaan we het concept van Strings gedurende de cursus veel verder onderzoeken.  
 
-##### Importeren van een library (of header-file)
+#### Importeren van een library (of header-file)
 Procedures (en functies) staan dikwijls (in het geval van printf bijvoorbeeld) gegroepeerd in **bibliotheken** (libraries).
 
 De procedure die wij kunnen gebruiken (printf) staat samen met andere procedures (en functies) gedefinieerd in een **header-file**.  
@@ -230,7 +137,7 @@ Ter herhaling, de nieuwigheid t.o.v. het vorig  voorbeeld is:
 * deze statements worden van elkaar gescheiden door elk statement te eindigen met een **";"**
 
 
-#### Voorbeeld: Werken met getallen 
+### Voorbeeld: Werken met getallen 
 
 We hadden reeds een eerste **datatype** bekeken tot nog toe, namelijk **string** (tekst).  
 C ondersteunt echter **veel meer datatypes**, 1 van deze datatypes is een **integer**. 
@@ -264,7 +171,7 @@ $ Het getal is: 5
 Dit lijkt vrij overbodig want ```printf("Het getal is: 5");``` geeft hetzelfde formaat.  
 Bij het volgende begrip "variabelen" gaat het nut hiervan duidelijker worden.
 
-#### Voorbeeld: Variabelen en data-types  
+### Voorbeeld: Variabelen en data-types  
 
 De C-programmeertaal laat je ook toe van - tijdens het uitvoeren van je programma - bepaalde waardes bij te houden in het geheugen.
 
@@ -290,7 +197,7 @@ Kenmerken van variabelen:
 een belangrijk kenmerk van een variabele, namelijk geheugen-adres hebben we express niet vermeld.  
 We gaan hier de volgende hoofdstukken dieper op in.
 
-#### Voorbeeld: operatoren en expressies
+### Voorbeeld: operatoren en expressies
 Belangrijk om met onze variabelen en constanten iets te kunnen doen.
 ```
 #include <stdio.h>
@@ -314,9 +221,9 @@ void main ()
 |%         |rest             |
 
 
-#### Voorbeeld precedence
+### Voorbeeld precedence
 
-#### Voorbeeld: printf met meerdere placeholders
+### Voorbeeld: printf met meerdere placeholders
 
 ------------------------------
 TODO voorbeelden te includeren
