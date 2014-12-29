@@ -7,7 +7,7 @@
 De basis-structuur van een C-programma kunnen we illustreren aan de hand van een e een leeg programma.  
 Als je dit programma zou aanroepen zou dit direct beëindigen zonder iets te doen.
 
-```
+``` {.c}
 void main ()
 {
 
@@ -22,7 +22,7 @@ $ gcc empty.c -o empty
 $ ls
 $ empty.c empty
 $ ./empty
-$ 
+$
 ```
 
 **Wat je echter moet onthouden naar de volgende voorbeelden toe:**
@@ -74,9 +74,9 @@ Je typt de naam van de procedure, en daarna (tussen de haakjes) een lijst van ar
 ```
 printf("Hello World");
 ```
-> Later in deze cursus gaan we procedures nog verder bekijken: 
+> Later in deze cursus gaan we procedures nog verder bekijken:
 >
-> * Beter overzicht van bestaande procedures 
+> * Beter overzicht van bestaande procedures
 > * Procedures (en functies) zelf maken
 > * Functies, zijnde procedures die een waarde teruggeven (eigenlijk is printf een functie maar daarover later meer)  
 >
@@ -111,7 +111,7 @@ Met deze include of import van deze file zorg je ervoor dat je programma beschik
 
 ### Voorbeeld: Meerdere statements sequentieel na elkaar uitvoeren (meerdere print-statements)
 Tot nog toe hadden we enkel 1 instructie doorgegeven, je kan het programma ook **meerdere instructies** na mekaar laten uitvoeren.  
-In het programma hieronder, hebben we 2-maal een printf-functie-aanroep geplaatst: 
+In het programma hieronder, hebben we 2-maal een printf-functie-aanroep geplaatst:
 
 ```
 #include <stdio.h>
@@ -137,10 +137,10 @@ Ter herhaling, de nieuwigheid t.o.v. het vorig  voorbeeld is:
 * deze statements worden van elkaar gescheiden door elk statement te eindigen met een **";"**
 
 
-### Voorbeeld: Werken met getallen 
+### Voorbeeld: Werken met getallen
 
 We hadden reeds een eerste **datatype** bekeken tot nog toe, namelijk **string** (tekst).  
-C ondersteunt echter **veel meer datatypes**, 1 van deze datatypes is een **integer**. 
+C ondersteunt echter **veel meer datatypes**, 1 van deze datatypes is een **integer**.
 
 Een getal in C - in het voorbeeld hieronder een extra argument aan printf - wordt uitgedrukt door gewoon het getal te typen.  
 In tegenstelling tot een string moet je hier **geen quotes** rond plaatsen.
@@ -153,14 +153,14 @@ void main ()
 }
 ```
 
-In het voorbeeld hierboven voegen we 2 nieuwe zaken toe: 
+In het voorbeeld hierboven voegen we 2 nieuwe zaken toe:
 
 * Een integer/getal meegeven als aan printf  
 * Het gebruik van placeholders aan printf  
 
 De functie printf kan niet rechtstreeks getallen afdrukken.  
 Daarvoor bestaat er specifieke syntax, je kan namelijk binnen het eerste (string-)argument de plek waar je het getal wil printen met %i markeren.  
-De functie printf zal deze dan deze placeholder (%i) vervangen door het getal bij het afdrukken. 
+De functie printf zal deze dan deze placeholder (%i) vervangen door het getal bij het afdrukken.
 
 ```
 $ gcc printnumber.c -o printnumber
