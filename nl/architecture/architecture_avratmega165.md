@@ -4,7 +4,7 @@
 
 Onderstaande figuur toont de architectuur van de microcontroller, die bovendien gebaseerd is op de **Harvard structuur**, waarbij geheugens en bussen voor instructies (programma) en data gescheiden zijn.  De instructies in het programmageheugen worden uitgevoerd volgens het principe **single level pipelining**.
 
-![AVR CPU cORE](../pictures/avr_cpu_core.png)
+![AVR CPU cORE](../../pictures/avr_cpu_core.png)
 
 We kunnen volgende blokken opmerken:
 * Geheugen
@@ -17,8 +17,8 @@ De blokken die blauw ingekleurd zijn, zijn de typische componenten die standard 
 
 > Pipelining is een implementatietechniek waarbij meerdere instructies zijn overlapt.  Terwijl één instructie uitgevoerd wordt, wordt de volgende instructie al opgehaald uit het programmageheugen. Waardoor men elke klokcyclus een instructie kan uitvoeren. Hiervoor is geen extra hardware aan boord maar dit wordt verwezenlijkt door bepaalde hardware stukken gezamenlijk te laten werken voor verschillende instructies, en dit op het zelfde moment.
 
-> | Klok cyclus    | 1                  | 2                   | 3                   | 4                   | 5                   |
-|----------------|--------------------|---------------------|---------------------|---------------------|---------------------|
+| >              | Klok cyclus        | 1                   | 2                   | 3                   | 4                   |
+|:---------------|:-------------------|:--------------------|:--------------------|:--------------------|:--------------------|
 | Instructie i   | Instructie ophalen | Instructieuitvoeren |                     |                     |                     |
 | Instructie i+1 |                    | Instructie ophalen  | Instructieuitvoeren |                     |                     |
 | Instructie i+2 |                    |                     | Instructie ophalen  | Instructieuitvoeren |                     |
@@ -34,7 +34,7 @@ ALU zijn:
 * Het naar links of rechts verplaatsen van bits (Shiften)
 * Logische bewerkingen zoals AND, NOT, OR en XOR  
 
-![AVR ALU](../pictures/avr_alu.png)
+![AVR ALU](../../pictures/avr_alu.png)
 
 De AVR ALU ondersteunt bewerkingen tussen 2 registers, of tussen een constante en een register. Na een aritmetische bewerking wordt het resultaat terug in bestemmingsregister Rd geschreven. Ook het Status register wordt geüpdatet. De bits in het statusregisters noemt men **FLAGS** of vlaggen. Deze vlaggen geven meer informatie over het resultaat van de bewerking.
 De ALU werkt direct samen met de 32 general purpose werkingsregisters.  
@@ -48,7 +48,7 @@ Het status register wordt na elke bewerking geupdate.
 
 De ALU geeft na ELKE bewerking een extra informatie bij een bepaald resultaat. Dit resultaat zijn vlaggen in de vorm van bits. Deze bits zijn weergegeven in het Status Register. Het status register wordt na elke bewerking geupdate.
 
-![AVR ALU](../pictures/avr_status_register.png)
+![AVR ALU](../../pictures/avr_status_register.png)
 
 Het status register bevindt zich op adres 0x5F van het DATA geheugen. Alle bits van het register zijn ‘0’
 na een RESET. Het status register bevat volgende bits:
@@ -79,7 +79,7 @@ aftrekking en geeft een overdracht aan van bit 3 naar bit 4
 De S bit is steeds een EXOR functie tussen de negatieve vlag N en de overflow flag V.  
 S = N ⊕ V
 
-![Flags](../pictures/avr_register_signbit.png)
+![Flags](../../pictures/avr_register_signbit.png)
 
 **Two’s Complement overflow flag (V) - Bit 3:**  
 wordt gebruikt bij optelling en aftrekking van integers die in het twee-complement zijn
@@ -111,7 +111,7 @@ kunnen gebruikt worden als 3 16-bit indirect adresseerbare register adrespointer
 pointers kan ook gebruikt worden als adrespointer voor look-up tabellen in het Flash programma
 geheugen. Deze functieregisters noemen we de X-,Y-, en Z-registers.
 
-![General purpose register file](../pictures/avr_xyz_register.png)
+![General purpose register file](../../pictures/avr_xyz_register.png)
 
 In de verschillende adresseringsmodes hebben deze registers functies zoals:
 * Vaste vervanging
@@ -137,7 +137,7 @@ lokale variabelen en return adressen na interrupts en subroutines. De Stack is o
 
 Men kan dit visueel voorstellen door houten schijven rond een paaltje in de grond. Hij bestaat uit een aantal die elkaar in adres opvolgen en waarvan we zowel de locatie als het aantal zelf kunnen bepalen:
 
-![Geheugen overzicht](../pictures/avr_stack_illustration.png)
+![Geheugen overzicht](../../pictures/avr_stack_illustration.png)
 
 Het aantal geheugenlocaties dat gereserveerd moet worden is afhankelijk van het programma dat uitgevoerd wordt. Wordt er te veel geheugen gereserveerd voor de stack, dan blijven een heel deel stack registers, die nodig kunnen zijn als data geheugen, ongebruikt.  
 Worden er te weinig registers gereserveerd dan kan het programma vast lopen. In principe moet men, na het afwerken van een programma, controleren hoeveel stackregisters er nodig zijn, en indien nodig de stack aanpassen.
@@ -146,7 +146,7 @@ Worden er te weinig registers gereserveerd dan kan het programma vast lopen. In 
 
 Bij de stack hoort ook een stackpointer. Deze pointer is in het I/O geheugen (op adres 0x5E en 0x5D) opgenomen als twee 8-bit registers (SPH en SPL). De stackpointer wijst naar het data SRAM stack-gebied waar de subroutine en interrupt stacks gelokaliseerd zijn. De stackpointer MOET boven 0xFF geïnitialiseerd worden.
 
-![AVR Stackpointer](../pictures/avr_stackpointer.png)
+![AVR Stackpointer](../../pictures/avr_stackpointer.png)
 
 De stack pointer wordt:  
 
@@ -174,8 +174,8 @@ Een voorbeeld hier van kan als volgt opgebouwd worden:
 
 Hier in dit voorbeeld, in assembly code met instructies uit de instructieset, wordt de adrespointer dus geladen met de waarde 0x04FFh. Onderstaande figuur geeft dit visueel weer. De stack begint dus bij de hoogste SRAM adreswaarde en groeit van boven naar onder aan. Terwijl het data geheugen van beneden naar boven aangroeit.  
 
-![AVR Stackpointer](../pictures/avr_stackpointer_initalization.png)
-![AVR Stackpointer](../pictures/avr_stackpointer_initalization_2.png)
+![AVR Stackpointer](../../pictures/avr_stackpointer_initalization.png)
+![AVR Stackpointer](../../pictures/avr_stackpointer_initalization_2.png)
 
 ### Geheugen
 
@@ -192,7 +192,7 @@ De ATmega165P controller heeft verschillende soorten geheugen, namelijk:
 * 512 bytes Extra EEPROM data geheugen
 
 
-![Geheugen overzicht](../pictures/avr_overview_memory.png)
+![Geheugen overzicht](../../pictures/avr_overview_memory.png)
 
 #### "In System" herprogrammeerbaar flash programma geheugen
 
@@ -203,7 +203,7 @@ Dit is geheugen van het type Flash. Na het laden van een programa in dit geheuge
 Het datageheugen kan in 4 onderdelen worden opgesplitst. Belangrijk om weten is dat al deze
 onderdelen, hoewel wij ze zo tekenen, niet fysisch in één geheugen IC zijn ondergebracht.
 
-![Geheugen overzicht](../pictures/avr_sram_datamemory.png)
+![Geheugen overzicht](../../pictures/avr_sram_datamemory.png)
 
 De ATmega165P controller is een complexe microcontroller met meer randapparatuur dan er kan ondersteund worden door de 64 locaties, die gereserveerd zijn voor de opcode voor de IN en UIT instructies.  
 Voor deze randapparaten hebben we Extended I/O geheugenruimte. Deze EXT I/O geheugenruimte is beschikbaar van geheugenplaats 0x60h tot 0xFFh. De EXT I/O registers kunnen enkel aangesproken worden met de volgende instructies:
@@ -253,7 +253,7 @@ Meer info over de write/read procedure van de EEPROM is terug te vinden in de da
 De gedefinieerde functies van de I/O data geheugens is beschreven in de “Register Summary” in de datasheet.
 We werden reeds, bij de bespreking van het stackpointer register, geconfronteerd met de I/O registers en merkten op dat het register 2 adressen heeft. Dit is ook zichtbaar in het register overzicht dat besproken wordt in de datasheet.
 
-![Register overzicht](../pictures/avr_overview_registers.png)
+![Register overzicht](../../pictures/avr_overview_registers.png)
 
 **Wat is hier het reden en doel van?**
 
@@ -263,7 +263,7 @@ Deze referentielijn noemen wij de referentie lijn voor register gebruik. Dit GPR
 groot. De volgende blok is het 64 registers grote I/O geheugen, dat begint, indien we de register referentielijn beschouwen, op 0x20 en eindigt op 5F.  
 We kunnen ook het I/O geheugen op zichzelf beschouwen. Dan wordt onze referentie, het startpunt vanwaar we beginnen te tellen, de I/O referentielijn. Het bereik van dit blok is nu 0x3F groot, begint op 0x00 en eindigt op 0x3F. De volgenden figuur geeft dit grafisch weer:
 
-![Register overzicht](../pictures/avr_atmega_io_register_adresses.png)
+![Register overzicht](../../pictures/avr_atmega_io_register_adresses.png)
 
 Waarom dit ondescheid?
 
@@ -293,7 +293,7 @@ Deze registers bevinden zich op volgende adressen:
 
 Zoals eerder besproken bezit de ATmega165P controller een ingewikkeld kloksysteem. Een schematisch overzicht is hieronder weergegeven. Op een bepaald moment zal elke klok eens actief zijn. De niet-gebruikte klokken kunnen, teneinde het verbruik te verlagen, in een slaapmodus geplaatst worden. Dit powermanagement valt echter buiten het doel van deze cursus en is volledig beschreven in de datasheet.
 
-![AVR Klok-overzicht](../pictures/avr_clock_overview.png)
+![AVR Klok-overzicht](../../pictures/avr_clock_overview.png)
 
 **CPU klok (clk cpu )**  
 Alle componenten die betrokken zijn bij de werking van de AVR CPU core werking ontvangen deze klok. Hierbij denken we bijvoorbeeld aan het General Purpose Register file, het status register, het datageheugen dat de Stackpointer bevat. Indien deze klok onderdrukt wordt dan zal de CPU er van weerhouden worden om algemene operaties en berekeningen uit te voeren.
@@ -316,20 +316,20 @@ De analoog-digitaal convertor heeft een eigen klok domein. Dit moet ruis, gegene
 Er zijn verschillende manieren waarop we een klok kunnen genereren voor onze controller. Zo kunnen we bijvoorbeeld een externe klok die "éénen" en "nullen" produceert, een extern kristal of keramiek oscillator aansluiten.  
 Onze microcontroller bezit zelfs een ingebouwde RC trillingsgenerator.  
 
-![AVR Klok-bronnen](../pictures/avr_clock_sources.png)
+![AVR Klok-bronnen](../../pictures/avr_clock_sources.png)
 
 Men kan aan de hand van de zogenaamde fuse bits softwarematig kiezen welke klok er gebruikt wordt.  
 Via de Fuse Low byte kan de gewenste klok geselecteerd worden.  
 De bits die hiervoor moeten worden aangepast zijn de bits Select clock source CKSEL 3 t.e.m. 0.  
 De klok van de geselecteerde bron is de input voor de AVR klok generator.
 
-|Device Clocking Option |  CKSEL3 t.e.m. 0 |
-|-----------------------|------------------|  
-|External Crystal/Ceramic Resonator|1111 - 1000|
-|External Low-frequency Crystal|0111 - 0110|
-|Calibrated Internal RC Oscillator|0010|
-|External Clock|0000|
-|Reserved|0011, 0001, 0101, 0100|
+| Device Clocking Option             | CKSEL3 t.e.m. 0        |
+|:-----------------------------------|:-----------------------|
+| External Crystal/Ceramic Resonator | 1111 - 1000            |
+| External Low-frequency Crystal     | 0111 - 0110            |
+| Calibrated Internal RC Oscillator  | 0010                   |
+| External Clock                     | 0000                   |
+| Reserved                           | 0011, 0001, 0101, 0100 |
 
 Fabrieksnieuw is de controller ingesteld met volgende fusebits:
 * CKSEL = “0010” (Interne RC oscillator)
@@ -346,16 +346,16 @@ Meer info mbt de “SUT” fuse bit is terug te vinden in de datasheet.
 Deze oscillator, die geen externe componenten nodig heeft, genereert een kloksignaal van **+/- 8MHz** die bij levering door 8 gedeeld wordt. De frequentie is afhankelijk van de voedingsspanning VCC en de temperatuur. Om deze reden kan men deze oscillator voor een grotere nauwkeurigheid gaan hercalibreren via het Oscillator Calibration register OSCCAL. (meer info in datasheet)  
 
 ###### Kristal oscillator  
-![AVR Klok-bronnen](../pictures/avr_crystal_oscilator.png)
+![AVR Klok-bronnen](../../pictures/avr_crystal_oscilator.png)
 
 Via de penaansluitingen XTAL1 en XTAL2, die respectievelijk in- en uitgang zijn van een inverterende versterker, kan een quartz kristal of een keramische resonator aangesloten worden om een klok te genereren.  
 
-|CKSEL 3...1|Frequentie bereik|C 1 en C 2 [pF]|
-|-----------|-----------------|---------------|
-|100        |0,4 – 0,9        | -             |
-|101        |0,9 – 3,0        |12 - 22        |
-|110        |3,0 – 8,0        |12 – 22        |
-|111        |8,0 –            |12 - 22        |
+| CKSEL 3...1 | Frequentie bereik | C 1 en C 2 [pF] |
+|:------------|:------------------|:----------------|
+| 100         | 0,4 – 0,9         | -               |
+| 101         | 0,9 – 3,0         | 12 - 22         |
+| 110         | 3,0 – 8,0         | 12 – 22         |
+| 111         | 8,0 –             | 12 - 22         |
 
 Indien een kristal met lage frequentie gebruikt wordt dient men rekening te houden met
 vervangingsweerstanden.  
@@ -394,24 +394,24 @@ Het prescale register bevat volgende bits (zie datasheet)
 * **Bit 3...0: CLKPS:** Clock Prescaler Select Bits  
 Met deze bits wordt de gewenste schaal factor gekozen.  
 
-|CLKPS|CLKPS|CLKPS|CLKPS|Deel factor|
-|-----|-----|-----|-----|-----------|
-| 0   | 0 | 0 | 0 | 1   |
-| 0   | 0 | 0 | 1 | 2   |
-| 0   | 0 | 1 | 0 | 4   |
-| 0   | 0 | 1 | 1 | 8   |
-| 0   | 1 | 0 | 0 | 16  |
-| 0   | 1 | 0 | 1 | 32  |
-| 0   | 1 | 1 | 0 | 64  |
-| 0   | 1 | 1 | 1 | 128 |
-| 1   | 0 | 0 | 0 | 256 |
+| CLKPS | CLKPS | CLKPS | CLKPS | Deel factor |
+|:------|:------|:------|:------|:------------|
+| 0     | 0     | 0     | 0     | 1           |
+| 0     | 0     | 0     | 1     | 2           |
+| 0     | 0     | 1     | 0     | 4           |
+| 0     | 0     | 1     | 1     | 8           |
+| 0     | 1     | 0     | 0     | 16          |
+| 0     | 1     | 0     | 1     | 32          |
+| 0     | 1     | 1     | 0     | 64          |
+| 0     | 1     | 1     | 1     | 128         |
+| 1     | 0     | 0     | 0     | 256         |
 
 **Voorbeeld:**  
 we sluiten een kristal van 8MHz aan, de fuse bit CLKDIV8 laten we ongeprogrammeerd (=”1”).  
 In het prescale register (CLKPR) zetten we de prescale register select bits (CLKPS3...0) op “00010”.  
 De prescale factor is nu 0,25 (delen door 4). De systeemklok wordt 2Mhz  
 
-![AVR Prescaler](../pictures/avr_prescaler.png)
+![AVR Prescaler](../../pictures/avr_prescaler.png)
 
 > Opmerking:  
 > De fuse bit CKDIV8 bepaalt de initiële waarde van de CLKPS bits.  
