@@ -1,29 +1,37 @@
-
-
 ## Eerste stappen in programmeren
+
+Als voorbereiding op de labo's, gaan we de elementaire kenmerken van een applciatie verder onder de loep nemen:
+
+* Simple statements
+* Variabelen
+* Expressies
 
 ### Voorbeeld: Body van een programma
 
-De basis-structuur van een C-programma kunnen we illustreren aan de hand van een e een leeg programma.  
+De basis-structuur van een C-programma illustreren we aan de hand van een e een leeg programma.  
 Als je dit programma zou aanroepen zou dit direct beëindigen zonder iets te doen.
 
-``` {.c}
+~~~{.c}
 void main ()
 {
 
 }
-```
+~~~
 
-Hoewel dit programma niets doet is het wel een geldig programma.
+Hoewel dit programma niets doet is het wel een geldig programma dat je kan uitvoeren.
 Als je dit programma compileert en vervolgens uitvoert zie je dat dit programma niets afprint
 
-```
+> ```void main(){ }``` is wat we noemen een functie, meer details over functies volgt later.  
+
+
+~~~
 $ gcc empty.c -o empty
 $ ls
 $ empty.c empty
 $ ./empty
 $
-```
+~~~  
+
 
 **Wat je echter moet onthouden naar de volgende voorbeelden toe:**
 
@@ -71,9 +79,9 @@ Die functionaliteit (zoals het printen) kan je dan aanroepen met de volgende syn
 ```  
 Je typt de naam van de procedure, en daarna (tussen de haakjes) een lijst van argumenten (gescheiden met komma's als er meerdere argumenten zijn).
 
-```
+``` {.c}
 printf("Hello World");
-```
+```  
 > Later in deze cursus gaan we procedures nog verder bekijken:
 >
 > * Beter overzicht van bestaande procedures
@@ -212,13 +220,13 @@ void main ()
 
 ##### Overzicht operatoren
 
-| Operator | Operatie        |
-|----------|-----------------|
-|+         |optellen         |
-|-         |aftrekken        |
-|*         |vermenigvuldigen |
-|/         |delen            |
-|%         |rest             |
+| Operator | Operatie         |
+|:---------|:-----------------|
+| +        | optellen         |
+| -        | aftrekken        |
+| *        | vermenigvuldigen |
+| /        | delen            |
+| %        | rest             |
 
 
 ### Voorbeeld precedence
@@ -289,24 +297,3 @@ A*B+C is niet A*(B+C)
 4. Schrijven van broncode
 5. Builden van broncode
 6. Testen en debuggen van broncode
-
-### Illustratie met scratch  
-
-![Mogelijkheden met scratch](../pictures/scratch_code_bloks.png)
-
-#### Beslissingen  
-#### Herhalingen  
-#### Variabelen en data-types  
-#### Input en output  
-#### Functies en procedures  
-#### Events  
-#### Arrays en lijsten  
-
-### Toegepast in C  
-#### Beslissingen  
-#### Herhalingen  
-#### Variabelen en data-types  
-#### Input en output  
-#### Functies en procedures  
-#### Events  
-#### Arrays en lijsten  

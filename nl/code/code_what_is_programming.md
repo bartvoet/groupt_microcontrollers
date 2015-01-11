@@ -1,4 +1,8 @@
-## Introductie in programmeren
+## Introductie in programmeren  
+
+Programma:
+
+![](../../pictures/code_hierachy_of_statements.png)
 
 Dit is een introductie en/of eerste kennismaking met programmeren aan de hand van de programmeer-taal C.
 
@@ -12,7 +16,7 @@ We pakken dit stap-voor-stap en starten ook enkel met de absolute basis (niet me
 * Input en output verwerken in een command-line-applicatie
 
 >**Nota:**  
->Sommige zaken worden in dit hoofdstuk uitermate vereenvoudigd en zelfs onvolledig voorgesteld.   
+>Sommige zaken worden in dit hoofdstuk uitermate vereenvoudigd en zelfs onvolledig voorgesteld.
 >Waarom?  
 >Programmeren is niet de meest eenvoudige activiteit en we willen niet te snel vooruit lopen om iedereen (met of zonder eerdere programmeer-ervaring) van in het begin dezelfde basis (en kansen) mee te geven.
 
@@ -30,7 +34,7 @@ In de praktijd gaat deze **CPU**:
 * de instructies van dit programma in het RAM-geheugen laden
 en heeft toegang tot het geheugen voor het opslaan van data.
 
-![](../pictures/intro_external_logical_computer_view.png)
+![](../../pictures/intro_external_logical_computer_view.png)
 
 ### Soorten van instructies (gemeenschappelijk voor alle talen)
 
@@ -44,7 +48,7 @@ Binnen zo een programma zijn er verschillende soorten statements:
 * Lezen van randapparatuur (bv. scherm, toetsenbord, ...)  
 * ...
 
-![](../pictures/basic_structure_programm.png)
+![](../../pictures/basic_structure_programm.png)
 
 > In somige gevallen kunnen deze instructies zelfs pas opgeroepen worden bij bepaalde events (wordt pas binnen een paar lessen besproken)
 
@@ -58,7 +62,7 @@ Voor deze cursus gaan we dit bekijken aan de hand van de programmeertaal C, mome
 In praktijk start een C-programma zijn leven als 1 (of meerdere) tekst-files.
 Voor dit aan te maken heb je niet meer nodig dan een teksteditor (zoals bv. notepad, vim, notepad++, emacs, ...) zoals geillustreerd hieronder:
 
-![](../pictures/intro_printscreen_of_editor.png)
+![](../../pictures/intro_printscreen_of_editor.png)
 
 Ter illustratie zie je hier enkele voorbeelden van hetzelfde programma - printen van "Hello World" geschreven in verschillende talen.
 
@@ -70,7 +74,7 @@ Machine-taal zijn instructies die gecodeerd in een serie bytes (opcodes),deze in
 Deze **instructies** verschillen van processor tot processor, de instructies die worden gebruikt voor x86 (wat in een 32-bit-computer) zijn niet te vergelijken met bijvoorbeeld degene die voor een microcontroller worden gebruik (later zullen we hier nog over uitwijden als we de AVR-achitectuur bestuderen).
 
 Aangezien dat deze instructies niet leesbaar zijn (tenzij je echt veel moeite zou doen), bestaat er assembler.
-Dit is 
+Dit is
 
 ```
 .data
@@ -80,21 +84,22 @@ hello:
 .text
 .globl _start
 _start:
-        movl $4, %eax 
+        movl $4, %eax
         movl $1, %ebx
         movl $hello, %ecx
         movl $13, %edx
         int $0x80
 
-        movl $1, %eax 
+        movl $1, %eax
         movl $0, %ebx
         int $0x80
 ```
+Om dit uit te voeren
 
 ```
-$ as helloworld.s -o helloworld.o
-$ ld -s -o helloworld helloworld.o
-$ ./helloworld
+$ as helloworld.s -o helloworld.o  
+$ ld -s -o helloworld helloworld.o  
+$ ./helloworld  
 ```
 
 #### Voorbeeld in C
@@ -122,7 +127,7 @@ $
 
 ```java
 public class HelloWorld {
-    public static void main(String[] args) {
+    public static void main(String[] args) {  
         System.out.println("Welkom in de cursus microcontrollers");
     }
 }
@@ -152,7 +157,7 @@ $
 Deze tekst kan je echter niet direct door een CPU laten uitvoeren.  
 Alvorens je dat programma kan uitvoeren op het platform naar keuze (computer, microcontroller ...) moet deze tekst-file getransformeerd worden naar een uitvoerbare binaire file (in het geval van C).  
 
-![](../pictures/intro_position_of_writing_code.png)
+![](../../pictures/intro_position_of_writing_code.png)
 
 Deze transformatie wordt uitgevoerd door  3 programma's:
 
@@ -166,7 +171,7 @@ Dit programma kan dan rechtstreeks geïnterpreteerd worden door een CPU
 In de praktijk zijn er programma's die dat voor jou doen.  Voorbeelden van zulke compilers zijn gcc en msc.  
 Ter illustratie zie je hieronder een voorbeeld van hoe dat je met GCC (via de terminal) een tekstbestand (helloworld.c) transformeert naar een programma (helloworld)
 
-![](../pictures/intro_printscreen_of_gcc.png)
+![](../../pictures/intro_printscreen_of_gcc.png)
 
 
 Hoe dat precies in zijn werk gaat wordt in het volgend hoofdstuk uitgelegd.  
@@ -177,4 +182,4 @@ Het gebruik van deze tools wordt in een volgend hoofdstuk uitgelegd zodat we zel
 
 > Vooraleer te starten met microcontrollers oefenen we de basis van programmeren met c in aan de hand van dit soort programma's dat je van de command-line kan aanroepen.
 
-> Hierover volgt in de volgende hoofdstukken nog zeer veel diepgang, voorlopig focussen we ons op de eerste activiteit, namelijk het schrijven  van code zelf   .
+> Hierover volgt in de volgende hoofdstukken nog zeer veel diepgang, voorlopig focussen we ons op de eerste activiteit, namelijk het schrijven  van code zelf.

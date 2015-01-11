@@ -149,6 +149,7 @@ Bij de stack hoort ook een stackpointer. Deze pointer is in het I/O geheugen (op
 ![AVR Stackpointer](../pictures/avr_stackpointer.png)
 
 De stack pointer wordt:  
+
 * **Verminderd met 1**; wanneer het return adres op de stack geduwd wordt met het PUSH
 commando.
 * **Verminderd met 2**; wanneer het return adres op de stack geduwd wordt met de subroutine

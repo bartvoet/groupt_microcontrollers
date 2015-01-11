@@ -1,8 +1,19 @@
 ## Bit-wise operaties
 
+
 ### Bitwise operatoren in c
 
 #### Logical operators
+
+
+```dot
+graph {
+A -- B
+C -- B
+C -- D
+}
+```
+
 
 #### Bit-shifting
 
