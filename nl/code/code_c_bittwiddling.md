@@ -6,15 +6,6 @@
 #### Logical operators
 
 
-```dot
-graph {
-A -- B
-C -- B
-C -- D
-}
-```
-
-
 #### Bit-shifting
 
 

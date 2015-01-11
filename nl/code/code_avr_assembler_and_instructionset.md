@@ -29,7 +29,7 @@ instructie (vb het aantal bytes)
 De operand is de date waarop de instructie wordt uitgevoerd of dit kan ook een geheugenadres zijn.  
 
 Schematisch kan een instructie er als volgt uit zien:
-![Assembler instructie](../pictures/avr_assembler_instruction.png?raw=true)
+![Assembler instructie](../../pictures/avr_assembler_instruction.png?raw=true)
 
 
 De meest algemene vorm van een instructie is:  
@@ -49,7 +49,7 @@ een combinatie van éénen en nullen is.
 Voor elke instructie kan men de binaire machinecode terugvinden in de algemene AVR
 instructie set beschrijving. (http://www.atmel.com/Images/doc0856.pdf)  
 
-> ![Assembler vs instructie](../pictures/avr_assembler_vs_machine_code.png)  
+> ![Assembler vs instructie](../../pictures/avr_assembler_vs_machine_code.png)  
 
 ### Overzicht van de instructieset  
 
@@ -111,7 +111,7 @@ instructies tussen twee registers als instructies op één enkel register zijn d
 
 **Instructie formaat:**  
 
-![](../pictures/avr_16_bit_instruction.png)  
+![](../../pictures/avr_16_bit_instruction.png)  
 
 **Voorbeeld:**
 ```
@@ -124,7 +124,7 @@ De microcontroller leest de data uit de registers Rd en Rs. Voert de instructie 
 resultaat terug op in het bestemmingsregister Rd
 
 **Instructie formaat:**  
-![](../pictures/avr_instruction_16bit_rd_and_rr.png)  
+![](../../pictures/avr_instruction_16bit_rd_and_rr.png)  
 
 **Voorbeeld:**  
 ```
@@ -136,7 +136,7 @@ ADD R2, R5  ;add the content of both registers, the sum is stored in R2
 
 Onderstaande figuur geeft het eerder besproken instructieformaat voor het direct en indirect adresseren van een geheugenplaats weer. De operands in deze afbeelding is beschreven met afkortingen. (zie ook eerder -> verklaring van de operands)
 
-![Directe adresserings methode voorstelling](../pictures/avr_directadressing.png)
+![Directe adresserings methode voorstelling](../../pictures/avr_directadressing.png)
 
 Het is belangrijk te leren werken met datasheets, deze beschrijvingen zijn een samenvatting van de datasheet http://www.atmel.com/Images/doc0856.pdf. De uitgebreide, in woorden beschreven, instructie formaten zullen achterwegen gelaten worden.
 
@@ -152,7 +152,7 @@ IN  Rd, Poort_Address
 OUT  Poort_Address, Rs
 ```
 **Instructie formaat:**  
-![I/O Direct adresseringsmethode](../pictures/avr_io_direct_adresseringsmethod.png)
+![I/O Direct adresseringsmethode](../../pictures/avr_io_direct_adresseringsmethod.png)
 
 Registers Rd en Rs: één van de 32 general purpose registers
 Poort adres: Kan een willekeurig I/O register zijn
@@ -163,7 +163,7 @@ IN  R16, PORTA    ;Information on port A is stored in R16
 OUT PORTA, R16    ;Information of R16 is pushed in R16
 ```
 >Opmerking:  
->![Data memory](../pictures/avr_data_memory_related_to_direct_memory.png)  
+>![Data memory](../../pictures/avr_data_memory_related_to_direct_memory.png)  
 De AVR ATmega165P controller heeft meer randsytemen aan boord dan er door de 64 I/O registers kunnen ondersteund worden. De 160 Extended I/O geheugenplaatsen kunnen enkel bereikt worden via de data adresseringsmethode. I/O adressing is enkel mogelijk voor de 64 I/O registers.  
 
 #### Immediate adresseringsmethode  
@@ -188,7 +188,7 @@ Instructies bestaan uit twee “woorden” van 16 bit, waarbij het 16-bit adres 
 bits van deze instructie. Rd en Rs zijn het bestemmings en bron register.  
 
 **Instructie formaat: **  
-![Data directe adresseringsmethode](../pictures/avr_data_direct_adressingmethod.png)
+![Data directe adresseringsmethode](../../pictures/avr_data_direct_adressingmethod.png)
 
 **Voorbeeld:**  
 Onderstaande figur toont een specifieke start-situatie:  
@@ -245,7 +245,7 @@ Hier is het adres gespecifieerd als de inhoud van het X, Y of Z register, waarbi
 
 **Instructie formaat**
 
-![Data indirecte adresseringsmethode](../pictures/avr_data_indirect_adressingmethod.png)
+![Data indirecte adresseringsmethode](../../pictures/avr_data_indirect_adressingmethod.png)
 
 Data verplaatsen:
 * Geheugen naar register: ```mnemonic    destinationregister,X```
@@ -309,7 +309,7 @@ De pointer registers X, Y of Z kunnen ook:
 * Vermeerderd worden met 1 alvorens de instructie uit te voeren (post-increment)  
 * Eerst verminderd worden met 1 alvorens de instructie uit te voeren (pré-decrement)
 
-![Post-increment / Pre-decrement](../pictures/avr_post_and_pre_decrement.png)
+![Post-increment / Pre-decrement](../../pictures/avr_post_and_pre_decrement.png)
 A. Post-increment
 ```
 LD   R0, X+ ; Laad de inhoud van de geheugencel, waarnaar X
@@ -335,18 +335,18 @@ De adres operand is het resultaat van de som van het Y of Z register EN de off-s
 LDD R0, Z+0x10 ; Laad indirect de inhoud van het register Z+0x10 in register R0
                ; Dit is hieronder visueel weer gegeven
 ```
-![Indirecte adressering met OFFSET](../pictures/AVR_indirect_adressing_with_offset.png)  
+![Indirecte adressering met OFFSET](../../pictures/AVR_indirect_adressing_with_offset.png)  
 ##### Indirecte programmageheugen adressering (z register)
 Om het 16K grootte programmageheugen aan te spreken gebruiken we het Z-register als pointer voor indirecte sprongen of subroutines. Instructies die hiervoor gebruikt worden zijn bijvoorbeeld IJMP of ICALL.
 
 Indien één van deze instructies gebruikt wordt moet men eerst het Z-register laden. De instructie IJMP laadt de waarde van het Z-register in de programcounter (PC). De programcounter wijst naar het adres van de volgende uit te voeren instructie.
 
-![Indirecte programmageheugen adressering](../pictures/AVR_indirect_program_memory_adressing_with_offset.png)
+![Indirecte programmageheugen adressering](../../pictures/AVR_indirect_program_memory_adressing_with_offset.png)
 
 ##### Relatieve programmageheugen adresseringsmethode
 De instructies rjmp en rcall werken volgens deze methode. Voor de relatieve programma geheugen adressering gebruikt men de PC als pointer.
 
-![Relatieve programmageheugen adressering](../pictures/AVR_relative_programming_memory_adressing.png)
+![Relatieve programmageheugen adressering](../../pictures/AVR_relative_programming_memory_adressing.png)
 
 De operand voor het constante adres (k) is 12 bit groot => 2<sup>12</sup> (= 4096) mogelijkheden. De maximale relatieve sprong kan dus + 2047 of -2048 stappen groot zijn. In dit geval zal de volgende instructie opgehaald worden op adess PC + k + 1
 
@@ -406,7 +406,7 @@ Interruptroutines worden door hardware opgestart, en het is dan ook onmogelijk o
 ### Instructievoorbeelden  
 #### Logische instructies  
 De logische operaties die ATmega165P kan uitvoeren zijn de AND, OR en XOR instructies.
-![Logische functies](../pictures/avr_logical_functions.png)
+![Logische functies](../../pictures/avr_logical_functions.png)
 
 Deze logische bewerkingen kunnen uitgevoerd worden tussen twee registers  of tussen een register en een constante.
 
@@ -449,7 +449,7 @@ steeds ‘1’ zijn.
 #### De EXOR functie
 Stel volgende opstelling
 
-![](../pictures/xor_analogy_with_motors.png)
+![](../../pictures/xor_analogy_with_motors.png)
 
 De draaizin van de motor moet omgeschakeld worden. De andere bits van de poort mogen daarbij niet beinvloed worden.  
 

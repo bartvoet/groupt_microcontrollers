@@ -29,7 +29,7 @@ De daaropvolgende status 'command' zal dan het adres-register (7 bit) en rw-flag
 
 Binnen de volgende 'command_slave_ack'-status wordt er nagekeken of de slave het commando heeft ontvangen.  
 
-![Open collector](../pictures/i2c_statediagram.png)
+![Open collector](../../pictures/i2c_statediagram.png)
 
 Afhankelijk van de inhoud van RW (read=1 en write=0) zal men naar de read of write status gaan.  
 In deze statussen zal men (op het ritme van de clock) ofwel data lezen en het rx-register aanvullen ofwel data van het tx-register wegschrijven naar de SDA-lijn.  

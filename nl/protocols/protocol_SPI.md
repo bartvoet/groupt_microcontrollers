@@ -19,7 +19,7 @@ uitgang voor de slave.
 Slave select, is een actief laag signaal waarmee de master de slaves selecteert
 waarmee hij wil commmuniceren.
 
-![Topologie SPI](../pictures/spi_topology.png)
+![Topologie SPI](../../pictures/spi_topology.png)
 
 ### Communicatie
 
@@ -40,14 +40,14 @@ Indien CPHA = 0 en CPOL = 1 wordt de data gesampled op de falling en gewijzigd o
 Indien CPHA = 1 en CPOL = 0 wordt de data gewijzigd op de rising en gesampled op de falling edge.  
 Indien CPHA = 1 en CPOL = 1 wordt de data gewijzigd op de falling en gesampled op de rising edge.  
 
-![Klokfase en Polariteit](../pictures/spi_clockphase_and_polarity.png)
+![Klokfase en Polariteit](../../pictures/spi_clockphase_and_polarity.png)
 
 ### SPI op de ATMEGA
 
 Net zoals voor de tellers, TWI, Uart enzovoort, beschikt de Atmega ook over een hardwarematige SPI-eenheid.  
 Het blokdiagram hiervan is geillustreerd op de onderstaande figuur:
 
-![SPI op de ATMEGA](../pictures/spi_on_atmega.png)
+![SPI op de ATMEGA](../../pictures/spi_on_atmega.png)
 
 De slave select uitgang zal niet door de SPI-logica worden aangestuurd wanneer deze als master staat ingesteld. De bedoeling van een slave select is immers "om een slave te selecteren" dit kan men moeilijk in hardware implementeren omdat men niet kan voorzien hoeveel slaves er zullen zijn (per slave moet er een fysieke lijn gemaakt worden), en men weet ook niet welke slave(s) jij zal willen adresseren met een bepaald bericht.  
 Indien daarentegen de SPI controller als slave staat ingesteld, hoeft deze enkel zijn eigen CS (chip

@@ -1,6 +1,6 @@
 ## Toolchain
 
-![Toolchain](../pictures/toolchain_for_avr.png)
+![Toolchain](../../pictures/toolchain_for_avr.png)
 
 
 
