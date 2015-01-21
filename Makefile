@@ -41,6 +41,8 @@ CHAPTER += ../code/headers_and_modularity.md
 
 CHAPTER_08 += ../code/pointers_in_c.md
 
+graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
+
 # Advanced
 
 #debugging_code
@@ -55,5 +57,7 @@ clean:
 	rm dist/cursus.epub
 
 build_graphs:
-	dot -Tpng ./graphviz/code_hierachy_of_statements.dot -o ./pictures/code_hierachy_of_statements.png
+	#$(foreach dotfile,$(wildcard ./graphviz/*.dot),${call graph_to_pnge,$(dotfile)})
+	${call graph_to_png,"code_hierachy_of_statements"}
+	${call graph_to_png,"orientation_digital_courses"}
 	gvpr -c 'N[name=="declaration"]{color = "blue"}' ./graphviz/code_hierachy_of_statements.dot | dot -Tpng -o ./pictures/code_hierachy_of_statementsi_declaration.png

@@ -1,9 +1,5 @@
 ## Introductie in programmeren  
 
-Programma:
-
-![](../../pictures/code_hierachy_of_statements.png)
-
 Dit is een introductie en/of eerste kennismaking met programmeren aan de hand van de programmeer-taal C.
 
 We pakken dit stap-voor-stap en starten ook enkel met de absolute basis (niet meer dan nog om een basis command-line-programma te schrijven):
@@ -57,7 +53,7 @@ Binnen zo een programma zijn er verschillende soorten statements:
 Hoe dat dit in zijn werk gaat bekijken we aan de hand van een programmeertaal.  
 Er bestaan veel verschillende programmeer-talen zoals C, C++, Java, Python, C#, ...
 
-Voor deze cursus gaan we dit bekijken aan de hand van de programmeertaal C, momenteel nog altijd de meest gebruikte programmeertaal in de wereld van microctrollers en embedded programming.
+Voor deze cursus gaan we dit bekijken aan de hand van de programmeertaal C, momenteel nog altijd de meest gebruikte programmeertaal (zeker in de wereld van microcontrollers en embedded programming).
 
 In praktijk start een C-programma zijn leven als 1 (of meerdere) tekst-files.
 Voor dit aan te maken heb je niet meer nodig dan een teksteditor (zoals bv. notepad, vim, notepad++, emacs, ...) zoals geillustreerd hieronder:
@@ -65,6 +61,10 @@ Voor dit aan te maken heb je niet meer nodig dan een teksteditor (zoals bv. note
 ![](../../pictures/intro_printscreen_of_editor.png)
 
 Ter illustratie zie je hier enkele voorbeelden van hetzelfde programma - printen van "Hello World" geschreven in verschillende talen.
+
+Programma:
+
+![](../../pictures/code_hierachy_of_statements.png)
 
 ####  Assembler
 

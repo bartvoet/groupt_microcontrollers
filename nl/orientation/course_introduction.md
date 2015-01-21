@@ -1,11 +1,19 @@
-## Het vak "Microcontrollers"
 
+## Het vak "Microcontrollers"
 Wat houdt de cursus microcontrollers gegeven in ACE Groep T?  
-Hoe past deze in de opleiding?  
+Hoe past deze cursus binnen de opleiding?  
 Wat ga je hier leren?  
 
 ### Situering van de module in de opleiding
-Na digitale combinatorische logica en digitale sequentiële schakelingen, waar de studenten leerden om Programmeerbare logische devices te programmeren, is het nu de beurt aan de microcontroller.  
+In de opleiding "digitale combinatorische" en "digitale sequentiële logica" heb je geleerd van (hardwarematig) logische devices te programmeren.
+
+In de praktijk werkt deze hardware samen met (of wordt aangestuurd door) microcontrollers.
+
+![](../../pictures/orientation_digital_courses.png)
+
+In deze cursus leren we omgaan met deze "kleine computers" of microcontrollers.
+
+De kennis van deze 3 vakken (module digitale technieken) zal uiteindelijk worden gebruikt in het vak "multimedia" waar je deze vaardigheden zal combineren.
 
 ### Doelstelling van de cursus
 
@@ -21,17 +29,6 @@ Dit houdt in onder andere:
 * Het geheugen en registeropbouw in een microcontroller (en coputersystemen in het algemeen)
 * Meer geavanceerde aspecten van C (bv. arrays, pointers, dynamisch geheugen, ...)
 * ...
-
-
-> **Opmerking:**  
-> De student mag gebruik maken van de computers voorzien in het labo.  
-Als hij/zij deze cursus wil uitproberen op de eigen PC, de gebruikte software en toolchains zijn open en beschikbaar (+ getest) op de volgende OS:
->
-* Linux (getest op Ubuntu 14.10)
-* Mac OS X (getest op Maverics)
-* Windows (getest op Windows 7)
-* FreeBSD is ongoing  
-
 
 ### Principes
 
@@ -60,10 +57,26 @@ Oefeningen voor de studenten die voorop lopen.
 De oefeningen moeten binnen een bepaalde tijd worden opgelost ongeacht het feit dat niet alle oefeningen opelost zijn.  
 Waar een student niet zijn verplichte oefening tijdelijk kan afsluiten zal er extra begeleiding worden voorzien tijdens de les (en in bepaalde gevallen in extra zituren).
 
+#### Labo-vak
+De theorie gegeven in dit vak is ter ondersteuning van het labo (niet omgekeerd), er zijn daarom geen examens of papers te volbrengen.  
+De evaluatie wordt gedaan op basis van:
+* Labo-opdrachten
+* Aanwezigheden  
+* Inzet  
+* Begrip in het toepassen van de theorie in de praktijd
+
+#### Aanwezigheden
+Zoals hierboven vermeld is dit een labo-vak en wordt er verwacht van de student aanwezig is.  
+In geval van verwittigen en/of goede reden kan een uitzonderlijke afwezigheid  toegestaan worden zonder impact op de punten.
+
 #### Projecten  
 Voor studenten die voorlopen op de cursus (reeds geprogrammeerd of met microcontrollers gewerkt) zullen extra projecten worden voorzien.
 
-#### Verschillende aspecten
+#### Gebruik van eigen PC (of labo-PC)
+De student mag gebruik maken van de computers voorzien in het labo.  
+Als hij/zij deze cursus wil uitproberen op de eigen PC, de gebruikte software en toolchains zijn open en beschikbaar (+ getest) op de meeste besturingssystemen (Windows,Linux,Mac).
+
+### Samenstelling cursus/Verschillende aspecten
 
 * **Code:**  
 Het aanleren van programmeren met een focus op de C-programmeertaal.  
