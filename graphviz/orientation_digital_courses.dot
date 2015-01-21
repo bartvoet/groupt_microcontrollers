@@ -1,0 +1,11 @@
+digraph vakken {
+	digitaal_sequentieel[label="digitaal sequentiele"]
+  digitaal_combinatorisch[label="digitaal combinatorisch"]
+  multimedia[label="multimedia"]
+
+  digitaal_combinatorisch -> digitaal_sequentieel
+	digitaal_combinatorisch -> microcontrollers
+  digitaal_sequentieel -> multimedia
+  microcontrollers -> multimedia
+
+}

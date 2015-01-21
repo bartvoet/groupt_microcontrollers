@@ -1,0 +1,25 @@
+ digraph graphname {
+	statement[label="statement"];
+	simple_statement[label="simple statement"];
+	block_statement[label="block statement"];
+	statement -> simple_statement;
+	statement -> block_statement;
+	
+	declaration[label="declaration",shape=box]
+	assignment[label="assignment",shape=box]
+	function_call[label="function call",shape=box]
+	
+	simple_statement -> function_call
+	simple_statement -> assignment
+	simple_statement -> declaration
+
+	conditional_statement[label="condition",shape=box]
+	repeat_statement[label="repetition",shape=box]
+	function_statement[label="function",shape=box]
+
+	block_statement -> conditional_statement;
+	block_statement -> repeat_statement;
+	block_statement -> function_statement;
+
+}
+
