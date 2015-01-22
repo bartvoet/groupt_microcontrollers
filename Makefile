@@ -60,4 +60,6 @@ build_graphs:
 	#$(foreach dotfile,$(wildcard ./graphviz/*.dot),${call graph_to_pnge,$(dotfile)})
 	${call graph_to_png,"code_hierachy_of_statements"}
 	${call graph_to_png,"orientation_digital_courses"}
-	gvpr -c 'N[name=="declaration"]{color = "blue"}' ./graphviz/code_hierachy_of_statements.dot | dot -Tpng -o ./pictures/code_hierachy_of_statementsi_declaration.png
+	${call graph_to_png,"intro_in_c_2_variables_1"}
+	${call graph_to_png,"intro_in_c_2_variables_2"}
+	gvpr -c 'N[name=="simple_statement" | name=="declaration" | name=="function_call" | name=="assignment"]{color = "blue"}' ./graphviz/code_hierachy_of_statements.dot | dot -Tpng -o ./pictures/code_focus_on_simple_statements.png

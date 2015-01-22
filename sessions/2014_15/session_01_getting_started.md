@@ -9,6 +9,11 @@
     * Daarvoor 11 jaar Java-ontwikkelaar bij AXA
 * Programmeren: Ervaring met C, Java, Python, Bash, Scala, ...
 * Microcontrollers: AVR en ARM
+* bart.voet@groept.be
+* Met de slagwoorden van ACE Groep T (3 E's)
+    * Engagement
+    * Het streven naar Excellence
+    * Opbrengen van de nodige Empathy (examens zijn net gedaan :))
 
 ### Wie zijn de studenten?
 * Ervaring met programmeren?
@@ -21,6 +26,7 @@
     * Verzoeken
     * Positief negatief?
 * Andere relevante info?
+* Hoe zijn de examens gegaan?
 * ...
 
 ### Programma voor vandaag?

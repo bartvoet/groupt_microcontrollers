@@ -2,14 +2,65 @@
 
 Als voorbereiding op de labo's, gaan we de elementaire kenmerken van een applciatie verder onder de loep nemen:
 
-* Simple statements
-* Variabelen
-* Expressies
+### Statements
+
+Zoals eerder vermeld - in de introductie van programmeren - bestaat een programma (in c maar ook andere talen) uit statements.  
+Om een idee te hebben wat zo'n statement eigenlijk bekijken we het voorbeeld hieronder:
+
+
+```{.c}
+void main ()
+{
+	int a;
+	a = 1 + 2;
+	printf("1 + 2 = %i",a);
+}
+```
+
+Deze bovenstaande code-snippet heeft als functionaliteit het afdrukken van de som van de getallen 1 en 2.  
+Het eindresultaat van dit programma is een afdruk op het scherm:
+
+```
+1 + 2 = 3
+```
+
+Om deze bewerkingen te kunnen voltooien worden er 3 statements gebruikt:  
+
+* Declaratie: we declareren wat we noemen een variabele van het type integer 
+* Assignment: we initialiseren deze variabele met een waarde (in dit geval de expressie 1 + 2)
+* Functie-aanroep: we roepen de functie printf aan (reeds voorzien in de C-libraries) die er voor zorgt dat het resultaat wordt afgedrukt naar het scherm.
+* Output, hoe kan je data naar de command-line afdrukken en inlezen
+
+### Focus van deze les  
+
+Deze bewerkingen of statements noemen we simpele statements:  
+
+* Doen slechts 1 (functionele) taak
+* Worden in C altijd beindigd met een ; (semicolon in het Engels)
+* Kunnen (en worden meestal op 1 lijn) geschreven worden
+
+![](../../pictures/code_focus_on_simple_statements.png)
+
+Deze les heeft slechts 1 doel, namelijk de student de eerste basis te geven om een heel éénvoudige command-line applictie te doen schrijven (hetgeen voor een eerste kennismaking met programmeren al een hele hoop werk is).  
+Daarom focussen we eerst op de deze "simpele statements" (blauwe gedeelte in het diagram), daarnaast zullen we ook kennis maken met de volgende begrippen gerelateerd aan simple statements:
+
+* Variabelen en waardes
+* Expressies (nummer-expressies) en operatoren
+* Constanten
+
+De andere soorten statements zoals bijvoorbeeld:
+
+* het conditioneel uitvoeren van statements
+* het herhalen van deze statements (onder bepaalde condities)
+* zelf schrijven van functies en procedures
+
+nemen we onder loep in de 2 komende hoofdstukken.  
 
 ### Voorbeeld: Body van een programma
 
-De basis-structuur van een C-programma illustreren we aan de hand van een e een leeg programma.  
-Als je dit programma zou aanroepen zou dit direct beëindigen zonder iets te doen.
+Deze statements kunnen niet zomaar in een C-programma worden geschreven daarvoor heeft ons programma eerst een body nodig (main-functie).
+Dit illustreren aan de hand van een leeg programma zonder statements.  
+Als je dit programma zou aanroepen zou dit direct beëindigen zonder iets te doen maar het zeker een geldig programma.
 
 ~~~{.c}
 void main ()
@@ -21,9 +72,6 @@ void main ()
 Hoewel dit programma niets doet is het wel een geldig programma dat je kan uitvoeren.
 Als je dit programma compileert en vervolgens uitvoert zie je dat dit programma niets afprint
 
-> ```void main(){ }``` is wat we noemen een functie, meer details over functies volgt later.  
-
-
 ~~~
 $ gcc empty.c -o empty
 $ ls
@@ -32,17 +80,19 @@ $ ./empty
 $
 ~~~  
 
+> ```void main(){ }``` is wat we noemen een functie, meer details over functies volgt later. 
 
 **Wat je echter moet onthouden naar de volgende voorbeelden toe:**
 
 * Een c-programma start met "void main()"
-* Tussen de accolades kan je een sequentie van instructies schrijven.
+* Tussen de accolades kan je een sequentie van statements schrijven.
 * Wat er tussen deze accolades staat wordt ook wel de **body** van je programma genoemd.
 
 ### Voorbeeld: Schrijven naar een console  
 
 Een eerste gewoonte bij het aanleren van programmeer-taal te leren kennen is het schrijven van programma dat een tekst-boodschap afrdukt.
-Men noemt dit ook een "Hello World" (zie ook http://en.wikipedia.org/wiki/List_of_Hello_world_program_examples) met voorbeelden voor zowat alle talen.
+Men noemt dit ook een "Hello World"  
+(zie ook http://en.wikipedia.org/wiki/List_of_Hello_world_program_examples met voorbeelden voor zowat alle talen).
 In C bestaat er een specifieke instructie hiervoor genaamd "printf"
 
 ```
@@ -64,7 +114,7 @@ $
 
 Tegenover het vorige programma hebben we **3 nieuwe elementen** kunnen we hier onderscheiden:  
 
-* Het aanroepen van een procedure
+* Het aanroepen van een procedure/functie
 * Gebruikt van test (string)
 * Importeren van een bibliotheek/library
 
@@ -82,7 +132,7 @@ Je typt de naam van de procedure, en daarna (tussen de haakjes) een lijst van ar
 ``` {.c}
 printf("Hello World");
 ```  
-> Later in deze cursus gaan we procedures nog verder bekijken:
+> Later in deze cursus gaan we functies en procedures nog verder bekijken:
 >
 > * Beter overzicht van bestaande procedures
 > * Procedures (en functies) zelf maken
@@ -176,37 +226,155 @@ $ ./printnumber
 $ Het getal is: 5
 ```
 
-Dit lijkt vrij overbodig want ```printf("Het getal is: 5");``` geeft hetzelfde formaat.  
+Dit lijkt vrij overbodig want ```printf("Het getal is: 5");``` geeft hetzelfde resultaat.  
 Bij het volgende begrip "variabelen" gaat het nut hiervan duidelijker worden.
+
+### Voorbeeld: printf met meerdere argumenten
+
+Je kan aan printf ook meerdere placeholders meegeven in 1 functie-aanroepen (het mechanisme komen we later op terug)
+```
+#include <stdio.h>
+void main ()
+{
+    printf("De getallen zijn %i en %i\n",5,6);
+}
+```
+Bovenstaand programma drukt af ```De getallen zijn 5 en 6```
+Onderstaand programma drukt af ```De getallen zijn 5,6 en 7```
+
+```
+#include <stdio.h>
+void main ()
+{
+    printf("De getallen zijn %i, %i en %i\n",5,6,7);
+}
+```
+
+#### Line feed
+Let ook dat we aan het eind van deze string altijd **\\n** toevoegen, dit is een trucje om het programma na het afdrukken de cursus naar een nieuwe lijn te brengen.
 
 ### Voorbeeld: Variabelen en data-types  
 
 De C-programmeertaal laat je ook toe van - tijdens het uitvoeren van je programma - bepaalde waardes bij te houden in het geheugen.
+Deze waardes worden bijgehouden in wat noemen variabelen.  
 
 ```
 #include <stdio.h>
 int main ()
 {
-    int getal = 5; 	// Geheel getal 1 = 5
-    printf("Het getal is: %i",getal);
-    printf("Nog 1 maal printen van %i",getal);
+    int getal;
+    getal = 5; 	// Geheel getal 1 = 5
+    printf("Het getal is: %i\n",getal);
+    printf("Nog 1 maal printen van %i\n",getal);
 }
 ```
 
-Een variabele is een plekje geheugen waar je een waarde (in dit geval 5) kan opslaan en een naam kan toekennen (in dit geval getal).
+Het resultaat is uiteindelijk
+
+```
+$ gcc printnumber.c -o printnumber
+$ ./printnumber
+$ Het getal is: 5
+$ Nog 1 maal printen van 5
+```
+#### Wat is een variabele
+
+Een variabele is een plekje geheugen waar je een waarde (in dit geval 5) kan opslaan en een naam kan toekennen (in dit geval een integer-getal).
 
 Kenmerken van variabelen:  
 
-* Naam: (literal, identifier) volledig vrij te kiezen (betekenisvolle namen gebruiken) Vb. L123, appel, RekeningNummer, ...  
-* Waarde: inhoud  
-* Type: cijfers, karakters, strings (numerieke en alfanumerieke variabelen)  
+* Heeft een naam, deze vrij te kiezen (liefst betekenisvolle namen gebruiken) Vb. L123, appel, rekeningNummer, ... )
+* Met wel een aantal beperkingen zoals 
+   * Mag niet starten met een cijfer
+   * Mag een aantal gereserveerde karakters niet bevatten  
+Voornamlijk karakters die worden gebruikt voor operatoren (*,+,-,/,%,..)  
+```int een*variable;``` is bijvoorbeeld geen geldige variabele-naam
+   * Geen aantal key-word van de C-taal mag worden gebruikt zoals datatypes (int, float, ..) of andere (zoals include, void, volatile, ...) 
+* Heeft een bepaalde waarde of inhoud  
+* Heeft een bepaald type: cijfers, karakters, strings (numerieke en alfanumerieke variabelen)  
 
 > Bemerking:  
 een belangrijk kenmerk van een variabele, namelijk geheugen-adres hebben we express niet vermeld.  
 We gaan hier de volgende hoofdstukken dieper op in.
 
-### Voorbeeld: operatoren en expressies
-Belangrijk om met onze variabelen en constanten iets te kunnen doen.
+Om een variabele te gebruiken moeten we - net zoals in het eerste voorbeeld - deze variabele:
+
+* eerst declareren ```int getal;```  (eerste lijn body)
+(dit houdt in dat software een geheugenplekje reserveert in het geheugen
+* daarna initialiseren met een waarde ```getal = 5;```
+
+
+Een variabele zoals we zullen zien in de volgende voorbeelden kunnen we dan verder in het programma herbruiken in andere statements (ipv de waarde zelf)
+   * als argument van een functie
+   * de variabele gebruiken in een expressie (zie later)
+   * de variabele gebruiken om een andere variabele in te stellen
+
+### Voorbeeld: declaratie en assignment in 1 statement
+Tot nog toe hebben we de declaratie en assignment van ene variabele gescheiden gehouden.  
+Het onderstaande programma doet hetzelfde als het voorgaande programma
+
+```
+#include <stdio.h>
+int main ()
+{
+    int getal = 5;
+    printf("Het getal is: %i",getal);
+    printf("Nog 1 maal printen van %i",getal);
+}
+```
+
+(het resultaat zal identiek zijn aan ons vorig programma)  
+Zoals je ziet worden de eerste 2 lijnen gecombineerd in 1 statement en winnen we 1 lijn code.
+Welke stijl dat je kiest is afhankelijk van de situatie (en soms ook persoonlijke smaak)
+
+### Voorbeeld: variabelen gebruiken voor andere variabelen
+
+Je kan met een variabele ook een andere variabele initialiseren.  
+
+```
+#include <stdio.h>
+int main ()
+{
+    int getal = 5;
+    int zelfde_getal = getal;
+    printf("Het getal is: %i",getal);
+    printf("Nog 1 maal printen van %i",zelfde_getal);
+}
+
+```
+Dit gedeelte gebruikt nu 2 variabelen die dezelfde waarde bevatten
+Het resultaat zal ook opnieuw hetzelfde zijn zoals de vorige getallen
+
+
+### Voorbeeld: variabelen bevatten waardes
+
+Het is belangrijk om te weten (maar ook wel logisch) dat als je een variabele initialiseert met een waarde van een aandere variabele deze de waarde overneemt
+```
+#include <stdio.h>
+int main ()
+{
+    int getal = 5;
+    int getal_dat_we_wijzigen = getal;
+    getal_dat_we_wijzigen=10;
+    printf("Het getal is: %i",getal);
+    printf("Ander getal is %i",getal_dat_we_wijzigen);
+}
+```
+Het bovenstaande programma zal eerst de waarde 5 toekennen aan de variabele getal:
+![](../../pictures/intro_in_c_2_variables_1.png)
+
+De zal het de waarde van getal_dat_we_wijzigen wijzigen naar 10:
+![](../../pictures/intro_in_c_2_variables_2.png)
+
+De eerste variabele (getal) blijft de waarde 5 behouden want beide variabelen wijzen naar een andere geheugenlocatie.  De statement ```int getal_dat_we_wijzigen = getal;``` zal dus enkel de waarde overdragen.
+
+### Voorbeeld: operatoren en expressies (getallen)
+Belangrijk om met onze variabelen iets dymischer te kunnen doen dan deze enkel maar af te drukken.  
+Daarvoor introduceren we het laatste element van deze les namelijk expressies.
+
+Tot nu toe hadden we enkel gezien hoe dat we een variabele konnen initializeren met statische waardes (buiten het allereerste voorbeeld van dit hoofdstuk).  
+Je kan deze waardes echter ook berekenen uit waardes, door bijvoorbeeld wiskundige expressies uit te voeren zoals in het voorbeeld hieronder:
+
 ```
 #include <stdio.h>
 void main ()
@@ -217,8 +385,40 @@ void main ()
     printf("Het resultaat is: %i",som);
 }
 ```
+Je ziet dat het programma hier 2 bestaande variabelen gebruikt om een andere variabele te initialiseren.  
+Als je dit programma dan compileert en uitvoert krijg je het volgende resultaat
 
-##### Overzicht operatoren
+```
+$ gcc firstexpression.c -o firstexpression
+$ ./firstexpression
+$ Het resultaat is 12
+```
+
+### Regels van operatoren en operanden
+
+Een expressie bestaat uit 2 soorten elementen:  
+
+* Operatoren die een specifiek bewerking voorstellen (zie tabel hieronder)  
+* Elke operator is meestal **binair**, dit wil zeggen omringd door 2 operanden  
+<operand> <operator> <operator> => met als voorbeeld 5 + 10 of 3 * 5
+* Deze operanden zijn 
+    * Constante waardes ```5 + 6)```
+    * Variabelen ```(a + 6)```
+    * Andere expressies  
+      Net als in wiskunde kan je complexere expressies samenstellen met meerdere operatoren  
+      bv (5 + 6 * 9)
+    * C volgt de matische regels door expressies in volgorde op te lossen (bv eerst */ dan +-)
+* Je kan verschillende soorten operatoren combineren in een expressie
+* Je kan ook met haakjes werken om de volgorde van uitvoering af te dwingen  
+    * ```(5 + 6) * 3``` geeft 33
+    * ```5 + 6 * 3``` zal eerst 6*3 uitvoeren en geeft 23
+* Naast binaire operatoren bestaan er ook unitaire operatoren  
+```- a + 5``` zal de waarde van a omdraaien binnen deze bewerking
+ 
+
+Zoals je zie volgt een expressie in C dezelfde regels als algemen wiskunde is eigenlijk bijna identiek aan een wiskundig expressie:  
+
+#### Overzicht operatoren
 
 | Operator | Operatie         |
 |:---------|:-----------------|
@@ -228,72 +428,133 @@ void main ()
 | /        | delen            |
 | %        | rest             |
 
+### Voorbeeld: expressies met waardes en variabelen
 
-### Voorbeeld precedence
+Een expressie bestaat niet noodzakelijk uit variabelen, je kan deze ook wisselen met constante waardes:  
+(```int som = getal1 + 7;``` in plaats van ```int som = getal1 + getal2;```)
 
-### Voorbeeld: printf met meerdere placeholders
+```
+#include <stdio.h>
+void main ()
+{
+    int getal1 = 5; 	// Geheel getal 1 = 5
+    int som = getal1 + 7;
+    printf("Het resultaat is: %i",som);
+}
+```
 
-------------------------------
-TODO voorbeelden te includeren
+### Voorbeeld: expressies als argument van een functie
 
-Variable => plekje in het geheugen dat je kan gebruiken om een waarde op te slaan
-  Variable names (and beperkingen + gereserveerde woorden)
-  Variabele initialiseren
-Expressie => iets dat je kan evalueren en een waarde kan geven
-  Wiskundige expressies met operators
+Of je kan zelfs een expressie gebruiken rechtstreeks als argument van een functie:
+```
+#include <stdio.h>
+void main ()
+{
+    int getal1 = 5; 	// Geheel getal 1 = 5
+    printf("Het resultaat is: %i",getal1 + 7);
+}
+```
+(hetgeen vanzelfsprekend hetzelfde resultaat oplevert)
+
+### Voorbeeld: expressies met meerdere operanden
+
+Een expressie is niet beperkt tot slechts 2 operanden
+
+```
+#include <stdio.h>
+void main ()
+{
+    int getal1 = 5; 	// Geheel getal 1 = 5
+    int som = getal1 + 5 + 2;
+    printf("Het resultaat is: %i",som);
+}
+```
+
+### Voorbeeld: expressies met verschillende soorten operatoren
+
+En je kan verschillende soorten operatoren combineren:
+
+```
+#include <stdio.h>
+void main ()
+{
+    int getal1 = 5; 	// Geheel getal 1 = 5
+    int som = ((getal1 - 3) * 3) + 6;
+    printf("Het resultaat is: %i",som);
+}
+```
+Met hetzelfde resultaat zijnde 12
+
+### Voorbeeld: unitaire operator
+
+Een laatste voorbeeld is de unitaire operator, in het voorbeeld hieronder gebruiken we deze om een negatie op een operand uit te voeren.
+
+```
+#include <stdio.h>
+void main ()
+{
+    int getal1 = 5; 	// Geheel getal 1 = 5
+    int som = -(getal1) + 17;
+    printf("Het resultaat is: %i",som);
+}
+```
+Bij de evaluatie van deze expressie wordt de waarde van getal1 eerst negatief gemaakt alvorens dat hier 17 wordt bij opgeteld.  
+Belangrijk is te weten dat net als in de wiskunde unitaire operatoren 1st worden uitgevoerd.
+
+### Lezen van een getal
+Als laatste van deze sessie leggen we uit hoe we getallen kunnen inlezen.
+
+```
+#include <stdio.h>
+
+int main()
+{
+  int getal1,getal2;
+
+  printf("%s","Geef getal 1 in ");
+  scanf("%i",&getal1);
+  printf("%s", "Geef getal 2 in ");
+  scanf("%i",&getal2);
+  printf("Het resultaat van %i + %i is %i",getal1,getal2,(getal1 + getal2));
+  return 0;
+}
+```
+Dit programma zal 2 getallen inlezen.
+Hiervoor gebruikt het de procedure/functie scanf (tegenhanger van printf):
+Om een waarde in een variabele in te lezen in een getal:
+
+* Roep je deze functie aan
+* Het eerste argument is voor integers (altijd) %i
+* Daarna geef je een de variabele mee voorafgegaan door een & (ampersand)
+
+> Deze & gaan we momenteel nog niet verklaren (werken met pointers zal een volledige aparte les innemen), ga er voorlopig van uit je dit moet doen.  
+> Ook van deze printf- en scanf-methoden hebben we enkel nog maar het tipje van de ijsberg gezien, voorlopig leggen we enkel voldoende uit om zo snel mogelijk aan de slag te gaan. 
+
+### Tot hier toe ...
+Hebben we de eerste stap gezet in het programmeren
+
+* We kunnen verschillende statements schrijven (declaraties, assignement, functies aanroepen, ...)
+* We kunnen wiskundige bewerkingen doen (expressies)
+* We kunnen stukjes geheugen gebruiken om tussentijdse resultaten op te slaan (variabelen)
+* We kunnen deze data schrijven naar de console (printf)
+
+### Wat volgt ...
+We gaan nu in het labo:
+
+* Deze kennis proberen uit te werken in een aantal labo-oefeningen en gaan 
+* Kennismaken met de tools en editors die ons in staat stellen een programma te schrijven
+
+Na dit eerste kennismakings-labo gaan we uitleggen hoe:
+
+* Je code conditioneel kan uitvoeren 
+* Je code repetitief kan uitvoeren (met bepaalde condities)
+* Andere expressies (tot nu enkel numerieke) en operatoren
+    * Logische operatoren
+    * Relationele operatoren
+    * Bit operatoren
 
 
-  Volgorde van uitvoeren (pemal - h-vdr-oa- van links naar rechts)
-  Afronden (voorlopig bespreken we enkel ints, later volgen andere)
-
-  !integer division!
-
-  Naming => weten wat code doet
-
-User input en output
-
-Commentaar  
-
-
-Assignment statement => je will beide koppelen of eventueel rechtsreeks een waarde
-Constante is de zelfde
 
 
 
-Statement
-Assignment statement
 
-
-  expression
-  assignment
-  function-calls
-  operator
-
-Constant vs variable
-
-------------------------------------------------------------------
-
-## TODO's
-
-Rekenkundige uitdrukkingen worden samengesteld uit constanten/variabelen en wiskundige operatoren:
-* ```+```		optelling
-* ```-```		aftrekking
-* ```*```		vermenigvuldiging
-* ```/```		deling
-* ```%```		gehele rest van een deling  
-
-Andere bemerkingen:  
-
-##### Haakjes en prioriteit!  
-Wanneer met variabelen en constante wordt gewerkt is de normale wiskunde van tel!
-Haakjes zijn zeer belangrijk.
-A*B+C is niet A*(B+C)
-
-### Ontwikkelen van een programma
-
-1. Probleem definitie
-2. Probleem analyse
-3. Opstellen algoritme(n)
-4. Schrijven van broncode
-5. Builden van broncode
-6. Testen en debuggen van broncode

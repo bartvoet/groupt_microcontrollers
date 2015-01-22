@@ -1,6 +1,6 @@
 ## Introductie in programmeren  
 
-Dit is een introductie en/of eerste kennismaking met programmeren aan de hand van de programmeer-taal C.
+Dit is een **introductie** en/of eerste kennismaking met programmeren aan de hand van de programmeer-taal C.
 
 We pakken dit stap-voor-stap en starten ook enkel met de absolute basis (niet meer dan nog om een basis command-line-programma te schrijven):
 
@@ -55,16 +55,12 @@ Er bestaan veel verschillende programmeer-talen zoals C, C++, Java, Python, C#, 
 
 Voor deze cursus gaan we dit bekijken aan de hand van de programmeertaal C, momenteel nog altijd de meest gebruikte programmeertaal (zeker in de wereld van microcontrollers en embedded programming).
 
-In praktijk start een C-programma zijn leven als 1 (of meerdere) tekst-files.
-Voor dit aan te maken heb je niet meer nodig dan een teksteditor (zoals bv. notepad, vim, notepad++, emacs, ...) zoals geillustreerd hieronder:
+In praktijk start een software-programma zijn leven als 1 (of meerdere) tekst-files.
+Voor dit aan te maken heb je niet meer nodig dan een teksteditor (zoals bv. notepad, vim, notepad++, emacs, ...) zoals het c-programma geillustreerd hieronder:
 
 ![](../../pictures/intro_printscreen_of_editor.png)
 
 Ter illustratie zie je hier enkele voorbeelden van hetzelfde programma - printen van "Hello World" geschreven in verschillende talen.
-
-Programma:
-
-![](../../pictures/code_hierachy_of_statements.png)
 
 ####  Assembler
 
@@ -73,8 +69,10 @@ Machine-taal zijn instructies die gecodeerd in een serie bytes (opcodes),deze in
 
 Deze **instructies** verschillen van processor tot processor, de instructies die worden gebruikt voor x86 (wat in een 32-bit-computer) zijn niet te vergelijken met bijvoorbeeld degene die voor een microcontroller worden gebruik (later zullen we hier nog over uitwijden als we de AVR-achitectuur bestuderen).
 
-Aangezien dat deze instructies niet leesbaar zijn (tenzij je echt veel moeite zou doen), bestaat er assembler.
-Dit is
+Aangezien dat deze instructies niet leesbaar zijn (tenzij je een computer bent), bestaat er assembler.  
+Dit is de groep van **programmeer-talen** die het dichtste staat bij de eigenlijke machine-taal, elke processor-architectuur heeft natuurlijk zijn eigen assembler-taal maar de principes blijven dezelfde.
+
+Het voorbeeld hieronder is geschreven met de gas-assember (GNU Assembler) die de  AT&T syntax:
 
 ```
 .data
@@ -94,7 +92,8 @@ _start:
         movl $0, %ebx
         int $0x80
 ```
-Om dit uit te voeren
+
+Om dit uit te voeren:
 
 ```
 $ as helloworld.s -o helloworld.o  
@@ -102,7 +101,15 @@ $ ld -s -o helloworld helloworld.o
 $ ./helloworld  
 ```
 
+Assembler is een zeer efficiente manier van programmerenvoor wat betreft performance maar:
+* Is zeer moeillijk te schrijven en te lezen
+* Is niet overdraagbaar naar andere processor-architecturen
+
 #### Voorbeeld in C
+
+Vandaar dat er talen zijn die meer om maat van mensen zijn gemaakt zoals bijvoorbeeld C.
+
+> Zoals eerder vermeld gaan we deze taal gebruiken de komende weken gebruiken voor onze labo's.
 
 ```
 #include <stdio.h>
@@ -114,6 +121,8 @@ int main(int argc, char** argv)
 }
 
 ```
+Dit programma voert het zelfde uit als het bovenstaande assembler-programma.
+Dit programma kan je op een command-line compilen (transformeren naar byte-instructies) en uitvoeren.
 
 ```
 $ gcc helloworld.c -o helloworld
@@ -122,8 +131,18 @@ $ Hello World
 $
 ```
 
+C is vergeleken met assembly zeer leesbaar, maar sluit in praktijk toch tamelijk dicht aan bij de hardware (vooral door pointers).  
+Dat heeft zowel voor- als nadelen:
+* Voordeel is dat C voor van alles gebruikt kan worden en relatief snel is.
+Als gevolg is dit de meest populaire taal voor het programmeren van MCU'S of andere omgevingen waar performance en memory-verbruik zeer belangrijk zijn.
+* Daarnaast is de taal gecompileerd worden naar zowat alle platformen en processor-architecturen die er bestaan
+* Nadelen zijn dat de taal niet erg vergevingsgezind is met betrekking tot fouten en dat de C-compiler weinig controles uitvoert (hoewel die controles met diverse tools alsnog uitgevoerd kunnen worden).  
+Een C-programma dat door de C-compiler correct wordt bevonden, hoeft niet per definitie goed te functioneren.  
+Een oorzaak van vele problemen hier is het gebruik van pointers; dit is dan ook de reden waarom deze in afgeleide talen zoals Java en Python achterwege gelaten zijn..
 
 #### Voorbeeld in Java
+
+Een ander voorbeeld van een high-level taal is Java
 
 ```java
 public class HelloWorld {
@@ -141,7 +160,7 @@ $
 ```
 
 #### Voorbeeld in Python
-
+Of Python
 ```
 print("hello world")
 ```

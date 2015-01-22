@@ -1,0 +1,10 @@
+digraph graphname {
+ var1[label="getal"];
+ var2[label="getal_dat_we_wijzigen "];
+ memory1[label="5",shape=box];
+ memory2[label="5",shape=box];
+
+ var1->memory1;
+ var2->memory2;
+
+}

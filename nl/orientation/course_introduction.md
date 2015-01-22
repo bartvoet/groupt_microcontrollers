@@ -75,6 +75,11 @@ Voor studenten die voorlopen op de cursus (reeds geprogrammeerd of met microcont
 #### Gebruik van eigen PC (of labo-PC)
 De student mag gebruik maken van de computers voorzien in het labo.  
 Als hij/zij deze cursus wil uitproberen op de eigen PC, de gebruikte software en toolchains zijn open en beschikbaar (+ getest) op de meeste besturingssystemen (Windows,Linux,Mac).
+Het is wel de bedoeling dat we dezelfde software gebruiken, in geval van problemen is het dan gemakkelijk een gemeenschappelijke oplossing te zoeken voor alle studenten.
+
+#### Aankondigingen
+Aankondigingen gebeuren op Toledo en per mail.
+Per mail is dat naar het Groep T-adres, indien je wilt dat ik ook een ander adres stuur kan dit ook.
 
 ### Samenstelling cursus/Verschillende aspecten
 

@@ -175,7 +175,20 @@ Naast deze GPIO-functionaliteit kan je op bepaalde pinnen ook meer gespecialisee
     * UART
     * SPI
     * I2C
-...
+...  
+
+#### Development-borden
+De controller in zijn zuivere vorm is een dip- of dim-package die je integreert op een print (of een breadboard voor prototyping).  
+
+Voor het makkelijk te maken snel toepassingen te ontwikkelen zonder een hele elektronica-setup maken we tijdens de cursus gebruik van 2 development-borden die we later in de cursus nog uitvoerig bespreken.
+
+##### Arduino UNO
+Voor de basis-oefeningen:  
+![](../../pictures/intro_arduino_uno.jpg)
+
+##### Digilent IO Explorer
+Voor de meer gevorderde oefeningen:  
+![](../../pictures/intro_digilent_usb.jpg)
 
 ### Tot hier toe...
 De bedoeling van dit hoofdstuk was een een idee te vormen van wat een microcontroller eigenlijk is.  
