@@ -1,7 +1,7 @@
 ## Wat zijn microcontrollers?
 
 Dit hoofdstuk dient als illustratie een eerste kennismaking met microcontrollers.  
-Het heeft als doel je een beeld te vormen van wat een microcontrollers zijn, waarvoor ze gebruikt worden (en in uitbreiding een embedded systeem is)
+Het heeft als doel je een **beeld** te doen vormen van **wat** een **microcontrollers zijn**, waarvoor ze **gebruikt** worden (en in uitbreiding een embedded systeem is)
 
 ### Definitie van een microcontroller:  
 
@@ -9,9 +9,10 @@ Een microcontroller is:
 
 * Een **geïntegreerde** schakeling in een elektronisch circuit of toestel (met eventueel mechanische onderdelen)
 * **Programmeerbaar** met **software** (geschreven in C in ons geval)
-* Met de bedoeling een **controle-element** in de dat toestel in te bouwen
+* Met de bedoeling een **controle-element** in de **hardware** in te bouwen  
+(controle-element kan een sturing zijn maar ook gewoon een data-logging of sampling)  
 
-### Is een microcontroller == computer?
+#### ?Microcontroller == computer?
 Je kan een microcontroller programmeren met software net zoals een computer, is dit dan het zelfde als een computer?
 
 #### Een microcontroller is een ... computer ...
@@ -25,13 +26,20 @@ Ja dus, een **MCU** (afkorting die we vanaf nu regelmatig gebruiken) bevat de ty
 
 Een MCU Is programmeerbaar met **dezelfde programmeer-talen** die we gebruiken voor een **computer**(soms met wat beperkingen) zoals in ons geval C (of C++).
 
-#### Een microcontroller is een ... computer "*ON A CHIP*"
+#### Een microcontroller is een ... computer met zeer veel IO-functionaliteiten
 
 Een klassieke microcontroller kan je voorstellen als een typische geïntegreerde schakeling zoals bv. de AVR Atmega328P hieronder .
 
 ![](../../pictures/intro_dip_microcontroller_s.jpg)
 
-Je kan deze inschakelen in typische elektronica projecten, als een zeer flexibel (programmeerbaar) component (gevoed op 3.3-5V)
+Je kan deze inschakelen in typische elektronica projecten, als een zeer flexibel (programmeerbaar) component (gevoed op 3.3-5V)  
+
+Dat is iets wat je normaal gezien (niet gemakkelijk) terugvindt bij een gewone computer, namelijk de mogelijkheden om een elektrische signalen door te sturen op een zeer laag niveau.  
+
+![](../../pictures/intro_mcu_peripherals.png)
+
+
+#### Een microcontroller is een ... computer "*ON A CHIP*"
 
 Alle elementen nodig om zijn taak uit te voeren (geheugen, cpu, opslag, ...) zit eigenlijk om 1 chip geplaatst, het principe van zulk een "mini-computer" noemen we ook een SOC (System on a chip):  
 
@@ -39,7 +47,7 @@ Alle elementen nodig om zijn taak uit te voeren (geheugen, cpu, opslag, ...) zit
 * Heeft weinig anders nodig dan:
     * een externe voeding
     * optioneel een kloksignaal (kwartz)
-* Bevat dus alle componenten op 1 chip zoals geillustreerd hieronder:
+* Bevat dus alle componenten op 1 chip zoals geïllustreerd hieronder:
 
 ![](../../pictures/intro_soc.jpg)
 
@@ -75,21 +83,21 @@ Een klassieke computer (pc, mac, server, tablet, ...) is een apparaat dat rechts
 Een computer is dus in principe:
 
 * Een **eindproduct** dat direct bruikbaar is voor de eindgebruiker
-* Kan op zich werken, geïntegreerd te worden in een groter geheel
+* Kan op zich werken, hoeft **niet geïntegreerd** te worden in een groter **geheel**
 
 Een microntroller kan in dat opzicht niet rechtstreeks gebruikt worden als een "consumer"-apparaat.  
 
 Een MCU heeft als doel **ingebed** (embedded) te worden in **specifieke**/gespecialiseerde elektronische (en/of mechanische) **toepassingen**.
 
-Daarvoor heeft een MCU beschikking tot low-level interfaces die het toelaten elektrische signalen te lezen en te genereren vanuit software.
+Zoals eerder vermeld heeft een MCU om die redenen beschikking tot low-level interfaces die het toelaten elektrische signalen te lezen en te genereren vanuit software.
 
 #### Embedded systemen
 
-Deze gespecialiseerde systemen noemen we ook **embedded systemen**.     
+De gespecialiseerde systemen waar we over spraken noemen we **"embedded systemen"**.   
 Het woord embedded dekt **vele ladingen** , echter in essentie komt het er op neer op **systemen** die:
 
 * Zowel soft- als hardware (elektronisch en mechanisch) combineren
-* Een **specifieke doel** hebben
+* Een **specifiek** doel en/of toepassingsgebied hebben
 
 Dit komt vandaag de dag neer op zowat alle elektronische apparatuur die wordt aangestuurd door een controle-element zoals:
 
@@ -107,8 +115,8 @@ Dit komt vandaag de dag neer op zowat alle elektronische apparatuur die wordt aa
 
 ##### Raspberry Pi, Beaglebone, OLinuXino, Cubieboard, ...  
 
-Het verschil tussen een computer en een microcontroller is wel wat aan het vervagen ...   
-De laatste jaren komen - mede door de vooruitgang in mobiele technologieën - zeer krachtige SOC-systemen op de markt (dikwijls gebaseerd op ARM) die een volwaardig OS (zoals Linux of Android) kunnen draaien.   
+Het verschil tussen een computer en een microcontroller is tegenwoordig wel wat aan het vervagen ...   
+De laatste jaren komen - mede door de vooruitgang in mobiele technologieën - zeer krachtige SOC-systemen op de markt (dikwijls gebaseerd op **ARM**) die een volwaardig **OS** (zoals Linux of Android) kunnen draaien.   
 
 Net als de MCU bestaan deze **computers** uit een **SOC** waar de centrale componenten (CPU, RAM, ROM, hardware-controllers, ...) in 1 chip geïntegreerd zitten.  
 
@@ -133,11 +141,11 @@ Belangrijke nuance is wel dat voor de meeste elektronica-projecten je dikwijls h
 
 De microcontroller-architectuur waar we met werken - in deze cursus - zijn de **AVR**-microcontrollers en worden geproduceerd door Atmel als antwoord op de populaire PIC-microcontrollers.
 
-Deze architectuur is ontworpen door 2 Noorse studenten Alf-Egil Bogen and Vegard Wollan en in productie gebracht door Atmel (die daarvoor zich enkel met memory bezig hielden) in 1996.
+Deze architectuur is ontworpen door 2 Noorse studenten (Alf-Egil Bogen and Vegard Wollan) en in productie gebracht door Atmel (die daarvoor zich enkel met memory bezig hielden) in **1996**.
 
 AVR dankt hieraan zijn naam (Alf-Egil Bogen Vegard Wollan RISC microcontroller), ook soms vertaald als Advanced Virtual RISC.
 
-AVR zich op de markt door de zeer lage kost (vanaf 0.5 € voor ATTiny), snelheid, en de support in GCC-compilers.  
+AVR onderscheidt zich op de markt door de zeer lage kost (vanaf 0.5 € voor ATTiny), snelheid, en de uitgebreide support in (GCC-)compilers.  
 Nadeel is dat deze architectuur maar door 1 fabrikant wordt geproduceerd (tov bijvoorbeeld ARM-architecturen)
 
 AVR's is een microcontroller-architectuur die beschikbaar is verschillende maten en gewichten, algemeen zijn onderscheiden we 3 soorten die verschillen in prijs, grootte
@@ -167,7 +175,7 @@ AVR's is een microcontroller-architectuur die beschikbaar is verschillende maten
     * 48-144 pins
     * Tot 66 MHz
     * Zeer uitgebreide peripheral set
-    * +10 €
+    * > 10 €
 
 > In de meeste opdrachten maken we gebruik van de AVR ATmega-serie.
 > Naast AVR bestaan er ook andere architecturen zijn bijvoorbeeld ARM Cortex M-serie (verschillende producenten), PIC (Microchip), Intel 8051, MSP (TI), ...  
@@ -198,19 +206,24 @@ Voor de basis-oefeningen gaan we hun basis-platform gebruiken, de Arduino UNO
 
 ![](../../pictures/intro_arduino_uno.jpg)
 
-Later bij de start van de microcontroller-labo's volgt hieromtrent meer informatie.  
+**Later** bij de start van de microcontroller-labo's volgt een verdere introductie rond Arduino en het werken ermee.  
 
 > **Opmerking:**  
 > Arduino is zowel hardware als software.  
-> Hoewel dat de Arduino-software zijn nut heeft voor mensen (of kinderen) zonder programmeer-omgeving snel te laten starten is het in deze cursus is uitgesloten van de programmeer-omgeving van Arduino te gebruiken.  
-> Dit om verscheiden redenen:
+> Hoewel dat de Arduino-software zijn nut heeft om mensen (of kinderen) zonder programmeer-ervaring snel te laten starten is het in deze cursus is **uitgesloten van de programmeer-omgeving van Arduino te gebruiken**.    
+> Dit om verschillende redenen:  
 >
-> * Meer inzicht te verwerven (Arduino software schermt veel af achter abstracties)  
-> * Om meer controle te hebben op de hardware
-> * Performantie en geheugen-plaats (binaries van Arduino zijn groter en trager dan binaries uit normale C-code)
+> * We willen **inzicht** verwerven in de microcontroller  
+Arduino-software schermt veel af achter abstracties om het gemakkelijk te maken  
+(voor mensen die niet noodzakelijk een cursus microcontrollers volgen)
+> * We willen meer **controle** te hebben op de hardware  
+Ook met deze abstracties is het moeilijker om op een laag niveau controle te hebben.
+> * **Performantie** en geheugen-plaats   
+Binaries via Arduino zijn groter en trager dan binaries uit normale C-code.  
+(20-40 * trager)
 
 ##### Digilent IO Explorer
-Voor de meer gevorderde oefeningen gaan we gebruik maken van een ander bord, namelijk de Digilen IO Explorer  
+Voor de meer gevorderde oefeningen gaan we gebruik maken van een ander bord, namelijk de Digilent IO Explorer  
 
 ![](../../pictures/intro_digilent_usb.jpg)
 
@@ -223,13 +236,20 @@ Hoe ziet nu zo een microcontroller eruit en wat zijn zijn belangrijkste kenmerke
 
 #### Geïntegreerde chip  
 Zoals reeds vermeld; een microcontroller is een geïntegreerde chip.  
-Typisch in een **dip**- (bruikbaar op een breadboard en of prototype) of **dim**-verpakking (typisch om op een plc te plaatsen) :  
+Deze komen meestal in 2 vormen voor:  
+
+* **dip**-verpakking  
+Bruikbaar op een breadboard en of prototype  
+MCU's hieronder met lange pinnetjes
+* **dim**-verpakking  
+Meestal/typisch gebruikt om op een plc te plaatsen.  
+Deze ga je meestal zelf niet gebruiken voor prototypes (meer voor eindproducten).
 
 ![](../../pictures/intro_mcus_examples.jpg)  
 
 #### Pinnen
-De belangrijkste eigenschap van alle microcontrollers is dat deze een reeks van van pinnetjes bevatten.  
-Deze pinnetjes (of pins) stellen je in staat om elektrische signalen uit te sturen vanuit de controller (en de software) zoals:
+De belangrijkste eigenschap van alle microcontrollers is dat deze een reeks van pinnetjes (of pins) bevatten.  
+Deze pins stellen je in staat om elektrische signalen uit te sturen vanuit de controller (en de software) naar de buiten wereld:
 
 * Plaatsen van een specifieke spanning op een van deze pinnetjes (hoog of laag)
 * Lezen van de spanning die op een van deze pinnetjes wordt geplaatst
@@ -240,7 +260,10 @@ Voor output houdt dit in dat je ofwel 0 of een referentie-spanning (meestal 3.3v
 ##### Voorbeeld
 
 Zuiver ter illustratie momenteel (de code hiervan wordt binnen een 2-tal lessen uitgelegd).  
-Hieronder heb je code om op de setup daaronder (op basis van een atmega168p) de leds 1 voor 1 (voor korte tijd 85ms) van links naar rechts te laten bewegen
+Hieronder heb je code om op de setup daaronder (op basis van een atmega168p) de leds 1 voor 1 (voor korte tijd 85ms) van links naar rechts te laten bewegen.  
+
+> **Let wel**:  
+Dit is enkel ter voorbeeld, het werken met c-code en meer specifiek op MCU zal snel duidelijk worden in de volgende hoofdstukken.
 
 ```
 #include <avr/io.h>
@@ -266,7 +289,7 @@ int main(void) {
   return (0);
 }
 ```
-
+De hardware setup (mocht je zelf al willen proberen)
 ![](../../pictures/intro_demo_design.jpg)
 
 
@@ -281,15 +304,13 @@ Naast deze GPIO-functionaliteit kan je op bepaalde pinnen ook meer gespecialisee
     * SPI (master-slave-protocol ontwikkeld door Motorolla)
 ...  
 
-![](../../pictures/intro_mcu_peripherals.png)
-
 De beschikbare extra functionaliteiten hangen natuurlijk sterk af van het type MCU
-
+Deze gespecialiseerde functionaliteiten zullen nog sterk aan bod komen in deze cursus.  
 
 ### Tot hier toe...
-De bedoeling van dit hoofdstuk was een een idee te vormen van wat een microcontroller eigenlijk is NIET:
+De bedoeling van dit hoofdstuk was een een idee te vormen van wat een microcontroller eigenlijk is, dus we hebben nog NIET gezien:
 
-* Hoe je hier moet met werken
+* Hoe je met een MCU in het algemeen (of specifiek een AVR) moet met werken
 * Hoe deze intern is opgebouwd
 
 Dit is de bedoeling dat we dit (simultaan met de labo's) gaan uitleggen en opbouwen.   
@@ -300,5 +321,5 @@ In de volgend hoofdstukken gaan we bekijken hoe we deze AVR-MCU's gaan aanspreke
 * Lezen en schrijven
 * Interne opbouw
 
-Alvorens dieper in te gaan op hoe dat een MCU werkt en opgebouwd is gaan we eerst een *basis-introductie* geven in programmeren in *C* aan de hand van een aantal command-line applicaties (met als target de computer).
+Alvorens dieper in te gaan op hoe dat een MCU werkt en opgebouwd is gaan we **eerst** een **basis-introductie** geven in programmeren in **C** aan de hand van een aantal command-line applicaties (met als target de computer).
 
