@@ -1,12 +1,20 @@
 # Basics
 CHAPTER_01 += chapter01_introduction.md
 CHAPTER_01 += ../orientation/course_introduction.md
+CHAPTER_01 += ../../general/pandoc_page_break.txt
+CHAPTER_01 += ../orientation/course_conventions.md
+CHAPTER_01 += ../../general/pandoc_page_break.txt
+CHAPTER_01 += ../architecture/architecture_definition_of_microcontrollers.md
+CHAPTER_01 += ../../general/pandoc_page_break.txt
 
 CHAPTER_02 += chapter02_getting_started.md
+CHAPTER_02 += ../../general/pandoc_page_break.txt
 CHAPTER_02 += ../code/code_what_is_programming.md
+CHAPTER_02 += ../../general/pandoc_page_break.txt
 CHAPTER_02 += ../code/code_c_introduction.md
-CHAPTER_02 += ../tools/tools_editors_and_ides.md
-CHAPTER_02 += ../tools/tools_toolchain_x86_overview.md
+CHAPTER_02 += ../../general/pandoc_page_break.txt
+#CHAPTER_02 += ../tools/tools_editors_and_ides.md
+#CHAPTER_02 += ../tools/tools_toolchain_x86_overview.md
 CHAPTER_02 += ../labo/x86_statements.md
 
 CHAPTER_03 += chapter03_mode_coding.md
@@ -48,10 +56,15 @@ graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
 #debugging_code
 
 all:
+	cd nl/chapter && pandoc  \
+			$(CHAPTER_01) $(CHAPTER_02) \
+		-o ../../dist/cursus.epub
+#		--epub-stylesheet ../../markdown.css \
+
 	cd nl/chapter && pandoc \
 			$(CHAPTER_01) $(CHAPTER_02) \
-		--epub-stylesheet ../../markdown.css \
-		-o ../../dist/cursus.epub
+		-o ../../dist/cursus.pdf
+	
 
 clean:
 	rm dist/cursus.epub

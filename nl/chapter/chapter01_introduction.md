@@ -1,6 +1,5 @@
-# Situering van deze cursus
+# Inleiding
 
-## Doel
 Opbouw van de cursus, principes en afspraken uitleggen.
 
 

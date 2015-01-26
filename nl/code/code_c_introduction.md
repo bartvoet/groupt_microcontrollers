@@ -1,11 +1,11 @@
-## Eerste stappen in programmeren
+## Eerste stappen in programmeren met c
 
-Als voorbereiding op de labo's, gaan we de elementaire kenmerken van een applciatie verder onder de loep nemen:
+Als voorbereiding op de labo's, gaan we de elementaire kenmerken van een software-programma in C verder onder de loep nemen:
 
 ### Statements
 
-Zoals eerder vermeld - in de introductie van programmeren - bestaat een programma (in c maar ook andere talen) uit statements.  
-Om een idee te hebben wat zo'n statement eigenlijk bekijken we het voorbeeld hieronder:
+Zoals eerder vermeld - in de introductie van programmeren - bestaat een programma (in c maar ook andere talen) uit **statements**.  
+Om een idee te hebben wat zo'n statement eigenlijk bekijken we het voorbeeld hieronder (dat 3 statements bevat):
 
 
 ```{.c}
@@ -17,23 +17,28 @@ void main ()
 }
 ```
 
-Deze bovenstaande code-snippet heeft als functionaliteit het afdrukken van de som van de getallen 1 en 2.  
+Deze bovenstaande code-snippet heeft als **functionaliteit** het **afdrukken** van de **som** van de getallen **1 en 2**.    
 Het eindresultaat van dit programma is een afdruk op het scherm:
 
 ```
 1 + 2 = 3
 ```
 
-Om deze bewerkingen te kunnen voltooien worden er 3 statements gebruikt:  
+Om deze bewerkingen te kunnen voltooien worden er 3 (soorten) statements gebruikt:  
 
-* Declaratie: we declareren wat we noemen een variabele van het type integer 
-* Assignment: we initialiseren deze variabele met een waarde (in dit geval de expressie 1 + 2)
-* Functie-aanroep: we roepen de functie printf aan (reeds voorzien in de C-libraries) die er voor zorgt dat het resultaat wordt afgedrukt naar het scherm.
-* Output, hoe kan je data naar de command-line afdrukken en inlezen
+* Een **declaratie**:  
+We **declareren** wat we noemen een **variabele** van het type integer 
+* Een **assignment** (of initialisatie) :    
+We **initialiseren** deze **variabele** met een waarde (in dit geval de expressie 1 + 2)
+* Een **functie-aanroep**:  
+We **roepen** de **functie printf aan** (reeds voorzien in de C-libraries) die er voor zorgt dat het resultaat wordt afgedrukt naar het scherm.
 
-### Focus van deze les  
+Deze statements gaan we in dit deel verder bekijken  
+(wat ze betekenen, hoe we ze moeten gebruiken)
 
-Deze bewerkingen of statements noemen we simpele statements:  
+### Focus van deze les: simpele statements  
+
+Deze bewerkingen of statements noemen we **simpele statements**, deze :  
 
 * Doen slechts 1 (functionele) taak
 * Worden in C altijd beindigd met een ; (semicolon in het Engels)
@@ -42,7 +47,8 @@ Deze bewerkingen of statements noemen we simpele statements:
 ![](../../pictures/code_focus_on_simple_statements.png)
 
 Deze les heeft slechts 1 doel, namelijk de student de eerste basis te geven om een heel éénvoudige command-line applictie te doen schrijven (hetgeen voor een eerste kennismaking met programmeren al een hele hoop werk is).  
-Daarom focussen we eerst op de deze "simpele statements" (blauwe gedeelte in het diagram), daarnaast zullen we ook kennis maken met de volgende begrippen gerelateerd aan simple statements:
+
+Daarom focussen we eerst op de deze "simpele statements" (**blauwe gedeelte** in het diagram), daarnaast zullen we ook kennis maken met de volgende begrippen gerelateerd aan simple statements:
 
 * Variabelen en waardes
 * Expressies (nummer-expressies) en operatoren
@@ -56,11 +62,12 @@ De andere soorten statements zoals bijvoorbeeld:
 
 nemen we onder loep in de 2 komende hoofdstukken.  
 
-### Voorbeeld: Body van een programma
+### Voorbeeld: Body van een programma (beginnen bij het begin)
 
 Deze statements kunnen niet zomaar in een C-programma worden geschreven daarvoor heeft ons programma eerst een body nodig (main-functie).
 Dit illustreren aan de hand van een leeg programma zonder statements.  
-Als je dit programma zou aanroepen zou dit direct beëindigen zonder iets te doen maar het zeker een geldig programma.
+
+Als je dit programma zou aanroepen zou dit direct beëindigen zonder iets te doen maar het zeker een **geldig programma**.
 
 ~~~{.c}
 void main ()
@@ -80,20 +87,31 @@ $ ./empty
 $
 ~~~  
 
-> ```void main(){ }``` is wat we noemen een functie, meer details over functies volgt later. 
+> ```void main(){ }``` is wat we noemen een functie, meer details over functies volgt later.  
+> Soms zie je ook in plaats van ```void main()``` andere vormen/notaties terug:  
+>  
+*  ```int main()``` met ``` return 0``` (of ```return EXIT_SUCCESS;```) tussen de accolades toegevoegd
+*  ```int main(int argc, char *argv[])```  (met zelfde return-statements)
+>  
+>
+> Voorlopig houden we in deze voorbeelden bij de oorspronkelijke versie, de volgende les gaan we hier dieper op ingaan maar voorlopig hebben we deze niet nodig om onze eerste programma's te schrijven.
 
 **Wat je echter moet onthouden naar de volgende voorbeelden toe:**
 
-* Een c-programma start met "void main()"
-* Tussen de accolades kan je een sequentie van statements schrijven.
+* Een c-programma **start** met **"void main()"**
+* **Tussen** de **accolades** kan je een **sequentie** van **statements** schrijven.
 * Wat er tussen deze accolades staat wordt ook wel de **body** van je programma genoemd.
 
 ### Voorbeeld: Schrijven naar een console  
 
-Een eerste gewoonte bij het aanleren van programmeer-taal te leren kennen is het schrijven van programma dat een tekst-boodschap afrdukt.
-Men noemt dit ook een "Hello World"  
-(zie ook http://en.wikipedia.org/wiki/List_of_Hello_world_program_examples met voorbeelden voor zowat alle talen).
-In C bestaat er een specifieke instructie hiervoor genaamd "printf"
+Een eerste stap bij het aanleren van programmeertalen is het schrijven van programma dat een tekst-boodschap afdrukt.
+In het vakjargon noemt men zulk een programma een "Hello World", in de meeste voorbeelden op het internet zullen deze programma's ook effectief de tekst "Hello World" afdrukken.  
+
+> Je moet maar eens in google de zoekterm Hello World C typen en naar de voorbeelden kijken.  
+>  
+> Op Wikipedia (http://en.wikipedia.org/wiki/List_of_Hello_world_program_examples) zie je trouwens voorbeelden voor zowat alle programmeer-talen die er bestaan..
+
+In C bestaat er voor het afdrukken een specifieke functie genaamd "printf", zoals geïllustreerd hieronder:  
 
 ```
 #include <stdio.h>
@@ -102,7 +120,9 @@ void main ()
   printf("Hello World");
 }
 ```
+
 Als je nu dit programma compileert en uitvoert zie je dat het via via een terminal print de boodschap print die we aan deze functie hebben meegegeven.
+
 ```
 $ gcc helloworld.c -o helloworld
 $ ls
@@ -114,14 +134,14 @@ $
 
 Tegenover het vorige programma hebben we **3 nieuwe elementen** kunnen we hier onderscheiden:  
 
-* Het aanroepen van een procedure/functie
-* Gebruikt van test (string)
-* Importeren van een bibliotheek/library
+* Het **aanroepen** van een **functie**
+* Gebruik van **tekst** of een **string**
+* Importeren van een **bibliotheek**/library 
 
-#### Aanroepen van een procedure  
+#### Aanroepen van een functie    
 
-De eerste instructie die we bekijken is het **aanroepen van een procedure**.  
-Een **procedure** zelf - is in essentie - een stuk **herbruikbare** functionaliteit (code).
+De eerste instructie die we bekijken is het **aanroepen van een functie**.  
+Een **functie** zelf - is in essentie - een stuk **herbruikbare** functionaliteit (code).
 
 Die functionaliteit (zoals het printen) kan je dan aanroepen met de volgende syntax  
 ```
@@ -132,8 +152,8 @@ Je typt de naam van de procedure, en daarna (tussen de haakjes) een lijst van ar
 ``` {.c}
 printf("Hello World");
 ```  
-> Later in deze cursus gaan we functies en procedures nog verder bekijken:
->
+> Later in deze cursus gaan we functies nog verder bekijken:
+>  
 > * Beter overzicht van bestaande procedures
 > * Procedures (en functies) zelf maken
 > * Functies, zijnde procedures die een waarde teruggeven (eigenlijk is printf een functie maar daarover later meer)  

@@ -1,7 +1,9 @@
 digraph vakken {
-	digitaal_sequentieel[label="digitaal sequentiele"]
+	digitaal_sequentieel[label="digitaal sequentiel"]
   digitaal_combinatorisch[label="digitaal combinatorisch"]
-  multimedia[label="multimedia"]
+  microcontrollers[label="microcontrollers" color="blue"]
+	multimedia[label="multimedia"]
+
 
   digitaal_combinatorisch -> digitaal_sequentieel
 	digitaal_combinatorisch -> microcontrollers

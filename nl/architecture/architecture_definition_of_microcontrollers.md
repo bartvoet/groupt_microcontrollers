@@ -18,11 +18,11 @@ Je kan een microcontroller programmeren met software net zoals een computer, is 
 #### Een microcontroller is een ... computer ...
 Ja dus, een **MCU** (afkorting die we vanaf nu regelmatig gebruiken) bevat de typische elementen van een computer-systeem:  
 
-    * CPU (processor) +- 1-20 MHz
-    * Een hoeveelheid geheugen
-        * Dynamisch geheugen (RAM)
-        * Non-volatile geheugen (Flash ROM en EEPROM)
-    * divers I/O-poorten zijn ondergebracht.
+* CPU (processor) +- 1-20 MHz
+* Een hoeveelheid geheugen
+   * Dynamisch geheugen (RAM)
+    * Non-volatile geheugen (Flash ROM en EEPROM)
+* Divers I/O-mogelijkheden
 
 Een MCU Is programmeerbaar met **dezelfde programmeer-talen** die we gebruiken voor een **computer**(soms met wat beperkingen) zoals in ons geval C (of C++).
 
@@ -34,7 +34,7 @@ Een klassieke microcontroller kan je voorstellen als een typische geïntegreerde
 
 Je kan deze inschakelen in typische elektronica projecten, als een zeer flexibel (programmeerbaar) component (gevoed op 3.3-5V)  
 
-Dat is iets wat je normaal gezien (niet gemakkelijk) terugvindt bij een gewone computer, namelijk de mogelijkheden om een elektrische signalen door te sturen op een zeer laag niveau.  
+Dat is iets wat je normaal gezien niet (gemakkelijk) terugvindt bij een gewone computer, namelijk de mogelijkheden om een elektrische signalen door te sturen op een zeer laag niveau.  
 
 ![](../../pictures/intro_mcu_peripherals.png)
 
