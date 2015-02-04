@@ -1,0 +1,14 @@
+digraph assemble {
+
+rankdir="LR";
+
+code[shape="box" width=1 style=filled ];
+object[shape="box"  width=1 style=filled];
+executable[shape="box"  width=1 style=filled];
+
+compile [ width=1];
+link [ width=1];
+
+code -> compile-> object -> link -> executable
+
+}

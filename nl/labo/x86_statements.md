@@ -1,13 +1,13 @@
-## Labo 1
+## Labo: simpele statements 
 
-Labo 1 bevat een aantal basis-oefeningen die je moeten wennen aan het werken met:
+Dit labo bevat een aantal basis-oefeningen die je moeten wennen aan het werken met:
 
 * Expressies
 * Variabelen (type integer)
     * Declaratie
     * Assignment
 * Output met printf-functie 
-* Input met scanf
+* Input met scanf (integers)
 
 
 ### Opdracht 1

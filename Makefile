@@ -1,5 +1,6 @@
 # Basics
 CHAPTER_01 += chapter01_introduction.md
+CHAPTER_01 += ../../general/pandoc_page_break.txt
 CHAPTER_01 += ../orientation/course_introduction.md
 CHAPTER_01 += ../../general/pandoc_page_break.txt
 CHAPTER_01 += ../orientation/course_conventions.md
@@ -13,8 +14,9 @@ CHAPTER_02 += ../code/code_what_is_programming.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt
 CHAPTER_02 += ../code/code_c_introduction.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt
-#CHAPTER_02 += ../tools/tools_editors_and_ides.md
+CHAPTER_02 += ../tools/tools_eclipse_getting_started.md
 #CHAPTER_02 += ../tools/tools_toolchain_x86_overview.md
+CHAPTER_02 += ../../general/pandoc_page_break.txt
 CHAPTER_02 += ../labo/x86_statements.md
 
 CHAPTER_03 += chapter03_mode_coding.md
@@ -75,4 +77,7 @@ build_graphs:
 	${call graph_to_png,"orientation_digital_courses"}
 	${call graph_to_png,"intro_in_c_2_variables_1"}
 	${call graph_to_png,"intro_in_c_2_variables_2"}
-	gvpr -c 'N[name=="simple_statement" | name=="declaration" | name=="function_call" | name=="assignment"]{color = "blue"}' ./graphviz/code_hierachy_of_statements.dot | dot -Tpng -o ./pictures/code_focus_on_simple_statements.png
+	${call graph_to_png,"assembly_build"}
+	${call graph_to_png,"compile_build"}
+	gvpr -c 'N[name=="simple_statement" | name=="assignment" | name=="function_call"]{color="blue"}' ./graphviz/code_hierachy_of_statements.dot | dot -Tpng -o ./pictures/code_focus_on_simple_statements.png
+		gvpr -c 'N[name=="block_statement" | name=="conditional_statement"]{color="blue"}' ./graphviz/code_hierachy_of_statements.dot | dot -Tpng -o ./pictures/code_focus_on_conditions.png

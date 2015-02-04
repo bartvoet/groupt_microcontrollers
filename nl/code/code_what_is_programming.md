@@ -1,115 +1,140 @@
-## Introductie in programmeren  
+## Introductie in programmeren: van code naar bytes  
 
-Dit is een **introductie** en/of eerste kennismaking met programmeren aan de hand van de programmeer-taal C.
+Alvorens van start te gaan met c, een korte **introductie** en/of eerste kennismaking met programmeren.  
+De elementen die we hier bespreken gelden vanzelfsprekend voor C maar zijn natuurlijk ook toepasbaar voor andere (imperatieve) programmeertalen (zoals Java, C++, Python, Ruby, ...).  
 
-We pakken dit stap-voor-stap en starten ook enkel met de absolute basis (niet meer dan nog om een basis command-line-programma te schrijven):
-
-* Basis-structuur van een applicatie
-    * Statements en expressies
-    * Operatoren en functies (aanroepen)
-    * Variabelen en constanten
-    * Assignments
-* Input en output verwerken in een command-line-applicatie
-
->**Nota:**  
->Sommige zaken worden in dit hoofdstuk uitermate vereenvoudigd en zelfs onvolledig voorgesteld.
+>Op dit moment worden sommige zaken uitermate vereenvoudigd (en zelfs onvolledig) voorgesteld.
 >Waarom?  
 >Programmeren is niet de meest eenvoudige activiteit en we willen niet te snel vooruit lopen om iedereen (met of zonder eerdere programmeer-ervaring) van in het begin dezelfde basis (en kansen) mee te geven.
 
+### Basisprincipe:  Wat is een (software-)programma?
 
-### Wat is een (software-)programma?
-In essentie is bestaat een (uitvoerbaar) programma (executable) uit :
+In essentie bestaat een (uitvoerbaar) programma (executable) uit :
 
-* een (of meerdere) **bestand**(en)  die een welbepaalde **sequentie van instructies** bevatten
-* deze instructies worden door een **computer** (meer bepaald een processor) **geïnterpreteerd** en **uitgevoerd**.
+* een (of soms meerdere) **bestand**(en)  die een welbepaalde **sequentie** van **instructies** bevatten
+* deze instructies worden door een **computer** **geïnterpreteerd** en **uitgevoerd**.
 
-Binnen een computer is een **CPU (processor)** verantwoordelijk voor het 1 voor 1 verwerken van deze instructies.  
-In de praktijd gaat deze **CPU**:
+De **CPU (processor)** is het component verantwoordelijk voor het 1 voor 1 verwerken van deze **instructies** (hoewel sequentieel relatief is bij multicore-cpu's).   
+In de praktijk gaat deze **CPU** :
 
-* het programma van een hard-disk of een ander medium afhalen
+* het programma van een hard-disk (pc) of een ander medium afhalen
 * de instructies van dit programma in het RAM-geheugen laden
-en heeft toegang tot het geheugen voor het opslaan van data.
 
 ![](../../pictures/intro_external_logical_computer_view.png)
 
-### Soorten van instructies (gemeenschappelijk voor alle talen)
+### Instructieset  
 
-Binnen zo een programma zijn er verschillende soorten statements:  
+Binnen zo een programma zijn er verschillende soorten **instructies** die door een cpu kunnen worden verwerkt zoals :  
 
 * Berekeningen maken
-* Afdrukken van het resultaat op een scherm of een andere medium
+* Uitvoeren van deze instructies onder bepaalde voorwaarden
 * Herhalen van instructies
-* Aanroepen van functies en procedures
-* Enkel uitvoeren van deze instructies onder bepaalde voorwaarden
+* Aanroepen van andere stukken code (procedures)  
 * Lezen van randapparatuur (bv. scherm, toetsenbord, ...)  
 * ...
 
-![](../../pictures/basic_structure_programm.png)
+> In sommige gevallen kunnen deze instructies zelfs pas opgeroepen worden bij bepaalde events (wordt pas binnen een paar lessen besproken)
 
-> In somige gevallen kunnen deze instructies zelfs pas opgeroepen worden bij bepaalde events (wordt pas binnen een paar lessen besproken)
+Hoe deze instructies er uitzien voor cpu/processor wordt uitgedrukt aan de hand van een **instructieset**.   
 
-### Programmeertalen
+De beschikbare **instructies** (en hun representatie) verschillen van processor tot processor, de instructies die worden gebruikt voor x86 (wat in een 32-bit-computer) zijn bijvoorbeeld niet te vergelijken met die voor een microcontroller gebruiken 
 
-Hoe dat dit in zijn werk gaat bekijken we aan de hand van een programmeertaal.  
-Er bestaan veel verschillende programmeer-talen zoals C, C++, Java, Python, C#, ...
+We gaan hier (nog niet) over uitweiden, het enige dat we nu onthouden is dat zulk een instructie van een programma bestaat dit uit 2 componenten:
 
-Voor deze cursus gaan we dit bekijken aan de hand van de programmeertaal C, momenteel nog altijd de meest gebruikte programmeertaal (zeker in de wereld van microcontrollers en embedded programming).
+* **Opcode**  
+De code die de instructie voorstelt (bestaat uit 1 of meer bytes), informeert de processor wat hij moet uitvoeren en welke operanden er nog volgen ...
 
-In praktijk start een software-programma zijn leven als 1 (of meerdere) tekst-files.
-Voor dit aan te maken heb je niet meer nodig dan een teksteditor (zoals bv. notepad, vim, notepad++, emacs, ...) zoals het c-programma geillustreerd hieronder:
+* **Operand:**
+De operand is de data die bij deze de instructie hoort (register-adress, geheugen-adres, ...),  
+Het kunnen meerdere zijn en bestaan uit 1 of meerdere bytes. 
 
-![](../../pictures/intro_printscreen_of_editor.png)
+Schematisch kan een instructie er als volgt uit zien (in geval van AVR-instructies):
+![Assembler instructie](../../pictures/avr_assembler_instruction.png)
 
-Ter illustratie zie je hier enkele voorbeelden van hetzelfde programma - printen van "Hello World" geschreven in verschillende talen.
+> later zullen we hier nog over uitweiden als we de AVR-architectuur bestuderen
 
-####  Assembler
+###  Programmeertalen: van instructies naar assembler
+ 
+Een programma is dus eigenlijk een hoop byte-codes en als gevolg niet echt leesbaar door een gebruiker (tenzij je een computer bent of veel hebt geoefend), zelfs in hexadecimale voorstelling.  
+ 
+Om deze instructies te kunnen beschrijven van uit een leesbare tekst bestaan er wat we noemen **programmeertalen**.
 
-De **statements** uit een programma worden gewoonlijk vertaald naar machine-taal.
-Machine-taal zijn instructies die gecodeerd in een serie bytes (opcodes),deze instructie zijn meestal tussen 1 en 3 bytes lang (in geval van x86).
+De eerste groep van programmeertalen (die ooit werden geïntroduceerd) is wat we noemen **assembler**.  
+Deze soort van programmeertalen staat zeer dicht bij deze instructies:  
 
-Deze **instructies** verschillen van processor tot processor, de instructies die worden gebruikt voor x86 (wat in een 32-bit-computer) zijn niet te vergelijken met bijvoorbeeld degene die voor een microcontroller worden gebruik (later zullen we hier nog over uitwijden als we de AVR-achitectuur bestuderen).
+* **1-2-1 mapping** van statements (tekst) naar instructies (van cpu)  
+* Werkt met het principe van **mnemonics** hetgeen een tekstuele voorstelling is van de opcodes en hun operanden
+* elke cpu-families hebben zijn eigen specifieke assembler-talen (overeenkomstig instructieset)
 
-Aangezien dat deze instructies niet leesbaar zijn (tenzij je een computer bent), bestaat er assembler.  
-Dit is de groep van **programmeer-talen** die het dichtste staat bij de eigenlijke machine-taal, elke processor-architectuur heeft natuurlijk zijn eigen assembler-taal maar de principes blijven dezelfde.
 
-Het voorbeeld hieronder is geschreven met de gas-assember (GNU Assembler) die de  AT&T syntax:
+Een voorbeeld van zulk een assembler-programma is hieronder beschreven (GNU Assembler voor X86 die de  AT&T syntax volgt):
 
 ```
 .data
 hello:
-        .string "Hello world\n"
+        .string "Hello world\n"  # Een stukje constant geheugen
 
 .text
 .globl _start
 _start:
-        movl $4, %eax
-        movl $1, %ebx
-        movl $hello, %ecx
-        movl $13, %edx
-        int $0x80
+        movl $4, %eax     # System call voor schrijven naar console
+        movl $1, %ebx     # File descripter => sysout (of console)
+        movl $hello, %ecx # Pointer (naar data) naar boodschap
+        movl $13, %edx    # Lengte van de data (te printen vanaf pointer)
+        int $0x80         # Interrupt die kernel vraagt system call uit te voeren
 
-        movl $1, %eax
-        movl $0, %ebx
-        int $0x80
+        movl $1, %eax     # System call voor afsluiten programma
+        movl $0, %ebx     # Return code voor shell
+        int $0x80         # Interrupt, kernel vragen system call uit te voeren
 ```
 
-Om dit uit te voeren:
+> We gaan dit (nog) niet in detail bespreken, dit is enkel ter illustratie en ter vergelijking.  
+> Later gaan we assembly verder bekijken als we dieper ingaan op hoe een processor samenwerkt met het geheugen.  
+
+Om deze code te **transformeren** of in vakjargon **"compilen"** voer je volgende 2 commando's uit (linux):
 
 ```
 $ as helloworld.s -o helloworld.o  
 $ ld -s -o helloworld helloworld.o  
 $ ./helloworld  
+$ Hello World
+$ echo $?
+$ 0
 ```
 
-Assembler is een zeer efficiente manier van programmerenvoor wat betreft performance maar:
-* Is zeer moeillijk te schrijven en te lezen
+Volgende taken worden uitgevoerd:  
+
+* as zijnde het programma dat de assembly transformeert naar "bits en bytes"  
+* ld zijnde het programma dat deze assembly "linkt" met andere object-files (in dit geval slechts 1) 
+* Als je daarna dit programma uitvoert, zie dat dit de tekst "Hello World" uitprint
+* Met het commando $? zie je de return-code (0)  
+
+![](../../pictures/assembly_build.png)
+
+
+Assembler is een **zeer efficiënte manier** van programmeren voor wat betreft performance **maar:**
+
+* Is zeer moeilijk te schrijven en te lezen
+* Programma's worden zeer groot
 * Is niet overdraagbaar naar andere processor-architecturen
 
+### High-Level programmeertalen
+**(van assembler naar iets leesbaar)**
+
+Omdat assembler dus nog altijd niet echt leesbaar is, zijn in de loop der tijden andere programmeertalen uitgevonden zoals C, Fortran, Lisp, C++, Java, Python, C#, ...   
+
+(elk natuurlijk met hun eigen toepassingsgebied).  
+
+
+
+In deze programmeertalen spreken we dus niet meer over instructies maar eerder over statements en declaraties.
+In plaats van deze instructies programmeer-talen gebruiken de meeste programmeer-talen in plaats hiervan statements (actie uitvoeren) en declaraties (van variabelen en geheugen).
+
+Voor deze cursus gaan we dit bekijken aan de hand van de programmeertaal C, momenteel nog altijd de meest gebruikte programmeertaal (zeker in de wereld van microcontrollers en embedded programming).
+
+Ter illustratie zie je hier enkele voorbeelden van hetzelfde programma - printen van "Hello World" - geschreven in C (die we gaan gebruiken in onze labo's) maar ook in andere talen (ter illustratie).
+
 #### Voorbeeld in C
-
-Vandaar dat er talen zijn die meer om maat van mensen zijn gemaakt zoals bijvoorbeeld C.
-
-> Zoals eerder vermeld gaan we deze taal gebruiken de komende weken gebruiken voor onze labo's.
 
 ```
 #include <stdio.h>
@@ -121,28 +146,32 @@ int main(int argc, char** argv)
 }
 
 ```
+
+Deze code is al min of meer leesbaar en mapt ook niet meer 1-2-1 met cpu-instructies.    
+De transformatie naar een uitvoerbaar bestand van deze code noemen we **compileren**, dit procesis natuurlijk een stuk complexer als bij assembler.
+
 Dit programma voert het zelfde uit als het bovenstaande assembler-programma.
 Dit programma kan je op een command-line compilen (transformeren naar byte-instructies) en uitvoeren.
 
 ```
-$ gcc helloworld.c -o helloworld
+$ gcc helloworld.c -c helloworld.o
+$ gcc helloworld.o -o helloworld
 $ ./helloworld
 $ Hello World
 $
 ```
 
-C is vergeleken met assembly zeer leesbaar, maar sluit in praktijk toch tamelijk dicht aan bij de hardware (vooral door pointers).  
-Dat heeft zowel voor- als nadelen:
-* Voordeel is dat C voor van alles gebruikt kan worden en relatief snel is.
-Als gevolg is dit de meest populaire taal voor het programmeren van MCU'S of andere omgevingen waar performance en memory-verbruik zeer belangrijk zijn.
-* Daarnaast is de taal gecompileerd worden naar zowat alle platformen en processor-architecturen die er bestaan
-* Nadelen zijn dat de taal niet erg vergevingsgezind is met betrekking tot fouten en dat de C-compiler weinig controles uitvoert (hoewel die controles met diverse tools alsnog uitgevoerd kunnen worden).  
-Een C-programma dat door de C-compiler correct wordt bevonden, hoeft niet per definitie goed te functioneren.  
-Een oorzaak van vele problemen hier is het gebruik van pointers; dit is dan ook de reden waarom deze in afgeleide talen zoals Java en Python achterwege gelaten zijn..
+Dit gebeurt ook - zoals bij assembler - in 2 fases:
 
-#### Voorbeeld in Java
+* Compilen van de programma-code naar object-code (instructies)
+* Linken van de object-code met andere code (in dit geval slechts 1 object-file)
 
-Een ander voorbeeld van een high-level taal is Java
+![](../../pictures/compile_build.png)
+
+
+#### Andere voorbeelden
+
+Een ander voorbeeld van een high-level taal is **Java**, zeer populair in web- en enterprise-development
 
 ```java
 public class HelloWorld {
@@ -159,8 +188,7 @@ $ Hello World
 $
 ```
 
-#### Voorbeeld in Python
-Of Python
+Als laatste voorbeeld Python, een andere zeer populaire programmeer-taal
 ```
 print("hello world")
 ```
@@ -171,34 +199,7 @@ $ Hello World
 $
 ```
 
+### En verder ...
 
-##### Compileren en linken
-Deze tekst kan je echter niet direct door een CPU laten uitvoeren.  
-Alvorens je dat programma kan uitvoeren op het platform naar keuze (computer, microcontroller ...) moet deze tekst-file getransformeerd worden naar een uitvoerbare binaire file (in het geval van C).  
+Vanaf de volgende hoofdstukken gaan verder met de programmeertaal C en gaan we proberen de eerste programma's te schrijven. 
 
-![](../../pictures/intro_position_of_writing_code.png)
-
-Deze transformatie wordt uitgevoerd door  3 programma's:
-
-* Een assembler die je code vertaalt naar assembler (zie later)  
-* Een **compiler** die deze assembler vertaalt naar binaire objecten
-* Een **linker** die deze binaire objecten linkt tot een uitvoerbaar programma
-
-Dit programma kan dan rechtstreeks geïnterpreteerd worden door een CPU
-
-##### Command-line
-In de praktijk zijn er programma's die dat voor jou doen.  Voorbeelden van zulke compilers zijn gcc en msc.  
-Ter illustratie zie je hieronder een voorbeeld van hoe dat je met GCC (via de terminal) een tekstbestand (helloworld.c) transformeert naar een programma (helloworld)
-
-![](../../pictures/intro_printscreen_of_gcc.png)
-
-
-Hoe dat precies in zijn werk gaat wordt in het volgend hoofdstuk uitgelegd.  
-Voorlopig kan je er vanuit gaan (indien gcc geinstalleerd is) je dit onder de volgende vorm kan aanroepen:  
-```gcc <c-file> -o <programmanaam>```  
-om een uitvoerbaar command-line applicatie te verkrijgen.  
-Het gebruik van deze tools wordt in een volgend hoofdstuk uitgelegd zodat we zelf de voorbeelden en labo's kunnen kunnen compileren en uitvoeren.
-
-> Vooraleer te starten met microcontrollers oefenen we de basis van programmeren met c in aan de hand van dit soort programma's dat je van de command-line kan aanroepen.
-
-> Hierover volgt in de volgende hoofdstukken nog zeer veel diepgang, voorlopig focussen we ons op de eerste activiteit, namelijk het schrijven  van code zelf.

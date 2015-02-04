@@ -235,6 +235,7 @@ We weten wat een microcontroller of MCU (we zullen deze afkorting vanaf nu meer 
 Hoe ziet nu zo een microcontroller eruit en wat zijn zijn belangrijkste kenmerken?
 
 #### Geïntegreerde chip  
+
 Zoals reeds vermeld; een microcontroller is een geïntegreerde chip.  
 Deze komen meestal in 2 vormen voor:  
 
@@ -289,7 +290,8 @@ int main(void) {
   return (0);
 }
 ```
-De hardware setup (mocht je zelf al willen proberen)
+De hardware setup (mocht je zelf al willen proberen):
+
 ![](../../pictures/intro_demo_design.jpg)
 
 
