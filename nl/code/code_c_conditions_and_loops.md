@@ -1,6 +1,6 @@
 ## Loops en condities in C
 
-Tot nu toe hebben we geleerd: 
+Tot nu toe hebben we geleerd:
 
 * Data in te lezen uit een console (integers)
 * Deze data bij te houden in een variabele
@@ -11,7 +11,7 @@ We gaan in deze les bekijken hoe dat we een programma intelligenter kunnen maken
 
 ![](../../pictures/code_focus_on_conditions.png)
 
-Eerst gaan we kennis maken met een nieuw soort van expressies van operators. 
+Eerst gaan we kennis maken met een nieuw soort van expressies van operators.
 
 ### Logische expressies
 
@@ -98,10 +98,10 @@ $
 
 ### Voorbeeld: Oppassen met het verschil tussen = en ==
 
-   
+
 Een "gelijk aan"-operator bestaat uit 2 maal ```=``` omdat deze - zoals we eerder hadden gezien - gereserveerd is voor assignemnts.
 
-Dus onthoudt **```=``` is niet hetzelfde als ```==```**.   
+Dus onthoudt **```=``` is niet hetzelfde als ```==```**.
 Dit is een veel voorkomende bug zelfs in professionele software, later bij condities gaan we dit nog verder bekijken.
 
 ```
@@ -188,12 +188,12 @@ We gaan direct van start met een voorbeeld.
 
 ### Voorbeeld: "if"-statement
 
-We gebruiken hier als voorbeeld een programma dat een getal inleest en iest afdrukt op het scherm indien het een even getal is.   
+We gebruiken hier als voorbeeld een programma dat een getal inleest en iest afdrukt op het scherm indien het een even getal is.
 
 ```
 #include <stdio.h>
 
-void main() 
+void main()
 {
     int input;
     printf("Gelieve een getal in te geven: ");
@@ -215,7 +215,7 @@ Als je het programma runt een een positief getal in geeft dan zal het programma 
 ```
 $ gcc is_even.c -o is_even
 $ ./is_even.c
-$ Gelieve een getal in te geven: 
+$ Gelieve een getal in te geven:
 $ 4
 $ Het getal 4 is even
 ```
@@ -224,7 +224,7 @@ Als je hetzelfde opnieuw uitvoert maar dan met een oneven getal krijgt je niets 
 
 ```
 $ ./is_even.c
-$ Gelieve een getal in te geven: 
+$ Gelieve een getal in te geven:
 $ 3
 $
 ```
@@ -232,6 +232,7 @@ $
 Het is wel een beetje ongelukkig dat het programma niets afdrukt wanneer het getal oneven is.  
 
 Dit zouden we kunnen oplossen door in het programma een **2de if-statement** toe te voegen (waar we naar de omgekeerde conditie testen) maar daarvoor hebben we een betere oplossing.  
+ 	
 > **Belangrijke nota:  **  
 > Een goede programmeur is naast verstandig echter ook een lui en dus zoeken naar de meest optimale oplossing.
 
@@ -248,7 +249,7 @@ We herschrijven als gevolg hiervan het programma
 ```
 #include <stdio.h>
 
-void main() 
+void main()
 {
     int input;
     printf("Gelieve een getal in te geven: ");
@@ -265,7 +266,7 @@ Het programma zal het zelfde resultaat als het vorige, zoals je hieronder ziet..
 ```
 $ gcc is_pair_or_not.c -o is_pair_or_not
 $ ./is_pair_or_not
-$ Gelieve een getal in te geven: 
+$ Gelieve een getal in te geven:
 $ 4
 $ Het getal 4 is even
 $
@@ -275,7 +276,7 @@ Als je hetzelfde opnieuw uitvoert maar dan met een oneven getal krijgt uiteindel
 
 ```
 $ ./is_even.c
-$ Gelieve een getal in te geven: 
+$ Gelieve een getal in te geven:
 $ 3
 $ Het getal 4 is oneven
 $
@@ -322,13 +323,13 @@ Dit programma uitvoeren geeft ons het resultaat dat we wensen.
 ```
 $ gcc check_pair_positive_and_negative.c -o check_pair_positive_and_negative.
 $ ./check_pair_positive_and_negative.
-$ Gelieve een getal in te geven: 
+$ Gelieve een getal in te geven:
 $ 4
 $ Het getal 4 is een positief even getal
 $ ./check_pair_positive_and_negative
 $ -5
 $ Het getal -5 is een negatief oneven getal
-$ 
+$
 ```
 
 Aan dit programma is echter nog iets fout, wat als we het getal 0 ingeven?
@@ -368,7 +369,7 @@ Er is nog een 3de soort clausule die je kan toevoegen namelijk "else if"
 * Deze bevat net als de if-clausule een logische expressie
 * Deze moet altijd tussen de de "else"- en de "if"-clausule geplaatst worden
 * Men kan meerdere "if else"-clausules tussen de "if-" en "else-"clausules plaatsen
-* Maar wel maar 1 "if"- en 1 "else"-clausele (waarbij if verplict is en else optioneel) 
+* Maar wel maar 1 "if"- en 1 "else"-clausele (waarbij if verplict is en else optioneel)
 
 ```
 #include <stdio.h>
@@ -406,18 +407,18 @@ Als we dit testen zien we dat dit programma correct omgaat met het getal 0.
 
 ```
 $ gcc check_pair_positive_and_negative_and_zero.c -o check_pair_positive_and_negative_and_zero
-$ ./check_pair_positive_and_negative_and_zero.c 
-$ Gelieve een getal in te geven: 
+$ ./check_pair_positive_and_negative_and_zero.c
+$ Gelieve een getal in te geven:
 $ 4
 $ Het getal 4 is een positief even getal
 $ ./check_pair_positive_and_negative
-$ Gelieve een getal in te geven: 
+$ Gelieve een getal in te geven:
 $ -5
 $ Het getal -5 is een negatief oneven getal
-$ Gelieve een getal in te geven: 
+$ Gelieve een getal in te geven:
 $ 0
 $ Het getal 0 is noch even of oneven
-$ 
+$
 ```
 
 ### Voorbeeld: Mathematische expressies en getallen
@@ -440,7 +441,7 @@ void main()
 }
 ```
 
-Dit programma zal enkel hello afdrukken, de regel is simpel: 
+Dit programma zal enkel hello afdrukken, de regel is simpel:
 
 * 0 zal altijd evalueren als false
 * Alle andere getallen als true
@@ -451,18 +452,18 @@ Dit programma zal enkel hello afdrukken, de regel is simpel:
 Een 2de soort operator die je kan gebruiken in logische expressies is de logische operator.
 
 | Operator | Vergelijking            |
-|:---------|:------------------------|
-| ```&&``` | Logische "AND"          |
-| ```||``` | Logische "OR"           |
-| ```!```  | Logische "NOT"          |
+|:----------------|:------------------------|
+| &&              | Logische "AND"          |
+| &#124;&#124;    | Logische "OR"           |
+| !               | Logische "NOT"          |
 
-De 2 eerste operatoren && en || 
+De 2 eerste operatoren && en ||
 
 * stellen respectievelijk de combinaties and or voor
 * zijn binair (2 operanden)
 * geven 0 of 1 terug
 * evalueren volgens de klassiek waarheidstabellen (die je hebt gezien in combinatorische)
-* maar gelijkaardig aan if-statement wordt elke getal verschillend van 0 gezien als "true"   
+* maar gelijkaardig aan if-statement wordt elke getal verschillend van 0 gezien als "true"
 
 > Nota: x in de waarheidheids-tabel stelt elke niet 0 waarde voor
 
@@ -500,7 +501,7 @@ De negatie-operator ! is een unitaire operator:
 | x | 0  |
 
 
-### Voorbeeld: ! (negatie-operator) 
+### Voorbeeld: ! (negatie-operator)
 
 We hernemen het voorbeeld van ons programma dat nagaat of een getal:
 
@@ -541,7 +542,7 @@ void main()
 ```
 Dit wijzigt de karakteristiek van het programma echter niet.  
 
-We bekomen hetzelfde resultaat als we dit resultaat inverteren: 
+We bekomen hetzelfde resultaat als we dit resultaat inverteren:
 Onderstaande tabel verduidelijkt dit:
 
 |        | **(input % 2)** | **! (input % 2)**  |
@@ -556,19 +557,19 @@ Als we dit uittesten krijgen we hetzelfde resultaat
 
 ```
 $ gcc check_pair_positive_and_negative_and_zero2.c -o check_pair_positive_and_negative_and_zero2
-$ ./check_pair_positive_and_negative_and_zero2.c 
-$ Gelieve een getal in te geven: 
+$ ./check_pair_positive_and_negative_and_zero2.c
+$ Gelieve een getal in te geven:
 $ 4
 $ Het getal 4 is een positief even getal
 $ ./check_pair_positive_and_negative2
-$ Gelieve een getal in te geven: 
+$ Gelieve een getal in te geven:
 $ -5
 $ Het getal -5 is een negatief oneven getal
 $ ./check_pair_positive_and_negative2
-$ Gelieve een getal in te geven: 
+$ Gelieve een getal in te geven:
 $ 0
 $ Het getal 0 is noch even of oneven
-$ 
+$
 ```
 
 ### Voorbeeld: &&
@@ -629,7 +630,7 @@ void main()
     }
 }
 ```
-### Voorbeeld: Alles tesamen 
+### Voorbeeld: Alles tesamen
 
 ```
 #include <stdio.h>
@@ -660,63 +661,160 @@ void main()
 }
 ```
 
-### Herhalen
+### While-loops
 
-Tot nog toe hadden we logische expressies en operatoren enkel gebruikt voor het conditioneel uitvoeren van code.
+Tot **nog toe** hadden we **logische expressies** en operatoren enkel gebruikt voor het **conditioneel uitvoeren** van code.  
+Als je een stuk code wil **herhalen** op basis van een logische expressie kan je dit doen met een **while loop**.
 
+* Deze is **gelijkaardig** aan de **if**-conditie **van vorm**, ipv een if schrijf je while.  
+* Een while-statement bevat geen clausules (1 body)  
 
+### Voorbeeld: Eenvoudige lus
 
+We starten met een programma:
 
-### Labo
-
-1. breid het bestaande programma uit
-
-Voeg de mogelijkheid bij na te kijken of het een deler is
-Laat dit programma herhalen zolang je een karakter ingeeft
-
-2. 
-Print een binaire representatie af van een getal (zie lessen combinatorische en als je er niet uit     
-
-Breidt dit uit door Simuleer een knight-rider
+* Dat een **vermenigvuldigings-tabel** afdrukt 
+* Op **basis** van een **getal** dat de gebruiker **ingeeft**
 
 ```
-00000001  
-00000010  
-00000100  
-00001000  
-00010000  
-00100000  
-01000000  
-10000000  
-01000000  
-00100000  
-00010000  
-00001000  
-00000100  
-00000010  
-00000001  
-```
-Inverteer dit
+#include <stdio.h>
 
-4. Teken de kerstboom na aan de hand van een loopeen kerstboom met het karakter '*' van 
-Je kan hier de methode putchar() voor gebruiken
+void main(void) {
+  int number_to_multiply,i;
+  printf("Gelieve het basis-nummer in te geven voor de tafel: \n");
+  scanf("%i",&number_to_multiply);
+
+  i=1;
+  while(i<10) {
+    printf("%i * %i = %i\n",i,number_to_multiply,(i * number_to_multiply) );
+    i=i+1;
+  }
+}
+```
+
+* Dit programma zal de statements binnen de while-statement **blijven uitvoeren zolang i kleiner is dan 10**.  
+* **"i"** wordt **telkens verhoogt met 1** met het gevolg dat de vermenigvulding **9 maal** wordt afgedrukt.
 
 ```
-     *  
-    ***  
-   *****                 
-  *******  
- *********        
-***********  
-     *  
-     *    
-```     
-3. maak een programma dat nakijkt of een getal een priemgetal is
+$ gcc multiplication.c -o multiplication
+$ ./multiplication
+$ Gelieve het basis-nummer in te geven voor de tafel:
+$ 5
+$ 1 * 5 = 5
+$ 2 * 5 = 10
+$ 3 * 5 = 15
+...
+```
 
-maak een getal (niet 0 of 1) gelijk aan 
+### Voorbeeld: Geneste loops
+
+Je kan deze loops ook in elkaar nesten (zoals we reeds bij de if's hebben gezien).  
+We wijzigen het voorgaande programma en drukken alle tafels af (geen input meer vereist).    
+
+```
+void main(void) {
+	int j,i;
+
+	i=1;
+	while (i<10) {
+		j=1;
+		while(j<10) {
+			printf("%i * %i = %i\n",i,j,(i * j) );
+			j=j+1;
+		}
+		i=i+1;
+	}
+}
+
+```
+De output is gelijkaardig aan het vorige-programma maar zal dus de tafels van alle getallen afdrukken.
+
+### Voorbeeld: <= tov <
+
+We gebruikten voor de vergelijking de expressie ```i < 10```, je kan dit ook wijzigen naar ```i <= 9```.  
+
+> Welke optie je gebruikt is een kwestie van leesbaarheid, het hangt af van het geval (zoals we later bij de for-loop and arrays gaan zien).  
 
 
+```
+#include <stdio.h>
 
+void main(void) {
+	int j,i;
 
+	i=1;
+	while (i <= 9) {
+		j=1;
+		while(j <= 9) {
+			printf("%i * %i = %i\n",i,j,(i * j) );
+			j=j+1;
+		}
+		i=i+1;
+	}
+}
 
+```
 
+### Voorbeeld: ++-operator
+
+Je kan ook een verkorte versie gebruiken van het statment i=i+1, namelijk i++.
+Dit is een unitaire operator (1 operand) die na het getal komt.  
+We komen hier later nog op terug want er zijn meer varianten hierop.  
+
+```
+#include <stdio.h>
+
+void main(void) {
+	int j,i;
+
+	i=1;
+	while (i <= 9) {
+		j=1;
+		while(j <= 9) {
+			printf("%i * %i = %i\n",i,j,(i * j) );
+			j++;
+		}
+		i++;
+	}
+}
+
+```
+
+### Voorbeeld: Loops en input
+
+Een laaste voorbeeld herneemt het voorbeeld dat we eerder hebben gezien en combineert een complexe logische expressie met een while loop.
+
+````
+#include <stdio.h>
+
+void main()
+{
+    int first,second,test;
+
+    printf("Gelieve een getal in te geven: ");
+    scanf("%i",&first);
+
+    printf("Gelieve een 2de getal in te geven: ");
+    scanf("%i",&second);
+
+    printf("Gelieve een test-getal in te geven: ");
+    scanf("%i",&test);
+	while( ((test <= first) &&  (test >= second))
+    	||
+		((test >= first) &&  (test <= second))
+    ) {
+    	        printf("Getal %i ligt tussen %i en %i\n",test,first,second);
+
+		printf("Gelieve een getal in te geven: ");
+		scanf("%i",&first);
+
+		printf("Gelieve een 2de getal in te geven: ");
+		scanf("%i",&second);
+
+		printf("Gelieve een test-getal in te geven: ");
+		scanf("%i",&test);
+
+	}
+   	printf("Getal %i ligt niet tussen %i en %i, programma eindigt nu\n",test,first,second);
+
+}
