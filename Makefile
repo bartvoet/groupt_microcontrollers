@@ -59,12 +59,12 @@ graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
 
 all:
 	cd nl/chapter && pandoc  \
-			$(CHAPTER_01) $(CHAPTER_02) \
+			../title.txt $(CHAPTER_01) $(CHAPTER_02) \
 		-o ../../dist/cursus.epub
 #		--epub-stylesheet ../../markdown.css \
 
 	cd nl/chapter && pandoc \
-			$(CHAPTER_01) $(CHAPTER_02) \
+			../title.txt ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) \
 		-o ../../dist/cursus.pdf
 	
 
