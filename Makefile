@@ -19,10 +19,11 @@ CHAPTER_02 += ../tools/tools_eclipse_getting_started.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt
 CHAPTER_02 += ../labo/x86_statements.md
 
-CHAPTER_03 += chapter03_mode_coding.md
-CHAPTER_03 += ../code/integer_data_types.ùd
-CHAPTER_03 += ../code/code_input_and_output_in_c.md
-CHAPTER_03 += ../code/code_basic_loops_and_conditions.md
+#CHAPTER_03 += chapter03_mode_coding.md
+CHAPTER_02 += ../../general/pandoc_page_break.txt
+CHAPTER_03 += ../code/code_c_conditions_and_loops.md
+CHAPTER_02 += ../../general/pandoc_page_break.txt
+CHAPTER_03 += ../labo/x86_loops_and_conditionals.md 
 
 CHAPTER_04 += chapter04_first_experience_with_mcu.md
 CHAPTER_04 += ../tools/to_arduino_or_not.md
@@ -59,12 +60,12 @@ graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
 
 all:
 	cd nl/chapter && pandoc  \
-			../title.txt $(CHAPTER_01) $(CHAPTER_02) \
+			../title.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03)\
 		-o ../../dist/cursus.epub
 #		--epub-stylesheet ../../markdown.css \
 
 	cd nl/chapter && pandoc \
-			../title.txt ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) \
+			../title.txt ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03)\
 		-o ../../dist/cursus.pdf
 	
 
