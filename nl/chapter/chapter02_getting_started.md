@@ -7,10 +7,9 @@ In deze fase worden de C-programma's nog geschreven voor X86 (pc)
     * Simpele statements en expressies
     * Declaraties en variabelen
     * Input en Output
+* Een eerste kennismaking met tools:
+    * Compilen en uitvoeren vanuit command line (gcc)
+    * Werken met een IDE (Eclipse)
 * Dynamischer maken van het programma:
     * Condities
     * Loops
-* Een eerste kennismaking met tools:
-    * Compiler (gcc)
-    * Eclipse
-
