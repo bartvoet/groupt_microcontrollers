@@ -6,5 +6,7 @@ Veel succes (en vooral plezier) gewenst met deze kennismaking met programmeren e
 In deze inleiding bekijken we:  
 
 * Opbouw van de cursus, principes en afspraken uitleggen.
-* Korte introductie om een indruk te krijgen van wat een microcontroller eigenlijk is
+* Korte introductie (om een indruk te krijgen)
+    *  Wat is een microcontroller?  
+    *  Wat is programmeren?  
 

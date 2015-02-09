@@ -7,10 +7,10 @@ CHAPTER_01 += ../orientation/course_conventions.md
 CHAPTER_01 += ../../general/pandoc_page_break.txt
 CHAPTER_01 += ../architecture/architecture_definition_of_microcontrollers.md
 CHAPTER_01 += ../../general/pandoc_page_break.txt
+CHAPTER_01 += ../code/code_what_is_programming.md
+CHAPTER_01 += ../../general/pandoc_page_break.txt
 
 CHAPTER_02 += chapter02_getting_started.md
-CHAPTER_02 += ../../general/pandoc_page_break.txt
-CHAPTER_02 += ../code/code_what_is_programming.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt
 CHAPTER_02 += ../code/code_c_introduction.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt
@@ -21,9 +21,9 @@ CHAPTER_02 += ../labo/x86_statements.md
 
 #CHAPTER_03 += chapter03_mode_coding.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt
-CHAPTER_03 += ../code/code_c_conditions_and_loops.md
+CHAPTER_02 += ../code/code_c_conditions_and_loops.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt
-CHAPTER_03 += ../labo/x86_loops_and_conditionals.md 
+CHAPTER_02 += ../labo/x86_loops_and_conditionals.md 
 
 CHAPTER_04 += chapter04_first_experience_with_mcu.md
 CHAPTER_04 += ../tools/to_arduino_or_not.md
