@@ -417,10 +417,10 @@ Belangrijke kenmerken van deze operatoren (logical shift):
 #include <stdio.h>
 void main()
 {
-    printf("%x\n,0xa << 0);	
-    printf("%x\n,0xa << 1);	
-    printf("%x\n,0xa << 3);	
-    printf("%x\n,0xa << 4);	
+    printf("%x\n",0xa << 0);	
+    printf("%x\n",0xa << 1);	
+    printf("%x\n",0xa << 3);	
+    printf("%x\n",0xa << 4);	
 }
 ```
 
