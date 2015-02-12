@@ -257,7 +257,7 @@ Gezien er op elke positie bij beide getallen minstens één 0 voorkomt is het re
 
 Naast & heb je hier een overzicht van all bitwise operatoren:
 
-| Operator | Betekenis             | Voorbeeld    | Resultaat (per bit-positie)                       |ç
+| Operator | Betekenis             | Voorbeeld    | Resultaat (per bit-positie)                       |
 |----------|-----------------------|--------------|---------------------------------------------------|
 | &        | AND                   | x & y        | 1 als beide 1 zijn                                |
 | &#124;   | OR                    | x &#124; y   | 1 als er 1 van de 2 een 1 voorkomt                |
