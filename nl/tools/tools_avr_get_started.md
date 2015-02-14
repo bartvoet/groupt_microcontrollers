@@ -1,33 +1,34 @@
-## Van start geraken met AVR-ontwikkeling (gebaseerd op arduino)
+## Starten met tools: AVR toolchain (compilen en flashen)
 
-### Installatie
+We willen starten met 
 
-#### Linux
+### Installatie Linux
 Ubuntu en Debian:   
 ```sudo apt-get install avrdude avrdude-doc binutils-avr avr-libc gcc-avr gdb-avr```
 
 Fedora en Red Hat:  
 ```sudo yum install avrdude avr-gcc avr-binutils avr-libc avr-gdb```
 
-#### Mac
+### Installatie Mac
 Crosspack voor mac zou moeten volstaan, er zijn geen dependencies op xcode (dus je moet niet specifiek een account maken)  
 http://www.obdev.at/downloads/crosspack/CrossPack-AVR-20131216.dmg
 
-#### FreeBSD:
+### Installatie FreeBSD:
 Installeer via ports  
 avr-gcc, avr-binutils, avr-libc, avr-gdb, avrdude 
 
-#### Windows 7  
+### Installatie Windows 7  
 
 Installeer WinAVR of de arduino-omgeving, deze bevat ook de nodige gcc-software.  
 Andere mogelijkheid is de software te gebruiken meegeleverd bij de cursus (start de command-line comandline_bash_with_toolchain.bat)
 
-> Windows 8 is not niet uitgeprobeerd maar zou in principe moeten werken (op eigen risico)
+> Windows 8 is nog niet uitgeprobeerd maar zou in principe moeten werken (op eigen risico)
 
-### Eerste programma
+### Test-programma
 
 Bedoeling van deze getting started is de toolchain te leren kennen dus dit programma wordt later verduidelijkt.  
 Als dit programma correct wordt geplaatst op de arduino zou het on-board led moeten beginnen te togglen.
+
 
 ``` {.c}
 #include <stdio.h>
@@ -59,13 +60,21 @@ int main(void)
 
 ```
 
-### Compileren van de code 
+### Compileren en flashen van de code 
 
 ![](../../pictures/toolchain_for_avr_s.png)
 
 * Bewaar het onderstaande programma op je harde schijf (lokaal niet op het netwerk)
 * Navigeer via command line naar de directory waar
 
+Voer daarna de volgende 4 commando's uit (vervang /dev/ttyACM0 door de specifieke poort waar de Arduino is op aan gesloten):
+
+* avr-gcc -Os -DF_CPU=16000000UL -mmcu=atmega328p -c -o led.o led.c
+* avr-gcc -mmcu=atmega328p led.o -o led
+* avr-objcopy -O ihex -R .eeprom led led.hex
+* avrdude -F -V -c arduino -p ATMEGA328P -P /dev/ttyACM0 -b 115200 -U flash:w:led.hex
+
+Bij het uitvoeren van deze commando's krijg je de volgende output:
 
 ```
 $ avr-gcc -Os -DF_CPU=16000000UL -mmcu=atmega328p -c -o led.o led.c
