@@ -1,4 +1,4 @@
-## Eerste stappen in programmeren met c
+## Code: Eerste stappen in programmeren met c
 
 Als voorbereiding op de labo's, gaan we een aantal elementaire kenmerken van een software-programma in C verder onder de loep nemen:
 
@@ -32,13 +32,13 @@ We **initialiseren** deze **variabele** met een waarde (in dit geval het resulta
 We **roepen** de **functie printf aan** (reeds voorzien in de C-libraries) die er voor zorgt dat het resultaat wordt afgedrukt naar het scherm.
 
 
-### Focus van deze les: simpele statements  
+### Duiding: simpele statements  
 
-De 2 elementen - naast de declaratie - assignment en functie-aanroep zijn beide statements.  
+De 2 lijnen (in voorgaande code) die na de declaratie kwamen (assignment en functie-aanroep) benoemen we **statements**.  
  
-Waar een declaratie dient om het werkgeheugen van een programma te organiseren, zijn statemnts concrete acties (waarde toekennen, berekening, printen, ...).
+Waar een declaratie dient om het werkgeheugen van een programma te organiseren, stellen statements concrete acties voor (waarde toekennen, berekening, printen, ...).
 
-De soorten van statements die we vandaag bekijken kunnen we definiëren als we **simpele statements**, deze :  
+Er zijn veel verschillende soorten statements in c, degene die we vandaag bekijken kunnen we definiëren als we **simpele statements**, deze :  
 
 * Doen slechts 1 (functionele) taak
 * Worden in C altijd beindigd met een ; (semicolon in het Engels)
@@ -46,6 +46,7 @@ De soorten van statements die we vandaag bekijken kunnen we definiëren als we *
 
 ![](../../pictures/code_focus_on_simple_statements.png)
 
+> Bemerking:  
 > Deze les heeft slechts 1 doel, namelijk de student de eerste basis te geven om een heel eenvoudige command-line applicatie te doen schrijven (hetgeen voor een eerste kennismaking met programmeren al een hele hoop werk is).  
 
 Daarom focussen we eerst op de deze "simpele statements" (**blauwe gedeelte** in het diagram), daarnaast zullen we ook kennis maken met de volgende begrippen gerelateerd aan simple statements:
@@ -60,12 +61,13 @@ De andere soorten statements zoals bijvoorbeeld:
 * het herhalen van deze statements (onder bepaalde condities)
 * zelf schrijven van functies en procedures
 * return statements
+...
 
-nemen we onder loep in de 2 komende hoofdstukken.  
+nemen we onder loep in de volgende hoofdstukken.  
 
-### Voorbeeld: Body van een programma (beginnen bij het begin)
+### Voorbeeld: Een leeg programma (body)
 
-Deze statements kunnen niet zomaar in een C-programma worden geschreven daarvoor heeft ons programma eerst een body nodig (main-functie).
+Deze statements kunnen niet zomaar in een C-programma worden geschreven, daarvoor heeft ons programma eerst een body nodig (main-functie).
 Dit illustreren aan de hand van een leeg programma zonder statements.  
 
 Als je dit programma zou aanroepen zou dit direct beëindigen zonder iets te doen maar het zeker een **geldig programma**.
@@ -77,18 +79,20 @@ void main ()
 }
 ~~~
 
-Hoewel dit programma niets doet is het wel een geldig programma dat je kan uitvoeren.
+Hoewel dit programma niets doet is het wel een **geldig programma** dat je kan uitvoeren vanuit de command line.
 Als je dit programma compileert en vervolgens uitvoert zie je dat dit programma niets afdrukt.
 
 ~~~
 $ gcc empty.c -o empty
 $ ls
-$ empty.c empty
+empty.c empty
 $ ./empty
 $
 ~~~  
 
-> ```void main(){ }``` zelf is - naast de body van het programma - wat we noemen een functie, meer details over functies volgt later.  
+```void main(){ }``` zelf is - naast de body van het programma - wat we noemen een functie, meer details over functies volgt later.  
+
+> Bemerking:  
 > Soms zie je ook in plaats van ```void main()``` andere vormen/notaties terug:  
 >  
 *  ```int main()``` met ``` return 0``` (of ```return EXIT_SUCCESS;```) tussen de accolades toegevoegd
@@ -103,43 +107,45 @@ $
 * **Tussen** de **accolades** kan je een **sequentie** van **statements** schrijven.
 * Wat er tussen deze accolades staat wordt ook wel de **body** van je programma genoemd.
 
-### Voorbeeld: Schrijven naar een console  
+### Voorbeeld: Schrijven van tekst naar een console  
 
-Een eerste stap bij het aanleren van programmeertalen is het schrijven van programma dat een tekst-boodschap afdrukt.
-In het vakjargon noemt men zulk een programma een "Hello World", in de meeste voorbeelden op het internet zullen deze programma's ook effectief de tekst "Hello World" afdrukken.  
+Een eerste stap bij het aanleren van programmeertalen is het schrijven van programma dat een tekst-boodschap afdrukt.  
+Dit noemt men ook wel een "Hello World"-programma, de meeste voorbeelden op het internet printen ook effectief de tekst "Hello World" afdrukken.  
 
+> Bemerking:  
 > Je moet maar eens in google de zoekterm Hello World C typen en naar de voorbeelden kijken.  
 >  
 > Op Wikipedia (http://en.wikipedia.org/wiki/List_of_Hello_world_program_examples) zie je trouwens voorbeelden voor zowat alle programmeer-talen die er bestaan..
 
 In C bestaat er voor het afdrukken een specifieke functie genaamd "printf", zoals geïllustreerd hieronder:  
 
-```
+```{.c}
 #include <stdio.h>
 void main ()
 {
-  printf("Hello World");
+  printf("Hello World\n");
 }
 ```
 
-Als je nu dit programma compileert en uitvoert zie je dat het via via een terminal print de boodschap print die we aan deze functie hebben meegegeven.
+Als je nu dit programma compileert en uitvoert, zie je dat het via via een terminal print de boodschap print die we aan deze functie hebben meegegeven.
 
 ```
 $ gcc helloworld.c -o helloworld
 $ ls
 $ helloworld helloworld.c
 $ ./helloworld
-$ Hello World
+Hello World
 $
 ```
 
 Tegenover het vorige programma hebben we **3 nieuwe elementen** kunnen we hier onderscheiden:  
 
-* Het **aanroepen** van een **functie**
-* Gebruik van **tekst** of een **string**
-* Importeren van een **bibliotheek**/library 
+1. Het **aanroepen** van een **functie**
+2. Gebruik van **tekst** of een **string**
+3. Importeren van een **bibliotheek**/library   
 
-#### Aanroepen van een functie    
+
+* **Aanroepen van een functie**    
 
 De eerste statement (uit bovenstaand programma) die we bekijken is het **aanroepen van een functie**.  
 Een **functie** zelf - is in essentie - een stuk **herbruikbare** functionaliteit (code).
@@ -161,7 +167,7 @@ printf("Hello World");
 >
 > Voorlopig zijn we echter enkel geïnteresseerd in het schrijven van tekst naar de console, we komen hier later op de cursus nog op terug.
 
-#### Gebruik van tekst(string)
+* **Gebruik van tekst(string)**  
 
 We hebben met dit voorbeeld reeds ons eerste datatype gezien dat je in een programma kunt gebruiken, namelijk een string (of tekst maar meestal bij programmeren gebruiken we het woord string).  
 
@@ -171,7 +177,7 @@ In C kan je dus een stuk tekst uitdrukken/definiëren met quotes rond (dubbele h
 ```
 > Zelfde bemerking zoals bij functies, het concept van strings gaan we gedurende de cursus veel verder onderzoeken.  
 
-#### Importeren van een library (of header-file)
+* **Importeren van een library (of header-file)**  
 
 Procedures (en functies) staan dikwijls (in het geval van printf bijvoorbeeld) gegroepeerd in **bibliotheken** (libraries).
 
@@ -194,7 +200,7 @@ Met deze include of import van deze file zorg je ervoor dat je programma beschik
 Tot nog toe hadden we enkel 1 instructie doorgegeven, je kan het programma ook **meerdere instructies** na mekaar laten uitvoeren.  
 In het programma hieronder, hebben we 2-maal een printf-functie-aanroep geplaatst:
 
-```
+```{.c}
 #include <stdio.h>
 void main ()
 {
@@ -226,7 +232,7 @@ C ondersteunt echter **veel meer datatypes**, 1 van deze datatypes is een **inte
 Een getal in C - in het voorbeeld hieronder een extra argument aan printf - wordt uitgedrukt door gewoon het getal te typen.  
 In tegenstelling tot een string moet je hier **geen quotes** rond plaatsen.
 
-```
+```{.c}
 #include <stdio.h>
 void main ()
 {
@@ -234,10 +240,10 @@ void main ()
 }
 ```
 
-In het voorbeeld hierboven voegen we 2 nieuwe zaken toe:
+Met het voorbeeld hierboven voegen we 2 nieuwe elementen toe:
 
-* Een **integer/getal** meegeven als aan **printf** (2de argument)  
-* Het gebruik van placeholders binnen het eerste argument van printf  
+* Een **integer/getal** meegeven als aan **printf** (2de argument)
+* Het gebruik van placeholders binnen het eerste argument van printf
 
 De functie printf kan niet rechtstreeks getallen afdrukken.  
 Daarvoor bestaat er specifieke syntax, je kan namelijk binnen het eerste (string-)argument de plek waar je het getal wil printen met %i markeren.  
@@ -255,7 +261,7 @@ Bij het begrip "variabelen" gaat het nut hiervan duidelijker worden.
 ### Voorbeeld: printf met meerdere argumenten
 
 Je kan aan printf ook meerdere placeholders meegeven in 1 functie-aanroepen (het mechanisme komen we later op terug)
-```
+```{.c}
 #include <stdio.h>
 void main ()
 {
@@ -265,7 +271,7 @@ void main ()
 Bovenstaand programma drukt af ```De getallen zijn 5 en 6```
 Onderstaand programma drukt af ```De getallen zijn 5,6 en 7```
 
-```
+```{.c}
 #include <stdio.h>
 void main ()
 {
@@ -290,7 +296,7 @@ Let ook dat we aan het eind van deze string altijd **\\n** toevoegen, dit is een
 De C-programmeertaal laat je ook toe van - tijdens het uitvoeren van je programma - bepaalde waardes bij te houden in het geheugen.
 Deze waardes worden bijgehouden in wat noemen variabelen.  
 
-```
+```{.c}
 #include <stdio.h>
 int main ()
 {
@@ -309,7 +315,7 @@ $ ./printnumber
 $ Het getal is: 5
 $ Nog 1 maal printen van 5
 ```
-#### Wat is een variabele
+### Duiding: Wat is een variabele?
 
 Een variabele is een plekje geheugen waar je een waarde (in dit geval 5) kan opslaan en een naam kan toekennen (in dit geval een integer-getal).
 
@@ -341,7 +347,7 @@ Een variabele zoals we zullen zien in de volgende voorbeelden kunnen we dan verd
    * de variabele gebruiken in een expressie (zie later)
    * de variabele gebruiken om een andere variabele in te stellen
 
-#### Assignment operator =
+### Voorbeeld: Assignment operator =
 
 Bij deze zien we ook onze eerste **operator** in C, de assignment-operator.  
 Een operator is binnen een programmeer taal (C in ons geval):  
@@ -362,7 +368,7 @@ In dit geval heeft een assignment:
 Tot nog toe hebben we de declaratie en assignment van ene variabele gescheiden gehouden.  
 Het onderstaande programma doet hetzelfde als het voorgaande programma
 
-```
+```{.c}
 #include <stdio.h>
 int main ()
 {
@@ -383,7 +389,7 @@ Welke stijl dat je kiest is afhankelijk van de situatie (en soms ook persoonlijk
 
 Je kan met een variabele ook een andere variabele initialiseren.  
 
-```
+```{.c}
 #include <stdio.h>
 int main ()
 {
@@ -401,7 +407,7 @@ Het resultaat zal ook opnieuw hetzelfde zijn zoals de vorige getallen
 ### Voorbeeld: variabelen bevatten waardes
 
 Het is belangrijk om te weten (maar ook wel logisch) dat als je een variabele initialiseert met een waarde van een aandere variabele deze de waarde overneemt
-```
+```{.c}
 #include <stdio.h>
 int main ()
 {
@@ -428,7 +434,7 @@ Daarvoor introduceren we het laatste element van deze les namelijk expressies.
 Tot nu toe hadden we enkel gezien hoe dat we een variabele konden initialiseren met statische waardes (buiten het allereerste voorbeeld van dit hoofdstuk).  
 Je kan deze waardes echter ook berekenen uit waardes, door bijvoorbeeld wiskundige expressies uit te voeren zoals in het voorbeeld hieronder:
 
-```
+```{.c}
 #include <stdio.h>
 void main ()
 {
@@ -447,7 +453,7 @@ $ ./firstexpression
 $ Het resultaat is 12
 ```
 
-### "Arithmetic" operatoren en operanden
+### Duiding: Operatoren en operanden (arithmetic)
 
 Een expressie bestaat uit 2 soorten elementen (herinner operator en operanden bij de assignment) :  
 
@@ -474,7 +480,7 @@ Andere kenmerken:
 
 Zoals je zie volgt een expressie in C dezelfde regels als algemen wiskunde is eigenlijk bijna identiek aan een wiskundig expressie:  
 
-#### Overzicht operatoren
+* **Overzicht operatoren**
 
 | Operator | Operatie         |
 |:---------|:-----------------|
@@ -489,7 +495,7 @@ Zoals je zie volgt een expressie in C dezelfde regels als algemen wiskunde is ei
 Een expressie bestaat niet noodzakelijk uit variabelen, je kan deze ook wisselen met constante waardes:  
 (```int som = getal1 + 7;``` in plaats van ```int som = getal1 + getal2;```)
 
-```
+```{.c}
 #include <stdio.h>
 void main ()
 {
@@ -512,11 +518,11 @@ void main ()
 ```
 (hetgeen vanzelfsprekend hetzelfde resultaat oplevert)
 
-### Voorbeeld: expressies met meerdere operanden
+### Voorbeeld: expressies met meerdere operatoren
 
-Een expressie is niet beperkt tot slechts 2 operanden
+Een expressie is niet beperkt tot slechts 2 operatoren
 
-```
+```{.c}
 #include <stdio.h>
 void main ()
 {
@@ -530,7 +536,7 @@ void main ()
 
 En je kan verschillende soorten operatoren combineren:
 
-```
+```{.c}
 #include <stdio.h>
 void main ()
 {
@@ -545,7 +551,7 @@ Met hetzelfde resultaat zijnde 12
 
 Een laatste voorbeeld is de unitaire operator, in het voorbeeld hieronder gebruiken we deze om een negatie op een operand uit te voeren.
 
-```
+```{.c}
 #include <stdio.h>
 void main ()
 {
@@ -557,11 +563,11 @@ void main ()
 Bij de evaluatie van deze expressie wordt de waarde van getal1 eerst negatief gemaakt alvorens dat hier 17 wordt bij opgeteld.  
 Belangrijk is te weten dat net als in de wiskunde unitaire operatoren 1st worden uitgevoerd.
 
-### Lezen van een getal
+### Voorbeeld: Lezen van een getal
 
 Als laatste van deze sessie (ter voorbereiding van de labo's) leggen we uit hoe we getallen kunnen inlezen.
 
-```
+```{.c}
 #include <stdio.h>
 
 int main()

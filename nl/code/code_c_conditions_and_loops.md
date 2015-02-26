@@ -47,7 +47,7 @@ Er bestaan binnen de syntax van C 6 relationele operatoren:
 
 ### Voorbeeld: resultaat is een integer
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -76,7 +76,7 @@ zien we bij het uitvoeren van deze code dat :
 
 Net zoals mathematische expressies kan je deze inline in een functie (of andere statements gebruiken).
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -104,7 +104,7 @@ Een "gelijk aan"-operator bestaat uit 2 maal ```=``` omdat deze - zoals we eerde
 Dus onthoudt **```=``` is niet hetzelfde als ```==```**.
 Dit is een veel voorkomende bug zelfs in professionele software, later bij condities gaan we dit nog verder bekijken.
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -128,7 +128,7 @@ Zoals je ziet geeft dit als resulaat ipv 0 een 6.
 ### Voorbeeld: ```!=``` geeft het omgekeerde resultaat van ```==```
 
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -156,7 +156,7 @@ $
 
 De >= en <= doen hetzelfde dan > en <, maar geven 1 terug als beide operanden gelijk aan elkaar zijn.
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -190,7 +190,7 @@ We gaan direct van start met een voorbeeld.
 
 We gebruiken hier als voorbeeld een programma dat een getal inleest en iest afdrukt op het scherm indien het een even getal is.
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -246,7 +246,7 @@ De statements die binnen deze clausule binnen de haakjes te voorschijn komen, wo
 
 We herschrijven als gevolg hiervan het programma
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -294,7 +294,7 @@ Bedoeling is dat het programma 4 mogelijke zinnen afdrukt:
 
 We wijzigen ons programma door binnen de 2 verschillende clausules (if en else) een andere te plaatsen
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -320,7 +320,7 @@ void main()
 
 Dit programma uitvoeren geeft ons het resultaat dat we wensen.
 
-```
+```{.c}
 $ gcc check_pair_positive_and_negative.c -o check_pair_positive_and_negative.
 $ ./check_pair_positive_and_negative.
 $ Gelieve een getal in te geven:
@@ -334,7 +334,7 @@ $
 
 Aan dit programma is echter nog iets fout, wat als we het getal 0 ingeven?
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -371,7 +371,7 @@ Er is nog een 3de soort clausule die je kan toevoegen namelijk "else if"
 * Men kan meerdere "if else"-clausules tussen de "if-" en "else-"clausules plaatsen
 * Maar wel maar 1 "if"- en 1 "else"-clausele (waarbij if verplict is en else optioneel)
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -427,7 +427,7 @@ Tot nog toe hebben we een if-statement enkel met logische expressies gebruikt.
 Een if-statement kan echter ook met getallen of mathematische expressies werken  
 (die een integer terug geven) zoals het voorbeeld hieronder
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -539,7 +539,8 @@ void main()
         }
     }
 }
-```
+
+```{.c}
 Dit wijzigt de karakteristiek van het programma echter niet.  
 
 We bekomen hetzelfde resultaat als we dit resultaat inverteren:
@@ -577,7 +578,7 @@ $
 We bouwen voor op hetzelfd programma en vervangen de geneste statements door &&
 Om het programma overzichtelijk te maken houden we de testen bij in een variabele.
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -610,7 +611,7 @@ void main()
 
 Voor het volgende deel schrijven we een programma dat nakijkt of een getal zich tussen 2 andere getallen bevindt.
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -632,7 +633,7 @@ void main()
 ```
 ### Voorbeeld: Alles tesamen
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -676,7 +677,7 @@ We starten met een programma:
 * Dat een **vermenigvuldigings-tabel** afdrukt 
 * Op **basis** van een **getal** dat de gebruiker **ingeeft**
 
-```
+```{.c}
 #include <stdio.h>
 
 void main(void) {
@@ -711,7 +712,7 @@ $ 3 * 5 = 15
 Je kan deze loops ook in elkaar nesten (zoals we reeds bij de if's hebben gezien).  
 We wijzigen het voorgaande programma en drukken alle tafels af (geen input meer vereist).    
 
-```
+```{.c}
 void main(void) {
 	int j,i;
 
@@ -736,7 +737,7 @@ We gebruikten voor de vergelijking de expressie ```i < 10```, je kan dit ook wij
 > Welke optie je gebruikt is een kwestie van leesbaarheid, het hangt af van het geval (zoals we later bij de for-loop and arrays gaan zien).  
 
 
-```
+```{.c}
 #include <stdio.h>
 
 void main(void) {
@@ -761,7 +762,7 @@ Je kan ook een verkorte versie gebruiken van het statment i=i+1, namelijk i++.
 Dit is een unitaire operator (1 operand) die na het getal komt.  
 We komen hier later nog op terug want er zijn meer varianten hierop.  
 
-```
+```{.c}
 #include <stdio.h>
 
 void main(void) {
@@ -784,7 +785,7 @@ void main(void) {
 
 Een laaste voorbeeld herneemt het voorbeeld dat we eerder hebben gezien en combineert een complexe logische expressie met een while loop.
 
-````
+````{.c}
 #include <stdio.h>
 
 void main()

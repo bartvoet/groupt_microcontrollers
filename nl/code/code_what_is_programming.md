@@ -136,7 +136,7 @@ Ter illustratie zie je hier enkele voorbeelden van hetzelfde programma - printen
 
 #### Voorbeeld in C
 
-```
+```{.c}
 #include <stdio.h>
 
 int main(int argc, char** argv)
@@ -173,7 +173,7 @@ Dit gebeurt ook - zoals bij assembler - in 2 fases:
 
 Een ander voorbeeld van een high-level taal is **Java**, zeer populair in web- en enterprise-development
 
-```java
+```{.java}
 public class HelloWorld {
     public static void main(String[] args) {  
         System.out.println("Welkom in de cursus microcontrollers");
@@ -189,7 +189,7 @@ $
 ```
 
 Als laatste voorbeeld Python, een andere zeer populaire programmeer-taal
-```
+```{.py}
 print("hello world")
 ```
 

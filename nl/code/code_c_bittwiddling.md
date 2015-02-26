@@ -7,30 +7,35 @@ We hebben deze gebruikt voor
 * Logische expressies en operators zoals &&, || en !
 * Relationele expressies en operatoren zoals >,<, ...
 
-Wat deze operatoren algemaal gemeen hebben is dat op de waarde van het getal werken.  
+Wat deze operatoren allemaal gemeen hebben met elkaar is dat deze met de waarde van een getal (integer in dit geval) werken (mathematische bewerkingen, vergelijkingen van getallen, combineren van vergelijkingen, ...).  
+
 Zoals we direct gaan zien bestaan er ook operatoren om integers te manipuleren op bit-niveau.  
 
 Dit is een vaardigheid die we nog veel gaan nodig hebben bij het werken met microcontrollers (of ander low level-programmeer-activiteiten).  
-Alvorens echter deze operaties en expressies te bespreken gaan we eerst kijken hoe een integer er uit ziet.  
+Alvorens echter deze operaties en expressies te bespreken gaan we eerst kijken hoe zo een een integer er van binnen uit ziet.  
 
 ### Unsigned integer-types
 
-Tot nu toe hebben we het type **int** gebruikt in onze code-voorbeelden, dit heeft als ken merken:
+Tot nu toe hebben we het type **int** gebruikt in onze code-voorbeelden, dit type heeft als kenmerken:
 
-* Signed type, het kan zowel positief als negatief getal voorstellen
-* Minimum 2 bytes volgens C-specificatie
-* Meestal echter 4 bytes op intel-processoren
-* 1 bit wordt gebruikt voor het sign (negatief of positief)
+* **Signed type**, het kan zowel positief als negatief getal voorstellen
+* Minimum **2 bytes** in het geheugen volgens C-specificatie
+* Meestal echter **4 bytes** op intel-processoren
+* **1 bit**, de MSB (most significant) wordt gebruikt voor het sign (negatief of positief)
 
 Naast deze integer heb je ook een aantal andere **signed types** met verschillende groottes zoals **char, short, long, int, long en long long**.
 
-We nemen deze later nog onder de loep gezien (interne opbouw, conversies, ...)  
-Bedoeling hier is te leren werken met bit-operators dus beperken we ons tot unsigned integer-types.  
+We nemen eerst echter een andere type onder de loep, namelijk de **unsigned integer** (interne opbouw, conversies, ...)  
+Bedoeling hier is te leren werken met bit-operators en de regels rond unsigned integers zijn eenvoudiger en bit-expressies zijn een pak éénvoudiger. 
 Deze zijn eenvoudiger van opbouw en meer relevant voor een eerste kennismakig met bit-operatoren en expressies..  
 
-Net zoals het type int dat we eerder gebruikt hebben in vorige hoofdstukken hebben we ook een type **unsigned int**.
+Net zoals het type int dat we eerder gebruikt hebben in vorige hoofdstukken hebben we ook zijn tegenhanger de **unsigned int**.
 
-Alvorens deze te bekijken gaan we kijken naar de **unsigned** varianten.   
+```{.c}
+unsigned int = 5;
+
+Het unsigned integer-type bestaat in verschillende maten (aantal bytes);
+
 
 |type                  |minimum           | x86               | 
 |----------------------|------------------|-------------------|
@@ -41,6 +46,16 @@ Alvorens deze te bekijken gaan we kijken naar de **unsigned** varianten.
 | unsigned long long   | 8                | 8                 |
 
 De byte-encoding van een unsigned char is vrij éénvoudig vergeleken met de signed varianten (die we volgende les bekijken).  
+
+Het getal 0xAAAA
+
+|type  | hex      |15  | 14 | 13 | 12 | 11 | 10 |  9 |  8 |  7 |  6 |  5 |  4 |  3 |  2 |  1 |  0 |
+|------|----------|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|
+|short |0x1010    | 1  | 0  | 1  | 0  | 1  | 0  | 1  | 0  |  1 | 0  | 1  | 0  |  1 | 0  | 1  | 0  |
+|char  |0x10      | -  | -  | -  | -  | -  | -  | -  | -  |  1 | 0  | 1  | 0  |  1 | 0  | 1  | 0  |
+
+
+
 
 We beperken ons in deze les tot de unsigned char:
 

@@ -1,4 +1,4 @@
-## Labo: eenvoudige loops en condities
+## Labo: bitmasks en shift-operators
 
 ### Opdracht 1
 
