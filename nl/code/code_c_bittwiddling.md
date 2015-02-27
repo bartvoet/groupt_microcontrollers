@@ -14,7 +14,7 @@ Zoals we direct gaan zien bestaan er ook operatoren om integers te manipuleren o
 Dit is een vaardigheid die we nog veel gaan nodig hebben bij het werken met microcontrollers (of ander low level-programmeer-activiteiten).  
 Alvorens echter deze operaties en expressies te bespreken gaan we eerst kijken hoe zo een een integer er van binnen uit ziet.  
 
-### integer-types heb je in verschillende groottes
+### Duiding: integer-types heb je in verschillende groottes
 
 Tot nu toe hebben we het type **int** gebruikt in onze code-voorbeelden, dit type heeft als kenmerken:
 
@@ -25,7 +25,7 @@ Tot nu toe hebben we het type **int** gebruikt in onze code-voorbeelden, dit typ
 
 Naast deze integer heb je ook een aantal andere **signed types** met verschillende groottes zoals **char, short, long, int, long en long long** die allemaal variëren in lengte (het aantal aantal bytes lengte.
 
-### Maar voorlopig bekijken we enkel unsigned integers
+### Duiding: voorlopig bekijken we enkel unsigned integers
 
 We nemen eerst echter een andere type onder de loep, namelijk de **unsigned integer** (interne opbouw, conversies, ...)   
 Bedoeling hier is te leren werken met bit-operators en de regels rond unsigned integers zijn eenvoudiger en bit-expressies zijn een pak éénvoudiger. 
@@ -58,9 +58,7 @@ Het getal 0xAAAA
 |char  |0x10      | -  | -  | -  | -  | -  | -  | -  | -  |  1 | 0  | 1  | 0  |  1 | 0  | 1  | 0  |
 
 
-
-
-We beperken ons in deze les tot de unsigned char:
+We beperken ons in deze les ook (meestal) tot de unsigned char:
 
 * Stelt een byte voor
 * Heeft geen sign-bit  
@@ -77,7 +75,7 @@ We beperken ons in deze les tot de unsigned char:
 
 Vanuit de bitwise operatoren de we zo direct gaan zien kan je het volgende als model nemen voor een unsigned char
 
-### HEX-representatie
+### Duiding: HEX-representatie
 
 Als we de onderliggende representatie (of encoding) gaan gebruiken - op bit-niveau -  is het handig getallen uit te drukken als hexadecimale getallan.
 
@@ -123,7 +121,7 @@ Onderstaande code toont ook aan dat de hex-representatie de zelfde waarde geeft 
 
 void main() 
 {
-	if(10 == 0xa) {}
+    if(10 == 0xa) {
 		printf("10 == 0xa");
     }
 }
@@ -140,7 +138,7 @@ Dit kan je gebruiken door de placeholder x te gebruiken (ipv i die we tot nog to
 
 void main() 
 {
-	int value_ten = 10;
+    int value_ten = 10;
     printf("%i == %x\n",value_ten,value_ten);
 }
 ```
@@ -177,9 +175,8 @@ sizeof(unsigned long long) = 8 bytes
 $
 ```
 
-### Bitwise operatoren in c
 
-#### Bitwise operatoren vs logische operatoren
+### Duiding: Bitwise operatoren vs logische operatoren
 
 Tot nog toe hebben we logische operatoren gezien zoals &&, || en !, deze hadden als eigenschappen:
 
@@ -190,7 +187,7 @@ Tot nog toe hebben we logische operatoren gezien zoals &&, || en !, deze hadden 
 De operatoren die we vandaag bekijken noemen we bitwise operatoren.  
 Met bit-wise willen we zeggen dat deze op bit-niveau opereren, ipv de operanden als 0 en 1 te gaan beschouwen gaan deze operator elke bit mat elkaar kan vergelijken.
 
-#### Voorbeeld: verschil tussen logische en bitwise operatoren
+### Voorbeeld: verschil tussen logische en bitwise operatoren
 
 We kunnen dit best met een stukje code gaan vergelijken
 
@@ -231,7 +228,7 @@ Bij de bitwise operator gaat deze de bits individueel met elkaar gaan matchen en
 |**2 blijft 2** |0    |1    |0    | 
 |**2 & 2**      |0    |1    |0    |
 
-#### Voorbeeld: verschil tussen logische en bitwise operatoren (2)
+### Voorbeeld: verschil tussen logische en bitwise operatoren (2)
 
 Nog een ander voorbeeld is de combinatie 5 en 2.  
 Hier is het verschil tussen beide nog opvallender (1 en 0),.
@@ -271,7 +268,7 @@ Gezien er op elke positie bij beide getallen minstens één 0 voorkomt is het re
 
 > Dit kan gevaarlijk zijn als je dit in een if-conditie of loop zou gebruiken (& ipv &&)
 
-#### Overzicht bitwise operatoren  
+### Overzicht bitwise operatoren  
 
 Naast & heb je hier een overzicht van all bitwise operatoren:
 
@@ -285,7 +282,7 @@ Naast & heb je hier een overzicht van all bitwise operatoren:
 > Binaire getallen worden vanaf hier bits genoemd (binary digits)  
 > Als we in deze tekst bits vergelijken, vergelijken we bits op de zelfde positie bij 2 integers
 
-#### Voorbeeld: Bitwise operator & 
+### Voorbeeld: Bitwise operator & (and)
 
 & (and) zal:  
 * in 0 resulteren als 1 van beide bits gelijk zijn aan 0  
@@ -326,7 +323,7 @@ $ ./example_bit_and
 $ 
 ```
 
-#### Voorbeeld: Bitwise operator |
+### Voorbeeld: Bitwise operator | (or)
 
 | (or) zal in 1 resulteren als minstens 1 van opereranden gelijk is aan 1 volgens de waarheidstabel.
 
@@ -363,7 +360,7 @@ $ ./example_bit_or
 $ 
 ```
 
-#### Bitwise operator ^
+### Voorbeeld: Bitwise operator ^ (xor)
 
 ^ (xor) zal in 1 resulteren als 1 van beide operanden 1, anders zal de uitslag altijd 0 zijn
 
@@ -401,7 +398,30 @@ $ ./example_bit_xor
 $ 
 ```
 
-### Bit-shifting
+### Voorbeeld: Bitwise operator ~ (invertor)
+
+De laatste bitwise operator die we zien is de invertor.  
+Dit is een unitaire operator (slechts 1 operand).  
+
+```{.c}
+#include <stdio.h>
+void main()
+{
+	printf("~0xAA = %x\n", 0x55);	
+}
+```
+
+Deze operator zal dus de waarde gaan om van elke individuele bit
+
+|          | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+|----------|---|---|---|---|---|---|---|---|
+|**0xAA**  | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 |
+|**~0xAA** | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 1 |
+
+> **Nota:**  
+> Bij de laatste voorbeelden gaan we zien dat we de xor kunnen gebruiken voor individuele bits te inverteren
+
+### Duiding: Bit-shifting
 
 Een 2de soort van bit-operatoren zijn de bit-shift-operatoren
 
@@ -420,7 +440,7 @@ Belangrijke kenmerken van deze operatoren (logical shift):
 > Dit gedrag is trouwens niet 100 % overeenkomstig bij signed getallen waar een arithmatische shift wordt uitgevoerd.  
 > Hier komen we later in de cursus nog op terug.   
 
-#### Voorbeeld <<
+### Voorbeeld <<
 
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
@@ -443,7 +463,7 @@ void main()
 ```
 
 
-#### Voorbeeld >>
+### Voorbeeld >>
 
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
@@ -464,7 +484,7 @@ void main()
     printf("%x\n",0xa >> 4);	
 }
 ```
-#### Voorbeeld: >> wegshiften van bits
+### Voorbeeld: >> wegshiften van bits
 
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
@@ -473,7 +493,7 @@ void main()
 |      0x0a >> 3|         1|         1|  00000001|
 |      0x0a >> 4|         0|         0|  00000000|
 
-#### Voorbeeld: << wegshiften van bits
+### Voorbeeld: << wegshiften van bits
 
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
@@ -501,7 +521,7 @@ Zo'n **bitmask** kan je best bekijken als een **bit-patroon** (of masker) dat je
 
 De eerste die we bekijken is het uitlezen van een bit of een specifieke locatie.
 
-### Voorbeeld: Een bitmask om een specifieke bit te lezen
+### Voorbeeld: Een bit-query met and (bit op specifiek positie lezen)
 
 Je wil weten of een specifieke bit is geactiveerd?
 Dit kan je doen door 2 operatoren te combineren & en <<
@@ -597,6 +617,8 @@ Als voorbeeld, stel het volgende:
 
 * Een unsigned short heeft 16 bits
 * Je wil deze opsplitsen in 2 chars
+    * 1 met de MSB byte
+    * 1 met de LSB byte
 
 ```{.c}
 #include <stdio.h>
@@ -632,7 +654,7 @@ Bovenstaande code combineert in dit geval de 2 bit- en shift-operatoren:
   0000000010101010  00aa
 ```
 
-#### Voorbeeld: printen welk bits zijn gezet
+### Voorbeeld: printen welk bits zijn gezet
 
 ```{.c}
 #include <stdio.h>
@@ -654,7 +676,7 @@ void main()
 }
 ```
 
-#### Bits wijzigen naar 1 (met or)
+### Voorbeeld: bits setten met or (wijzigen naar 1)
 
 Tot nu toe hadden we enkel geprobeerd een waardes te weten te kokmen.  
 Je kan ook een bit in een getal wijzigen, dit is een vaardigheid dat je zeer veel nodig zal hebben voor een MCU-programma.  
@@ -686,7 +708,7 @@ We maken hier gebruik (in tegenstelling tot lezen van een bit) van een **|**
 Bij deze operator is de **1 dominant**, dus waar een 1 wordt gebruikt bij het masker zal de waarde worden geforceerd naar 1.  
 Wanneer er een 0 staat op een specifieke locatie zal deze zich gedragen als een buffer (de originele waarde behouden).  
 
-#### Bits wijzigen naar 0 (met and)
+### Voorbeeld: bits clearen met and (wijzigen naar 0)
 
 Een andere actie die je kan toepassen is een specifieke bit wijzigen naar 0 (ook wel de bit clearen genoemd).
 Dit wordt gedaan door een geinverteerd bit-patroon toe te passen zoals hieronder:
@@ -718,12 +740,27 @@ Dit doet het omgekeerde van voorgaand voorbeeld
 |              ~(0x1 << 1)|        13|         d|  11111101|
 |   a = a & ~(0x1 << 1)   |         8|         8|  00001000|
 
-
-
-#### Bits wisselen (met xor)
+### Voorbeeld: Bits togglen (of wisselen) met xor
 
 Als laatste voorbeeld (voortgaand op de voorgaande voorbeelden) kan je ook individuele bits laten togglen.  
 (togglen = laten alterneren tussen 0 en 1)   
+
+Dit kan je eventueel doen met een invertor (~), maar deze gaat alle bits inverteren.  
+In dit geval willen we dit toepassen met een bitmask, en daar komt de xor zeer goed van pas.  
+
+Een xor heeft de eigenschap zich te gedragen als een poort die je kan configureren als: 
+
+* ofwel een buffer (wanneer je deze als 1 configureert)  
+* ofwel een invertor (wanneer je deze als 0 configureert)
+
+Anders gezegd:
+
+* Op de positie waar een bitmask de waarde 1 heeft zal dit het gedrag van een invertor vertonen    
+  (0 ^ **1** = 1 en 1 ^ **1** = 0)  
+  en de bit van het source-getal **inverteren**  
+* Op de positie waar een bitmask de waarde 0 heeft zal dit het gedrag van een buffer vertonen    
+  (0 ^ **0** = 0 en 1 ^ **0** = 1)   
+  en de bit van het source-getal **niet wijzigen**  
 
 ```
 #include <stdio.h>
@@ -756,43 +793,39 @@ $ ./example_of_toggling
 $
 ```
 
-De 2de bit van rechts (positie 1) alterneert telkens als we deze expressie uitvoeren.
+De 2de bit van rechts (positie 1) alterneert telkens als we deze expressie uitvoeren.   
   
-Dit is namelijke een leuke eigenschap van een xor, als je een specifiek bit telkens opnieuw met 1 zal "xor-en" zal deze telkens van waarde wisselen.  
+Dit is namelijk de eigenschap van een xor die we vanboven hebben beschreven.  
+Als je een specifieke bit telkens opnieuw met 1 zal "xor-en" zal deze telkens van waarde wisselen (inverteren) als volgt:
 
-In het bovenstaande code gebeurt er het volgende op bit-niveau:
-
-Je start met een xor tussen 2 maal dezelfde bitwaarde (op positie 1)
-
+* Je start met een xor tussen 2 maal dezelfde bitwaarde (op positie 1)
 ```
   0010 
 ^ 0010 
   0000 
 ```
-
 Dit levert uiteindelijk een 0 op want beide bits zijn gelijk aan elkaar (en dat levert de waarde 0 op bij xor).  
 
-De volgende keer echter - als we opnieuw de bit 1 als mask toepassen - zal deze opnieuw 1 worden.  
+* De volgende keer echter - als we opnieuw de bit 1 als mask toepassen - zal deze opnieuw 1 worden.    
+```
+  0000 
+^ 0010 
+  0010 
+```
 In dit geval verschillen de bits van waarde en dit geeft een 1 als resultaat bij een xor.
 
+* En dit gedrag blijft zich herhalen bij de volgende keer dat we hetzelfde bit-patroon toepassen
+```
+  0010 
+^ 0010 
+  0000 
+```
 ```
   0000 
 ^ 0010 
   0010 
 ```
 
-En dit gedrag blijft zich herhalen bij de volgende keer dat we hetzelfde bit-patroon toepassen
+> **Nota:**  
+> Met de invertor-operator (~) kan je dit enkel op de volledige char (of integer) toepassen (zonder bitmask).
 
-```
-  0010 
-^ 0010 
-  0000 
-```
-
-Een xor heeft de eigenschap zich te gedragen als een poort die je kan configureren als 
-
-* ofwel een buffer (wanneer je deze als 1 configureert)
-* ofwel een invertor (wanneer je deze als 0 configureert)
-
-Met als gevolg dat bij een bitmask met een 1 op een specifieke locatie deze zich telkens de waarde gaat inverteren (en de andere blijven telkens hun waarde houden).   
-Met de invertor-operator (~) kan je dit enkel op de volledige char (of integer) toepassen (zonder bitmask).
