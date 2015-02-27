@@ -1,4 +1,4 @@
-# Introductie en start-up
+# Eerste kennismaking met AVR
 
 We gaan nu de eerste stap zetten met microcontrollers.
 We doen dit aan de hand van het hardware-platform Arduino (niet het software-platform) 
