@@ -482,35 +482,34 @@ void main()
 |      0xa0 << 3|         0|         0|  00000000|
 |      0xa0 << 4|         0|         0|  00000000|
 
-#### Voorbeeld
 
-```{.c}
-#include <stdio.h>
+### Duiding: Toepassing met bitmasks
 
-void main()
-{
-	
-}
+De vraag die nu overblijft, waarvoor kan je dit nu allemaal gebruiken?
+Als je software schrijft voor een MCU werkt of specifieke low-level-software zoals bijvoorbeeld drivers moet je geregeld bits op een memory-locatie manipuleren.   
 
+Je gaat als het ware integers niet meer bekijken als getallen waar je wiskundige bewerkingen met uitvoert, je gaat ze bekijken als stukjes memory, aaneenschakelingen van bits.
 
-```
+Om dit efficiënt toe te passen gaan we beide operatoren - bitwise- en shiftoperatoren - combineren naar een bitmask.  
+Zo'n **bitmask** kan je best bekijken als een **bit-patroon** (of masker) dat je over een **integer-variabele** legt om:
 
+* Te weten te komen wat de waarde is van een bit op een specifieke locatie
+* Een specifieke bit (of meerdere tegelijkertijd) te setten (op 1 zetten)
+* Een specifieke bit (of meerdere tegelijkertijd) te clearen (op 0 zetten)
+* Een specifieke bit (of meerdere tegelijkertijd) te togglen of alterneren
+* Of eender welke combinatie van de 4 voorgaande mogelijkheden  
 
-### Toepassingen
+De eerste die we bekijken is het uitlezen van een bit of een specifieke locatie.
 
-#### Bits lezen
+### Voorbeeld: Een bitmask om een specifieke bit te lezen
 
-Je will weten of een specifieke bit is geactiveerd?
+Je wil weten of een specifieke bit is geactiveerd?
 Dit kan je doen door 2 operatoren te combineren & en <<
 
 * Met ```1 << x``` kan je een bit-patroon maken dat enkel een 1 bevat op positie x
-* Als je dit patroon toepast, in de onderste table (1 << 3 == 00000100) met een | zal die volgende operatie toepassen
+* Als je dit patroon toepast, in de onderste tabel (1 << 3 == 00000100) met een bitwise & zal die volgende operatie toepassen
 
-|                         | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
-|-------------------------|---|---|---|---|---|---|---|---|
-| test_getal = 5          | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 |
-| 1 << 2                  | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
-| 5 & (1 << 2)            | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
+Beschouw de volgende code:
 
 ```{.c}
 #include <stdio.h>
@@ -525,7 +524,7 @@ void main()
         printf("bit %i van testgetal %x is niet gezet\n",2,test_getal);
     }
 
-    if(test_getal & (1 << 1)) {
+    if(test_getal & (1 << 5)) {
         printf("bit %i van testgetal %x is gezet\n",1,test_getal);
     } else {
         printf("bit %i van testgetal %x is niet gezet\n",1,test_getal);
@@ -533,10 +532,66 @@ void main()
 }
 ```
 
-### Voorbeeld: Bitmask
+Volgende tabel illustreert wat er zich afspeelt in de eerste if-statement:
 
-Wat we hier eigenlijk toepasten is wat we noemen een bitmask.  
-Je maakt een bit-patroon aan waarmee je een stuk uit een integer selecteerd.
+|                         | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+|-------------------------|---|---|---|---|---|---|---|---|
+| test_getal = 5          | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 |
+| 1 << 2                  | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
+| **&**                   | & | & | & | & | & | & | & | & |
+| 5 & (1 << 2)            | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 |
+
+Het 1ste if-statement zal in een byte resulteren met zeker 1 bit op 1, binnen een if-statement wordt een getal <> 0 als een logische TRUE beschouwd.   
+
+Je maakt gebruik maakt van het principe dat een **0 dominant** is bij een **&** operator:
+
+* Overal buiten positie 2 is de bit 0, dus gegarandeerd zal dit 0 als resultaat voortbrengen
+* Waar de bitmask 1 is (positie 2) zal de & zich gedragen als een buffer gate (behoudt de waarde van de bit)
+
+Het 2de if-statement echter zal in een 0 resulteren (en binnen een if geldt dit als false)
+
+|                         | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+|-------------------------|---|---|---|---|---|---|---|---|
+| test_getal = 5          | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 |
+| 1 << 5                  | 0 | 0 | 1 | 0 | 0 | 1 | 0 | 0 |
+| **&**                   | & | & | & | & | & | & | & | & |
+| 5 & (1 << 5)            | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+
+
+> **Nota:**  
+> Je gebruikt als ware de 2 soorten operatoren om patronen toe te passen op integers of memory-locaties.   
+> Het manipuleren van individuele bits in het geheugen is 1 van de belangrijke vaardigheden voor embedded programmeren (zoals we weldra gaan zien)
+
+### Voorbeeld: een samengestelde bitmask
+
+We hebben dit nu toegepast om 1 enkele bit te selecteren.   
+Je kan ook grotere bitmask maken, stel voor dat je wil weten dat minstens 1 positie is  
+
+
+```{.c}
+#include <stdio.h>
+
+void main()
+{
+    int test_getal= 0xAA;
+
+    if(test_getal &  (1 << 3) | (1 << 6) {
+        printf("bit %i van testgetal %x is gezet\n",2,test_getal);
+    } else {
+        printf("bit %i van testgetal %x is niet gezet\n",2,test_getal);
+    }
+}
+```
+
+|                         | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+|-------------------------|---|---|---|---|---|---|---|---|
+| test_getal = 0xA        | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 |
+| (1 << 3) | (1 << 6)     | 0 | 1 | 1 | 0 | 1 | 0 | 0 | 0 |
+| **&**                   | & | & | & | & | & | & | & | & |
+| 5 & (1 << 2)            | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 |
+
+
+### Voorbeeld: een bitmask toepassen op byte-niveau
 
 Als voorbeeld, stel het volgende:
 
@@ -625,8 +680,11 @@ In dit geval worden eerst de shift-operator uit gevoerd (dit is ook het geval zo
 |-------------------------|----------|----------|----------|
 |                int a = 1|         1|         1|  00000001|
 |                 0x1 << 4|        16|        10|  00001000|
-|   a = a &#124;  0x1 << 4|        17|        11|  00001001|
+|   a = a &#124;(0x1 << 4)|        17|        11|  00001001|
 
+We maken hier gebruik (in tegenstelling tot lezen van een bit) van een **|**  
+Bij deze operator is de **1 dominant**, dus waar een 1 wordt gebruikt bij het masker zal de waarde worden geforceerd naar 1.  
+Wanneer er een 0 staat op een specifieke locatie zal deze zich gedragen als een buffer (de originele waarde behouden).  
 
 #### Bits wijzigen naar 0 (met and)
 
@@ -672,7 +730,7 @@ Als laatste voorbeeld (voortgaand op de voorgaande voorbeelden) kan je ook indiv
 
 void main()
 {
-	 int a = 0xA;
+     int a = 0x2;
      a = a ^ (0x1 << 1);
      printf("%x\n",a);
 
@@ -687,15 +745,54 @@ void main()
 }
 ```
 
-Het resultaat van bovenstaande code is vergelijkbaar met het vorige voorbeeld.  
+Het resultaat van bovenstaande code is als volgt:  
 
 ```
 $ ./example_of_toggling
-8
-a
-8
-a
+0
+2
+0
+2
 $
 ```
 
-De 2de bit van rechts alterneert telkens als we deze expressie uitvoeren.
+De 2de bit van rechts (positie 1) alterneert telkens als we deze expressie uitvoeren.
+  
+Dit is namelijke een leuke eigenschap van een xor, als je een specifiek bit telkens opnieuw met 1 zal "xor-en" zal deze telkens van waarde wisselen.  
+
+In het bovenstaande code gebeurt er het volgende op bit-niveau:
+
+Je start met een xor tussen 2 maal dezelfde bitwaarde (op positie 1)
+
+```
+  0010 
+^ 0010 
+  0000 
+```
+
+Dit levert uiteindelijk een 0 op want beide bits zijn gelijk aan elkaar (en dat levert de waarde 0 op bij xor).  
+
+De volgende keer echter - als we opnieuw de bit 1 als mask toepassen - zal deze opnieuw 1 worden.  
+In dit geval verschillen de bits van waarde en dit geeft een 1 als resultaat bij een xor.
+
+```
+  0000 
+^ 0010 
+  0010 
+```
+
+En dit gedrag blijft zich herhalen bij de volgende keer dat we hetzelfde bit-patroon toepassen
+
+```
+  0010 
+^ 0010 
+  0000 
+```
+
+Een xor heeft de eigenschap zich te gedragen als een poort die je kan configureren als 
+
+* ofwel een buffer (wanneer je deze als 1 configureert)
+* ofwel een invertor (wanneer je deze als 0 configureert)
+
+Met als gevolg dat bij een bitmask met een 1 op een specifieke locatie deze zich telkens de waarde gaat inverteren (en de andere blijven telkens hun waarde houden).   
+Met de invertor-operator (~) kan je dit enkel op de volledige char (of integer) toepassen (zonder bitmask).
