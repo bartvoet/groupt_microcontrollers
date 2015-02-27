@@ -33,6 +33,7 @@ Net zoals het type int dat we eerder gebruikt hebben in vorige hoofdstukken hebb
 
 ```{.c}
 unsigned int = 5;
+```
 
 Het unsigned integer-type bestaat in verschillende maten (aantal bytes);
 
