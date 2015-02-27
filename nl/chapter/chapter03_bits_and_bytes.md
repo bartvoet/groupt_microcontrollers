@@ -1,18 +1,16 @@
 # Bits en bytes 
 
-In dit hoofdstuk gaan we voor de eerste maal integer-getallen als bits en bytes bekijken.  
-We maken ook een eerste keer kennis met de arduino (zij het zeer kort).
+In dit hoofdstuk gaan we voor de eerste maal integer-getallen als bits en bytes bekijken  
+(ipv bewerkingen en vergelijkingen te doen).  
 
-* Bit-expressies
-    * unsigned char
-    * Bitwise-operatoren
-    * Shift-operatoren
-    * Toepassing met bitmasks
-         * Lezen van bit(s)
-         * Set/Clear van bit(s)
-         * Togglen met bit(s)
-* Tools
-    * Werken met command-line
-    * Toolchain voor AVR (en Arduino), eerste kennismaking
+Dit gaan we doen aan de hand van:  
+
+* unsigned integer-types
+* bitwise operatoren (&,|,^,~)
+* shift-operatoren (<<,>>)
+* bitmasks (patronen)
+     * Lezen van bit(s)
+     * Set/Clear van bit(s)
+     * Togglen met bit(s)
 
       

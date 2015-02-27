@@ -14,6 +14,8 @@ CHAPTER_02 += chapter02_getting_started.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt
 CHAPTER_02 += ../code/code_c_introduction.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt
+CHAPTER_02 += ../tools/tools_command_getting_started.md
+CHAPTER_02 += ../../general/pandoc_page_break.txt
 CHAPTER_02 += ../tools/tools_eclipse_getting_started.md
 #CHAPTER_02 += ../tools/tools_toolchain_x86_overview.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt
@@ -29,16 +31,18 @@ CHAPTER_03 += ../../general/pandoc_page_break.txt
 CHAPTER_03 += ../code/code_c_bittwiddling.md
 CHAPTER_03 += ../../general/pandoc_page_break.txt
 CHAPTER_03 += ../labo/avr_x86_shift_operators.md 
+
+CHAPTER_04 += chapter04_getting_started_with_embedded.md
+CHAPTER_04 += ../../general/pandoc_page_break.txt
+CHAPTER_04 += ../code/code_avr_getting_started.md
 CHAPTER_03 += ../../general/pandoc_page_break.txt
-CHAPTER_03 += ../tools/tools_command_getting_started.md
-CHAPTER_03 += ../../general/pandoc_page_break.txt
-CHAPTER_03 += ../tools/tools_avr_get_started.md
+CHAPTER_04 += ../tools/tools_avr_get_started.md
 
 
-CHAPTER_04 += ../tools/tools_toolchain_avr_overview.md
-CHAPTER_04 += ../code/fuctions_and_procedures.md
-CHAPTER_04 += ../architecture/ports_and_pins.md
-CHAPTER_04 += ../code/code_avr_helloworld.md
+#CHAPTER_04 += ../tools/tools_toolchain_avr_overview.md
+#CHAPTER_04 += ../code/fuctions_and_procedures.md
+#CHAPTER_04 += ../architecture/ports_and_pins.md
+#CHAPTER_04 += ../code/code_avr_helloworld.md
 
 CHAPTER_05 += chapter05_embedded_coding.md
 CHAPTER_05 += ../architecture/architecture_intro_computer_memory.md
@@ -68,12 +72,12 @@ graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
 
 all:
 	cd nl/chapter && pandoc  \
-			../title.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03)\
+			../title.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04)\
 		-o ../../dist/cursus.epub
 #		--epub-stylesheet ../../markdown.css \
 
 	cd nl/chapter && pandoc -S \
-			../title.txt ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03)\
+			../title.txt ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04)\
 		-o ../../dist/cursus.pdf
 	
 

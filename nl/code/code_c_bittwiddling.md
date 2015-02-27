@@ -14,7 +14,7 @@ Zoals we direct gaan zien bestaan er ook operatoren om integers te manipuleren o
 Dit is een vaardigheid die we nog veel gaan nodig hebben bij het werken met microcontrollers (of ander low level-programmeer-activiteiten).  
 Alvorens echter deze operaties en expressies te bespreken gaan we eerst kijken hoe zo een een integer er van binnen uit ziet.  
 
-### Unsigned integer-types
+### integer-types heb je in verschillende groottes
 
 Tot nu toe hebben we het type **int** gebruikt in onze code-voorbeelden, dit type heeft als kenmerken:
 
@@ -23,9 +23,11 @@ Tot nu toe hebben we het type **int** gebruikt in onze code-voorbeelden, dit typ
 * Meestal echter **4 bytes** op intel-processoren
 * **1 bit**, de MSB (most significant) wordt gebruikt voor het sign (negatief of positief)
 
-Naast deze integer heb je ook een aantal andere **signed types** met verschillende groottes zoals **char, short, long, int, long en long long**.
+Naast deze integer heb je ook een aantal andere **signed types** met verschillende groottes zoals **char, short, long, int, long en long long** die allemaal variëren in lengte (het aantal aantal bytes lengte.
 
-We nemen eerst echter een andere type onder de loep, namelijk de **unsigned integer** (interne opbouw, conversies, ...)  
+### Maar voorlopig bekijken we enkel unsigned integers
+
+We nemen eerst echter een andere type onder de loep, namelijk de **unsigned integer** (interne opbouw, conversies, ...)   
 Bedoeling hier is te leren werken met bit-operators en de regels rond unsigned integers zijn eenvoudiger en bit-expressies zijn een pak éénvoudiger. 
 Deze zijn eenvoudiger van opbouw en meer relevant voor een eerste kennismakig met bit-operatoren en expressies..  
 
