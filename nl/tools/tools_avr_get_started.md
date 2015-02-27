@@ -19,8 +19,9 @@ avr-gcc, avr-binutils, avr-libc, avr-gdb, avrdude
 
 ### Installatie Windows 7  
 
-Installeer WinAVR of de arduino-omgeving, deze bevat ook de nodige gcc-software.  
-Andere mogelijkheid is de software te gebruiken meegeleverd bij de cursus (start de command-line comandline_bash_with_toolchain.bat)
+Als je met je eigen PC werkt is het aangeraden van WinAVR te installeren, deze installeert alles wat je nodig hebt en past de PATH-variabele.
+Een andere mogelijk is de arduino-omgeving te installeren, deze bevat ook de nodige gcc-software.  
+Andere mogelijkheid is de software te gebruiken meegeleverd bij de cursus (start de command-line 'comandline_bash_with_toolchain.bat')
 
 > Windows 8 is nog niet uitgeprobeerd maar zou in principe moeten werken (op eigen risico)
 
