@@ -19,6 +19,9 @@ Dit deel legt uit:
 
 
 ### Installatie Linux
+
+Bij linux-distributies is avr-gcc beschikbaar via de verschillende package-managers.
+
 Ubuntu en Debian:   
 ```sudo apt-get install avrdude avrdude-doc binutils-avr avr-libc gcc-avr gdb-avr```
 
@@ -26,56 +29,56 @@ Fedora en Red Hat:
 ```sudo yum install avrdude avr-gcc avr-binutils avr-libc avr-gdb```
 
 ### Installatie Mac
-Crosspack voor mac zou moeten volstaan, er zijn geen dependencies op xcode (dus je moet niet specifiek een account maken)  
+
+Voor Mac is Crosspack de aangewezen installatie-software, er zijn ook geen dependencies op xcode of MacPorts (dus je moet niet specifiek een account maken)  
 http://www.obdev.at/downloads/crosspack/CrossPack-AVR-20131216.dmg
 
-### Installatie FreeBSD:
-Installeer via ports  
+### Installatie FreeBSD
+
+Zoals bij Linux ook de klassieke package-manager volstaat (ports).  
+De volgende packages dienen te geïnstalleerd worden.  
 avr-gcc, avr-binutils, avr-libc, avr-gdb, avrdude 
 
-### Installatie Windows 7  
+### Installatie Windows (xp tem 7)  
 
 Als je met je eigen PC werkt is het aangeraden van WinAVR te installeren, deze installeert alles wat je nodig hebt en past de PATH-variabele.
-Een andere mogelijk is de arduino-omgeving te installeren, deze bevat ook de nodige gcc-software.  
-Andere mogelijkheid is de software te gebruiken meegeleverd bij de cursus (start de command-line 'comandline_bash_with_toolchain.bat')
+Een andere mogelijk is de arduino-omgeving te installeren, deze bevat ook de nodige gcc-software (en moet je een aantal PATH-variabelen gaan aanpassen).  
 
+> **Nota:**  
+> Andere mogelijkheid is de software te gebruiken meegeleverd bij de cursus (start de command-line 'comandline_bash_with_toolchain.bat').  
+> Dit is echter niet aangeraden (dit is enkel een noodoplossing als je geen eigen PC hebt)
+
+> **Nota:**  
 > Windows 8 is nog niet uitgeprobeerd maar zou in principe moeten werken (op eigen risico)
 
 ### Test-programma
 
-Bedoeling van deze getting started is de toolchain te leren kennen dus dit programma wordt later verduidelijkt.  
-Als dit programma correct wordt geplaatst op de arduino zou het on-board led moeten beginnen te togglen.
-
+Hieronder vindt je het voorbeeld-programma dat we hebben gebruikt bij de introductie van AVR:
+Je mag dit programma gewoon kopiëren en plakken in een file genaamd led.c.
 
 ``` {.c}
-#include <stdio.h>
 #include <avr/io.h>
 #include <util/delay.h>
 
-
-#define LED PB5 // PB5 komt overeen met pin 13 op Arduino
-
-void initIO(void)
-{
-	DDRB |= (1<<LED);
-}
-
+int LED_NUMMER = PB5;
 
 int main(void)
 {
-  initIO();
+  DDRB |= (1<<LED_NUMMER);
 
   while (1)
   {
-   PORTB |= (1<<LED); // set
-   _delay_ms(500);
-   PORTB &= ~(1<<LED); // clear
-   _delay_ms(500);
+      PORTB |= (1<<LED_NUMMER);
+      _delay_ms(500);
+      PORTB &= ~(1<<LED_NUMMER);
+      _delay_ms(500);
   }
-  return 0; // never reached
+  return 0;
 }
 
 ```
+
+1 maal dat je deze file hebt bewaard kan je starten aan de volgende stap (compilen en builden)
 
 ### Compileren en flashen van de code 
 
