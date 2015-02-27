@@ -1,6 +1,22 @@
 ## Starten met tools: AVR toolchain (compilen en flashen)
 
-We willen starten met 
+We willen starten met het het compilen en flashen van een c-programma op een AVR-microcontroller.  
+Hiervoor heb je 3 belangrijke onderdelen voor nodig:
+
+* **avr-gcc**: versie van gcc getarget naar AVR
+* **avrdude**: het programma dat praat met de programmer
+* **gdb-avr**: een extensie op GDB om te kunnen debuggen (dit komt een later deel aan bod.
+
+Dit deel legt uit:
+
+* hoe dat je deze tools moet installeren op verschillende OS
+* legt uit hoe dat je deze tools kan gebruiken vanuit command-line
+
+> **Nota:**  
+> Deze voorbeelden zijn gegeven in de terminal.  
+> 1-maal deze tools geïnstalleerd kan je in principe dit ook via Eclipse  
+> (dit bekijken we later)
+
 
 ### Installatie Linux
 Ubuntu en Debian:   
