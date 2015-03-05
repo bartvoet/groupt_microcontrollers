@@ -13,14 +13,14 @@ We gaan in deze les bekijken hoe dat we een programma intelligenter kunnen maken
 
 Eerst gaan we kennis maken met een nieuw soort van expressies van operators.
 
-### Logische expressies
+### Duiding: Logische expressies
 
 Een logische expressie - zoals we die nu gaan zien - heeft als resultaat een integer, net zoals de "arithmetic"-expressies die we eerder hebben gezien.  
 Het grote verschil is echter dat zulk een expressie die slechts 2 mogelijke waarden kan opleveren, namelijk 0 of 1.  
 
 We noemen deze expressies (vergelijkingen in dit geval) ook wel boolean-expressies aangezien 0 false voorstelt en elke andere waarden (1 inclusief) true.
 
-### Relationele operatoren
+### Duiding: Relationele operatoren
 
 Om te kunnen beslissen moet je meestal kunnen vergelijken (zoals je in de winkel ook prijs en/of kwaliteit gaat vergelijken).
 
@@ -32,6 +32,8 @@ De werking en kenmerken van deze relationele operatoren zij vrij eenvoudig:
 
 * Het zijn ook binaire operatoren (2 operanden)
 * Ze vergelijken 2 getallen
+
+### Overzicht: Relationele operatoren:
 
 Er bestaan binnen de syntax van C 6 relationele operatoren:
 
@@ -45,7 +47,9 @@ Er bestaan binnen de syntax van C 6 relationele operatoren:
 |```!=```  | Niet gelijk aan         |
 
 
-### Voorbeeld: resultaat is een integer
+### Voorbeeld: resultaat relationele expressie 0 of 1
+
+Een relationele operator geeft als resultaat een integer, weliswaar met 2 mogelijke waarden.
 
 ```{.c}
 #include <stdio.h>
@@ -96,10 +100,9 @@ $ 0
 $
 ```
 
-### Voorbeeld: Oppassen met het verschil tussen = en ==
+### Voorbeeld: Opletten het verschil tussen = en == (assignment vs equality)
 
-
-Een "gelijk aan"-operator bestaat uit 2 maal ```=``` omdat deze - zoals we eerder hadden gezien - gereserveerd is voor assignemnts.
+Een equality-operator bestaat uit 2 maal ```=``` omdat dit symbaal (1 maal) - zoals we eerder hadden gezien - gereserveerd is voor assignemnts.
 
 Dus onthoudt **```=``` is niet hetzelfde als ```==```**.
 Dit is een veel voorkomende bug zelfs in professionele software, later bij condities gaan we dit nog verder bekijken.
@@ -179,16 +182,23 @@ $ 5>=6 geeft 0
 $
 ```
 
-### Condities uitdrukken in een C-programma
+### Duiding: Condities uitdrukken in een C-programma
 
-De relationale operatoren die we nu hebben gezien worden meestal gebruikt wanneer je een beslissing wil maken in een programma.  
+De relationele operatoren die we nu hebben gezien worden meestal gebruikt wanneer je een beslissing wil maken in een programma.   
 Hierbij komen we bij onze eerste complexe statement in C, namelijke de if-else-statement.
 
-We gaan direct van start met een voorbeeld.
+Dit is een samengesteld of complex statement:
+
+* Je plaatst een expressie die een integer produceert tussen ```if(``` en ```)```
+* Als deze expressie een integer-waarde geeft verschillend van 0 wordt de code tussen ```{``` en ```}``` uitgevoerd (na de ```if(<expressie>)```)
+* Een if-else-statement (of kortweg if-statement) bestaat uit if-clausule en optionele else-clausule
+* Deze else-clausule bevat code tussen ```else {``` en ```}``` die wordt uitgevoerd enkel en alleen als de expressie een 0 produceert
+
+We gaan direct van start met een aantal voorbeelden.
 
 ### Voorbeeld: "if"-statement
 
-We gebruiken hier als voorbeeld een programma dat een getal inleest en iest afdrukt op het scherm indien het een even getal is.
+We gebruiken hier als voorbeeld een programma dat een getal inleest en iets afdrukt op het scherm indien het een even getal is.
 
 ```{.c}
 #include <stdio.h>
@@ -513,7 +523,7 @@ In dit programma voeren we 2 wijzigingen uit:
 * ((input % 2) == 0) wijzigen we naar !(input % 2)
 * (input == 0) wijzigen we naar !input
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -539,8 +549,8 @@ void main()
         }
     }
 }
+```
 
-```{.c}
 Dit wijzigt de karakteristiek van het programma echter niet.  
 
 We bekomen hetzelfde resultaat als we dit resultaat inverteren:
@@ -554,7 +564,7 @@ Onderstaande tabel verduidelijkt dit:
 * Als de input even is zal (input % 2) in 0 resulteren en !(input % 2) in 1
 * Als de input oneven is zal (input % 2) in 1 resulteren en !
 
-Als we dit uittesten krijgen we hetzelfde resultaat
+Als we dit uittesten krijgen we hetzelfde resultaat:
 
 ```
 $ gcc check_pair_positive_and_negative_and_zero2.c -o check_pair_positive_and_negative_and_zero2

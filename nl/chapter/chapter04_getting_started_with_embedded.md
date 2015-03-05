@@ -10,6 +10,7 @@ We doen dit aan de hand van het hardware-platform Arduino (niet het software-pla
 * Tools
     * Werken met command-line
     * Toolchain voor AVR (en Arduino), eerste kennismaking
+    * Input en output voor de AVR
 * Labo
     * Eenvoudige oefening om te leren werken met AVR
     * Werken met datasheet eerste kennismaking 

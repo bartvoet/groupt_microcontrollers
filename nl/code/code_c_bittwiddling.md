@@ -98,6 +98,8 @@ Als we de onderliggende representatie (of encoding) gaan gebruiken - op bit-nive
 |14       |e       |00001110|
 |15       |f       |00001111|
 
+### Voorbeeld: een waarde uitdrukken als hex in c-code
+
 Een unsigned char (maar ook andere integer-variante) kan hexadecimaal gerepresenteerd worden door "0x" te laten volgen door een hexadecimaal getal.   
 
 Bijvoorbeeld ```int a = 0xA``` zal er voor zorgen dat integer a wordt geinitiaseerd met de waarde 10 (decimaal) of A (hexadecimaal)
@@ -109,7 +111,7 @@ Onderstaande code zal desgevolg ook 10 afdrukken.
 
 void main() 
 {
-	int value_ten = 0xa;
+    int value_ten = 0xa;
     printf("%i\n",value_ten);
 }
 ```
@@ -122,7 +124,7 @@ Onderstaande code toont ook aan dat de hex-representatie de zelfde waarde geeft 
 void main() 
 {
     if(10 == 0xa) {
-		printf("10 == 0xa");
+       printf("10 == 0xa");
     }
 }
 ```
@@ -268,7 +270,7 @@ Gezien er op elke positie bij beide getallen minstens één 0 voorkomt is het re
 
 > Dit kan gevaarlijk zijn als je dit in een if-conditie of loop zou gebruiken (& ipv &&)
 
-### Overzicht bitwise operatoren  
+### Overzicht: bitwise operatoren  
 
 Naast & heb je hier een overzicht van all bitwise operatoren:
 
@@ -625,10 +627,6 @@ Als voorbeeld, stel het volgende:
 
 void main()
 {
-#include <stdio.h>
-
-void main()
-{
    unsigned short big_number = 0xAABB;
    unsigned char ls_byte = big_number & 0x00ff;
    unsigned char ms_byte = (big_number & 0xff00) >> 8;
@@ -686,7 +684,7 @@ Je kan ook een bit in een getal wijzigen, dit is een vaardigheid dat je zeer vee
 
 void main()
 {
-	 int a = 0x1;
+     int a = 0x1;
      a = a | (0x1 << 4);
      printf("%x\n",a); 
 }
@@ -713,7 +711,7 @@ Wanneer er een 0 staat op een specifieke locatie zal deze zich gedragen als een 
 Een andere actie die je kan toepassen is een specifieke bit wijzigen naar 0 (ook wel de bit clearen genoemd).
 Dit wordt gedaan door een geinverteerd bit-patroon toe te passen zoals hieronder:
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -762,7 +760,7 @@ Anders gezegd:
   (0 ^ **0** = 0 en 1 ^ **0** = 1)   
   en de bit van het source-getal **niet wijzigen**  
 
-```
+```{.c}
 #include <stdio.h>
 
 void main()
