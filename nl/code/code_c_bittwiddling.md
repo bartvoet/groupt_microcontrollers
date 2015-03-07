@@ -827,3 +827,6 @@ In dit geval verschillen de bits van waarde en dit geeft een 1 als resultaat bij
 > **Nota:**  
 > Met de invertor-operator (~) kan je dit enkel op de volledige char (of integer) toepassen (zonder bitmask).
 
+### Voorbeeld: combineren van bitmasks
+
+
