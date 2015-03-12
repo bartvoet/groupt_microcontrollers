@@ -40,6 +40,8 @@ CHAPTER_04 += ../tools/tools_avr_get_started.md
 CHAPTER_04 += ../../general/pandoc_page_break.txt
 CHAPTER_04 += ../labo/avr_arduino_firsttime.md
 CHAPTER_04 += ../../general/pandoc_page_break.txt
+CHAPTER_04 += ../code/avr_c_gpio_input_and_output.md
+CHAPTER_04 += ../../general/pandoc_page_break.txt
 CHAPTER_04 += ../labo/avr_arduino_more_complex_in_group.md
 
 #CHAPTER_04 += ../tools/tools_toolchain_avr_overview.md
