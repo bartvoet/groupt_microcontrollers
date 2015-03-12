@@ -570,9 +570,25 @@ Bovenstaande code zal bijvoorbeeld niet compileren want getal is niet gekend.
 > **Nota:**  
 > Dit is niet altijd het geval in andere talen verwant aan c zoals Java en C# die minder streng zijn hieromtrent.
 
-Een functie kan je echter al declareren alvorens te definiëren.
-Een prototype
+Het zelfde geldt trouwens ook voor functies.  
+De volgende code zal desgevolg ook niet compilen aangezien de functie main de functie print_hello() gebruikt.
 
+```{.c}
+#include <stdio.h>
+
+void main() 
+{
+    print_hello();
+}
+
+void print_hello()
+{
+    printf("Hello World");
+}
+```
+
+Dit kan je echter oplossen door een functie-prototype te gebruiken.  
+Dit is een declaratie om de compiler aan te geven dat deze functie later in het programma zal worden definieerd.
 
 ```{.c}
 #include <stdio.h>
@@ -589,20 +605,11 @@ void print_hello()
     printf("Hello World");
 }
 ```
-### Linken vs compilatie
 
-Dit illustreert ook eigenlijk goed waar we 
+> **Nota: **
+> We komen hier later op terug, want in combinatie met **preprocessing** kan dit een zeer krachtig mechanisme zijn.  
+> Maar daarvoor moeten we eerst nog verdere inleiding krijgen in **preprocessing** en **header-files**
 
-```
-$ gcc -c hello.c
-$ ls
-$ hello.o
-$ gcc hello.o -o hello
-hello.o: In function `main':
-hello.c:(.text+0xa): undefined reference to `print'
-collect2: error: ld returned 1 exit status
-$ 
-```
 
 ### Voorbeeld: main-functie
 
