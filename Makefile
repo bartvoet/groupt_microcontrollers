@@ -54,6 +54,10 @@ CHAPTER_04 += ../../general/pandoc_page_break.txt
 CHAPTER_05 += chapter05_functions_and_macros.md
 CHAPTER_05 += ../../general/pandoc_page_break.txt
 CHAPTER_05 += ../code/code_c_functions_and_procedures.md
+CHAPTER_05 += ../../general/pandoc_page_break.txt
+CHAPTER_05 += ../code/code_preprocessor.md
+CHAPTER_05 += ../../general/pandoc_page_break.txt
+CHAPTER_05 += ../labo/labo_functies_en_loop.md
 
 # Intermediate
 
