@@ -1,4 +1,4 @@
-## Labo: eenvoudige loops en condities
+## Labo: functies en macro's 
 
 ### Opdracht 1
 
@@ -9,6 +9,8 @@ Schrijf een functie die de macht van een int neemt.
 ```{.c}
 printf(macht(2));//print 4
 ```
+
+Bekijk dit programma met cpp
 
 #### Deel B
 
