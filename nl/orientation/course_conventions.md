@@ -51,4 +51,16 @@ Het is wel de bedoeling dat we dezelfde software gebruiken, in geval van problem
 Aankondigingen gebeuren op Toledo en per mail.
 Per mail is dat naar het Groep T-adres, indien je wilt dat ik ook een ander adres stuur kan dit ook.
 
+### Labo's afgeven
+
+De labo's mogen doorgestuurd worden op het mailadres van de docent met volgende naming-conventions:
+
+```labo_$(opdracht)_$(deelvan)_(deeltot).c```
+
+* Als je bijvoorbeeld van het eerste labo opdracht 1 deel A hebt gemaakt:  
+  ```labo_1simpelestatements_1_A.c```
+* Als je meerdere delen van een opdracht hebt bijvoorbeeld opdracht deel A en deel B mag je dit als volgt benoemen:  
+  ```labo_1simpelestatements_1_A_B.c```
+
+
 

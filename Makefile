@@ -43,15 +43,17 @@ CHAPTER_04 += ../../general/pandoc_page_break.txt
 CHAPTER_04 += ../code/avr_c_gpio_input_and_output.md
 CHAPTER_04 += ../../general/pandoc_page_break.txt
 CHAPTER_04 += ../labo/avr_arduino_more_complex_in_group.md
+CHAPTER_04 += ../../general/pandoc_page_break.txt
+
 
 #CHAPTER_04 += ../tools/tools_toolchain_avr_overview.md
 #CHAPTER_04 += ../code/fuctions_and_procedures.md
 #CHAPTER_04 += ../architecture/ports_and_pins.md
 #CHAPTER_04 += ../code/code_avr_helloworld.md
 
-CHAPTER_05 += chapter05_embedded_coding.md
-CHAPTER_05 += ../architecture/architecture_intro_computer_memory.md
-CHAPTER_05 += ../code/code_c_bittwiddling.md
+CHAPTER_05 += chapter05_functions_and_macros.md
+CHAPTER_05 += ../../general/pandoc_page_break.txt
+CHAPTER_05 += ../code/code_c_functions_and_procedures.md
 
 # Intermediate
 
@@ -70,6 +72,9 @@ CHAPTER += ../code/headers_and_modularity.md
 CHAPTER_08 += ../code/pointers_in_c.md
 
 graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
+grap_convert = gvpr -c '$(1)' ./graphviz/$(2).dot | dot -Tpng -o ./pictures/$(3).png
+
+pagebreak = ../../general/pandoc_page_break.txt
 
 # Advanced
 
@@ -77,14 +82,24 @@ graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
 
 all:
 	cd nl/chapter && pandoc  \
-			../title.txt part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04)\
+			../title.txt part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(CHAPTER_05)\
 		-o ../../dist/cursus.epub
 #		--epub-stylesheet ../../markdown.css \
 
 	cd nl/chapter && pandoc -S \
-			../title.txt part01_minimal_knowledge.md ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04)\
+			../title.txt part01_minimal_knowledge.md ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(CHAPTER_05)\
 		-o ../../dist/cursus.pdf
 	
+labos:
+	cd nl/labo && pandoc  \
+			labo_header.md $(pagebreak) x86_statements.md $(pagebreak) x86_loops_and_conditionals.md $(pagebreak) avr_x86_shift_operators.md $(pagebreak) avr_arduino_firsttime.md $(pagebreak) avr_arduino_more_complex_in_group.md \
+		-o ../../dist/labos.epub
+	
+	cd nl/labo && pandoc  \
+		labo_header.md $(pagebreak) x86_statements.md $(pagebreak) x86_loops_and_conditionals.md $(pagebreak) avr_x86_shift_operators.md $(pagebreak) avr_arduino_firsttime.md $(pagebreak) avr_arduino_more_complex_in_group.md \
+		-o ../../dist/labos.pdf
+
+
 
 clean:
 	rm dist/cursus.epub
@@ -98,4 +113,4 @@ build_graphs:
 	${call graph_to_png,"assembly_build"}
 	${call graph_to_png,"compile_build"}
 	gvpr -c 'N[name=="simple_statement" | name=="assignment" | name=="function_call"]{color="blue"}' ./graphviz/code_hierachy_of_statements.dot | dot -Tpng -o ./pictures/code_focus_on_simple_statements.png
-		gvpr -c 'N[name=="block_statement" | name=="conditional_statement"]{color="blue"}' ./graphviz/code_hierachy_of_statements.dot | dot -Tpng -o ./pictures/code_focus_on_conditions.png
+	gvpr -c 'N[name=="block_statement" | name=="conditional_statement"]{color="blue"}' ./graphviz/code_hierachy_of_statements.dot | dot -Tpng -o ./pictures/code_focus_on_conditions.png
