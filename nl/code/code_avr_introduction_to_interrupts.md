@@ -175,7 +175,7 @@ Nu we echter ervaren zijn met het gebruik van macro's maken we hier ook gebruik 
 
 We starten met de volgende code (nog zonder interrupts)
 
-```
+```{.c}
 #include <avr/io.h>
 #include <util/delay.h>
 
@@ -265,7 +265,7 @@ Je moet 2 **taken** in 1 taak hetgeen je code:
 Nu kunnen we echter onze bestaande code behouden en hoeven we enkel een extra stuk code.  
 De 2 taken zitten mooi van elkaar afscheiden in volgene code (beter nog we hebben zelfs geen code moeten wijzigen).  
 
-```
+```{.c}
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
