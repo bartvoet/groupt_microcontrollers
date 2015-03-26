@@ -23,12 +23,20 @@ Dit houdt in onder andere:
 
 * De basis van de programmeertaal C (input/output, condities, loops, types, ...)
 * Basis I/O periferieën en het leren aansturen ervan in de programmeertaal C
-* Algemene communicatie-protocollen zoals i2c, spi, usart,
+* Algemene communicatie-protocollen zoals i2c, spi, usart, ...
 * De architectuur van een AVR microcontroller (en vergelijking met andere architecturen)
+* Werken met datasheets
 * Ter illustratie van deze architectuur AVR-assembler (enkel de noties)
 * Het geheugen en registeropbouw in een microcontroller (en coputersystemen in het algemeen)
 * Meer geavanceerde aspecten van C (bv. arrays, pointers, dynamisch geheugen, ...)
+* Leren je code modulair en herbruikbaar te maken
 * ...
+
+> **Belangrijke bemerking:**  
+> Een belangrijke achtergrond van deze cursus is de student klaar te maken:
+>
+> * Capabel zijn nieuwe platformen en architecturen te analyseren (naast AVR) 
+> * Ook algemene aspecten bij te leren over programmeren in het algemeen zoals design en analyse
 
 ### Samenstelling cursus/Verschillende aspecten
 

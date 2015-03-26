@@ -827,4 +827,24 @@ In dit geval verschillen de bits van waarde en dit geeft een 1 als resultaat bij
 > **Nota:**  
 > Met de invertor-operator (~) kan je dit enkel op de volledige char (of integer) toepassen (zonder bitmask).
 
+### Besluit: denk in bits
 
+In een klassieke programmeer-curus worden het werken met bitmasks niet bij de start aangeleerd.  
+Voor het programmeren van microcontrollers is dit echter een essentiële vaardigheid.   
+Dit komt door het principe van "memory mapped io", hetgeen geheugen gaat koppelen aan IO-devices (later meer hierover).  
+
+Dus belangrijk te onthouden:  
+
+* Bitwise operatoren zijn verschillend van hun logische verwanten om dat ze het vergelijk op **bit-level** maken
+* Denk bij bitwise operatoren in bits en niet aan de getal-waarde (mind-switch)
+* **Dominantie** van 0 of 1
+    * Bij **&** (AND) is **0** dominant dus 
+           * kan je gebruiken om een bit op een positie te **clearen** (en andere bit-posities in masker op 1 zodat die niet wijzigen)
+           * te lezen door enkel de bits die je wil lezen op 1 te zetten (en andere bit-posities op 0 zodat die niet rekening worden gebracht 
+    * Bij **|** (OR) is **1** dominant dus kan je gebruiken om een bit op positie te **setten** (bij 0 behoudt de andere bit de waarde)
+* **^ (XOR)** kan je als een **configureerbare** poort laten gedragen 
+    * als een **buffer** (je configureerbare poort op **0**) 
+    * als een **inverter** (je configureerbare poort op **1**)
+* ^ (XOR) gebruik je in combinatie met een bitmask om te togglen (zoals een inverter maar enkel op specifieke bits)
+
+Deze regels zullen nog veel terugkomen bij het werken met registers in MCU's!!!

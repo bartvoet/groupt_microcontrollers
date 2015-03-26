@@ -59,6 +59,10 @@ CHAPTER_05 += ../code/code_preprocessor.md
 CHAPTER_05 += ../../general/pandoc_page_break.txt
 CHAPTER_05 += ../labo/labo_functies_en_loop.md
 
+CHAPTER_06 += chapter06_interrupts.md
+CHAPTER_06 += ../../general/pandoc_page_break.txt
+CHAPTER_06 += ../code/code_avr_introduction_to_interrupts.md
+
 # Intermediate
 
 CHAPTER_07 += chapter07_simple_serial_communication.md
@@ -86,12 +90,12 @@ pagebreak = ../../general/pandoc_page_break.txt
 
 all:
 	cd nl/chapter && pandoc  \
-			../title.txt part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(CHAPTER_05)\
+			../title.txt part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(CHAPTER_05) $(CHAPTER_06)\
 		-o ../../dist/cursus.epub
 #		--epub-stylesheet ../../markdown.css \
 
 	cd nl/chapter && pandoc -S \
-			../title.txt part01_minimal_knowledge.md ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(CHAPTER_05)\
+			../title.txt part01_minimal_knowledge.md ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(CHAPTER_05) $(CHAPTER_06)\
 		-o ../../dist/cursus.pdf
 	
 labos:

@@ -7,6 +7,7 @@ Onderstaande figuur toont de architectuur van de microcontroller, die bovendien 
 ![AVR CPU cORE](../../pictures/avr_cpu_core.png)
 
 We kunnen volgende blokken opmerken:
+
 * Geheugen
 * General purpose registers
 * Special purpose register
@@ -28,6 +29,7 @@ De blokken die blauw ingekleurd zijn, zijn de typische componenten die standard 
 De ALU is als rekeneenheid het centraal staande onderdeel van de processor. De ALU voert
 rekenkundige en logische bewerkingen uit. Deze bewerkingen zijn binair. De basis bewerkingen van de
 ALU zijn:
+
 * Aritmetische bewerkingen (optellen, aftrekken, vermenigvuldigen, delen)
 * Verlagen/verhogen met 1
 * (Verlagen met 1 en dan) vergelijken met nul
@@ -60,33 +62,35 @@ bespreking van de I/O registers.
 **Global interupt Enable (I) - Bit 7:**  
 Indien bit op ‘1’ zijn interrupts toegestaan. Indien deze bit gecleard is dan kan er géén interrupt optreden, ondanks dat er in afzonderlijke interrupt registers een interrupt bit enabled is.  
 Instructies die deze bit beinvloeden:  
+
 * RETI = Interrupt return (PC ← STACK)
 * SEI  = Global interrupt Enable
 * CLI  = Global interrupt Disable
 
-**Bit Copy Storage (T) - Bit 6:**
+**Bit Copy Storage (T) - Bit 6:**  
 Onderstaande instructies gebruiken de T bit als bron of bestemming. Eén welbepaalde bit uit een register kan gekopieerd worden naar T, of kan vanuit T naar een welbepaald register gestuurd worden.
 Bit copy instructies beïnvloeden deze bit:
+
 * BLD = Bit Load
 * BST = Bit Store
 
-**Half Carry Flag (H) - Bit 5:**
+**Half Carry Flag (H) - Bit 5:**  
 Ook wel Auxilliary Carry Flag genoemd.. Dit is een hulp overdracht vlag, gebruikt bij BCD
 bewerkingen. De half Carry wordt gezet of teruggezet gedurende een optelling of een
 aftrekking en geeft een overdracht aan van bit 3 naar bit 4
 
-**Sign Bit (S) - Bit 4:**
+**Sign Bit (S) - Bit 4:**  
 De S bit is steeds een EXOR functie tussen de negatieve vlag N en de overflow flag V.  
 S = N ⊕ V
 
 ![Flags](../../pictures/avr_register_signbit.png)
 
-**Two’s Complement overflow flag (V) - Bit 3:**  
+**Two’s Complement overflow flag (V) - Bit 3:**    
 wordt gebruikt bij optelling en aftrekking van integers die in het twee-complement zijn
 gegeven met teken. De overflowvlag wordt gezet als er een overdracht is naar het achtste
 bit, terwijl er geen overdracht vanuit het achtste bit plaatsvindt. De overdracht-vlag geeft dus een teken bereik overflow aan
 
-**Negative flag (N) - Bit 2:**  
+**Negative flag (N) - Bit 2:**   
 Geeft weer dat het resultaat van de ALU negatief is.  
 
 **Zero flag (Z) - Bit 1:**  
@@ -103,17 +107,21 @@ terug opgeroepen. De gebruiker moet dit zelf zo programmeren!
 
 
 ### General Purpose Register File
-Het **General Purpose Register** is speciaal ontworpen voor de AVR met RISC instructieset. Doordat deze registers zeer dicht bij het geheugen staan zijn ze zeer snel en flexibel.
-![General purpose register file](../pictures/avr_general_purpose_register_file.png)
 
-Bovenstaande figuur toont de structuur van het 32 bytes grote CPU GPR register. 6 van deze 32 registers
-kunnen gebruikt worden als 3 16-bit indirect adresseerbare register adrespointers. Eén van deze
-pointers kan ook gebruikt worden als adrespointer voor look-up tabellen in het Flash programma
-geheugen. Deze functieregisters noemen we de X-,Y-, en Z-registers.
+Het **General Purpose Register** is speciaal ontworpen voor de AVR met RISC instructieset. Doordat deze registers zeer dicht bij het geheugen staan zijn ze zeer snel en flexibel.
+
+![General purpose register file](../../pictures/avr_general_purpose_register_file.png)
+
+Bovenstaande figuur toont de structuur van het 32 bytes grote CPU GPR register.  
+6 van deze 32 registers kunnen gebruikt worden als 3 16-bit indirect adresseerbare register adrespointers.  
+Eén van deze pointers kan ook gebruikt worden als adrespointer voor look-up tabellen in het Flash programma
+geheugen.  
+Deze functieregisters noemen we de X-,Y-, en Z-registers.
 
 ![General purpose register file](../../pictures/avr_xyz_register.png)
 
-In de verschillende adresseringsmodes hebben deze registers functies zoals:
+In de verschillende adresseringsmodes hebben deze registers functies zoals:  
+
 * Vaste vervanging
 * Automatische increment
 * Automatische decrement  
@@ -129,6 +137,7 @@ Om het overzichtelijk te houden zijn de eerste 32 adressen van het datageheugen 
 > later hoofdstuk verder behandeld.
 
 ### Stack en stackpointer
+
 #### De stack  
 
 De stack, ook wel Stapelgeheugen genoemd, is een gereserveerd
@@ -180,6 +189,7 @@ Hier in dit voorbeeld, in assembly code met instructies uit de instructieset, wo
 ### Geheugen
 
 De ATmega165P controller heeft verschillende soorten geheugen, namelijk:
+
 * 16 K Programmageheugen
   * Applicatie FLASH geheugen
   * Boot FLASH sectie
@@ -235,6 +245,7 @@ We kunnen als gebruiker in dit geheugen gaan schrijven en lezen. Hiervoor moeten
 In het EEPROM geheugen kunnen we “configuratieparameters” opslaan. Bijvoorbeeld de structuur van een keuzemenu, taalinstellingen of andere door de gebruiker gekozen parameters, look-up tabels,...
 
 Aan dit geheugen zijn 4 Registers gekoppeld, namelijk:
+
 * EEARH en EEARL: EEPROM adres register (High en Low)
   * In deze 2 registers wordt de byte die men wil schrijven of lezen geschreven.
 * EEDR: EEPROM Data Register
@@ -285,6 +296,7 @@ Zoals eerder besproken bezit de ATmega165P controller een ingewikkeld kloksystee
 Dit powermanagement valt echter buiten het doel van deze cursus en is volledig beschreven in de datasheet.
 
 Deze registers bevinden zich op volgende adressen:
+
 * GPIOR0: 0x1E (0x3E)
 * GPIOR1: 0x2A (0x4A)
 * GPIOR2: 0x2B (0x4B)  
@@ -362,12 +374,14 @@ vervangingsweerstanden.
 Meer technische info hieromtrent is terug te vinden in de datasheet.
 
 ###### Externe klok (fuse bits CKSEL3...0 = “0000”)  
+
 Fuse bits: 0000  
 XTAL1 = Extern klok signaal  
 XTAL2 = niet aangesloten  
 Frequentiebereik = 0-16MHz  
 
 ###### Welke klok kies ik?  
+
 Dit hangt af van meerdere factoren.  
 Indien hoge nauwkeurigheid een must is, dan gebruikt men best de externe klok of kristal.  
 Indien de kost laag moet blijven dan kan men de interne oscillator of de keramische resonator gebruiken.  
@@ -382,6 +396,7 @@ Wederom met behulp van een fuse bit, namelijk CKOUT, kunnen we de systeemklok na
 Om de systeemklok frequentie te kunnen verlagen en om zo eveneens het verbruik, op niet-kritische momenten, te reduceren kunnen we een prescaler gebruiken.  
 Deze prescaler kan de klokfrequentie delen door 1,2,4,8,16,32,64,128 of 256.  
 De prescaler kan worden ingesteld door:  
+
 * de fuse bit CKDIV8 enerzijds en door (delen door 8)
 * het klok prescale register CLKPR (adres 0x61)anderzijds. (delen door 1,2,4,16,32, 64,128 of 256)
 
@@ -389,6 +404,7 @@ Deze prescaler gaat in combinatie met alle klok mogelijkheden en zal invloed heb
 De voorheen besproken kloksignalen clk I/O , clk ADC , clk CPU , en clk FLASH worden allemaal gedeeld door de gekozen factor.  
 
 Het prescale register bevat volgende bits (zie datasheet)  
+
 * **Bit 7: CLKPCE:** Clock Prescaler Change Enable  
 1 = wijzigingen op CLKPS bits toestaan  
 * **Bit 3...0: CLKPS:** Clock Prescaler Select Bits  
@@ -415,8 +431,9 @@ De prescale factor is nu 0,25 (delen door 4). De systeemklok wordt 2Mhz
 
 > Opmerking:  
 > De fuse bit CKDIV8 bepaalt de initiële waarde van de CLKPS bits.  
-* CKDIV8 = “1” = fuse bit ongeprogrammeerd => CLKPS = “0000”  
-* CKDIV8 = “0” = fuse bit geprogrammeerd   => CLKPS = “0011” = klok delen door 4 bij
+>
+> * CKDIV8 = “1” = fuse bit ongeprogrammeerd => CLKPS = “0000”  
+> * CKDIV8 = “0” = fuse bit geprogrammeerd   => CLKPS = “0011” = klok delen door 4 bij
 opstarten  
 
 > Bij het wijzigen van de prescale factor tijdens programma uitvoer moet men
