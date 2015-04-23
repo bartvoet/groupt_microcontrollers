@@ -1,4 +1,4 @@
-## Labo: eenvoudige loops en condities
+## Labo: arrays
 
 ### Opdracht 1: array met maanden
 
