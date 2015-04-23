@@ -11,12 +11,13 @@ Na deze eerste kennismaking gaan we deze basis verder uitbouwen:
      * Functies
      * Preprocessing, macro's en header-files
      * Input en output van een programma (deel 2)
+* Nieuwe MCU-concepten
+     * Interrupts
+     * Timers
+     * UART
+     * ADC
+     * PWM
 * Meer inzicht in datatypes en memory in c:
      * Soorten van geheugen
      * Arrays en Structs
      * Pointers
-* Nieuwe MCU-concepten zoals
-     * UART
-     * ADC
-     * PWM
-

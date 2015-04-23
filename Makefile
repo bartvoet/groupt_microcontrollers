@@ -45,12 +45,6 @@ CHAPTER_04 += ../../general/pandoc_page_break.txt
 CHAPTER_04 += ../labo/avr_arduino_more_complex_in_group.md
 CHAPTER_04 += ../../general/pandoc_page_break.txt
 
-
-#CHAPTER_04 += ../tools/tools_toolchain_avr_overview.md
-#CHAPTER_04 += ../code/fuctions_and_procedures.md
-#CHAPTER_04 += ../architecture/ports_and_pins.md
-#CHAPTER_04 += ../code/code_avr_helloworld.md
-
 CHAPTER_05 += chapter05_functions_and_macros.md
 CHAPTER_05 += ../../general/pandoc_page_break.txt
 CHAPTER_05 += ../code/code_c_functions_and_procedures.md
@@ -58,10 +52,15 @@ CHAPTER_05 += ../../general/pandoc_page_break.txt
 CHAPTER_05 += ../code/code_preprocessor.md
 CHAPTER_05 += ../../general/pandoc_page_break.txt
 CHAPTER_05 += ../labo/labo_functies_en_loop.md
+CHAPTER_05 += ../../general/pandoc_page_break.txt
 
 CHAPTER_06 += chapter06_interrupts.md
 CHAPTER_06 += ../../general/pandoc_page_break.txt
 CHAPTER_06 += ../code/code_avr_introduction_to_interrupts.md
+CHAPTER_06 += ../../general/pandoc_page_break.txt
+CHAPTER_06 += ../code/code_avr_introducion_to_timers.md
+CHAPTER_06 += ../../general/pandoc_page_break.txt
+CHAPTER_06 += ../code/asynchronuous_programming.md
 
 # Intermediate
 
@@ -94,14 +93,23 @@ all:
 		-o ../../dist/cursus.epub
 #		--epub-stylesheet ../../markdown.css \
 
+	cd nl/chapter && pandoc  \
+			../title.txt $(pagebreak) part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(pagebreak) $(CHAPTER_05) $(CHAPTER_06)\
+		-o ../../dist/cursus.html
+#		--epub-stylesheet ../../markdown.css \
+
 	cd nl/chapter && pandoc -S \
-			../title.txt part01_minimal_knowledge.md ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(CHAPTER_05) $(CHAPTER_06)\
+			../title.txt $(pagebreak) part01_minimal_knowledge.md ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(pagebreak) $(CHAPTER_05) $(CHAPTER_06)\
 		-o ../../dist/cursus.pdf
 	
 labos:
 	cd nl/labo && pandoc  \
 			labo_header.md $(pagebreak) x86_statements.md $(pagebreak) x86_loops_and_conditionals.md $(pagebreak) avr_x86_shift_operators.md $(pagebreak) avr_arduino_firsttime.md $(pagebreak) avr_arduino_more_complex_in_group.md \
 		-o ../../dist/labos.epub
+	
+		cd nl/labo && pandoc  \
+			labo_header.md $(pagebreak) x86_statements.md $(pagebreak) x86_loops_and_conditionals.md $(pagebreak) avr_x86_shift_operators.md $(pagebreak) avr_arduino_firsttime.md $(pagebreak) avr_arduino_more_complex_in_group.md \
+		-o ../../dist/labos.html
 	
 	cd nl/labo && pandoc  \
 		labo_header.md $(pagebreak) x86_statements.md $(pagebreak) x86_loops_and_conditionals.md $(pagebreak) avr_x86_shift_operators.md $(pagebreak) avr_arduino_firsttime.md $(pagebreak) avr_arduino_more_complex_in_group.md \

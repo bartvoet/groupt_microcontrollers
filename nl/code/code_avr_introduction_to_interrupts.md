@@ -26,7 +26,7 @@ In een notendop een interrupt is:
 In geval van MCU's zijn deze meestal afkomstig van hardware (bijvoorbeeld spanning op een pin die wijzigt, timer, ...) maar voor complexere systemen kunnen deze ook door software worden gegenereerd.
 
 Tot nog toe hebben we enkel een event-loop geprogrammeerd, het hoofdprogramma.  
-Het interrupt-mechanisme in een MCU (of andere computer-systeemookKortom) zal echter deze loop kunnen ond, een interrupt is een manier om:
+Het interrupt-mechanisme in een MCU (of andere computer-systeem) zal echter deze loop kunnen onderbreken, een interrupt is een manier om:
 
 * Ten gevolge van zo'n event 
 * De activiteit van de huidige processor pauzeren (event-loop) 
@@ -38,20 +38,22 @@ Het interrupt-mechanisme in een MCU (of andere computer-systeemookKortom) zal ec
 
 Als illustratie is het principe van interrupts gemakkelijk te beschrijven in een analogie uit het dag-dagelijkse leven:
 
-* Laten we zeggen we zijn een goed boek aan het lezen (liefst een boek of cursus ivm microcontrollers)  
-  Dit vereist al onze aandacht, dus we zijn geen andere activiteiten aan het uitvoeren
+Laten we zeggen we zijn een goed boek aan het lezen (liefst een boek of cursus ivm microcontrollers)  
+Dit vereist al onze aandacht, dus we zijn geen andere activiteiten aan het uitvoeren
+
 * Echter, halverwege het boek, rinkelt de telefoon rinkelt.  
 * We zorgen dat we de pagina onthouden  
   (door er bijvoorbeeld een papiertje tussen te plaatsen)
-* We voeren onze (korte) taak uit;,we beantwoorden de telefoon op
+* We voeren onze (korte) taak uit, we beantwoorden de telefoon op
 * Daarna hervatten we het lezen van onze boek op de zelfde manier
 
 ![](../../pictures/avr_interrupt_analogy.png)
 
 Wat wij doen wordt ook wel genoemd **asynchrone verwerking**:
 
-* We verwerken van de interrupt buiten de reguliere taak van het hoofdprogramma (het boek lezen)
-* De interrupt (telefoon-bel) is een event die het hoofdprogramma stopt
+* We denken in de context van **taken**
+* We verwerken deze interrupt buiten de reguliere taak van het hoofdprogramma (het boek lezen)
+* De interrupt (telefoon-bel) is een **event** die het hoofdprogramma stopt
 * We slagen de staat op van ons programma (pagina van het boek en eventueel wat nota's) 
 * Nadien kunnen we (na het telefoongesprek) het boek terug kunnen hervatten met wat we onthouden hebben
 
@@ -71,31 +73,52 @@ In een computer-systeem (MCU is ook een computer-systeem) kunnen deze interrupts
 > We gaan deze ook niet verder bekijken in de context van MCU's.  
 > Dit is eigenschap die je gemakkelijker gaat terugvinden bij 32-bit platformen waar veelal met een operating sytem wordt gewerkt.
 
-### Duiding: Interupts in AVR
+### Duiding: Interrupts in AVR
+
+![](../../pictures/avr_using_interrupts.png)
 
 AVR ondersteunt een heel grote variëteit aan  hardware-interrupts:  
 
-* Pin interrupts (wijzigingen op de spanning op een pin)
-* Timer interrupts (een teller die een specifiek specifiek tijdsverloop kan opmeten)
-* Interrupts gerelateerd aan seriële protocollen) i2c, spi, uart, ...
-* Interrupts gerelateerd aan ADC 
+* **Pin interrupts**  
+  Het detecteren van wijzigingen van de de spanning op een pin.  
+  (zonder deze constant te moeten pollen in de event-loop)
+* **Timer interrupts**  
+  Een teller die een specifiek specifiek tijdsverloop kan opmeten  
+  en vervolgens een interrupt genereert.
+* **Seriële interrupts**  
+  **UART** is het serieel protocol dat (in combinatie met ftdi-chips) veel wordt gebruikt voor communicatie met computers.  
+  Veelal wil je daar kunnen assynchroon kunnen reageren op boodschappen.  
+  Idem dito voor andere protocollen zoals **i2c** en **spi**, dikwijls gebruikt ter communicatie met **sensoren** of andere kleine peripherals.   
+* **ADC-Interrupts** (Analog Digital Conversion)   
+  die je melden wanneer een nieuwe meetwaarde ter beschikking staatl 
 * ...
 
 De volledige lijst kan je zien in de vector-tabel die direct wordt besproken of voor nog meer details in de datasheet van de atmega328p (mcu op Arduino).  
 In dit deel verduidelijken we enkel de pin-interrupts, geleidelijk aan komen we terug op de andere interrupts.  
 
+
 ### Duiding: werking van interrupts (overzicht)
 
-Om met interrupts te werken zijn er een aantal belangrijke stappen die we moeten bekijken (voordat we in de code duiken).  
+Zoals we al konden afleiden zal een interrupt:
+
+* bij een specifiek event
+* een stuk code activeren 
+* (bij voorkeur voor korte tijd)
+
+![](../../pictures/interrupt_flow.png)
+
+Vooraleer in de code te duiken gaan we bekijken hoe we van deze events bij de uitvoering van deze code komen.  
+Om met interrupts te werken zijn er namelijk een aantal belangrijke stappen die we moeten bekijken:    
 
 > **Nota:**  
 > Het mag geen verassing zijn dat we hier opnieuw terug gaan vallen op registers.  
+> Indien dit nog niet duidelijk is gelieve de introductie rond avr en het hoofdstuk rond bitshifting te bekijken.
 
 In het schema hieronder zie je een overzicht van deze stappen en de elementen die hiervoornodig zijn:
 
 ![](../../pictures/avr_interrupt_interrupt_bits.png)
 
-* *Stap: definieren van een interrupt*   
+* **Stap: definieren van een interrupt**   
   Dit houdt in een stuk uitvoerbare code associeren met een type van event.    
   In de meeste platformen wordt (zeker voor hardware-interrupts) hiervoor een **Interrupt Vector-Table** gebruikt.   
   Deze tabel (die in een aparte locatie in het geheugen zit bij AVR) is een tabel met referenties naar code die moet worden uitgevoerd als een     bepaalde event zich voordoet.   
@@ -243,6 +266,9 @@ De code die uit deze macro wordt expanded zal een RETI-instructie bevatten.
 > In gevallen waar nodig is kan je dezelfde interrupt-code koppelen aan 2 interrupts door volgende code:  
 > ```ISR(PCINT1_vect, ISR_ALIASOF(PCINT0_vect));```  
 
+> **Nota:**  
+> ISR staat voor interrupt service routine (veel gebruikt voor code die interrupts verwerkt)
+
 ### Voorbeeld: het gebruik van pin-interrupts
 
 Voorgaande code zal 1 led doen blinken.  
@@ -299,7 +325,7 @@ void initialiseer_de_interrupts()
 }
 
 void initialiseer_de_pins() {
-    LED_PORT |= (1 << LED1);
+    LED_DDR |= (1 << LED0) | (1 << LED1);
     BUTTON_PORT |= (1 << BUTTON);
 }
 
@@ -324,7 +350,7 @@ In deze code zijn 3 belangrijke elementen te vermelden:
 
 ### Duiding: configuratie van PIN-interrupts
 
-De configuratie van deze interrupts gebeurt over 2 belangrijke 
+De configuratie van deze interrupts gebeurt over 2 belangrijke registers:
 
 ```{.c }
 void initialiseer_de_interrupts() 
@@ -335,6 +361,11 @@ void initialiseer_de_interrupts()
     sei();                    // activeer all interrupts
 }
 ```
+
+Om dit te verduidelijken kunnen we dit illustreren als een aaneenschakeling van logische poorten:
+
+![](../../pictures/avr_pint_interrupt.png)
+
 
 Voor het configureren van deze: 
 
@@ -348,7 +379,7 @@ Voor het configureren van deze:
 * sei()  
   Met deze activeer je bij de start van het programma alle interrupts.  
   De hardware zal deze opnieuw deactiveren en de ISR-macro zal deze opnieuw activeren
-  Als je zelf alle interrupts wil afzetten kan die via cli() 
+  Als je zelf alle interrupts wil afzetten kan ..die via cli() 
 
 | Interrupt-naam         | Vector-naam ISR's       | Pins               |
 |------------------------|-------------------------|--------------------|
@@ -359,6 +390,19 @@ Voor het configureren van deze:
 ![](../../pictures/atmega_pin_names.png)
 
 > **Nota:**  
-> Ter info, er bestaat ook het PCIFR (Pin Change Interrupt Flag) dat je eventueel rechtstreeks kan aanspreken om de interrupt te activeren.  
+> Ter info, er bestaat ook het PCIFR (Pin Change Interrupt Flag) dat je eventueel rechtstreeks kan aanspreken om de interrupt te activeren.   
+
+### En verder?
+
+We hebben nu een introductie in interrupts (op AVR) gezien.  
+We hebben hiervoor de klassieke pin-interrupts gebruikt, dit sloot vrij goed aan bij wat we eerder hebben gezien met de gpio-outputs.
+
+Er zijn echter nog veel verschillende soorten interrupts, deze gaan we bekijken (in de komende hoofdstukken) aan de hand van nieuwe functionaliteiten zoals:
+
+* Timers
+* PWM
+* ADC
+* ...
+  
 
 

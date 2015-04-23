@@ -1,12 +1,12 @@
 # Inleiding
 
-Welkom in de cursus microcontrollers gegeven te Groep T.  
-Veel succes (en vooral plezier) gewenst met deze kennismaking met programmeren en microcontrollers.
+In dit eerste hoofdstuk deze inleiding bekijken we het volgende:  
 
-In deze inleiding bekijken we:  
-
-* Opbouw van de cursus, principes en afspraken uitleggen.
-* Korte introductie (om een indruk te krijgen)
-    *  Wat is een microcontroller?  
-    *  Wat is programmeren?  
+* Intro
+    * Opbouw van de cursus
+    * Principes en afspraken
+    * Orientatie
+* Korte introductie van (om een indruk te krijgen)
+    *  Wat is een microcontroller?
+    *  Wat is programmeren?
 

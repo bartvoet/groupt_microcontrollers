@@ -121,14 +121,33 @@ uint8_t *an_io_port = (int *) 0x2B;
 
 > Voor een overzicht van deze adressen en andere details rond deze processoren gaan we in het volgende deel van de cursus dieper ingaan door de datasheets te bestuderen.
 
+### Hardware-abstractie via header-files
+
+In de code die nu gaat volgen ga je zien dat deze steeds beginnen met deze 2 **include-directives**: 
+
+```{.c}
+#include <avr/io.h>
+#include <util/delay.h>
+```
+
+De header io.h bevatten een abstractie van de memory-locaties.  
+Je hoeft daarvoor niet de adressen van deze registers van buiten te kennen.
+
+Via macro's worden deze registers (zoals ```DDRB``` die we zo dadelijk bekijken) geabstraheerd achter een soort algemene variabele.  
+Hoe dat in zijn werk gaat zien we in het derde "gevorderd" gedeelte van de cursus.  
+Voorlopig is het voldoende te weten dat je via deze macro's toegang hebt tot deze registers.  
+
+> **Nota:**   
+> We komen later ook nog terug op wat macro's en header-files zijn.  
+> Bekijk het voorlopig als een manier om algeme variabelen te declareren 
+
+
 ### GPIO
 
 In AVR refereren we deze IO-registers (locaties in het geheugen) dikwijls als hardware registers.  
 De eerste (en voor deze les de enige) van deze hardware registers die we bekijken zijn de registers gebruikt om de pinnetjes van je MCU aan te sturen.  
 
 In deze les focussen we dus op het aansturen van gpio-pinnen (general purpose input output).
-
-
 
 #### DDRx data-direction registers (port x)
 
