@@ -6,7 +6,7 @@ Zoals we reeds eerder hebben gezien wordt het werk-geheugen van een computer:
 
 * Opgedeeld in geheugen-locaties van **1 byte** groot
 * Elk van deze adressen is **adresseerbaar**
-* Deze adressen volgen elkaar op zoals in het onderstaand voorbeeld
+* Deze **adressen volgen elkaar op** zoals in het onderstaand voorbeeld
 * Je kan dit het gemakkelijkst bekijken als een **lange rij** van geheugencellen van 1 byte lang
 
 | **adres**        |  **inhoud**     |
@@ -18,18 +18,19 @@ Zoals we reeds eerder hebben gezien wordt het werk-geheugen van een computer:
 | ...              |  ...            |
 
 
-Bovenstaande tabel is een voorbeeld van een 16-bit geheugen (zoals het datageheugen van een AVR Atmega).  
-De 16 bit van zo'n geheugen staat er voor dat er 2^16 (65536) verschillende geheugen-cellen beschikbaar zijn.
+Bovenstaande tabel illustreert een 16-bit geheugen (zoals het datageheugen van een AVR Atmega).  
+De 16 bit van zo'n geheugen staat er voor dat er 2^16 (65536) verschillende geheugen-cellen beschikbaar zijn die telkens 1 byte adresseren.
 
 ### Herhaling: Variabelen en geheugen
 
-Zeer kort samengevat, tot nog toe hebben we rond variabelen gezien:
+Zeer kort samengevat, tot nog toe hebben we rond **variabelen** gezien:
 
+* Dit stellen **locaties** in het **geheugen** voor
 * Deze variabelen hadden een **type**
 * We hebben ons (tot nog toe) beperkt tot **integer-types**
 * We hebben ons (in het bit-mask-hoofdstuk) beperkt tot **unsigned** integer-types
 * Elk van deze types hebben verschillende **grootte** (of dimensies)
-* De c-standaard verplicht c-compilers (en platformen) een **minimum grootte** te respecteren
+* De c-standaard verplicht c-compilers (en platformen) een **minimum grootte** te respecteren (zie tabel hieronder)
 * De c-compilers zijn in principe vij van boven deze minima te gaan 
 
 |type                  |minimum           | x86               | 
@@ -50,7 +51,7 @@ Belangrijk te weten (voor de komende onderwerken) is dat c-compilers er voor zor
 
 ### Voorbeeld: Casten van waardes?
 
-Je kan waarden overdragen tussen variabelen van verschillende types.  
+Je kan waarden overdragen tussen variabelen van verschillende types (en verschillende groottes).  
 We noemen dit casting en zijn 2 varianten (niet meerekenende overdracht tussen 2 variabelen van hetzelfde type):
 
 * **promotie**  
@@ -65,13 +66,13 @@ We noemen dit casting en zijn 2 varianten (niet meerekenende overdracht tussen 2
 ```{.c}
 #include <stdio.h>
 
-int main(void) {
-    unsigned int groter_getal=0xFFFF;
+int main(void) 
+{
+    unsigned short groter_getal=0xFFFF;
     printf("groter getal: %x\n",groter_getal);
 
-    unsigned int nog_groter_getal=(unsigned int)groter_getal;
+    unsigned long nog_groter_getal=(unsigned int)groter_getal;
     printf("nog groter getal: %x\n",nog_groter_getal);
-
 
     unsigned char kleiner_getal=(unsigned char)groter_getal;
     printf("kleiner getal: %x",kleiner_getal);
@@ -93,29 +94,63 @@ kleiner getal: bb
 ```
 
 Als resultaat zie je dat de waarde in het kleiner getal als het ware wordt afgeknipt.  
-Enkel bb blijft behouden, de boodschap is hier dat je voorzichtig moet zijn met conversies tussen types.
+Enkel minst significante gedeelte "bb" blijft behouden, de boodschap is hier dat je voorzichtig moet zijn met conversies tussen types (zeker in het geval van degradatie).
 
 > **Nota:**  
-> We komen hier later nog op terug als we bij signed integers en floating-point getallen gaan bekijken.
+> We komen later nog terug op conversie als we bij signed integers en floating-point getallen gaan bekijken.
 
+### Voorbeeld: toepassing van conversie
 
-### Voorbeeld: sizeof
+Soms kan dit verlies van data gewenst zijn.  
+Stel het volgende voorbeeld:
 
-In C kan je de werkelijk grootte (of dimensie) van zo'n type opvragen via de **operator sizeof** (geen functie!!).  
+* Een variabele bevat 2 bytes aan data
+* We willen deze splitsen in 2 variabelen van 1 byte
+* 1 met de minst significante byte, 1 met de meest significante byte 
+
+```{.c}
+#include <stdio.h>
+
+int main(void) {
+    unsigned short hello=0xBBAA;
+    unsigned char a = hello;
+    unsigned char b = hello >> 8;
+
+    printf("%x\n",hello);
+    printf("%x\n",a);
+    printf("%x\n",b);
+
+    return 0;
+}
+```
+
+### Voorbeeld: sizeof en size_t
+
+In C kan je de werkelijk grootte (of dimensie) van een variabele (of rechtstreeks van zijn type) opvragen via de **operator sizeof** (geen functie!!).  
 Deze operator zal dan een waarde teruggeven van het type **size_t**, dit is een type specifiek voorzien voor het uitdrukken van dimensies van types en variabelen die elke C-compiler moet voorzien.  
+
+Dit type **size_t** 
+
+* Is gemaakt om de grootte van data uit te drukken
+* Is bedoeld om iets uit te drukken in bytes
+* De grootte van **size_t** zal verschillen met platform en compiler
+* Dit wordt gebruikt voor zowel enkelvoudige datatypes (de integers die daarnet zagen) uit te drukken,  
+  maar ook complexere types zoals arrays
+* **size_t** zal typisch even groot zijn als het beschikbaar geheugen van je platform  
+  Bijvoorbeeld voor een 32-bit zal dit 4 (bytes) zijn, voor 64-bit 8 (bytes)
 
 ```{.c}
 #include <stdio.h>
 #include <stddef.h>
 
-int main(void) {
-
+int main(void) 
+{
     unsigned int getal = 5;
-    printf("%zu\n",sizeof(getal));
-    printf("%zu\n",sizeof(int));
+    printf("Grootte variabele type integer: %zu\n",sizeof(getal));
+    printf("Grootte type integer: %zu\n",sizeof(int));
 
     size_t register_grootte = sizeof(size_t);
-    printf("%zu\n",register_grootte);
+    printf("Grootte size_t: %zu\n",register_grootte);
     return 0;
 }
 ```
@@ -125,6 +160,7 @@ Bovenstaand voorbeeld illustreert het gebruik van deze sizeof-operator:
 * Je kan deze toepassen op **zowel variabelen als types** (een eender welke expressie)
 * Je kan deze waarde opvangen in een variabele van het type **size_t**
 * De definitie van dit type kan je vinden in de header-file **stddef.h** 
+* Je gebruikt de placeholder "zu" via printf
 
 Het resultaat hiervan uitgevoerd (en gecompileerd) op een 64-bit-processor (gcc
 
@@ -138,25 +174,27 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 $ gcc sizeof_voorbeeld.c -o sizeof_voorbeeld
 $ ./sizeof_voorbeeld
-4
-4
-8
+Grootte variabele type integer: 4
+Grootte type integer: 4
+Grootte size_t: 8
 $
 ```
 
-De grootte van deze size_t hangt af van platform en compiler, dit in de meeste gevallen overeen met de adres-dimensies van een platform.  
+Zoals eerder vermeld, de grootte van deze size_t hangt af van platform en compiler, dit in de meeste gevallen overeen met de adres-dimensies van een platform.  
 In het voorbeeld hierboven is dit gecompileerd en uitgevoerd op een 64-bit machine en zie je dat size_t 8 bytes lang is (hetgeen overeenstemt met 64 bits).  
 
 ### Voorbeeld: afdrukken van het geheugen-adres
 
-In c is er ook een manier om deze **adressen** te zien.  
+In c is er ook een manier om de **adressen** (of locaties in het geheugen) te zien van variabelen.  
 Men kan de **locatie in het werk-geheugen** bekomen door de naam van de variabele te prefixen met een **&-symbool**.  
+Als resultaat verkrijg je dan het geheugen-adres waar deze variabele is gelocaliseerd.  
 Om de waarde van dit adres af te drukken dien je de placeholder **p** te gebruiken (zoals we i gebruiken voor integers en uhh voor unsigned chars).  
 
 ```{.c}
 #include <stdio.h>
 
-int main(void) {
+int main(void) 
+{
     unsigned char test=2;
     printf("Waarde van test: %uhh\n", test);
     printf("Adres van test: %p\n", &test);
@@ -175,14 +213,14 @@ Waarde van test: 2hh
 Adres van test: 0x7ffd772e33e7
 ```
 
-Om de de waarde van dit adres op te vangen in een variabele is er ook een specifiek type voorzien (zoals we eerder hebben gezien voor size_t).  
+Om de de waarde van dit adres op te vangen in een variabele is er ook een specifiek type voorzien (zoals we eerder hebben gezien voor size_t), namelijk pointers.  
 Hier komen we later nog op terug als we bij het onderwerp pointers komen.
 
 Voorlopig hebben we deze operator (&) nodig om in onze voorbeelden adressen af te drukken in ons volgend voorbeeld, namelijk om het concept van  **arrays te verduikelijken.  
 
 ### Introductie: wat is een array
 
-Tot nu toe hebben we variabelen gebruik (gedeclareerd en geïnitialiseerd).  
+Tot nu toe hebben we variabelen gebruikt (gedeclareerd en geïnitialiseerd) die slecht 1 waarde kunnen bevatten.  
 Deze benoemen we als simpele (of enkelvoudige datatypes).
 
 C voorzien echter ook in complexe (of samengstelde) datatypes.  
@@ -540,7 +578,28 @@ Als je een element van een array gaat proberen te lezen of schrijven zal deze:
   In de meeste operating systemen is hier wel een beveiliging op ingebouwd die je programma gaat stoppen maar dat is niet altijd een garantie.  
 
 
+### Levensduur van memory
 
+Scope/Lifetime/Visibility
+
+### Duiding: pointers
+
+We hadden reeds gezien dat je - in C - een adres kan opvragen van een variabele.  
+Je kan dit adres opvangen in een pointer.  
+
+### Null-pointers
+
+### Pointers en arrays
+
+* + n
+en 
+[n]
+
+### Gebruik: meegeven aan functie
+
+### Gebruik: arrays
+
+### Gebruik: dynamische memory allocatie
 
 
 
