@@ -708,6 +708,45 @@ unsigned int* adres_van_a
 ```*``` speelt de rol van **de-referentie-operator**
 (je gaat als het ware de referentie gebruiken om de geheugenplaats aan te spreken)
 
+### Array als argument van een functie
+
+```{.c}
+#include <stdio.h>
+
+void print_array(unsigned char a[],int index) {
+	printf("%hhu\n",a[1]);
+}
+
+int main(void) {
+	unsigned char hello[]={1,2,3};
+	print_array(hello,1);
+	printf("%li\n",sizeof(hello));
+	return 0;
+}
+```
+
+### Array als argument van een functie, inhoud wijzigen
+
+```{.c}
+#include <stdio.h>
+
+void wijzig_naar_0(unsigned char a[],int index) {
+	a[index]=0;
+}
+
+void print_array(unsigned char a[],int index) {
+	printf("%hhu\n",a[1]);
+}
+
+int main(void) {
+	unsigned char hello[]={1,2,3};
+	wijzig_naar_0(hello,1);
+	print_array(hello,1);
+	return 0;
+}
+```
+
+Later gaan we zien dat de array die je aan deze functie meegeeft eigenlijk niet volledig een array is (als we bij pointers komen)
 
 ### Duiding: pointers
 
@@ -862,11 +901,39 @@ int main() {
     return 0;
 }
 ```
+
 ```
 Rechtstreeks: 1
 Via de-reference-operator: 1
 Via array-notatie: 1
 ```
+### Voorbeeld: je kan een array als argument van een functie is een pointer
+
+We hadden daarnet gezien dat een array en een pointer eigenlijk zo goed als hetzelfde is.  
+Het enig verschil tussen beide is de declaratie, als je een variabele ```char a[5]``` declareert vraag je aan de compiler om 5 bytes te reserveren.  
+
+In het vervolg van het programma wordt deze variabele a eigenlijk beschouwd als een pointer.  
+Het volgende programma illustreert dit door een variabele mee te geven als argument aan een functie: 
+
+```{.c}
+#include <stdio.h>
+
+void print_array(unsigned char a[]) {
+	printf("%li\n",sizeof(a));
+	printf("%hhu\n",a[1]);
+}
+
+int main(void) {
+	unsigned char hello[]={1,2,3};
+	print_array(hello);
+	printf("%li\n",sizeof(hello));
+	return 0;
+}
+```
+
+Het verschil tussen beide ligt in het feit dat een array eigenlijk enkel een declaratie is (reservatie) van geheugen.
+De waarde van een array kan je eigenlijk niet meegeven aan een functie, in plaats daarvan geef je het adres van de array mee.
+
 
 ### Voorbeeld: pointers en casten
 
@@ -1001,17 +1068,30 @@ int main(void) {
     char hello[20];
     fgets(hello, sizeof(hello), stdin);
     printf("%s\n",hello);
-	return 0;
+    return 0;
 }
 ```
 
-### Voorbeeld: loopen
+### Duiding: String  en terminitor
 
+Een string niet langer kan zijn dan het geheugen in de char-array gereserveerd.  
+Meer precies het maximum aantal karakter is gelijk aan het de grootte van de array - 1.  
+
+Waarom is dit en hoe dat een printf-functie weet hoeveel karakters het mag afdrukken (als hij bijvoorbeeld maar met 4 karakters is gevuld (in een buffer van 20)?
+
+Het antwoord ligt hier in de conventie die wordt gebruikt in c-programma's (en andere platformen).  
+Een string wordt in een array namelijk altijd beeïndigd met het karakter ```\0``` (ook wel string-terminator genoemd)
+
+In het voorbeeld hieronder zien we de inhoud van een char-array van 20 chars nadat hij is ingelezen met de tekst "TEST".
 
 |0   | 1    |  2   |   3   |  4     |   5   |    6   |   ....  | 20 |
 |----|------|------|-------|--------|-------|--------|---------|----|
-|T   | E    |S     | T     |```\n```|       |        |         |    |
+|T   | E    |S     | T     |```\0```|       |        |         |    |
 
+Op positie 4 zien we het karakter ```\0``` dat het einde van de eigenlijke tekst bepaald.  
+Het gebruik van deze string-terminator (0-karakter) betekent dat je maar maximum 19 karakters in een char-array van 20 karakter kan opslaan.
+
+### Voorbeeld: een while loop en een string
 
 ```{.c}
 #include <stdio.h>
@@ -1024,7 +1104,7 @@ int main(void)
     int teller = 0;
 
     while(teller < sizeof(hello)/sizeof(char)) {
-        if(hello[teller]=='\n') {
+        if(hello[teller]=='\0') {
             return 0;
         } else {
             printf("%c",hello[teller]);
