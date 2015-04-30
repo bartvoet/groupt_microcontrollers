@@ -218,6 +218,34 @@ Hier komen we later nog op terug als we bij het onderwerp pointers komen.
 
 Voorlopig hebben we deze operator (&) nodig om in onze voorbeelden adressen af te drukken in ons volgend voorbeeld, namelijk om het concept van  **arrays te verduikelijken.  
 
+### Duiding: little vs big-endian
+
+Zoals we eerder hebben vermeld zijn (bijna) alle compouters byte-georienteerd.  
+Dit houdt in dat voor variabele van een groter type (zoals unsigned shorts die 2 byte lang zijn) hun inhoud is gespreid is over meerdere geheugen-cellen (in geval van unsigned short 2 cellen).  
+
+Een compiler (en processor-architectuur) gaat vanzelfsprekend:
+
+* Opeenvolgende geheugencellen gebruiken.  
+  Als de eerste cel van een short zich op 0x0AB0 bevindt zal de volgende zich op 0x0AB1 bevinden
+* Geheugencellen gebruiken in een volgorde van minst naar meest significante byte
+
+![](../../pictures/little_vs_bigendian.png)
+
+Deze volgorde wordt altijd gerespecteerd.  
+Echter zoals je hierboven kan de **richting** van deze volgorde per architectuur verschillen.  
+Hierbij hebben we het concept van **endianness** geintroduceerd, hetgeen de volgorde aanduidt waarin je de individuele bytes gaat encoderen in het geheugen, er bestaan 2 varianten:
+
+* **Little Endian** betekent dat je de LSB (mist significante byte) aan het start-adres van je variabele zet.  
+  Daarna zullen de andere bytes in (omgekeerde) volgorde van significantie geadresseerd worden.  
+  De MSB (meest significante) zal je dan aan op het laatste adres aantreffen  
+  (in geval het voorbeeld op adres ```0x0AB01 + 3 = 0x0AB03```)
+* **Big Endian** gaat dezelfde volgorde respecteren zoals je deze in gewone wiskunde (en c-code) zou encoderen.
+
+**Belanrijke nota:**  
+De architecturen waar me mee werken (AVR voor MCU en X86 voor PC) zijn beide little endian.  
+Dit had weinig belang tot nog toe, gezien alle operators (ook de bitwise en shift-operators) garanderen te werken zoals je de waardes in de code (en in conventionele wiskunde) zou gebruiken.  
+Als we echter met pointers gaan werken kan dit van belang zijn ... zoals we later gaan zien.  
+
 ### Introductie: wat is een array
 
 Tot nu toe hebben we variabelen gebruikt (gedeclareerd en geïnitialiseerd) die slecht 1 waarde kunnen bevatten.  
@@ -226,10 +254,11 @@ Deze benoemen we als simpele (of enkelvoudige datatypes).
 C voorzien echter ook in complexe (of samengstelde) datatypes.  
 Een eerste van deze types zijn arrays (heel soms ook geïndexeerde variabele genoemd).  
 
-Heel simpel uitgedrukt zijn arrays:
+Praktisch uitgedrukt arrays zijn:
 
-* Een **verzameling** of collectie van **simpele types**.
-* Elk **element** van zo'n array worden **gelezen of gewijzigd** via een index
+* Een **verzameling** of collectie van elementen van bepaald **type**  
+  (zoals we eerder int, short, char, ... hebben gezien).
+* Elk **element** van zo'n array worden **gelezen of gewijzigd** via een **index**
 * Een array heeft een **grootte of dimensie** (die we voor de gemakkelijkheid aanduiden als n)
 * Deze index **start** bij **0** (1ste element) en **eindigt** bij de index **n-1***
 * De **dimensie** van een array-variabele kan niet wijzigen tijdens de loop van het programma  
@@ -238,30 +267,10 @@ Heel simpel uitgedrukt zijn arrays:
 > **Nota:**    
 > Later gaan we zien dat de laatste bemerking niet volledig waar is als we spreken over dynamisch geheugen en heaps. 
 
-### Duiding een array declareren en initialiseren
-
-De declaratie van een array gaat als volgt:
-
-```{.c}
-type naam[grootte];
-```
-Belangrijk te bemerken is dat deze array eender welk type kan zijn (zelfs een array)
-
-Je kan deze ook (optioneel) initialiseren tijdens de declaratie als volgt:
-
-```{.c}
-type naam[grootte]={waarde_1,waarde_2,...,waarde_n};
-```
-
-Assignen van een individueel element (of initialiseren) kan je doen door de index tussen vierkante haken te zetten:
-
-```{.c}
-naam[index]=waarde;
-```
-
-We zullen dit illustreren met enkele voorbeelden
-
 ### Voorbeeld: initialiseren en gebruiken van een array
+
+Dit was de theoritische verklaring, laten we verklaren met een voorbeeld.  
+Het voorbeeld hieronder declareert zo'n array en print elk **element** van deze array af.  
 
 ```{.c}
 #include <stdio.h>
@@ -293,6 +302,29 @@ een_array[0]=1
 een_array[1]=2
 $
 ```
+
+### Duiding: syntax om een array declareren en initialiseren
+
+De declaratie van een array gaat dus als volgt:
+
+```{.c}
+type naam[grootte];
+```
+Belangrijk te bemerken is dat deze array eender welk type kan zijn (zelfs een array)
+
+Je kan deze ook (optioneel) initialiseren tijdens de declaratie als volgt:
+
+```{.c}
+type naam[grootte]={waarde_1,waarde_2,...,waarde_n};
+```
+
+Assignen van een individueel element (of initialiseren) kan je doen door de index tussen vierkante haken te zetten:
+
+```{.c}
+naam[index]=waarde;
+```
+
+We zullen dit illustreren met enkele voorbeelden
 
 ### Voorbeeld: declaratie en initialisatie tegelijk
 
@@ -480,7 +512,7 @@ int main()
     unsigned char een_array[3]={};
 
     int teller = 0;
-    while(teller<sizeof(een_array)) {
+    while(teller<sizeof(een_array)/sizeof(unsigned char)) {
         printf("Index %i heeft waarde %hhu \n",teller,een_array[teller]);
         teller++;
     }
@@ -501,7 +533,33 @@ Index 2 heeft waarde 0
 
 ### Illustratie: een array bestaat uit aangesloten geheugen-locaties
 
-Zoals eerder vermeld bestaat een array uit opeenvolgende geheugen-cellen.  
+Een andere manier van te bekijken is dat een array, een array is een manier om een stuk geheugen te reserveren ter grootte van ```n * s``` waar:
+
+* n (number) het **aantal elementen** in deze array bevat (of de dimensie)
+* s (size) de **groott0**e van deze elementen (bepaalt door het type van deze array)  
+
+Net zoals bij een gewone variabelen zal elk element van de array zijn geheugencellen adresseren
+
+![](../../pictures/arrays_in_memory.png)
+
+In bovenstaande illustratie:
+
+* van het type **unsigned char** (s=1 byte)  
+  met een **dimensie van 8** (n=2)  
+  zou deze array ```8 * 1 = 2``` bytes geheugen innemen (opeenvolgend).  
+* van het type **unsigned short** (s=2 bytes)   
+  met een **dimensie van 5** (n=5) 
+  zou deze array ```5 * 2 = 10``` bytes geheugen innemen (opeenvolgend). 
+
+Let wel elke element zal (net zoals bij enkelvoudige integers) een endiannes hebben.  
+Gezien we in deze cursus enkel met x86 en AVR werken zal die little endian zijn.  
+
+**Let wel:**  
+De waarde die geencodeerd is op adres 0x0AB0 (gereferenceerd door 0x0AB0) heeft dus in werkelijkheid de waarde 0xAABB  
+(en niet 0xBBAA zoals je op het eerste zicht zou kunnen vermoeden)
+
+### Voorbeeld: printen van geheugen-adressen op een array
+
 Stel bijvoorbeeld:
 
 * Een array met een dimensie van 3
@@ -526,15 +584,15 @@ int main(void) {
 
     printf("Grootte van char-array van %i elementen is %zu\n",3,sizeof(char_array));
 
-    while(teller<sizeof(char_array)) {
+    while(teller<(sizeof(char_array)/sizeof(unsigned char))) {
         printf("Index %i heeft adres %p \n",teller,&char_array[teller]);
         teller++;
     }
 
     printf("\n");
-    printf("Grootte van short-array van %i elementen is %zu\n",3,sizeof(short_array));
+    printf("Grootte van short-array van %i elementen is %zu\n",3,(sizeof(short_array)/sizeof(unsigned short)));
     teller=0;
-    while(teller<sizeof(short_array)) {
+    while(teller<(sizeof(short_array)/sizeof(unsigned short))) {
         printf("Index %i heeft waarde %p \n",teller,&short_array[teller]);
         teller++;
     }
@@ -577,34 +635,403 @@ Als je een element van een array gaat proberen te lezen of schrijven zal deze:
 * In het beste geval zal het programma eindigen (op zijn minst ga je weten dat er een fout is in je programma)  
   In de meeste operating systemen is hier wel een beveiliging op ingebouwd die je programma gaat stoppen maar dat is niet altijd een garantie.  
 
+### Voorbeeld: pointers
 
-### Levensduur van memory
+We hadden reeds gezien dat je - in C - een adres kan opvragen van een variabele (via de &-opetor).  
+Je kan dit adres opvangen in een pointer-variabele, zoals in het code-voorbeeld hieronder:
 
-Scope/Lifetime/Visibility
+```{.c}
+#include <stdio.h>
+
+int main(void) {
+
+    unsigned int a = 0x5F010000;
+    unsigned int* adres_van_a = &a;
+
+    printf("Waarde van a: %x\n",a );
+    printf("Adres van a: %p\n",adres_van_a );
+    printf("Waarde van a die : %x\n",*adres_van_a );
+
+	return 0;
+}
+```
+
+Wat dit programma doet:
+
+* Declareert en initialeert een variabele a op 0x5F010000
+* Vraagt het adres op van deze variabele a via de &-operator
+* Bewaart het adres in een andere variabele adres_van_a
+* Print de waarde en adres van a af
+* Gebruikt echter ook echter de pointer variabele om deze waarde te verkrijgen (en af te drukken)
+  hiervoor gebruiken we de dereferentie-operator *
+
+Als resultaat krijgen we: 
+
+```
+Waarde van a: 5f010000
+Adres van a: 0x7ffdcdf795ac
+Waarde van a: 5f010000
+```
+
+### Referentie en de-referentie
+
+Er zijn hier 3 belangrijke elementen in de code:
+
+**Declaratie van een pointer:**
+
+```{.c }
+unsigned int* adres_van_a
+``` 
+
+```*``` wordt hier gebruikt als een deel van het type (geen operator) op aan te duiden dat dit:
+
+* een variabele is van het type **pointer**
+* naar een variabele van het type **unsigned int verwijst**
+ 
+
+**Referentie nemen van een adres:**  
+
+```{.c }
+&a
+``` 
+
+```&``` speelt hier bij initialisatie de rol van **referentie-operator**  
+(referentie kan je hier als rechtstreekse vertaling van pointer bekijken)
+
+
+**De-referentie van een pointer:**  
+
+```{.c }
+*adres_van_a
+``` 
+
+```*``` speelt de rol van **de-referentie-operator**
+(je gaat als het ware de referentie gebruiken om de geheugenplaats aan te spreken)
+
 
 ### Duiding: pointers
 
-We hadden reeds gezien dat je - in C - een adres kan opvragen van een variabele.  
-Je kan dit adres opvangen in een pointer.  
+De onderstaande tekening illustreert de code op een andere manier:
 
-### Null-pointers
+![](../../pictures/intro_in_pointers_s.png)
 
-### Pointers en arrays
+Verklaring:  
 
-* + n
-en 
-[n]
+* In de tekening hierboven zetten we **variabele a** zich op het **adres 0x00000004**.
+* We initialiseren echter een 2de **variabele adres_van_a** die het adres van van a bevat.  
+  Deze pointer-variabele bevindt zich op het adres 0x00000001c.  
+* Deze pointer-variabele is een variabele zoals een ander specfiek type (pointer-type)
+* Een pointer-variabele heeft altijd dezelfde grootte, ongeacht de grootte van het type waarnaar deze "point"  
+  Een pointer naar een unsigned char zal dezelfde grootte hebben als een pointer naar het type unsigned long long.  
+* Deze grootte komt meestal overeen met de grootte van de adress-bus (probeer dit uit met sizeof uit te voeren op een pointer-variabele of type)   
+  Op een 32-bit-platform zal dit 32 bit zijn (x86), op een 64-bit-platform zal dit 64 bit zijn (x86-64)
 
-### Gebruik: meegeven aan functie
+> **Nota:**  
+> We gaan hier uit van de hypotese dat zowel een **unsigned int** als een **pointer** 4 bytes lang zijn voor het voorbeeld. 
 
-### Gebruik: arrays
+### Voorbeeld: pointer gebruiken om een waarde te wijzigen:
 
-### Gebruik: dynamische memory allocatie
+We breiden het voorgaand voorbeeld om de waarde te wijzigen aan de hand van een pointer aan de hand van de **de-referentie-operator**.
+
+```{.c}
+#include <stdio.h>
+
+int main(void) {
+
+    unsigned int a = 0x5F010000;
+    unsigned int* adres_van_a = &a;
+
+    printf("Waarde van a: %x\n",a );
+    printf("Adres van a: %p\n",adres_van_a );
+    printf("Waarde van a (met de-referentie): %x\n",*adres_van_a );
+
+    *adres_van_a = 0x10;
+
+    printf("\n");
+    printf("Waarde van a: %x\n",a );
+    printf("Adres van a: %p\n",adres_van_a );
+    printf("Waarde van a (met de-referentie): %x\n",*adres_van_a );
+
+	return 0;
+}
+```
+
+### Voorbeeld: pointers en functies
+
+```{.c}
+
+#include <stdio.h>
+
+void wijzig_pointer(int* a,int nieuwe_waarde);
+void print_pointer(int* a);
+
+int main(void) {
+
+    unsigned int a = 0x5F010000;
+    unsigned int* adres_van_a = &a;
+
+    print_pointer(adres_van_a);
+    wijzig_pointer(adres_van_a,10);
+    print_pointer(adres_van_a);
+
+	return 0;
+}
+
+void wijzig_pointer(int* a,int nieuwe_waarde)
+{
+    *a = nieuwe_waarde;
+}
+
+void print_pointer(int* a)
+{
+    printf("Adres van a: %p\n",a );
+    printf("Waarde van a (met de-referentie): %x\n",*a );
+}
+```
+
+### Voorbeeld: pointers en arrays
+
+```{.c}
+#include <stdio.h>
+
+int main(void) {
+    unsigned short short_array[3]={1,2,3};
+    int teller=0;
+
+    printf("Eerst via een array\n");
+    printf("Grootte van short-array van %i elementen is %zu\n",3,(sizeof(short_array)/sizeof(unsigned short)));
+    teller=0;
+    while(teller<(sizeof(short_array)/sizeof(unsigned short))) {
+        printf("Index %i heeft waarde %i \n",teller,short_array[teller]);
+        printf("Index %i heeft adres %p \n",teller,&short_array[teller]);
+        teller++;
+    }
+
+
+    teller=0;
+
+    printf("Nu met pointer-arithmetiek\n");
+
+    printf("Grootte van short-array van %i elementen is %zu\n",3,(sizeof(short_array)/sizeof(unsigned short)));
+    teller=0;
+    while(teller<(sizeof(short_array)/sizeof(unsigned short))) {
+        printf("Index %i heeft waarde %i \n",teller,*(short_array + teller));
+        printf("Index %i heeft adres %p \n",teller,(short_array + teller));
+        teller++;
+    }
+
+    return 0;
+}
+```
 
 
 
+```
+Eerst via een array
+Grootte van short-array van 3 elementen is 3
+Index 0 heeft waarde 1 
+Index 0 heeft adres 0x7fffb48559e0 
+Index 1 heeft waarde 2 
+Index 1 heeft adres 0x7fffb48559e2 
+Index 2 heeft waarde 3 
+Index 2 heeft adres 0x7fffb48559e4 
+Nu met pointer-arithmetiek
+Grootte van short-array van 3 elementen is 3
+Index 0 heeft waarde 1 
+Index 0 heeft adres 0x7fffb48559e0 
+Index 1 heeft waarde 2 
+Index 1 heeft adres 0x7fffb48559e2 
+Index 2 heeft waarde 3 
+Index 2 heeft adres 0x7fffb48559e4 
+```
 
 
+### Voorbeeld: array-notatie op gewone variabelen
+
+```{.c}
+#include <stdio.h>
+
+int main() {
+    int test=1;
+    int* referentie_naar_test = &test;
+
+    printf("Rechtstreeks: %i\n",test);
+    printf("Via de-reference-operator: %i\n",*referentie_naar_test);
+    printf("Via array-notatie: %i\n",referentie_naar_test[0]);
+
+    return 0;
+}
+```
+```
+Rechtstreeks: 1
+Via de-reference-operator: 1
+Via array-notatie: 1
+```
+
+### Voorbeeld: pointers en casten
+
+```{.c}
+#include <stdio.h>
+
+int main(void) {
 
 
+    unsigned short short_array[3]={0xABCD,0xEF12,0x3456};
+    unsigned char* char_array=(unsigned char*)short_array;
+    int teller=0;
 
+    printf("Eerst via een array\n\n");
+    printf("Grootte van short-array van %i elementen is %zu\n",3,(sizeof(short_array)/sizeof(unsigned short)));
+    teller=0;
+    while(teller<(sizeof(short_array)/sizeof(unsigned short))) {
+        printf("Index %i heeft waarde %x \n",teller,short_array[teller]);
+        printf("Index %i heeft adres %p \n",teller,&short_array[teller]);
+        teller++;
+    }
+
+
+    teller=0;
+
+    printf("\nNu met pointer-arithmetiek\n\n");
+
+    printf("Grootte van short-array van %i elementen is %zu\n",3,(sizeof(short_array)/sizeof(unsigned char)));
+    teller=0;
+    while(teller<(sizeof(short_array)/sizeof(unsigned char))) {
+        printf("Index %i heeft waarde %x \n",teller,*(char_array + teller));
+        printf("Index %i heeft adres %p \n",teller,(char_array + teller));
+        teller++;
+    }
+
+    return 0;
+}
+```
+
+
+```
+Eerst via een array
+
+Grootte van short-array van 3 elementen is 3
+Index 0 heeft waarde abcd 
+Index 0 heeft adres 0x7fff6db9ccc0 
+Index 1 heeft waarde ef12 
+Index 1 heeft adres 0x7fff6db9ccc2 
+Index 2 heeft waarde 3456 
+Index 2 heeft adres 0x7fff6db9ccc4 
+
+Nu met pointer-arithmetiek
+
+Grootte van short-array van 3 elementen is 6
+Index 0 heeft waarde cd 
+Index 0 heeft adres 0x7fff6db9ccc0 
+Index 1 heeft waarde ab 
+Index 1 heeft adres 0x7fff6db9ccc1 
+Index 2 heeft waarde 12 
+Index 2 heeft adres 0x7fff6db9ccc2 
+Index 3 heeft waarde ef 
+Index 3 heeft adres 0x7fff6db9ccc3 
+Index 4 heeft waarde 56 
+Index 4 heeft adres 0x7fff6db9ccc4 
+Index 5 heeft waarde 34 
+Index 5 heeft adres 0x7fff6db9ccc5 
+```
+
+### Duiding: ASCCI
+
+Tot nu toe hebben we de unsigned char gebruikt om bytes (8 bits) in variabelen op te slagen.  
+char (afkorting van character) wordt ook gebruikt om assci-karakters voor te stellen.
+
+**ASCCI** is een internationale conventie die bepaalt welke cijfer-waarde overeenkomt met welke code:
+
+![](../../pictures/chars-table-landscape.jpg)
+
+### Voorbeeld: char-datatype als tekst
+
+Deze ASCCI wordt ook door c-programma's gebruikt als conventie voor encoderen van karakter-waardes en het printen van tekst.
+
+```{.c}
+#include <stdio.h>
+
+
+int main(void) {
+    char hello = 'a';
+    printf("hello als karakter: %c\n",hello);
+    printf("hello als cijfer: %i\n",hello);
+}
+```
+
+### Voorbeeld: String
+
+Zo 1 karakter is op zich niet zo heel bruikbaar.  
+Daarom gebruikt met meestal array van char's om tekst bij te houden.  
+Dit noemen ze ook strings
+
+```{.c}
+#include <stdio.h>
+
+int main(void) {
+    char* hello = "TEST";
+    printf("%s\n",hello);
+    return 0;
+}
+```
+
+
+### Voorbeeld: string wijzigen
+
+In vorige code kon je echter deze string niet wijzigen.  
+Dit was omdat deze string een constante was in het geheugen van het programma (komen we later nog op terug)
+
+```{.c}
+#include <stdio.h>
+
+int main(void) {
+    char hello[5] = "TEST";
+    hello[1]='A';
+    hello[4]='A';
+    printf("%s\n",hello);
+	return 0;
+}
+```
+### Voorbeeld: string inlezen en wijzigen
+
+```{.c}
+#include <stdio.h>
+
+int main(void) {
+    char hello[20];
+    fgets(hello, sizeof(hello), stdin);
+    printf("%s\n",hello);
+	return 0;
+}
+```
+
+### Voorbeeld: loopen
+
+
+|0   | 1    |  2   |   3   |  4     |   5   |    6   |   ....  | 20 |
+|----|------|------|-------|--------|-------|--------|---------|----|
+|T   | E    |S     | T     |```\n```|       |        |         |    |
+
+
+```{.c}
+#include <stdio.h>
+
+int main(void)
+{
+    char hello[20]="TEST";
+    printf("%s\n",hello);
+
+    int teller = 0;
+
+    while(teller < sizeof(hello)/sizeof(char)) {
+        if(hello[teller]=='\n') {
+            return 0;
+        } else {
+            printf("%c",hello[teller]);
+        }
+        teller++;
+    }
+
+    return 0;
+}
+```
