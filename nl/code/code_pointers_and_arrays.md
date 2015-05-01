@@ -658,12 +658,12 @@ int main(void) {
 
 Wat dit programma doet:
 
-* Declareert en initialeert een variabele a op 0x5F010000
-* Vraagt het adres op van deze variabele a via de &-operator
+* Declareert en initialeert een variabele a op **0x5F010000**
+* Vraagt het adres op van deze variabele a via de **&**-operator
 * Bewaart het adres in een andere variabele adres_van_a
-* Print de waarde en adres van a af
+* Het print de waarde en adres van a af
 * Gebruikt echter ook echter de pointer variabele om deze waarde te verkrijgen (en af te drukken)
-  hiervoor gebruiken we de dereferentie-operator *
+  hiervoor gebruiken we de dereferentie-operator ```*```
 
 Als resultaat krijgen we: 
 
