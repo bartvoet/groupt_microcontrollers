@@ -2,7 +2,7 @@
 
 ### Opdracht 1: hello world
 
-Gegeven volgende code en bijhorende header-file:
+Gegeven volgende code (en bijhorende header-file):
 
 **serieel.c**:  
 
@@ -54,7 +54,7 @@ void serieel_verstuur_getal(unsigned char i)
 }
 ```
 
-en bijhorende **serieel.h**:  
+en bijhorende header **serieel.h**:  
 
 ```{.c}
 #ifndef SERIAL_H_
@@ -68,35 +68,38 @@ void serieel_verstuur_getal(unsigned char i);
 #endif
 ```
 
+#### Deel A: communicatie met de computer
 
-#### Deel A
+Integreer deze code in het eerste voorbeeld van het ADC-hoofdstuk (zet deze 2 files onder aparte files) om de ADC-waardes over een
+seriele lijn weg te schrijven.
 
-Voer het voorbeeld-programma uit dat in de theorie-les staat
+Om deze seriele communicatie te lezen gebruik een terminal-programma.  
+Het programma dat 
+
+![](../../pictures/putty_configuration.png)
+
+Putty bestaat enkel voor Linux - en zelfs voor Windows :) - maar niet voor Mac.  
+Voor Mac en Linux kan je bijgevolg ook de volgende terminal-programma's gebruiken:
+
+* picocom -r -b 9600 /dev/ttyACM0
+* screen 9600 /dev/ttyACM0
+
+> **Nota:**  
+> Je kan hier ook testen zonder de leds als die niet voorradig zijn  
+> Met deze seriele communicatie je ook het programma testen.
+
+> **Nota**  
+> Als je tijd heb mag je dit ook toepassen op het laatste voorbeeld 
 
 #### Deel B
 
-Optimaliseer dit toggle-programma met de xor-operator
+Optimaliseer de prescaler zoals gevraagd in de cursus.  
+Schrijf in commentaar van de code een verwijzing naar de datasheet waar je de nodige info hebt gevonden.  
 
-#### Deel C (optioneel)
+#### Deel C
 
-Optimaliseer het programma door ook de snelheid in een globale variabele te plaatsen.
+Wijzig de input-pin naar ADC3
 
-### Opdracht 2: datasheets
+#### Deel D (optioneel)
 
-#### Deel A
-
-Dowload de datasheets/referenties voor:
-
-* Arduino UNO (pinmapping als pdf-document + een url van de specificaties op de Arduino-site)
-* ATMEGA328p (vermoedelijk vind je 1 die wordt gebruikt voor de ATMEGA-famillie)
-
-Hier is het voldoende me de URL's door te sturen als bewijs.  
-
-> Het is vanaf nu wel verwacht dat je deze datasheet tijdens de labo's altijd open heb staan.
-
-#### Deel B  
-
-Zoek in deze datasheets de memory-locaties verbonden aan pin 13 op Arduino 
-Je moet hiervoor zowel in de pinmapping als de datasheet gaan kijken.
-
-We hebben het adres van de IO-registers (configuratie, input en output) nodig binnen de memory-map gerelateerd aan pin 13
+Maak dit voorbeeld interrupt-gebaseerd
