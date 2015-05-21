@@ -257,11 +257,11 @@ De regel is simpel hier, gebruik do while enkel als je code er leesbaarder door 
 In bepaalde gevallen wil op onverwachte ogenblikken een loop verlaten of een aantal stappen overslaan.
 Hiervoor bestaan 2 keywords:
 
-* **break** 
+* **break**  
   Onderbreken van de code in de clausule vanaf de lijn van deze statement (en de loop). 
   De test-evaluatie wordt niet meer uitgevoerd
 
-* **continue** 
+* **continue**  
   Onderbreken van de code in de clausule. 
   De test-evaluatie wordt wel opnieuw uitgevoerd
 
@@ -334,7 +334,6 @@ int difference(int a, int b)
     } else {
        return b-a;
  }
-    return a > b:a-b:b-a;
 }
 ```
 
