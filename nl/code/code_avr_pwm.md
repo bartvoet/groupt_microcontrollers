@@ -236,10 +236,21 @@ OC1A/OC1B at BOTTOM (non-inverting mode)
 Set OC1A/OC1B on Compare Match, clear
 OC1A/OC1B at BOTTOM (inverting mode)
 
-### Duiding: 
+### Duiding: output van timers
 
+Vorige keer bekeken we de timer/counter-architectuur puur vanuit het gebruik als timer.  
+Je kan echter ook rechtstreeks signalen genereren vanuit deze hardware.
 
-### Voorbeeld: output
+![](../../pictures/compare_output_unit.png)
+
+Voor elke timer bestaan er 2 zulke pinnen, zoals we direct gaan zien kan je dan ook deze 2 pinnen apart aanspreken.
+Voor bijvoorbeeld timer 1 noemen deze **OC1A** en **OC1B** en komen deze respectievelijk overeen met PB1 en PB2 (bank 2)
+
+![](../../pictures/Atmega168PinMap2.png)
+
+### Voorbeeld: output van timers
+
+Alvorens in de echte PWM te storten demonstreren we het gebruik van deze 2 uitgangen in de vertrouwde CTC-mode.  
 
 ```{.c}
 #include <avr/io.h>
@@ -248,10 +259,7 @@ OC1A/OC1B at BOTTOM (inverting mode)
 
 int main(void)
 {
-//      DDRB = 0xFF;
-
       DDRB |= (1 << DDB1) | (1 << DDB2); // PB1 and PB2 als output
-
 
       TCCR1B |= (1 << CS10) | (1 << CS12);
       TCCR1B &= ~ (1 << CS11);
@@ -268,7 +276,21 @@ int main(void)
       return 0;
 }
 ```
+Het grootste deel van de code is identiek aan vorige voorbeelden:
 
+* Initialiseren van de pinnen
+* Configuratie van de prescaler (clock-select)
+* Selectie van CTC als waveform-output
+* Initialiseren van een compare-waarde met OCR1A
+
+We zien echter 2 verschillen:
+
+* Een 2de compare waarde (OCR1B)
+* Het instelen van een output compare unit
+
+* 
+ 
+Het belangrijkste verschil hier is de lijn:
 
 ### Voorbeeld: PWM-functionaliteit (fast PWM)
 
