@@ -384,8 +384,7 @@ char lees_karakter() {
     do {
         c = getchar();
     } while (isspace(c));
-    while (getchar() != '\n')
-        ;
+    while (getchar() != '\n');
     return c;
 }
 
