@@ -73,13 +73,20 @@ CHAPTER_07 += ../code/code_c_loop_and_conditions_extended.md
 CHAPTER_07 += ../../general/pandoc_page_break.txt
 CHAPTER_07 += ../labo/labo_loops_extended.md
 
-# Intermediate
+CHAPTER_08 += chapter08_analog.md
+CHAPTER_08 += ../../general/pandoc_page_break.txt
+CHAPTER_08 += ../code/avr_adc.md
+CHAPTER_08 += ../labo/avr_arduino_adc.md
+CHAPTER_08 += ../../general/pandoc_page_break.txt
+CHAPTER_08 += ../code/code_avr_pwm.md
+CHAPTER_08 += ../../general/pandoc_page_break.txt
 
-
-
-CHAPTER += ../code/headers_and_modularity.md
-
-CHAPTER_08 += ../code/pointers_in_c.md
+CHAPTER_09 += chapter09_serial.md
+CHAPTER_09 += ../../general/pandoc_page_break.txt
+CHAPTER_09 += ../protocols/protocol_USART.md
+CHAPTER_09 += ../../general/pandoc_page_break.txt
+CHAPTER_09 += ../protocols/protocol_I2C.md
+CHAPTER_09 += ../labo/labo_i2c.md
 
 graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
 grap_convert = gvpr -c '$(1)' ./graphviz/$(2).dot | dot -Tpng -o ./pictures/$(3).png
@@ -92,30 +99,30 @@ pagebreak = ../../general/pandoc_page_break.txt
 
 all:
 	cd nl/chapter && pandoc  \
-			../title.txt part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07)\
+			../title.txt part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) $(CHAPTER_08) $(CHAPTER_09)\
 		-o ../../dist/cursus.epub
 #		--epub-stylesheet ../../markdown.css \
 
 	cd nl/chapter && pandoc  \
-			../title.txt $(pagebreak) part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(pagebreak) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07)\
+			../title.txt $(pagebreak) part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(pagebreak) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07)  $(CHAPTER_08) $(CHAPTER_09)\
 		-o ../../dist/cursus.html
 #		--epub-stylesheet ../../markdown.css \
 
 	cd nl/chapter && pandoc -S \
-			../title.txt $(pagebreak) part01_minimal_knowledge.md ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(pagebreak) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07)\
+			../title.txt $(pagebreak) part01_minimal_knowledge.md ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(pagebreak) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07)  $(CHAPTER_08) $(CHAPTER_09)\
 		-o ../../dist/cursus.pdf
 	
 labos:
 	cd nl/labo && pandoc  \
-labo_header.md $(pagebreak) x86_statements.md $(pagebreak) x86_loops_and_conditionals.md $(pagebreak) avr_x86_shift_operators.md $(pagebreak) avr_arduino_firsttime.md $(pagebreak) avr_arduino_more_complex_in_group.md $(pagebreak) labo_functies_en_loop.md $(pagebreak) x86_arrays.md $(pagebreak) avr_arduino_adc.md $(pagebreak) labo_loops_extended.md\
+labo_header.md $(pagebreak) x86_statements.md $(pagebreak) x86_loops_and_conditionals.md $(pagebreak) avr_x86_shift_operators.md $(pagebreak) avr_arduino_firsttime.md $(pagebreak) avr_arduino_more_complex_in_group.md $(pagebreak) labo_functies_en_loop.md $(pagebreak) x86_arrays.md $(pagebreak) avr_arduino_adc.md $(pagebreak) labo_loops_extended.md labo_i2c.md\
 		-o ../../dist/labos.epub
 	
 		cd nl/labo && pandoc  \
-			labo_header.md $(pagebreak) x86_statements.md $(pagebreak) x86_loops_and_conditionals.md $(pagebreak) avr_x86_shift_operators.md $(pagebreak) avr_arduino_firsttime.md $(pagebreak) avr_arduino_more_complex_in_group.md $(pagebreak) labo_functies_en_loop.md $(pagebreak) x86_arrays.md $(pagebreak) avr_arduino_adc.md $(pagebreak) labo_loops_extended.md\
+			labo_header.md $(pagebreak) x86_statements.md $(pagebreak) x86_loops_and_conditionals.md $(pagebreak) avr_x86_shift_operators.md $(pagebreak) avr_arduino_firsttime.md $(pagebreak) avr_arduino_more_complex_in_group.md $(pagebreak) labo_functies_en_loop.md $(pagebreak) x86_arrays.md $(pagebreak) avr_arduino_adc.md $(pagebreak) labo_loops_extended.md labo_i2c.md\
 		-o ../../dist/labos.html
 	
 	cd nl/labo && pandoc  \
-		labo_header.md $(pagebreak) x86_statements.md $(pagebreak) x86_loops_and_conditionals.md $(pagebreak) avr_x86_shift_operators.md $(pagebreak) avr_arduino_firsttime.md $(pagebreak) avr_arduino_more_complex_in_group.md $(pagebreak) labo_functies_en_loop.md $(pagebreak) x86_arrays.md $(pagebreak) avr_arduino_adc.md $(pagebreak) labo_loops_extended.md\
+		labo_header.md $(pagebreak) x86_statements.md $(pagebreak) x86_loops_and_conditionals.md $(pagebreak) avr_x86_shift_operators.md $(pagebreak) avr_arduino_firsttime.md $(pagebreak) avr_arduino_more_complex_in_group.md $(pagebreak) labo_functies_en_loop.md $(pagebreak) x86_arrays.md $(pagebreak) avr_arduino_adc.md $(pagebreak) labo_loops_extended.md labo_i2c.md\
 		-o ../../dist/labos.pdf
 
 clean:

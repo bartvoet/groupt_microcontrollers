@@ -288,9 +288,6 @@ We zien echter 2 verschillen:
 * Een 2de compare waarde (OCR1B)
 * Het instelen van een output compare unit
 
-* 
- 
-Het belangrijkste verschil hier is de lijn:
 
 ### Voorbeeld: PWM-functionaliteit (fast PWM)
 
@@ -464,10 +461,20 @@ int main(void) {
 
 ```
 
-
 ![phase and frequency](../../pictures/pwm_PHASE_AND_FREQUENCY_CORRECT_PWM_TOGGLE.JPG)
 
 ![phase](../../pictures/pwm_PHASE_CORRECT_PWM_TOGGLE.JPG)
+ 
 
+### Samengevat: verschil tussen fast PWM en phase correct
+
+Onderstaande tekening vat het verschil tussen fast en frequency-correct samen:
+
+* Phase Correct past dual slope toe
+* (als gevolg dubbel zo traag)
+* Maar zal (zelfst bij wijziging van OCR1A of B) dezelfde fase blijven behouden
+
+
+![](../../pictures/adc_timing_fast_vs_freq.png)
 
 
