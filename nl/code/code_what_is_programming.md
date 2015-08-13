@@ -37,14 +37,14 @@ Binnen zo een programma zijn er verschillende soorten **instructies** die door e
 
 Hoe deze instructies er uitzien voor cpu/processor wordt uitgedrukt aan de hand van een **instructieset**.   
 
-De beschikbare **instructies** (en hun representatie) verschillen van processor tot processor, de instructies die worden gebruikt voor x86 (wat in een 32-bit-computer) zijn bijvoorbeeld niet te vergelijken met die voor een microcontroller gebruiken 
+De beschikbare **instructies** (en hun representatie) verschillen van processor tot processor, de instructies die worden gebruikt voor x86 (klassieke computer) zijn bijvoorbeeld niet te vergelijken met die voor een microcontroller (bijvoorbeeld AVR) worden gebruikt. 
 
 We gaan hier (nog niet) over uitweiden, het enige dat we nu onthouden is dat zulk een instructie van een programma bestaat dit uit 2 componenten:
 
 * **Opcode**  
 De code die de instructie voorstelt (bestaat uit 1 of meer bytes), informeert de processor wat hij moet uitvoeren en welke operanden er nog volgen ...
 
-* **Operand:**
+* **Operand:**  
 De operand is de data die bij deze de instructie hoort (register-adress, geheugen-adres, ...),  
 Het kunnen meerdere zijn en bestaan uit 1 of meerdere bytes. 
 
@@ -148,7 +148,7 @@ int main(int argc, char** argv)
 ```
 
 Deze code is al min of meer leesbaar en mapt ook niet meer 1-2-1 met cpu-instructies.    
-De transformatie naar een uitvoerbaar bestand van deze code noemen we **compileren**, dit procesis natuurlijk een stuk complexer als bij assembler.
+De transformatie naar een uitvoerbaar bestand van deze code noemen we **compileren**, dit proces is natuurlijk een stuk complexer als bij assembler.
 
 Dit programma voert het zelfde uit als het bovenstaande assembler-programma.
 Dit programma kan je op een command-line compilen (transformeren naar byte-instructies) en uitvoeren.

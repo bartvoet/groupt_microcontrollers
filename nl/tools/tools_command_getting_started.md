@@ -55,42 +55,71 @@ Vandaar dat er alternatieven bestaan als **MingW/MSYS** die je een Bash-compatib
 
 PATH-variabele
 
-**ls**: directory inhoud Mac/Linux  
-**ls -al**:  alle bestanden inclusief de verborgen bestanden met extra informatie  
-**dir**: directory inhoud Windows  
+**ls**:  
+directory inhoud Mac/Linux  
+**ls -al**:  
+alle bestanden inclusief de verborgen bestanden met extra informatie  
+**dir**:  
+directory inhoud als je met de Windows-cmd werkt  
 
-**cd** directorypath: wijzigen huidige directory  
-**cd ..** 1 directory naarboven  
-**cd** naar je home directory  
+**cd** directorypath:  
+Wijzigen huidige directory  
+**cd ..**  
+1 directory naarboven  
+**cd**  
+naar je home directory  
 
-**pwd** wat is je huidige directory
+**pwd**  
+wat is je huidige directory in Mac/Linux
+**echo %cd%**  
+wat is je huidige directory in Windows
 
-**>>** de output van een commando naar een file afleiden (kan gemakkelijk zijn als je wil loggen naar een file)
-**>** zelfde als vorige commando maar 
 
+**>>**  
+de output van een commando naar een file afleiden (kan gemakkelijk zijn als je wil loggen naar een file)
+**>**  
+zelfde als vorige commando maar zal toevoegen aan een bestaande file
+
+**Voorbeeld:**  
 Het commando ```ls -al > hello.txt``` zal bijvoorbeeld een file hello.txt maken met de inhoud van een directory
 
 
-### Een C-programma op command-line (GCC)
+### Een C-programma op command-line bouwen (GCC)
 
 GCC is een command-line-tool die c-code kan omzetten naar een uitvoerbaar bestand
 
-Compilen gebeurt altijd in 2 stappen (later gaan we verder uitdiepen)
+Compilen (van een C-programma) wordt uitgevoerd in 2 stappen:
+
+* **Compileren:**  
+  De C-files worden elk omgezet naar een object-file (extensie .o).  
+  Hier wordt de C-code reeds vertaald naar machine-taal
+* **Linken:**  
+  Hier worden 1 of meerdere object files met elkaar verbonden (en eventueel gelinkt aan externe libraries)
+
+> **Belangrijke bemerking:**  
+> Later gaan we hier veel verder op ingaan, momenteel moeten we enkel weten wat je moet doen om een éénvoudig C-programma om te zetten naar een uitvoerbaar bestand.
 
 
-Stap 1:  
-je schrijft je code naar een bestand en geeft dit een naam met de extensie C
+**Stap 1: code schrijven**  
+Je schrijft je code naar een bestand en geeft dit een naam met de extensie C.  
 
 ```{.c}
 #include <stdio.h>
 
-void main() {
+void main() 
+{
 	printf("!!!Hello World!!!");
 }
 ```
 
-Stap 2:  
-Je compileert het bestaand naar een object-file, dit is ...
+**Stap 2: compileren**  
+Je **compileert** deze C-code naar een object-file (extensie .o).  
+
+Deze **object-file** is niet het uiteindelijk uitvoerbaar bestand, maar eerder een tussenbestand dat je toelaat van meerdere C-files in bouwen (build) van een programma.  
+
+Een object-file bevat reeds de machine instructies van je programma, maar moet in de volgende stap nog gelinkt worden aan libraries (en eventueel andere objects).  
+Binnen een paar lessen komen we hier nog uitgebreider op terug als we grotere programma's maken.
+
 
 ```{.sh}
 $ ls
@@ -98,14 +127,107 @@ hello.c
 $ gcc -c hello.c
 $ ls
 hello.c  hello.o
+```
+
+**Stap 3: linken**  
+Van 1 of meerdere object-files en libraries kan je een uitvoerbaar bestaand (programma) maken door te **linken**.  
+Voorlopig werken we met maar 1 source file dus onderstaande command-line volstaat.
+
+```{.sh}
 $ gcc hello.o -o hello
+```
+
+**Uitvoeren:**  
+Daarna kan je het programma uitvoeren door de naam te typen  
+(voorafgegaan door ./  om aan te duiden dat het bestand in deze diretory staat, in Windows dit is .\\)
+
+```{.sh}
 $ ./hello 
 !!!Hello World!!!
 $ 
 ```
 
-> In Windows gebruik je voor je executable de extensie exe, dus het laaste commando ```gcc hello.o -o hello.exe``` 
+> **Bemerking:**  
+> In Windows gebruik je voor een uitvoerbaar bestand de extensie .exe, dus het laaste commando is dan ```gcc hello.o -o hello.exe``` 
 
-### Teksteditor
+### Linken en compilen tegelijk met GCC  
 
-Bijgeleverd notepad++, zeker geen tekstverwerker zoals word, ...
+Je kan gcc ook tegelijkertijd laten compileren en linken zodat je direct een uitvoerbaar bestand kijkt:
+
+```{.sh}
+$ ls
+hello.c
+$ gcc hello.c -o hello
+$ ls
+hello.c  hello
+$ ./hello
+!!!Hello World!!!
+$
+```
+
+Dit is een veréénvoudigde manier die we de eerstvolgende lessen gaan gebruiken.  
+Het vorige voorbeeld is echter belangrijk om te beseffen dat achter het bouwen van een C-programmen hierachter verschillende processen zitten zoals:
+
+* Compilen
+* Linken
+* Preprocessing
+* ...
+
+We gaan in de volgende hoofdstukken deze verschillende bouwstenen/processen verder uitleggen en verdiepen.
+
+### Keuze van een teksteditor
+
+Om C te programmeren heb je een tekst-editor nodig.  
+Let wel, dit niet te verwarren met tekstverwerkings-programma's zoals Word, LibreOffice, Pages!!!
+
+Voor Windows kan je notepad hiervoor gebruiken, maar er zijn betere keuzes zoals:
+
+* Notepad++
+* PSpad Editor
+* Atom
+* ...
+
+Deze editors hebben (in tegenstelling tot notepad) eigenschappen zoals:
+
+* *Text coloring:*  
+  Bepaalde elementen (variabelen, loops, functies, ...) worden in een andere kleur geplaatst om de leesbaarheid te verhogen.  
+* *Code completion:*  
+  De editor kan intelligent zijn door bijvoorbeeld code die gedeeltelijk is ingevuld automatisch aan te vullen
+* ...
+
+Voor Linux heb je een scala aan keuze:
+
+* GEdit (zeer eenvoudig)
+* Scitext
+* Atom
+* Kate
+* Leaf-pad
+* ...
+
+Voor Mac:
+
+* TextMate
+* TextWrangler
+* XCode
+* ...
+
+Dit zijn allemaal grafische text-editors en zijn over het algemeen zeer éénvoudig om mee te werken.  
+Deze hebben wel het nadeel dat je altijd tussen een command line en je editor moet wisselen, hievoor zijn er 2 alternatieven:
+
+* Command-line editors
+* IDE's, integrated development environments die zowel tekst-editors
+
+#### Command-line editors
+
+Voor de meer gevorderden zijn er Linux- en Mac zijn er zeer goede tekst-editors die je via de command-line bestuurt:
+
+* Vim
+* emacs
+* nano
+* ed
+* ...
+
+Deze zijn zeer krachtige editors die wel een zekere leercurve hebben (dus als je die voor de eerste maal probeert moet je wel wat tijd vrijmaken)
+
+> **Windows:**  
+> Deze command-line-editors zijn ook beschikbaar in Windows via Cygwin of Mingw (later meer hierover)

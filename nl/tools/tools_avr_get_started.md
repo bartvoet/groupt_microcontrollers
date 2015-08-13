@@ -85,16 +85,22 @@ int main(void)
 ![](../../pictures/toolchain_for_avr_s.png)
 
 * Bewaar het onderstaande programma op je harde schijf (lokaal niet op het netwerk)
-* Navigeer via command line naar de directory waar
+* Navigeer via command line naar de directory waar je code staat
 
 Voer daarna de volgende 4 commando's uit (vervang /dev/ttyACM0 door de specifieke poort waar de Arduino is op aan gesloten):
 
-* avr-gcc -Os -DF_CPU=16000000UL -mmcu=atmega328p -c -o led.o led.c
-* avr-gcc -mmcu=atmega328p led.o -o led
-* avr-objcopy -O ihex -R .eeprom led led.hex
-* avrdude -F -V -c arduino -p ATMEGA328P -P /dev/ttyACM0 -b 115200 -U flash:w:led.hex
+* Compilatie:  
+  avr-gcc -Os -DF_CPU=16000000UL -mmcu=atmega328p -c -o led.o led.c
+* Linken:  
+  avr-gcc -mmcu=atmega328p led.o -o led
+* Omzetten naar een hex-file:  
+  avr-objcopy -O ihex -R .eeprom led led.hex
+* Downloaden naar de AVR-mcu via een programmer (in dit geval de bootloader van AVR) : 
+  avrdude -F -V -c arduino -p ATMEGA328P -P /dev/ttyACM0 -b 115200 -U flash:w:led.hex
 
-Bij het uitvoeren van deze commando's krijg je de volgende output:
+### Command-line voorbeeld
+
+* Eerst voer je de 3 eerste commando's uit om tot een (door AVR) uitvoerbaar bestand te komen:
 
 ```
 $ avr-gcc -Os -DF_CPU=16000000UL -mmcu=atmega328p -c -o led.o led.c
@@ -106,6 +112,11 @@ led  led.c  led.o
 $ avr-objcopy -O ihex -R .eeprom led led.hex
 $ ls
 led  led.c  led.hex  led.o
+```
+
+* Daarna download je de hex-file naar de microcontroller:
+
+```
 $ avrdude -F -V -c arduino -p ATMEGA328P -P /dev/ttyACM0 -b 115200 -U flash:w:led.hex
 
 avrdude: AVR device initialized and ready to accept instructions
@@ -129,3 +140,5 @@ avrdude: safemode: Fuses OK (E:00, H:00, L:00)
 avrdude done.  Thank you.
 
 ```
+
+* Als alles goed verlopen is krijg je bovenstaande output

@@ -32,7 +32,7 @@ De ontwikkel-omgeving is gebaseerd:
 * op de taal processing (sterk verwant met C++)
 * komt met zijn eigen libraries die het mgoelijk maken te programmeren op Arduino zonder de onderliggende architectuur
 
-Het voorbeeld hieronder toont de typische "Hello World" schrijft voor een Arduno 
+Het voorbeeld hieronder toont de typische "Hello World" schrijft voor een Arduino 
 
 ```{.c}
 int led = 13;
@@ -54,7 +54,7 @@ Eigenlijk heel gemakkelijk/ideaal om snel te starten en leren programmeren **maa
 ### Maar geen Arduino-programeer-omgeving  
 
 Concreet gezien gaan we enkel de hardware en bootloader gebruiken (en zelfs deze laatste gaan we in het laatste deel overboord gooien).  
-Deze brengen on het voordeel dat we met een (relatief goedkoop) bord al heel wat functionaliteit hebben)
+Deze brengen ons het voordeel dat we met een (relatief goedkoop) bord al heel wat functionaliteit hebben)
 
 De ontwikkelingsomgeving echter gaan we vermijden (lees als **niet te gebruiken in de labo's**)  
 om de volgende redenen:  
@@ -80,20 +80,20 @@ Dit kan je enkel als je de vaardigheden:
 	
 #### Het gaat hier om een opleiding naar het beroep van embedded ontwikkelaar (of elektronicus)   
   
-De kans is groot als je in een beroepssituatie dat je niet zo maar kan kiezen welke omgeving en hardware je mag gebruiken.  
-Je moet daar ook meestal zeer specifieke requirements of consideraties rekening houden zoals onder andere
+De kans is groot dat als je in een beroepssituatie je niet zo maar kan kiezen welke ontwikkelings-omgeving en hardware je mag gebruiken.  
+Je moet daar ook met meestal zeer specifieke requirements of consideraties rekening houden, zoals onder andere:
 
-* Kost  
-  Als je miljoenen stuks moet produceren van iets telt elke eurocent en moet je proberen te werken met omgevingen met weinig overhead  
+* **Kost**  
+  Als je miljoenen stuks moet produceren van iets, telt elke eurocent en moet je proberen te werken met omgevingen met weinig overhead  
   Zowel op niveau van memory en snelheid, en dat is iets waar Arduino-software niet optimaal voor is.  
   Dit telt trouwens ook voor de hardware, een bord kost +- 20 € je kan meestal voor 3 € hetzelfde gebruiken (ATTiny + aantal componenten)
-* Verbruik
-  Dikwijls gaat het om hardware die op batterijen waardoor je zo zuinig mogelijk moet zijn in je software.  
-  Ter illustratie: een uitgang op 1 zetten in Arduino neemt +- 40-60 cycles in beslag tov 2-4 als je het in C doet   
-  Ter illust
-* Grootte  
+* **Verbruik**  
+  Dikwijls gaat het om hardware die op batterijen werkt, waardoor je zo zuinig mogelijk moet zijn in je software.   
+  Ter illustratie: een uitgang op 1 zetten in Arduino(-programmeeromgeving) neemt +- 40-60 cycles in beslag tov 2-4 als je het in C doet   
+* **Grootte**  
   Meestal moet je deze integreren in klein apparaat
-* Sommige zaken kan je niet met de abstracties van arduino zoals:  
+* **Controle** en **haalbaarheid**  
+  Sommige zaken kan je niet met de abstracties van arduino zoals:  
      * Werken met interrupts (dit kan enkel met AVR-specifieke kennis)
      * Specifieke configuratie-opties voor i2c, spi, ...
      * ...
@@ -170,7 +170,7 @@ Hier komen we later nog op terug.
 
 #### PINx port x input pins address
 
-Deze registers hebben als functie de spanning te meten voor elke pin die is geconfigureerd als als input.  
+Deze registers hebben als functie de spanning te meten voor elke pin die is geconfigureerd als input.  
 Elke PINx-geheugen-locatie is verbonden aan een comparator-circuit dat detecteert of de pin hoog of laag staat.  
 Deze geheugen-locatie is wel read-only, je kan er niet naar schrijven.
 
@@ -196,7 +196,7 @@ int main(void){
 
 ### Voorbeeld: blinken van een LED
 
-We bespreken deze structuur aan de hand van een meest eenvoudige (zichtbare) voorbeeld mogelijk (op een Arduino UNO).  
+We bespreken deze structuur aan de hand van een meest eenvoudig (zichtbare) voorbeeld mogelijk (op een Arduino UNO).  
 Namelijk het programma dat het ledje op de Arduino UNO doet blinken:
 
 ```{.c}
@@ -281,12 +281,11 @@ Je zou inderdaad hetzelfde kunnen bereiken met volgend statement:
 PORTB = 0x20
 ```
 
-Het probleem hiermee is dat je hiermee ook andere registers manipuleert hetgeen al niet proper is.  
+Het probleem is dat je hiermee ook andere registers manipuleert hetgeen niet in alle situaties correct is (en soms zelf schadelijk).  
 In bepaalde gevallen kan je bijvoorbeeld een register-bit kunnen aanraken die je niet wil aanraken.  
 
 **De afspraak is dus van enkel via bitmasks te werken**:  
 
 * Dit maakt de code meestal veel leesbaarder (aangezien je met bits werkt)
 * Dit vermijdt risico's (de verkeerde pin aanraken)
-* Later gaan we zien dat we dit nog kunnen optimaliseren met het gebruik van macro's
- zouden het durven van deze 
+* Later gaan we zien dat we dit nog kunnen optimaliseren met het gebruik van macro's 

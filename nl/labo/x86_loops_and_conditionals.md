@@ -38,7 +38,7 @@ Deze opdracht heeft als bedoeling een aantal wijzigingen aan dit programma aan t
 
 #### Deel A
 
-Momenteel kijkt dit programma na of het getal **even of oneven** is, met andere woorden dat 2 een deler is van hett input-getal.    
+Momenteel kijkt dit programma na of het getal **even of oneven** is, met andere woorden dat 2 een deler is van het input-getal.    
 Wijzig het programma opdat het **ipv** na te kijken of het input-getal **gedeeld** kan worden door **2** nakijkt of het gedeeld kan worden door **een ingegeven getal**.   
  
 Dus ipv te testen dat het deelbaar is door 2, vraagt het programma bij het begin een getal om te testen zoals geïllustreerd hieronder:  
@@ -156,7 +156,8 @@ Je mag eventueel spaties printen ipv een 0 om een leuker effect te verkrijgen.
 
 
 #### Deel C (optioneel)
-Inverteer dit dit resultaat
+
+Inverteer dit resultaat
 
 ### Opdracht 3 (optioneel)
 
@@ -176,5 +177,5 @@ Gebruik hiervoor loops.
 
 ### Opdracht 4 (optioneel)
 
-Maak een programma dat nakijkt of een getal een priemgetal is
+Maak een programma dat nakijkt of een getal een priemgetal is (aan de hand van een loop)
 

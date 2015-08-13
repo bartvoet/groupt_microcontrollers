@@ -1,18 +1,22 @@
 ## Programma's bouwen met meerdere files
 
 De basis (en grootste kwaliteit) van een goed programma is leesbaarheid en onderhoudbaarheid.  
-Zonder deze basis is het niet mogelijk een goed werkend en flexibel programma te maken, echt niet.  
+Zonder deze basis is het niet mogelijk een goed werkend en flexibel programma te maken, echt niet!!  
 
-Een belangrijk element hiervan hebben we reeds gezien namelijk het werken met functies.  
+Een belangrijk element hiervan hebben we reeds gezien namelijk het werken met functies.
+Deze stellen je in staat de software in verschillende (functionele) stukken op te delen.  
 In dit hoofdstuk bouwen we hierop verder door te kijken hoe je je code kan verdelen over meerdere files.
 
-> **Nota:**
-> Nogmaals ter herhaling, dit is het belangrijkste voor een een ontwikkelaar, zeker als je met andere ontwikkelaars samenwerkt.  
-> **Simpele, goed opgedeelde code** die bovendien goed **getest en voorbereid** is maakt **90,00 %** uit van het **succes van een project**, de andere **10 %** in het vinden van een goed idee of concept.  
->
-> Dit is wat men met andere woorden noemt vakmanschap.  
-> Elke professional zal dit bevestigen, een taal goed kennen komt er op neer de mechanismes van de taal te beheersen om dit resultaat te bereiken.  
-> Dit thema zal bijgevolg vanaf dit deel veel terugkomen in deze cursus.
+## Vakmanschpa
+
+Nogmaals ter herhaling, dit is het belangrijkste voor een ontwikkelaar, zeker als je met andere ontwikkelaars samenwerkt.  
+
+**Simpele, goed opgedeelde code** die bovendien goed **getest en voorbereid** is maakt **90,00 %** uit van het **succes van een project**, de andere **10 %** in het vinden van een goed idee of concept.  
+
+Dit is wat men met andere woorden noemt **vakmanschap**.   
+
+Elke professional zal dit bevestigen, een taal goed kennen komt er op neer de mechanismes van de taal te beheersen om eenvoudige, krachtige en onderhoudbare programma's te schrijven.    
+Dit thema zal bijgevolg vanaf dit deel veel terugkomen in deze cursus.
 
 ### Herhaling: Functie-prototypes
 
@@ -39,14 +43,17 @@ Ter **herhaling**, deze functie-prototypes stelden ons in staat de functie ```pr
 
 Prototypes binnen dezelfde file kan handig zijn als je je programma leesbaar wil maken, in dit geval bijvoorbeeld kan je de belangrijkst functie (main) vanboven zetten.  
 
-In dit klein programma maakt het minder uit maar als programma +100 lijnen groot is begint dit belangrijker te worden.  
+In dit klein programma maakt het minder uit, maar als je programma + 100 lijnen groot is begint dit belangrijker te worden.  
 
 
 ### Voorbeeld: je programma verdelen over verschillende files
 
-Een volgende stap is de de logica in je programma over verschillende files gaan verdelen.
+Tot nog toe hebben we al onze code in 1 file geplaatst, je kan echter je code ook verspreiden over verschillende files (met de extensie .c).
+Op deze manieren kan bepaalde functies en variabelen die bij elkaar horen groeperen in 1 file, hetgeen zeer nuttig is als je met grote programma's werkt.
 
-* Je kan bijvoorbeeld de logica voor het printen van een boodschap in een aparte file bijhouden (helloworld.c):
+Toepassende op het eerdere voorbeel is eerstvolgende stap dat je de logica in je programma over verschillende files gaan verdelen:
+
+* Je kan bijvoorbeeld starten de logica voor het printen van een boodschap in een aparte file bijhouden (helloworld.c):
 
 ```{.c}
 #include <stdio.h>
@@ -68,8 +75,7 @@ void main()
 }
 
 ```
-
-* Deze 2 files kan je daarna toevoegen als argument aan het gcc-commando
+* Bij compilatie kan je deze 2 files daarna toevoegen als argument aan het gcc-commando
 
 ```
 $ gcc main.c helloworld.c -o main
@@ -78,12 +84,20 @@ Hello World
 $
 ```
 
-Dit geeft als gevolg hetzelfde resultaat als de code uit het voorgaand voorbeeld maar we winnen een beetje aan flexibiliteit.  
+**Gebruiken van functies uit verschillende files:**  
+Zonder het functie-prototype (in main.c) zal het programma niet compilen (of afhankelijk van de compiler een hele hoop warnings geven).
+Dit komt doordat een c-programma in verschillende fasen wordt omgezet opgebouwd (build).
+Beide files worden eerst apart **gecompileerd** naar een object-file en in een 2de fase worden deze objecten pas met elkaar gelinkt.                  
+
+Als je het prototype zou weglaten zou men in de eerste fase bij het compileren van main.c niet kunnen weten dat er in de andere file een functie met de naam print_hello bestaat.
+We komen hier spoedig nog terug.
 
 ### Voorbeeld: je programma flexibeler maken
 
-Deze flexibiliteit ligt in het feit dat je de declaratie en definitie fysisch van elkaar hebt
-Stel nu dat we hetzelfde programma willen maken in een andere taal zonder main te wijzigen dan kunnen we dit doen:
+We hebben hetzelfde resultaat als de code uit het voorgaand voorbeeld, maar we winnen een beetje aan flexibiliteit.  
+
+Deze flexibiliteit ligt in het feit dat je de declaratie en definitie fysisch van elkaar hebt gescheiden.   
+Stel nu dat we hetzelfde programma willen maken in een andere taal zonder main.c te wijzigen dan kunnen we dit doen:
 
 * We bouwen een nieuwe file "helloworld_nl.c"
 
@@ -112,15 +126,15 @@ Hallo Wereld in het Nederlands
 $
 ```
 
-Dit is een eerste naïef maar eenvoudig voorbeeld van abstractie.  
-Momenteel is de functie-declaratie of -prototype nog ingebakken in de de file die de main-functie bevat.  
+Dit is een eerste naïef maar eenvoudig voorbeeld van **abstractie**.  
+Momenteel is de functie-declaratie of -prototype nog ingebakken in de file die de main-functie bevat.  
 
 Een volgende stap die we nu zetten is het scheiden van deze declaratie(s) in een aparte file.
 
 ### Voorbeeld: gebruik van een header-file
 
-Zo'n apart-file voor functie-declaraties noemt men een **header-file** (eindig meestal op .h).  
-Zo'n header-file kan maar 2 zaken bevatten, namelijk functie-prototytypes en macro's (dit komt later).  
+Zo'n aparte file voor functie-declaraties noemt men een **header-file** (eindigt meestal op de extensie .h).  
+Zo'n header-file kan maar 2 zaken bevatten, namelijk functie-prototytypes en macro's (macro's worden later verklaard).  
 
 * We starten met een file aan te maken met de naam "helloworld.h"  
   Zoals we zien bevat deze enkel een functie-declaratie.  
@@ -132,8 +146,11 @@ void print_hello();
 
 * De andere files die deze functie gebruiken of implementeren moeten naar deze file te verwijzen.  
   We passen deze aan door een include-directive toe te voegen.  
-  **Let op**: dit is niet met ```<...>``` maar met  ```"..."```  
+  **Let op**: dit is niet met ```<...>``` (zoals we eerder hadden gezien)  maar met  ```"..."```  
   We starten met de main-file:  
+
+> **Bemerking:**  
+> We komen zo dadelijk terug op het verschil tussen ```<...>``` en ```"..."``` als we duiden hoe dat de compiler deze header-files terugvindt.
 
 ```
 #include "print_hello.h"
@@ -181,15 +198,22 @@ Hallo Wereld in het Nederlands
 $
 ```
 
+> **Belangrijk:**  
+> In het voorbeeld hierboven produceren/compilen we 2 verschillende programma's aan (main_en en main_nl)  
+> Je kan helloworld.c en helloworld_nl.c vanzelfsprekend niet te samen compileren in hetzelfde programma gezien dezelfde functie bevatten.  
+> (de compiler zou een conflict rapporteren bij compilatie)
+
 Net als vorige keer hebben we hetzelfde resultaat.  
 We zijn er nu wel in geslaagd het functie-prototype in een apart fysiche file te declareren.  
 
+De **directive** ```#include "print_hello.h"``` vervangt als het ware het functie-prototype, een groot voordeel van header-files is dat men meerdere functies kan groeperen.  
+Men moet deze functie-prototypes dus niet herhalen in alle de .c-files die deze functies gebruiken (deze directive copieert als het ware deze prototypes, we komen hier nog op terug)
 
 ### Duiding: Waarom verschillende files gebruiken?
 
 We gaan dit proberen te duiden door terug te komen op de redenen voor het gebruik van functies (uit het vorige hoofdstuk),
 
-* **Herhaling** van de zelfde functionaliteit binnen hetzelfde programma
+* **Herhaling** van dezelfde functionaliteit binnen hetzelfde programma
 * **Generaliseren** en hergebruik van functionaliteit over verschillende programma's
 * **Opdelen** van je programma in logische delen
 * **Abstraheren** door het scheiden van declaratie en definitie (hier komen we later op terug)
@@ -208,9 +232,9 @@ In voorgaande voorbeeld zijn vooral de 2 laatste principes belangrijk (opdelen e
 
 Bovenstaande tekening illustreert de structuur van onze programma's:
 
-* Aan de linkerkant heb je 2 mogelijk implementaties (nederlands- en engelstalig)
-* In het midden heb je de header-file die de beschikbare functionaliteit
-* Aan de rechterkant je hoofd-functie of entrypoint van je programma (main.c)
+* Aan de linkerkant heb je 2 mogelijk implementaties die een functie **produceren** (nederlands- en engelstalig)
+* In het midden heb je de header-file die de beschikbare functionaliteit **declareert**
+* Aan de rechterkant je hoofd-functie of entrypoint van je programma die de functies **consumeert** (main.c)
 
 Eigenlijk kan je de header-file bekijken als een soort van **contract** of **interface**.  
 
@@ -221,17 +245,17 @@ Als je echter grotere systemen gaat bouwen zal dit nog zeer nuttig blijken (in d
 
 ### Duiding: het "builden" van C programma's (werking)
 
-We hebben tot nu een eerste voorbeeld van hoe we met verschillende files kunnen werken.  
+We hebben tot nu een eerste voorbeeld van hoe we met verschillende files kunnen werken (en al vermelding gemaakt dat het bouwen uit meerdere stappen bestaat).
 
-Voordat we echter nieuwe coding-technieken gaan introduceren (en verder gaan bouwen met grotere voorbeelden) gaan we even terugkomen hoe het bouwproces van code werkt.
+Voordat we echter nieuwe coding-technieken gaan introduceren (en verder gaan bouwen met grotere voorbeelden) gaan we even terugkomen op hoe het bouwproces (build) een C-programma in elkaar zit.
 
 **Structuur: Files gebruikt voor het bouwen van een programma**
 
-Het builden van C programma's voor een desktop-omgeving (x86) bestaat uit 4 types van files:
+Bij het bouwen (build) van C-programma's zijn er verschillende types van files die worden gelezen of geproduceerd:
 
 * **Source-files**:  
   Deze files bevatten functie-definities, globale variabelen, ... en eindigen op ".c" per conventie.  
-  Dit zijn de files waar we onze programma's hebben in gemaakt tot nog toe.  
+  (kortom de eigenlijke code)
 * **Header-files**:  
   Deze files bevatten functie-declaraties (<> definities) of beter gezegd functie-prototypes.  
   Deze zorgen ervoor dat je vanuit de voorgaande source-files bepaalde functies kan accessen die in andere compileer-eenheden zitten.  
@@ -243,17 +267,17 @@ Het builden van C programma's voor een desktop-omgeving (x86) bestaat uit 4 type
   Hoewel dat deze files al machinecode bevatten zijn deze nog niet uitvoerbaar op het specifiek platform.  
   Daarvoor moeten ze nog eerst gelinkt worden.  
 * **Binary executables**:  
-  Het uiteindelijke doel is een uitvoerbaar programma (of in besommmige gevallen een library).  
+  Het uiteindelijke doel is een uitvoerbaar programma (of in sommmige gevallen een library).  
   Deze file (meestal 1) is de output van een programma genaamd de linker.  
-  De linker linkt of bindt de object-files samen to een uitvoerbaar programma.  
-  Typisch op unix-varianten hebben deze files geen extensie, op Windows niet verassend zal deze eindigen op ".exe"
+  De linker linkt of bindt de object-files samen tot een uitvoerbaar programma.  
+  Typisch op unix-varianten (linux, bsd, ...) hebben deze files geen extensie, bij het Windows-os eindigen op ".exe"
 * **Andere files**:  
   Er zijn andere zoals libraries (.a) en shared libraries (.so).  
-  Deze zijn meestal reeds in je operating system of je compiler inbegrepen en je komt hier niet direct mee in contact.  
+  Deze zijn dikwijls reeds in je operating system aanwezig of je compiler inbegrepen en je komt hier niet direct mee in contact.  
   In het volgende deel van de cursus komen we hier nog op terug.  
 
 > **Nota:**  
-> Voor andere platformen is dit zeer gelijkaardig, we komen hier nog op terug voor wat het ontwikkelen van AVR-programma's.
+> Voor andere platformen is dit zeer gelijkaardig, we komen hier nog op terug voor wat betreft het ontwikkelen van AVR-programma's.
 
 **Proces: Bouwen van een programma**
 
@@ -265,20 +289,22 @@ We illustreren dit aan de hand van een overzichtje van het proces dat de compile
 Dit proces bestaat uit 3 stappen die we elk kort gaan beschrijven.
 
 * **Preprocessing:**  
-  voor dit specifiek geval betekent dit het samenvoegen van de c-files (main.c en helloworld.c) en de h-files (helloworld.h en stdio.h)  
-  We komen hier dadelijk op terug.
+  Voor dit specifiek geval betekent dit het samenvoegen van de c-files (main.c en helloworld.c) en de h-files (helloworld.h en stdio.h)  
+  We komen hier dadelijk op terug (preprocessing en directives).
 * **Compiling:**  
-  De preprocessed versies van deze main.c en helloworld.c worden daarna vertaald naar assembly-instructions.
+  Deze preprocessed versies van deze main.c en helloworld.c worden daarna vertaald naar assembly-instructions.
 * **Linking:**  
   Deze object files worden met elkaar gelinked tot een uitvoerbaar programma.  
   Alle verwijzingen naar methodes
 
 ### Duiding: Preprocessing
 
-Deze eerste stap kunnen we pas nu in deze les beschrijven, aangezien header-files (meestal) een belangrijke rol spelen.  
-
-Voordat de compiler zijn werk/vertaling doet wordt de files gescanned en (intern) geconverteerd (preprocessing).  
+Voordat de compiler zijn werk/vertaling doet worden de tekst van de C-files gescanned en (intern) geconverteerd (preprocessing).  
 In unix/linux is het programma **cpp** hier voor verantwoordelijk (**C** **p**re**p**rocessor).  
+
+> **Bemerking:**  
+> Bij het gebruik van een compiler (gcc bij de vorige voorbeelden) werd dit programma (of een equivalent) gebruikt achter de schermen.  
+> Hoewel dit achter de schermen gebeurt is het echter belangrijk om dit essentieel concept van de C-programmeertaal te begrijpen. 
 
 Ter illustratie passen we dit command toe op het vorige voorbeeld:
 
@@ -291,7 +317,7 @@ void main()
 }
 ```
 
-Als we preprocessing-tool loslaten op deze file krijgen we als resultaat dezelfde code, maar we zien dat ```#include "print_hello.h"``` verdwenen is.  
+Als we de preprocessing-tool zouden loslaten op deze file krijgen we als resultaat dezelfde code, maar we zien dat ```#include "print_hello.h"``` verdwenen is.  
 Op de plaats van deze include-directive is nu de inhoud (in dit geval het functie-prototype) verschenen van de file print_hello.h.
 
 ```
@@ -307,9 +333,11 @@ $
 Dit is wat preprocessing doet, het zoekt naar zogenoemde directives in de code (zoals include) en voert deze uit.  
 In dit voorbeeld is dit het includeren van de inhoud van print_hello.h
 
-Dagdagelijks zal je niet rechtstreeks met cpp worden geconfronteerd, gcc zal deze tool intern gebruiken op alle files die worden gecompileerd.  
-Het is transparant.
-Dit is wat intern eveneens gebeurt wanneer je 1 of meerdere C-files compileert (met gcc maar ook met andere compilers).  
+> **Bemerking:**  
+> We komen zodalijk terug op deze directives (include is niet het enige directive)
+
+Zoals reeds vermeld, dagdagelijks zal je niet rechtstreeks met cpp worden geconfronteerd.
+gcc zal deze tool intern gebruiken op alle files die worden gecompileerd.  
 
 Wanneer je compileert met bv.  
 ```$ gcc main.c helloworld.c -o main_en```  
@@ -318,7 +346,7 @@ zal gcc intern cpp toepassen op main.c en helloworld.c om deze preprocessing of 
 
 ### Duiding: Onderscheid maken tussen compilatie en linken
 
-Je kan deze 2 files compilen via het volgende commando.
+Tot nog toe bouwden we een programma (met 1 of meerdere files) via het volgende commando.
 
 ```
 $ gcc main.c helloworld.c -o main
@@ -356,7 +384,7 @@ $
 ```
 > **Nota**  
 > We komen later nog terug op compilen, linken en shared libraries en objects.  
-> Momenteel is het belangrijk is te weten hoe werken met verschillende source-files en header-files in dit plaatje passen.  
+> Momenteel is het belangrijk te weten hoe source-files en header-files in dit plaatje passen.  
 > We gaan nu eerst dieper in op **preprocessing** en **directives**
 
 ### Duiding: Directives
@@ -367,7 +395,7 @@ Terugkomende op preprocessing:
 * Op zoek naar directives (starten met ```#```)
 * Deze directives toepassen op de code
 
-Deze **directives** zijn eigenlijk **commando's** voor preprocessor.
+Deze **directives** zijn eigenlijk **commando's** voor de preprocessor.
 Deze starten altijd met een ```#``` zoals bijvoorbeeld ```#include <stdio.h>```
 
 In dit geval was er de directive ```#include "print_info.h" die de macros en functie-prototypes gaan "includen" in de code.
@@ -383,13 +411,13 @@ De eerste directive die we zijn tegenkomen is **include**
 Deze is gebruikt om functie-prototypes en macro's (macro's leggen we direct uit) te importeren in de source-code van een file.
 Als de preprocessor deze directive tegenkomt zal hij de header-file opzoeken relatief van de source-file op de moment van compilatie.  
 
-De verwijzing naar de header-file - die moet worden included - kan op 2 manieren:  
+Het verwijzen naar een header-file (met een include-directive) kan op 2 manieren gebeuren:  
 
 * **"Dubbele quotes"**: voorbeeld ```{.h}#include "print_hello.h"```  
 De quotes wil zeggen dat men de header file moet zoeken in dezelfde directory (of relatief bij gebruik van folders).
 Deze file wordt meestal gebruikt voor zelf-gedefinieerde header-files.  
 * **<tussen brackets>**: voorbeeld ```{.h}#include <stdio.h>"```
-Deze notatie zal zoeken paden geconfigureerd op compiler-niveau.  
+Deze notatie zal zoeken in paden geconfigureerd op compiler-niveau.  
 Dit wordt hoofdzakelijk gebruikt voor standaard library header files zoals we bijvoorbeeld reeds hebben gezien:
     * stdio.h die algemene input- en output-functies bevat (zoals scanf en printf)
     * avr/io.h die verwijzingen bevat naar pin-mappingen gebruikt voor avr-mcu's
@@ -405,8 +433,8 @@ Andere noemenwaardige feiten:
 
 ### Duiding: define-directive (macro's)
 
-Hier komen bij het begrip **macro's**  
-Macro's in hun simpelste vorm zij placeholders:  
+Hier komen we bij het begrip **macro's**  
+Macro's in hun simpelste vorm zijn placeholders:  
 
 * Je bindt een waarde aan een bepaalde naam
 * Deze waarde kan ook optioneel zijn (zien we later bij ifdef)
@@ -418,13 +446,13 @@ Dit heeft de volgende vorm:
 
 * Deze start met de token ```{.c}#define```
 * Gevolgd door een symbool (HELLO)
-     * Gelijkaardig regels zoals variabele-namen
-     * Niet verplicht maar bij conventie lieft in hoofletters
+     * Op de naam van dit symbool staan gelijkaardig regels zoals op variabele-namen
+     * Het is niet verplicht maar bij conventie worden deze namen liefst met hoofletters geschreven
 * Een waarde, dit kan eender wat zijn zoals we gaan zien in de voorbeelden
-		 * Een getal
-		 * Een stuk code
-		 * Een stuk tekst
-		 * ...
+     * Een getal
+     * Een stuk code
+     * Een stuk tekst
+     * ...
 
 We verduidelijken het gebruik met een aantal voorbeelden:
 
@@ -435,7 +463,7 @@ Een veelvuldig gebruik van macro's is het bepalen van constante waardes (waardes
 Bijvoorbeeld:
 
 * We maken een functie (procedure) die een boodschap print wanneer een getal te groot is
-* In de file definiëren we de MAXIMUM_NUMMER met een specifieke waarde
+* In de file definiëren we dit maximum als MAXIMUM_NUMMER gevolgd door een specifieke waarde
 
 
 ```{.c}
@@ -449,8 +477,8 @@ void print_boodschap_bij_te_groot_getal(int getal)
 }
 ```
 
-* Als deze file wordt ge-preprocessed zal overal in de code (wel beperkt tot deze file)  
-  waar het symbool MAXIMUM_NUMMER vervangen worden door de tekst 1000000
+* Als deze file wordt ge-preprocessed (zie voorgaande stuk over cpp) zal overal in de code (wel beperkt tot deze specfieke c-file)  
+  het symbool MAXIMUM_NUMMER vervangen worden door de tekst 1000000
 * Als we deze file zouden pre-processen met cpp krijgen we het volgende resultaat
 
 ```{.c}
@@ -486,8 +514,8 @@ int main()
 
 ### Voorbeeld: macro's met argumenten
 
-Je kan ook argumenten meegeven, net zoals functies.
-Zo kan je bijvoorbeeld een stuk tekst meegaat in de "macro-expansie".
+Je kan ook argumenten meegeven aan macro's, net zoals functies.
+Het voorbeeld hieronder geeft een stuk tekst mee in de **macro-expansie**.
 
 ```{.c}
 #define LOGGEN(tekst) printf(tekst)
@@ -506,15 +534,19 @@ int main()
 
 ### Definitie: Standaard macro's
 
-Er zijn ook een aantal macros
+Er zijn ook een aantal macros voorafbepaald (predefined) door de compiler.  
+Een aantal voorbeelden die standaard beschikbaar zijn:
 
-| MACRO            | Betekenis                                         |
-|------------------|---------------------------------------------------|
-|```__DATE__```    | Formaat "Mmm dd yyyy"                               |
-|```__FILE__```    | Source-file waar deze macro is expanded           |
-|```__LINE__```    | Line inde source-file waar deze macro is expanded |
-|```__TIME__```    | De tijd in hh:mm:ss                               |
+| MACRO            | Betekenis                                          |
+|------------------|----------------------------------------------------|
+|```__DATE__```    | Formaat "Mmm dd yyyy"                              |
+|```__FILE__```    | Source-file waar deze macro is expanded            |
+|```__LINE__```    | Line in de source-file waar deze macro is expanded |
+|```__TIME__```    | De tijd in hh:mm:ss                                |
 
+> **Bemerking:**  
+> Macro's genereren code, 1 maal je C-file is ge-preprocessed en gecompileerd wijzigt deze code niet meer.
+> Als je __DATE__ zou gebruiken in je programma is dit de datum dat je programma is gecompileerd (en niet de datum van uitvoering van je programma)
 
 ### Voorbeeld: Hergebruik van standaard macro's + meerdere statements
 
@@ -555,7 +587,7 @@ Wordt de lijn in file verwezen + datum van uitvoering
 
 ### Duiding: Conditionele directives
 
-Je kan ook condities plaatsen of een bepaalde macro-waarde aanwezig zijn.  
+Je kan ook condities plaatsen of een bepaalde macro-waarde aanwezig is.  
 De volgende directives worden hiervoor gebruikt:  
 
 * Conditie bepalen
@@ -566,6 +598,11 @@ De volgende directives worden hiervoor gebruikt:
      * elif
 * Beëindigen van condities
      * endif
+
+> **Bemerking:**  
+> Zoals eerder vermeld deze macro-directives worden tijdens compilatie uitgevoerd.  
+> Je kan binnen deze condities geen variabelen gebruiken van binnen je programma   
+> (enkel andere macro's of constante waardes)
 
 We bekijken het volgende voorbeeld:
 

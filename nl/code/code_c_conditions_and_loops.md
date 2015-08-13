@@ -220,7 +220,7 @@ Het if-stament zal er voor zorgen dat alle code die tussen accolades staat wordt
 > **Belangrijke nota:  **
 > Ondanks het feit dat een logische expressie garandeert dat "true" naar 1 wordt vertaald en "false" naar 0 wordt vertaald, zal een if-statement (en aanverwanten) alles wat niet 0 is als "true" interpreteren.
 
-Als je het programma runt een een positief getal in geeft dan zal het programma antwoorden.
+Als je het programma runt en een positief getal in geeft dan zal het programma antwoorden.
 
 ```
 $ gcc is_even.c -o is_even
@@ -244,7 +244,7 @@ Het is wel een beetje ongelukkig dat het programma niets afdrukt wanneer het get
 Dit zouden we kunnen oplossen door in het programma een **2de if-statement** toe te voegen (waar we naar de omgekeerde conditie testen) maar daarvoor hebben we een betere oplossing.  
  	
 > **Belangrijke nota:  **  
-> Een goede programmeur is naast verstandig echter ook een lui en dus zoeken naar de meest optimale oplossing.
+> Een goede programmeur is naast verstandig echter ook lui en dus zoeken we naar de meest optimale oplossing.
 
 ### Voorbeeld: "else"-clause
 
@@ -278,7 +278,7 @@ $ gcc is_pair_or_not.c -o is_pair_or_not
 $ ./is_pair_or_not
 $ Gelieve een getal in te geven:
 $ 4
-$ Het getal 4 is even
+$ Het getal 3 is even
 $
 ```
 
@@ -377,9 +377,9 @@ Er is echter een alternatieve manier om dit te bekomen
 Er is nog een 3de soort clausule die je kan toevoegen namelijk "else if"
 
 * Deze bevat net als de if-clausule een logische expressie
-* Deze moet altijd tussen de de "else"- en de "if"-clausule geplaatst worden
+* Deze moet altijd tussen de "else"- en de "if"-clausule geplaatst worden
 * Men kan meerdere "if else"-clausules tussen de "if-" en "else-"clausules plaatsen
-* Maar wel maar 1 "if"- en 1 "else"-clausele (waarbij if verplict is en else optioneel)
+* Maar wel maar 1 "if"- en 1 "else"-clausele (waarbij if verplicht is en else optioneel)
 
 ```{.c}
 #include <stdio.h>
@@ -411,7 +411,7 @@ void main()
 > **Leesbaarheid van een programma**  
 > Je ziet dat de programma's groter en groter worden naarmate de cursus vordert.  
 > In de programma's worden de statements altijd geindenteerd om leesbaarheid te behouden.  
-> Gelieve deze regel ook aan te houden, in het beroepsleven moet je meestal je code delen met collega's dus je hebt er alle belang bij om deze leesbaar te houden (en er wordt rekening met gehouden in de punten).  
+> Gelieve deze regel ook aan te houden, in het beroepsleven moet je meestal je code delen met collega's dus je hebt er alle belang bij om deze leesbaar te houden (en er wordt rekening mee gehouden in de punten).  
 
 Als we dit testen zien we dat dit programma correct omgaat met het getal 0.
 
@@ -585,7 +585,7 @@ $
 
 ### Voorbeeld: &&
 
-We bouwen voor op hetzelfd programma en vervangen de geneste statements door &&
+We bouwen voort op hetzelfde programma en vervangen de geneste statements door &&
 Om het programma overzichtelijk te maken houden we de testen bij in een variabele.
 
 ```{.c}
@@ -637,7 +637,7 @@ void main()
     if(first < 0 || second < 0) {
     	printf("1 van de 2 getallen is negatief");
     } else {
-    	printf("beide getatllen zijn positief");
+    	printf("beide getallen zijn positief");
     }
 }
 ```
@@ -795,7 +795,7 @@ void main(void) {
 
 Een laaste voorbeeld herneemt het voorbeeld dat we eerder hebben gezien en combineert een complexe logische expressie met een while loop.
 
-````{.c}
+```{.c}
 #include <stdio.h>
 
 void main()
@@ -829,3 +829,4 @@ void main()
    	printf("Getal %i ligt niet tussen %i en %i, programma eindigt nu\n",test,first,second);
 
 }
+```

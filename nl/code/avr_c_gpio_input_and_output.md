@@ -8,7 +8,7 @@ We hebben reeds gezien (gerelateerd aan MCU's) hoe:
 * Principe van memory mapped IO (high level)
 * Gebruiken van datasheets
 
-Het dit hoofdstuk van dit deel van de cursus (getting started) bouwt verder op dit voorbeeld door de gpio's te connecteren aan externe componenten.  
+Dit hoofdstuk van dit deel van de cursus (getting started) bouwt verder op dit voorbeeld door de gpio's te connecteren aan externe componenten.  
 (in dit geval een button en leds)
 
 > **Nota:**  
@@ -53,8 +53,8 @@ Bij de van oudsher verkrijgbare standaard-leds is dit vaak iets van 20 mA, bij z
 Bij een MCU is het equivalent van een "Hello World"-programma in vele gevallen een programmaatje dat naar een LED schrijft  
 (tekst schrijven zonder dat je seriële verbinding gebruikt is wat moeilijk)
 
-De eerste stap om een elektronische verbinding tussen een MCU en een is dus een weerstand te plaatsen.  
-Wat je zeker wil **vermijden** (verwijzende naar bovenstaande inleiding) is dus dit:  
+De eerste stap van dit "Hello World"-programma is het opzetten van een elektronische verbinding tussen een MCU en een led.  
+Wat je daar zeker wil **vermijden** (verwijzende naar bovenstaande inleiding) is dus dit (geen weerstand):  
 
 ![](../../pictures/dumb_connection_to_led_bb.png)
 
@@ -148,7 +148,7 @@ Laten we het programma een beetje interactiever maken
 ![](../../pictures/correction_connection_to_led_and_button_bb.png)
 
 De volgende stap bij MCU-programmeren is het experimenteren met input, we gaan dit illustreren met een "pushbutton".
-In dit geval het geval dat deze button wordt ingedrukt zal er een verbinding ontstaan tussen:
+In het geval dat deze button wordt ingedrukt zal er een verbinding ontstaan tussen:
 
 * aan de ene kant de grond
 * aan de andere kant de pin
@@ -157,7 +157,7 @@ In dit geval het geval dat deze button wordt ingedrukt zal er een verbinding ont
 ![](../../pictures/button_naive.png)
 
 Deze setup zal echter niet goed werken om dat de input ("by default") wel een spanning kan aanvoelen maar niet aan een circuit is verbonden.  
-En we weten als een component dat niet aan een circuit is verbonden geen voorspelbare spanning heeft.
+En we weten dat als een component niet aan een circuit is verbonden er geen voorspelbare spanning staat op de pin.
 
 ### Duiding pull-up-weerstand
 
@@ -225,7 +225,7 @@ int main(void)
   return 0;
 }
 ```
-Het doel van voorgaande code is een een led van waarde te laten veranderen:
+Het doel van voorgaande code is een led van waarde te laten veranderen:
 
 * We configureren PB2 als output
 * We configureren PB3 als input
@@ -271,7 +271,7 @@ int main(void)
 Zal deze code **correct** werken?  
 **Neen**, deze code zal een een onvoorspelbaar resultaat opleveren.  
 
-De tijd dat je de button indrukt (aantal ms tot seconen) zal het stuk code blijven uitgevoerd worden en de let zal blijven togglen:  
+De tijd dat je de button indrukt (aantal ms tot seconen) zal het stuk code blijven uitgevoerd worden en de led zal blijven togglen:  
 
 * De led zal flikkeren
 * Je hebt 50 % kans dat er een effectieve toggle is uitgevoerd
@@ -334,7 +334,7 @@ Onderstaande foto van een osciloscoop illustreert illustreert wat er gebeurt als
 ![](../../pictures/button_bounce.png)
 
 Er bestaan hiervoor software-matige als hardware-matige oplossingen (condensator, flip-flops, ...)
-De keuze tussen deze verschillende oplossingen hangt af van verschillende factoren (kost, hardware, performantie cpu), in vele gevallen echter gaat men software-matige oplossingen gebruiken zodat met op componenten kan besparen.  
+De keuze tussen deze verschillende oplossingen hangt af van verschillende factoren (kost, hardware, performantie cpu), in vele gevallen echter gaat men software-matige oplossingen gebruiken zodat men op componenten kan besparen.  
 
 ### Voorbeeld: Gebruik maken van timeouts
 
@@ -343,7 +343,7 @@ Onderstaande code is een voorbeeld van zo'n een oplossing (zijn meerdere mogelij
 We maken namelijk gebruik van delays (timeouts) die we trouwens ook al hebben gebruikt in eerdere programma's.  
 Dit zijn functies die er voor zorgen dat de uitvoering van je programma wordt gepauzeerd gedurende specfieke periode.  
 
-AVR-GCC voorziet in zulk een bibliotheek (util/delay.h)
+AVR-GCC (compiler) voorziet voor zulke requirements een bibliotheek die je kan gebruiken via de header-file "util/delay.h".
 
 ```{.c}
 #include <avr/io.h>
@@ -391,7 +391,7 @@ In dit geval gaan we:
 
 ### Korte herhaling
 
-Dit is niet de enige manier (en later gaan we nog varianten zien) maar de voorbeelden illustren wel een aantal belangrijke concepten waar je moet met rekening houden als je met gpio-pinnen werkt:
+Dit is niet de enige manier (en later gaan we nog varianten zien) maar de voorbeelden illustreren wel een aantal belangrijke concepten waar je moet mee rekening houden als je met gpio-pinnen werkt:
 
 * Configuratie van deze uit- en ingangen  
 * Beschermen van je pinnen met weerstanden

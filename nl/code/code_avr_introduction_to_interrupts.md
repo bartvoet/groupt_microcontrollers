@@ -1,6 +1,6 @@
 ## Interupts
 
-Eén van de belangrijkste vaardigheden in het embedded hardware in het werken met MCU's is proberen zo veel mogelijk de aanwezige hardware te gebruiken.  
+Eén van de belangrijkste vaardigheden in het werken met MCU's (en embedded development) is proberen zo veel mogelijk de aanwezige hardware te gebruiken.  
 Dit houdt onder andere in:
 
 * **Memory-mapping** kennen en gebruiken
@@ -23,13 +23,17 @@ In een notendop een interrupt is:
 * Dat niet specifiek wordt aangeroepen (of toch niet rechtstreeks) door andere code 
 * Maar wordt aangeroepen/geactiveerd door een **event**.  
   
-In geval van MCU's zijn deze meestal afkomstig van hardware (bijvoorbeeld spanning op een pin die wijzigt, timer, ...) maar voor complexere systemen kunnen deze ook door software worden gegenereerd.
+In geval van MCU's zijn deze events meestal afkomstig van hardware (bijvoorbeeld spanning op een pin die wijzigt, timer, ...), maar voor complexere systemen kunnen deze ook door software worden gegenereerd.  
 
-Tot nog toe hebben we enkel een event-loop geprogrammeerd, het hoofdprogramma.  
-Het interrupt-mechanisme in een MCU (of andere computer-systeem) zal echter deze loop kunnen onderbreken, een interrupt is een manier om:
+### Duiding: event-loop vs interrupts
+
+Tot nog toe hebben we enkel een **event-loop** geprogrammeerd, het hoofdprogramma (main-methode) dat in eindeloze loop draait en bepaalde acties uitvoert (onder bepaalde condties).  
+Het interrupt-mechanisme in een MCU (of eender welk computer-systeem) zal echter deze loop kunnen onderbreken en andere code runnen.  
+
+Samengevat, een interrupt is een manier om:
 
 * Ten gevolge van zo'n event 
-* De activiteit van de huidige processor pauzeren (event-loop) 
+* De activiteit van de huidige processor te pauzeren (event-loop) 
 * Zodat het een korte taak (stuk code) kan voltooien 
 * En er voor zorgen dat de taak (die gepauzeerd was)  
   kan hervatten waar het gebleven was.  
@@ -41,7 +45,7 @@ Als illustratie is het principe van interrupts gemakkelijk te beschrijven in een
 Laten we zeggen we zijn een goed boek aan het lezen (liefst een boek of cursus ivm microcontrollers)  
 Dit vereist al onze aandacht, dus we zijn geen andere activiteiten aan het uitvoeren
 
-* Echter, halverwege het boek, rinkelt de telefoon rinkelt.  
+* Echter, halverwege het boek, rinkelt de telefoon.  
 * We zorgen dat we de pagina onthouden  
   (door er bijvoorbeeld een papiertje tussen te plaatsen)
 * We voeren onze (korte) taak uit, we beantwoorden de telefoon op
@@ -49,13 +53,15 @@ Dit vereist al onze aandacht, dus we zijn geen andere activiteiten aan het uitvo
 
 ![](../../pictures/avr_interrupt_analogy.png)
 
+### Duiding: asynchrone verwerking
+
 Wat wij doen wordt ook wel genoemd **asynchrone verwerking**:
 
 * We denken in de context van **taken**
-* We verwerken deze interrupt buiten de reguliere taak van het hoofdprogramma (het boek lezen)
+* De interrupt wordt verwerkt buiten de reguliere taak van het hoofdprogramma (het boek lezen)
 * De interrupt (telefoon-bel) is een **event** die het hoofdprogramma stopt
-* We slagen de staat op van ons programma (pagina van het boek en eventueel wat nota's) 
-* Nadien kunnen we (na het telefoongesprek) het boek terug kunnen hervatten met wat we onthouden hebben
+* We slagen de **staat** op van ons programma (paginanummer van het boek en eventueel wat nota's) 
+* Na het telefoongesprek kunnen we het boek terug hervatten (aan de hand van het paginanummer)
 
 ### Duiding: hardware- vs software-interrupts
 
@@ -69,9 +75,9 @@ In een computer-systeem (MCU is ook een computer-systeem) kunnen deze interrupts
   Interrupts geactiveerd door een andere programma, dit komt meer voor bij computersystemen met een OS
 
 > **Nota:**  
-> Software-interrupts worden niet ondersteund door AVR 8-bit processoren waar we met werken.  
+> Software-interrupts worden niet ondersteund door de AVR 8-bit processoren die we in de cursus gebruiken.  
 > We gaan deze ook niet verder bekijken in de context van MCU's.  
-> Dit is eigenschap die je gemakkelijker gaat terugvinden bij 32-bit platformen waar veelal met een operating sytem wordt gewerkt.
+> Dit is een eigenschap die je gemakkelijker gaat terugvinden bij 32-bit platformen (waar veelal met een operating sytem wordt gewerkt).
 
 ### Duiding: Interrupts in AVR
 
@@ -134,14 +140,14 @@ In het schema hieronder zie je een overzicht van deze stappen en de elementen di
   Deze interrupt wordt meestal niet rechtsreeks gemanipuleerd (set/clear) vanaf de code maar via specifieke instructies (zie later)
 * *Stap: detecteren van de interrupt*   
   Dit is een taak van de hardware, deze zal een flag activeren die we **Interrupt Flag Bit** (per interrupt)   
-  Deze soort van interrupts maken ook deel uit van register zoals bijvoorbeeld de PCIFR (Pin Change interrupt flag)
+  Deze **flags** maken onderdeel uit van registers zoals bijvoorbeeld de PCIFR (Pin Change interrupt flag), we komen hier later nog op terug.  
   Hoewel niet gebruikelijk kan je deze flag ook via software (manueel) zetten. 
 * *Stap: uitvoeren van de code*   
   Als deze flag aangezet wordt zal de hardware de volgende stappen uitvoeren:
      * Uitschakelen van de **Globale Interrupt Enable-flag** (om te vermijden dat andere interrupts kunnen worden uitgevoerd)
      * De status van de huidige code bewaren in een stack-register (komen we later nog op terug)
      * Opzoeken van de code via de **Interrupt Vector-Table** en deze code uitvoeren
-* *Stap: beindigen van de interrupt*   
+* *Stap: beëindigen van de interrupt*   
   Hoewel de hardware de **Globale Interrupt Enable-flag** heeft afgezet moet de interrupt-code deze terug aanzetten.  
   In assembly-code (en machine-instructies) gebeurt door op het einde van de interrupt-code de RETI-instructie (return from interrupt) aan te roepen.  
   In onze voorbeelden gaan we dit niet moeten doen omdat we daar een macro kunnen gebruiken.
@@ -154,7 +160,7 @@ Hieronder heb je een overzicht naar alle beschikbare interrupts (copy van de dat
 * De vector-naam is de naam die je in de code gaat moeten gebruiken om interrupt-code te schrijven  
   (met behulp van macros)
   
-Deze tabel zal je ook terugvinden als je naar de datasheet van de atmega328p gaat zoeken in de datasheet
+> Deze tabel zal je ook terugvinden in de datasheet van de atmega328p  
 
 | Programma-adres  | Source       | Vector-naam       | Beschrijving                   |
 |------------------|--------------|-------------------|--------------------------------|
@@ -239,6 +245,7 @@ De taal C heeft zelf echter geen rechtstreekse support voor interrupts, hetgeen 
 
 Dit is dus verschillend voor elk platform/compiler combinatie, meestal via macros, taalextensies (of beide).   
 De omgeving die wij gebruiken, AVR-GCC, ondersteunt die ISR-macros (die de low level detals en extensies afschermen).    
+Een voorbeeld hiervan volgt direct.  
 
 Om deze te gebruiken moet je:  
 
@@ -283,13 +290,13 @@ Als je dit zou willen toepassen zonder interrupts zou je heel wat code moeten sc
 * Continue moet nakijken of de button is ingedrukt
 * De tijd moet bijhouden (de delays moeten verdwijnen of zeer klein worden gehouden) om te weten wanneer je led moet branden
 
-Je moet 2 **taken** in 1 taak hetgeen je code:  
+Je moet zou dan 2 **taken** moeten uitvoeren binnen 1 taak (event-loop) hetgeen je code:  
 
 * Onoverzichtelijk maakt
 * Minder optimaal omdat je constant je processor moet bezighouden
   
 Nu kunnen we echter onze bestaande code behouden en hoeven we enkel een extra stuk code.  
-De 2 taken zitten mooi van elkaar afscheiden in volgene code (beter nog we hebben zelfs geen code moeten wijzigen).  
+De 2 taken zijn mooi van elkaar afscheiden in de volgende code (beter nog we hebben zelfs geen code moeten wijzigen).  
 
 ```{.c}
 #include <avr/io.h>

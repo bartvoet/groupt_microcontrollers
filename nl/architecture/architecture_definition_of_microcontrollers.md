@@ -16,7 +16,7 @@ Een microcontroller is:
 Je kan een microcontroller programmeren met software net zoals een computer, is dit dan het zelfde als een computer?
 
 #### Een microcontroller is een ... computer ...
-Ja dus, een **MCU** (afkorting die we vanaf nu regelmatig gebruiken) bevat de typische elementen van een computer-systeem:  
+Ja dus, een **MCU** (een afkorting die we vanaf nu regelmatig gebruiken) bevat de typische elementen van een computer-systeem:  
 
 * CPU (processor) +- 1-20 MHz
 * Een hoeveelheid geheugen
@@ -34,7 +34,7 @@ Een klassieke microcontroller kan je voorstellen als een typische geïntegreerde
 
 Je kan deze inschakelen in typische elektronica projecten, als een zeer flexibel (programmeerbaar) component (gevoed op 3.3-5V)  
 
-Dat is iets wat je normaal gezien niet (gemakkelijk) terugvindt bij een gewone computer, namelijk de mogelijkheden om een elektrische signalen door te sturen op een zeer laag niveau.  
+Dat is iets wat je normaal gezien niet (gemakkelijk) terugvindt bij een gewone computer, namelijk de mogelijkheden om elektrische signalen door te sturen op een zeer laag niveau.  
 
 ![](../../pictures/intro_mcu_peripherals.png)
 
@@ -58,7 +58,7 @@ Een MCU is dus in dat opzicht (relatief gezien) niet te vergelijken met een gewo
 * meestal 8- of 16-bit tov de 64-bit bij hedendaagse computers
 * Zeer weinig geheugen
     * 1-32 KB tov 1-32 GB (bij een hedendaagse computer)
-    * dus delen door +- 1000.000
+    * dus delen door +- 1.000.000
 * Zeer traag (relatief natuurlijk)
     * 20 Mhz is ook niet veel tov
 * Geen operating system die hardware voor je beheert
@@ -177,11 +177,14 @@ AVR's is een microcontroller-architectuur die beschikbaar is verschillende maten
     * Zeer uitgebreide peripheral set
     * > 10 €
 
-> In de meeste opdrachten maken we gebruik van de AVR ATmega-serie.
-> Naast AVR bestaan er ook andere architecturen zijn bijvoorbeeld ARM Cortex M-serie (verschillende producenten), PIC (Microchip), Intel 8051, MSP (TI), ...  
-> Deze zullen sporadisch aan bod komen ter vergelijking met AVR (of voor bepaalde optionele projecten en/of opdrachten)
+> **Bemerking:**  
+> In de meeste opdrachten zullen gebruik maken van de AVR ATmega-serie.
+> AVR is vanzelfsprekend niet de enige microcontroller-architectuur.    
+> Andere voorbeelden hiervan zijn de ARM Cortex M-serie (gemaakt door verschillende producenten), PIC (Microchip), Intel 8051, MSP (TI), ...  
+> Deze architecturen zullen sporadisch aan bod komen ter vergelijking met AVR (of voor bepaalde optionele projecten en/of opdrachten)
 
 #### Development-boards
+
 De controller in zijn zuivere vorm is een dip- of dim-package die je integreert op een print (of een breadboard voor prototyping).  
 Als je aan de slag wilt met een  moet je zelf:
 

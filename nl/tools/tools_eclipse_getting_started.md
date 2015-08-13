@@ -10,13 +10,23 @@ In deze handleiding wordt kort beschreven:
 > Hier en daar worden wat hints gegeven, beschouw dit echter niet als een referentie.  
 > Een handleiding van Eclipse zou meerdere boeken vullen, dus je bent uitgenodigd Eclipse ook zelf ter verkennen aan de hand van de vele tutorials op het web.
 
-Eclipse is een opensourceframework van de Eclipse Foundation voor software-ontwikkelomgevingen (IDE of Integrated Development Environment).
+Eclipse is een opensourceframework van de Eclipse Foundation voor software-ontwikkellingsomgevingen (IDE of Integrated Development Environment).
   
-De bekendste toepassing is het gebruik als IDE voor de programmeertaal Java maareigenlijk wordt gebruikt voor zowat alle programmeertalen (Java, C, Python, Javascript, Scala, Groovy, ...).  
-Het is 1 van de meet populaire ontwikkelingsomgevingen die er bestaan (en bijna standaard als het om niet microsoft onwikkeling).
+Oorspronkelijk was Eclipse vooral populaire voor Java-ontwikkelin, maar vandaag de dag is Eclipse populair voor zowat alle programmeertalen (Java, C, Python, Ruby, C++, Javascript, Scala, Groovy, Cobol,...).  
+Het is 1 van de meest populaire ontwikkelingsomgevingen die er bestaan (en bijna standaard als het om niet microsoft onwikkeling).
 
 Eclipse heeft ook een heel modulaire architectuur die het toelaat van zeer gemakkelijk uitbreidingen (of plugins) te schrijven.  
 Dit gaan we later in de cursus gebruik door bijvoorbeeld plugins te gebruiken die de integratie met AVR's vergemakkelijken.  
+
+### Instalatie van Eclipse
+
+Om eclipse te gebruiken heb moet je de volgende zaken (in volgorde) installeren:
+
+* GCC-compiler  
+  (Windows via Mingw, bij de meeste distributies standaard, Mac via XCode)
+* Een java (jdk or jre) bij voorkeur een recente versie  
+  (download en installeren voor Mac en Windows, voor Linux gebruik je meestal een package-manager)
+* Eclipse (de CDT-versie)
 
 ### Workspace  
 
@@ -28,12 +38,6 @@ Deze workspace is een sandbox die een aantal projecten bevat (en eventueel wat e
 
 Een project (zeker in de context van een c-applicatie) stelt een c-applicatie voor.  
 Dit project mag verschillende c-files (en header files) bevatten.
-
-Open eclipse (zie os-specifieke guidelines hiervoor).
-We gaan er vanuit dat j
-
-Eclipse is modulair opgebouwd en kan dus uitgebreid worden met verschillende plugins (zoals bijvoorbeeld later gaan zien voor de AVR).  
-
 
 ### Concept: Workspace en projecten 
 
@@ -51,7 +55,7 @@ Een workspace is eigenlijk een map met een aantal referenties naar projecten die
 
 ### Stap: Van start gaan
 
-Als je Eclipse opent (zie richtlijnen per os) krijg je een venster "Workspace Launcher"; hierin kies je een 
+Als je Eclipse opent krijg je een venster "Workspace Launcher"; hierin kies je een 
 bestaande workspace of wijs (via de knop Browse) een nieuwe workspace aan.  
 
 Je kan een workspace in Eclipse customizeren, deze kan je instellen door uit het menu Window | Preferences te selecteren.  
@@ -113,9 +117,9 @@ Een aantal interessante shortcuts die je moet uitproberen als labo-oefening:
 Als je nog geen project hebt aangemaakt (of een nieuwe oefening wil starten) dan dien je een nieuw project aan te maken.  
 
 * Kies File | New C Project 
-* Voer een projectnaam in en klik op Finish.
+* Voer een projectnaam in en klik op Finish
 * Selecteer onder Executable/Empty Project aan
-* Selecteer dan MingW GCC, Linux GCC of GCC (afhankelijk van het OS), kies geen Cross GCC dit dient als je wil compilen naar een ander target dan je eigen PC (dit bekijken we later bij AVR)
+* Selecteer dan MingW GCC, Linux GCC of GCC (afhankelijk van het OS), kies geen Cross GCC dit dient als je wil compilen naar een ander target dan je eigen PC (bijvoorbeeld als we de komende lessen voor AVR gaan compilen)
 
 ![](../../pictures/tools_eclipse_new_project_s.png)
  

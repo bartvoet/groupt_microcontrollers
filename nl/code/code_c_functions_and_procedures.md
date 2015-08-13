@@ -33,7 +33,7 @@ Een (zuivere) functie die enkel een waarde berekent (zonder side-effects zoals n
 
 Kort gezegd een functie (en/of procedure) is een **"building block"** van een applicatie en wordt gebruikt voor:
 
-* **Herhaling** van de zelfde functionaliteit binnen hetzelfde programma
+* **Herhaling** van dezelfde functionaliteit binnen hetzelfde programma
 * **Generaliseren** en hergebruik van functionaliteit over verschillende programma's
 * **Opdelen** van je programma in logische delen
 * **Abstraheren** door het scheiden van declaratie en definitie (hier komen we later op terug)
@@ -45,7 +45,7 @@ Tot nog toe hebben we dus enkel functies aangeroepen, vandaag gaan we functies l
 De definitie van een zo een functie bestaat uit 2 delen:
 
 * De **functie-header**:  
-Een **header** bevat de beschrijving of **signatuur** van een functie:
+Een **header** bevat de beschrijving of **signatuur** van de functie:
     * **Naam** van een functie
     * **Return-type** (optioneel)
     * 1 of meerdere **argumenten**
@@ -66,7 +66,7 @@ Een **header** bevat de beschrijving of **signatuur** van een functie:
 ### Voorbeeld: een eerste functie
 
 Ons eerste voorbeeld bevat 2 functies.    
-Dit eerste voorbeeld zal een een tekst naar de console printen:  
+Dit eerste voorbeeld zal een tekst naar de console printen:  
 
 ```{.c}
 #include <stdio.h>
@@ -103,14 +103,14 @@ $
 
 ### Duiding: Return-statements
 
-Je kan van uit een functie "communiceren" naar de aanroepende code toe via een return statement.  
+Je kan vanuit een functie "communiceren" naar de aanroepende code toe via een return statement.  
 Je moet hiervoor 2 elementen toevoegen aan je functie:
 
 * Een **return-statement** toevoegen aan het einde van de functie  
   Deze bestaat uit het keyword **return** gevolgd door een waarde, expressie of variabele  
   (bv ```return (1 + 1);```)
 * Het **return-type** aanduiden in de header (signatuur) van je functie.  
-  Vanzelfsprekend moet die altijd hetzelfde type van de expressie of variabele die je in de return.
+  Vanzelfsprekend moet dit type overeenkomen met de de expressie of variabele die je in de functie-body "returned".
 
 Zo'n return-statement (in geval er slechts 1 is) moet altijd het laatste statement zijn anders zal deze functie niet compilen.   
 Later gaan we nog zien dat we meerdere return-statements kunnen toevoegen.  
@@ -144,7 +144,7 @@ void main()
 
 ```
 
-* Deze functie geeft aan in zijn signatuur dat integer zal opleveren.  
+* Deze functie geeft aan in zijn signatuur dat een integer zal worden teruggegeven (return).  
 * De aanroepende code vangt deze waarde op in een variabele 
 * En drukt deze waarde af via een andere functie (```printf```)
 
@@ -163,7 +163,7 @@ Argumenten volgen op de functie-naam ```(<argument1,argument2,...)```
 * Deze argumenten worden tussen haakjes geschreven
 * Meerdere argumenten worden gescheiden door haakjes
 
-Deze argumenten zijn beschikbaar binnen de body van je functie (en alleen daar) net als de variabelen die daar declareert.  
+Deze argumenten zijn beschikbaar binnen de body van je functie (en alleen daar) net als de variabelen die je declareert.  
 De naam van de argumenten moeten uniek zijn en hebben ook dezelfde conventies en beperkingen als andere variabelen.  
 
 ### Voorbeeld: gebruik van argumenten in een functie.   
@@ -192,7 +192,7 @@ void main()
 
 ```
 
-Het toevoegen van dit argument zorgt dat we het gedrag van deze functie kan doen laten variëren door een argument mee te geven.
+Het toevoegen van dit argument zorgt dat je het gedrag van deze functie kan doen laten variëren door een andere waarde mee te geven.
 
 ### Voorbeeld: meerdere argumenten
 
@@ -237,20 +237,23 @@ De volgende regels gelden:
 * Je mag binnen een functie meerdere return-statements hebben
 * Maar enkel als deze in een block zitten (functie, loop, clausules van condities) 
 * De laatste statement in je functie moet een return-statement zijn
-* Deze laatste statement mag een block-statement, maar dan moet deze garanderen dat deze in alle gevallen.  
+* Deze laatste statement mag een block-statement zijn (if, while, ...),  
+  maar dan moet er in elke vertakking (of clausule) een return worden voorzien.    
   Bijvoorbeeld een if-else zal zowel in de if- als in de else-statement een return moeten geven
 
 De filosofie achter deze regels komt terug op: 
 
 * Elke **logische vertakking van een functie** moet in een **return-waarde** resulteren.  
   Met andere woorden, je functie moet voor **elke mogelijke combinatie van argumenten een antwoord geven** (ofwel geen enkel antwoord in geval van procedures)  
-* Code die nooit kan uitgevoerd worden, ook wel **dode code** genoemd omdat er (ongeacht de omstandigheden een return-statement nakomt veroorzaakt een error in de compilatie.  
+* Code die nooit kan uitgevoerd worden, ook wel **dode code** genoemd is niet toegestaan en zal een error veroorzaken bij compilatie.  
+  Bijvoorbeeld code die binnen een functie na een return-statement wordt geplaatst veroorzaakt zal altijd een error veroorzaken bij compilatie.  
 
 
 ### Voorbeelden: Meerdere return-statements 
 
 In deze functie is het laatste een block-statement.  
-Hier is het gegarandeerd dat in alle mogelijkheiden (of ta (if en else) een waarde
+In deze code is het duidelijk gegarandeerd dat er altijd een waarde vanuit de functie wordt teruggegeven.  
+(zowel in de if en else-clausule) 
 
 ```{.c}
 int max(int a,int b) 
@@ -311,11 +314,11 @@ int max(int a,int b)
 ### Duiding: void-return
 
 Een functie die geen return-waarde teruggeeft (void als return waarde) kan echter ook vervroegd het programma beëindigen via een return-statement. 
-Hier geldt wel de regel van **dode code***, code die na zo een expliciete return (en deze return staat niet afgeschermd door een conditie) zal een fout genereren. 
+Hier geldt wel de regel van **dode code** - code die na zo een **expliciete return** komt (en deze return staat niet afgeschermd door een conditie) - een fout zal genereren. 
 
 ### Voorbeelden: void-return
 
-Bijvoorbeeld het volgende programma zal terugkeren als het a kleiner is dan 0.
+Bijvoorbeeld het volgende programma zal terugkeren als a kleiner is dan 0.
 
 ```{.c}
 void print_enkel_positieve_getallen(int a) 
@@ -371,7 +374,7 @@ void world()
 Eenzelfde variabele-naam kan echter ook voorkomen in verschillende functies.  
 Deze zal dan ook worden beschouwd als een andere variabele.
 
-In code hieronder is de variabele ```a`` in methode ```hello()``` is namelijk verschillend van de variabele ```a``` in de functie ```world()```
+In code hieronder is de variabele ```a``` in de methode ```hello()``` is namelijk niet dezelfde als de variabele ```a``` in de functie ```world()```
 
 ```{.c}
 void hello()
@@ -385,11 +388,11 @@ void world()
 }
 ``` 
 
-De scope die we hier bekeken noemen we functie-scope.
+Deze scope benoemen we als **functie-scope**.
 
 ### Duiding en voorbeelden: block-scope
 
-Dit principe kunnen we echter nog verder trekken, namelijk block-scope.
+Dit principe kunnen we echter nog verder trekken, namelijk **block-scope** (op niveau van clausules binnen loops, condities, ...).   
 We illustreren dit als volgt:  
 
 ```{.c}
@@ -403,8 +406,8 @@ void hello(int x)
 }
 ``` 
 
-Variabele a is enkel zichtbaar tussen de accolades van de if-statement.  
-De lijn binnen de printf-statement kan echter de variabele a niet zien aan gezien de scope enkel beperkt is tot de if-clausule 
+Variabele ```a``` is enkel zichtbaar tussen de accolades van de if-statement.  
+De lijn binnen de printf-statement kan echter de variabele a niet zien aangezien de scope enkel beperkt is tot de if-clausule 
 
 Ook als deze statement binnen de else-clausule staat zal dit niet werken want de scope is letterlijk beperkt tot de accolades.  
 
@@ -549,10 +552,11 @@ Met als gevolg dat wat in dit boek staat als algemene conventie wordt aanvaard.
 
 ### Functie-prototype
 
-In voorgaand voorbeeld diende een functie die wordt gebruikt door een andere functie (main in dit geval) worden gedeclareerd voor de specfieke functie.  
-Dit is een regel binnen c waarmee je rekening mee moet houden, je kan enkel gebruiken wat reeds eerder is gedeclareerd.
+In de voorgaande voorbeelden kan je al zien dat functies altijd worden (eigen moeten worden) gedeclareerd voor de functies die deze gebruiken  
+(bijvoorbeeld main gebruikt print_teller dus print_teller mag niet na main worden gedeclareerd).    
 
-Dit geldt niet alleen voor functies maar ook voor variabelen.
+Dit is een regel binnen c waarmee je rekening mee moet houden, je kan enkel gebruiken wat reeds eerder is gedeclareerd (zowel functies als variabelen).
+
 
 ```{.c}
 #include <stdio.h>
@@ -565,7 +569,7 @@ void main()
 int getal = 5;
 
 ```
-Bovenstaande code zal bijvoorbeeld niet compileren want getal is niet gekend.
+Bovenstaande code bijvoorbeeld zal niet compileren want getal is gedeclareerd na de main-functie (en dus niet gekend).
 
 > **Nota:**  
 > Dit is niet altijd het geval in andere talen verwant aan c zoals Java en C# die minder streng zijn hieromtrent.
@@ -587,8 +591,8 @@ void print_hello()
 }
 ```
 
-Dit kan je echter oplossen door een functie-prototype te gebruiken.  
-Dit is een declaratie om de compiler aan te geven dat deze functie later in het programma zal worden definieerd.
+Dit kan je echter oplossen door een **functie-prototype** te gebruiken.  
+Dit is een declaratie om de compiler aan te geven dat deze functie later in het programma zal worden gedefiniëerd.
 
 ```{.c}
 #include <stdio.h>
@@ -639,7 +643,7 @@ int main()
 ```
 
 Deze return-code wordt trouwens door het OS opgevangen en kan je gebruiken om aan te tonen of je programma succesvol is beëindigd.  
-Niets houdt ons echter tegen om een een andere waarde terug te geven.  
+Niets houdt ons echter tegen om een andere waarde terug te geven.  
 
 ```{.c}
 #include <stdio.h>
