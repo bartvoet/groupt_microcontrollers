@@ -55,7 +55,7 @@ Per mail is dat naar het Groep T-adres, indien je wilt dat ik ook een ander adre
 
 De labo's mogen doorgestuurd worden op het mailadres van de docent met volgende naming-conventions:
 
-```labo_$(opdracht)_$(deelvan)_(deeltot).c```
+     labo_$(opdracht)_$(deelvan)_(deeltot).c
 
 * Als je bijvoorbeeld van het eerste labo opdracht 1 deel A hebt gemaakt:  
   ```labo_1simpelestatements_1_A.c```

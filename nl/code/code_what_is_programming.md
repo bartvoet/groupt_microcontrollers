@@ -69,7 +69,7 @@ Deze soort van programmeertalen staat zeer dicht bij deze instructies:
 
 Een voorbeeld van zulk een assembler-programma is hieronder beschreven (GNU Assembler voor X86 die de  AT&T syntax volgt):
 
-```
+```{.as}
 .data
 hello:
         .string "Hello world\n"  # Een stukje constant geheugen
