@@ -43,7 +43,7 @@ Zeer kort samengevat, tot nog toe hebben we rond **variabelen** gezien:
 
 > **Nota:**  
 > De types die we hieronder zijn in volgorde.  
-> De C-specificatie vermeldt enkel het minimum maar deze volgorde moet wel blijven gerespecteerd.  
+> De C-specificatie vermeldt enkel het **minimum** maar deze **volgorde** moet wel blijven **gerespecteerd**.    
 > Bijvoorbeeld een unsigned int mag op bepaalde platformen 8 bytes lang zijn, maar dan moet een unsigned long minimum 8 bytes zijn. 
 
 De meeste van deze types (met uitzondering van een unsigned char) zijn groter dan een byte.
@@ -52,7 +52,7 @@ Belangrijk te weten (voor de komende onderwerken) is dat c-compilers er voor zor
 ### Voorbeeld: Casten van waardes?
 
 Je kan waarden overdragen tussen variabelen van verschillende types (en verschillende groottes).  
-We noemen dit casting en zijn 2 varianten (niet meerekenende overdracht tussen 2 variabelen van hetzelfde type):
+We noemen dit castingi, er bestaan 2 varianten hierin:
 
 * **promotie**  
   Je **initialiseert** een variabele van een bepaald type met de waarde van die van een **kleiner type**.  
@@ -63,6 +63,8 @@ We noemen dit casting en zijn 2 varianten (niet meerekenende overdracht tussen 2
   Stel dat je de variabelen van 1 byte probeert te initialiseren vanuit een 8 byte variabele zal je de 7 MSB-bytes kwijtgeraken.  
   maw als je een waarde groter dan 255 ingeeft zal je data kwijt geraken zoals in onderstaand voorbeeld
 
+Het volgende voorbeeld van een expliciete casting illustreert de 2 principes:
+
 ```{.c}
 #include <stdio.h>
 
@@ -71,10 +73,12 @@ int main(void)
     unsigned short groter_getal=0xFFFF;
     printf("groter getal: %x\n",groter_getal);
 
+    //promotie van een short naar een long
     unsigned long nog_groter_getal=(unsigned int)groter_getal;
     printf("nog groter getal: %x\n",nog_groter_getal);
 
-    unsigned char kleiner_getal=(unsigned char)groter_getal;
+    //degradatie van een short naar een char, je geraakt data kwijt
+    unsigned char kleiner_getal=(unsigned har)groter_getal;
     printf("kleiner getal: %x",kleiner_getal);
     return 0;
 }
@@ -124,7 +128,7 @@ int main(void) {
 }
 ```
 
-### Voorbeeld: sizeof en size_t
+### Herhaling: sizeof en size_t
 
 In C kan je de werkelijk grootte (of dimensie) van een variabele (of rechtstreeks van zijn type) opvragen via de **operator sizeof** (geen functie!!).  
 Deze operator zal dan een waarde teruggeven van het type **size_t**, dit is een type specifiek voorzien voor het uitdrukken van dimensies van types en variabelen die elke C-compiler moet voorzien.  
