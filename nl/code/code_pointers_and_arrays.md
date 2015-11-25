@@ -624,6 +624,46 @@ Index 4 heeft waarde 0x7fffea7cf488
 Index 5 heeft waarde 0x7fffea7cf48a 
 ```
 
+### Array als argument van een functie
+
+```{.c}
+#include <stdio.h>
+
+void print_array(unsigned char a[],int index) {
+	printf("%hhu\n",a[1]);
+}
+
+int main(void) {
+	unsigned char hello[]={1,2,3};
+	print_array(hello,1);
+	printf("%li\n",sizeof(hello));
+	return 0;
+}
+```
+
+### Array als argument van een functie, inhoud wijzigen
+
+```{.c}
+#include <stdio.h>
+
+void wijzig_naar_0(unsigned char a[],int index) {
+	a[index]=0;
+}
+
+void print_array(unsigned char a[],int index) {
+	printf("%hhu\n",a[1]);
+}
+
+int main(void) {
+	unsigned char hello[]={1,2,3};
+	wijzig_naar_0(hello,1);
+	print_array(hello,1);
+	return 0;
+}
+```
+
+Later gaan we zien dat de array die je aan deze functie meegeeft eigenlijk niet volledig een array is (als we bij pointers komen)
+
 ### Waarschuwing: boundaries van een array
 
 Zoals we reeds hebben gezien in vorig voobeeld, arrays worden in het geheugen als een aan elkaar gesloten rij opgeslagen.  
@@ -641,7 +681,7 @@ Als je een element van een array gaat proberen te lezen of schrijven zal deze:
 
 ### Voorbeeld: pointers
 
-We hadden reeds gezien dat je - in C - een adres kan opvragen van een variabele (via de &-opetor).  
+We hadden reeds gezien dat je - in C - een adres kan opvragen van een variabele (via de &-operator).  
 Je kan dit adres opvangen in een pointer-variabele, zoals in het code-voorbeeld hieronder:
 
 ```{.c}
@@ -712,46 +752,6 @@ unsigned int* adres_van_a
 ```*``` speelt de rol van **de-referentie-operator**
 (je gaat als het ware de referentie gebruiken om de geheugenplaats aan te spreken)
 
-### Array als argument van een functie
-
-```{.c}
-#include <stdio.h>
-
-void print_array(unsigned char a[],int index) {
-	printf("%hhu\n",a[1]);
-}
-
-int main(void) {
-	unsigned char hello[]={1,2,3};
-	print_array(hello,1);
-	printf("%li\n",sizeof(hello));
-	return 0;
-}
-```
-
-### Array als argument van een functie, inhoud wijzigen
-
-```{.c}
-#include <stdio.h>
-
-void wijzig_naar_0(unsigned char a[],int index) {
-	a[index]=0;
-}
-
-void print_array(unsigned char a[],int index) {
-	printf("%hhu\n",a[1]);
-}
-
-int main(void) {
-	unsigned char hello[]={1,2,3};
-	wijzig_naar_0(hello,1);
-	print_array(hello,1);
-	return 0;
-}
-```
-
-Later gaan we zien dat de array die je aan deze functie meegeeft eigenlijk niet volledig een array is (als we bij pointers komen)
-
 ### Duiding: pointers
 
 De onderstaande tekening illustreert de code op een andere manier:
@@ -801,6 +801,8 @@ int main(void) {
 
 ### Voorbeeld: pointers en functies
 
+Een pointer - zijnde een variabele als een ander - kan je ook meegegeven aan functies.
+
 ```{.c}
 
 #include <stdio.h>
@@ -831,6 +833,8 @@ void print_pointer(int* a)
     printf("Waarde van a (met de-referentie): %x\n",*a );
 }
 ```
+
+Het "side-effect" hier van is dat je een pointer kan gebruiken om (via dit adres) de waarde van een variabele te wijzigen.
 
 ### Voorbeeld: pointers en arrays
 
@@ -1076,7 +1080,7 @@ int main(void) {
 }
 ```
 
-### Duiding: String  en terminitor
+### Duiding: String  en terminator
 
 Een string niet langer kan zijn dan het geheugen in de char-array gereserveerd.  
 Meer precies het maximum aantal karakter is gelijk aan het de grootte van de array - 1.  
