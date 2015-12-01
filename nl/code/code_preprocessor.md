@@ -7,12 +7,13 @@ Een belangrijk element hiervan hebben we reeds gezien namelijk het werken met fu
 Deze stellen je in staat de software in verschillende (functionele) stukken op te delen.  
 In dit hoofdstuk bouwen we hierop verder door te kijken hoe je je code kan verdelen over meerdere files.
 
-## Vakmanschpa
+### Onderhoudbaarheid van software
 
-Nogmaals ter herhaling, dit is het belangrijkste voor een ontwikkelaar, zeker als je met andere ontwikkelaars samenwerkt.  
+Het doel van dit hoofdstuk is uit te leggen hoe je je code kan organiseren in verschillende **modules**.  
+Doel hiervan is je je programma leesbaar en onderhoudbaar te houden.  
+Dit is enorm belangrijk voor een professionele ontwikkelaar, zeker als je in team-verband samenwerkt.  
 
 **Simpele, goed opgedeelde code** die bovendien goed **getest en voorbereid** is maakt **90,00 %** uit van het **succes van een project**, de andere **10 %** in het vinden van een goed idee of concept.  
-
 Dit is wat men met andere woorden noemt **vakmanschap**.   
 
 Elke professional zal dit bevestigen, een taal goed kennen komt er op neer de mechanismes van de taal te beheersen om eenvoudige, krachtige en onderhoudbare programma's te schrijven.    
