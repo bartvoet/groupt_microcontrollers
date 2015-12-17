@@ -468,6 +468,8 @@ print(circle.area())
 
 ## Schermen
 
+![](../../pictures/python_project.png)
+
 ### Voorbeeld 1 
 
 ~~~{.py}
