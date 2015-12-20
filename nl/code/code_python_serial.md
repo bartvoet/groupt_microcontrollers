@@ -1,40 +1,55 @@
 ## Bedoeling van dit hoofdstuk
 
-We hebben recentelijk gezien hoe we vanuit de MCU/AVR kunnen communiceren met een computer.  
-Dit was mogelijk over een seriële vebinding waar we een ftdi-converter gebruikten om de conversie tussen uart en usb te doen.  
+We hebben ondertussen geleerd hoe we vanuit onze MCU (AVR) kunnen communiceren naar een computer toe (over een seriële poort).  
+We gebruikten hiervoor een programmas zoals putty, picocom, ... om data door te sturen of te ontvangen.  
 
-Het doel van deze les is van nog iets verder gaan en een **applicatie** op je computer te bouwen.
-Bedoeling hiervan is de microcontroller aan te sturen besturen over een **seriele connectie**.  
+Dit was mogelijk - over een seriële vebinding - dankzij de ftdi-converter (die op de Arduino zit of optioneel een externe als je met direct met een AVR werkt) die de conversie tussen uarti- en usb-communicatie verzorgt.  
+
+Het doel van deze les is dit principe nog iets verder te trekken en een **applicatie** op je computer te bouwen die deze seriële communicatie gebruikt om instructies te geven aan de microcontroller.
 
 ## Python leren in een c-cursus?
 
-We gaan hier geen C (voor het pc-gedeelte) voor gebruiken maar **Python**.
-Waarom nog een andere taal leren?
+We gaan hier geen C (voor het pc-gedeelte) voor gebruiken, maar een andere taal genaamd **Python**.  
+Waarom moeten we een andere taal hiervoor gebruiken en werken we niet verder met onze verworven C-kennis?
 
 * "Using the right tool for the job"  
+  Python is beter geschikt om applicaties te schrijven 
      * C is een taal die wordt gebruikt om systeem-software (mcu, drivers, os, ...) te gebruiken  
-     (bazooka om een mug klein te krijgen)
-     * Python is een taal gebruikt om kleine tot grote applicaties
-* Python is zeer éénvoudig aan te leren
-* Scripting-gebaseerd
-* Open-source en vrij beschikbaar
-* Imens populair
+     We gaan geen bazooka om een mug klein te krijge
+     * Python is een taal gebruikt om kleine tot grote applicaties te bouwen  
+     Je kan hier heel éénvoudig en snel applicaties (command line of gui) bouwen zonder al te veel voorkennis.
+* Python is zeer éénvoudig aan te leren (zeker in vergelijking met C)
+* Python is enorm populair,  
+  heeft enorm veel libraries om allerlei taken uit te voeren,
+  zeer grote community en online support
+* Een script-taal zeer flexibel 
+* Open-source, vrij beschikbaar en gesupporteerd voor alle opertating systems
 
 ## Waarschuwing: crashcourse
 
-Deze uitstap naar Python is te beschouwen als een **intro**, niet meer.  
-Bedoeling is enkel het minimum aan te leren om een korte support-applicatie te schrijven voor je MCU.
+Let wel, deze les is enkel te beschouwen als een **intro** in python, niet meer.  
+Bedoeling is een voorbeeld-applicatie te maken om je samenwerkt met je MCU
+Hierbij wordt enkel het minimum aangeleerd nodig om een kleine support-applicatie te schrijven voor je MCU.
 
-## Installatie
+## Installatie python 2.7
 
 Bij deze gaan we python 2.7 installeren.  
 Er bestaat ook python 3 maar deze is niet volledig compatibel met 2.7 (en 2.7 is momenteel nog het meest gebruikt)
 
+Voor deze les willen moeten er volgende zaken aanwezig zijn:
+
+* Python runtime (-interpreter)
+* 2 libraries
+     * Py-serial (seriële communicaties)
+     * Tkinter (gui)
+
+Installatie is getest op 3 Operating Systems
+
 ### Linux
 
-Python is by default geïnstalleerd op vrijwel elke Linux-distributie.
+Python is by default geïnstalleerd op vrijwel elke Linux-distributie en in de meeste gevallen is dit ook python 2.7.
 
-Voor de 2 volgende aptitude-commando's uit om support voor tk (gui) en seriële connecties te gebruiken:
+Voor Debian of Ubuntu, voer de 2 volgende aptitude-commando's uit om support voor tk (gui) en seriële connecties te gebruiken:
 
 ~~~
 $ sudo apt-get install python-tk
@@ -43,6 +58,14 @@ $ sudo apt-get install python-serial
 ...
 ~~~
 
+Voor Fedora of Red Hat, voor de 2 volgende dnf's uit:
+
+~~~
+# dnf install pyserial
+...
+# dnf install tkinter
+...
+~~~
 
 ### Mac
 
@@ -54,7 +77,7 @@ Voor Mac OS X voer je 3 acties uit:
 http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.5.18.0/ActiveTcl8.5.18.0.298892-macosx10.5-i386-x86_64-threaded.dmg
 * Installeren van pyserial
      * Download vanaf https://pypi.python.org/pypi/pyserial
-     * Je krijgt tar-file, deze kan je gewoon extracten vanaf de command-line
+     * Je krijgt tar-file, deze kan je gewoon extracten vanaf de command-line (tar -xvf ${naam_tar_file})
      * python setup.py install
 
 ### Windows
@@ -63,13 +86,10 @@ http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.act
 https://www.python.org/ftp/python/2.7.10/python-2.7.10.amd64.msi
 * Installeren van gui  
 http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-x86_64-threaded.exe
+* Download vanaf https://pypi.python.org/pypi/pyserial  
+  Installeer de msi
 
-Download vanaf https://pypi.python.org/pypi/pyserial
-http://www.7-zip.org/
-c:\Python27\Lib\pyserial-2.6\
-python setup.py install
-
-## Starten met python: File of repl-modus
+## Starten met python: werken met een interactieve shell of uitvoeren vanuit een file
 
 Aan de basis is python een scripting-taal.  
 Scripting-talen kunnen (meestal) uitgevoerd worden met 2 modi:
@@ -78,41 +98,73 @@ Scripting-talen kunnen (meestal) uitgevoerd worden met 2 modi:
   (ook wel repl or Read–eval–print loop genoemd)
 * Als file (alle commando's worden direct na elkaar uitgevoerd)
 
-## REPL tov files
+## Python: interactief of vanuit een file
 
-Python kan worden uitgevoerd onder 2 modi:
+Python-code kan je uitvoeren op 2 manieren:
 
-### REPL-modus
+* Interactief: van uit een shell statement per statement uitvoeren
+* File: python-statements in een file zetten
+
+### Interactief programmeren (REPL)
 
 Je kan python-code (statements) rechtstreeks vanuit een interactieve shell uitvoeren.  
-Het is voldoende om naar de command-line te gaan (cmd of bash afhangende van je OS)
+Men noemt die ook soms wel REPL of **R**ead **E**val **P**rint **L**oop.  
 
-Het volgende voorbeeld zal het zinnetje hello afdrukken:
+Als python correct is geïnstalleerd is het voldoende om:
+
+* Naar de command-line te gaan (cmd of bash afhangende van je OS)
+* Het commando "python" in te te typen
+
+~~~
+$ python
+Python 2.7.10 (default, Oct 14 2015, 16:09:02) 
+[GCC 5.2.1 20151010] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+~~~
+
+Vanaf dat er >>> verschijnt (voorafgegaan door wat info) kan je aan de slag en python-statement of commando's uitvoeren.  
+We gaan verder met het volgende voorbeeld:
 
 ~~~{.py}
 $ python
+Python 2.7.10 (default, Oct 14 2015, 16:09:02) 
+[GCC 5.2.1 20151010] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 5 + 5
+10
 >>> print("hello")
 hello
 >>> exit()
 $
 ~~~
 
-Om uit deze interactieve shell te geraken typ je exit() (gevolgd door enter) en je komt gewoon terug op de command-line.  
-Bij deze had je ook de python-functie leren kennnen, namelijk print om een stuk tekst naar de console te printen.
+3 (voorbeeld-)acties zijn hier uitgevoerd:
 
-Je zie dat het aanroepen van een methode heel veel lijkt op de manier zoals we dat in c deden
+* Een **expressie** (in dit geval een wiskundige) kan **direct** uitvoeren (in een C programma kan je dat niet een expressie op zich uitvoeren)  
+  Als je enkel een expressie typt (wiskundige, naam van een variabele, ...) zal je direct het resultaat **uitprinten** naar de interpreter (print uit RE**P**L)
+* Vervolgens roepen we onze eerste python-**functie** aan **print**, deze zal een tekst afdrukken naar de stdout (gelijkaardig aan de printf uit C)
+* Om uit deze interactieve shell te geraken typ je **exit()** (gevolgd door enter) en je komt gewoon **terug** op de **command-line**.  
 
-### FILE-modus
+> **Nota:**  
+> Je zie dat het aanroepen van een methode heel veel lijkt op de manier zoals we dat in c deden.  
+> We komen hier zodadelijk nog op terugo
+
+Deze interactieve modus hadde we nog niet gezien bij C-ontwikkeling, dit is echter wel zeer courant bij scripting-talen zoals Python, Ruby, Groovy, ....  
+Het laat je toe om je code "uit te proberen" in een omgeving waar je direct feedback krijgt.  
+
+### Python-programma's bouwen (FILE)
 
 In het geval je een programmatje wil bouwen, is het interessant deze "statements" sequentieel in een file te plaatsen (zoals we tot nog toe bij C hebben gezien).  
-Dit doe je door een file te creeren met een text-editor (gedit, notepad++, vi, ...), bijvoorbeeld met de volgende inhoud.   
+Dit doe je door een file te creeren met een text-editor (gedit, notepad++, vi, ...), bijvoorbeeld met de volgende inhoud:   
 
 ~~~{.py}
 print("hello")
 print("world")
 ~~~
 
-Deze file eindigt per conventie op de extensie py (in het voorbeeld noemen we deze hello.py)
+Deze inhoud plaats je (via een tekst-editor) in een file met de extensie py (dit voorbeeld noemen we deze hello.py)  
+Net als bij het interactieve voorbeeld gebruik je het commando python, maar nu dan gevolgd door de naam (of beter gezegd het path) van de file.
 
 ~~~
 $ python hello.py
@@ -122,6 +174,9 @@ $
 ~~~
 
 ## Python-syntax
+
+We hebben onze eerste kennismaking gehad met python en je zou nu instaat moeten zijn van een éénvoudige hello world te schrijven.   
+We gaan nu wat dieper in op de basis-syntax van deze taal.  
 
 ### Aanroepen van methodes
 
@@ -136,6 +191,7 @@ Later zien we hoe we onze eigen functies aanmaken.
 ### Een variabele
 
 Nu dat we éénmaal weten hoe te printen, introduceren we variabelen.  
+
 Net zoals bij C kan je een waarde in het geheugen plaatsen onder de vorm van een variabele.  
 Deze variabele kan je meegeven aan  
 
