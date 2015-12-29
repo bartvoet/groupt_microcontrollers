@@ -7,31 +7,36 @@ Dit was mogelijk - over een seriële vebinding - dankzij de ftdi-converter (die 
 
 Het doel van deze les is dit principe nog iets verder te trekken en een **applicatie** op je computer te bouwen die deze seriële communicatie gebruikt om instructies te geven aan de microcontroller.
 
-## Python leren in een c-cursus?
+### Python leren in een c-cursus?
 
 We gaan hier geen C (voor het pc-gedeelte) voor gebruiken, maar een andere taal genaamd **Python**.  
 Waarom moeten we een andere taal hiervoor gebruiken en werken we niet verder met onze verworven C-kennis?
 
-* "Using the right tool for the job"  
-  Python is beter geschikt om applicaties te schrijven 
-     * C is een taal die wordt gebruikt om systeem-software (mcu, drivers, os, ...) te gebruiken  
-     We gaan geen bazooka om een mug klein te krijge
-     * Python is een taal gebruikt om kleine tot grote applicaties te bouwen  
+* **"Using the right tool for the job"**
+     * Python is zeer geschikt om **applicaties** te schrijven 
+     * C is een taal die wordt gebruikt om **systeem**-software (mcu, drivers, os, real time, weinig resources...) te gebruiken  
+* Python is een taal gebruikt om kleine tot grote applicaties te bouwen  
      Je kan hier heel éénvoudig en snel applicaties (command line of gui) bouwen zonder al te veel voorkennis.
-* Python is zeer éénvoudig aan te leren (zeker in vergelijking met C)
-* Python is enorm populair,  
-  heeft enorm veel libraries om allerlei taken uit te voeren,
-  zeer grote community en online support
-* Een script-taal zeer flexibel 
-* Open-source, vrij beschikbaar en gesupporteerd voor alle opertating systems
+* Python is zeer **éénvoudig** aan te leren (zeker in vergelijking met C)
+* Python is enorm **populair**
+* Python heeft enorm veel **libraries** en **utilities** om allerlei **taken** uit te voeren
+* Python heeft  zeer grote **community** en online **support**
+* Python is een **scripting**-taal en is zeer **flexibel** 
+* Python is **open-source**, vrij beschikbaar en gesupporteerd voor **alle opertating systems**
 
-## Waarschuwing: crashcourse
+Samengevat, als je een toepassing of applicatie maakt op je PC (GUI, Webapp, command-line, ...) is C niet altijd wat je nodig hebt.  
+Hiervoor zijn er talen zoals Python, Java, Ruby, C#, ... die je de job kunnen gemakkelijker maken.
 
-Let wel, deze les is enkel te beschouwen als een **intro** in python, niet meer.  
-Bedoeling is een voorbeeld-applicatie te maken om je samenwerkt met je MCU
+### Waarschuwing: crashcourse
+
+Let wel, deze les is enkel te beschouwen als een **introductie** in python, niets meer.  
+Bedoeling is een voorbeeld-applicatie te maken om met de MCU samen te werken.
+
 Hierbij wordt enkel het minimum aangeleerd nodig om een kleine support-applicatie te schrijven voor je MCU.
 
-## Installatie python 2.7
+### Installatie van Python
+
+**Python 2.7**
 
 Bij deze gaan we python 2.7 installeren.  
 Er bestaat ook python 3 maar deze is niet volledig compatibel met 2.7 (en 2.7 is momenteel nog het meest gebruikt)
@@ -43,11 +48,13 @@ Voor deze les willen moeten er volgende zaken aanwezig zijn:
      * Py-serial (seriële communicaties)
      * Tkinter (gui)
 
-Installatie is getest op 3 Operating Systems
+Deze installatie is getest op 3 Operating Systems:
 
-### Linux
+**Installatie op Linux:**
 
-Python is by default geïnstalleerd op vrijwel elke Linux-distributie en in de meeste gevallen is dit ook python 2.7.
+Python is by default geïnstalleerd op vrijwel elke Linux-distributie en in de meeste gevallen is dit ook de versie die wij gebruiken, namelijk python 2.7.
+
+*Debian/Ubuntu:*
 
 Voor Debian of Ubuntu, voer de 2 volgende aptitude-commando's uit om support voor tk (gui) en seriële connecties te gebruiken:
 
@@ -58,7 +65,9 @@ $ sudo apt-get install python-serial
 ...
 ~~~
 
-Voor Fedora of Red Hat, voor de 2 volgende dnf's uit:
+*Fedora/Red Hat:*
+
+Voor Fedora of Red Hat, voor de 2 volgende dnf-commando's uit:
 
 ~~~
 # dnf install pyserial
@@ -67,20 +76,20 @@ Voor Fedora of Red Hat, voor de 2 volgende dnf's uit:
 ...
 ~~~
 
-### Mac
+**Installatie op Mac:**
 
-Voor Mac OS X voer je 3 acties uit:
+Voor de meer recentere versies van Mac OS X is Python geïnstalleerd by default:
 
-* Installeren van python zelf  
-  https://www.python.org/ftp/python/2.7.10/python-2.7.10-macosx10.6.pkg
 * Installeren van gui  
 http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.5.18.0/ActiveTcl8.5.18.0.298892-macosx10.5-i386-x86_64-threaded.dmg
 * Installeren van pyserial
      * Download vanaf https://pypi.python.org/pypi/pyserial
      * Je krijgt tar-file, deze kan je gewoon extracten vanaf de command-line (tar -xvf ${naam_tar_file})
-     * python setup.py install
+     * python setup.py install (in de directory waar je de tar hebt uitgepakt)
 
-### Windows
+**Installatie op Windows:**
+
+In tegenstelling tot Mac en Linux is bij Windows is Python niet by default voorzien, volgende stappen moet je uitvoeren:
 
 * Installeren van python  
 https://www.python.org/ftp/python/2.7.10/python-2.7.10.amd64.msi
@@ -89,31 +98,39 @@ http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.act
 * Download vanaf https://pypi.python.org/pypi/pyserial  
   Installeer de msi
 
-## Starten met python: werken met een interactieve shell of uitvoeren vanuit een file
+### Starten met python: werken met een interactieve shell of uitvoeren vanuit een file
 
-Aan de basis is python een scripting-taal.  
-Scripting-talen kunnen (meestal) uitgevoerd worden met 2 modi:
+Nu dat Python is geïnstalleerd, kunnen we aan de slag met deze programmeer-omgeving.  
+Het enige wat je nodig hebt is een goede text-editor (GEdit, Notepad++, TextMate, Vi, ...) en je command-line (Bash voor Mac en Linux, Powershell voor Windows).
 
-* Rechtstreeks op command-line  
-  (ook wel repl or Read–eval–print loop genoemd)
-* Als file (alle commando's worden direct na elkaar uitgevoerd)
+> **Nota:**  
+> Python komt met een ontwikkelings-omgeving IDLE, we gebruiken deze voorlopige nog niet.
 
-## Python: interactief of vanuit een file
+**Python: interactief of vanuit een file**
 
 Python-code kan je uitvoeren op 2 manieren:
 
-* Interactief: van uit een shell statement per statement uitvoeren
-* File: python-statements in een file zetten
+* **Interactief:** van uit een shell statement per statement uitvoeren
+* **File:** python-statements in een file zetten
 
-### Interactief programmeren (REPL)
+Laten we van start gaan met de eerste manier.
+
+**Interactief programmeren (REPL)**
 
 Je kan python-code (statements) rechtstreeks vanuit een interactieve shell uitvoeren.  
-Men noemt die ook soms wel REPL of **R**ead **E**val **P**rint **L**oop.  
+Men noemt die ook soms wel **REPL** of **R**ead **E**val **P**rint **L**oop.  
 
-Als python correct is geïnstalleerd is het voldoende om:
+* **R**ead: lezen van een expressie van de gebruiker
+* **E**val: evaluatie van deze expressie en uiteindelijk uitvoering hiervan
+* **P**rint: uitprinten van het resultaat van deze expressie (als er één is)
+* **L**oop: wacht opnieuw op de volgende expressie of statement
 
-* Naar de command-line te gaan (cmd of bash afhangende van je OS)
-* Het commando "python" in te te typen
+Als Python correct is geïnstalleerd is het voldoende om:
+
+* Naar de **command-line** te gaan (cmd of bash afhangende van je OS)
+* Het **commando python** in te te **typen**
+
+Als alles goed verloopt krijg je min of meer volgend resultaat:
 
 ~~~
 $ python
@@ -123,7 +140,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> 
 ~~~
 
-Vanaf dat er >>> verschijnt (voorafgegaan door wat info) kan je aan de slag en python-statement of commando's uitvoeren.  
+Vanaf dat er **>>>** verschijnt (voorafgegaan door wat systeem-info) kan je aan de slag en Python-statement of commando's uitvoeren.  
 We gaan verder met het volgende voorbeeld:
 
 ~~~{.py}
@@ -147,15 +164,17 @@ $
 * Om uit deze interactieve shell te geraken typ je **exit()** (gevolgd door enter) en je komt gewoon **terug** op de **command-line**.  
 
 > **Nota:**  
-> Je zie dat het aanroepen van een methode heel veel lijkt op de manier zoals we dat in c deden.  
-> We komen hier zodadelijk nog op terugo
+> Je ziet dat het aanroepen van een methode heel veel lijkt op de manier zoals we dat in c deden.  
+> We komen hier zodadelijk nog op terug
 
 Deze interactieve modus hadde we nog niet gezien bij C-ontwikkeling, dit is echter wel zeer courant bij scripting-talen zoals Python, Ruby, Groovy, ....  
 Het laat je toe om je code "uit te proberen" in een omgeving waar je direct feedback krijgt.  
 
-### Python-programma's bouwen (FILE)
+**Python-programma's bouwen (FILE)**
 
-In het geval je een programmatje wil bouwen, is het interessant deze "statements" sequentieel in een file te plaatsen (zoals we tot nog toe bij C hebben gezien).  
+Deze REPL- of Interpreter-modus is heel handig om te ontwikkelen en snel feedback te krijgen.
+
+In het geval je een programma wil bouwen, is het interessant deze "statements" sequentieel in een file te plaatsen (zoals we tot nog toe bij C hebben gezien).  
 Dit doe je door een file te creeren met een text-editor (gedit, notepad++, vi, ...), bijvoorbeeld met de volgende inhoud:   
 
 ~~~{.py}
@@ -173,27 +192,30 @@ world
 $
 ~~~
 
-## Python-syntax
+Zo'n een file kan je meerdere malen aanroepen en zoals we verder gaan zien een volledige gui-applicatie mee maken.
 
-We hebben onze eerste kennismaking gehad met python en je zou nu instaat moeten zijn van een éénvoudige hello world te schrijven.   
+### Programmeren met Python
+
+We hebben onze eerste kennismaking gehad met python en je zou nu instaat moeten zijn van een éénvoudige hello world (met print) te schrijven.   
 We gaan nu wat dieper in op de basis-syntax van deze taal.  
 
 ### Aanroepen van methodes
 
 Zoals je bij vorige stukken hebt gezien is het aanroepen van een methode heel gelijkaardig aan hoe we dat in c kennen:
 
-* een naam 
-* gevoldd door 1 of meerdere argumenten tussen haakjes
-* Argumenten gescheiden door ;
+* Een **naam** van deze functie 
+* Gevolgd door 1 of meerdere **argumenten** tussen haakjes
+* Argumenten gescheiden door **,**
 
-Later zien we hoe we onze eigen functies aanmaken.
+> **Nota:**  
+> Later zien we hoe we onze eigen functies aanmaken.
 
-### Een variabele
+### Werken met variabelen
 
-Nu dat we éénmaal weten hoe te printen, introduceren we variabelen.  
+Nu dat we éénmaal weten hoe te printen (en functies aan te roepen) introduceren we **variabelen**.  
 
 Net zoals bij C kan je een waarde in het geheugen plaatsen onder de vorm van een variabele.  
-Deze variabele kan je meegeven aan  
+Deze variabele kan je meegeven aan een functie zoals print.
 
 ~~~{.py}
 >>> say_hello = "hello"
@@ -202,9 +224,10 @@ Deze variabele kan je meegeven aan
 ~~~
 
 De variabele die je nu hebt gezien is van het type string (net zoals je ook zo'n type in C hebt).  
-Let ook op het feit dat je geen type moeten aanduiden bij declararatie van zo'n variabele.
+Let ook op het feit dat je **geen type** moeten **aanduiden** bij declararatie van zo'n variabele, dit betekent evenwel niet dat er geen type bestaat natuurlijk.
 
-Je kan ook zo'n variabele deleten in python als je deze niet meer nodig hebt (om geheugen te besparen)
+Ook nieuw is dat je zo'n variabele kan verwijderen via het commando **del** in Pythoni, als je deze niet meer nodig hebt (om geheugen te besparen).  
+(ga je meestal niet nodig hebben)
 
 ~~~{.py}
 >>> say_hello = "hello"
@@ -219,104 +242,225 @@ NameError: name 'say_hello' is not defined
 
 ~~~
 
-### Data-types
+### Primitieve data-types
 
-Naast het type string heb je ook support voor allerlei 
+Naast het type string heb je ook support voor allerlei numerieke types, vergelijkbaar met degene die we in C hebben gezien:
 
-* Integers  
+* **Integers:** (geen onderscheid tussen signed en unsigned)  
   —1, –3, 42, 355, 888888888888888, –7777777777
-* Floats  
+* **Floats:**  
   —3.0, 31e12, –6e-4
-* Complex numbers  
+* **Complexe getallen:**  
   —3 + 2j, –4- 2j, 4.2 + 6.3j
-* Booleans  
+* **Booleans:** (in C was 0 false en alle anderen getallen true)  
   True, False
 
-### Operations
+### Mathematische operatoren
+
+Alle operatoren die je gewoon bent uit C zijn zeer vergelijkbaar met degene uit Python:  
+
 ~~~
->>> x = 5 + 2 - 3 *2
+>>> x = 5 + 2 - 3 * 2
 >>> x
->>> 1
+1
+>>> x = 5 + (2 - 3) * 2
+>>> x
+3
 >>> 5 / 2
->>> 2 ## in python 3 2.5
->>> 5 // 2 ## enkel in python 3
->>> 2
+2
+>>> 5 // 2
+2
+>>> 5.5 / 2
+2.75
 >>> 2 ** 8
->>> 256
+256
+>>> 5 % 2
+1
+>>> 
 ~~~
 
-### Een variabele en formatting
+* ~~~+ - * /~~~ gesupporteerd
+* 2 integers door elkaar delen zal afronden naar beneden
+* ~~~%~~~ geeft de rest van een deleing
+* ~~~**~~~ stelt macht voor
+
+ 
+~~~//~~~ is het zelfde als ~~~/~~~ in Python 2
+In Python 3 echter zal ~~~/~~~ niet afronden maar in een floating point-nummer resulteren  
+
+~~~
+$ python3
+Python 3.4.3+ (default, Oct 14 2015, 16:03:50) 
+[GCC 5.2.1 20151010] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 5 / 2
+2.5
+>>> 5 // 2
+2
+>>> 
+~~~
+
+### Formatteren van een string
+
+Net zoals je bij de sprintf- en printf-functies in C kan je een stuk tekst formatteren.  
+In Python zijn 3 verschillende manieren hiervoor 
+
+De oude manier, niet gesupporteerd in Python 3, maar van wel dezelfde formatters als C gebruikmakende:
+
+~~~
+>>> "decimaal: %i hex: %x" % (10 , 10)
+'decimaal: 10 hex: a'
+>>> print("a %i %x" % (10,10))
+decimaal: 10 hex: a
+>>> 
+~~~
+
+De nieuwe manier, zowel in Python 2 als Python 3 gesupporteerd:
 
 ~~~{.py}
->>> x = 5
->>> print '{} {} {}'.format(x, x*x, x*x*x)'
+print("{:d}-{:d}".format(1,2))
+1-2
+>>> print("{}-{}".format(1,2))
+1-2-1
 ~~~
 
+Bij dezei (nieuwe) manier ben je niet verplicht een formaat aan tegen een {} is voldoende.  
+Optioneel kan je - binnen de string selecteren - welk getal uit de luist je wil selecteren:
 
 ~~~{.py}
->>> x = 5
->>> print '{0:2d} {1:3d} {2:4d}'.format(x, x*x, x*x*x)'
+>>> print("{0}-{1}-{0}".format(1,2))
+1-2-1
+>>> print("{0:d}-{1:d}-{0:d}".format(1,2))
+1-2-1
 ~~~
+
+Een ander voorbeeld is het uitlijnen van tekst.
+
+~~~{.py}
+>>> print("{0:2d}{1:3d}{0:4d}".format(1,2))
+ 1  2   1
+>>> print("{0:2d}{1:3d}{0:4d}".format(10,20))
+10 20  10
+~~~
+ 
+Voor een volledig overzicht kan je naar de betreffende python-documentatie gaan kijken:  
+https://docs.python.org/2/tutorial/inputoutput.html
+
 
 > Nota:  
 > In dit geval zien we dat we dat we een methode aanroepen op een manier die we nog niet kennen vanuit C, namelijk vanuit een object (string.methode()).  
-> Dit is Object Georienteerd programmeren, hier komen we zoda
+> Dit is Object-Georienteerd programmeren, hier komen we zoda
 
-### Input inlezen vanuit je script
+### Inlezen vanaf de command-line
+
+We weten nu min of meer hoe we data naar de console moeten schrijven (equivalent van printf).  
+Om data in te lezen van de command line bestaat er een andere functie, namelijk raw_input.  
 
 ~~~{.py}
->>> x = 5
->>> print '{0:2d} {1:3d} {2:4d}'.format(x, x*x, x*x*x)'
+x = raw_input("Geef een string")
+print(x)
 ~~~
 
-### Inlezen
+Deze zal een stuk tekst inlezen van de STDIN (input command-line), deze tekst kan je dan opvangen in een variabele.  
+Als je dit programma zou uitvoeren krijg je ongeveer de volgende output:
 
-~~~{.py}
-x = input("Geef een string")
-print x
+~~~
+$ python print_een_string.py
+Geef een string:
+Hello
+Hello
+$
 ~~~
 
 ### Inlezen en converteren
 
+Je wil niet altijd tekst inlezen, in bepaalde gevallen wil je gewoon een nummer inlezen.  
+Daarvoor bestaan er conversie-functies in Python.
+
 ~~~{.py}
-x = int(input("Geef een nummer"))
-print '{0:2d} {1:3d} {2:4d}'.format(x, x*x, x*x*x)'
+input_string = raw_input("Geef een nummer: ")
+x = int(input_string)
+print('1ste macht: {0:2d} 2de macht: {1:3d} 3de macht{2:4d}'.format(x, x*x, x*x*x))
+~~~
+
+Dit geeft het volgende resultaat:
+
+~~~
+$ python input_and_convert.py
+Geef een nummer: 5
+1ste macht:  5 2de macht:  25 3de macht 125
+~~~
+
+Ter vervollediging, je kan dit ook verkort door de 2 functie-aanroepen te nesten. 
+
+~~~{.py}
+x = int(raw_input("Geef een nummer: "))
+print('1ste macht: {0:2d} 2de macht: {1:3d} 3de macht{2:4d}'.format(x, x*x, x*x*x))
 ~~~
 
 ### C vs python blocks
 
-We starten direct aan meer complexere code (condities en herhalingen).  
+We hebben tot nog toe gezien:
+
+* Mathematische expressies
+* Variabelen 
+* Output met print
+* Input met raw_input
+* Conversie naar een getal met int()
+
+Samengevat, de basis om een eerste heel éénvoudig programma te schrijven.  
+
+We starten nu aan meer complexere code (condities en herhalingen).  
 We zullen eerst even basis van de syntax in python vergelijken tov deze van C:
 
-* tab gebaseerd  
+* Geen main-methode nodig
+* **tab** gebaseerd  
   (tov accolades die worden gebruikt voor blocks te onderscheiden)
-* geen type nodig voor een variabele  
+* geen **;** verplicht
+* **geen type** nodig voor een variabele  
   (in c moet je altijd een type aangeven)
-* case sensitive  
-  net zoals in c vanzelfspreken
-* oo (zie we niet vandaag)
+* **oo** (zien we nog)
 
-In c:
+We starten met een stuk code in c te vergelijken met een equivalent stuk code in python (loop):
 
 ~~~{.c}
-int n, r;
-n = 9;
-r = 1;
-while (n > 0) {
-    r *= n;
-    n--;
+int main() {
+    int n, r;
+    n = 9;
+    r = 1;
+    while (n > 0) {
+        r *= n;
+        printf("%i\n",r);
+        n--;
+    }
 }
 ~~~
 
-In python:
+We zien in de C code:
+
+* We schrijven een main-methode waarbinnen we codere
+* Alle simpele statements gescheiden door een ;
+* Accolades demarkeren de code die binnen de loop wordt uitgevoerd
+
+Dezelfde functionaliteit in python:
 
 ~~~{.py}
 n = 9
 r = 1
 while n > 0:
     r *= n
+    print(r)
     n -= 1
 ~~~
+
+We zien heel veel gelijkenissen tussen C en python maar:
+
+* Python heeft geen main-methode nodig  
+  Alle code die niet binnen een functie staat wordt zowiezo uitgevoerd
+* Een complexe statement start met een :
+* Alle statements binnen zo'n complexe statements moeten 1 tab verder worden geindenteerd
+
+We komen hier zo dadelijk nog op terug.
 
 ### Strings
 
@@ -336,27 +480,48 @@ In python wordt er geen onderscheid gemaakt tussen een karakter en een string:
 Waar je in C ~~~//~~~ en ~~~/**/~~~ gebruikt om je code te becommentariëren bestaan er in python de 2 volgende manieren:
 
 Of je gebruikt een hashbang:
+
 ~~~{.py}
 # This is python-comment
 ~~~
 
 Of je zet een multi-line string zonder hem aan een variabele te assignen
+
 ~~~{.py}
 """This is a multiline comment.
 The following lines concatenate the two strings."""
 ~~~
 
-## Condities en herhalign
+### Condities en herhaling
 
-### If
+Loops en condities zijn vergelijkbaar met wat je uit C kent, dezelfde of vergelijkbare constructies vind je terug:
+
+* if-else
+* elif (tov else if in C)
+* while-loop
+* for-loop 
+
+### Condities
+
+We starten met condities.
+Een conditie kan uit 3 delen bestaan:
+
+* if-clausules
+* else-clausule
+* 1 of meerdere elif-clausules
+
 
 ~~~{.py}
 if expression:
    statement(s)
+elif:
+   statements(s)
+...elif:...
 else:
    statement(s)
 ~~~
 
+De volgende voorbeelden illustreren het gebruik van een conditie:
 
 ~~~{.py}
 a = 10
@@ -366,7 +531,7 @@ else:
    print("a <= 10")
 ~~~
 
-### ElIf
+Met een elif toegevoegd ...
 
 ~~~{.py}
 a = 10
@@ -378,7 +543,12 @@ else:
    print("a > 10")
 ~~~
 
-## While
+### While-loop (en break)
+
+Een while-loop is ook zeer vergelijkbaar met C.
+
+Bijzonder is dat je bij Python ook een else-clausule kan worden toegevoegd.   
+Deze wordt uitgevoerd wanneer de while-conditie false evalueert, maar niet als er een break of exceptie (komen we nog op terug) wordt gegenereerd
 
 ~~~{.py}
 while condition:
@@ -386,6 +556,10 @@ while condition:
 else:
     post-code
 ~~~
+
+Volgende voorbeelde illustreren:
+
+**Basis-voorbeeld while-loop:**
 
 ~~~{.py}
 x = 5
@@ -395,34 +569,111 @@ while x > y:
     x = x + 1 
 ~~~
 
-## While met else
+Net zoals verwacht zal deze van 5 tem 9 printen
 
 ~~~{.py}
-x = 1;
-while x < 10:
+$ python simple_while_loop.py 
+5
+6
+7
+8
+9
+$
+~~~
+
+**While met else en break:**
+
+Een loop kan ook (in tegenstelling to C) een else-clausule bevatten.  
+Deze else-clausule wordt uitgevoerd wanneer de conditie in de while-clausule negatief evalueert:
+
+~~~{.py}
+x = 5
+y = 10
+while x < y:
     print(x)
     x = x + 1
+#    if x == 7:
+#        break
 else:
     print("deze code wordt altijd uitgevoerd")
 ~~~
 
+Met het zelfde resultaat als boven
+
 ~~~{.py}
-x = 10;
-while x < 10:
+$ python simple_while_else_loop.py
+5
+6
+7
+8
+9
+deze code wordt altijd uitgevoerd
+$
+~~~
+
+In bovenstaande code heeft deze else-clausule niet veel nut, gezien je ook de print-statement achter de loop kan plaatsen.  
+Waar dit wel nut kan hebben is bij break-statements (net zoals in C supporteert Python ook break- en continue-statements) zoals geillustreerd in onderstaand voorbeeld.  
+
+~~~{.py}
+x = 5
+y = 10
+while x < y:
     print(x)
     x = x + 1
+    if x == 7:
+        break
 else:
     print("deze code wordt altijd uitgevoerd")
+~~~
+
+Als je dan bovenstaande code uitvoert zal deze de code uit de else-clausule niet uitvoeren.
+
+~~~{.py}
+$ python simple_while_else_break_loop.py
+5
+6
+7
+$
 ~~~
 
 ### For-loop
 
+Python supporteert ook for-loops, hoewel deze niet volledig identiek zijn aan de for-loops zoals we ze kennen uit C:
+
 ~~~{.py}
 for x in range(1,11):
-     print '{0:2d} {1:3d} {2:4d}'.format(x, x*x, x*x*x)'
+     print('{0:2d} {1:3d} {2:4d}'.format(x, x*x, x*x*x))
 ~~~
 
+Deze for-loop zal voor elk getal in de "range" tussen een start (1) en einde (11) de statements uitvoeren.  
+Let wel het einde is niet inclusief (loop telt tot 10)
+
+~~~
+$ python example_for_loop.py 
+ 1   1    1
+ 2   4    8
+ 3   9   27
+ 4  16   64
+ 5  25  125
+ 6  36  216
+ 7  49  343
+ 8  64  512
+ 9  81  729
+10 100 1000
+$
+~~~
+
+Dit is een eerste voorbeeld van een for loop, we gaan direct ook tonen hoe je deze loop kan gebruiken om lijsten te itereren.  
+
+> **Nota:**  
+> Deze for-constructie is zeer krachtig, maar om dat ik enkel een intro is gaan we hier niet verder op in dan het praktisch gebruik.  
+> Als je echter meer wil weten zie Deze for-loop zal voor elk getal in de "range" tussen een start en einde de statements uitvoeren.
+
+
 ### Nesten van codities en herhaling
+
+Net zoals in C kan je loops en condities in elkaar nesten.  
+Let natuurlijk wel dat je de correcte identatie gebruikt.
 
 ~~~{.py}
 for x in range(1,11):
@@ -435,12 +686,32 @@ for x in range(1,11):
             print("")
 ~~~
 
-## Lijsten
+### List
+
+Arrays zoals we ze uit C kennen bestaan niet in Python.   
+In de plaats daarvan spreken we in Python van het datatype list.  
+
+Volgende code:
+
+* initialiseert een list 3 elementen
+* print het 2de element (positie 1)
+* wijzigt het 3de element (positie 2)
+* print ditzelfde 3de element
+ 
 
 ~~~{.py}
 x = [1.0, 2.0, 3.0]
 print(x[1])
+x[2]=10
+print(x[2])
 ~~~
+
+~~~
+$ python hello.py 
+2.0
+10
+~~~
+
 
 ### Lijsten doorlopen
 
