@@ -210,5 +210,7 @@ $
 
 ### En verder ...
 
-Vanaf de volgende hoofdstukken gaan verder met de programmeertaal C en gaan we proberen de eerste programma's te schrijven. 
+Vanaf de volgende hoofdstukken gaan verder met de programmeertaal C en gaan we proberen de eerste programma's te schrijven.  
+
+
 
