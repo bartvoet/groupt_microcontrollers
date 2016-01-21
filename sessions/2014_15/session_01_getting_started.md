@@ -1,21 +1,22 @@
 ## Les 1: Introductie en starten met programmeren
-### Wie is de docent?
-* Bart Voet
-* Ex-student ACE Groep T (Informatica (2004) en Elektronica (2014))
-  * Sinds 2014 embedded Developper Wordline (C, Java en Linux in embedded omgeving)
-* Avondjob: docent Microcontrollers
-* Huidige dagjob:
-    * sinds 2014 ontwikkelen embedded systemen bij Worldline (vroegere Banksys)
-    * Daarvoor 11 jaar Java-ontwikkelaar bij AXA
-* Programmeren: Ervaring met C, Java, Python, Bash, Scala, ...
-* Microcontrollers: AVR en ARM
-* bart.voet@groept.be
-* Met de slagwoorden van ACE Groep T (3 E's)
-    * Engagement
-    * Het streven naar Excellence
-    * Opbrengen van de nodige Empathy (examens zijn net gedaan :))
 
-### Wie zijn de studenten?
+### Docent?
+
+* Bart Voet - **bart.voet@ucll.be**
+* **Student** Mobyus (toen nog ACE Groep T) 
+     * Informatica (2004) 
+     * Elektronica (2014)
+     * ...
+* Relevante **programmeer-ervaring**     
+     * Van 2004-2014 Java- en Web-developper bij **AXA** 
+     * Sinds 2014 embedded Developper bij **Wordline** (C, Java en Linux in embedded omgeving)
+* Programmeren: C, Java, Python, Linux, Android,...
+* Microcontrollers: AVR en ARM
+
+------
+
+### Studenten?
+
 * Ervaring met programmeren?
     * Geen?
     * Hobby?
@@ -29,10 +30,11 @@
 * Hoe zijn de examens gegaan?
 * ...
 
+------
+
 ### Programma voor vandaag?
 * Overzicht van het vak microcontrollers
-    * Structuur
-    * Inhoud
+    * Structuur en inhoud
     * Afspraken
 * Wat is een microcontroller (bedoeling is dat je een idee hebt)
     * Verschil met een (klassiek) computer-systeem
@@ -44,7 +46,12 @@
     * Tools en editors
     * Labo C
 
+------
+
 ### Programma voor de komende dagen
-* Volgende week college ivm flowcode (IMEC)
+
 * Vervolg basis-cursus C
 * Eerste kennismaking met Microcontroller in labo
+* Volgende week college ivm flowcode (IMEC)
+
+------
