@@ -1,5 +1,22 @@
 ## Les 1: Introductie en starten met programmeren
 
+Welkom in de cursus MCU!!
+
+----
+
+## Cursus
+* Leren **programmeren** in het algemeen
+* Programmeren met **C**
+     * Basis-kennis van C opbouwen
+* Werken met MCU
+     * Architectuur, datasheets, registers, peripherals, protocollen, ...
+     * **AVR**-gebaseerd met eventueel vergelijkingen naar C ...
+* Python
+     * Ondersteunende applicatie bouwen
+     * Preview OO
+
+--------
+
 ### Docent?
 
 * Bart Voet - **bart.voet@ucll.be**
@@ -32,7 +49,36 @@
 
 ------
 
-### Programma voor vandaag?
+
+## Materiaal: waar?
+
+* Te vinden op Toledo
+* Wordt elke week aangevuld met het materiaal van de week
+
+> Bemerking: inhoud van cursus (markdown) en code-voorbeelden ook te vinden op github  
+> www.github.com/bartvoet
+
+--------
+
+## Materiaal: vorm?
+
+* Cursus:  
+  Alle inhoud van de cursus in 3 formaten
+     * PDF
+     * EPUB
+     * HTML
+* Slides:  
+  Uitleg tijdens les
+     * PDF
+     * HTML
+* Code voorbeelden
+     * C
+     * Python
+     
+-------
+
+
+### Programma vandaag?
 * Overzicht van het vak microcontrollers
     * Structuur en inhoud
     * Afspraken
@@ -48,10 +94,9 @@
 
 ------
 
-### Programma voor de komende dagen
+### Programma vervolg?
 
-* Vervolg basis-cursus C
+* Vervolg basis-cursus C op X86 (3 lessen in totaal)
+* Normaal gezien een college ivm flowcode (IMEC)
 * Eerste kennismaking met Microcontroller in labo
-* Volgende week college ivm flowcode (IMEC)
-
 ------

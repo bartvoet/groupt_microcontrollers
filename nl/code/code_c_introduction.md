@@ -1,5 +1,39 @@
 ## Code: Eerste stappen in programmeren met c
 
+De basis van programmeren bij bijna alle talen begint bij de 3 verschillende principes:
+
+* Sequentiele logica
+    * We voeren een statement **1 voor 1** uit (input, output, processing)
+    * We voeren deze na elkaar uit
+    * Bijvoorbeeld:
+         * We lezen een getal in
+         * We vermenigvuldigen dit met 2
+         * We printen het resultaat af
+* Selectieve logica
+    * We voeren onze statements nog altijd sequentieel uit (zelfde volgorde)
+    * Maar welke statements we uitvoeren hangt af van een aantal **condities**
+    * Bijvoorbeeld:
+         * We printen het resultaat enkel af als het even is
+* Repetitieve logica
+    * We voeren onze statements nog altijd sequentieel uit (zelfde volgorde)
+    * Maar we herhalen bepaalde statements onder een aantal **condities** 
+    * Bijvoorbeeld we berekenen en printen het resultaat zolang de gebruiker een positief getal inbrengt
+
+![](../../pictures/programm_logic.png)
+
+### Sequentiele logica
+
+Vandaag bekijken we het sequentiele aspect van C:
+
+* **Input:** inlezen van data van de commmand-line
+* **Processing:** bewerkingen doen op integers
+* **Data:** deze data tijdelijk in het geheugen opslaan door middel van variabelen
+* **Output:** het schrijven van data  naar de command-line
+
+![](../../pictures/sequential_programming.png)
+
+### Anatomie van een C-programma
+
 Als voorbereiding op de labo's, gaan we een aantal elementaire kenmerken van een software-programma in C verder onder de loep nemen:
 
 We starten met een kort voorbeeld:
