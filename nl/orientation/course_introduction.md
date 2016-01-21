@@ -63,3 +63,9 @@ Het leren werken de benodigde tools zoals compilers, flash-tools, debuggers,  ..
 
 * **Elektronica** en **integratie**
 Herhaling vanuit de andere elektronica-vakken waar nodig (bijvoorbeeld pull-up en pull-down, PWM, ...)
+
+* **Vrij Project**-werk  
+Naast het labo-werk wordt er wat extra aanvullend materiaal ter beschikking gesteld om een gemeenschappelijk projectje te doen.  
+... meer info volgt later
+
+![](../../pictures/project_for_fun_small.jpg)
