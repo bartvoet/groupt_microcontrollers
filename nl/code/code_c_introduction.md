@@ -12,16 +12,18 @@ int main ()
 {
 	int a;
 	a = 1 + 2;
-	printf("1 + 2 = %i",a);
+	printf("1 + 2 = %i\n",a);
 	return 0;
 }
 ```
 
 Deze code-snippet heeft als **functionaliteit** het **afdrukken** van de **som** van de getallen **1 en 2**.    
-Het eindresultaat van dit programma is een afdruk op het scherm:
+Het eindresultaat van dit programma is een afdruk op het scherm van de som van 1 en 2:
 
 ```
+$ gcc eerste_programma.c -o eerste_programma
 1 + 2 = 3
+$
 ```
 
 Om deze bewerkingen te kunnen voltooien zijn er 3 (soorten) belangrijke elementen die we vandaag gaan bespreken:  
@@ -93,7 +95,7 @@ $ ./empty
 $
 ~~~  
 
-```void main(){ }``` zelf is - naast de body van het programma - wat we noemen een functie, meer details over functies volgt later.  
+```void main(){ }``` zelf is - naast de body van het programma - wat we noemen een **functie**, meer details over functies volgt later.  
 
 > Bemerking:  
 > Soms zie je ook in plaats van ```void main()``` andere vormen/notaties terug:  
@@ -109,6 +111,77 @@ $
 * Een c-programma **start** met **"void main()"**
 * **Tussen** de **accolades** kan je een **sequentie** van **statements** schrijven.
 * Wat er tussen deze accolades staat wordt ook wel de **body** van je programma genoemd.
+
+
+### Voorbeeld: return-code van een programma
+
+Als je voorbeelden uit boeken of van het internet gaat zoeken ga je dikwijls andere vormen (signaturen) van zo'n een main-functie tegenkomen.  
+
+Bijvoorbeeld ~~~int main()~~~ ipv ~~~void main()~~~
+Dit houdt in dat je programma een status-code terug naar je command-line kan sturen, hierdoor ben je wel verplicht een return-statement toe te voegen aan het einde van je programma.
+
+Beschouw de 2 volgende voorbeelden:
+
+~~~{.c}
+int main ()
+{
+    return 0;
+}
+~~~
+
+
+~~~{.c}
+int main ()
+{
+    return 1;
+}
+~~~
+
+**Windows:**
+
+1ste voorbeeld:
+
+~~~
+c:\> programma_with_return_code_0.exe
+c:\> echo %errorlevel%
+0
+
+c:\>
+~~~
+
+2de voorbeeld:
+~~~
+c:\> programma_with_return_code_1.exe
+c:\> echo %errorlevel%
+1
+
+c:\>
+~~~
+
+**Linux/Mac:**
+
+1ste voorbeeld:
+
+~~~
+$ programma_with_return_code_0
+$ echo $?
+0
+$ 
+~~~
+
+2de voorbeeld:
+~~~
+$ programma_with_return_code_0
+$ echo $?
+1
+~~~
+
+Dit laat je programma toe van een naar de command-line te communiceren of er iets fout is gelopen in het programma of niet.  
+De conventie is dat het programma 0 terugstuurt als alles correct is verlopen.
+
+Dit is enkel ter info, voorlopig hoeven we dit niet te gebruiken (in de meeste voorbeelden gebruiken we de void-variant).  
+Ook zullen sommige compilers warnings geven als je de void-variant gebruikt (maar deze mag je negeren)
+
 
 ### Voorbeeld: Schrijven van tekst naar een console  
 
@@ -130,6 +203,17 @@ void main ()
 }
 ```
 
+of alternatief (om compiler-warnings te vermijden)
+
+```{.c}
+#include <stdio.h>
+int main ()
+{
+  printf("Hello World\n");
+  return 0;
+}
+```
+
 Als je nu dit programma compileert en uitvoert op de command line, zie je dat het programma deze boodschap afprint op de console.
 
 ```
@@ -145,7 +229,8 @@ Vergeleken met het vorige programma onderscheiden we **3 nieuwe elementen** uit 
 
 1. Het **aanroepen** van een **functie**
 2. Gebruik van **tekst** of een **string**
-3. Importeren van een **bibliotheek**/library   
+3. Importeren van een **bibliotheek**/library
+
 
 
 * **Aanroepen van een functie**    

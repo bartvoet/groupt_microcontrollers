@@ -60,6 +60,33 @@ Deze zijn zeer krachtige editors die wel een zekere leercurve hebben (dus als je
 > **Windows:**  
 > Deze command-line-editors zijn ook beschikbaar in Windows via Cygwin of Mingw (later meer hierover)
 
+### Toolchain GCC: Linux
+
+Op linux-distributies kan je gcc installeren via de package-managers
+
+**Ubuntu, Mint, Debian:**
+
+~~~
+$ sudo apt-get install gcc
+~~~
+
+**Fedora, Red Hat:**
+
+~~~
+# dnf install gcc
+~~~
+
+### Toolchain GCC: Windows
+
+Voor Windows moet je een Mingw installeren op je machine.   
+Er is echter een zip-file voor de cursus voorzien die alle tooling voorziet zonder dat je iets moet installeren (of zelfs administratie-rechten).
+We komen hier zo dadelijk op terug.
+
+### Toolchain GCC: Mac
+
+Als je het programma gcc aanroept **via command-line** zal OS X je voorstellen om gcc (of clan) te installeren.  
+Laat de installatie gewoon lopen.
+
 
 ### CLI/shell/terminal
 
@@ -141,6 +168,52 @@ zelfde als vorige commando maar zal toevoegen aan een bestaande file
 
 **Voorbeeld:**  
 Het commando ```ls -al > hello.txt``` zal bijvoorbeeld een file hello.txt maken met de inhoud van een directory
+
+### Een C-programma op command-line bouwen (voorbereiding voor Windows-gebruikers)
+
+**Stap 1:** **Download** de **zip**-file (url wordt tijdens de les gegeven)  
+
+**Stap 2:** Unzip deze file en je krijgt een directory structuur (binnen een folder dist)
+
+![](../../pictures/tooling_for_windows.png)
+
+**Stap 3:** Maak een C-file in een teksteditor (dist\tools\Notepad++Portable\Notepad++Portable.c) en bewaar die ergens op je harde schijf
+
+~~~{.c}
+#include <stdio.h>
+
+int main()
+{
+	printf("Hello World");
+	return 0;
+}
+~~~
+
+**Stap 4:** Open de command-line tool en navigeer naar de plaats waar de file staat.
+
+**Stap 5:** Voor de volgende command-line instructies uit (uitleg over C volgt later)
+
+~~~
+E:\>gcc hello.c -o hello.exe
+
+E:\>dir
+ De volumenaam van station E is VBOX_Desktop
+ Het volumenummer is 0000-0801
+
+ Map van E:\
+
+21/01/2016  12:58                75 hello.c
+21/01/2016  13:00            68,400 hello.exe
+21/01/2016  12:44    <DIR>          temp
+               2 bestand(en)           72,571 bytes
+               1 map(pen)  141,787,025,408 bytes beschikbaar
+
+E:\>hello.exe
+Hello World
+E:\>
+~~~
+
+![](../../pictures/creating_a_c_file_with_notpadpp.png)
 
 
 ### Een C-programma op command-line bouwen (GCC)

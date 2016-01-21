@@ -3,6 +3,7 @@
 Alvorens van start te gaan met c, een korte **introductie** en/of eerste kennismaking met programmeren.  
 De elementen die we hier bespreken gelden vanzelfsprekend voor C maar zijn natuurlijk ook toepasbaar voor andere (imperatieve) programmeertalen (zoals Java, C++, Python, Ruby, ...).  
 
+> **Waarschuwing:**  
 >Op dit moment worden sommige zaken uitermate vereenvoudigd (en zelfs onvolledig) voorgesteld.
 >Waarom?  
 >Programmeren is niet de meest eenvoudige activiteit en we willen niet te snel vooruit lopen om iedereen (met of zonder eerdere programmeer-ervaring) van in het begin dezelfde basis (en kansen) mee te geven.
@@ -19,8 +20,16 @@ In de praktijk gaat deze **CPU** :
 
 * het programma van een hard-disk (pc) of een ander medium afhalen
 * de instructies van dit programma in het RAM-geheugen laden
+* deze instructies worden 1 voor 1 geinterpreteerd door een controle-unit (sequentieel)
+* er zijn 3 soorten instructies die een CPU (controller of ALU)
+    * Lezen van geheugen naar een register (memory naar registers)
+    * Bewerkingen uitvoeren op registers (en resultaat naar een register schrijven)
+    * Schrijven naar het geheugen vanuit een register
 
-![](../../pictures/intro_external_logical_computer_view.png)
+![](../../pictures/loading_software.png)
+
+> **Waarschuwing:**  
+> Dit is een fel vereenvoudigde voorstelling, we komen hier later in de cursus nog op terug
 
 ### Instructieset  
 
