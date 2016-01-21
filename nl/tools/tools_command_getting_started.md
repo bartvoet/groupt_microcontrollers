@@ -171,7 +171,7 @@ Het commando ```ls -al > hello.txt``` zal bijvoorbeeld een file hello.txt maken 
 
 ### Een C-programma op command-line bouwen (voorbereiding voor Windows-gebruikers)
 
-**Stap 1:** **Download** de **zip**-file (url wordt tijdens de les gegeven)  
+**Stap 1:** **Download** de **zip**-file (https://www.dropbox.com/s/8ooj6ab89vj92dm/cursus_mcu_tools.zip?dl=0)  
 
 **Stap 2:** Unzip deze file en je krijgt een directory structuur (binnen een folder dist)
 
