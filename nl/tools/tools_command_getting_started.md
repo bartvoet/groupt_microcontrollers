@@ -3,6 +3,64 @@
 Elke software-ontwikkelaar (en zeker als je met MCU's werkt) moet de beginselen kennen van het werken met command-line.  
 Dit argument is nog sterker als je met embedded devices werkt die veelal enkel te besturen zijn via command-line
 
+### Keuze van een teksteditor
+
+Om C te programmeren heb je een tekst-editor nodig.  
+Let wel, dit niet te verwarren met tekstverwerkings-programma's zoals Word, LibreOffice, Pages!!!
+
+Voor Windows kan je notepad hiervoor gebruiken, maar er zijn betere keuzes zoals:
+
+* Notepad++
+* PSpad Editor
+* Atom
+* ...
+
+Deze editors hebben (in tegenstelling tot notepad) eigenschappen zoals:
+
+* *Text coloring:*  
+  Bepaalde elementen (variabelen, loops, functies, ...) worden in een andere kleur geplaatst om de leesbaarheid te verhogen.  
+* *Code completion:*  
+  De editor kan intelligent zijn door bijvoorbeeld code die gedeeltelijk is ingevuld automatisch aan te vullen
+* ...
+
+Voor Linux heb je een scala aan keuze:
+
+* GEdit (zeer eenvoudig)
+* Scitext
+* Atom
+* Kate
+* Leaf-pad
+* ...
+
+Voor Mac:
+
+* TextMate
+* TextWrangler
+* XCode
+* ...
+
+Dit zijn allemaal grafische text-editors en zijn over het algemeen zeer éénvoudig om mee te werken.  
+Deze hebben wel het nadeel dat je altijd tussen een command line en je editor moet wisselen, hievoor zijn er 2 alternatieven:
+
+* Command-line editors
+* IDE's, integrated development environments die zowel tekst-editors
+
+#### Command-line editors
+
+Voor de meer gevorderden zijn er Linux- en Mac zijn er zeer goede tekst-editors die je via de command-line bestuurt:
+
+* Vim
+* emacs
+* nano
+* ed
+* ...
+
+Deze zijn zeer krachtige editors die wel een zekere leercurve hebben (dus als je die voor de eerste maal probeert moet je wel wat tijd vrijmaken)
+
+> **Windows:**  
+> Deze command-line-editors zijn ook beschikbaar in Windows via Cygwin of Mingw (later meer hierover)
+
+
 ### CLI/shell/terminal
 
 Een **shell** of **CLI** (command-line-interface) zorgt ervoor dat een gebruiker: 
@@ -15,7 +73,7 @@ Een **shell** of **CLI** (command-line-interface) zorgt ervoor dat een gebruiker
 De CLI geldt als tegenhanger van de grafische gebruikersomgeving (ofwel de GUI, Graphical User Interface).  
 
 > **Nota:**  
-> Als voorbeeld van zo'n GUI-omgeving gaan Eclipse bekijken.  
+> Als voorbeeld van zo'n **GUI**-omgeving gaan we later nog **Eclipse** bekijken maar we starten bij de basis en dat is command-line.  
 
 ### Starten met CLI
 
@@ -32,15 +90,7 @@ In Linux kan je dit via een terminal-emulator zoals:
 
 Een andere optie is Linux opstarten zonder grafische shell (X-server)
 
-**MAC OS X**
-
-In MAC OS X kan je de terminal bereiken via Programma’s - Hulpprogramma’s - Terminal
-Net zoals bij Linux is de terminal omgeving gebaseerd op Bash (Bourne Again Shell) en kan je gelijkaardige commando's uitvoeren
-
-**FreeBSD**
-Gelijkaardig aan Linux en Mac OS X
-
-**Windows 7**
+**Windows**
 
 In Windows heb je de keuze tussen de programma's (meestal te vinden bij de adminstratieve tools):
 
@@ -51,9 +101,18 @@ In Windows heb je de keuze tussen de programma's (meestal te vinden bij de admin
 De Windows commando's hebben echter hun beperkingen.  
 Vandaar dat er alternatieven bestaan als **MingW/MSYS** die je een Bash-compatibele omgeving meebrengen (zodat je gelijkaardige commando's als Linux kan uitvoeren)
 
+**MAC OS X**
+
+In MAC OS X kan je de terminal bereiken via Programma’s - Hulpprogramma’s - Terminal
+Net zoals bij Linux is de terminal omgeving gebaseerd op Bash (Bourne Again Shell) en kan je gelijkaardige commando's uitvoeren
+
+**FreeBSD**
+
+Gelijkaardig aan Linux en Mac OS X
+
 ### Algemene commando's
 
-PATH-variabele
+Een zeer kort overzicht van commando die nodig heb om te navigeren en file-manipulatie:
 
 **ls**:  
 directory inhoud Mac/Linux  
@@ -106,9 +165,10 @@ Je schrijft je code naar een bestand en geeft dit een naam met de extensie C.
 ```{.c}
 #include <stdio.h>
 
-void main() 
+int main() 
 {
 	printf("!!!Hello World!!!");
+    return 0;
 }
 ```
 
@@ -175,59 +235,3 @@ Het vorige voorbeeld is echter belangrijk om te beseffen dat achter het bouwen v
 
 We gaan in de volgende hoofdstukken deze verschillende bouwstenen/processen verder uitleggen en verdiepen.
 
-### Keuze van een teksteditor
-
-Om C te programmeren heb je een tekst-editor nodig.  
-Let wel, dit niet te verwarren met tekstverwerkings-programma's zoals Word, LibreOffice, Pages!!!
-
-Voor Windows kan je notepad hiervoor gebruiken, maar er zijn betere keuzes zoals:
-
-* Notepad++
-* PSpad Editor
-* Atom
-* ...
-
-Deze editors hebben (in tegenstelling tot notepad) eigenschappen zoals:
-
-* *Text coloring:*  
-  Bepaalde elementen (variabelen, loops, functies, ...) worden in een andere kleur geplaatst om de leesbaarheid te verhogen.  
-* *Code completion:*  
-  De editor kan intelligent zijn door bijvoorbeeld code die gedeeltelijk is ingevuld automatisch aan te vullen
-* ...
-
-Voor Linux heb je een scala aan keuze:
-
-* GEdit (zeer eenvoudig)
-* Scitext
-* Atom
-* Kate
-* Leaf-pad
-* ...
-
-Voor Mac:
-
-* TextMate
-* TextWrangler
-* XCode
-* ...
-
-Dit zijn allemaal grafische text-editors en zijn over het algemeen zeer éénvoudig om mee te werken.  
-Deze hebben wel het nadeel dat je altijd tussen een command line en je editor moet wisselen, hievoor zijn er 2 alternatieven:
-
-* Command-line editors
-* IDE's, integrated development environments die zowel tekst-editors
-
-#### Command-line editors
-
-Voor de meer gevorderden zijn er Linux- en Mac zijn er zeer goede tekst-editors die je via de command-line bestuurt:
-
-* Vim
-* emacs
-* nano
-* ed
-* ...
-
-Deze zijn zeer krachtige editors die wel een zekere leercurve hebben (dus als je die voor de eerste maal probeert moet je wel wat tijd vrijmaken)
-
-> **Windows:**  
-> Deze command-line-editors zijn ook beschikbaar in Windows via Cygwin of Mingw (later meer hierover)

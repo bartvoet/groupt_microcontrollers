@@ -1,48 +1,57 @@
 
 ## Het vak "Microcontrollers"
-Wat houdt de cursus microcontrollers gegeven in ACE Groep T?  
-Hoe past deze cursus binnen de opleiding?  
-Wat ga je hier leren?  
 
-### Situering van de module in de opleiding
-In de opleiding "digitale combinatorische" en "digitale sequentiële logica" heb je geleerd van (hardwarematig) logische devices te programmeren.
+* Wat houdt de cursus microcontrollers gegeven in ACE Groep T?
+* Hoe past deze cursus binnen de opleiding?
+* Wat ga je hier leren?
 
-In de praktijk werkt deze hardware samen met (of wordt aangestuurd door) microcontrollers.
+### Situering van de module binnen de opleiding
+
+In de opleidingen 
+
+* **digitale combinatorische**
+* **digitale sequentiële**
+
+heb je geleerd van - **hardwarematig** - logische devices te maken door te werken met: 
+
+* Combinatorische logica te maken met logiche poorten
+* Geheugen-elementen hier aan toe te voegen (flipflops, shift-registers, ...)
+* Tellers
+* ...
+
+Om van deze hardware een werkbaar en flexibel product te maken wordt **hardware**  - zowel analoge als digitaal - in de praktijk gecombineerd met en aangestuurd door **microcontrollers** als besturings- en meet-element.
 
 ![](../../pictures/orientation_digital_courses.png)
 
-In deze cursus leren we omgaan met deze "kleine computers" of microcontrollers.
-
-De kennis van deze 3 vakken (module digitale technieken) zal uiteindelijk worden gebruikt in het vak "multimedia" waar je deze vaardigheden zal combineren om multimedia-toepassingen te maken.
+De kennis van deze **3 vakken** (binnen module digitale technieken) zal uiteindelijk worden **samengebracht** in het vak "multimedia" waar je deze vaardigheden zal combineren om multimedia-toepassingen te maken.
 
 ### Doelstelling van de cursus
 
-De doelstellingen van deze cursus zijn inzicht verwerven in en te leren werken met zowel microcontrollers als met de programmeer-taal C  
+In deze cursus leren we omgaan met deze **"kleine computers"** of **microcontrollers**:
 
-Dit houdt in onder andere:
-
-* De basis van de programmeertaal C (input/output, condities, loops, types, ...)
-* Basis I/O periferieën en het leren aansturen ervan in de programmeertaal C
-* Algemene communicatie-protocollen zoals i2c, spi, usart, ...
-* De architectuur van een AVR microcontroller (en vergelijking met andere architecturen)
-* Werken met datasheets
-* Ter illustratie van deze architectuur AVR-assembler (enkel de noties)
-* Het geheugen en registeropbouw in een microcontroller (en coputersystemen in het algemeen)
-* Meer geavanceerde aspecten van C (bv. arrays, pointers, dynamisch geheugen, ...)
-* Leren je code modulair en herbruikbaar te maken
+* Hoe te **programmeren** (in C)?
+* Hoe microcontrollers te **integreren** in electronische schakelingen?
+* Optimaal de **hardware** van je **MCU** te gebruiken?
+* Leren **datasheets** te **lezen** en werken met **registers**
 * ...
 
-> **Belangrijke bemerking:**  
-> Een belangrijke achtergrond van deze cursus is de student klaar te maken:
->
-> * Capabel zijn nieuwe platformen en architecturen te analyseren (naast AVR) 
-> * Ook algemene aspecten bij te leren over programmeren in het algemeen zoals design en analyse
+We weken in deze cursus met AVR-microcontrollers, maar het uiteindelijke **doel/resultaat** van/na de cursus:
+
+* Voldoende (minimale) **basiskennis** van C relevant voor het werken met MCU
+* **Zelfstandig** met microcontrollers werken door datasheets te analyzeren
+* En al doende een **nieuwe microcontroller**-architectuur te begrijpen
+* **Basis-kennis/pakket** hebben van de belangrijkste en voornaamste 
+      * **technieken** (registers, interrupts, timers, ...)
+      * **peripherals** (gpio,pwm, adc, i2c, spi, ...) 
+
+> Met andere woorden, na deze cursus wordt je in je eindwerk (en andere vakken) heel waarschijnlijk geconfronteerd met een microcontroller.  
+> Met deze cursus willen je klaarstomen om dit op een zo zelfstandige basis te kunnen verwerken.
+
 
 ### Samenstelling cursus/Verschillende aspecten
 
 * **Code:**  
-Het aanleren van programmeren met een focus op de C-programmeertaal.  
-Dit is meestal de start van een hoofdstuk waar we de nodige elementen aanleren die nodig zijn in de 2 in het toepassing-niveau (en ook niet meer want C is al voldoende complex).  
+Het aanleren van **programmeren** met een **focus** op de **C**-programmeertaal (Python komt in de laatste les ook aan bod).  
 Dit wordt telkens ingeoefend aan de hand van korte labo-oefeningen op PC voor dat we dit toepassen op een microcontroller-omgeving.  
 
 * **Architectuur en low-level**  
@@ -52,5 +61,5 @@ Afhangende van het onderwerp zullen we dieper ingaan op instructie-sets, process
 * **Toepassing: tools en labo's**  
 Het leren werken de benodigde tools zoals compilers, flash-tools, debuggers,  ...
 
-* **Elektronica**  
+* **Elektronica** en **integratie**
 Herhaling vanuit de andere elektronica-vakken waar nodig (bijvoorbeeld pull-up en pull-down, PWM, ...)

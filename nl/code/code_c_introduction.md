@@ -6,11 +6,14 @@ We starten met een kort voorbeeld:
 
 
 ```{.c}
-void main ()
+#include <stdio.h>
+
+int main ()
 {
 	int a;
 	a = 1 + 2;
 	printf("1 + 2 = %i",a);
+	return 0;
 }
 ```
 
