@@ -4,7 +4,7 @@ Welkom in de cursus MCU!!
 
 ----
 
-## Cursus
+### Cursus
 * Leren **programmeren** in het algemeen
 * Programmeren met **C**
      * Basis-kennis van C opbouwen
@@ -50,7 +50,7 @@ Welkom in de cursus MCU!!
 ------
 
 
-## Materiaal: waar?
+### Materiaal: waar?
 
 * Te vinden op Toledo
 * Wordt elke week aangevuld met het materiaal van de week
@@ -60,7 +60,7 @@ Welkom in de cursus MCU!!
 
 --------
 
-## Materiaal: vorm?
+### Materiaal: vorm?
 
 * Cursus:  
   Alle inhoud van de cursus in 3 formaten
@@ -74,11 +74,20 @@ Welkom in de cursus MCU!!
 * Code voorbeelden
      * C
      * Python
-     
+ 
+------- 
+ 
+### Verschil vorig jaar?
+
+* Toevoegen van Python
+* Meer vergelijking met andere architecturen
+* Examens
+
 -------
 
 
 ### Programma vandaag?
+
 * Overzicht van het vak microcontrollers
     * Structuur en inhoud
     * Afspraken
@@ -94,9 +103,10 @@ Welkom in de cursus MCU!!
 
 ------
 
-### Programma vervolg?
+### Programma vervolg
 
 * Vervolg basis-cursus C op X86 (3 lessen in totaal)
 * Normaal gezien een college ivm flowcode (IMEC)
 * Eerste kennismaking met Microcontroller in labo
+
 ------
