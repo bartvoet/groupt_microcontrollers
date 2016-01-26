@@ -39,7 +39,7 @@
 
 
 
-```c
+```{.c}
 int a;
 
 int main()
