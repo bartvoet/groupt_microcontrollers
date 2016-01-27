@@ -54,7 +54,7 @@ int main ()
 Deze code-snippet heeft als **functionaliteit** het **afdrukken** van de **som** van de getallen **1 en 2**.    
 Het eindresultaat van dit programma is een afdruk op het scherm van de som van 1 en 2:
 
-```
+```bash
 $ gcc eerste_programma.c -o eerste_programma
 1 + 2 = 3
 $
