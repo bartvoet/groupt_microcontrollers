@@ -8,10 +8,10 @@ In de cursus bespraken we dit onderstaande programma dat nakeek of een gegegeven
 * Even of oneven is
 * Bij 0 een waarschuwing meegeeft (noch negatief/positief, even/oneven)
 
-```
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     int input;
     printf("Gelieve een getal in te geven: \n");
@@ -31,6 +31,7 @@ void main()
     		printf("Het getal %i is een negatief oneven getal",input);
         }
     }
+    return 0;
 }
 ```
 
@@ -40,44 +41,44 @@ Deze opdracht heeft als bedoeling een aantal wijzigingen aan dit programma aan t
 
 Momenteel kijkt dit programma na of het getal **even of oneven** is, met andere woorden dat 2 een deler is van het input-getal.    
 Wijzig het programma opdat het **ipv** na te kijken of het input-getal **gedeeld** kan worden door **2** nakijkt of het gedeeld kan worden door **een ingegeven getal**.   
- 
+
 Dus ipv te testen dat het deelbaar is door 2, vraagt het programma bij het begin een getal om te testen zoals geïllustreerd hieronder:  
 
 ```
-$ Gelieve een getal in te geven: 
+$ Gelieve een getal in te geven:
 $ 5
 $ Gelieve een deel-getal in te geven:
 $ 3
 $ Het getal 5 is een positief getal maar niet deelbaar door 3
 $
-``` 
+```
 
 of
 
 ```
-$ Gelieve een getal in te geven: 
+$ Gelieve een getal in te geven:
 $ - 8
 $ Gelieve een deel-getal in te geven:
 $ 4
 $ Het getal -8 is een negatief getal en deelbaar door 4
 $
-``` 
+```
 
 #### Deel B
 Laat dit programma zich herhalen waarbij je telkens opnieuw het input- en deel-getal opvraagt.  
 Laat het programma stoppen als als je voor het input-getal 1 ingeeft.  
 
 ```
-$ Gelieve een getal in te geven: 
+$ Gelieve een getal in te geven:
 $ - 8
 $ Gelieve een deel-getal in te geven:
 $ 4
 $ Het getal -8 is een negatief getal en deelbaar door 4
-$ Gelieve een getal in te geven: 
+$ Gelieve een getal in te geven:
 $ 1
 $ Bij ingave van 1 stopt het programma
-$ 
-``` 
+$
+```
 
 #### Deel C (optioneel)
 Zorg ervoor dat het programma een boodschap als geeft dat hij dit niet kan nakijken omdat het getal kleiner is dan het "deel-getal".   
@@ -95,12 +96,12 @@ Print een binaire representatie af van een getal (zie lessen combinatorische en 
 Tips:
 
 * Het afdrukken van 0 en 1 kan je via printf (```printf("0");``` en ```printf("1");```)
-* Ter referentie 2 onderstaande tabellen stellen we 2 verschillende manieren voor om dit te bereiken 
+* Ter referentie 2 onderstaande tabellen stellen we 2 verschillende manieren voor om dit te bereiken
 
 **Manier 1:**
 
 * Starten bij de grootste macht van 2 < input getal, deze door 2 blijven delen.  
-* Als de (gedeelde) macht van 2 kleiner is dan het input (of zijn overschot) 
+* Als de (gedeelde) macht van 2 kleiner is dan het input (of zijn overschot)
     * print je een 1 en trek je de macht af
     * anders print je 0
 * Je eindigt als je bij 0 of 1 komt
@@ -114,7 +115,7 @@ Tips:
 | 0         | -           | -               | -             |
 
 
-**Manier 2:** 
+**Manier 2:**
 
 * Blijf het input-getal blijven delen door 2
 * Als er een rest is print je 1, anders print je 0
@@ -178,4 +179,3 @@ Gebruik hiervoor loops.
 ### Opdracht 4 (optioneel)
 
 Maak een programma dat nakijkt of een getal een priemgetal is (aan de hand van een loop)
-
