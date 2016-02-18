@@ -44,7 +44,7 @@ Daarom willen we ons **beperken** (in dit hoofdstuk) tot **unsigned integers**, 
 
 Net zoals het type int dat we eerder gebruikt hebben in vorige hoofdstukken bestaat er ook een unsigned tegenhanger, namelijk de **unsigned int**.
 
-```{.c}
+```c
 unsigned int = 5;
 ```
 
@@ -107,13 +107,14 @@ Bijvoorbeeld ```int a = 0xA``` zal er voor zorgen dat integer a wordt geinitiase
 
 Onderstaande code zal desgevolg ook 10 afdrukke (%i is de decimale representatie).
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     int value_ten = 0xa;
     printf("%i\n",value_ten);
+    return 0;
 }
 ```
 
@@ -121,10 +122,10 @@ void main()
 
 Onderstaande code toont ook aan dat de hex-representatie dezelfde waarde geeft als  de decimale representatie...
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     if(10 == 0xa) {
        printf("10 == 0xa");
@@ -138,13 +139,14 @@ De printf-functie geeft je ook de mogelijkheid om de waarde als hexadecimaal get
 
 Dit kan je gebruiken door de placeholder x te gebruiken (ipv i die we tot nog toe hebben gebruikt)
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
   int value_ten = 10;
   printf("%i == %x\n",value_ten,value_ten);
+  return 0;
 }
 ```
 
@@ -154,10 +156,10 @@ Vandaag beperken we ons in de meeste oefeningen en labo's tot de "unsigned char"
 
 In c heb je trouwens een **operator** (geen functie) met de naam sizeof die toelaat van de **grootte** van een bepaald **type** te verkrijgen.  
 
-```{.c}
+```c
 #include <stdio.h>
 
-int main(void)
+int main(int)
 {
 
 	unsigned char an_unsigned_char = 5;
@@ -214,12 +216,13 @@ We gaan dit direct met een aantal voorbeelden **illustreren**.
 
 ### Voorbeeld: verschil tussen logische en bitwise operatoren
 
-```{.c}
+```c
 #include <stdio.h>
-void main()
+int main()
 {
 	printf("2 && 2 = %i\n",2 && 2);
 	printf("2 & 2 = %i\n", 2 & 2);
+  return 0;
 }
 ```
 Als je dit uitvoert krijg je de volgende output
@@ -256,9 +259,9 @@ Bij de bitwise operator gaat deze de bits individueel met elkaar gaan matchen en
 Nog een ander voorbeeld is de combinatie 5 en 2.  
 Hier is het verschil tussen beide nog opvallender (1 en 0),.
 
-```{.c}
+```c
 #include <stdio.h>
-void main()
+int main()
 {
 	printf("5 && 2 = %i\n",5 && 2);
 	printf("5 & 2 = %i\n", 5 & 2);
@@ -333,11 +336,12 @@ een 1 voorkomt een 1 als uitkomst hebben (anders 0).
 
 Code:
 
-```{.c}
+```c
 #include <stdio.h>
-void main()
+int main()
 {
 	printf("0x5B & 0xCA = %x\n", 0x5B & 0xCA);
+  return 0;
 }
 ```
 Als je dit uitvoert krijg je de volgende output
@@ -370,9 +374,9 @@ Voorbeeld:
 
 Code:
 
-```{.c}
+```c
 #include <stdio.h>
-void main()
+int main()
 {
 	printf("0x5B | 0xCA = 0x%x\n", 0x5B | 0xCA);
 }
@@ -407,17 +411,18 @@ Zoals je zien in de laatste rij resulteren de kolommen waar beide bits gelijk zi
 
 Hetzelfde voorbeeld in code bevestigd de tabel:  
 
-```{.c}
+```c
 #include <stdio.h>
-void main()
+int main()
 {
 	printf("0x5B ^ 0xCA = 0x%x\n", 0x5B ^ 0xCA);
+  return 0;
 }
 ```
 
 Als je dit uitvoert krijg je de volgende output
 
-```
+```bash
 $ gcc example_bit_xor.c -o example_bit_xor
 $ ./example_bit_xor
 0x5B ^ 0xCA = 0x91
@@ -429,11 +434,12 @@ $
 De laatste bitwise operator die we zien is de invertor.  
 Dit is een unitaire operator (slechts 1 operand).  
 
-```{.c}
+```c
 #include <stdio.h>
-void main()
+int main()
 {
 	printf("~0xAA = %x\n", 0x55);
+  return 0;
 }
 ```
 
@@ -478,9 +484,9 @@ Belangrijke kenmerken van deze operatoren (logical shift):
 
 > Bemerking: de getallen worden in dit geval ook vermenigvuldigd met 2
 
-```{.c}
+```c
 #include <stdio.h>
-void main()
+int main()
 {
     printf("%x\n",0xa << 0);
     printf("%x\n",0xa << 1);
@@ -501,14 +507,15 @@ void main()
 
 > Bemerking: de getallen worden in dit geval ook gedeeld door 2
 
-```{.c}
+```c
 #include <stdio.h>
-void main()
+int main()
 {
     printf("%x\n",0xa >> 0);
     printf("%x\n",0xa >> 1);
     printf("%x\n",0xa >> 3);
     printf("%x\n",0xa >> 4);
+    return 0;
 }
 ```
 ### Voorbeeld: >> wegshiften van bits
@@ -571,10 +578,10 @@ Voorbeeld:
 
 Beschouw de volgende code:
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     int test_getal= 0x5;
 
@@ -629,10 +636,10 @@ Het 2de if-statement echter zal in een 0 resulteren (en binnen een if geldt dit 
 
 We hebben dit nu toegepast om 1 enkele bit te selecteren.
 Je kan ook grotere bitmask maken, stel voor dat je wil weten dat minstens 1 positie is  
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     int test_getal= 0xAA;
 
@@ -641,6 +648,7 @@ void main()
     } else {
         printf("bit %i van testgetal %x is niet gezet\n",2,test_getal);
     }
+    return 0;
 }
 ```
 
@@ -655,7 +663,7 @@ void main()
 
 Een praktisch voorbeeld is als je wil uitprinten welke bits van een getal op 1 staan
 
-```{.c}
+```c
 #include <stdio.h>
 
 int main()
@@ -684,10 +692,10 @@ Als voorbeeld, stel het volgende:
     * 1 met de MSB byte
     * 1 met de LSB byte
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
    unsigned short big_number = 0xAABB;
    unsigned char ls_byte = big_number & 0x00ff;
@@ -730,14 +738,15 @@ Je kan ook een bit (op een specifieke positie) in een getal wijzigen zonder de a
 Dit is een vaardigheid dat je zeer veel nodig zal hebben voor een MCU-programma.  
 
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
      int a = 0x1;
      a = a | (0x1 << 4);
      printf("%x\n",a);
+     return 0;
 }
 ```
 
@@ -763,10 +772,10 @@ Wanneer er een 0 staat op een specifieke locatie zal deze zich gedragen als een 
 Een andere actie die je kan toepassen is een specifieke bit wijzigen naar 0 (ook wel de bit clearen genoemd).
 Dit wordt gedaan door een geinverteerd bit-patroon toe te passen zoals hieronder:
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
      int a = 0xA;
      a = a & ~(0x1 << 1);
@@ -812,10 +821,10 @@ Anders gezegd:
   (0 ^ **0** = 0 en 1 ^ **0** = 1)
   en de bit van het source-getal **niet wijzigen**  
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
      int a = 0x2;
      a = a ^ (0x1 << 1);
@@ -829,6 +838,7 @@ void main()
 
      a = a ^ (0x1 << 1);
      printf("%x\n",a);
+     return 0;
 }
 ```
 
