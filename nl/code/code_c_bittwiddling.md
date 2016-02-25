@@ -32,7 +32,7 @@ Naast deze integer heb je ook een aantal andere **signed types** met verschillen
 We nemen eerst echter een andere type onder de loep, namelijk de **unsigned integer** (interne opbouw, conversies, ...)
 Deze unsigned versie verschilt van een signed integer:
 
-* Kan negatieve waarde voorstellen
+* Kan alleen een positieve waarde voorstellen
 * Gebruikt geen sign-bit
 * De regels rond bit-manipulaties zijn éénvoudiger  
   (je moet geen rekening houden met de sign-bit ...)
@@ -69,8 +69,8 @@ Bijvoorbeeld hieronder de representatie van:
 
 |type  | hex      |15  | 14 | 13 | 12 | 11 | 10 |  9 |  8 |  7 |  6 |  5 |  4 |  3 |  2 |  1 |  0 |
 |------|----------|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|
-|short |0x1010    | 1  | 0  | 1  | 0  | 1  | 0  | 1  | 0  |  1 | 0  | 1  | 0  |  1 | 0  | 1  | 0  |
-|char  |0x10      | -  | -  | -  | -  | -  | -  | -  | -  |  1 | 0  | 1  | 0  |  1 | 0  | 1  | 0  |
+|short |0xAAAA    | 1  | 0  | 1  | 0  | 1  | 0  | 1  | 0  |  1 | 0  | 1  | 0  |  1 | 0  | 1  | 0  |
+|char  |0xAA      | -  | -  | -  | -  | -  | -  | -  | -  |  1 | 0  | 1  | 0  |  1 | 0  | 1  | 0  |
 
 > **Bemerking:**  
 > We houden in dit hoofdstuk nog geen rekening met de endianess (big vs little endian)  
@@ -185,7 +185,7 @@ int main(int)
 
 Als je dit programma uitvoert krijg je volgend resultaat
 
-```
+```c
 sizeof(unsigned char) = 1 bytes
 sizeof(an_unsigned_char) = 1 bytes
 sizeof(unsigned short) = 2 bytes
@@ -910,3 +910,56 @@ Dus belangrijk te onthouden:
 * ^ (XOR) gebruik je in combinatie met een bitmask om te togglen (zoals een inverter maar enkel op specifieke bits)
 
 Deze regels zullen nog veel terugkomen bij het werken met registers in MCU's!!!
+
+
+### Overzicht
+
+**OVERZICHT:**
+
+* Shift-operators:
+     * >>,<<
+     * Let op overflow
+* Bitwise-operators:
+     * inverter: ~
+     * bitwise and: &
+     * bitwise or: |
+     * bitwise xor: ^
+* BITMASK
+     * == PATROON
+     * Laat je toe in bits te denken zonder te rekenen
+
+**Basis-bitmasks:**
+
+```c
+1 bit-positie                    => (1 << pos)
+1 volledige byte                 => (0xFF << pos)
+                                 => (0xFF << (pos * 8))
+combineren/plakken van bitmasks  => (1 << pos1) | (1 << pos2)
+inverteren van bitmasks          => ~(1 << pos)
+                                 => ~0xAA == 0x55
+```
+
+**Kenmerken van bitwise-operatoren:**
+
+```c
+& => 0 is dominant
+| => 1 is dominant
+^ => 1 iverter, 0 is buffer
+```
+
+**Basis-operaties:**
+
+```c
+GET     =>   if( x &  (1 << pos))  
+SET     =>   x = x |  (1 << pos)  
+CLEAR   =>   x = x & ~(1 << pos)
+TOGGLE  =>   x = x ^  (1 << pos)
+INVERT  =>   ~0xFF == 0x00
+        =>   ~0xAA == 0x55
+```
+
+**Andere:**
+
+```c
+0xFF == ~0x00
+```
