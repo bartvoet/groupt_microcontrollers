@@ -23,10 +23,17 @@ Dit deel legt uit:
 Bij linux-distributies is avr-gcc beschikbaar via de verschillende package-managers.
 
 Ubuntu en Debian:   
-```sudo apt-get install avrdude avrdude-doc binutils-avr avr-libc gcc-avr gdb-avr```
+
+```bash
+$ sudo apt-get install avrdude avrdude-doc binutils-avr avr-libc gcc-avr gdb-avr
+$ sudo usermod -a -G dialout name_user
+```
 
 Fedora en Red Hat:  
-```sudo yum install avrdude avr-gcc avr-binutils avr-libc avr-gdb```
+```bash
+# yum install avrdude avr-gcc avr-binutils avr-libc avr-gdb
+# usermod -a -G dialout name_user
+```
 
 ### Installatie Mac
 
@@ -37,7 +44,7 @@ http://www.obdev.at/downloads/crosspack/CrossPack-AVR-20131216.dmg
 
 Zoals bij Linux ook de klassieke package-manager volstaat (ports).  
 De volgende packages dienen te geïnstalleerd worden.  
-avr-gcc, avr-binutils, avr-libc, avr-gdb, avrdude 
+avr-gcc, avr-binutils, avr-libc, avr-gdb, avrdude
 
 ### Installatie Windows (xp tem 7)  
 
@@ -80,7 +87,7 @@ int main(void)
 
 1 maal dat je deze file hebt bewaard kan je starten aan de volgende stap (compilen en builden)
 
-### Compileren en flashen van de code 
+### Compileren en flashen van de code
 
 ![](../../pictures/toolchain_for_avr_s.png)
 
@@ -95,7 +102,7 @@ Voer daarna de volgende 4 commando's uit (vervang /dev/ttyACM0 door de specifiek
   avr-gcc -mmcu=atmega328p led.o -o led
 * Omzetten naar een hex-file:  
   avr-objcopy -O ihex -R .eeprom led led.hex
-* Downloaden naar de AVR-mcu via een programmer (in dit geval de bootloader van AVR) : 
+* Downloaden naar de AVR-mcu via een programmer (in dit geval de bootloader van AVR) :
   avrdude -F -V -c arduino -p ATMEGA328P -P /dev/ttyACM0 -b 115200 -U flash:w:led.hex
 
 ### Command-line voorbeeld
