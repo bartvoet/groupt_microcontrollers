@@ -1,6 +1,6 @@
 ## Labo: eerste AVR-programma
 
-### Opdracht 1: hello world
+### Opdracht 1: hello world (blinking led voor microcontrollers)
 
 #### Deel A
 
