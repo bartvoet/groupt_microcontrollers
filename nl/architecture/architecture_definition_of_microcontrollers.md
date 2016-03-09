@@ -125,7 +125,7 @@ Dit laat het toe van **zeer compacte** en kleine **computers** te maken, voorbee
 ![](../../pictures/intro_beaglebone_picture_vs.jpg) ![](../../pictures/intro_rpi_picture.png)
 
 Deze **mini-computers** bevatten ook dikwijls dezelfde (of toch een deel van de) low-level-interface-mogelijkheiden van een MCU waardoor je deze (naast klassiek computergebruik) deze ook kan integreren in een elektronische schakeling.  
-Dit kan zeer nuttig zijn als je meer krachtige toepassingen wil hebben waar je bijvoorbeeld: 
+Dit kan zeer nuttig zijn als je meer krachtige toepassingen wil hebben waar je bijvoorbeeld:
 
 * Meer CPU en/of opslag nodig heb
 * Wil integreren in een draadloos netwerk
@@ -298,12 +298,13 @@ De hardware setup (mocht je zelf al willen proberen):
 ![](../../pictures/intro_demo_design.jpg)
 
 
-#### Gespecialiseerde functionaliteit  
+#### Gespecialiseerde functionaliteit
+
 Naast deze GPIO-functionaliteit kan je op bepaalde pinnen ook meer gespecialiseerde functionaliteiten triggeren (geïmplementeerd in hardware) zoals:  
 
 * Pulse Width Modulation (PWM) voor het genereren van analoge signalen (soms in combinatie met een filter)
 * Analog Digital Conversion (ADC) voor het omzetten en samplen van analoge signale
-* Seriele protocollen (voornamelijk gebruikt voor instructies en data-overdracht tussen MCU's, sensors, computers, ...) 
+* Seriele protocollen (voornamelijk gebruikt voor instructies en data-overdracht tussen MCU's, sensors, computers, ...)
     * UART (bijvoorbeeld via een ftdi-chip kan je de MCU met je computer laten praten)
     * I2C (serieel bus-protocol uitgevonden door Philips en voortgezet door NXP)
     * SPI (master-slave-protocol ontwikkeld door Motorolla)
@@ -327,4 +328,3 @@ In de volgend hoofdstukken gaan we bekijken hoe we deze AVR-MCU's gaan aanspreke
 * Interne opbouw
 
 Alvorens dieper in te gaan op hoe dat een MCU werkt en opgebouwd is gaan we **eerst** een **basis-introductie** geven in programmeren in **C** aan de hand van een aantal command-line applicaties (met als target de computer).
-
