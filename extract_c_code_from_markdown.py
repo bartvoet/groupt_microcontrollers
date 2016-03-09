@@ -1,6 +1,5 @@
 import os
 import sys
-from pandocfilters import toJSONFilter, Str, Para, Image
 import re
 
 def write_to_file(file_object,code):

@@ -19,17 +19,17 @@ def code_include(key, value, format, meta):
         result = regex.search(code)
         if result:
             comp_file = result.group(1)
-            make_command = "make " + comp_file 
+            make_command = "make " + comp_file
             try:
                 p = subprocess.Popen(make_command,shell=True,bufsize=64,stdin=subprocess.PIPE,stderr=subprocess.PIPE,stdout=subprocess.PIPE)
                 new_code = "$ # make and run: {" + comp_file + "}\n"
-                new_code = new_code + "$ " + make_command                 
+                new_code = new_code + "$ " + make_command
                 for line in p.stdout:
-                    new_code = new_code + "\n" + str(line.rstrip())    
+                    new_code = new_code + "\n" + str(line.rstrip())
                 p = subprocess.Popen(comp_file,shell=True,bufsize=64,stdin=subprocess.PIPE,stderr=subprocess.PIPE,stdout=subprocess.PIPE)
                 new_code = new_code + "\n$ " + comp_file
                 for line in p.stdout:
-                    new_code = new_code + "\n"  + str(line.rstrip()) 
+                    new_code = new_code + "\n"  + str(line.rstrip())
             except e:
                 sys.stderr.write(e)
             return CodeBlock([ident, classes, namevals], new_code)
