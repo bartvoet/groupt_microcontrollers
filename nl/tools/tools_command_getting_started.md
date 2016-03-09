@@ -1,4 +1,4 @@
-## Starten met tools: Command line
+M## Starten met tools: Command line
 
 Elke software-ontwikkelaar (en zeker als je met MCU's werkt) moet de beginselen kennen van het werken met command-line.  
 Dit argument is nog sterker als je met embedded devices werkt die veelal enkel te besturen zijn via command-line
@@ -90,10 +90,10 @@ Laat de installatie gewoon lopen.
 
 ### CLI/shell/terminal
 
-Een **shell** of **CLI** (command-line-interface) zorgt ervoor dat een gebruiker: 
+Een **shell** of **CLI** (command-line-interface) zorgt ervoor dat een gebruiker:
 
-* via tekst-**commando's** (acties) kan uitvoeren naar een **programma** toe 
-* in meeste gevallen het operating system zelf (maar soms ook specifiek programma's met een CLI) 
+* via tekst-**commando's** (acties) kan uitvoeren naar een **programma** toe
+* in meeste gevallen het operating system zelf (maar soms ook specifiek programma's met een CLI)
 * deze tekst-commando's kunnen meestal ook **gebundeld** worden in een **script** (dat je dan kan uitvoeren van een CLI)   
 * nadat de opdracht is uitgevoerd krijgt de gebruiker weer de kans om de shell of het programma aan te spreken door op de opdrachtregel een nieuwe opdracht op te geven.  
 
@@ -104,7 +104,7 @@ De CLI geldt als tegenhanger van de grafische gebruikersomgeving (ofwel de GUI, 
 
 ### Starten met CLI
 
-Elk operating system bevat een CLI: 
+Elk operating system bevat een CLI:
 
 **Linux**
 
@@ -177,7 +177,7 @@ Het commando ```ls -al > hello.txt``` zal bijvoorbeeld een file hello.txt maken 
 
 ![](../../pictures/tooling_for_windows.png)
 
-**Stap 3:** Maak een C-file in een teksteditor (dist\tools\Notepad++Portable\Notepad++Portable.c) en bewaar die ergens op je harde schijf
+**Stap 3:** Maak een C-file in een teksteditor (dist\\tools\\Notepad++Portable\\Notepad++Portable.c) en bewaar die ergens op je harde schijf
 
 ~~~{.c}
 #include <stdio.h>
@@ -238,7 +238,7 @@ Je schrijft je code naar een bestand en geeft dit een naam met de extensie C.
 ```{.c}
 #include <stdio.h>
 
-int main() 
+int main()
 {
 	printf("!!!Hello World!!!");
     return 0;
@@ -275,13 +275,13 @@ Daarna kan je het programma uitvoeren door de naam te typen
 (voorafgegaan door ./  om aan te duiden dat het bestand in deze diretory staat, in Windows dit is .\\)
 
 ```{.sh}
-$ ./hello 
+$ ./hello
 !!!Hello World!!!
-$ 
+$
 ```
 
 > **Bemerking:**  
-> In Windows gebruik je voor een uitvoerbaar bestand de extensie .exe, dus het laaste commando is dan ```gcc hello.o -o hello.exe``` 
+> In Windows gebruik je voor een uitvoerbaar bestand de extensie .exe, dus het laaste commando is dan ```gcc hello.o -o hello.exe```
 
 ### Linken en compilen tegelijk met GCC  
 
@@ -307,4 +307,3 @@ Het vorige voorbeeld is echter belangrijk om te beseffen dat achter het bouwen v
 * ...
 
 We gaan in de volgende hoofdstukken deze verschillende bouwstenen/processen verder uitleggen en verdiepen.
-

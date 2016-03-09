@@ -54,9 +54,22 @@ Er zijn andere manieren maar:
 * Deze is de meest gebruiksvriendelijke
 * Er zijn ook geen dependencies op xcode of MacPorts (dus je moet niet specifiek een account maken)  
 
-### Installatie Windows  AVR-compiler (xp tem 10)  
+### Installatie Windows AVR-compiler (xp tem 10)  
 
-Als je met je eigen PC werkt is het aangeraden van WinAVR te installeren, deze installeert alles wat je nodig hebt en past de PATH-variabele.  
+Als je met Windows werkt is het aangeraden van WinAVR te installeren, deze installeert alles wat je nodig hebt om te werken met AVR's.  
+Deze zal ook de nodige aanpassingen doen je environment-variabelen (PATH) zodat deze utilities direct beschikbaar zijn vanaf de command line.  
+
+### Boven Windows 8
+
+Vanaf Windows 8, werkt de installatie van WinAVR niet direct.  
+Dit geldt ook voor AVR Studio alsook andere (commerciele) software gebouwd bovenop WinAVR(zoals ATMEL Studio)
+
+Er zijn verschillende oplossingen hiervoor (zoals zelf compileren van WinAVR), de eenvoudigste manier is echter:
+
+* Downloaden van de zip-file op toledo (bij het het hoofdstuk gerelateerd aan AVR-GCC)  
+* De inhoud van deze file copieren en plakken in de folder "utils\\bin" onder de WinAVR-installatie
+
+Voor meer info ivm deze oplossing, zie volgend forum http://www.avrfreaks.net/comment/1007906#comment-1007906
 
 ### Test-programma
 
@@ -132,7 +145,7 @@ Dit is mogelijk gezien op de MCU (ATMEGA328P) een programma's op te laden over e
 
 Dit commando is gelijkaardig voor de meesten operating-systemen en setup's maar:
 
-* De **naam**** van de **seriele poort** (die na het -P argument komt) zal **verschillen** (voorbeeld komt van een Linux-OS)
+* De **naam** van de **seriele poort** (die na het -P argument komt) zal **verschillen** (voorbeeld komt van een Linux-OS)
 * Afhankelijk van het **OS** moet je een aantal zaken **voorbereiden**
 
 We bespreken dit per OS:
@@ -159,7 +172,7 @@ Deze nummer kan je te weten komen door naar de "Device Manager" in Windows te na
 Met bovenstaande com-poort (COM17) kan je dan het volgende commando gebruken:
 
 ```bash
-avrdude -F -V -c arduino -p ATMEGA328P -P COM17 -b 115200 -U flash:w:led.hex
+avrdude -F -V -c arduino -p ATMEGA328P -PCOM17 -b 115200 -U flash:w:led.hex
 ```
 
 ### Linux
