@@ -122,10 +122,9 @@ Het volstaat nu eigenlijk om ons voorbeeld van vorige week te herhalen maar naar
 #include <avr/io.h>
 #include <util/delay.h>
 
-int LED_NUMMER = PB2;
-
 int main(void)
 {
+  int LED_NUMMER = PB2;
   DDRB |= (1<<LED_NUMMER);
 
   while (1)
