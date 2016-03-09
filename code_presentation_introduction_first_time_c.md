@@ -1,0 +1,3 @@
+compile_programm.png
+os_loads_programm.png
+os_launch_programm.png
