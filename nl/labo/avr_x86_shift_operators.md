@@ -28,7 +28,7 @@ Een getal met de binaire waarde 01000001 kan je nog vermenigvuldigen met 2.
 Maak een programma dat bij de start 2 unsigned chars inleest (patroon %hhu ipv %i)  
 Voorbeeld voor inlezen van een unsigned char:  
 
-```{.c}
+```c
 unsigned char getal;
 scanf("%hhu",&getal);
 ```
@@ -43,14 +43,14 @@ Het is voldoende om enkel het totaal over de 2 ingelezen getallen af te drukken 
 
 Stel dat we 5 en 3 ingeven als getal en wetende dat een unsigned char 1 byte of 8 bits groot is:
 
-```
+```bash
 5 -> 00000101
 3 -> 00000011
 ```
 
 Op deze basis testen we ons programma:
 
-```
+```bash
 $ ./totaal_1_en_0
 Geef getal 1 in:
 5
@@ -74,26 +74,20 @@ Gebruik de meest efficiente operator hiervoor die we in de cursus hebben gezien.
 >**Tip**:  
 >Eén van de bitwise-operatoren (die we hebben gezien) zal 1 aanduiden indien 2 bits verschillend zijn en 0 als de bits gelijk zijn (voor meer info zie cursus-tekst).   
 
-#### Deel C
 
-Tel hoeveel bits gelijk aan elkaar zijn op dezelfde positie.  
-
-> **Tip**:  
-> Opnieuw er is een specfieke operator die dat voor jou kan doen, die enkel 1 geeft als de bits gelijk zijn aan elkaar.  
-
-#### Deel D
+#### Deel C (optioneel)
 
 Tel hoeveel posities waarbij er bij minstens 1 van beide bits 1 is
   
 > **Tip**:
-> Idem dito... vorig deel B en C
+> Idem dito... vorige
 
-#### Deel E (optioneel)
+#### Deel D (optioneel)
 
 Plak beide getallen aan elkaar adhv van een bitshift naar een unsigned short.    
 Het eerste getal dat je inleest is de MSB
 
-### Opdracht 3 (optioneel)
+### Opdracht 3
 
 Zelfde als opdracht 2 uit de loops, maar met de nieuwe operatoren (zou stuk éénvoudiger moeten zijn).
 
@@ -122,6 +116,6 @@ Je mag eventueel spaties printen ipv een 0 om een leuker effect te verkrijgen.
 00000001  
 ```
 
-#### Deel C
+#### Deel C (optioneel)
 Inverteer dit dit resultaat
 
