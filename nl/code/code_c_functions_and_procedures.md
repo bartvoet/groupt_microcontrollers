@@ -186,12 +186,13 @@ int vraag_een_nummer(char* boodschap)
     return nummer;
 }
 
-void main()
+int main()
 {
     int a,b;
     a=vraag_een_nummer("Geef een nummer aub");
     b=vraag_een_nummer("Geef nog een nummer aub");
     printf("De som van %i en %i is %i",a,b,(a + b));
+    return 0;
 }
 
 ```
@@ -476,7 +477,7 @@ void hello(int x)
   De variabele op het bovenste niveau wordt als het ware buiten scope gezet of genegeerd.
 * Als je de functie zou aanroepen met ```hello(0)``` zal deze 10 afprinten.
 
-### Duiding en voorbeelden: globale voorbeelden
+### Duiding en voorbeelden: globale scope
 
 Er is echter nog een derde soort scope mogelijk namelijk de globale scope.
 Deze scope geldt voor variabelen die gedeclareerd worden buiten functies om.
