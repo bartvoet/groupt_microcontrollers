@@ -14,10 +14,51 @@ Een functies kan 2 rollen in een programma innemen:
      * een waarde wegschrijft naar een file
      * ...
 * Een **waarde berekenen of genereren**, meestal op basis van een 1 of meerdere getallen, zoals bijvoorbeeld:
-     * een functie die de lengte van een string uitrekent 
+     * een functie die de lengte van een string uitrekent
      * de macht berekent over een getal
      * een string converteert naar hoofdletters
      * ...
+
+
+### Voorbeeld: een eerste functie
+
+Ons eerste voorbeeld bevat 2 functies.    
+Dit eerste voorbeeld zal een tekst naar de console printen:  
+
+```c
+#include <stdio.h>
+
+void print_een_boodschap()
+{
+   printf("%s","Een boodschap\n");
+}
+
+int main()
+{
+   print_een_boodschap();
+   return 0;
+}
+```
+
+* De functie ```main``` roept een eerder gedefinieerde functie ```print_een_boodschap``` aan
+* De body van ```print_een_boodschap``` bevat een lijn code die een tekst print (via een andere functie)
+* Deze functie bevat geen return-statement, dit is typisch voor "procedure"-functies
+* Het keyword **void** duidt erop dat deze functie geen waarde aflevert (procedure)
+
+> **Nota:**  
+>  De **main-functie** is ook een functie.
+>  Weliswaar een functie met een specifieke rol(hier komen we verder nog op terug).
+
+Als we de functie compilen krijgen we het volgende resultaat:
+
+```
+$ gcc simpele_functie.c -o simpele_functie
+$ ./simpele_functie
+Een boodschap
+$
+
+```
+
 
 ### Duiding: verschil tussen een functie en procedure
 
@@ -63,43 +104,6 @@ Een **header** bevat de beschrijving of **signatuur** van de functie:
 }
 ```
 
-### Voorbeeld: een eerste functie
-
-Ons eerste voorbeeld bevat 2 functies.    
-Dit eerste voorbeeld zal een tekst naar de console printen:  
-
-```{.c}
-#include <stdio.h>
-
-void print_een_boodschap()
-{
-    printf("%s","Een boodschap\n");
-}
-
-void main() 
-{
-    print_een_boodschap();
-}
-```
-
-* De functie ```main``` roept een eerder gedefinieerde functie ```print_een_boodschap``` aan 
-* De body van ```print_een_boodschap``` bevat een lijn code die een tekst print (via een andere functie)
-* Deze functie bevat geen return-statement, dit is typisch voor "procedure"-functies
-* Het keyword **void** duidt erop dat deze functie geen waarde aflevert (procedure)
-
-> **Nota:**  
->  De **main-functie** is ook een functie.
->  Weliswaar een functie met een specifieke rol(hier komen we verder nog op terug).
-
-Als we de functie compilen krijgen we het volgende resultaat:
-
-```
-$ gcc simpele_functie.c -o simpele_functie
-$ ./simpele_functie
-Een boodschap
-$
-
-```
 
 ### Duiding: Return-statements
 
@@ -125,7 +129,7 @@ Om return-statements te illustreren het volgende voorbeeld, een functie die:
 * Een getal uitleest van de console.
 * Het resultaat hiervan teruggeeft via een return-statement.
 
-```{.c}
+```c
 #include <stdio.h>
 
 int vraag_een_nummer()
@@ -136,7 +140,7 @@ int vraag_een_nummer()
     return nummer;
 }
 
-void main() 
+void main()
 {
     int nummer=vraag_een_nummer();
     printf("Het nummer is %i",nummer);
@@ -145,7 +149,7 @@ void main()
 ```
 
 * Deze functie geeft aan in zijn signatuur dat een integer zal worden teruggegeven (return).  
-* De aanroepende code vangt deze waarde op in een variabele 
+* De aanroepende code vangt deze waarde op in een variabele
 * En drukt deze waarde af via een andere functie (```printf```)
 
 ### Duiding: Communiceren met argumenten
@@ -171,7 +175,7 @@ De naam van de argumenten moeten uniek zijn en hebben ook dezelfde conventies en
 We vullen het vorige voorbeeld aan en zorgen we ervoor dat we ook de boodschap kunnen doorgeven.  
 We **parametreren** deze functie met een booschap, zodat we deze functie in verschillende situaties kunnen gebruiken.
 
-```{.c}
+```c
 #include <stdio.h>
 
 int vraag_een_nummer(char* boodschap)
@@ -182,7 +186,7 @@ int vraag_een_nummer(char* boodschap)
     return nummer;
 }
 
-void main() 
+void main()
 {
     int a,b;
     a=vraag_een_nummer("Geef een nummer aub");
@@ -199,7 +203,7 @@ Het toevoegen van dit argument zorgt dat je het gedrag van deze functie kan doen
 Niets houdt ons dan ook tegen om meerdere argumenten te gebruiken.  
 Ter aanvulling van het vorige voorbeeld voegen we nog een functie toe die 2 argumenten aanneemt en een som berekent.
 
-```{.c}
+```c
 #include <stdio.h>
 
 int vraag_een_nummer(char* boodschap)
@@ -215,7 +219,7 @@ int som(int a,int b)
     return a + b;
 }
 
-void main() 
+void main()
 {
     int a,b;
     a=vraag_een_nummer("Geef een nummer aub");
@@ -235,13 +239,13 @@ Vanaf de moment dat je in het uitvoeren van zo'n functie bij deze statement komt
 De volgende regels gelden:
 
 * Je mag binnen een functie meerdere return-statements hebben
-* Maar enkel als deze in een block zitten (functie, loop, clausules van condities) 
+* Maar enkel als deze in een block zitten (functie, loop, clausules van condities)
 * De laatste statement in je functie moet een return-statement zijn
 * Deze laatste statement mag een block-statement zijn (if, while, ...),  
   maar dan moet er in elke vertakking (of clausule) een return worden voorzien.    
   Bijvoorbeeld een if-else zal zowel in de if- als in de else-statement een return moeten geven
 
-De filosofie achter deze regels komt terug op: 
+De filosofie achter deze regels komt terug op:
 
 * Elke **logische vertakking van een functie** moet in een **return-waarde** resulteren.  
   Met andere woorden, je functie moet voor **elke mogelijke combinatie van argumenten een antwoord geven** (ofwel geen enkel antwoord in geval van procedures)  
@@ -249,14 +253,14 @@ De filosofie achter deze regels komt terug op:
   Bijvoorbeeld code die binnen een functie na een return-statement wordt geplaatst veroorzaakt zal altijd een error veroorzaken bij compilatie.  
 
 
-### Voorbeelden: Meerdere return-statements 
+### Voorbeelden: Meerdere return-statements
 
 In deze functie is het laatste een block-statement.  
 In deze code is het duidelijk gegarandeerd dat er altijd een waarde vanuit de functie wordt teruggegeven.  
-(zowel in de if en else-clausule) 
+(zowel in de if en else-clausule)
 
-```{.c}
-int max(int a,int b) 
+```c
+int max(int a,int b)
 {
     if(a > b) {
          return a;
@@ -266,11 +270,11 @@ int max(int a,int b)
 }
 ```
 
-De compiler zal niet aanvaarden dat je nog een statement hierna plaatst. 
+De compiler zal niet aanvaarden dat je nog een statement hierna plaatst.
 
-```{.c}
+```c
 // deze code compileert niet
-int max(int a,int b) 
+int max(int a,int b)
 {
     if(a > b) {
          return a;
@@ -283,9 +287,9 @@ int max(int a,int b)
 
 En ook niet in dit geval want de if-else clausule vangt alle mogelijkheden op.
 
-```{.c}
+```c
 // deze code compileert niet
-int max(int a,int b) 
+int max(int a,int b)
 {
     if(a > b) {
          return a;
@@ -300,12 +304,12 @@ De volgende schrijfwijze zal wel werken.
 Deze zal het zelfde resultaat geven als de eerste implementatie.
 Dit aangezien je in beide gevallen toch aan ```return b;``` uitkomt als de if-statement 0 evalueert.
 
-```{.c}
-int max(int a,int b) 
+```c
+int max(int a,int b)
 {
     if(a > b) {
          return a;
-    } 
+    }
     return b;
 }
 ```
@@ -313,15 +317,15 @@ int max(int a,int b)
 
 ### Duiding: void-return
 
-Een functie die geen return-waarde teruggeeft (void als return waarde) kan echter ook vervroegd het programma beëindigen via een return-statement. 
-Hier geldt wel de regel van **dode code** - code die na zo een **expliciete return** komt (en deze return staat niet afgeschermd door een conditie) - een fout zal genereren. 
+Een functie die geen return-waarde teruggeeft (void als return waarde) kan echter ook vervroegd het programma beëindigen via een return-statement.
+Hier geldt wel de regel van **dode code** - code die na zo een **expliciete return** komt (en deze return staat niet afgeschermd door een conditie) - een fout zal genereren.
 
 ### Voorbeelden: void-return
 
 Bijvoorbeeld het volgende programma zal terugkeren als a kleiner is dan 0.
 
-```{.c}
-void print_enkel_positieve_getallen(int a) 
+```c
+void print_enkel_positieve_getallen(int a)
 {
     if(a < 0) {
         return;
@@ -333,8 +337,8 @@ void print_enkel_positieve_getallen(int a)
 
 Het programma is echter wel equivalent aan het volgende:
 
-```{.c}
-void print_enkel_positieve_getallen(int a) 
+```c
+void print_enkel_positieve_getallen(int a)
 {
     if(a >= 0) {
         printf("%i\n");
@@ -358,7 +362,7 @@ De scope van zo'n lokale variabele is enkel zichtbaar en beperkt tot de functie 
 In het voorbeeld hieronder zal a enkel zichtbaar zijn in de de methode ```hello()``` en niet de methode ```world()```
 
 
-```{.c}
+```c
 //deze code zal niet compilen
 void hello()
 {
@@ -369,14 +373,14 @@ void world()
 {
     printf("%i",a);
 }
-``` 
+```
 
 Eenzelfde variabele-naam kan echter ook voorkomen in verschillende functies.  
 Deze zal dan ook worden beschouwd als een andere variabele.
 
 In code hieronder is de variabele ```a``` in de methode ```hello()``` is namelijk niet dezelfde als de variabele ```a``` in de functie ```world()```
 
-```{.c}
+```c
 void hello()
 {
     char* a = "hello";
@@ -386,7 +390,7 @@ void world()
 {
     char* a = "world";
 }
-``` 
+```
 
 Deze scope benoemen we als **functie-scope**.
 
@@ -395,7 +399,7 @@ Deze scope benoemen we als **functie-scope**.
 Dit principe kunnen we echter nog verder trekken, namelijk **block-scope** (op niveau van clausules binnen loops, condities, ...).   
 We illustreren dit als volgt:  
 
-```{.c}
+```c
 //deze code zal niet compileren
 void hello(int x)
 {
@@ -404,14 +408,14 @@ void hello(int x)
     }
     printf("%i",a);
 }
-``` 
+```
 
 Variabele ```a``` is enkel zichtbaar tussen de accolades van de if-statement.  
-De lijn binnen de printf-statement kan echter de variabele a niet zien aangezien de scope enkel beperkt is tot de if-clausule 
+De lijn binnen de printf-statement kan echter de variabele a niet zien aangezien de scope enkel beperkt is tot de if-clausule
 
 Ook als deze statement binnen de else-clausule staat zal dit niet werken want de scope is letterlijk beperkt tot de accolades.  
 
-```{.c}
+```c
 //deze code zal niet compileren
 void hello(int x)
 {
@@ -421,13 +425,13 @@ void hello(int x)
         printf("%i",a);
     }
 }
-``` 
+```
 
 Het omgekeerde is echter wel waar.  
 Een variabele gedeclareerd op een hoger niveau is zichtbaar voor de blocks op een lager niveau.   
 Hoewel nutteloos zal de code hieronder wel compilen.  
 
-```{.c}
+```c
 //deze code zal niet compileren
 void hello(int x)
 {
@@ -438,7 +442,7 @@ void hello(int x)
         printf("%i",a);
     }
 }
-``` 
+```
 
 ### Duiding en voorbeelden: naam-conflicten
 
@@ -454,7 +458,7 @@ Deze variabele is echter op 2 niveaus gedeclareerd:
 * functie-scope
 * block-scope  
 
-```{.c}
+```c
 void hello(int x)
 {
     int a = 10;
@@ -466,7 +470,7 @@ void hello(int x)
         printf("%i",a);
     }
 }
-``` 
+```
 
 * Als je de functie zou aanroepen met ```hello(1)``` zal deze 5 afprinten  
   De variabele op het bovenste niveau wordt als het ware buiten scope gezet of genegeerd.
@@ -478,7 +482,7 @@ Er is echter nog een derde soort scope mogelijk namelijk de globale scope.
 Deze scope geldt voor variabelen die gedeclareerd worden buiten functies om.
 
 
-```{.c}
+```c
 #include <stdio.h>
 
 int teller = 0;
@@ -508,7 +512,7 @@ void main()
     tel_omlaag();
     print_teller();
 }
-``` 
+```
 Dit geeft als resultaat:
 
 ```
@@ -525,10 +529,10 @@ De variabelen die je dus buiten een functie declareert kan je dus lezen vanuit e
 
 ### Voorbeeld: Conventies rond plaatsing van accolades
 
-```{.c}
+```c
 #include <stdio.h>
 
-int main() 
+int main()
 {
     int i=0;
     while(i < 8) {
@@ -558,10 +562,10 @@ In de voorgaande voorbeelden kan je al zien dat functies altijd worden (eigen mo
 Dit is een regel binnen c waarmee je rekening mee moet houden, je kan enkel gebruiken wat reeds eerder is gedeclareerd (zowel functies als variabelen).
 
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main() 
+void main()
 {
     print_hello("Het getal is %i,5);
 }
@@ -577,10 +581,10 @@ Bovenstaande code bijvoorbeeld zal niet compileren want getal is gedeclareerd na
 Het zelfde geldt trouwens ook voor functies.  
 De volgende code zal desgevolg ook niet compilen aangezien de functie main de functie print_hello() gebruikt.
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main() 
+void main()
 {
     print_hello();
 }
@@ -594,12 +598,12 @@ void print_hello()
 Dit kan je echter oplossen door een **functie-prototype** te gebruiken.  
 Dit is een declaratie om de compiler aan te geven dat deze functie later in het programma zal worden gedefiniëerd.
 
-```{.c}
+```c
 #include <stdio.h>
 
 void print_hello();
 
-void main() 
+void main()
 {
     print_hello();
 }
@@ -620,10 +624,10 @@ void print_hello()
 Eigenlijk maken we al onze eigen functies sinds de start van de cursus, namelijk de main-functie.  
 Dit is een functie als een ander, met diens verschil dat deze functie altijd als het **entry point** wordt beschouwd van je programma (door de compilers).  
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main() 
+void main()
 {
     printf("Hello world");
 }
@@ -632,26 +636,26 @@ void main()
 Nu dat we echter weten wat een return-statement is zullen we in de cursus altijd een return-statement plaatsen.  
 De conventie is dat als het programma eindigt zonder error dat de waarde 0 is.
 
-```{.c}
+```c
 #include <stdio.h>
 
-int main() 
+int main()
 {
    printf("Hello world");
-   return 0; 
+   return 0;
 }
 ```
 
 Deze return-code wordt trouwens door het OS opgevangen en kan je gebruiken om aan te tonen of je programma succesvol is beëindigd.  
 Niets houdt ons echter tegen om een andere waarde terug te geven.  
 
-```{.c}
+```c
 #include <stdio.h>
 
-int main() 
+int main()
 {
    printf("Hello world\n");
-   return 1; 
+   return 1;
 }
 ```
 Ter illustratie, op Linux en Mac kan je deze code opvragen na het beëindigen van het programma met de shell-variabele ```$?```
@@ -666,5 +670,3 @@ $
 ```
 
 In Windows kan je dit doen via de shell-variabele ```%errorlevel%```
-
-
