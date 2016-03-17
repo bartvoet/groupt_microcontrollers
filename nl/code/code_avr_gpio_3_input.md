@@ -237,36 +237,34 @@ AVR-GCC (compiler) voorziet voor zulke requirements een bibliotheek die je kan g
 #include <avr/io.h>
 #include <util/delay.h>
 
-int LED_NUMMER = PB2;
-int BUTTON_NUMMER = PB3;
-int DEBOUNCE-TIJD = 1000;
-
 int main(void)
 {
-  DDRB  |= (1<<LED_NUMMER);
-  DDRB  &= ~(1 << BUTTON_NUMMER);
-  PORTB |= (1 << BUTTON_NUMMER);
+	int LED_NUMBER = PB2;
+	int BUTTON_NUMBER = PB3;
+	int DEBOUNCE_TIME = 1000;
 
-  PORTB &= (1 << LED_NUMMER);
+	DDRB |= (1 << LED_NUMBER);         //output
+	DDRB &= ~(1 << BUTTON_NUMBER);     //input
+	PORTB |= (1 << BUTTON_NUMBER);     //pull-up
 
-  int button_was_ingeduwd = 0;
+	PORTB &= ~(1 << LED_NUMBER); //button is by default 0
 
-  while (1)
-  {
-      if (!(PINB & (1 << BUTTON_NUMBER))) {
-        _delay_us(DEBOUNCE_TIME);
-        if (!(PINB & (1 << BUTTON_NUMBER))) {
-          if(button_was_ingeduwd==0) {
-            PORTB = PORTB ^ (1 << LED_NUMBER);
-            button_was_ingeduwd = 1;
-          }
-        }
-      } else {
-        button_was_ingeduwd = 0;
-      }
+	int button_was_ingeduwd = 0;
 
-  }
-  return 0;
+	while (1) {
+		if (!(PINB & (1 << BUTTON_NUMBER))) {
+			_delay_us(DEBOUNCE_TIME);
+			if (!(PINB & (1 << BUTTON_NUMBER))) {
+				if (button_was_ingeduwd == 0) {
+					PORTB = PORTB ^ (1 << LED_NUMBER);
+					button_was_ingeduwd = 1;
+				}
+			} else {
+				button_was_ingeduwd = 0;
+			}
+		}
+	}
+	return 0;
 }
 ```
 
