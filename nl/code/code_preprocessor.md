@@ -24,7 +24,7 @@ Dit thema zal bijgevolg vanaf dit deel veel terugkomen in deze cursus.
 In de les ivm functies spraken we reeds van functie-prototypes.  
 We hernemen hierbij de voorbeeld-code van onze eerste kennismaking van functie-prototypes.  
 
-```{.c}
+```c
 #include <stdio.h>
 
 void print_hello();
@@ -56,7 +56,7 @@ Toepassende op het eerdere voorbeel is eerstvolgende stap dat je de logica in je
 
 * Je kan bijvoorbeeld starten de logica voor het printen van een boodschap in een aparte file bijhouden (helloworld.c):
 
-```{.c}
+```c
 #include <stdio.h>
 
 void print_hello()
@@ -67,7 +67,7 @@ void print_hello()
 
 * En het main-programma in een aparte file main.c
 
-```{.c}
+```c
 void print_hello();
 
 void main()
@@ -78,7 +78,7 @@ void main()
 ```
 * Bij compilatie kan je deze 2 files daarna toevoegen als argument aan het gcc-commando
 
-```
+```bash
 $ gcc main.c helloworld.c -o main
 $ ./main
 Hello World
@@ -102,7 +102,7 @@ Stel nu dat we hetzelfde programma willen maken in een andere taal zonder main.c
 
 * We bouwen een nieuwe file "helloworld_nl.c"
 
-```{.c}
+```c
 #include <stdio.h>
 
 void print_hello()
@@ -117,7 +117,7 @@ void print_hello()
     * Een Engelstalige versie
     * Een Nederlandstalige versie
 
-```
+```bash
 $ gcc main.c helloworld.c -o main_en
 $ gcc main.c helloworld_nl.c -o main_nl
 $ ./main_en
@@ -141,7 +141,7 @@ Zo'n header-file kan maar 2 zaken bevatten, namelijk functie-prototytypes en mac
   Zoals we zien bevat deze enkel een functie-declaratie.  
   Deze file moet in dezelfde directory staan.  
 
-```{.h}
+```c
 void print_hello();
 ```
 
@@ -153,7 +153,7 @@ void print_hello();
 > **Bemerking:**  
 > We komen zo dadelijk terug op het verschil tussen ```<...>``` en ```"..."``` als we duiden hoe dat de compiler deze header-files terugvindt.
 
-```
+```c
 #include "print_hello.h"
 
 void main()
@@ -165,7 +165,7 @@ void main()
 
 * De Engelstalige versie:
 
-```{.c}
+```c
 #include <stdio.h>
 #include "print_hello.h"
 
@@ -177,7 +177,7 @@ void print_hello()
 
 * De Nederlandstalige versie:
 
-```{.c}
+```c
 #include <stdio.h>
 #include "print_hello.h"
 
@@ -189,7 +189,7 @@ void print_hello()
 
 * Deze 2 files kan je daarna toevoegen als argument aan het gcc-commando
 
-```
+```bash
 $ gcc main.c helloworld.c -o main_en
 $ gcc main.c helloworld_nl.c -o main_nl
 $ ./main_en
@@ -309,7 +309,7 @@ In unix/linux is het programma **cpp** hier voor verantwoordelijk (**C** **p**re
 
 Ter illustratie passen we dit command toe op het vorige voorbeeld:
 
-```{.h}
+```c
 #include "print_hello.h"
 
 void main()
@@ -414,10 +414,10 @@ Als de preprocessor deze directive tegenkomt zal hij de header-file opzoeken rel
 
 Het verwijzen naar een header-file (met een include-directive) kan op 2 manieren gebeuren:  
 
-* **"Dubbele quotes"**: voorbeeld ```{.h}#include "print_hello.h"```  
+* **"Dubbele quotes"**: voorbeeld ```#include "print_hello.h"```  
 De quotes wil zeggen dat men de header file moet zoeken in dezelfde directory (of relatief bij gebruik van folders).
 Deze file wordt meestal gebruikt voor zelf-gedefinieerde header-files.  
-* **<tussen brackets>**: voorbeeld ```{.h}#include <stdio.h>"```
+* **<tussen brackets>**: voorbeeld ```#include <stdio.h>"```
 Deze notatie zal zoeken in paden geconfigureerd op compiler-niveau.  
 Dit wordt hoofdzakelijk gebruikt voor standaard library header files zoals we bijvoorbeeld reeds hebben gezien:
     * stdio.h die algemene input- en output-functies bevat (zoals scanf en printf)
@@ -427,7 +427,7 @@ Andere noemenwaardige feiten:
 
 * Voor beide soorten kunnen deze verwijzingen een folder structuur bevatten.  
   Als je bijvoorbeeld voor een file hello.h in een folder print relatief van een file main.c plaatst moet je de volgende include-directive plaatsen
-  bv. ```{.h}#include print/hello.h```
+  bv. ```#include print/hello.h```
 * Include-directives in header-files worden ook uitgevoerd.
   Deze include-statements zijn als het ware recursief.
   Als je de directive ```#include <stdio.h>``` in een header-file print_hello.h plaatst en je include deze vervolgens in een source file zal deze ook de inhoud van stdio.h includen.
@@ -443,9 +443,9 @@ Macro's in hun simpelste vorm zijn placeholders:
 * Dit gebeurt vanzelfsprekend tijdens het preprocessen
 
 Dit heeft de volgende vorm:  
-```{.c}#define HELLO 123```
+```#define HELLO 123```
 
-* Deze start met de token ```{.c}#define```
+* Deze start met de token ```#define```
 * Gevolgd door een symbool (HELLO)
      * Op de naam van dit symbool staan gelijkaardig regels zoals op variabele-namen
      * Het is niet verplicht maar bij conventie worden deze namen liefst met hoofletters geschreven
@@ -467,7 +467,7 @@ Bijvoorbeeld:
 * In de file definiëren we dit maximum als MAXIMUM_NUMMER gevolgd door een specifieke waarde
 
 
-```{.c}
+```c
 #define MAXIMUM_NUMMER 1000000
 
 void print_boodschap_bij_te_groot_getal(int getal)
@@ -482,7 +482,7 @@ void print_boodschap_bij_te_groot_getal(int getal)
   het symbool MAXIMUM_NUMMER vervangen worden door de tekst 1000000
 * Als we deze file zouden pre-processen met cpp krijgen we het volgende resultaat
 
-```{.c}
+```c
 #include <stdio.h>
 
 void print_boodschap_bij_te_groot_getal(int getal)
@@ -498,7 +498,7 @@ void print_boodschap_bij_te_groot_getal(int getal)
 Zo een define-directive kan voor eender wat worden gebruikt.
 Zo kan je bijvoorbeeld
 
-```{.c}
+```c
 #define LOGGEN printf("Probleem in de code")
 #define MAXIMUM_NUMMER 1000000
 #include <stdio.h>
@@ -518,7 +518,7 @@ int main()
 Je kan ook argumenten meegeven aan macro's, net zoals functies.
 Het voorbeeld hieronder geeft een stuk tekst mee in de **macro-expansie**.
 
-```{.c}
+```c
 #define LOGGEN(tekst) printf(tekst)
 #define MAXIMUM_NUMMER 1000000
 #include <stdio.h>
@@ -558,7 +558,7 @@ Het volgende voorbeeld illustreert:
 * Als een macro te lang is (je wil bijvoorbeeld meerdere statmenents genereren) kan je de macro over meerdere lijnen spreiden.
 * Je moet de lijn dan met ```\``` beëindigen
   
-```{.c}
+```c
 #define LOGGEN(tekst) printf("Datum %s, Lijn %i\n",__DATE__,__LINE__); \
                       printf("%s\n",tekst)
 #define MAXIMUM_NUMMER 1000000
@@ -576,9 +576,9 @@ int main()
 
 Na het compilen en uitvoeren van deze code:
 
-```{.c}
-bart@bvpers2:~/tmp$ gcc blabla.c -o blabla
-bart@bvpers2:~/tmp$ ./blabla
+```c
+$ gcc blabla.c -o blabla
+$ ./blabla
 Datum Mar 18 2015, Lijn 11
 nummer is veel te groot vergeleken met MAXIMUM_NUMMER
 bart@bvpers2:~/tmp$
@@ -611,7 +611,7 @@ We bekijken het volgende voorbeeld:
    * 1 voor een gedefinieerde macro (MACRO1)
    * 1 voor een niet gedefinieerde macro (MACRO2)
 
-```{.c}
+```c
 #include <stdio.h>
 
 #define MACRO1
@@ -633,7 +633,7 @@ int main(void)
 
 * Als je cpp hier op loslaat krijg je
 
-```{.c}
+```c
 //de inhoud van stdio weglaten ter volledigheid
 int main(void)
 {
@@ -646,7 +646,7 @@ int main(void)
 
 * Desgevolg zal gcc dit ook zo uitvoeren
 
-```
+```bash
 $ gcc macro.c -o macro
 $ ./macro
 MACRO1 is daar
@@ -657,7 +657,7 @@ $
 * Wel interessant is dat gcc (en ook andere compilers) toelaat macro's via environment-variabelen te activeren  
   In dit voorbeeld geef je MACRO2 als environment-variable mee:
 
-```
+```bash
 $ gcc macro.c -DMACRO2 -o macro
 $ ./macro
 MACRO1 is daar
