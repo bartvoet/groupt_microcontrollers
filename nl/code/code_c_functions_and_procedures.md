@@ -568,7 +568,7 @@ Dit is een regel binnen c waarmee je rekening mee moet houden, je kan enkel gebr
 
 void main()
 {
-    print_hello("Het getal is %i,5);
+    print_hello("Het getal is %i",getal);
 }
 
 int getal = 5;
