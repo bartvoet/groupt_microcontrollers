@@ -19,13 +19,13 @@ CHAPTER_02 += ../labo/x86_statements.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt
 CHAPTER_02 += ../code/code_c_conditions_and_loops_1_if_else_while.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt
-CHAPTER_02 += ../labo/x86_loops_and_conditionals.md 
+CHAPTER_02 += ../labo/x86_loops_and_conditionals.md
 
 CHAPTER_03 += chapter03_bits_and_bytes.md
 CHAPTER_03 += ../../general/pandoc_page_break.txt
 CHAPTER_03 += ../code/code_c_bittwiddling.md
 CHAPTER_03 += ../../general/pandoc_page_break.txt
-CHAPTER_03 += ../labo/avr_x86_shift_operators.md 
+CHAPTER_03 += ../labo/avr_x86_shift_operators.md
 
 CHAPTER_04 += chapter04_getting_started_with_embedded.md
 CHAPTER_04 += ../../general/pandoc_page_break.txt
@@ -49,7 +49,7 @@ CHAPTER_05 += ../../general/pandoc_page_break.txt
 CHAPTER_05 += ../labo/labo_led.md
 CHAPTER_05 += ../code/code_avr_gpio_3_input.md
 CHAPTER_05 += ../../general/pandoc_page_break.txt
-CHAPTER_05 += ../code/code_c_conditions_and_loops_3_do_while.md 
+CHAPTER_05 += ../code/code_c_conditions_and_loops_3_do_while.md
 CHAPTER_05 += ../../general/pandoc_page_break.txt
 CHAPTER_05 += ../labo/labo_traffic_light.md
 
@@ -60,6 +60,14 @@ CHAPTER_06 += ../../general/pandoc_page_break.txt
 CHAPTER_06 += ../code/code_preprocessor.md
 CHAPTER_06 += ../../general/pandoc_page_break.txt
 CHAPTER_06 += ../labo/labo_functies_en_loop.md
+
+CHAPTER_07 += chapter07_pointers_and_arrays.md
+CHAPTER_07 += ../../general/pandoc_page_break.txt
+CHAPTER_07 += ../code/code_pointers_and_arrays.md
+CHAPTER_07 += ../../general/pandoc_page_break.txt
+CHAPTER_07 += ../protocols/protocol_USART.md
+CHAPTER_07 += ../../general/pandoc_page_break.txt
+CHAPTER_07 += ../labo/x86_arrays.md
 
 
 graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
@@ -73,25 +81,24 @@ pagebreak = ../../general/pandoc_page_break.txt
 
 all:
 	cd nl/chapter && pandoc  \
-			../title.txt part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) $(CHAPTER_05) $(CHAPTER_06) -o ../../dist/cursus.epub
+			../title.txt part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) -o ../../dist/cursus.epub
 #		--epub-stylesheet ../../markdown.css \
 
 	cd nl/chapter && pandoc  \
-			../title.txt $(pagebreak) part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) $(CHAPTER_05) $(CHAPTER_06)  -o ../../dist/cursus.html  --self-contained -s -S --toc
-#		--epub-stylesheet ../../markdown.css \
+			../title.txt $(pagebreak) part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) -o ../../dist/cursus.html  --self-contained -s -S --toc --toc-depth=2	
 
 	cd nl/chapter && pandoc -S \
-			../title.txt $(pagebreak) part01_minimal_knowledge.md ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) $(CHAPTER_05) $(CHAPTER_06) -o ../../dist/cursus.pdf
-	
+			../title.txt $(pagebreak) part01_minimal_knowledge.md ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) -o ../../dist/cursus.pdf 	-c ../../github-pandoc.css
+
 labos:
 	cd nl/labo && pandoc  \
 labo_header.md $(pagebreak) x86_statements.md $(pagebreak) x86_loops_and_conditionals.md $(pagebreak) avr_x86_shift_operators.md $(pagebreak) avr_arduino_firsttime.md $(pagebreak) avr_arduino_more_complex_in_group.md $(pagebreak) labo_functies_en_loop.md $(pagebreak) x86_arrays.md $(pagebreak) avr_arduino_adc.md $(pagebreak) labo_loops_extended.md labo_i2c.md\
 		-o ../../dist/labos.epub
-	
+
 		cd nl/labo && pandoc  \
 			labo_header.md $(pagebreak) x86_statements.md $(pagebreak) x86_loops_and_conditionals.md $(pagebreak) avr_x86_shift_operators.md $(pagebreak) avr_arduino_firsttime.md $(pagebreak) avr_arduino_more_complex_in_group.md $(pagebreak) labo_functies_en_loop.md $(pagebreak) x86_arrays.md $(pagebreak) avr_arduino_adc.md $(pagebreak) labo_loops_extended.md labo_i2c.md\
 		-o ../../dist/labos.html
-	
+
 clean:
 	rm dist/cursus.epub
 
