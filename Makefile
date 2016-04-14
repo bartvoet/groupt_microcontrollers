@@ -85,7 +85,7 @@ all:
 #		--epub-stylesheet ../../markdown.css \
 
 	cd nl/chapter && pandoc  \
-			../title.txt $(pagebreak) part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) -o ../../dist/cursus.html  --self-contained -s -S --toc --toc-depth=2	
+			../title.txt $(pagebreak) part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) -o ../../dist/cursus.html  --self-contained -s -S --toc --toc-depth=2	-c ../../github-pandoc.css
 
 	cd nl/chapter && pandoc -S \
 			../title.txt $(pagebreak) part01_minimal_knowledge.md ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) -o ../../dist/cursus.pdf 	-c ../../github-pandoc.css
