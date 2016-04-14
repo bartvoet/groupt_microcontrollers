@@ -1,4 +1,4 @@
-M## Starten met tools: Command line
+## Starten met tools: Command line
 
 Elke software-ontwikkelaar (en zeker als je met MCU's werkt) moet de beginselen kennen van het werken met command-line.  
 Dit argument is nog sterker als je met embedded devices werkt die veelal enkel te besturen zijn via command-line

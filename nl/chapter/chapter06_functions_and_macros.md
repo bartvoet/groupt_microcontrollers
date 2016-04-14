@@ -1,4 +1,4 @@
-# Functies en macros 
+# Functies en macros
 
 We hebben nu het absolute minimum geleerd om een AVR-programma te schrijven (in c):
 
@@ -11,4 +11,4 @@ In dit deel gaan we deze basis uitbreiden met 2 elementen om je programma flexib
 
 * Functies
 * Preprocessing
-* Macros  
+* Macros
