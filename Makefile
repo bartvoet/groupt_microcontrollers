@@ -63,7 +63,13 @@ CHAPTER_06 += ../labo/labo_functies_en_loop.md
 
 CHAPTER_07 += chapter07_pointers_and_arrays.md
 CHAPTER_07 += ../../general/pandoc_page_break.txt
+CHAPTER_07 += ../code/code_memory_encoding.md
+CHAPTER_07 += ../../general/pandoc_page_break.txt
 CHAPTER_07 += ../code/code_pointers_and_arrays.md
+CHAPTER_07 += ../../general/pandoc_page_break.txt
+CHAPTER_07 += ../code/code_intro_in_pointers.md
+CHAPTER_07 += ../../general/pandoc_page_break.txt
+CHAPTER_07 += ../code/code_strings.md
 CHAPTER_07 += ../../general/pandoc_page_break.txt
 CHAPTER_07 += ../protocols/protocol_USART.md
 CHAPTER_07 += ../../general/pandoc_page_break.txt

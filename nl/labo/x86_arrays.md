@@ -18,11 +18,11 @@ Maand 3 is 31 dagen
 Vraag een maand op en print het aantal dagen van die maand
 
 #### Deel 3: (optioneel)
-Voortgaand op deel 2 
+Voortgaand op deel 2
 Print nu ook hoeveel dagen van het begin van de gevraagde maand tot het einde van het jaar
 
 #### Deel 4: (optioneel)
-Print nu ook hoeveel dagen er zijn tussen het begin van het jaar (1 januari) tot de gevraagde maand. 
+Print nu ook hoeveel dagen er zijn tussen het begin van het jaar (1 januari) tot de gevraagde maand.
 
 ### Opdracht 2: getallen inlezen en in array bewaren
 
@@ -62,8 +62,14 @@ Verwijs naar deze array met een pointer van het type ```unsigned char *``` en pr
 Wat krijg je als resultaat (bijvoorbeeld 0x00AB of 0xAB00)?
 
 Verklaar in commentaar van de code wat dit resultaat zal zijn.
- 
+
 
 ### Opdracht 4
 
+#### Deel 1
+
 Lees een tekst in en print het omgekeerd af (palindroom).
+
+#### Deel 2 (optioneel)
+
+Voor dit uit op een arduino met behulp van een seriele connectie
