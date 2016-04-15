@@ -1,4 +1,4 @@
-## Encodering van een variabele
+## Encodering van data in C
 
 ### Adresseerbaarheid van geheugen
 

@@ -42,9 +42,6 @@ int main(void) {
 
 ### Voorbeeld: string wijzigen
 
-
-#include <stdio.h>
-
 Test is eigenlijk een pointer naar een constante (read-only).
 
 ```c
