@@ -24,11 +24,11 @@ Print nu ook hoeveel dagen van het begin van de gevraagde maand tot het einde va
 #### Deel 4: (optioneel)
 Print nu ook hoeveel dagen er zijn tussen het begin van het jaar (1 januari) tot de gevraagde maand.
 
-### Opdracht 2: getallen inlezen en in array bewaren
+### Opdracht 2: getallen inlezen en in array bewaren (optioneel)
 
 Lees 10 getallen in (unsigned long) en bewaar deze in een array
 
-#### Deel 1:
+#### Deel 1:  (optioneel)
 
 Door deze array te loopen:
 
@@ -36,7 +36,7 @@ Door deze array te loopen:
 * Print het gemiddelde
 * Print het totaal af
 
-#### Deel 2:
+#### Deel 2:  (optioneel)
 Print de grootte en adressen af van deze array
 
 #### Deel 3: (optioneel)
@@ -45,9 +45,9 @@ Kopieer deze elementen in een nieuwe array maar draai de volgorde om getallen om
 #### Deel 3 (Optioneel)
 Sorteer deze array op waarde van de getallen
 
-### Opdracht 3: een array converteren
+### Opdracht 3: een array converteren  (optioneel)
 
-#### Deel 1
+#### Deel 1  (optioneel)
 
 Initialiseer een getal van het type unsigned integer met hexadecimale waarde (bv 0xABCDEF12).  
 Converteer deze naar een pointer van het type unsigned char*, schrijf een loop dat deze 4 bytes zal lezen.  
@@ -58,7 +58,7 @@ Gaan de getallen in dezelfde volgorde staan?  Verklaar in commentaar en schrijf 
 * Initialiseer een array van 4 bytes lang (unsigned char array[4])
 * Initialiseer deze array met hexadecimale waardes (bv unsigned char array[4]={0X00,0xAB,0xDC,0xEF};
 
-Verwijs naar deze array met een pointer van het type ```unsigned char *``` en print de eeste waarde hexadecimaal (printf("%x",short[0]) af.  
+Verwijs naar deze array met een pointer van het type ```unsigned char *``` en print de eerste waarde hexadecimaal (printf("%x",short[0]) af.  
 Wat krijg je als resultaat (bijvoorbeeld 0x00AB of 0xAB00)?
 
 Verklaar in commentaar van de code wat dit resultaat zal zijn.
@@ -66,10 +66,4 @@ Verklaar in commentaar van de code wat dit resultaat zal zijn.
 
 ### Opdracht 4
 
-#### Deel 1
-
-Lees een tekst in en print het omgekeerd af (palindroom).
-
-#### Deel 2 (optioneel)
-
-Voor dit uit op een arduino met behulp van een seriele connectie
+Installeer putty of een equivalent programma en test het laatste programma van het hoofstuk over USART
