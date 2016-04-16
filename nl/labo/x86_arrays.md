@@ -58,7 +58,7 @@ Gaan de getallen in dezelfde volgorde staan?  Verklaar in commentaar en schrijf 
 * Initialiseer een array van 4 bytes lang (unsigned char array[4])
 * Initialiseer deze array met hexadecimale waardes (bv unsigned char array[4]={0X00,0xAB,0xDC,0xEF};
 
-Verwijs naar deze array met een pointer van het type ```unsigned char *``` en print de eerste waarde hexadecimaal (printf("%x",short[0]) af.  
+Verwijs naar deze array via een pointer van het type ```unsigned short*``` en print de eerste waarde hexadecimaal (printf("%x",short[0]) af.  
 Wat krijg je als resultaat (bijvoorbeeld 0x00AB of 0xAB00)?
 
 Verklaar in commentaar van de code wat dit resultaat zal zijn.
