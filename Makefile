@@ -87,8 +87,7 @@ pagebreak = ../../general/pandoc_page_break.txt
 
 all:
 	cd nl/chapter && pandoc  \
-			../title.txt part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) -o ../../dist/cursus.epub
-#		--epub-stylesheet ../../markdown.css \
+			../title.txt part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) -o ../../dist/cursus.epub --epub-stylesheet ../../base.css \
 
 	cd nl/chapter && pandoc  \
 			../title.txt $(pagebreak) part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) -o ../../dist/cursus.html  --self-contained -s -S --toc --toc-depth=2	-c ../../github-pandoc.css

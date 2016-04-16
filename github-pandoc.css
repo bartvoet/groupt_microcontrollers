@@ -117,7 +117,23 @@ a:hover {
 
 h1 {
     font-size: 2em;
-    margin: 0.67em 0;
+    margin: 1.67em 0;
+    text-align: center;
+    border: 3px solid grey;
+}
+
+h2 {
+margin: 0.67em 0;
+border-bottom: 3px solid grey;
+}
+
+h3 {
+margin: 0.67em 0;
+border-bottom: 1px solid grey;
+}
+
+h4 {
+  border-bottom: 1px dashed grey;
 }
 
 /**
@@ -230,6 +246,10 @@ sub {
 
 img {
     border: 0;
+      max-width: 60%;
+      margin: 0 auto;
+      padding: 0;
+      display: block;
 }
 
 /**
