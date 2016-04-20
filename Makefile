@@ -75,25 +75,31 @@ CHAPTER_07 += ../protocols/protocol_USART.md
 CHAPTER_07 += ../../general/pandoc_page_break.txt
 CHAPTER_07 += ../labo/x86_arrays.md
 
+CHAPTER_08 += ../chapter/chapter08_interrupts.md
+CHAPTER_08 += ../../general/pandoc_page_break.txt
+CHAPTER_08 += ../code/code_avr_introduction_to_interrupts.md
+CHAPTER_08 += ../../general/pandoc_page_break.txt
+CHAPTER_08 += ../code/code_c_character_classes_2.md
+
+pagebreak = ../../general/pandoc_page_break.txt
+
+CHAPTERS = part01_minimal_knowledge.md $(pagebreak) $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) $(CHAPTER_08)
 
 graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
 grap_convert = gvpr -c '$(1)' ./graphviz/$(2).dot | dot -Tpng -o ./pictures/$(3).png
 
-pagebreak = ../../general/pandoc_page_break.txt
+
 
 # Advanced
 
 #debugging_code
 
 all:
-	cd nl/chapter && pandoc  \
-			../title.txt part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) -o ../../dist/cursus.epub --epub-stylesheet ../../base.css \
+	cd nl/chapter && pandoc ../title.txt $(CHAPTERS) -o ../../dist/cursus.epub --epub-stylesheet ../../base.css --epub-cover-image=../front_page.jpg\
 
-	cd nl/chapter && pandoc  \
-			../title.txt $(pagebreak) part01_minimal_knowledge.md $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) -o ../../dist/cursus.html  --self-contained -s -S --toc --toc-depth=2	-c ../../github-pandoc.css
+	cd nl/chapter && pandoc ../title.txt $(CHAPTERS) -o ../../dist/cursus.html  --self-contained -s -S --toc --toc-depth=2	-c ../../github-pandoc.css
 
-	cd nl/chapter && pandoc -S \
-			../title.txt $(pagebreak) part01_minimal_knowledge.md ../../general/pandoc_page_break.txt $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) -o ../../dist/cursus.pdf 	-c ../../github-pandoc.css
+	#cd nl/chapter && pandoc -S ../title.txt $(CHAPTERS) -o ../../dist/cursus.pdf 	-c ../../github-pandoc.css
 
 labos:
 	cd nl/labo && pandoc  \

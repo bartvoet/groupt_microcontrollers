@@ -20,9 +20,9 @@ Eén van de meest fundamentele en bruikbare principes van de moderne embedded pr
 In een notendop een interrupt is:
 
 * Een stuk **uitvoerbare code** in het programma-geheugen
-* Dat niet specifiek wordt aangeroepen (of toch niet rechtstreeks) door andere code 
+* Dat niet specifiek wordt aangeroepen (of toch niet rechtstreeks) door andere code
 * Maar wordt aangeroepen/geactiveerd door een **event**.  
-  
+
 In geval van MCU's zijn deze events meestal afkomstig van hardware (bijvoorbeeld spanning op een pin die wijzigt, timer, ...), maar voor complexere systemen kunnen deze ook door software worden gegenereerd.  
 
 ### Duiding: event-loop vs interrupts
@@ -32,9 +32,9 @@ Het interrupt-mechanisme in een MCU (of eender welk computer-systeem) zal echter
 
 Samengevat, een interrupt is een manier om:
 
-* Ten gevolge van zo'n event 
-* De activiteit van de huidige processor te pauzeren (event-loop) 
-* Zodat het een korte taak (stuk code) kan voltooien 
+* Ten gevolge van zo'n event
+* De activiteit van de huidige processor te pauzeren (event-loop)
+* Zodat het een korte taak (stuk code) kan voltooien
 * En er voor zorgen dat de taak (die gepauzeerd was)  
   kan hervatten waar het gebleven was.  
 
@@ -60,7 +60,7 @@ Wat wij doen wordt ook wel genoemd **asynchrone verwerking**:
 * We denken in de context van **taken**
 * De interrupt wordt verwerkt buiten de reguliere taak van het hoofdprogramma (het boek lezen)
 * De interrupt (telefoon-bel) is een **event** die het hoofdprogramma stopt
-* We slagen de **staat** op van ons programma (paginanummer van het boek en eventueel wat nota's) 
+* We slagen de **staat** op van ons programma (paginanummer van het boek en eventueel wat nota's)
 * Na het telefoongesprek kunnen we het boek terug hervatten (aan de hand van het paginanummer)
 
 ### Duiding: hardware- vs software-interrupts
@@ -96,7 +96,7 @@ AVR ondersteunt een heel grote variëteit aan  hardware-interrupts:
   Veelal wil je daar kunnen assynchroon kunnen reageren op boodschappen.  
   Idem dito voor andere protocollen zoals **i2c** en **spi**, dikwijls gebruikt ter communicatie met **sensoren** of andere kleine peripherals.   
 * **ADC-Interrupts** (Analog Digital Conversion)   
-  die je melden wanneer een nieuwe meetwaarde ter beschikking staatl 
+  die je melden wanneer een nieuwe meetwaarde ter beschikking staatl
 * ...
 
 De volledige lijst kan je zien in de vector-tabel die direct wordt besproken of voor nog meer details in de datasheet van de atmega328p (mcu op Arduino).  
@@ -108,7 +108,7 @@ In dit deel verduidelijken we enkel de pin-interrupts, geleidelijk aan komen we 
 Zoals we al konden afleiden zal een interrupt:
 
 * bij een specifiek event
-* een stuk code activeren 
+* een stuk code activeren
 * (bij voorkeur voor korte tijd)
 
 ![](../../pictures/interrupt_flow.png)
@@ -128,26 +128,26 @@ In het schema hieronder zie je een overzicht van deze stappen en de elementen di
   Dit houdt in een stuk uitvoerbare code associeren met een type van event.    
   In de meeste platformen wordt (zeker voor hardware-interrupts) hiervoor een **Interrupt Vector-Table** gebruikt.   
   Deze tabel (die in een aparte locatie in het geheugen zit bij AVR) is een tabel met referenties naar code die moet worden uitgevoerd als een     bepaalde event zich voordoet.   
-* *Stap: activeren (en configureren) van een interrupt*   
+* **Stap: activeren (en configureren) van een interrupt**   
   Hiervoor gebruiken wat we noemen de **Interrupt Enabled Bit**.   
   Dit zijn bits in de registers die we gebruiken om een specifieke interrupt te activeren of te desactiveren (enable/disable), met andere woorden of de MCU moet reageren op het specifiek event.   
   Een voorbeeld dat we later gaan terugzien is de PCICR (of Pin Change Interrupt Control Register)  
-  We komen hier in de voorbeelden nog op terug (registers, waarden, ...) 
-* *Stap: activeren van alle interrupts*   
+  We komen hier in de voorbeelden nog op terug (registers, waarden, ...)
+* **Stap: activeren van alle interrupts**   
   Je kan alle interrupts ook tegelijkertijd activeren of deactiveren.   
   Dit kan via de **Globale Interrupt Enable-flag** (of ook wel I-bit genoemd) binnen het SREG-register (7de bit).   
   Deze staat by default op non-actief, deze moet je altijd via code activeren als je wil met interrupts werken.   
   Deze interrupt wordt meestal niet rechtsreeks gemanipuleerd (set/clear) vanaf de code maar via specifieke instructies (zie later)
-* *Stap: detecteren van de interrupt*   
+* **Stap: detecteren van de interrupt**   
   Dit is een taak van de hardware, deze zal een flag activeren die we **Interrupt Flag Bit** (per interrupt)   
   Deze **flags** maken onderdeel uit van registers zoals bijvoorbeeld de PCIFR (Pin Change interrupt flag), we komen hier later nog op terug.  
-  Hoewel niet gebruikelijk kan je deze flag ook via software (manueel) zetten. 
-* *Stap: uitvoeren van de code*   
+  Hoewel niet gebruikelijk kan je deze flag ook via software (manueel) zetten.
+* **Stap: uitvoeren van de code**   
   Als deze flag aangezet wordt zal de hardware de volgende stappen uitvoeren:
      * Uitschakelen van de **Globale Interrupt Enable-flag** (om te vermijden dat andere interrupts kunnen worden uitgevoerd)
      * De status van de huidige code bewaren in een stack-register (komen we later nog op terug)
      * Opzoeken van de code via de **Interrupt Vector-Table** en deze code uitvoeren
-* *Stap: beëindigen van de interrupt*   
+* **Stap: beëindigen van de interrupt**   
   Hoewel de hardware de **Globale Interrupt Enable-flag** heeft afgezet moet de interrupt-code deze terug aanzetten.  
   In assembly-code (en machine-instructies) gebeurt door op het einde van de interrupt-code de RETI-instructie (return from interrupt) aan te roepen.  
   In onze voorbeelden gaan we dit niet moeten doen omdat we daar een macro kunnen gebruiken.
@@ -159,7 +159,7 @@ Hieronder heb je een overzicht naar alle beschikbare interrupts (copy van de dat
 * Het programma-adres is het adres binnen de **Interrupt Vector-Table**
 * De vector-naam is de naam die je in de code gaat moeten gebruiken om interrupt-code te schrijven  
   (met behulp van macros)
-  
+
 > Deze tabel zal je ook terugvinden in de datasheet van de atmega328p  
 
 | Programma-adres  | Source       | Vector-naam       | Beschrijving                   |
@@ -213,7 +213,7 @@ We starten met de volgende code (nog zonder interrupts)
 #define LED_DDR                 DDRB
 #define LED0                    PB2
 
-void initialiseer_de_pins() 
+void initialiseer_de_pins()
 {
    LED_DDR = LED_DDR | (1 << LED0);
 }
@@ -221,7 +221,7 @@ void initialiseer_de_pins()
 int main(void) {
 
   initialiseer_de_pins();
- 
+
   while (1) {
     _delay_ms(DELAYTIME);
     LED_PORT ^= (1 << LED0);
@@ -294,7 +294,7 @@ Je moet zou dan 2 **taken** moeten uitvoeren binnen 1 taak (event-loop) hetgeen 
 
 * Onoverzichtelijk maakt
 * Minder optimaal omdat je constant je processor moet bezighouden
-  
+
 Nu kunnen we echter onze bestaande code behouden en hoeven we enkel een extra stuk code.  
 De 2 taken zijn mooi van elkaar afscheiden in de volgende code (beter nog we hebben zelfs geen code moeten wijzigen).  
 
@@ -323,7 +323,7 @@ ISR(PCINT2_vect)
 }
 
 
-void initialiseer_de_interrupts() 
+void initialiseer_de_interrupts()
 {
     PCICR  |= (1 << PCIE2);    // activeer de pin-interrupts voor de D-bank
     PCMSK2 |= (1 << PCINT18);  // masker om aan te duiden op welk pins er moet worden gereageerd
@@ -336,7 +336,7 @@ void initialiseer_de_pins() {
     BUTTON_PORT |= (1 << BUTTON);
 }
 
-int main(void) 
+int main(void)
 {
   initialiseer_de_pins();
   initialiseer_de_interrupts();
@@ -353,14 +353,14 @@ In deze code zijn 3 belangrijke elementen te vermelden:
 
 * Je moet nog altijd de pin-initialisatie doen voor de button net als voor klassieke gpio-access
 * Een vector is toegevoegd via de ISR-macro van het type ```PCINT2_vect```
-* Deze interrupts moeten worden geinitialiseerd (zie procedure ```initialiseer_de_interrupts()```) 
+* Deze interrupts moeten worden geinitialiseerd (zie procedure ```initialiseer_de_interrupts()```)
 
 ### Duiding: configuratie van PIN-interrupts
 
 De configuratie van deze interrupts gebeurt over 2 belangrijke registers:
 
 ```{.c }
-void initialiseer_de_interrupts() 
+void initialiseer_de_interrupts()
 {
     PCICR  |= (1 << PCIE2);   // activeer de pin-interrupts voor de D-bank
     PCMSK2 |= (1 << PCINT18); // masker om aan te duiden op welk pins er moet worden gereageerd
@@ -374,7 +374,7 @@ Om dit te verduidelijken kunnen we dit illustreren als een aaneenschakeling van 
 ![](../../pictures/avr_pint_interrupt.png)
 
 
-Voor het configureren van deze: 
+Voor het configureren van deze:
 
 * PCICR  Pin Change Interrupt Control    
   Verwijzende naar het eerder vermelde **Interrupt Enabled Bit**  
@@ -386,7 +386,7 @@ Voor het configureren van deze:
 * sei()  
   Met deze activeer je bij de start van het programma alle interrupts.  
   De hardware zal deze opnieuw deactiveren en de ISR-macro zal deze opnieuw activeren
-  Als je zelf alle interrupts wil afzetten kan ..die via cli() 
+  Als je zelf alle interrupts wil afzetten kan ..die via cli()
 
 | Interrupt-naam         | Vector-naam ISR's       | Pins               |
 |------------------------|-------------------------|--------------------|
@@ -410,6 +410,3 @@ Er zijn echter nog veel verschillende soorten interrupts, deze gaan we bekijken 
 * PWM
 * ADC
 * ...
-  
-
-

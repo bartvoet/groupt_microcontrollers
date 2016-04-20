@@ -1,5 +1,5 @@
 ---
-title: Introductie in microcontrollers en embedded C 
+title: Introductie in microcontrollers en embedded C
 author: Bart Voet
 rights:  Creative Commons Non-Commercial Share Alike 3.0
 language: nl
