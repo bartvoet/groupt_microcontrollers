@@ -79,7 +79,7 @@ CHAPTER_08 += ../chapter/chapter08_interrupts.md
 CHAPTER_08 += ../../general/pandoc_page_break.txt
 CHAPTER_08 += ../code/code_avr_introduction_to_interrupts.md
 CHAPTER_08 += ../../general/pandoc_page_break.txt
-CHAPTER_08 += ../code/code_c_character_classes_2.md
+CHAPTER_08 += ../code/code_avr_introducion_to_timers.md
 
 pagebreak = ../../general/pandoc_page_break.txt
 

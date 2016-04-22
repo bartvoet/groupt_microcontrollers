@@ -7,7 +7,7 @@ Ter herhaling, er zijn 3 basis-elementen bij AVR (en MCU's in het algemeen) waar
 * **Interrupts**  
   Opvangen van events met het gevolg asynchroon uitvoeren van code
 * **Timers/Counters**  
-  Het tellen en meten van (verlopen) tijd en eventueel verbinden van deze tijd aan specifieke acties of zelfs code (via interrupts) 
+  Het tellen en meten van (verlopen) tijd en eventueel verbinden van deze tijd aan specifieke acties of zelfs code (via interrupts)
 
 Dit 3de basis-element - **Timers/Counters** - gaan we bekijken in dit hoofdstuk.  
 
@@ -44,14 +44,14 @@ Ter voorbeschouwing:
 > **Nota:**  
 > Zoals je direct gaat zien zijn de timer en counter 2 onafhankelijke concepten in de AVR-architectuur.
 > Vandaar dat men niet zomaar timer zegt in de datasheets
- 
+
 ### Duiding en herhaling: wat is een counter
 
 We starten bij het basis-element, de counter (zonder voorlopig rekening te houden met het timing en interrupt-aspect).  
 Wat is een counter?    
 
-* Het is een **hardware-component** (en 1 van vele registers) 
-* Het bevindt zich in de meeste **moderne MCU's** 
+* Het is een **hardware-component** (en 1 van vele registers)
+* Het bevindt zich in de meeste **moderne MCU's**
 * **Telt** in al zijn eenvoud **events**.  
   (events wil zeggen in de betekenis van MCU's **elektrische pulsen**)
 * Telkens wanneer een **puls** wordt **geregistreerd**
@@ -59,7 +59,7 @@ Wat is een counter?
 
 Alvorens in de AVR-datasheet (en code) te duiken een korte samenvatting van wat we zouden moeten weten over een typische (synchrone) counter die we kennen vanuit de lessen digitale sequentiële technieken:  
 
-* Een **klok-ingang** (C) 
+* Een **klok-ingang** (C)
   Die pulsen/signalen geeft aan de counter om de volgende actie uit te voeren (meestal tellen)
 * Een **output-lijn** (Q)
   Een vector-uitgang die het getal met (in dit geval) een 8-bit vector
@@ -104,7 +104,7 @@ We starten met een eenvoudig voorbeeld om deze teller-functionaliteit te illustr
 
 We passen de volgende code toe:
 
-```{.c}
+```c
 #include <avr/io.h>
 
 int main(void)
@@ -120,7 +120,7 @@ int main(void)
 }
 ```
 
-**Het resultaat:** 
+**Het resultaat:**
 
 * Dit programma zal de binaire representatie op de leds per button-click optellen.  
 * Let wel dat we hier rekening moeten houden met "button-bounce" en het tellen soms een paar stappen kan overslagen (afhankelijk van button).
@@ -145,7 +145,7 @@ Dit is 1 van de 2 registers die we gebruiken voor het configureren van de counte
 > **Nota**:   
 > Er bestaat ook een 2de configuratie register TCCR1A dat we hierna gaan gebruiken.    
 > De andere counter/timer-componenten hebben parallelle namen  
-> (TCCR1A/TCCR1B en TCCR2A/TCCR2B) 
+> (TCCR1A/TCCR1B en TCCR2A/TCCR2B)
 
 ```TCCR0B |= (1 << CS02) | (1 << CS01) | (1 << CS00);```
 
@@ -173,7 +173,7 @@ De waarde van counter 0 kan je uitlezen via het register TCNT0 zoals in voorgaan
 
 ```PORTB = TCNT0;```
 
-Gezien hier beide 8-bit registers zijn kan je deze aan elkaar gelijk stellen. 
+Gezien hier beide 8-bit registers zijn kan je deze aan elkaar gelijk stellen.
 
 > **Nota**:   
 > Let wel, later gaan we ook nog de 16-bit teller bekijken.
@@ -220,7 +220,7 @@ Deze waarde wordt dan geconfigureerd in het **OCR0A**-register en kan gedurende 
 
 We passen het voorgaande voorbeeld aan zodat deze telt tot 10.
 
-```{.c}
+```c
 #include <avr/io.h>
 
 #define TELLEN_TOT    10
@@ -253,7 +253,7 @@ Als alles goed loopt zal er het volgende gebeuren:
 
 Om CRC-modus te kunnen configureren zijn er 2 assignment-statements toegevoegd aan het vorige voorbeeld:
 
-```{.c}
+```c
     TCCR0A |= (1 << WGM01) | (1 << WGM00);
     TCCR0B |= (1 << WGM02);
 ```
@@ -273,7 +273,7 @@ Als je in de datasheet kijkt zie je een tabel met alle mogelijke combinaties (zo
 
 ### Duiding: initialiseren van compare-waarde (OCR0A)
 
-```{.c}
+```c
 OCR0A = TELLEN_TOT;
 ```
 
@@ -306,7 +306,7 @@ Als je dan deze  als je deze pulsen toepast op een bekende (en constante) snelhe
 **Opstelling:**  
 
 * We starten met dezelfde setup als daarnet (8 leds)
-* De button hebben niet meer nodig (voor nu) 
+* De button hebben niet meer nodig (voor nu)
 
 We starten met bijna dezelfde code als het allereerste voorbeeld maar we linken deze keer niet naar de input op PD4 (button).   
 In de plaats daarvan gebruiken we een andere clock-select-mode ```001```.
@@ -315,7 +315,7 @@ Deze modus (kijk ook naar de datasheet) gebruikt de systeem-klok om de events vo
 maw telkens de klok hoog gaat zal de teller een puls krijgen.
 
 
-```{.c}
+```c
 #include <avr/io.h>
 
 int main(void)
@@ -347,7 +347,7 @@ We hebben deze code uitgevoerd **zonder prescaler** dit betekent dat de teller z
 Als je dit op een standaard klok uitvoert is dit 16 mHz (ofwel 16.000.000 keer per seconden).  
 
 maw Je zal het optellen niet zien, enkel een vorm van PWM, namelijk de leds die minder hard branden omdat ze zeer snel alterneren
-  
+
 ### Voorbeeld: tellen met prescaler
 
 Tot nu toe hebben we de CS-flags gebruikt voor 2 soorten van instellingen:
@@ -360,7 +360,7 @@ We kunnen deze systeem-klok echter afleiden naar een trager signaal (klok delen)
 
 Deze CS-flags (clock-select) kan je dan ook gebruiken
 
-```{.c}
+```c
 #include <avr/io.h>
 
 int main(void)
@@ -417,7 +417,7 @@ Als we de **systeem-klok** zouden gebruiken (**16 mHz** bij Arduino-configuratie
 * Aangezien we nu met een **16 bit** count werken
 * Hebben we **15625** tellen of ticks nodig om een **seconde** te benaderen.
 
-```{.c}
+```c
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
@@ -458,9 +458,9 @@ Hiervoor kunnen we het register **TIFR1** gebruiken, dit register bevat een aant
 Onderstaand voorbeeld:
 
 * Zal continue nakijken als de flag **OCF1A** in **TIFR1** wordt gezet
-* Indien zo zal deze incrementeren 
+* Indien zo zal deze incrementeren
 
-```{.c}
+```c
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
@@ -532,7 +532,7 @@ Het verschil met voorgaande code
 * Verplaatsen van het het **optellen** naar een **interrupt-vector**
 * **Verwijderen** van de **poll**- en **reset**-code rond **TIFR1**
 
-```{.c}
+```c
 	#include <avr/io.h>
 	#include <avr/interrupt.h>
 
@@ -577,7 +577,7 @@ Deze maximum waarde hangt af van het de precesie van van het tel register:
 * **256** voor **8**-bit
 * **65535** voor **16**-bit registers
 
-```{.c}
+```c
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
@@ -610,4 +610,3 @@ ISR(TIMER1_OVF_vect)
 ### En verder?
 
 We komen later nog terug op timers in PWM dat zeer sterkt steunt op deze counter/timer-infrastructuur
-
