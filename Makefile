@@ -80,10 +80,21 @@ CHAPTER_08 += ../../general/pandoc_page_break.txt
 CHAPTER_08 += ../code/code_avr_introduction_to_interrupts.md
 CHAPTER_08 += ../../general/pandoc_page_break.txt
 CHAPTER_08 += ../code/code_avr_introducion_to_timers.md
+CHAPTER_08 += ../../general/pandoc_page_break.txt
+CHAPTER_08 += ../labo/labo_interrupts.md
+
+CHAPTER_09 += ../chapter/chapter09_analog.md
+CHAPTER_09 += ../../general/pandoc_page_break.txt
+CHAPTER_09 += ../code/avr_adc.md
+CHAPTER_09 += ../../general/pandoc_page_break.txt
+CHAPTER_09 += ../code/code_avr_pwm.md
+
+#CHAPTER_09 += ../../general/pandoc_page_break.txt
+#CHAPTER_09 += ../labo/labo_interrupts.md
 
 pagebreak = ../../general/pandoc_page_break.txt
 
-CHAPTERS = part01_minimal_knowledge.md $(pagebreak) $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) $(CHAPTER_08)
+CHAPTERS = part01_minimal_knowledge.md $(pagebreak) $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) $(CHAPTER_08) $(CHAPTER_09)
 
 graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
 grap_convert = gvpr -c '$(1)' ./graphviz/$(2).dot | dot -Tpng -o ./pictures/$(3).png

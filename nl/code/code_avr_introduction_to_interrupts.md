@@ -142,13 +142,18 @@ In het schema hieronder zie je een overzicht van deze stappen en de elementen di
   Dit is een taak van de hardware, deze zal een flag activeren die we **Interrupt Flag Bit** (per interrupt)   
   Deze **flags** maken onderdeel uit van registers zoals bijvoorbeeld de PCIFR (Pin Change interrupt flag), we komen hier later nog op terug.  
   Hoewel niet gebruikelijk kan je deze flag ook via software (manueel) zetten.
-* **Stap: uitvoeren van de code**   
+* **Stap: activeren/aanroepen van de code**   
   Als deze flag aangezet wordt zal de hardware de volgende stappen uitvoeren:
-     * Uitschakelen van de **Globale Interrupt Enable-flag** (om te vermijden dat andere interrupts kunnen worden uitgevoerd)
      * De status van de huidige code bewaren in een stack-register (komen we later nog op terug)
      * Opzoeken van de code via de **Interrupt Vector-Table** en deze code uitvoeren
+* **Stap: stopzetten van andere interrupts**   
+     * Uitschakelen van de **Globale Interrupt Enable-flag**  
+       Het eerste dat deze "vector-code" wordt verwacht te doen is het uitschakelen van andere interrupts  
+     * Dit kan door het aanroepen van de assembler-instructie cli
+       (om te vermijden dat andere interrupts kunnen worden uitgevoerd)
 * **Stap: beëindigen van de interrupt**   
   Hoewel de hardware de **Globale Interrupt Enable-flag** heeft afgezet moet de interrupt-code deze terug aanzetten.  
+   Dit gebeurt door de assembler-instructie sei 
   In assembly-code (en machine-instructies) gebeurt door op het einde van de interrupt-code de RETI-instructie (return from interrupt) aan te roepen.  
   In onze voorbeelden gaan we dit niet moeten doen omdat we daar een macro kunnen gebruiken.
 

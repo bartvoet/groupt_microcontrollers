@@ -15,7 +15,7 @@ Het waarnemen van waarden uit de **"echte wereld"** gebeurt in elektronica via *
 
 Zulke sensors zullen:
 
-* via een chemisch, mechanisch, optisch, ... proces 
+* via een chemisch, mechanisch, optisch, ... proces
 * metingen uitvoeren
 * in de meeste gevallen worden deze metingen waarden dan **omgezet**
 * naar een **analoog** elektronisch signaal.  
@@ -28,7 +28,7 @@ Om dit te kunnen uitvoeren gebruiken we ADC (ofwel **A**nalog **D**igital **C**o
 
 ### Duiding: ADC-hardware
 
-Om deze taak (ADC) uit te voeren bevat de AVR heel wat hardware 
+Om deze taak (ADC) uit te voeren bevat de AVR heel wat hardware
 Onderstaande tekening geeft een overzicht van de ADC-architectuur van de AVR:  
 (geen paniek, het is niet zo moeilijk als het er uit ziet)
 
@@ -42,7 +42,7 @@ De 2 belangrijkste/centrale onderdelen hiervan zijn:
   (**AREF**)
 * **Comparator**  
   Deze **vergelijkt** de spanning gegenereerd door de DAC met een **input**-spanning  
-  
+
 2 spanningen dienen er aangelegd te worden om met ADC te werken:
 
 * **Referentie-spanning**  
@@ -55,7 +55,7 @@ De 2 belangrijkste/centrale onderdelen hiervan zijn:
   Deze input-kanalen zijn beperkt tot de pinnen **ADC0** tem **ADC5** (6 in totaal)
 
 Bij de AVR ga je deze vergelijkingen tegen een specifieke snelheid meten.  
-Deze snelheid wordt bepaald door een klok, die wordt afgeleid van de systeem-klok via een **prescaler** (vergelijkbaar mechanisme dat we ook bij de timers hebben gezien). 
+Deze snelheid wordt bepaald door een klok, die wordt afgeleid van de systeem-klok via een **prescaler** (vergelijkbaar mechanisme dat we ook bij de timers hebben gezien).
 
 > **Nota:**  
 > De DAC kan maar werken tussen een minimum en maximum snelheid.  
@@ -85,19 +85,32 @@ Succesive zal een aantal **opeenvolgende stappen** nemen om tot een schatting te
   De comparator oordeelt dat de spanning ```2.76 v < 4 v``` en schrijft een **0** naar de **1ste MSB-bit**.  
   We weten nu dat de spanning  ```0 >= 2.76 v <= 4 v``` !!
 * **Stap 2:**  
-  De DAC genereert een spanning die **tussen 0 v en 4** ligt, namelijk **2 v**   
+  De DAC genereert een spanning die **tussen 0 v en 4 v** ligt, namelijk **2 v**   
   De comparator oordeelt dat de spanning ```2.76 v > 2 v``` en schrijft een **1** naar de **2de MSB-bit**   
   We weten nu dat de spanning ```2 >= 2.76 v <= 4 v``` !!
 * **Stap 3:**  
-  De DAC genereert een spanning die **tussen 2 v en 4** ligt, namelijk **3 v**   
+  De DAC genereert een spanning die **tussen 2 v en 4 v** ligt, namelijk **3 v**   
   De comparator oordeelt dat de spanning ```2.76 v < 3 v``` en schrijft een **0** naar de **2de MSB-bit**   
   We weten nu dat de spanning ```2 >= 2.76 v <= 3 v``` !!
 * **Stap 4:**  
-  De DAC genereert een spanning die **tussen 2 v en 3** ligt, namelijk **2.5 v**   
+  De DAC genereert een spanning die **tussen 2 v en 3 v** ligt, namelijk **2.5 v**   
   De comparator oordeelt dat de spanning ```2.76 v > 2.5 v``` en schrijft een **1** naar de **2de MSB-bit**   
   We weten nu dat de spanning ```2.5 >= 2.76 v <= 3 v``` !!  
 
-We hebben in dit geval de spanning kunnen bepalen met een nauwkeurigheid van ```0.5 V = 8 V / 2 ^ 4``` 
+Als we hier nu de volgende berekeningen op los laten:
+
+```
+Max-waarde 2 ^ 16       = 16
+ADC        0101         =  5
+Verhouding 16/5         =  0,3125
+Spanning   0,3125 * 8 v =  2,5
+```
+
+
+
+#### Nauwkeurigheid
+
+We hebben in dit geval de spanning kunnen bepalen met een nauwkeurigheid van ```0.5 V = 8 V / 2 ^ 4```
 
 Om het voorbeeld éénvoudig te houden gebruikten we een 4 bit nauwkeurigheid , in werkelijkheid hebben we een 10-bit nauwkeurigheid (8 / 2 ^ 10 = 0,0078125).  
 Als je dan de werkelijke waarde zou willen weten moet je de volgende formule toepassen:
@@ -107,22 +120,23 @@ Als je dan de werkelijke waarde zou willen weten moet je de volgende formule toe
 
 Om een LDR te integreren de volgende relevante informatie rond de LDR:
 
-* Een LDR is een variabele weerstand de weerstand 
+* Een LDR is een variabele weerstand de weerstand
 * Je maakt een spannings-deler met een weerstand
-* De waarde van deze weerstand hangt af van het type LDR maar voor deze LDR wordt aangeraden van een 10 Kohm te gebruiken. 
+* De waarde van deze weerstand hangt af van het type LDR maar voor deze LDR wordt aangeraden van een 10 Kohm te gebruiken.
 
 ![](../../pictures/avr_ldr_voltage_division_s.png)
 
 De LDR die we gebruikt hebben voor de cursus/oefening dient gebruikt te worden in combinatie met een weerstand van +- kOhm.  
-Zie hier hieronder de relatie tussen de weerstand enerzijds (y-as) in functie van het aantal lux. 
+Zie hier hieronder de relatie tussen de weerstand enerzijds (y-as) in functie van het aantal lux.
 
 ![](../../pictures/ldr_grapic.png)
 
 Bij +- 10 K ga je bij 10 lux een 50-50 spannings-deling krijgen.
 De regel die algemeen bij LDR's wordt gebruikt is:  
 
-```R = vierkantswortel(R_ldr_min_licht * R_ldr_max_licht)```
-
+```
+R = vierkantswortel(R_ldr_min_licht * R_ldr_max_licht)
+```
 
 Voor meer info rond de LDR die we gebruiken in de cursus, de datasheet van deze LDR kan je vinden te:                                                                     
 https://www.iprototype.nl/docs/ldr-technische-datasheet.pdf     
@@ -142,7 +156,7 @@ Deze setup gaan we gebruiken als volgt:
 * 1 LED zal maar tegelijk branden
 * Bij weinig licht gaan dit leds aan de rechterkant zijn (PB0 is meest recht).
 * Hoe meer licht gaan dit verschruiven naar links  
-* Hoe meer de LDR gaat branden gaat deze LED uit verschuiven naar 
+* Hoe meer de LDR gaat branden gaat deze LED uit verschuiven naar
 
 ### Voorbeeld: enkelvoudige meting
 
@@ -150,14 +164,14 @@ Het eerste voorbeeld:
 
 * **Enkelvoudige conversie:**  
   We geven vanuit de code telkens de opdracht om de **conversie** (sampling) uit te voeren.  
-  Het tegengestelde is **free-running mode** waar de MCU continue de conversie gaat herstarten 
+  Het tegengestelde is **free-running mode** waar de MCU continue de conversie gaat herstarten
 * **Geen multiplexing:**  
   Enkel 1 input kanaal
 
 (de rest van de functionaliteit als hierboven omschreven)
-  
 
-```{.c}
+
+```c
 #include <avr/io.h>
 #include <util/delay.h>
 
@@ -223,7 +237,7 @@ Uit dit voorbeeld zijn er 7 lijnen code die relevant zijn naar ADC toe
 
 De eerste 4 zijn bij de initialisatie van de ADC
 
-```{.c}
+```c
   ADMUX |= (1 << REFS0);                 // interne referentie van 5 v AVCC
   ADMUX &= 0xF0;                         // selecteer ADC0
   ADCSRA |= (1 << ADPS1) | (1 << ADPS2); // prescaler op /64
@@ -243,7 +257,7 @@ De eerste 4 zijn bij de initialisatie van de ADC
 
 De volgende code bevindt zich in de event-loop en wordt bij elke conversie uitgevoerd
 
-```{.c}
+```c
     ADCSRA |= (1 << ADSC);                       // start ADC-conversie
     LOOP_TOT_DAT_BIT_IS_GECLEARED(ADCSRA, ADSC); // loopen tot conversie gedaan
     adc_resultaat = ADC;                         // lees de 10 bit-waarde in
@@ -253,7 +267,7 @@ De volgende code bevindt zich in de event-loop en wordt bij elke conversie uitge
 * De volgende lijn is een macro die blijft loopen zolang een specfieke bit niet gezet is  
   Als je deze macro niet verstaat kijk terug naar de hoofdstukken rond bitmasking en macros
 * Nadat deze conversie gedaan is kan je het resultaat inlezen  
-  (datatype van minimum 2 bytes nodig) 
+  (datatype van minimum 2 bytes nodig)
 
 ### Duiding: registers
 
@@ -271,9 +285,9 @@ Als extra duiding:
 ### Voorbeeld: free-run
 
 Het volgend voorbeeld is in free-run modus.  
-Het grote verschil is dat je hier geen 
+Het grote verschil is dat je hier geen
 
-```{.c}
+```c
 #include <avr/io.h>
 #include <util/delay.h>
 
@@ -337,15 +351,15 @@ int main(void)
 ```
 
 Het voorbeeld hier heeft 1 groot verschil, namelijk het je start maar 1 maal een conversie.  
-De lijn    
-```{.c}
+
+```c
 ADCSRA |= (1 << ADSC);                 // slechts 1 maal starten van ADC-conversie
 ```
 is nu buiten de event-loop geplaatst
 
 Hiervoor moet je wel de auto-trigger-mode activeren:
 
-```{.c}
+```c
 ADCSRA |= (1 << ADATE);                //auto-trigger
 ```
 
@@ -369,7 +383,7 @@ Om multiplexing te kunnen tonen gebruiken we het volgende principe:
   dus belichten we zoals de vorige voorbeelden enkel de indicator led
 
 
-```{.c}
+```c
 #include <avr/io.h>
 #include <util/delay.h>
 
@@ -448,7 +462,7 @@ int main(void)
 
 De code die de meting uitvoerde hebben we nu geisoleerd naar een functie:
 
-```{.c}
+```c
 unsigned short lees_kanaal(unsigned char kanaal)
 {
     ADMUX = ADMUX & (0xF0 | kanaal);             // selecteer ADC0
