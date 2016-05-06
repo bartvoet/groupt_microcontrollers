@@ -5,10 +5,10 @@ Voor degenen met een kort geheugen een korte herhali
 
 ### Herhaling: analoge spanning genereren met PWM
 
-**PWM** of "**P**ulse  **W**idth **M**odulation" is een modulatie-**techniek** 
+**PWM** of "**P**ulse  **W**idth **M**odulation" is een modulatie-**techniek**
 
-* om een specifieke spanning (analoog gegeven) te genereren 
-* vanuit een digitaal medium 
+* om een specifieke spanning (analoog gegeven) te genereren
+* vanuit een digitaal medium
 * dat enkel 0 of een 1 kan genereren
 * ofwel 0 of VCC (meestal 3.3 of 5 v)
 
@@ -57,13 +57,13 @@ Vanuit een MCU zijn verschillende manieren om PWM te genereren:
 * **Timer-gebaseerd met interrupts**  
   Idem dito maar met interrupts
 * **PWM**-generatie  
-  Veel moderne MCU's zoals de AVR beschikken over functionaliteit deze duty-cycle te genereren.
+  Veel moderne MCU's zoals de AVR beschikken over functionaliteit die deze duty-cycle kan genereren.
 
 In dit hoofdstuk gaan we elk van deze technieken bekijken.
 
 > **Nota**:  
 > Er zijn natuurlijk ook verschillende opties voor PWM:
-> 
+>
 > * Externe DAC
 > * Spanningsdeler (als je de spanning niet moet wijzigen)
 > * Specifieke hardware zoals bijvoorbeeld dc-motor-drivers
@@ -73,13 +73,13 @@ In dit hoofdstuk gaan we elk van deze technieken bekijken.
 
 ### Setup: led dimmen
 
-Voor de eerste voorbeelden starten we met éénvoudige setup, we laten een led dimmen door de spanning via PWM vanuit de MCU. 
+Voor de eerste voorbeelden starten we met éénvoudige setup, we laten een led dimmen door de spanning via PWM vanuit de MCU.
 
 ### Voorbeeld: brute-force PWM
 
 In dit eerste voorbeeld gaan we PWM illustreren zonder de PWM-hardware te gebruiken
 
-```{.c}
+```c
 #include <avr/io.h>
 #include <util/delay.h>
 
@@ -111,11 +111,11 @@ int main(void)
 }
 ```
 
-### Voorbeeld: brute-force PWM met sinus
+### Voorbeeld: brute-force PWM met zaagtand
 
 Deze code kunnen we hergebruiken om PWM te genereren
 
-```{.c}
+```c
 #include <avr/io.h>
 #include <util/delay.h>
 
@@ -153,11 +153,53 @@ int main(void)
 }
 ```
 
-### Voorbeeld: PWM met timer-interrupts
+### Voorbeeld: PWM met timer (polling-based)
 
+```c
+#include <avr/io.h>
+#include <util/delay.h>
+#include <avr/interrupt.h>
 
+#define PWM_BANK_PORT  PORTB
+#define PWM_BANK       DDRB
+#define PWM_PIN        PB1
+#define HELDERHEID     128
 
-```{.c}
+int main(void)
+{
+      DDRB = 0xFF;
+      PWM_BANK_PORT = PWM_BANK_PORT | (1 << PWM_PIN);
+
+      TCCR1B |= (1 << CS10) | (1 << CS12);
+      TCCR1B &= ~ (1 << CS11);
+
+      TCCR1B &= ~(1 << WGM13);
+      TCCR1B |=  (1 << WGM12);
+      TCCR1A &= ~((1 << WGM10) | (1 << WGM11));
+
+      OCR1B = 20;
+      OCR1A = 255;
+
+      TIMSK1 |= (1 << OCF1A);
+      TIMSK1 |= (1 << OCF1B);
+
+      while (1) {
+        if(TIFR & (1 << OCF1A) ) {
+          PWM_BANK_PORT = PWM_BANK_PORT | (1 << PWM_PIN);
+          TIFR = TIFR | (1 << OCF1A);
+        }
+        if(TIFR & (1 << OCF1B) ) {
+          PWM_BANK_PORT = PWM_BANK_PORT & ~(1 << PWM_PIN);
+          TIFR = TIFR | (1 << OCF1B);
+        }
+      }
+      return 0;
+}
+```
+
+### Voorbeeld: PWM met timer (interrupt-based)
+
+```c
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
@@ -189,7 +231,6 @@ int main(void)
       sei();
 
       while (1) {
-          //nu kan je nog andere code schrijven
       }
       return 0;
 }
@@ -216,25 +257,15 @@ Ter **herhaling**, tot nog toe hebben we 2 waveform-generation-modes gezien:
 * **Normal**-modus:  
   Waar de teller blijft doortellen en reset bij overflow van deze teller  
   (255 bij 8 bit en 65536 bij 16 bot)
-* **CTC**-modus:  
-  Waar de temmer reset wanneer hij op een waarde in het compare-register komt  
-  (**C**LEAR **T**IMER ON **C**OMPARE
+* **CTC**-modus (CLEAR TIMER ON COMPARE)
+  Waar de teller reset wanneer hij op een waarde van een compare-register komt  
 
-Met deze gebruikten we deze functionaliteit vooral als timer (met en zonder interrupts of niet).  
-In het vorige voorbeeld gebruikten we deze timer/counter-architectuur om zo pinnen aan te sturen.  
-
-Zoals we in het vorige voorbeeld konden zien wordt er ook veel gebruik gemaakt
-Daarnaast zijn echter nog nieuwe modes:
+In de vorige voorbeeld gebruikten we deze timer/counter-architectuur om zo pinnen aan te sturen.  
+Er zijn echter nog echter andere modes meer efficient om PWM te generen:
 
 * Fast PWM
 * Phase correct PWM
-* Phase and frequency correct 
-  
-Clear OC1A/OC1B on Compare Match, set
-OC1A/OC1B at BOTTOM (non-inverting mode)
-
-Set OC1A/OC1B on Compare Match, clear
-OC1A/OC1B at BOTTOM (inverting mode)
+* Phase and frequency correct
 
 ### Duiding: output van timers
 
@@ -464,7 +495,7 @@ int main(void) {
 ![phase and frequency](../../pictures/pwm_PHASE_AND_FREQUENCY_CORRECT_PWM_TOGGLE.JPG)
 
 ![phase](../../pictures/pwm_PHASE_CORRECT_PWM_TOGGLE.JPG)
- 
+
 
 ### Samengevat: verschil tussen fast PWM en phase correct
 
@@ -476,5 +507,3 @@ Onderstaande tekening vat het verschil tussen fast en frequency-correct samen:
 
 
 ![](../../pictures/adc_timing_fast_vs_freq.png)
-
-
