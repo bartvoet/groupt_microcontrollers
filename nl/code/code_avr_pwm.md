@@ -77,7 +77,7 @@ Voor de eerste voorbeelden starten we met éénvoudige setup, we laten een led d
 
 ### Voorbeeld: brute-force PWM
 
-In dit eerste voorbeeld gaan we PWM illustreren zonder de PWM-hardware te gebruiken
+In dit eerste voorbeeld genereren we PWM op zuivere software/gpio-basis.
 
 ```c
 #include <avr/io.h>
@@ -105,15 +105,37 @@ int main(void)
 {
   PWM_BANK = PWM_BANK | (1 << PWM_PIN);
   while (1) {
-     pwm(128);
+     pwm(HELDERHEID);
   }
   return 0;
 }
 ```
 
-### Voorbeeld: brute-force PWM met zaagtand
+Deze code vereist weinig uitleg:
 
-Deze code kunnen we hergebruiken om PWM te genereren
+* Functie pwm() heeft een argument helderheid
+* Dit argument is een verhouding tov 256 (maximum voor een 8-bit)
+* In functie van deze verhouding zal deze meer of minder helderheid weergeven.
+
+#### brute-force PWM 50 %
+
+Als we een scope gebruiken om de spanning te analyzeren krijgen we volgend resultaat.
+
+![](../../pictures/pwm/pwm_brute_force_50.png)
+
+#### brute-force PWM 75 %
+
+Als we de verhouding wijzignen naar 192/256 (macro HELDERHEID aanpassen)
+
+![](../../pictures/pwm/pwm_brute_force_75.png)
+
+> Nota: deze spanning is afgemeten over een LED, vandaar dat de maximum spanning op +- 1 v komt
+
+### Voorbeeld: brute-force PWM (zaagtand)
+
+Ter aanvulling kunnen we deze functie ook gebruiken om de helderheid van een led te doen wijzigen.
+
+Als je volgende code uitvoert zal in en periode van +- 3-4 seconden zien dimmen en feller worden.
 
 ```c
 #include <avr/io.h>
@@ -155,6 +177,16 @@ int main(void)
 
 ### Voorbeeld: PWM met timer (polling-based)
 
+Een volgende stap is het gebruik van een timer ipv het zuivere bit-banging.
+De hardware zal voor ons de tijd afmeten, in de software wordt nagekeken:
+
+* De flag voor de compare-waardes OCF1B  
+  Dit is de eerste compare-waarde (128 tellen), we clearen de uitgang
+* De flag voor de compare-waardes OCF1A  
+  Dit is de 2de compare-waarde (255 tellen), we setten de uitgang  
+  Bij het bereiken van deze flag wordt ook de teller gereset (CTC-mode)
+
+
 ```c
 #include <avr/io.h>
 #include <util/delay.h>
@@ -177,7 +209,7 @@ int main(void)
       TCCR1B |=  (1 << WGM12);
       TCCR1A &= ~((1 << WGM10) | (1 << WGM11));
 
-      OCR1B = 20;
+      OCR1B = 128;
       OCR1A = 255;
 
       TIMSK1 |= (1 << OCF1A);
@@ -197,7 +229,25 @@ int main(void)
 }
 ```
 
+> Bemerking:
+> Let ook dat je opnieuw moet schrijven naar de betreffende bit in TIFR
+> Dit hoef je niet te doen als je interrupts gebruikt.
+
+#### Timer polling-based PWM 50 %
+
+Als we een scope gebruiken om de spanning te analyzeren krijgen we volgend resultaat.
+
+![](../../pictures/pwm/pwm_timer_based_50.png)
+
+#### Timer polling-based PWM 75 %
+
+Als we de verhouding wijzignen naar 192/256
+
+![](../../pictures/pwm/pwm_timer_based_75.png)
+
 ### Voorbeeld: PWM met timer (interrupt-based)
+
+Ter vervollediging gebruiken gebruiken we interrupts ipv al dit werk in de event-loop uit te voeren.
 
 ```c
 #include <avr/io.h>
@@ -222,7 +272,7 @@ int main(void)
       TCCR1B |=  (1 << WGM12);
       TCCR1A &= ~((1 << WGM10) | (1 << WGM11));
 
-      OCR1B = 20;
+      OCR1B = 128;
       OCR1A = 255;
 
       TIMSK1 |= (1 << OCF1A);
@@ -246,10 +296,20 @@ ISR(TIMER1_COMPA_vect)
 }
 ```
 
+#### Timer interrupt-based PWM 50 %
+
+Als we een scope gebruiken om de spanning te analyzeren krijgen we volgend resultaat.
+
+![](../../pictures/pwm/pwm_timer_interrupt_based_50.png)
+
+#### Timer interrupt-based PWM 75 %
+
+Als we de verhouding wijzignen naar 192/256
+
+![](../../pictures/pwm/pwm_timer_interrupt_based_75.png)
 
 ### Duiding: PWM-modes
 
-Zoals bij de introductie van deze cursus vermeld, embedded programmeren is **optimaal gebruik maken van hardware** (en dus ook de datasheet te lezen).  
 De timer/counter-infrastructuur bevat namelijk een aantal interessante uitbreidingen om PWM direct te supporteren.  
 
 Ter **herhaling**, tot nog toe hebben we 2 waveform-generation-modes gezien:
@@ -267,10 +327,17 @@ Er zijn echter nog echter andere modes meer efficient om PWM te generen:
 * Phase correct PWM
 * Phase and frequency correct
 
-### Duiding: output van timers
+> Zoals bij de introductie van deze cursus vermeld, embedded programmeren is **optimaal gebruik maken van hardware** (en dus ook de datasheet te lezen).  
+
+Alvorens direct naar deze pwm te springen een
+
+### Duiding: compare output mode
 
 Vorige keer bekeken we de timer/counter-architectuur puur vanuit het gebruik als timer.  
-Je kan echter ook rechtstreeks signalen genereren vanuit deze hardware.
+Vanuit interrupt-code (of via directe interactie met het TIFR-register in de main) stuurden we 1 van de gpio-pinnen aan.
+
+Het aansturen van pinnen kan echter ook rechtstreeks vanuit deze hardware (dus zonder in de software de gpio's aan te spreken!!).  
+Dit is mogelijk voor een beperkte selectie van output-pinnen.
 
 ![](../../pictures/compare_output_unit.png)
 
@@ -279,11 +346,18 @@ Voor bijvoorbeeld timer 1 noemen deze **OC1A** en **OC1B** en komen deze respect
 
 ![](../../pictures/Atmega168PinMap2.png)
 
+> Op je Arduino-bordje zullen deze pinnen aangeduid staan met het teken ~ (tilde)
+
 ### Voorbeeld: output van timers
 
-Alvorens in de echte PWM te storten demonstreren we het gebruik van deze 2 uitgangen in de vertrouwde CTC-mode.  
+Het gebruik van deze pinnen is een basis-bouwsteun naar de andere PWM-modes toe.  
+We starten met een kleine demonstratie in de al vertrouwde CTC-mode.  
 
-```{.c}
+> **Let wel:**  
+> Je moet nog altijd de betreffende pinnen al output aanduiden.  
+> Als je wil weten met welke pinnen OC1A en OC1B overeenstemmen zie de datasheet.
+
+```c
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
@@ -298,8 +372,8 @@ int main(void)
       TCCR1B |= (1 << WGM12);
       TCCR1A |= (1 << COM1A0) | (1 << COM1B0);
 
-      OCR1B = 10000;
-      OCR1A = 15624;
+      OCR1B = 100;
+      OCR1A = 300;
 
       while (1) {
           //nu kan je nog andere code schrijven
@@ -316,15 +390,27 @@ Het grootste deel van de code is identiek aan vorige voorbeelden:
 
 We zien echter 2 verschillen:
 
-* Een 2de compare waarde (OCR1B)
-* Het instelen van een output compare unit
+* **Geen rechtstreeks** setten of clearen van **GPIO's**
+* Het instelen van een andere **Compare Output Mode**
 
+Deze configuratie (COM1A0 en COM1B0) zorgt ervoor dat OC1A/OC1B worden getoggled als een compare wordt bereikt op een respectievelijk OCR1A/OCR1B.
+
+> Kijk als oefening in de datasheet voor de tabel die dit gedrag beschrijft   
+> (hint: vlak bij de beschrijving van TCCR1A-register)
+
+Dit resulteert in volged resultaat:
+
+![](../../pictures/pwm/pwm_timer_direct_output_100_300.png)
+
+Als je de code wijzigt en beide OCR1A en OCR1B op 100 zet krijg je volgend resultaat:
+
+![](../../pictures/pwm/pwm_timer_direct_output_100_100.png)
 
 ### Voorbeeld: PWM-functionaliteit (fast PWM)
 
 ![](../../pictures/pwm_timing_fast.png)
 
-```{.c}
+```c
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
@@ -361,11 +447,20 @@ int main(void) {
 
 ### Voorbeeld: PWM-functionaliteit (PHASE correct)
 
+* dual slope <-> dubbel zo traag
+* beide signalen zijn in fase
+
+* Telt zowel omhoog als omlaag
+* Output Compare Registers (OC1A en OC1B voor timer 1)
+     * worden ge-cleared bij een compare match (bij omhoog-tellen) tussen TCNT1 and OCR1x
+     * worden ge-set bij compare match between
+
+
 
 ![](../../pictures/pwm_timing_phase_correct.png)
 
 
-```{.c}
+```c
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
@@ -404,7 +499,7 @@ int main(void) {
 
 ![](../../pictures/pwm_timing_phase_and_frequency_correct.png)
 
-```{.c}
+```c
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
@@ -448,7 +543,7 @@ int main(void) {
 }
 ```
 
-```{.c}
+```c
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>

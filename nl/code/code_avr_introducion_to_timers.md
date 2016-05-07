@@ -147,7 +147,9 @@ Dit is 1 van de 2 registers die we gebruiken voor het configureren van de counte
 > De andere counter/timer-componenten hebben parallelle namen  
 > (TCCR1A/TCCR1B en TCCR2A/TCCR2B)
 
-```TCCR0B |= (1 << CS02) | (1 << CS01) | (1 << CS00);```
+```
+TCCR0B |= (1 << CS02) | (1 << CS01) | (1 << CS00);
+```
 
 De 3 macro's - **CS00** en **CS01** en **CS00** - zijn eigenlijk **mnemomics** voor de **3 LSB** (rechtse) bits van het **TCCR0B-register**.  
 Deze 3 LSB-bits worden de **clock-select**-bits (of flags) genoemd, en de combinatie van deze 3 bits bepaalt het volgende:
@@ -171,7 +173,9 @@ De 3 waardes die in dit stadium relevant zijn:
 
 De waarde van counter 0 kan je uitlezen via het register TCNT0 zoals in voorgaand voorbeeld.  
 
-```PORTB = TCNT0;```
+```
+PORTB = TCNT0;
+```
 
 Gezien hier beide 8-bit registers zijn kan je deze aan elkaar gelijk stellen.
 
@@ -206,7 +210,7 @@ In de datasheet spreekt men - gerelateerd aan overflow - ook van 3 waarde-defini
 Je kan dit gedrag (overflow) echter ook controleren door met een "top-waarde" te configureren.  
 Via een ingebouwde comparator zal dan de clear (naar 0 plaatsen) worden ingeschakeld wanneer de teller deze top-waarde bereikt.  
 
-Hiervoor dien je wel de **CTC-mode** te activeren (**C**lear **T**imer on **C**ompare Match).  
+Hiervoor dien je wel de **CTC-mode** te activeren (Clear Timer on Compare Match).  
 Deze activeert deze comparator en de hardware zal dus de teller gaat clearen nadat je een bepaalde waarde bereikt
 
 De andere modus waar we in het voorgaand voorbeeld met werken noemt **normal mode**, deze is dan ook de default-modus.  
@@ -259,7 +263,7 @@ Om CRC-modus te kunnen configureren zijn er 2 assignment-statements toegevoegd a
 ```
 
 Voor deze mode te configureren moet je de **WGM-bits (of flags)** configureren.  
-WGM staat voor "**w**aveform **g**eneration **m**ode" en waveform verwijst naar het gebruik van timers om met PWM te kunnen werken (maar daar komen we later nog op terug).  
+WGM staat voor "waveform generation mode" waar waveform verwijst naar het gebruik van timers om met PWM te kunnen werken (maar daar komen we later nog op terug).  
 
 Zoals je kan zien in bovenstaande code (en in de datasheet) zijn deze 3 flags verspreid over de 2 configuratie-registers.  
 Als je in de datasheet kijkt zie je een tabel met alle mogelijke combinaties (zoek ook als oefening deze tabel op), van deze tabel zijn er 2 relevant voor deze fase:
