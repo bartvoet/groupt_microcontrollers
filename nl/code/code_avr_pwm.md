@@ -406,6 +406,13 @@ Als je de code wijzigt en beide OCR1A en OCR1B op 100 zet krijg je volgend resul
 
 ![](../../pictures/pwm/pwm_timer_direct_output_100_100.png)
 
+### Duding: BOTTOM-TOP
+| Concept | Description                              |
+|---------|-------------------------------------------------------------------------------------|
+| BOTTOM  | The counter reaches the BOTTOM when it becomes 0x0000.                              |
+| MAX     | The counter reaches its MAXimum when it becomes 0xFFFF (decimal 65535).             |
+| TOP     | The counter reaches the TOP when it becomes equal to the highest value in the count sequence. The TOP value can be assigned to be one of the fixed values: 0x00FF, 0x01FF, or 0x03FF, or to the value stored in the OCR1A or ICR1 Register. The assignment is dependent of the mode of operation.                                                                                      |
+
 ### Voorbeeld: PWM-functionaliteit (fast PWM)
 
 ![](../../pictures/pwm_timing_fast.png)
@@ -442,6 +449,8 @@ int main(void) {
     return 0;
 }
 ```
+
+![](../../pictures/pwm/pwm_timer_fast_pwm.png)
 
 ![](../../pictures/pwm_FAST_PWM.JPG)
 
