@@ -333,7 +333,7 @@ Alvorens direct naar deze pwm te springen een
 
 ### Duiding: compare output mode
 
-Vorige keer bekeken we de timer/counter-architectuur puur vanuit het gebruik als timer.  
+Tot nog toe bekeken we de timer/counter-architectuur puur vanuit het gebruik als timer.  
 Vanuit interrupt-code (of via directe interactie met het TIFR-register in de main) stuurden we 1 van de gpio-pinnen aan.
 
 Het aansturen van pinnen kan echter ook rechtstreeks vanuit deze hardware (dus zonder in de software de gpio's aan te spreken!!).  
@@ -348,7 +348,7 @@ Voor bijvoorbeeld timer 1 noemen deze **OC1A** en **OC1B** en komen deze respect
 
 > Op je Arduino-bordje zullen deze pinnen aangeduid staan met het teken ~ (tilde)
 
-### Voorbeeld: output van timers
+### Voorbeeld: compare output mode
 
 Het gebruik van deze pinnen is een basis-bouwsteun naar de andere PWM-modes toe.  
 We starten met een kleine demonstratie in de al vertrouwde CTC-mode.  
@@ -406,14 +406,98 @@ Als je de code wijzigt en beide OCR1A en OCR1B op 100 zet krijg je volgend resul
 
 ![](../../pictures/pwm/pwm_timer_direct_output_100_100.png)
 
-### Duding: BOTTOM-TOP
-| Concept | Description                              |
-|---------|-------------------------------------------------------------------------------------|
-| BOTTOM  | The counter reaches the BOTTOM when it becomes 0x0000.                              |
-| MAX     | The counter reaches its MAXimum when it becomes 0xFFFF (decimal 65535).             |
-| TOP     | The counter reaches the TOP when it becomes equal to the highest value in the count sequence. The TOP value can be assigned to be one of the fixed values: 0x00FF, 0x01FF, or 0x03FF, or to the value stored in the OCR1A or ICR1 Register. The assignment is dependent of the mode of operation.                                                                                      |
+### PWM-Modes
+
+Door CTC te gebruiken kunnen we:
+
+* **Zonder software-acties** (buiten configuratie) 2 blok-golven aansturen
+* Op 2 uitgangen
+* Wijzigen van **OCR1A** stelt ons in staat de frequentie te wijzigen
+* Door **OCR1B** te manipuleren kunnen we de fase wijzigen
+
+Wat er nog ontbreekt echter, om PWM te kunnen genereren, is het genereren van een duty-cycle.  
+Dit kan door het gebruik van andere PWM-Modes
+
+
+### Single-slope teller
+
+Vooraleer in de praktijk te duiken een introductie in een aantal concepten.  
+Een timer wordt - in context van pwm - meestal voorgesteld op een x-y-as (in functie van tijd) waarbij:
+
+* de **x-as** het aantal **ticks** voorstelt
+* de **y-as** de **teller** voorstelt
+
+Dit resulteert dan in een diagram dat lijkt op een **zaagtand**.
+
+![](../../gnuplot/single_slope.png)
+
+> In bovenstaand diagrammen gebruiken we een 8-bit teller, deze zal voor elke pwm-duty-cycle 256 keer tellen.  
+
+Zo'n **zaagtand** definieren we als een **single-slope**-teller.  
+
+### Concepten: BOTTOM-MAX-TOP
+
+In een single-slope telt de timer op en heeft dus **1 helling**, van daar single-slope.  
+
+* Hij start van een **BOTTOM**-waarde (0 in dit geval)
+* Deze telt tot een **MAX**-waarde
+* In dit geval is deze **MAX**-waarde 0xFF of 255
+* **0xFF** (voor 8-bit) definieren wel als **TOP**  
+  De hoogste waarde die je in een 8-bit teller kan opslaan
+* maw TOP <= **MAX** => BOTTOM
+
+### Relatie PWM vs timer
+
+Hoe maak je dan PWM?  
+Je voegt hier het concept van een **compare** of **match-waarde** aan toe.    
+
+![](../../gnuplot/single_slope_with_one_output.png)
+
+* Wanneer de teller aan de **bottom** zit **set** je een signaal
+* Op de moment dat je een **match** hebt **clear** je dit signaal
+* Bij het bereiken van de **top** zal de teller zich **resetten** naar de **bottom**
+
+### Frequentie en duty-cycle
+
+![](../../gnuplot/single_slope_with_one_output_diff_top.png)
+
+### Meerdere uitgangen
+
+![](../../gnuplot/single_slope_with_two_outputs.png)
+
+### Dual slope
+
+![](../../gnuplot/dual_slope_with_one_output_annotated.png)
+
+### Dual slope
+
+![](../../gnuplot/dual_slope_with_two_outputs.png)
+
+### PWM op een AVR
+
+Om het gedrag van PWM te beschrijven zijn er 3 "boundary"-concepten die we moeten kennen.
+
+* **BOTTOM**  
+  De teller bereikt BOTTOM als hij de waarde 0x0000 bereikt.  
+  (de waarde 0 voor BOOTOM is voor 8-bit tellers vanzelfsprekend ook geldende)
+* **MAX**  
+  De teller bereikt MAX als hij 0xFFFF (decimal 65535) wordt.
+  (bij 8-bit-tellers zal dit 0xFF of 255 zijn)
+* **TOP**  
+  De teller bereikt TOP wanneer hij gelijk is aan de hoogste waarde bij de teller-sequentie.  
+  De waarde hangt af van "mode of operation"
+     * Dit kan van de volgende waardes zijn: 0x00FF, 0x01FF, or 0x03FF
+     * Dit kan de waarde zijn van het OCR1A-register.
+     * Dit kan de waarde zijn van het ICR1-register.
+
+> Voor een exacte beschrijving van welke waarde deze TOP kan hebben kijk naar register TCCR1A in de datasheet  
+> (hint: tabel die overeenkomt met de verschillende waveforms)
+
+### Frequentie en Duty-cycle
 
 ### Voorbeeld: PWM-functionaliteit (fast PWM)
+
+We introduceren de PWM-hardware met de eerst beschikbare techniek **Fast PWM**
 
 ![](../../pictures/pwm_timing_fast.png)
 

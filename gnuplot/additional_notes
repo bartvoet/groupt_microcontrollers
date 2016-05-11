@@ -1,0 +1,13 @@
+
+
+max
+top
+bottom
+
+frequentie
+"compare match"
+
+set key outside
+
+set label "Approximation error" right at 2.4, 0.45 offset -.5, 0
+set arrow 1 from first 2.4, 0.45 to 3, 0.93 lt 1 lw 2 front size .3, 15
