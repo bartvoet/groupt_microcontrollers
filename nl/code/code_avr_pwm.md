@@ -1,57 +1,14 @@
-## PWM
+## PWM op de AVR
 
-In de lessen elektronica (en vermogenselektronica) ben je al geïntroduceerd met het begrip PWM.  
-Voor degenen met een kort geheugen een korte herhali
-
-### Herhaling: analoge spanning genereren met PWM
-
-**PWM** of "**P**ulse  **W**idth **M**odulation" is een modulatie-**techniek**
-
-* om een specifieke spanning (analoog gegeven) te genereren
-* vanuit een digitaal medium
-* dat enkel 0 of een 1 kan genereren
-* ofwel 0 of VCC (meestal 3.3 of 5 v)
-
-> **Nota:**  
-> We hadden eerder bij ADC gezien dat je ook met een DAC een specifieke spanning kan genereren.  
-> PWM is echter een zeer éénvoudige manier waarop je een spanning kan genereren enkel en alleen door het op en afzetten van spanning
-
-
-### Herhaling: PWM en Duty-cylce
-
-PWM is gebaseerd op het begrip **duty-cycle**:
-
-* Een blokgolf wordt gegenereerd
-* Met een vaste frequentie
-* Maar de verhouding in functie van tijd tussen logisch 1 en 0 varieert
-* De duty cycle is het percentage van een periode
-* Deze verhouding (percentueel) zal een gemiddelde spanning genereren
-
-De voorbeelden hieronder illustreren:
-
-![](../../pictures/example_duty_cycle.jpg)
-
-Stel het volgende:
-
-* VCC is 5 v
-* Frequentie is 1 kHz (periode = 1 ms)
-
-Dan kijg je volgende (gemiddelde) spanningen bij overeenkomstige duty-cycles:
-
-| 0      | 1      | duty cycle | spanning |
-|--------|--------|------------|----------|
-| 0.9 ms | 0.1 ms | 10 %       | 0.5 v    |
-| 0.3 ms | 0.7 ms | 30 %       | 1.5 v    |
-| 0.5 ms | 0.5 ms | 50 %       | 2.5 v    |
-| 0.1 ms | 0.9 ms | 90 %       | 4.5 v    |
-| 0.0 ms | 1.0 ms | 100 %      | 5.0 v    |
+Tot nog toe hebben we gezien hoe we PWM kunnen genereren met behulp van een teller.  
+In dit deel gaan we kijken hoe we dit principe kunnen toepassen vanuit een C-programma op de AVR.
 
 ### Duiding: PWM en counters
 
 Vanuit een MCU zijn verschillende manieren om PWM te genereren:
 
 * **Bit-banging**  
-  Op basis van de cpu-frequentie tel je in een loop hoeveel maal je een 1 en 0 naar een specifieke pin schrijft
+  Op basis van de cpu-frequentie (door middel van macro delay()) tel je in een loop hoeveel maal je een 1 en 0 naar een specifieke pin schrijft
 * **Timer-gebaseerd**  
   Je maakt gebruik van de timer/counter infrastructuur om te weten hoe lang je deze logische 0 en 1 scrhrijft
 * **Timer-gebaseerd met interrupts**  
@@ -71,9 +28,12 @@ In dit hoofdstuk gaan we elk van deze technieken bekijken.
 >
 > Deze alternatieven vallen echter buiten de scope van deze introductie in PWM.  
 
-### Setup: led dimmen
+### Setup: Led dimmen
 
-Voor de eerste voorbeelden starten we met éénvoudige setup, we laten een led dimmen door de spanning via PWM vanuit de MCU.
+We gaan uit van een **éénvoudige setup** om PWM te bestuderen:
+
+* We laten een led dimmen door de spanning via PWM vanuit de MCU.
+* Voor de laaste voorbeelden zullen we een 2de led gebruiken
 
 ### Voorbeeld: brute-force PWM
 
@@ -131,7 +91,7 @@ Als we de verhouding wijzignen naar 192/256 (macro HELDERHEID aanpassen)
 
 > Nota: deze spanning is afgemeten over een LED, vandaar dat de maximum spanning op +- 1 v komt
 
-### Voorbeeld: brute-force PWM (zaagtand)
+### Voorbeeld: brute-force PWM (driehoek-patroon)
 
 Ter aanvulling kunnen we deze functie ook gebruiken om de helderheid van een led te doen wijzigen.
 
@@ -331,151 +291,9 @@ Er zijn echter nog echter andere modes meer efficient om PWM te generen:
 
 Alvorens direct naar deze pwm te springen een
 
-### Duiding: compare output mode
-
-Tot nog toe bekeken we de timer/counter-architectuur puur vanuit het gebruik als timer.  
-Vanuit interrupt-code (of via directe interactie met het TIFR-register in de main) stuurden we 1 van de gpio-pinnen aan.
-
-Het aansturen van pinnen kan echter ook rechtstreeks vanuit deze hardware (dus zonder in de software de gpio's aan te spreken!!).  
-Dit is mogelijk voor een beperkte selectie van output-pinnen.
-
-![](../../pictures/compare_output_unit.png)
-
-Voor elke timer bestaan er 2 zulke pinnen, zoals we direct gaan zien kan je dan ook deze 2 pinnen apart aanspreken.
-Voor bijvoorbeeld timer 1 noemen deze **OC1A** en **OC1B** en komen deze respectievelijk overeen met PB1 en PB2 (bank 2)
-
-![](../../pictures/Atmega168PinMap2.png)
-
-> Op je Arduino-bordje zullen deze pinnen aangeduid staan met het teken ~ (tilde)
-
-### Voorbeeld: compare output mode
-
-Het gebruik van deze pinnen is een basis-bouwsteun naar de andere PWM-modes toe.  
-We starten met een kleine demonstratie in de al vertrouwde CTC-mode.  
-
-> **Let wel:**  
-> Je moet nog altijd de betreffende pinnen al output aanduiden.  
-> Als je wil weten met welke pinnen OC1A en OC1B overeenstemmen zie de datasheet.
-
-```c
-#include <avr/io.h>
-#include <util/delay.h>
-#include <avr/interrupt.h>
-
-int main(void)
-{
-      DDRB |= (1 << DDB1) | (1 << DDB2); // PB1 and PB2 als output
-
-      TCCR1B |= (1 << CS10) | (1 << CS12);
-      TCCR1B &= ~ (1 << CS11);
-
-      TCCR1B |= (1 << WGM12);
-      TCCR1A |= (1 << COM1A0) | (1 << COM1B0);
-
-      OCR1B = 100;
-      OCR1A = 300;
-
-      while (1) {
-          //nu kan je nog andere code schrijven
-      }
-      return 0;
-}
-```
-Het grootste deel van de code is identiek aan vorige voorbeelden:
-
-* Initialiseren van de pinnen
-* Configuratie van de prescaler (clock-select)
-* Selectie van CTC als waveform-output
-* Initialiseren van een compare-waarde met OCR1A
-
-We zien echter 2 verschillen:
-
-* **Geen rechtstreeks** setten of clearen van **GPIO's**
-* Het instelen van een andere **Compare Output Mode**
-
-Deze configuratie (COM1A0 en COM1B0) zorgt ervoor dat OC1A/OC1B worden getoggled als een compare wordt bereikt op een respectievelijk OCR1A/OCR1B.
-
-> Kijk als oefening in de datasheet voor de tabel die dit gedrag beschrijft   
-> (hint: vlak bij de beschrijving van TCCR1A-register)
-
-Dit resulteert in volged resultaat:
-
-![](../../pictures/pwm/pwm_timer_direct_output_100_300.png)
-
-Als je de code wijzigt en beide OCR1A en OCR1B op 100 zet krijg je volgend resultaat:
-
-![](../../pictures/pwm/pwm_timer_direct_output_100_100.png)
-
-### PWM-Modes
-
-Door CTC te gebruiken kunnen we:
-
-* **Zonder software-acties** (buiten configuratie) 2 blok-golven aansturen
-* Op 2 uitgangen
-* Wijzigen van **OCR1A** stelt ons in staat de frequentie te wijzigen
-* Door **OCR1B** te manipuleren kunnen we de fase wijzigen
-
-Wat er nog ontbreekt echter, om PWM te kunnen genereren, is het genereren van een duty-cycle.  
-Dit kan door het gebruik van andere PWM-Modes
-
-
-### Single-slope teller
-
-Vooraleer in de praktijk te duiken een introductie in een aantal concepten.  
-Een timer wordt - in context van pwm - meestal voorgesteld op een x-y-as (in functie van tijd) waarbij:
-
-* de **x-as** het aantal **ticks** voorstelt
-* de **y-as** de **teller** voorstelt
-
-Dit resulteert dan in een diagram dat lijkt op een **zaagtand**.
-
-![](../../gnuplot/single_slope.png)
-
-> In bovenstaand diagrammen gebruiken we een 8-bit teller, deze zal voor elke pwm-duty-cycle 256 keer tellen.  
-
-Zo'n **zaagtand** definieren we als een **single-slope**-teller.  
-
-### Concepten: BOTTOM-MAX-TOP
-
-In een single-slope telt de timer op en heeft dus **1 helling**, van daar single-slope.  
-
-* Hij start van een **BOTTOM**-waarde (0 in dit geval)
-* Deze telt tot een **MAX**-waarde
-* In dit geval is deze **MAX**-waarde 0xFF of 255
-* **0xFF** (voor 8-bit) definieren wel als **TOP**  
-  De hoogste waarde die je in een 8-bit teller kan opslaan
-* maw TOP <= **MAX** => BOTTOM
-
-### Relatie PWM vs timer
-
-Hoe maak je dan PWM?  
-Je voegt hier het concept van een **compare** of **match-waarde** aan toe.    
-
-![](../../gnuplot/single_slope_with_one_output.png)
-
-* Wanneer de teller aan de **bottom** zit **set** je een signaal
-* Op de moment dat je een **match** hebt **clear** je dit signaal
-* Bij het bereiken van de **top** zal de teller zich **resetten** naar de **bottom**
-
-### Frequentie en duty-cycle
-
-![](../../gnuplot/single_slope_with_one_output_diff_top.png)
-
-### Meerdere uitgangen
-
-![](../../gnuplot/single_slope_with_two_outputs.png)
-
-### Dual slope
-
-![](../../gnuplot/dual_slope_with_one_output_annotated.png)
-
-### Dual slope
-
-![](../../gnuplot/dual_slope_with_two_outputs.png)
-
 ### PWM op een AVR
 
-Om het gedrag van PWM te beschrijven zijn er 3 "boundary"-concepten die we moeten kennen.
+Om het gedrag van PWM te beschrijven zijn er 3 "boundary"-concepten die ons al eerder zijn geintroduceerd:
 
 * **BOTTOM**  
   De teller bereikt BOTTOM als hij de waarde 0x0000 bereikt.  
@@ -493,13 +311,14 @@ Om het gedrag van PWM te beschrijven zijn er 3 "boundary"-concepten die we moete
 > Voor een exacte beschrijving van welke waarde deze TOP kan hebben kijk naar register TCCR1A in de datasheet  
 > (hint: tabel die overeenkomt met de verschillende waveforms)
 
-### Frequentie en Duty-cycle
 
 ### Voorbeeld: PWM-functionaliteit (fast PWM)
 
 We introduceren de PWM-hardware met de eerst beschikbare techniek **Fast PWM**
 
 ![](../../pictures/pwm_timing_fast.png)
+
+Deze **Fast PWM** komt overeen met de **single slope** die we eerder hebben gezien.  
 
 ```c
 #include <avr/io.h>
@@ -538,17 +357,21 @@ int main(void) {
 
 ![](../../pictures/pwm_FAST_PWM.JPG)
 
+> Om deze code te verklaren kijk naar de datasheet, je moet in staat zijn de tabellen terug te vinden waarmee je de verschillende PWM-modes kan selecteren.
+
 ### Voorbeeld: PWM-functionaliteit (PHASE correct)
+
+De volgende PWM-mode die we uitproberen is de **Phase Corrrect PWM**, zoals we eerdere hebben gezien:
 
 * dual slope <-> dubbel zo traag
 * beide signalen zijn in fase
+
+Net zoals eerder gezien zie je op de scope dat:
 
 * Telt zowel omhoog als omlaag
 * Output Compare Registers (OC1A en OC1B voor timer 1)
      * worden ge-cleared bij een compare match (bij omhoog-tellen) tussen TCNT1 and OCR1x
      * worden ge-set bij compare match between
-
-
 
 ![](../../pictures/pwm_timing_phase_correct.png)
 
@@ -589,6 +412,11 @@ int main(void) {
 ![](../../pictures/pwm_PHASE_CORRECT_PWM.JPG)
 
 ### Voorbeeld: PWM-functionaliteit (PHASE and frequency correct)
+
+De laatste PWM-mode is de **PHASE and frequency correct PWM**.  
+Deze gedraagt zich indentiek aan de **PHASE correct PWM** maar zal er zal ervoor zorgen dat de frequentie altijd consistent blijft tov de top en compare-waarde (door de top-waarde enkel op specifieke tijdstippen te laten wijzigen).  
+
+> Als je meer wil weten over dit verschil kijk naar de datasheet
 
 ![](../../pictures/pwm_timing_phase_and_frequency_correct.png)
 
@@ -634,50 +462,6 @@ int main(void) {
     }
     return 0;
 }
-```
-
-```c
-#include <avr/io.h>
-#include <util/delay.h>
-#include <avr/interrupt.h>
-
-int main(void) {
-    DDRB |= (1 << DDB1) | (1 << DDB2); // PB1 and PB2 als output
-
-    ICR1 = 0xFFFF; //TOP-waarde op 16-bit
-
-    //Je hebt 2 uitgangen die je kan laten uitgaan bij ...
-    OCR1A = 0x3FFF; // 25% duty cycle PB1
-    OCR1B = 0xBFFF; // 75% duty cycle @ 16bit
-    //TOP = 0xFFFF
-
-
-    TCCR1A |= (1 << COM1A1) | (1 << COM1B1); // none-inverting mode
-
-    // PHASE AND FREQUENCY CORRECT PWM mode (16-bit) met ICR1 as TOP    1110
-    TCCR1B |= (1 << WGM13);
-
-    // Voorlopig geen prescaler nodig (volle snelheid)
-    TCCR1B |= (1 << CS10);
-
-    unsigned short toggle = 1;
-
-    while (1) {
-        _delay_ms(20);
-
-        toggle = !( toggle);
-
-        if(toggle) {
-            ICR1 = 0xCFFF;
-        } else {
-            ICR1 = 0xFFFF;
-        }
-        //nu kan je nog andere code schrijven
-        //om leds te dimmen of aan te sturen bijvoorbeeld
-    }
-    return 0;
-}
-
 ```
 
 ![phase and frequency](../../pictures/pwm_PHASE_AND_FREQUENCY_CORRECT_PWM_TOGGLE.JPG)

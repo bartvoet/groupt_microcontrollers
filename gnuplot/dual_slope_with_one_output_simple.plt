@@ -1,23 +1,25 @@
 set terminal pngcairo dashed
 set output 'dual_slope_with_one_output.png'
 
-set xrange [0:1100];
-set yrange [0:8];
+set xrange [0:2200];
+set yrange [0:6];
 
 scale = 256
 
-#unset ytics;
+#set termoption dash;
+#set style line 3 lt 2 lc rgb "blue" lw 0.5;
+
+#unset xtics;
+unset ytics;
+
+# set style line 101 lc rgb '#808080' lt 1 lw 1
+# set border 3 front ls 101
+# set tics nomirror out scale 0.75
+# set format '%g'
 
 set grid xtics lt 0 lw 1 lc rgb "#880000"
-set ytics ("0" 1, "1" 2, "0" 3, "127" 4, "255" 5 )
+
 set xtics 256
-
-set label "50/2%" center at 128-64,1 offset 0, 0.8
-set label "50/2%" center at 256+128+64,1 offset 0, 0.8
-set arrow from 256+128,1 to 256+128+128,1 heads
-set arrow from 0,1 to 128,1 heads
-
-set arrow from 0,4 to 256 * 8 - 128,4 nohead ls 3
 
 plot '-' using ($1*scale):(($2*1)) title "Square 1" with lines, \
      '-' using ($1*scale):($2*1) title "Single slope" with lines lt 1 lc 2, \
