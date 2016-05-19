@@ -2,7 +2,7 @@ set terminal pngcairo dashed
 set output 'single_slope_with_two_outputs.png'
 
 set xrange [0:1100];
-set yrange [0:10];
+set yrange [0:9];
 
 
 set ytics ("0" 1, "1" 2, "0" 3, "1" 4,"0" 5, "127" 6, "255" 7 )

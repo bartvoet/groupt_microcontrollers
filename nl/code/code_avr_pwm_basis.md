@@ -1,23 +1,23 @@
 ## Basis-principes PWM
 
 In de lessen elektronica (en vermogenselektronica) ben je al geïntroduceerd met het begrip PWM.  
-Voor degenen met een kort geheugen een korte herhaling.
+Voor degenen met een kort geheugen een korte **herhaling**.
 
 ### Herhaling: analoge spanning genereren met PWM
 
-**PWM** of "**P**ulse  **W**idth **M**odulation" is een modulatie-**techniek**
+**PWM** of "**P**ulse  **W**idth **M**odulation" is een modulatie-**techniek** om:
 
-* om een specifieke spanning (analoog gegeven) te genereren
-* vanuit een digitaal medium
-* dat enkel 0 of een 1 kan genereren
-* ofwel 0 of VCC (meestal 3.3 of 5 v)
+* een specifieke **spanning** (analoog gegeven)
+* te **genereren** vanuit een **digitaal medium**
+* dat enkel **logisch 0** of een **logisch 1** kan genereren
+* dus ofwel **0** of **VCC** (meestal 3.3 of 5 v)
 
 > **Nota:**  
 > We hadden eerder bij ADC gezien dat je ook met een DAC een specifieke spanning kan genereren.  
 > PWM is echter een zeer éénvoudige manier waarop je een spanning kan genereren enkel en alleen door het op en afzetten van spanning
 
 
-### Herhaling: PWM en Duty-cycle
+### PWM en Duty-cycle
 
 PWM is gebaseerd op het begrip **duty-cycle**:
 
@@ -27,20 +27,29 @@ PWM is gebaseerd op het begrip **duty-cycle**:
 * Deze verhouding (percentueel) zal een **gemiddelde spanning** genereren
 * De **duty cycle** is de **verhouding** tussing **hoog een laag** als percentage van een periode
 
-De essentie van pwm is dat **verhouding in periode** tussen een hoge en lage een **gemiddelde spanning genereren**.
-
 ![](../../pictures/example_duty_cycle.jpg)
+
+
+De **essentie** van **pwm** is dus de **verhouding in periode** tussen 1 enkele **hoog** en **laag** waarmee we **gemiddelde spanning genereren**.
+
+De hoeveelheid spanning die wordt genereerd is gelijk aan de
+
+ ```
+ V_UITGANG = VCC * P_HOOG / (P_HOOG + P_LAAG)
+ ```
+
+(P=periode V= spanning)
 
 ### Herhaling: voorbeeld pwm
 
-De **voorbeelden** hieronder illustreren:
+De **tabel** met **voorbeelden** hieronder illustreren deze **formule**:
 
-Stel het volgende:
+Van uitgaande van het volgende:
 
 * **VCC** is **5 v**
 * Frequentie is **1 kHz** (periode = 1 ms)
 
-Dan kijg je volgende (gemiddelde) spanningen bij overeenkomstige duty-cycles:
+Dan kijg je volgende **gemiddelde) spanningen** bij overeenkomstige **duty-cycles**:
 
 | 0      | 1      | duty cycle | spanning |
 |--------|--------|------------|----------|
@@ -50,21 +59,26 @@ Dan kijg je volgende (gemiddelde) spanningen bij overeenkomstige duty-cycles:
 | 0.1 ms | 0.9 ms | 90 %       | 4.5 v    |
 | 0.0 ms | 1.0 ms | 100 %      | 5.0 v    |
 
-### Single-slope teller
+> **Nota:**  
+> We proberen hieonder een aantal **concepten** uit te leggen (met de zelfde namen zoals in de datasheet) van de atmega328p worden gebruikt **zonder** ons op **details** zoals de **REGISTERS** te concentreren.
+>
+> Dit zou het **gemakkelijker** moeten maken de **datasheet** van de **AVR te lezen om de verschillende soorten PWM te begrijpen, alsook PWM om **andere MCU-architecturen**
+
+### Grafisch voorstellen van tellers
 
 Vooraleer in de praktijk te duiken (met de avr) wordt er een korte introductie gegeven in een aantal **pwm-concepten**.  
 
-> We proberen een aantal concepten uit te leggen met de zelfde namen zoals in de datasheet van de atmega328p worden gebruikt zonder ons op details zoals de REGISTERS te concentreren
-
-PWM is - bij de meeste MCU's - gebaseerd op een teller/timer.  
-Om het concept van PWM tov timers te duiden gaan we dit voorstellen op een x-y-as waarbij:
+**PWM** is - bij de meeste MCU's - gebaseerd op een **teller/timer**.  
+Om de **relatie van PWM tov timers** te duiden gaan we dit **voorstellen** op een **x-y-as** waarbij:
 
 * de **x-as** het aantal **ticks** voorstelt (tijd)
 * de **y-as** de **waarde** in de **teller** voorstelt (waarde teller)
 
-Dit resulteert dan in een diagram dat lijkt op een **zaagtand**.
+Dit **resulteert** dan in een diagram dat lijkt op een **zaagtand**.
 
 ![](../../gnuplot/single_slope.png)
+
+### Single slope-teller
 
 Een teller met zo'n **zaagtand**-vorm benoemen we **single-slope**-teller (1 helling):
 
@@ -72,34 +86,43 @@ Een teller met zo'n **zaagtand**-vorm benoemen we **single-slope**-teller (1 hel
 * Tot de top-waarde 255 (top-waarde voor 8-bit resolutie)
 * Zal terug naar de bodem-waarde gaan
 
-### BOTTOM en TOP
+### Bottom en Top
 
-Aan deze zaagtand zijn dus 2 belangrijke boundaries verbonden:
+Aan deze zaagtand zijn dus 2 belangrijke **boundaries** verbonden:
 
 * Een **BOTTOM**-waarde:  
-  de waarde vanwaar men terug begint naar boven te tellen
+  De "bodem"-waarde vanaf waar men (terug) begint naar boven te tellen.
 * een **TOP**-waarde:   
   De hoogste waarde die deze teller kan bevatten (afhankelijk van de resolutie).    
 
-In dit voorbeeld werken we met een **8-bit** teller en is deze **TOP** gelijk aan **0xFF** (255), bij een 16-bit teller zou dit 0xFFF (65535) zijn
+In dit voorbeeld werken we met een **8-bit** teller en is deze **TOP** gelijk aan **0xFF** (255).   
+Bij een **16-bit** teller zou dit **0xFFFF** (65535) zijn
 
-### MAX (en frequentie)
+> **Nota**:  
+> Als we vanaf hier over **frequentie** spreken, spreken we over **aantal ticks**.  
+> **Gemakkelijkshalve** laten we de **werkelijke snelheid** van de klok **achterwege**, we gaan er van uit dat deze snelheid een **constante** is.  
+> Als we over de implementatie op de **AVR** starten zullen we deze frequentie afleiden van de basis-klok zoals we dat eerder bij timers dede.  
 
-Met een vaste **BOTTOM** en **TOP** blijft de **frequentie** op een **constant** niveau 256 ticks.
+### Max (en frequentie)
 
-Bij PWM kan je natuurlijk niet voor elke toepassing de zelfde frequentie toepassen, daarom voegen we het concept **MAX** toe:
+Met de vaste **BOTTOM** en **TOP** blijft de **frequentie** echter op een **constant** niveau zitten  van **256** ticks (0-255 bij 8-bit).
+
+Bij **PWM** is kan je natuurlijk niet voor elke toepassing de zelfde frequentie toe te passen.   
+Daarom voegen we het concept **MAX** toe:
 
 ![](../../gnuplot/single_slope_with_max.png)
 
-**MAX** is nu de maximum waarde tot waar we kunnen tellen, deze hoeft niet gelijk te zijn aan **TOP** (maar dient vanzelfsprekend welk kleiner te zijn).  
-Door max te laten varieren kunnen we de **frequentie** wijzigen:  
+Waar **TOP** de absolute grens was is **MAX** nu de feitelijke maximum waarde tot waar we kunnen tellen.  
+Deze hoeft (zie hierboven) niet gelijk te zijn aan **TOP** (maar dient vanzelfsprekend welk kleiner te zijn).  
+
+Door max te laten varieren kunnen we de **frequentie** of **periode** van het het **optellen** **wijzigen**:  
 
 * Bij de eerste 2 slopes is deze MAX==TOP en zitten we op een periode van 256 ticks
 * Bij de slopes die daarop volgen brengen MAX naar 128 waardoor we een kortere periode krijgen (ook 128 gezien de BOTTOM==0)
 
 ### PWM maken met een teller?
 
-We weten nu hoe we een teller grafisch moeten voorstellen, en hoe je de frequentie van dit tellen van de verschillend periodes kunnen wijzigen.
+We weten nu hoe we een **teller grafisch** moeten voorstellen, en hoe je de **frequentie** van dit tellen van de verschillend periodes kunnen wijzigen.
 
 Hoe kan je dan hier PWM met maken?  
 Je voegt hier het concept van een **COMPARE** of **MATCH-waarde** aan toe.    
@@ -110,7 +133,7 @@ Bedoeling is dat we een signaal aansturen vanuit deze teller.
 We passen de volgende sequentie toe:
 
 1. Wanneer de **teller** aan de **BOTTOM**-waarde zit **set** je een signaal => lijn gaat **HOOG**
-2. Wanneer de teller een **MATCH**-waarde hebt **clear** je dit signaal => lijn gaat **LAAG**
+2. Wanneer de teller een **COMPARE** OF **MATCH**-waarde hebt **clear** je dit signaal => lijn gaat **LAAG**
 3. Bij het bereiken van de **MAX**-waarde zal de teller zich naar de **BOTTOM**-waarde
 4. ... Het process herhaalt zich bij punt 1:
      * Het signaal zet zich terug **HOOG** zetten (zie punt 1)

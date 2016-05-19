@@ -87,11 +87,14 @@ CHAPTER_09 += ../chapter/chapter09_analog.md
 CHAPTER_09 += ../../general/pandoc_page_break.txt
 CHAPTER_09 += ../code/avr_adc.md
 CHAPTER_09 += ../../general/pandoc_page_break.txt
+CHAPTER_09 += ../labo/avr_arduino_adc.md
+CHAPTER_09 += ../../general/pandoc_page_break.txt
 CHAPTER_09 += ../code/code_avr_timer_direct_output.md
 CHAPTER_09 += ../../general/pandoc_page_break.txt
 CHAPTER_09 += ../code/code_avr_pwm_basis.md
 CHAPTER_09 += ../../general/pandoc_page_break.txt
 CHAPTER_09 += ../code/code_avr_pwm.md
+CHAPTER_09 += ../labo/avr_arduino_pwm.md
 
 #CHAPTER_09 += ../../general/pandoc_page_break.txt
 #CHAPTER_09 += ../labo/labo_interrupts.md

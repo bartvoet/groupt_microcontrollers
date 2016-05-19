@@ -1,6 +1,6 @@
 ## PWM op de AVR
 
-Tot nog toe hebben we gezien hoe we PWM kunnen genereren met behulp van een teller.  
+Tot nog toe hebben we gezien hoe dat PWM kan worden gemaakt met met behulp van een teller.  
 In dit deel gaan we kijken hoe we dit principe kunnen toepassen vanuit een C-programma op de AVR.
 
 ### Duiding: PWM en counters
@@ -35,7 +35,7 @@ We gaan uit van een **éénvoudige setup** om PWM te bestuderen:
 * We laten een led dimmen door de spanning via PWM vanuit de MCU.
 * Voor de laaste voorbeelden zullen we een 2de led gebruiken
 
-### Voorbeeld: brute-force PWM
+### Brute-force PWM (loop)
 
 In dit eerste voorbeeld genereren we PWM op zuivere software/gpio-basis.
 
@@ -47,7 +47,7 @@ In dit eerste voorbeeld genereren we PWM op zuivere software/gpio-basis.
 #define PWM_BANK_PORT  PORTB
 #define PWM_BANK       DDRB
 #define PWM_PIN        PB2
-#define HELDERHEID     128
+#define HELDERHEID     127
 
 void pwm(uint8_t helderheid)
 {
@@ -74,8 +74,17 @@ int main(void)
 Deze code vereist weinig uitleg:
 
 * Functie pwm() heeft een argument helderheid
-* Dit argument is een verhouding tov 256 (maximum voor een 8-bit)
+* Dit argument is een verhouding tov 255 (maximum voor een 8-bit)
 * In functie van deze verhouding zal deze meer of minder helderheid weergeven.
+
+Als we terug verwijzen/vergelijken met voorgaand hoofdstuk:
+
+![](../../gnuplot/single_slope_with_one_output_simple.png)
+
+* De variabele herderheid komt overeen met **COMPARE**
+* Deze is in dit geval **127** ticks van **256**
+* De feitelijke lengte van de periode wordt bepaald door **LED_DELAY**
+
 
 #### brute-force PWM 50 %
 
@@ -289,36 +298,42 @@ Er zijn echter nog echter andere modes meer efficient om PWM te generen:
 
 > Zoals bij de introductie van deze cursus vermeld, embedded programmeren is **optimaal gebruik maken van hardware** (en dus ook de datasheet te lezen).  
 
-Alvorens direct naar deze pwm te springen een
-
 ### PWM op een AVR
 
-Om het gedrag van PWM te beschrijven zijn er 3 "boundary"-concepten die ons al eerder zijn geintroduceerd:
+Om het gedrag van PWM te beschrijven kunnen we terugvallen op "boundary"-concepten die ons al eerder zijn geintroduceerd:
 
 * **BOTTOM**  
   De teller bereikt BOTTOM als hij de waarde 0x0000 bereikt.  
   (de waarde 0 voor BOOTOM is voor 8-bit tellers vanzelfsprekend ook geldende)
-* **MAX**  
+* **TOP**  
   De teller bereikt MAX als hij 0xFFFF (decimal 65535) wordt.
   (bij 8-bit-tellers zal dit 0xFF of 255 zijn)
-* **TOP**  
+* **MAX**  
   De teller bereikt TOP wanneer hij gelijk is aan de hoogste waarde bij de teller-sequentie.  
   De waarde hangt af van "mode of operation"
      * Dit kan van de volgende waardes zijn: 0x00FF, 0x01FF, or 0x03FF
      * Dit kan de waarde zijn van het OCR1A-register.
-     * Dit kan de waarde zijn van het ICR1-register.
+     * Dit kan de waarde zijn van het ICR1-register  
+       (als we het OCR1A-register willen gebruiken voor COMPARE).
+* **COMPARE MATCH**  
+  De waarde waarmee de duty-cycle bepalen (OCR1A en/of OCR1B)
 
 > Voor een exacte beschrijving van welke waarde deze TOP kan hebben kijk naar register TCCR1A in de datasheet  
 > (hint: tabel die overeenkomt met de verschillende waveforms)
 
+Het centrale component dat deze blokken beheert wordt in de datasheet benoemd als de "Waveform-generator", verwijzende naar het feit dat deze een "square wave" genereert op basis van bovestaande configuratie.
+
+![](../../pictures/avr_pvm_comare.png)
 
 ### Voorbeeld: PWM-functionaliteit (fast PWM)
 
-We introduceren de PWM-hardware met de eerst beschikbare techniek **Fast PWM**
+We introduceren de PWM-hardware met de eerst beschikbare techniek, namelijk **Fast PWM**
 
 ![](../../pictures/pwm_timing_fast.png)
 
-Deze **Fast PWM** komt overeen met de **single slope** die we eerder hebben gezien.  
+Deze **Fast PWM** komt overeen met de **single slope** die we eerder hebben gezien.   
+
+> **Fast** verwijst naar het feit dat deze techniek sneller is dan **dual slope**
 
 ```c
 #include <avr/io.h>
@@ -352,6 +367,11 @@ int main(void) {
     return 0;
 }
 ```
+
+Let op:
+
+* Gebruik van OCR1A en OCR1B om 2 outputs te benutten
+* Kijk naar de tabel in de datasheet voor hoe de waveforms (pwm-mode) te selecteren
 
 ![](../../pictures/pwm/pwm_timer_fast_pwm.png)
 
@@ -467,15 +487,3 @@ int main(void) {
 ![phase and frequency](../../pictures/pwm_PHASE_AND_FREQUENCY_CORRECT_PWM_TOGGLE.JPG)
 
 ![phase](../../pictures/pwm_PHASE_CORRECT_PWM_TOGGLE.JPG)
-
-
-### Samengevat: verschil tussen fast PWM en phase correct
-
-Onderstaande tekening vat het verschil tussen fast en frequency-correct samen:
-
-* Phase Correct past dual slope toe
-* (als gevolg dubbel zo traag)
-* Maar zal (zelfst bij wijziging van OCR1A of B) dezelfde fase blijven behouden
-
-
-![](../../pictures/adc_timing_fast_vs_freq.png)

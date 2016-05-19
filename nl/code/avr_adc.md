@@ -106,8 +106,6 @@ Verhouding 16/5         =  0,3125
 Spanning   0,3125 * 8 v =  2,5
 ```
 
-
-
 #### Nauwkeurigheid
 
 We hebben in dit geval de spanning kunnen bepalen met een nauwkeurigheid van ```0.5 V = 8 V / 2 ^ 4```
@@ -247,8 +245,7 @@ De eerste 4 zijn bij de initialisatie van de ADC
 * De eerste lijn selecteert de referentie-spanning  
   In dit geval zal dit 5 v zijn, maar als je in de datasheet kijkt zal je ook zien dat je een externe spanning kan hangen op de AVCC-input-pin.
 * De 2de lijn selecteert het kanaal waar me met werken (ADC0)
-* De 3de lijn selecteert de prescaler van 64  
-  ``` 16Mhz / 64 =  250 Khzi```
+* De 3de lijn selecteert de prescaler van 64 (16Mhz / 64 =  250 Khzi)
 * De 4de lijn activeert ADC op de AVR
 
 > **Nota:**   
@@ -285,7 +282,8 @@ Als extra duiding:
 ### Voorbeeld: free-run
 
 Het volgend voorbeeld is in free-run modus.  
-Het grote verschil is dat je hier geen
+Het grote verschil is dat je hier niet opnieuw manueel moet triggeren door middel van de
+ADSC-bit.
 
 ```c
 #include <avr/io.h>
@@ -477,14 +475,14 @@ Deze functie roepen we nu 2 maal aan:
 * 1 maal met het sensor-kanaal
 * 1 maal met het potentio-meter kanaal
 
-```{.c}
+```c
     sensor_resultaat = lees_kanaal(SENSOR_KANAAL);
     pot_meter_resultaat = lees_kanaal(POT_METER_KANAAL);
 ```
 
 Daarna gebruiken we dit resultaat om een "nachtmodus" of "dagmodus" te activeren:
 
-```{.c}
+```c
     if(sensor_resultaat > pot_meter_resultaat) {
         // het is donker want meer spanning op sensor
         PORT_BANK |= (1 << adc_geschaald_naar_aantal_leds);

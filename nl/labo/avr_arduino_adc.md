@@ -1,12 +1,12 @@
-## Labo: eerste AVR-programma
+## Labo: ADC
 
-### Opdracht 1: hello world
+### Opdracht 1: Spanning meten
 
 Gegeven volgende code (en bijhorende header-file):
 
 **serieel.c**:  
 
-```{.c}
+```c
 #include <avr/io.h>
 #include <util/delay.h>
 
@@ -38,7 +38,7 @@ void serieel_verstuur_byte(unsigned char data)
 }
 
 
-void serieel_verstuur_string(char *s)
+void serieel_verstuur_string(char* s)
 {
     while (*s) {
         serieel_verstuur_byte(*s);
@@ -56,13 +56,13 @@ void serieel_verstuur_getal(unsigned char i)
 
 en bijhorende header **serieel.h**:  
 
-```{.c}
+```c
 #ifndef SERIAL_H_
 #define SERIAL_H_
 
 void serieel_initialiseer();
 void serieel_verstuur_byte(unsigned char data);
-void serieel_verstuur_string(char *s);
+void serieel_verstuur_string(char* s);
 void serieel_verstuur_getal(unsigned char i);
 
 #endif
@@ -74,7 +74,7 @@ Integreer deze code in het eerste voorbeeld van het ADC-hoofdstuk (zet deze 2 fi
 seriele lijn weg te schrijven.
 
 Om deze seriele communicatie te lezen gebruik een terminal-programma.  
-Het programma dat 
+Het programma dat
 
 ![](../../pictures/putty_configuration.png)
 
@@ -89,7 +89,7 @@ Voor Mac en Linux kan je bijgevolg ook de volgende terminal-programma's gebruike
 > Met deze seriele communicatie je ook het programma testen.
 
 > **Nota**  
-> Als je tijd heb mag je dit ook toepassen op het laatste voorbeeld 
+> Als je tijd heb mag je dit ook toepassen op het laatste voorbeeld
 
 #### Deel B
 
