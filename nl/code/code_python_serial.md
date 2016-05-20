@@ -13,7 +13,7 @@ We gaan hier geen C (voor het pc-gedeelte) voor gebruiken, maar een andere taal 
 Waarom moeten we een andere taal hiervoor gebruiken en werken we niet verder met onze verworven C-kennis?
 
 * **"Using the right tool for the job"**
-     * Python is zeer geschikt om **applicaties** te schrijven 
+     * Python is zeer geschikt om **applicaties** te schrijven
      * C is een taal die wordt gebruikt om **systeem**-software (mcu, drivers, os, real time, weinig resources...) te gebruiken  
 * Python is een taal gebruikt om kleine tot grote applicaties te bouwen  
      Je kan hier heel éénvoudig en snel applicaties (command line of gui) bouwen zonder al te veel voorkennis.
@@ -21,7 +21,7 @@ Waarom moeten we een andere taal hiervoor gebruiken en werken we niet verder met
 * Python is enorm **populair**
 * Python heeft enorm veel **libraries** en **utilities** om allerlei **taken** uit te voeren
 * Python heeft  zeer grote **community** en online **support**
-* Python is een **scripting**-taal en is zeer **flexibel** 
+* Python is een **scripting**-taal en is zeer **flexibel**
 * Python is **open-source**, vrij beschikbaar en gesupporteerd voor **alle opertating systems**
 
 Samengevat, als je een toepassing of applicatie maakt op je PC (GUI, Webapp, command-line, ...) is C niet altijd wat je nodig hebt.  
@@ -58,7 +58,7 @@ Python is by default geïnstalleerd op vrijwel elke Linux-distributie en in de m
 
 Voor Debian of Ubuntu, voer de 2 volgende aptitude-commando's uit om support voor tk (gui) en seriële connecties te gebruiken:
 
-~~~
+~~~bash
 $ sudo apt-get install python-tk
 ...
 $ sudo apt-get install python-serial
@@ -69,7 +69,7 @@ $ sudo apt-get install python-serial
 
 Voor Fedora of Red Hat, voor de 2 volgende dnf-commando's uit:
 
-~~~
+~~~bash
 # dnf install pyserial
 ...
 # dnf install tkinter
@@ -132,20 +132,20 @@ Als Python correct is geïnstalleerd is het voldoende om:
 
 Als alles goed verloopt krijg je min of meer volgend resultaat:
 
-~~~
+~~~bash
 $ python
-Python 2.7.10 (default, Oct 14 2015, 16:09:02) 
+Python 2.7.10 (default, Oct 14 2015, 16:09:02)
 [GCC 5.2.1 20151010] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
->>> 
+>>>
 ~~~
 
 Vanaf dat er **>>>** verschijnt (voorafgegaan door wat systeem-info) kan je aan de slag en Python-statement of commando's uitvoeren.  
 We gaan verder met het volgende voorbeeld:
 
-~~~{.py}
+~~~python
 $ python
-Python 2.7.10 (default, Oct 14 2015, 16:09:02) 
+Python 2.7.10 (default, Oct 14 2015, 16:09:02)
 [GCC 5.2.1 20151010] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
 >>> 5 + 5
@@ -177,7 +177,7 @@ Deze REPL- of Interpreter-modus is heel handig om te ontwikkelen en snel feedbac
 In het geval je een programma wil bouwen, is het interessant deze "statements" sequentieel in een file te plaatsen (zoals we tot nog toe bij C hebben gezien).  
 Dit doe je door een file te creeren met een text-editor (gedit, notepad++, vi, ...), bijvoorbeeld met de volgende inhoud:   
 
-~~~{.py}
+~~~python
 print("hello")
 print("world")
 ~~~
@@ -185,7 +185,7 @@ print("world")
 Deze inhoud plaats je (via een tekst-editor) in een file met de extensie py (dit voorbeeld noemen we deze hello.py)  
 Net als bij het interactieve voorbeeld gebruik je het commando python, maar nu dan gevolgd door de naam (of beter gezegd het path) van de file.
 
-~~~
+~~~bash
 $ python hello.py
 hello
 world
@@ -203,7 +203,7 @@ We gaan nu wat dieper in op de basis-syntax van deze taal.
 
 Zoals je bij vorige stukken hebt gezien is het aanroepen van een methode heel gelijkaardig aan hoe we dat in c kennen:
 
-* Een **naam** van deze functie 
+* Een **naam** van deze functie
 * Gevolgd door 1 of meerdere **argumenten** tussen haakjes
 * Argumenten gescheiden door **,**
 
@@ -217,7 +217,7 @@ Nu dat we éénmaal weten hoe te printen (en functies aan te roepen) introducere
 Net zoals bij C kan je een waarde in het geheugen plaatsen onder de vorm van een variabele.  
 Deze variabele kan je meegeven aan een functie zoals print.
 
-~~~{.py}
+~~~pythonthon
 >>> say_hello = "hello"
 >>> print(say_hello)
 >>>
@@ -229,7 +229,7 @@ Let ook op het feit dat je **geen type** moeten **aanduiden** bij declararatie v
 Ook nieuw is dat je zo'n variabele kan verwijderen via het commando **del** in Pythoni, als je deze niet meer nodig hebt (om geheugen te besparen).  
 (ga je meestal niet nodig hebben)
 
-~~~{.py}
+~~~python
 >>> say_hello = "hello"
 >>> print(say_hello)
 hello
@@ -238,7 +238,7 @@ hello
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 NameError: name 'say_hello' is not defined
->>> 
+>>>
 
 ~~~
 
@@ -259,7 +259,7 @@ Naast het type string heb je ook support voor allerlei numerieke types, vergelij
 
 Alle operatoren die je gewoon bent uit C zijn zeer vergelijkbaar met degene uit Python:  
 
-~~~
+~~~python
 >>> x = 5 + 2 - 3 * 2
 >>> x
 1
@@ -276,48 +276,48 @@ Alle operatoren die je gewoon bent uit C zijn zeer vergelijkbaar met degene uit 
 256
 >>> 5 % 2
 1
->>> 
+>>>
 ~~~
 
 * ~~~+ - * /~~~ gesupporteerd
 * 2 integers door elkaar delen zal afronden naar beneden
 * ~~~%~~~ geeft de rest van een deleing
-* ~~~**~~~ stelt macht voor
+* ~~~** ~~~ stelt macht voor
 
- 
+
 ~~~//~~~ is het zelfde als ~~~/~~~ in Python 2
 In Python 3 echter zal ~~~/~~~ niet afronden maar in een floating point-nummer resulteren  
 
-~~~
+~~~python
 $ python3
-Python 3.4.3+ (default, Oct 14 2015, 16:03:50) 
+Python 3.4.3+ (default, Oct 14 2015, 16:03:50)
 [GCC 5.2.1 20151010] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> 5 / 2
 2.5
 >>> 5 // 2
 2
->>> 
+>>>
 ~~~
 
 ### Formatteren van een string
 
 Net zoals je bij de sprintf- en printf-functies in C kan je een stuk tekst formatteren.  
-In Python zijn 3 verschillende manieren hiervoor 
+In Python zijn 3 verschillende manieren hiervoor
 
 De oude manier, niet gesupporteerd in Python 3, maar van wel dezelfde formatters als C gebruikmakende:
 
-~~~
+~~~python
 >>> "decimaal: %i hex: %x" % (10 , 10)
 'decimaal: 10 hex: a'
 >>> print("a %i %x" % (10,10))
 decimaal: 10 hex: a
->>> 
+>>>
 ~~~
 
 De nieuwe manier, zowel in Python 2 als Python 3 gesupporteerd:
 
-~~~{.py}
+~~~python
 print("{:d}-{:d}".format(1,2))
 1-2
 >>> print("{}-{}".format(1,2))
@@ -327,7 +327,7 @@ print("{:d}-{:d}".format(1,2))
 Bij dezei (nieuwe) manier ben je niet verplicht een formaat aan tegen een {} is voldoende.  
 Optioneel kan je - binnen de string selecteren - welk getal uit de luist je wil selecteren:
 
-~~~{.py}
+~~~python
 >>> print("{0}-{1}-{0}".format(1,2))
 1-2-1
 >>> print("{0:d}-{1:d}-{0:d}".format(1,2))
@@ -336,13 +336,13 @@ Optioneel kan je - binnen de string selecteren - welk getal uit de luist je wil 
 
 Een ander voorbeeld is het uitlijnen van tekst.
 
-~~~{.py}
+~~~python
 >>> print("{0:2d}{1:3d}{0:4d}".format(1,2))
  1  2   1
 >>> print("{0:2d}{1:3d}{0:4d}".format(10,20))
 10 20  10
 ~~~
- 
+
 Voor een volledig overzicht kan je naar de betreffende python-documentatie gaan kijken:  
 https://docs.python.org/2/tutorial/inputoutput.html
 
@@ -356,7 +356,7 @@ https://docs.python.org/2/tutorial/inputoutput.html
 We weten nu min of meer hoe we data naar de console moeten schrijven (equivalent van printf).  
 Om data in te lezen van de command line bestaat er een andere functie, namelijk raw_input.  
 
-~~~{.py}
+~~~python
 x = raw_input("Geef een string")
 print(x)
 ~~~
@@ -364,7 +364,7 @@ print(x)
 Deze zal een stuk tekst inlezen van de STDIN (input command-line), deze tekst kan je dan opvangen in een variabele.  
 Als je dit programma zou uitvoeren krijg je ongeveer de volgende output:
 
-~~~
+~~~bash
 $ python print_een_string.py
 Geef een string:
 Hello
@@ -377,7 +377,7 @@ $
 Je wil niet altijd tekst inlezen, in bepaalde gevallen wil je gewoon een nummer inlezen.  
 Daarvoor bestaan er conversie-functies in Python.
 
-~~~{.py}
+~~~python
 input_string = raw_input("Geef een nummer: ")
 x = int(input_string)
 print('1ste macht: {0:2d} 2de macht: {1:3d} 3de macht{2:4d}'.format(x, x*x, x*x*x))
@@ -391,9 +391,9 @@ Geef een nummer: 5
 1ste macht:  5 2de macht:  25 3de macht 125
 ~~~
 
-Ter vervollediging, je kan dit ook verkort door de 2 functie-aanroepen te nesten. 
+Ter vervollediging, je kan dit ook verkort door de 2 functie-aanroepen te nesten.
 
-~~~{.py}
+~~~python
 x = int(raw_input("Geef een nummer: "))
 print('1ste macht: {0:2d} 2de macht: {1:3d} 3de macht{2:4d}'.format(x, x*x, x*x*x))
 ~~~
@@ -403,7 +403,7 @@ print('1ste macht: {0:2d} 2de macht: {1:3d} 3de macht{2:4d}'.format(x, x*x, x*x*
 We hebben tot nog toe gezien:
 
 * Mathematische expressies
-* Variabelen 
+* Variabelen
 * Output met print
 * Input met raw_input
 * Conversie naar een getal met int()
@@ -423,7 +423,7 @@ We zullen eerst even basis van de syntax in python vergelijken tov deze van C:
 
 We starten met een stuk code in c te vergelijken met een equivalent stuk code in python (loop):
 
-~~~{.c}
+~~~c
 int main() {
     int n, r;
     n = 9;
@@ -444,7 +444,7 @@ We zien in de C code:
 
 Dezelfde functionaliteit in python:
 
-~~~{.py}
+~~~pythonthon
 n = 9
 r = 1
 while n > 0:
@@ -466,13 +466,13 @@ We komen hier zo dadelijk nog op terug.
 
 In python wordt er geen onderscheid gemaakt tussen een karakter en een string:
 
-~~~{.py}
+~~~python
 >>> a = "A string in double quotes can contain 'single quote' characters."
 >>> b = 'A string in single quotes can contain "double quote" characters.'
 >>> c = '''\This string starts with a tab and ends with a newline character.\n'''
 >>> d = """This is a triple double quoted string, the only kind that can
     contain real newlines."""
->>> 
+>>>
 ~~~
 
 ### Commentaar
@@ -481,13 +481,13 @@ Waar je in C ~~~//~~~ en ~~~/**/~~~ gebruikt om je code te becommentariëren bes
 
 Of je gebruikt een hashbang:
 
-~~~{.py}
+~~~python
 # This is python-comment
 ~~~
 
 Of je zet een multi-line string zonder hem aan een variabele te assignen
 
-~~~{.py}
+~~~python
 """This is a multiline comment.
 The following lines concatenate the two strings."""
 ~~~
@@ -499,7 +499,7 @@ Loops en condities zijn vergelijkbaar met wat je uit C kent, dezelfde of vergeli
 * if-else
 * elif (tov else if in C)
 * while-loop
-* for-loop 
+* for-loop
 
 ### Condities
 
@@ -511,7 +511,7 @@ Een conditie kan uit 3 delen bestaan:
 * 1 of meerdere elif-clausules
 
 
-~~~{.py}
+~~~python
 if expression:
    statement(s)
 elif:
@@ -523,7 +523,7 @@ else:
 
 De volgende voorbeelden illustreren het gebruik van een conditie:
 
-~~~{.py}
+~~~python
 a = 10
 if a > 10:
    print("a > 10")
@@ -533,7 +533,7 @@ else:
 
 Met een elif toegevoegd ...
 
-~~~{.py}
+~~~python
 a = 10
 if a > 10:
    print("a > 10")
@@ -550,7 +550,7 @@ Een while-loop is ook zeer vergelijkbaar met C.
 Bijzonder is dat je bij Python ook een else-clausule kan worden toegevoegd.   
 Deze wordt uitgevoerd wanneer de while-conditie false evalueert, maar niet als er een break of exceptie (komen we nog op terug) wordt gegenereerd
 
-~~~{.py}
+~~~python
 while condition:
     body
 else:
@@ -561,18 +561,18 @@ Volgende voorbeelde illustreren:
 
 **Basis-voorbeeld while-loop:**
 
-~~~{.py}
+~~~python
 x = 5
 y = 10
 while x > y:
     print(x)
-    x = x + 1 
+    x = x + 1
 ~~~
 
 Net zoals verwacht zal deze van 5 tem 9 printen
 
-~~~{.py}
-$ python simple_while_loop.py 
+~~~python
+$ python simple_while_loop.py
 5
 6
 7
@@ -586,7 +586,7 @@ $
 Een loop kan ook (in tegenstelling to C) een else-clausule bevatten.  
 Deze else-clausule wordt uitgevoerd wanneer de conditie in de while-clausule negatief evalueert:
 
-~~~{.py}
+~~~python
 x = 5
 y = 10
 while x < y:
@@ -600,7 +600,7 @@ else:
 
 Met het zelfde resultaat als boven
 
-~~~{.py}
+~~~python
 $ python simple_while_else_loop.py
 5
 6
@@ -614,7 +614,7 @@ $
 In bovenstaande code heeft deze else-clausule niet veel nut, gezien je ook de print-statement achter de loop kan plaatsen.  
 Waar dit wel nut kan hebben is bij break-statements (net zoals in C supporteert Python ook break- en continue-statements) zoals geillustreerd in onderstaand voorbeeld.  
 
-~~~{.py}
+~~~python
 x = 5
 y = 10
 while x < y:
@@ -628,7 +628,7 @@ else:
 
 Als je dan bovenstaande code uitvoert zal deze de code uit de else-clausule niet uitvoeren.
 
-~~~{.py}
+~~~python
 $ python simple_while_else_break_loop.py
 5
 6
@@ -640,7 +640,7 @@ $
 
 Python supporteert ook for-loops, hoewel deze niet volledig identiek zijn aan de for-loops zoals we ze kennen uit C:
 
-~~~{.py}
+~~~python
 for x in range(1,11):
      print('{0:2d} {1:3d} {2:4d}'.format(x, x*x, x*x*x))
 ~~~
@@ -649,7 +649,7 @@ Deze for-loop zal voor elk getal in de "range" tussen een start (1) en einde (11
 Let wel het einde is niet inclusief (loop telt tot 10)
 
 ~~~
-$ python example_for_loop.py 
+$ python example_for_loop.py
  1   1    1
  2   4    8
  3   9   27
@@ -675,7 +675,7 @@ Dit is een eerste voorbeeld van een for loop, we gaan direct ook tonen hoe je de
 Net zoals in C kan je loops en condities in elkaar nesten.  
 Let natuurlijk wel dat je de correcte identatie gebruikt.
 
-~~~{.py}
+~~~python
 for x in range(1,11):
     for y in range(x,11):
         if x != y:
@@ -697,9 +697,9 @@ Volgende code:
 * print het 2de element (positie 1)
 * wijzigt het 3de element (positie 2)
 * print ditzelfde 3de element
- 
 
-~~~{.py}
+
+~~~python
 x = [1.0, 2.0, 3.0]
 print(x[1])
 x[2]=10
@@ -707,7 +707,7 @@ print(x[2])
 ~~~
 
 ~~~
-$ python hello.py 
+$ python hello.py
 2.0
 10
 ~~~
@@ -715,7 +715,7 @@ $ python hello.py
 
 ### Lijsten doorlopen
 
-~~~{.py}
+~~~python
 x = [1.0, 2.0, 3.0]
 for n in x:
     print(n)
@@ -723,7 +723,7 @@ for n in x:
 
 ### Slicing
 
-~~~{.py}
+~~~python
 x = [0,1,2,3,4,5,6,7,8,9]
 print(x[-1])
 print(x[-3])
@@ -732,13 +732,13 @@ print(x[-3])
 
 ### Slicing
 
-~~~{.py}
+~~~python
 x = [0,1,2,3,4,5,6,7,8,9]
 for n in x[2:4]:
     print(n)
 ~~~
 
-~~~{.py}
+~~~python
 x = [0,1,2,3,4,5,6,7,8,9]
 for n in x[2:-2]:
     print(n)
@@ -748,14 +748,14 @@ for n in x[2:-2]:
 
 ### Formaat
 
-~~~{.py}
+~~~python
 def name(parameter1, parameter2, . . .):
     body
 ~~~
 
 ### Functie met 1 argument
 
-~~~{.py}
+~~~python
 def table_of_powers(until):
     for x in range(1,until):
          print '{0:2d} {1:3d} {2:4d}'.format(x, x*x, x*x*x)
@@ -765,24 +765,24 @@ table_of_powers(10)
 
 ### Functie met 2 argumenten en return
 
-~~~{.py}
+~~~python
 >>> def macht(x,y):
 ...     return x**y
-... 
+...
 >>> print(macht(5,6))
 15625
 ~~~
 
 ## Classes
 
-~~~{.py}
+~~~python
 class MyClass:
     body
 ~~~
 
 ### Voorbeeld
 
-~~~{.py}
+~~~python
 class Circle:
     def __init__(self,rad):
         self.radius = rad
@@ -797,9 +797,9 @@ print(circle.area())
 
 ![](../../pictures/python_project.png)
 
-### Voorbeeld 1 
+### Voorbeeld 1
 
-~~~{.py}
+~~~python
 from tkinter import *
 import sys
 win = Tk()
@@ -810,7 +810,7 @@ mainloop()
 
 ### Voorbeeld 2
 
-~~~{.py}
+~~~python
 from Tkinter import *
 
 def increment_led_0():
@@ -847,7 +847,7 @@ mainloop()
 
 ### Voorbeeld 3
 
-~~~{.py}
+~~~python
 from Tkinter import *
 
 class Led:
@@ -876,7 +876,7 @@ mainloop()
 
 ### Voorbeeld 3
 
-~~~{.py}
+~~~python
 from Tkinter import *
 from serial
 
@@ -898,16 +898,16 @@ class Led:
         self.scale.grid(row=row_number,column=1)
         Button(master,text='+',command=self.increment_led).grid(row=row_number,column=2)
         self.command("get({})".format(self.led_number))
-        
+
     def command(self,com):
-        val = serial.write_command(com) 
+        val = serial.write_command(com)
         self.scale.set(val)
 
     def increment_led(self):
-        self.command("up({})".format(self.led_number)) 
+        self.command("up({})".format(self.led_number))
 
     def decrement_led(self):
-        self.command("down({})".format(self.led_number)) 
+        self.command("down({})".format(self.led_number))
 
 master = Tk()
 serial = SerialConnection('/dev/serial/by-id/pci-Arduino__www.arduino.cc__Arduino_Uno_64935343333351F08192-if00',9600)
@@ -1029,7 +1029,3 @@ int main(void) {
     return 0;
 }
 ~~~
-
-
-
-
