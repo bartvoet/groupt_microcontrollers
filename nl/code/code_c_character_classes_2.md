@@ -201,7 +201,7 @@ int main()
 ### External vs internal Linkage
 
 ```c
-int a = 5;          // file scope, external linkage
+int a = 5;         // file scope, external linkage
 static int b = 3;  // file scope, internal linkage
 
 int main()

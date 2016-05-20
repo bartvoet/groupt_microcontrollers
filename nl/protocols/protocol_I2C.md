@@ -33,7 +33,7 @@ Wanneer deze interne transistor echter gesloten wordt zal de spanning natuurlijk
 ### Duiding: Transactie (of pakketten) in i2c
 
 Bij niet-activiteit (idle) blijven deze lijnen dus hoog, een master kan echter een “I2C-transactie” initieren door:
- 
+
 * De SDA-lijn naar beneden te trekken (laag)
 * Gevolgd door SCL.
 
@@ -61,12 +61,12 @@ Als je meer informatie wenst over het low-level gedeelte van i2c:
 
 I2C stuurt bytes door:
 
-* De MSB wordt eerst doorgestuurd 
+* De MSB wordt eerst doorgestuurd
 * De LSB laatst.  
 * Elk van deze bytes moet worden bevestigd door de slave (ACK).  
 
 Deze **ACK** – dit is eigenlijk de 9ste bit –  wordt bereikt door – na de 8 bits – een extra clock-puls te geven en de receiver controle te geven over de SDA-lijn.  
- 
+
 Als deze receiver de lijn laag trekt wordt dit dan gezien als een **acknowledgment** (of bevestiging van ontvangst), zoniet wordt de transactie afgebroken (error).  
 
 ### Duiding: Adres-byte i2c
@@ -112,39 +112,39 @@ Hieronder een overzicht van de meest relevante commando's gekend uit i2c (en die
 
 * Herhaalde **s**tart (**r**epeated start)
 * Idem aan ST maar wordt uitgevoerd direct na een transactie (zonder dat er een SP was)
-* Kondigt een nieuw pakket aan 
+* Kondigt een nieuw pakket aan
 
 **SAD + R:**
 
 * **S**lave **Ad**ress **R**ead
 * Samengesteld uit een adres van 7 bits gevolg door 1 (read)
 * Volgt op ST of SR
-* Kondigt aan dat de master data van een sensor wil lezen 
+* Kondigt aan dat de master data van een sensor wil lezen
 
 **SAD + W:**
 
 * **S**lave **Ad**ress **W**rite
 * Samengesteld uit een adres van 7 bits gevolg door 0 (read)
 * Volgt op ST of SR
-* Kondigt aan dat de master data van een sensor wil lezen 
+* Kondigt aan dat de master data van een sensor wil lezen
 
 **SUB:**
 
 * *Sub**-adres
-* Byte 
+* Byte
 * Volgt op een SAD
-* Wordt gebruikt 
+* Wordt gebruikt
      * als commmando voordat de read wordt geinitieerd (start meting bijvoorbeeld)
      * als register-adres bij de slave (een bepaalde waarde of configuratie)
 
 **DATA:**
 
 * Data die wordt getransfereerd
-* Byte 
+* Byte
 * Volgt op een SUB bij write of rechtstreeks na de een SAD+R bij een read
-* Data-transfert 
+* Data-transfert
 
-**SAK:** 
+**SAK:**
 
 * **S**lave **A**C**K** van client
 * 1 bit met waarde 0
@@ -157,8 +157,8 @@ Hieronder een overzicht van de meest relevante commando's gekend uit i2c (en die
 * 1 bit met waarde 1
 * Na een write van de master
 * Indiceert dat de slave niet klaar is om data te leveren  
- 
-**MAK:** 
+
+**MAK:**
 
 * **M**aster **A**C**K** van master
 * 1 bit met waarde 0
@@ -253,7 +253,7 @@ F(scl) = F(cpu) / (16 + (2 * TWBR * prescaler))
 ```
 In het hieropvolgend code voorbeeld komt dit neer op +-
 ```
-F(scl) = 16Mhz / (16 + (2 * 32 * 1)) = ~229 Mhz 
+F(scl) = 16Mhz / (16 + (2 * 32 * 1)) = ~229 Mhz
 ```
 
 **TWDR: (data register)**  
@@ -283,7 +283,7 @@ Dit is het geval voor de meeste sensors dus bij een 5 v MCU is het aangeraden va
 Het programma zal de data (buffer) en geconverteerde data daarna doorsturen.  
 
 
-```{.c}
+```c
 #include <util/delay.h>
 #include <util/twi.h>
 #include <avr/io.h>

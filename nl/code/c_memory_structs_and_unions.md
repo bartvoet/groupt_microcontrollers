@@ -1,4 +1,4 @@
-## Structures, enums en unions
+## Structures
 
 Tot nog toe hebben we 2 "groepen" van data gezien
 

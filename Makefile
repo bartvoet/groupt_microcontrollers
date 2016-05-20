@@ -96,14 +96,26 @@ CHAPTER_09 += ../../general/pandoc_page_break.txt
 CHAPTER_09 += ../code/code_avr_pwm.md
 CHAPTER_09 += ../labo/avr_arduino_pwm.md
 
-
+CHAPTER_10 += ../chapter/chapter10_memory.md
+CHAPTER_10 += ../../general/pandoc_page_break.txt
 CHAPTER_10 += ../code/c_memory_structs_and_unions.md
-#CHAPTER_09 += ../../general/pandoc_page_break.txt
+CHAPTER_10 += ../../general/pandoc_page_break.txt
+CHAPTER_10 += ../code/code_c_character_classes_2.md
+
+CHAPTER_11 += ../chapter/chapter11_i2c_spi.md
+CHAPTER_11 += ../../general/pandoc_page_break.txt
+CHAPTER_11 += ../protocols/protocol_I2C.md
+
+CHAPTER_12 += ../chapter/chapter12_python.md
+CHAPTER_12 += ../../general/pandoc_page_break.txt
+CHAPTER_12 += ../code/code_python_serial.md
+
+
 #CHAPTER_09 += ../labo/labo_interrupts.md
 
 pagebreak = ../../general/pandoc_page_break.txt
 
-CHAPTERS = part01_minimal_knowledge.md $(pagebreak) $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) $(CHAPTER_08) $(CHAPTER_09) $(CHAPTER_10)
+CHAPTERS = part01_minimal_knowledge.md $(pagebreak) $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) $(CHAPTER_08) $(CHAPTER_09) $(CHAPTER_10) $(CHAPTER_11) $(CHAPTER_12)
 
 graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
 grap_convert = gvpr -c '$(1)' ./graphviz/$(2).dot | dot -Tpng -o ./pictures/$(3).png
@@ -119,7 +131,7 @@ all:
 
 	cd nl/chapter && pandoc ../title.txt $(CHAPTERS) -o ../../dist/cursus.html  --self-contained -s -S --toc --toc-depth=2	-c ../../github-pandoc.css
 
-	cd nl/chapter && pandoc -S ../title.txt $(CHAPTERS) -o ../../dist/cursus.pdf 	-c ../../github-pandoc.css
+	cd nl/chapter && pandoc -S ../title.txt $(CHAPTERS) --latex-engine=xelatex -o ../../dist/cursus.pdf 	-c ../../github-pandoc.css
 
 	zip dist/cursus.zip dist/cursus.epub dist/cursus.html dist/cursus.pdf
 
