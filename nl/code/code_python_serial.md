@@ -429,7 +429,7 @@ int main() {
     n = 9;
     r = 1;
     while (n > 0) {
-        r *= n;
+        r = r * n;
         printf("%i\n",r);
         n--;
     }
@@ -444,7 +444,7 @@ We zien in de C code:
 
 Dezelfde functionaliteit in python:
 
-~~~pythonthon
+~~~python
 n = 9
 r = 1
 while n > 0:
