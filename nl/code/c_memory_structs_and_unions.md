@@ -1,6 +1,6 @@
 ## Structures
 
-Tot nog toe hebben we 2 "groepen" van data gezien
+Tot nog toe hebben we 2 "groepen" van data/variabelen gezien
 
 **Enkelvoudige** variabelen zijnde data-structuren die 1 waarde bevatten:
 
@@ -10,7 +10,7 @@ Tot nog toe hebben we 2 "groepen" van data gezien
       * ...
 * Met of zonder tekenbit (signed, unsigned)
 
-Daar na hebben we ook een eerste soort **samengestelde** data gezien, namelijk arrays:
+Daarna hebben we ook een eerste soort **samengestelde** data gezien, namelijk arrays:
 
 * Kan 0 tot n (**enkelvoudige**) waardes bevatten
 * Waar n natuurlijk beperkt is tot de **grootte van de adressen**
@@ -20,17 +20,19 @@ Daar na hebben we ook een eerste soort **samengestelde** data gezien, namelijk a
 
 ### Wat zijn structs?
 
-Een andere data-structuur die heel veel wordt gebruikt is de **structure** (of korter gezegd structures).  
-Structures laten je net als een array toe verschillende 0 tot n **waarden** te groeperen maar:
+Een andere data-structuur die heel veel wordt gebruikt is de **struct** (of languit gezegd structures).  
+Structs laten je - net als een array - toe verschillende 0 tot n **waarden** te groeperen maar:
 
-* Waardes mogen van **verschillende types** zijn
-* Adresseerbaar via een **naam**
+* Deze waardes mogen van **verschillende types** zijn
+* Zijn Adresseerbaar via een **naam** (**niet** via een **index** zoals bij arrays)
 * Elk van deze **velden** dient een naam te bevatten
 
 > Vergelijkbare concepten vinden we in andere talen meestal terug via het concept van objecten.  
 > Verschil is dat je daar niet enkel data kan aan koppelen maar ook functies... zie het laatste hoofdstuk ivm python
 
-Ook bijzonder is dat elke struct-defitie een specifiek type waar je voor een array geen apart type hoeft te definieren.
+Ook ander (bijzonder) verschil is dat een struct een type op zich is.
+Je moet namelijk expliciet een type definieren waar je voor een array gewoon maar de variabele moest definieren.
+
 
 ### Voorbeeld
 
