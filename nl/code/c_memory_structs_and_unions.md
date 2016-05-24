@@ -1,26 +1,36 @@
 ## Structures
 
-Tot nog toe hebben we 2 "groepen" van data/variabelen gezien
+Binnen de programmeer-taal C bestaan er **2 "groepen"** van **data-types** (types van variabelen).
 
-**Enkelvoudige** variabelen zijnde data-structuren die 1 waarde bevatten:
+Aan de ene kant bestaan er **Enkelvoudige** of primitieve variabelen:
 
-* In verschillende groottes
-      * char => 1 byte
-      * short => 2 bytes
-      * ...
-* Met of zonder tekenbit (signed, unsigned)
+* Bevatten **1 waarde**
+* Bestaan in verschillende groottes
+    * char => 1 byte
+    * short => 2 bytes
+    * ...
+* Verschillende encodings
+    * Integers met tekenbit (signed)
+    * Integers zonder tekenbit (unsigned)
+    * Floating-point-types (float, double)
 
-Daarna hebben we ook een eerste soort **samengestelde** data gezien, namelijk arrays:
+De andere groep noemen **samengestelde** of **complexe** data-types:
+
+* Deze kunnen **verschillende waardes** bevatten
+* Letterlijk **gegroepeerd** onder 1 variabele
+
+We hebben al een eerste type gezien, namelijk **arrays**:
 
 * Kan 0 tot n (**enkelvoudige**) waardes bevatten
-* Waar n natuurlijk beperkt is tot de **grootte van de adressen**
-* Van het **zelfde type**
-* Deze waarden adresseerbaar via een **index**
+* Waar n natuurlijk **beperkt** is tot de **grootte van de adressen**
+* Deze waarden zijn van het **zelfde type**
+* Deze waarden kunnen gelezen en gewijzigd worden een **index**  
+  Maw
 * Kunnen genest zijn, je kan een array van arrays hebben...
 
 ### Wat zijn structs?
 
-Een andere data-structuur die heel veel wordt gebruikt is de **struct** (of languit gezegd structures).  
+Een **andere data-structuur** die heel veel wordt gebruikt is de **struct** (of languit gezegd structures).  
 Structs laten je - net als een array - toe verschillende 0 tot n **waarden** te groeperen maar:
 
 * Deze waardes mogen van **verschillende types** zijn
@@ -30,11 +40,182 @@ Structs laten je - net als een array - toe verschillende 0 tot n **waarden** te 
 > Vergelijkbare concepten vinden we in andere talen meestal terug via het concept van objecten.  
 > Verschil is dat je daar niet enkel data kan aan koppelen maar ook functies... zie het laatste hoofdstuk ivm python
 
-Ook ander (bijzonder) verschil is dat een struct een type op zich is.
-Je moet namelijk expliciet een type definieren waar je voor een array gewoon maar de variabele moest definieren.
+### Een voorbeeld ...
+
+Laten we in dit hoofdstuk starten met een voorbeeld van een applicatie die punten van studenten bijhoudt en afdrukt.  
+(zonder structs voorlopig nog)
+
+```c
+#include <stdio.h>
+
+int main()
+{
+  char* student_naam;
+  int labo_points;
+  int exam_points;
+
+  student_naam = "Jan Python";
+  labo_points = 20;
+  exam_points = 20;
+
+  printf("De student %s heeft %i labo-punten en %i examen-punten\n",
+		                              student_naam,labo_points,exam_points);
+
+  return 0;
+}
+```
+
+Dit voorbeeld bevat 3 **variabelen** **relevant** voor een **student** in deze richting ...
+
+### ... met structs
+
+We kunnen dit voorbeeld omvormen naar een **equivalent** voorbeeld met **structs**.  
+Het begin van deze code start met het declareren van een struct, dit omvat:
+
+* Het **keyword** **struct** gevolgd door
+* De **naam** van dit **type** (student)
+* De **velden** (of onderdelen) van dit struct-type
+
+> Dit is een eerste **verschil met arrays**, je moet een "custom" of "specifiek" **type** declareren.   
 
 
-### Voorbeeld
+```c
+#include <stdio.h>
+
+struct student {
+   char* student_naam;
+   int labo_points;
+   int exam_points;
+};
+
+int main()
+{
+  struct student een_student;
+
+  een_student.student_naam = "Jan Python";
+  een_student.labo_points = 20;
+  een_student.exam_points = 20;
+
+  printf("De student %s heeft %i labo-punten en %i examen-punten\n",
+		  een_student.student_naam,een_student.labo_points,een_student.exam_points);
+
+  return 0;
+}
+```
+
+Het type - dat we boven hebben gedeclareerd - kunnen we dan dan gebruiken net als een gewone variabele (van een enkelvoudig type).
+
+```c
+struct student een_student;
+```
+
+Het enige **verschil** is dat je voor de **declaratie** van zo'n variabele het **keyword struct** moet gebruiken.  
+
+> Zo weet de compiler (en degene die jou code leest) dat dit een zelf-gedefinieerd type (en niet een bestaand type)
+
+Daarna kan je de velden van deze struct-variabele (deel-variabelen) gebruiken via de **naam** dit veld.   
+Je gebruikt een **.-notatie** (dot in het engels wordt hier veel voor gebruikt) om de verschillende velden te benoemen.
+
+```c
+een_student.exam_points = 20;
+```
+Dit geldt zowel voor het initialiseren van een waarde als voor het uilezen van deze waardes.
+
+```c
+printf("De student %s heeft %i labo-punten en %i examen-punten\n",
+    een_student.student_naam,een_student.labo_points,een_student.exam_points);
+```
+
+> Dit is een 2 verschil met arrays waardat je een index gebruikte om aan de verschillende velden te raken.
+
+### Declaratie en initialisatie (1)
+
+Je kan ook een struct-variabele - net zoals we eerder hebben gezien voor primitieve variabelen - tegelijkertijd initialiseren en declareren.
+
+```c
+#include <stdio.h>
+
+struct student {
+   char* student_naam;
+   int labo_points;
+   int exam_points;
+};
+
+int main()
+{
+  struct student een_student = {
+		 .student_naam = "Jan Python",
+		 .labo_points = 20,
+		 .exam_points = 20
+  };
+
+ printf("De student %s heeft %i labo-punten en %i examen-punten\n",
+		  een_student.student_naam,een_student.labo_points,een_student.exam_points);
+
+  return 0;
+}
+```
+
+In plaats van de velden - met de eerder getoonde dot-notatie - afzonderlijk te initalisatie kan je dit ook doen bij declaratie zoals hierboven beschreven.
+
+### Declaratie en initialisatie (1)
+
+Je kan zelfs ook dan de veld-namen weglaten, maar dan is de volgorde van de individuele velden belangrijk.
+
+```c
+#include <stdio.h>
+
+struct student {
+   char* student_naam;
+   int labo_points;
+   int exam_points;
+};
+
+int main()
+{
+  struct student een_student = {"Jan Python",20, 20 };
+
+  printf("De student %s heeft %i labo-punten en %i examen-punten\n",
+		  een_student.student_naam,een_student.labo_points,een_student.exam_points);
+
+  return 0;
+}
+```
+
+Welke vorm je prefereert (met of zonder veldnamen) is een kwestie van stijl en voorkeur.
+
+### Opbouw van structs
+
+```c
+#include <stdio.h>
+
+struct student {
+   char* student_naam;
+   int labo_points;
+   int exam_points;
+};
+
+int main()
+{
+  struct student een_student = {"Jan Python",20, 20 };
+
+  printf("Adres student = %p\n",&een_student);
+  printf("Adres student.student_naam = %p\n",&een_student);
+  printf("Adres student.labo_points = %p\n",&een_student.labo_points);
+  printf("Adres student.exam_points = %p\n",&een_student.exam_points);
+
+  return 0;
+}
+```
+
+```bash
+Adres student = 0x7ffd94128ba0
+Adres student.student_naam = 0x7ffd94128ba0
+Adres student.labo_points = 0x7ffd94128ba8
+Adres student.exam_points = 0x7ffd94128bac
+```
+
+### Een struct als argument van een functie
 
 Als voorbeeld van een struct maken we een programma dat de punten voor de studenten uitrekent.
 
