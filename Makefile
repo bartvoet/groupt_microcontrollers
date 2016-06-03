@@ -100,6 +100,8 @@ CHAPTER_10 += ../chapter/chapter10_memory.md
 CHAPTER_10 += ../../general/pandoc_page_break.txt
 CHAPTER_10 += ../code/c_memory_structs_and_unions.md
 CHAPTER_10 += ../../general/pandoc_page_break.txt
+CHAPTER_10 += ../labo/labo_struct_en_sensors.md
+CHAPTER_10 += ../../general/pandoc_page_break.txt
 CHAPTER_10 += ../code/code_c_character_classes_2.md
 
 CHAPTER_11 += ../chapter/chapter11_i2c_spi.md
