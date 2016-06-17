@@ -1,4 +1,4 @@
-## Bedoeling van dit hoofdstuk
+## Python in een C-cursus?
 
 We hebben ondertussen geleerd hoe we vanuit onze MCU (AVR) kunnen communiceren naar een computer toe (over een seriële poort).  
 We gebruikten hiervoor een programmas zoals putty, picocom, ... om data door te sturen of te ontvangen.  
@@ -7,27 +7,34 @@ Dit was mogelijk - over een seriële vebinding - dankzij de ftdi-converter (die 
 
 Het doel van deze les is dit principe nog iets verder te trekken en een **applicatie** op je computer te bouwen die deze seriële communicatie gebruikt om instructies te geven aan de microcontroller.
 
-### Python leren in een c-cursus?
+#### Using the right tool for the job
 
-We gaan hier geen C (voor het pc-gedeelte) voor gebruiken, maar een andere taal genaamd **Python**.  
-Waarom moeten we een andere taal hiervoor gebruiken en werken we niet verder met onze verworven C-kennis?
+C is een taal die wordt gebruikt om **systeem**-software (mcu, drivers, os, real time, weinig resources...) te gebruiken
 
-* **"Using the right tool for the job"**
-     * Python is zeer geschikt om **applicaties** te schrijven
-     * C is een taal die wordt gebruikt om **systeem**-software (mcu, drivers, os, real time, weinig resources...) te gebruiken  
-* Python is een taal gebruikt om kleine tot grote applicaties te bouwen  
-     Je kan hier heel éénvoudig en snel applicaties (command line of gui) bouwen zonder al te veel voorkennis.
+Als je een toepassing of applicatie maakt op je PC (GUI, Webapp, command-line, ...) is C zeker niet de meest éénvoudige oplossing.  
+
+Hiervoor zijn er talen zoals Python, Java, Ruby, C#, ... die je de job kunnen gemakkelijker maken.  
+Deze talen/platformen zijn veel flexibeler, hebben enorm veel libraries, maken je het veel gemakkelijker om geheugen te beheren, ...
+
+#### Python
+
+We gaan hier dus een andere taal gebruiken namelijk **Python**.  
+
+* Python is een taal gebruikt om **kleine tot grote applicaties** te bouwen   
+  Je kan hier heel éénvoudig en snel applicaties (command line of gui) bouwen zonder al te veel voorkennis.
 * Python is zeer **éénvoudig** aan te leren (zeker in vergelijking met C)
 * Python is enorm **populair**
 * Python heeft enorm veel **libraries** en **utilities** om allerlei **taken** uit te voeren
 * Python heeft  zeer grote **community** en online **support**
-* Python is een **scripting**-taal en is zeer **flexibel**
-* Python is **open-source**, vrij beschikbaar en gesupporteerd voor **alle opertating systems**
+* Python is **open-source**, vrij beschikbaar en gesupporteerd voor **alle operating systems**
 
-Samengevat, als je een toepassing of applicatie maakt op je PC (GUI, Webapp, command-line, ...) is C niet altijd wat je nodig hebt.  
-Hiervoor zijn er talen zoals Python, Java, Ruby, C#, ... die je de job kunnen gemakkelijker maken.
+#### Java, C#, ...
 
-### Waarschuwing: crashcourse
+We hadden ook Java kunnen gebruiken (zeker even populair), maar daar missen we de flexibiliteit van een scripting-taal...
+
+> We komen direct nog terug op scripting-talen`
+
+#### Waarschuwing: crashcourse
 
 Let wel, deze les is enkel te beschouwen als een **introductie** in python, niets meer.  
 Bedoeling is een voorbeeld-applicatie te maken om met de MCU samen te werken.
@@ -98,13 +105,18 @@ http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.act
 * Download vanaf https://pypi.python.org/pypi/pyserial  
   Installeer de msi
 
-### Starten met python: werken met een interactieve shell of uitvoeren vanuit een file
+### Starten met python:
 
 Nu dat Python is geïnstalleerd, kunnen we aan de slag met deze programmeer-omgeving.  
 Het enige wat je nodig hebt is een goede text-editor (GEdit, Notepad++, TextMate, Vi, ...) en je command-line (Bash voor Mac en Linux, Powershell voor Windows).
 
-> **Nota:**  
-> Python komt met een ontwikkelings-omgeving IDLE, we gebruiken deze voorlopige nog niet.
+#### Scripting-taal
+
+Python is een scripting-taal, net zoals bij C schrijf je code in 1 of meerdere tekst-files maar je moet deze code niet compilen.  
+
+Een speciaal programma - de interpreter - zal deze code/instructies als tekst "at runtime" inlezen en uitvoeren.
+
+#### Interactief python of file based
 
 **Python: interactief of vanuit een file**
 
@@ -217,7 +229,7 @@ Nu dat we éénmaal weten hoe te printen (en functies aan te roepen) introducere
 Net zoals bij C kan je een waarde in het geheugen plaatsen onder de vorm van een variabele.  
 Deze variabele kan je meegeven aan een functie zoals print.
 
-~~~pythonthon
+~~~python
 >>> say_hello = "hello"
 >>> print(say_hello)
 >>>
@@ -239,8 +251,9 @@ Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 NameError: name 'say_hello' is not defined
 >>>
-
 ~~~
+
+Wanneer je dan de variabele probeert te gebruiken zal de python-interpreter een fout rapporteren.
 
 ### Primitieve data-types
 
