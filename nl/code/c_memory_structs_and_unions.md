@@ -158,9 +158,10 @@ int main()
 
 In plaats van de velden - met de eerder getoonde dot-notatie - afzonderlijk te initalisatie kan je dit ook doen bij declaratie zoals hierboven beschreven.
 
-### Declaratie en initialisatie (1)
+### Declaratie en initialisatie (2)
 
-Je kan zelfs ook dan de veld-namen weglaten, maar dan is de volgorde van de individuele velden belangrijk.
+Je kan zelfs nog korter maken door de veld-namen weglaten, maar dan is de volgorde waarin de individuele velden belangrijk.  
+Deze komen dan overeen met de volgorde hoe dat de velden gedeclareerd zijn binnen het type.
 
 ```c
 #include <stdio.h>
@@ -181,10 +182,19 @@ int main()
   return 0;
 }
 ```
+Welke vorm je prefereert (met of zonder veldnamen) hangt fel af van de situatie en is ook een kwestie van stijl en voorkeur.
 
-Welke vorm je prefereert (met of zonder veldnamen) is een kwestie van stijl en voorkeur.
+Dit soort van  initialisatie tijdens declaratie hebben we nog al gezien, namelijk bij arrays.
 
-### Opbouw van structs
+```c
+int een_array[] = {1,2,3}
+printf("%i",een_array[0]);
+```
+
+
+### Opbouw van structs in het geheugen... en arrays
+
+Belangrijk om te weten is dat bij een struct - net als bij een array - alle velden na elkaar in het geheugen worden geplaatst.
 
 ```c
 #include <stdio.h>
@@ -199,32 +209,64 @@ int main()
 {
   struct student een_student = {"Jan Python",20, 20 };
 
-  printf("Adres student = %p\n",&een_student);
-  printf("Adres student.student_naam = %p\n",&een_student);
-  printf("Adres student.labo_points = %p\n",&een_student.labo_points);
-  printf("Adres student.exam_points = %p\n",&een_student.exam_points);
+  printf("   sizeof(...naam)     = %zu \n",sizeof(een_student.student_naam));
+  printf(" + sizeof(...labo...)  = %zu \n",sizeof(een_student.labo_points));
+  printf(" + sizeof(...exam...)  = %zu \n",sizeof(een_student.exam_points));
+
+  printf(" + ---------------------------- \n");
+
+  printf(" = sizeof(struct...)   = %zu\n",sizeof(struct student));
+  printf(" = sizeof(een_student) = %zu\n",sizeof(een_student));
+
+  printf("\n");
+
+  printf("Adres student               = %p\n",&een_student);
+  printf(" == \n");
+  printf("Adres student.student_naam  = %p\n",&een_student);
+  printf(" +  sizeof(...naam)         = %zu \n",sizeof(een_student.student_naam));
+  printf("= Adres student.labo_points = %p\n",&een_student.labo_points);
+  printf(" + sizeof(...labo...)       = %zu \n",sizeof(een_student.labo_points));
+  printf("Adres student.exam_points   = %p\n",&een_student.exam_points);
 
   return 0;
 }
 ```
 
+Om dit te bewijzen voeren we bovenstaand stuk code uit:
+
 ```bash
-Adres student = 0x7ffd94128ba0
-Adres student.student_naam = 0x7ffd94128ba0
-Adres student.labo_points = 0x7ffd94128ba8
-Adres student.exam_points = 0x7ffd94128bac
+  sizeof(...naam)     = 8
++ sizeof(...labo...)  = 4
++ sizeof(...exam...)  = 4
++ ----------------------------
+= sizeof(struct...)   = 16
+= sizeof(een_student) = 16
+
+Adres student               = 0x7ffd6402cca0
+==
+Adres student.student_naam  = 0x7ffd6402cca0
++  sizeof(...naam)          = 8
+= Adres student.labo_points = 0x7ffd6402cca8
++ sizeof(...labo...)        = 4
+Adres student.exam_points   = 0x7ffd6402ccac
 ```
 
-### Een struct als argument van een functie
+We bemerken hier (voorlopig):
 
-Als voorbeeld van een struct maken we een programma dat de punten voor de studenten uitrekent.
+* De **struct** is zo groot als de **som** van de groottes van zijn **velden**
+* Het **adres** van **elk veld** is afhankelijk van
+
+
+### Een struct als argument
+
+Een struct kan je net zoals een primiteve variabele meegeven aan een functie.
 
 ```c
 #include <stdio.h>
 #include <string.h>
 
 struct student {
-   char name[50];
+   char student_naam[50];
    int labo_points;
    int exam_points;
 };
@@ -233,8 +275,8 @@ void print_student(struct student student) {
 	int gemiddelde = (student.labo_points + student.exam_points)/2;
 
 	printf("Student %s heeft %i labo-punten en %i examen-punten",
-			student.name,student.labo_points,student.exam_points);
-	printf(", zijn haar gemiddelde is %i en %s is ",gemiddelde,student.name);
+			student.student_naam,student.labo_points,student.exam_points);
+	printf(", zijn/haar gemiddelde is %i en %s is ",gemiddelde,student.student_naam);
 	if(gemiddelde > 10) {
 		printf("geslaagd");
 	} else {
@@ -244,138 +286,128 @@ void print_student(struct student student) {
 }
 
 int main( ) {
-   struct student a;
-   struct student b;
-
-   strcpy(a.name , "Student 1");
-   strcpy(b.name, "Student 2");
-
-   a.labo_points=18;
-   a.exam_points=14;
-
-   b.labo_points=16;
-   b.exam_points=12;
+   struct student a = {
+		   .student_naam="Jan Java",
+		   .labo_points=18,
+		   .exam_points=14
+   };
+   struct student b = {
+		   .student_naam="Peter Python",
+		   .labo_points=16,
+		   .exam_points=12
+   };
 
    print_student(a);
    print_student(b);
 
    return 0;
 }
-
 ```
 
 Dit geeft als resultaat:
 
 ```bash
-Student Student 1 heeft 18 labo-punten en 14 examen-punten, zijn haar gemiddelde is 16 en Student 1 is geslaagd.
-Student Student 2 heeft 16 labo-punten en 12 examen-punten, zijn haar gemiddelde is 14 en Student 2 is geslaagd.
+Student Jan Java heeft 18 labo-punten en 14 examen-punten, zijn haar gemiddelde is 16 en Jan Java is geslaagd
+Student Peter Python heeft 16 labo-punten en 12 examen-punten, zijn haar gemiddelde is 14 en Peter Python is geslaagd
 ```
 
-### Declaratie van een variabele:
+### Struct vs Arrays
 
-* Als je een een **variabele** van dit type **declareert** gebruik je - net zoals bij gewone data-types - de naam van het type
-* Maar voorafgegaan door het **keyword struct**
+Een struct kan je dus gewoon **als waarde** doorgeven aan een **functie**.   
+Telkens als je een struct meegeeft aan een functie wordt er een copy meegemaakt in het geheugen van deze struct.
 
-### Declaratie van een struct-type
-
-* Een variabele wordt **gedeclareerd** als een **specifiek type**
-* Dit gebeurt in dit geval (en meestal) buiten functies, op globaal niveau.  
-  Zo'n type kan ook binnen een functie worden gedeclareerd maar dit gebeurt zelden
-  (dan verlies je ook het voordeel van zichtbaarheid)
-
-Dit gebeurt met volgende **structuur**:
-
-```c
-struct [name] {
-
-   type field;
-   type field;
-   ...
-   type field;
-}[variable,variable,...]
-```
-
-Uit bovenstaande structuur-beschrijving kunnen ook we afleiden dat:
-
-* De naam optioneel is
-* Je direct variabelen kan declareren in het type
-
-Dit wordt minder gebruikt maar is wel de moeite waard om te vermelden.  
-Zie onderstaand voorbeeld.
+Dit is niet zoals bij arrays die eigenlijk als pointer worden meegegeven aan functies.  
 
 ```c
 #include <stdio.h>
-#include <string.h>
 
-struct {
-   char name[50];
-   int labo_points;
-   int exam_points;
-} a,b;
+struct test_structuur {
+	unsigned short a;
+	unsigned short b;
+};
 
-int main( ) {
-   strcpy(a.name , "Student 1");
-   strcpy(b.name, "Student 2");
+void een_struct_functie(struct test_structuur een_structuur_als_argument)
+{
+	printf("Positie een_structuur_als_argument  != %p\n",&een_structuur_als_argument);
+}
 
-   a.labo_points=18;
-   a.exam_points=14;
+void een_array_functie(unsigned short een_array_als_argument[])
+{
+	printf("Positie een_array_als_argument      == %p\n",een_array_als_argument);
+}
 
-   b.labo_points=16;
-   b.exam_points=12;
+int main()
+{
+   struct test_structuur een_structuur = { 0xAABB,0xCCDD };
+   unsigned short een_array[] = { 0xAABB,0xCCDD };
 
-   //en printen maar
+
+   printf("Positie een_structuur               => %p\n",&een_structuur);
+   een_struct_functie(een_structuur);
+   printf("Positie een_array                   => %p\n",&een_array);
+   een_array_functie(een_array);
 
    return 0;
 }
 ```
 
-### Geneste structs
+### Waarom structs gebruiken: meerdere functies!
+
+De belangrijkste **eigenschap van structs** is dat je date kan de **groeperen**.  
+Een gevolg hiervan is dat je hier **herhaling** mee kan **vermijden**
+
+Een eerste **voorbeeld** is als je **dezelfde data** moet doorgeven aan **meerdere functies**  
+We hernemen het "studenten"-voorbeeld en splitsen een aantal functies uit.
+
 
 ```c
 #include <stdio.h>
 #include <string.h>
 
-struct name {
-	char name[50];
-	char last_name[50];
-};
-
 struct student {
-   struct name name;
+   char student_naam[50];
    int labo_points;
    int exam_points;
 };
 
-void print_student(struct student student) {
-	int gemiddelde = (student.labo_points + student.exam_points)/2;
+int gemiddelde_score_student(struct student een_student)
+{
+	return (een_student.exam_points + een_student.labo_points)/2;
+}
 
-	printf("Student %s %s heeft %i labo-punten en %i examen-punten",
-			student.name.name,student.name.last_name,student.labo_points,student.exam_points);
-	printf(", %s %s gemiddelde is %i en is ",student.name.name,student.name.last_name,gemiddelde);
-	if(gemiddelde > 10) {
+int student_is_geslaagd(struct student een_student)
+{
+	return gemiddelde_score_student(een_student) >= 10;
+}
+
+void print_geslaagd_of_niet(struct student een_student) {
+	if(student_is_geslaagd(een_student)) {
 		printf("geslaagd");
 	} else {
 		printf("niet geslaagd");
 	}
+}
+
+void print_student(struct student een_student) {
+	printf("Student %s heeft %i labo-punten en %i examen-punten",
+			een_student.student_naam,een_student.labo_points,een_student.exam_points);
+	printf(", zijn/haar gemiddelde is %i en %s is ",
+			gemiddelde_score_student(een_student),een_student.student_naam);
+	print_geslaagd_of_niet(een_student);
 	printf("\n");
 }
 
 int main( ) {
-   struct student a;
-   struct student b;
-
-   strcpy(a.name.name , "Student");
-   strcpy(a.name.last_name, "1");
-
-   strcpy(b.name.name , "Student");
-   strcpy(b.name.last_name, "2");
-
-
-   a.labo_points=18;
-   a.exam_points=14;
-
-   b.labo_points=16;
-   b.exam_points=12;
+   struct student a = {
+		   .student_naam="Jan Java",
+		   .labo_points=18,
+		   .exam_points=14
+   };
+   struct student b = {
+		   .student_naam="Peter Python",
+		   .labo_points=16,
+		   .exam_points=12
+   };
 
    print_student(a);
    print_student(b);
@@ -383,6 +415,153 @@ int main( ) {
    return 0;
 }
 ```
+
+In bovenstaande code hebben we de functie print_student uitgesplitst in een aantal kleinere functies.  
+Door een struct mee te geven besparen we ons de moeite meerdere malen meerdere argumenten mee te geven aan verschillende functies.
+
+### Waarom structs gebruiken: toevoegen (of wijzigen) van velden!
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+struct student {
+   char student_naam[50];
+   int labo_points;
+   int exam_points;
+   int medewerking;
+};
+
+int gemiddelde_score_student(struct student een_student)
+{
+	return (een_student.exam_points + een_student.labo_points + een_student.medewerking)/3;
+}
+
+int student_is_geslaagd(struct student een_student)
+{
+	return gemiddelde_score_student(een_student) >= 10;
+}
+
+void print_geslaagd_of_niet(struct student een_student) {
+	if(student_is_geslaagd(een_student)) {
+		printf("geslaagd");
+	} else {
+		printf("niet geslaagd");
+	}
+}
+
+void print_student(struct student een_student) {
+	printf("Student %s heeft %i labo-punten, %i examen-punten en %i voor medewerking",
+			een_student.student_naam,een_student.labo_points,een_student.exam_points,een_student.medewerking);
+	printf(", zijn/haar gemiddelde is %i en %s is ",
+			gemiddelde_score_student(een_student),een_student.student_naam);
+	print_geslaagd_of_niet(een_student);
+	printf("\n");
+}
+
+int main( ) {
+   struct student a = {
+		   .student_naam="Jan Java",
+		   .labo_points=18,
+		   .exam_points=14,
+		   .medewerking=16
+   };
+   struct student b = {
+		   .student_naam="Peter Python",
+		   .labo_points=16,
+		   .exam_points=12,
+		   .medewerking=14
+   };
+
+   print_student(a);
+   print_student(b);
+
+   return 0;
+}
+```
+
+```bash
+Student Jan Java heeft 18 labo-punten, 14 examen-punten en 16 voor medewerking, zijn/haar gemiddelde is 16 en Jan Java is geslaagd
+Student Peter Python heeft 16 labo-punten, 12 examen-punten en 14 voor medewerking, zijn/haar gemiddelde is 14 en Peter Python is geslaagd
+```
+
+### Geneste structs
+
+Een volgende wijziging die we aanbrengen is het uitsplitsen van naam in een voornaam en achternaam.  
+We maken hiervoor een aparte struct-definitie voor aan (gezien we deze in het volgende voorbeeld gaan herbruiken)
+
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+struct naam {
+	char voornaam[25];
+	char achternaam[25];
+};
+
+struct student {
+   struct naam student_naam;
+   int labo_points;
+   int exam_points;
+   int medewerking;
+};
+
+int gemiddelde_score_student(struct student een_student)
+{
+	return (een_student.exam_points + een_student.labo_points + een_student.medewerking)/3;
+}
+
+int student_is_geslaagd(struct student een_student)
+{
+	return gemiddelde_score_student(een_student) >= 10;
+}
+
+void print_geslaagd_of_niet(struct student een_student) {
+	if(student_is_geslaagd(een_student)) {
+		printf("geslaagd");
+	} else {
+		printf("niet geslaagd");
+	}
+}
+
+void print_student(struct student een_student) {
+	printf("Student %s %s heeft %i labo-punten, %i examen-punten en %i voor medewerking",
+			een_student.student_naam.voornaam,een_student.student_naam.achternaam,
+			een_student.labo_points,een_student.exam_points,een_student.medewerking);
+	printf(", zijn/haar gemiddelde is %i en %s is ",
+			gemiddelde_score_student(een_student),
+			een_student.student_naam.voornaam);
+	print_geslaagd_of_niet(een_student);
+	printf("\n");
+}
+
+int main( ) {
+  struct student a = {
+      .student_naam= {.voornaam = "Jan", .achternaam = "Java"},
+      .labo_points=18,
+      .exam_points=14,
+      .medewerking=16
+  };
+  struct student b = {
+      .student_naam= {.voornaam = "Peter", .achternaam = "Python"},
+      .labo_points=16,
+      .exam_points=12,
+      .medewerking=14
+  };
+
+   print_student(a);
+   print_student(b);
+
+   return 0;
+}
+```
+
+```c
+Student Jan Java heeft 18 labo-punten, 14 examen-punten en 16 voor medewerking, zijn/haar gemiddelde is 16 en Jan is geslaagd
+Student Peter Python heeft 16 labo-punten, 12 examen-punten en 14 voor medewerking, zijn/haar gemiddelde is 14 en Peter is geslaagd
+```
+
 
 ### Arrays van structs
 
@@ -390,113 +569,78 @@ int main( ) {
 #include <stdio.h>
 #include <string.h>
 
-struct name {
-	char name[50];
-	char last_name[50];
+struct naam {
+	char voornaam[25];
+	char achternaam[25];
 };
 
 struct student {
-   struct name name;
+   struct naam student_naam;
    int labo_points;
    int exam_points;
+   int medewerking;
 };
 
-void print_student(struct student student) {
-	int gemiddelde = (student.labo_points + student.exam_points)/2;
+int gemiddelde_score_student(struct student een_student)
+{
+	return (een_student.exam_points + een_student.labo_points + een_student.medewerking)/3;
+}
 
-	printf("Student %s %s heeft %i labo-punten en %i examen-punten",
-			student.name.name,student.name.last_name,student.labo_points,student.exam_points);
-	printf(", %s %s gemiddelde is %i en is ",student.name.name,student.name.last_name,gemiddelde);
-	if(gemiddelde > 10) {
+int student_is_geslaagd(struct student een_student)
+{
+	return gemiddelde_score_student(een_student) >= 10;
+}
+
+void print_geslaagd_of_niet(struct student een_student) {
+	if(student_is_geslaagd(een_student)) {
 		printf("geslaagd");
 	} else {
 		printf("niet geslaagd");
 	}
+}
+
+void print_student(struct student een_student) {
+	printf("Student %s %s heeft %i labo-punten, %i examen-punten en %i voor medewerking",
+			een_student.student_naam.voornaam,een_student.student_naam.achternaam,
+			een_student.labo_points,een_student.exam_points,een_student.medewerking);
+	printf(", zijn/haar gemiddelde is %i en %s is ",
+			gemiddelde_score_student(een_student),
+			een_student.student_naam.voornaam);
+	print_geslaagd_of_niet(een_student);
 	printf("\n");
 }
 
-int main( ) {
-   struct student studenten[2];
-   int i;
+int main() {
 
-   strcpy(studenten[0].name.name , "Student");
-   strcpy(studenten[0].name.last_name, "1");
+	int i;
 
-   strcpy(studenten[1].name.name , "Student");
-   strcpy(studenten[1].name.last_name, "2");
+     struct student studenten[] = {
+		{
+		   .student_naam= {.voornaam = "Jan", .achternaam = "Java"},
+		   .labo_points=18,
+		   .exam_points=14,
+		   .medewerking=16
+		},{
+		   .student_naam= {.voornaam = "Peter", .achternaam = "Python"},
+		   .labo_points=16,
+		   .exam_points=12,
+		   .medewerking=14
+	    },{
+		   .student_naam= {.voornaam = "Cedric", .achternaam = "C"},
+		   .labo_points=16,
+		   .exam_points=12,
+		   .medewerking=14
+	   }
+	};
 
-
-   studenten[0].labo_points=18;
-   studenten[0].exam_points=14;
-
-   studenten[1].labo_points=16;
-   studenten[1].exam_points=12;
-
-   for(i=0;i<sizeof(studenten)/sizeof(struct student);i++) {
-	   print_student(studenten[0]);
-   }
+    for(i=0;i<3;i++) {
+    	print_student(studenten[i]);
+    }
 
    return 0;
 }
 ```
 
-### Structs
-
-```c
-#include <stdio.h>
-#include <string.h>
-
-struct name {
-	char name[50];
-	char last_name[50];
-};
-
-struct student {
-   struct name name;
-   int labo_points;
-   int exam_points;
-};
-
-void print_student(struct student student) {
-	int gemiddelde = (student.labo_points + student.exam_points)/2;
-
-	printf("Student %s %s heeft %i labo-punten en %i examen-punten",
-			student.name.name,student.name.last_name,student.labo_points,student.exam_points);
-	printf(", %s %s gemiddelde is %i en is ",student.name.name,student.name.last_name,gemiddelde);
-	if(gemiddelde > 10) {
-		printf("geslaagd");
-	} else {
-		printf("niet geslaagd");
-	}
-	printf("\n");
-}
-
-struct student maak_student_aan(char* voornaam,char* naam) {
-	struct student een_student;
-	strcpy(een_student.name.name , naam);
-	strcpy(een_student.name.last_name, voornaam);
-	return een_student;
-}
-
-void zet_punten(struct student* een_student,int labo,int examens) {
-	een_student->labo_points=labo;
-	een_student->exam_points=examens;
-}
-
-int main( ) {
-
-   struct student student_1=maak_student_aan("Student","1");
-   struct student student_2=maak_student_aan("Student","2");
-
-   zet_punten(&student_1,18,14);
-   zet_punten(&student_2,16,12);
-
-   print_student(student_1);
-   print_student(student_2);
-
-   return 0;
-}
-```
 ### Structs en pointers
 
 ```c
