@@ -8,7 +8,7 @@ Daarom gaan we - op basis van een voorbeeld - een aantal richtlijnen en aandacht
 ### Opstelling: 8 leds en button
 
 We gaan voor het merendeel van de punten uitleggen aan de hand van hetzelfde voorbeeld.  
-Voor dit voorbeeld gebruiken we dezelfde opstelling die we hebben gebruikt voor de timers: 
+Voor dit voorbeeld gebruiken we dezelfde opstelling die we hebben gebruikt voor de timers:
 
 ![](../../pictures/8_led_with_button_bb.png)
 
@@ -29,7 +29,7 @@ We voegen echter nieuwe functionaliteit aan toe:
 > Om de code wat leesbaarder hebben we de configuratie-code wat verdeeld over een aantal procedures.  
 > (tip: als je niet meer weet wat het verschil is tussen een functie en een procedure ga je best in het hoofdstuk van functies kijken)
 
-```{.c}
+```c
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
@@ -143,4 +143,4 @@ Pattroon:
 activeren van timers
 starten van timer
 gebruik van volatile
-waarschuwing wees spaarzaam met 
+waarschuwing wees spaarzaam met
