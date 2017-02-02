@@ -1,322 +1,262 @@
-## Starten met tools: Command line
+## Tools: Werken met een shell
 
-Elke software-ontwikkelaar (en zeker als je met MCU's werkt) moet de beginselen kennen van het werken met command-line.  
+### Wat is een shell?
+
+Een shell is een programma dat rechtstreeks toegang heeft tot een
+
+* Aanmaken/verwijderen/hernoemen/... van een files en foldes
+* Starten van programma's
+
+Een shell is (om het simpel te houden) een tool die je een toegang geeft om low-level systeem-taken uit te voeren:
+
+* Opstarten van programma's 
+* Navigeren door een file-systeem
+* Manipuleren files en folders
+* Controleren en monitoren van processen
+* Automatiseren van taken
+* ...
+
+
+![](../../pictures/shell_vs_user.png)
+
+
+### Tekst-commando's
+
+Een **shell** of **CLI** (command-line-interface) zorgt ervoor dat een gebruikers deze taken kunnen uitvoeren via **tekst-commando's**.  
+
+Deze tekst-commando's kunnen meestal ook **gebundeld** worden in een **script** (dat je dan kan uitvoeren van een CLI net zoals je programma's kan uitvoeren)   
+
+Nadat zo'n commando/script/programma is uitgevoerd krijgt de gebruiker weer de kans om de shell of het programma aan te spreken door op de opdrachtregel een nieuwe opdracht op te geven.  
+
+### Waarom werken met een shell
+
+Om het kort te houden, het is een tool die moet gekend zijn als je wil programmeren omdat we deze vaardigheden nodig hebben om later met toolchains (compiler en linkers) om te gaan.  
+
+Elke software-ontwikkelaar moet de beginselen kennen van het werken met command-line.  
 Dit argument is nog sterker als je met embedded devices werkt die veelal enkel te besturen zijn via command-line
 
-### Keuze van een teksteditor
+  
+### Terminal op Windows
 
-Om C te programmeren heb je een tekst-editor nodig.  
-Let wel, dit niet te verwarren met tekstverwerkings-programma's zoals Word, LibreOffice, Pages!!!
+Elk operating system bevat een CLI, Windows bevat hiervoor het programma CMD, dat je kan vinden in het windows-menu onder "administrative tools".
 
-Voor Windows kan je notepad hiervoor gebruiken, maar er zijn betere keuzes zoals:
+![](../../pictures/windows_cmd.png)
 
-* Notepad++
-* PSpad Editor
-* Atom
-* ...
+> De Windows commando's hebben echter hun beperkingen.  
+> Vandaar dat er alternatieven bestaan als **MingW/MSYS** die je een Bash-compatibele omgeving meebrengen (zodat je gelijkaardige commando's als Linux kan uitvoeren)
 
-Deze editors hebben (in tegenstelling tot notepad) eigenschappen zoals:
+### Terminal op Linux
 
-* *Text coloring:*  
-  Bepaalde elementen (variabelen, loops, functies, ...) worden in een andere kleur geplaatst om de leesbaarheid te verhogen.  
-* *Code completion:*  
-  De editor kan intelligent zijn door bijvoorbeeld code die gedeeltelijk is ingevuld automatisch aan te vullen
-* ...
-
-Voor Linux heb je een scala aan keuze:
-
-* GEdit (zeer eenvoudig)
-* Scitext
-* Atom
-* Kate
-* Leaf-pad
-* ...
-
-Voor Mac:
-
-* TextMate
-* TextWrangler
-* XCode
-* ...
-
-Dit zijn allemaal grafische text-editors en zijn over het algemeen zeer éénvoudig om mee te werken.  
-Deze hebben wel het nadeel dat je altijd tussen een command line en je editor moet wisselen, hievoor zijn er 2 alternatieven:
-
-* Command-line editors
-* IDE's, integrated development environments die zowel tekst-editors
-
-#### Command-line editors
-
-Voor de meer gevorderden zijn er Linux- en Mac zijn er zeer goede tekst-editors die je via de command-line bestuurt:
-
-* Vim
-* emacs
-* nano
-* ed
-* ...
-
-Deze zijn zeer krachtige editors die wel een zekere leercurve hebben (dus als je die voor de eerste maal probeert moet je wel wat tijd vrijmaken)
-
-> **Windows:**  
-> Deze command-line-editors zijn ook beschikbaar in Windows via Cygwin of Mingw (later meer hierover)
-
-### Toolchain GCC: Linux
-
-Op linux-distributies kan je gcc installeren via de package-managers
-
-**Ubuntu, Mint, Debian:**
-
-~~~
-$ sudo apt-get install gcc
-~~~
-
-**Fedora, Red Hat:**
-
-~~~
-# dnf install gcc
-~~~
-
-### Toolchain GCC: Windows
-
-Voor Windows moet je een Mingw installeren op je machine.   
-Er is echter een zip-file voor de cursus voorzien die alle tooling voorziet zonder dat je iets moet installeren (of zelfs administratie-rechten).
-We komen hier zo dadelijk op terug.
-
-### Toolchain GCC: Mac
-
-Als je het programma gcc aanroept **via command-line** zal OS X je voorstellen om gcc (of clan) te installeren.  
-Laat de installatie gewoon lopen.
-
-
-### CLI/shell/terminal
-
-Een **shell** of **CLI** (command-line-interface) zorgt ervoor dat een gebruiker:
-
-* via tekst-**commando's** (acties) kan uitvoeren naar een **programma** toe
-* in meeste gevallen het operating system zelf (maar soms ook specifiek programma's met een CLI)
-* deze tekst-commando's kunnen meestal ook **gebundeld** worden in een **script** (dat je dan kan uitvoeren van een CLI)   
-* nadat de opdracht is uitgevoerd krijgt de gebruiker weer de kans om de shell of het programma aan te spreken door op de opdrachtregel een nieuwe opdracht op te geven.  
-
-De CLI geldt als tegenhanger van de grafische gebruikersomgeving (ofwel de GUI, Graphical User Interface).  
-
-> **Nota:**  
-> Als voorbeeld van zo'n **GUI**-omgeving gaan we later nog **Eclipse** bekijken maar we starten bij de basis en dat is command-line.  
-
-### Starten met CLI
-
-Elk operating system bevat een CLI:
-
-**Linux**
-
-In Linux kan je dit via een terminal-emulator zoals:  
+Elke linux-distro heeft 1 of meerdere terminal-emulators zoals:  
 
 * GNOME Terminal
 * Terminator
 * Guake
 * ...
 
-Een andere optie is Linux opstarten zonder grafische shell (X-server)
+> Een andere optie is Linux opstarten zonder grafische shell (X-server)
 
-**Windows**
+Deze terminal-emulator zullen een bash-shell aanbieden, deze deelt een aantal commando's met het windows-cmd maar is in principe veel uitgebreider
 
-In Windows heb je de keuze tussen de programma's (meestal te vinden bij de adminstratieve tools):
-
-* CMD
-* Powershell
-* ConEmu (te installeren)
-
-De Windows commando's hebben echter hun beperkingen.  
-Vandaar dat er alternatieven bestaan als **MingW/MSYS** die je een Bash-compatibele omgeving meebrengen (zodat je gelijkaardige commando's als Linux kan uitvoeren)
-
-**MAC OS X**
+### Terminal op MAC OS X
 
 In MAC OS X kan je de terminal bereiken via Programma’s - Hulpprogramma’s - Terminal
-Net zoals bij Linux is de terminal omgeving gebaseerd op Bash (Bourne Again Shell) en kan je gelijkaardige commando's uitvoeren
+Net zoals bij Linux is de terminal omgeving gebaseerd op Bash (Bourne Again Shell) en kan je dezelfde commando's uitvoeren
 
-**FreeBSD**
+### Windows commando's voorbeeld
 
-Gelijkaardig aan Linux en Mac OS X
+We gaan het gebruik van deze een terminal demonstreren op Windows.  
+Bedoeling is dat we het resultaat van deze oefening achteraf terug gebruiken voor onze eerste oefening met een compiler.  
 
-### Algemene commando's
+#### Windows shell openen
 
-Een zeer kort overzicht van commando die nodig heb om te navigeren en file-manipulatie:
+Afhankelijk van de windows-versie open je via het menu (onder "accessoires" of "administrative tools") het programma CMD
 
-#### Naar een directory gaan
+~~~
+Microsoft Windows [Version 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation.  All rights reserved.
 
-**cd** directorypath:  
-Wijzigen huidige directory  
-**cd ..**  
-1 directory naarboven  
-**cd**  
-naar je home directory  
+C:\Users\A590649>
+~~~
 
-#### Oplijsten van files binnen een directory
+#### Een directory aanmaken
 
-**dir**:  
-directory inhoud Windows  
-**ls**:  
-directory inhoud Mac/Linux  
-**ls -al**:  
-alle bestanden inclusief de verborgen bestanden met extra informatie  
+We kunnen een directory aanmaken:
 
-#### Afdrukken huidige directory
+~~~
+C:\Users\A590649>mkdir een_eerste_programma
 
-**echo %cd%**  
-wat is je huidige directory in Windows
+C:\Users\A590649>dir
+ Volume in drive C is System
+ Volume Serial Number is E687-8D34
 
-**pwd**  
-wat is je huidige directory in Mac/Linux
+ Directory of C:\Users\A590649
 
-#### Aanmaken van een directory
+...
+02/02/2017  14:08    <DIR>          een_eerste_programma
+...
+~~~
 
-**mkdir**  
-Maar een directory aan
+Door het commando dir te typen kunnen we de inhoud zien van de huidige directory
 
-#### Output van een commando
+#### Navigeren door directories
 
-**>>**  
-de output van een commando naar een file afleiden (kan gemakkelijk zijn als je wil loggen naar een file)
-**>**  
-zelfde als vorige commando maar zal toevoegen aan een bestaande file
+Als je deze directory hebt aangemaakt kan je hiernaartoe navigeren via het commando cd (change directory)
 
-**Voorbeeld:**  
-Het commando ```ls -al > hello.txt``` zal bijvoorbeeld een file hello.txt maken met de inhoud van een directory
+~~~
+C:\Users\A590649>cd een_eerste_programma
 
-### Een C-programma op command-line bouwen (voorbereiding voor Windows-gebruikers)
+C:\Users\A590649\een_eerste_programma>cd ..
 
-**Stap 1:** **Download** de **zip**-file (https://www.dropbox.com/s/8ooj6ab89vj92dm/cursus_mcu_tools.zip?dl=0)  
+C:\Users\A590649>
+~~~
 
-**Stap 2:** Unzip deze file en je krijgt een directory structuur (binnen een folder dist)
+Je kan terug naar een hogere directory navigeren door cd te laten volgen door ..
 
-![](../../pictures/tooling_for_windows.png)
+#### Directories verwijderen
 
-**Stap 3:** Maak een C-file in een teksteditor (dist\\tools\\Notepad++Portable\\Notepad++Portable.c) en bewaar die ergens op je harde schijf
+Een directory kan verwijderd worden door het commando rmdir (deze mag wel geen files bevatten)
+
+~~~
+C:\Users\A590649>rmdir een_eerste_programma
+
+C:\Users\A590649>cd een_eerste_programma
+The system cannot find the path specified.
+~~~
+
+Als je nadien naar deze directory probeert te gaan krijg je een boodschap dat deze directory niet bestaat.
+
+#### Files in een directory
+
+We maken opnieuw een directory aan, deze keer navigeren we ook naar deze directory.
+
+~~~
+C:\Users\A590649>mkdir mijn_eerste_programma
+
+C:\Users\A590649>cd mijn_eerste_programma
+
+C:\Users\A590649\mijn_eerste_programma>dir
+ Volume in drive C is System
+ Volume Serial Number is E687-8D34
+
+ Directory of C:\Users\A590649\mijn_eerste_programma
+
+02/02/2017  14:15    <DIR>          .
+02/02/2017  14:15    <DIR>          ..
+               0 File(s)              0 bytes
+               2 Dir(s)  123.086.462.976 bytes free
+~~~
+
+Vervolgens maken we via een texteditor (notepad++ zoals eerder besproken) aan en copieren we volgende inhoud:
 
 ~~~c
 #include <stdio.h>
 
 int main()
 {
-	printf("Hello World");
+	printf("Hello World\n");
 	return 0;
 }
 ~~~
 
-**Stap 4:** Open de command-line tool en navigeer naar de plaats waar de file staat.
+en bewaren we deze file onder de eerder aangemaakte directory onder de naam hello.c.
 
-**Stap 5:** Voor de volgende command-line instructies uit (uitleg over C volgt later)
+Nadien kijken we dit na met het DIR-commando:
 
 ~~~
-E:\>gcc hello.c -o hello.exe
+C:\Users\A590649\mijn_eerste_programma>dir
+ Volume in drive C is System
+ Volume Serial Number is E687-8D34
 
-E:\>dir
- De volumenaam van station E is VBOX_Desktop
- Het volumenummer is 0000-0801
+ Directory of C:\Users\A590649\mijn_eerste_programma
 
- Map van E:\
-
-21/01/2016  12:58                75 hello.c
-21/01/2016  13:00            68,400 hello.exe
-21/01/2016  12:44    <DIR>          temp
-               2 bestand(en)           72,571 bytes
-               1 map(pen)  141,787,025,408 bytes beschikbaar
-
-E:\>hello.exe
-Hello World
-E:\>
+02/02/2017  14:25    <DIR>          .
+02/02/2017  14:25    <DIR>          ..
+02/02/2017  14:24                77 hello.c
+               2 File(s)            471 bytes
+               2 Dir(s)  123.097.833.472 bytes free
 ~~~
 
-![](../../pictures/creating_a_c_file_with_notpadpp.png)
+#### Inhoud van een file tonen op command-line
 
+De inhoud van deze file kan men ook op de command-line afdrukken door het commmando type
 
-### Een C-programma op command-line bouwen (GCC)
-
-GCC is een command-line-tool die c-code kan omzetten naar een uitvoerbaar bestand
-
-Compilen (van een C-programma) wordt uitgevoerd in 2 stappen:
-
-* **Compileren:**  
-  De C-files worden elk omgezet naar een object-file (extensie .o).  
-  Hier wordt de C-code reeds vertaald naar machine-taal
-* **Linken:**  
-  Hier worden 1 of meerdere object files met elkaar verbonden (en eventueel gelinkt aan externe libraries)
-
-> **Belangrijke bemerking:**  
-> Later gaan we hier veel verder op ingaan, momenteel moeten we enkel weten wat je moet doen om een éénvoudig C-programma om te zetten naar een uitvoerbaar bestand.
-
-
-**Stap 1: code schrijven**  
-Je schrijft je code naar een bestand en geeft dit een naam met de extensie C.  
-
-```c
+~~~
+C:\Users\A590649\mijn_eerste_programma>type hello.c
 #include <stdio.h>
 
 int main()
 {
-	printf("!!!Hello World!!!");
-    return 0;
+        printf("Hello World\n");
+        return 0;
 }
-```
+C:\Users\A590649\mijn_eerste_programma>t
+~~~
 
-**Stap 2: compileren**  
-Je **compileert** deze C-code naar een object-file (extensie .o).  
+#### Copieren van een file
 
-Deze **object-file** is niet het uiteindelijk uitvoerbaar bestand, maar eerder een tussenbestand dat je toelaat van meerdere C-files in bouwen (build) van een programma.  
+Je kan ook een file via de terminal copieren via het commando COPY
 
-Een object-file bevat reeds de machine instructies van je programma, maar moet in de volgende stap nog gelinkt worden aan libraries (en eventueel andere objects).  
-Binnen een paar lessen komen we hier nog uitgebreider op terug als we grotere programma's maken.
+~~~
+C:\Users\A590649\mijn_eerste_programma>copy hello.c hello.txt
+        1 file(s) copied.
 
+C:\Users\A590649\mijn_eerste_programma>dir
+ Volume in drive C is System
+ Volume Serial Number is E687-8D34
 
-```{.sh}
-$ ls
-hello.c
-$ gcc -c hello.c
-$ ls
-hello.c  hello.o
-```
+ Directory of C:\Users\A590649\mijn_eerste_programma
 
-**Stap 3: linken**  
-Van 1 of meerdere object-files en libraries kan je een uitvoerbaar bestaand (programma) maken door te **linken**.  
-Voorlopig werken we met maar 1 source file dus onderstaande command-line volstaat.
+02/02/2017  14:34    <DIR>          .
+02/02/2017  14:34    <DIR>          ..
+02/02/2017  14:24                77 hello.c
+02/02/2017  14:24                77 hello.txt
+               2 File(s)            154 bytes
+               2 Dir(s)  123.095.646.208 bytes free
+~~~
 
-```{.sh}
-$ gcc hello.o -o hello
-```
+Gezien we deze niet nodig hebben voor het vervolg van onze cursus gebruiken we het DEL-commando om deze file te verwijderen
 
-**Uitvoeren:**  
-Daarna kan je het programma uitvoeren door de naam te typen  
-(voorafgegaan door ./  om aan te duiden dat het bestand in deze diretory staat, in Windows dit is .\\)
+~~~
+C:\Users\A590649\mijn_eerste_programma>del hello.txt
 
-```{.sh}
-$ ./hello
-!!!Hello World!!!
-$
-```
+C:\Users\A590649\mijn_eerste_programma>dir
+ Volume in drive C is System
+ Volume Serial Number is E687-8D34
 
-> **Bemerking:**  
-> In Windows gebruik je voor een uitvoerbaar bestand de extensie .exe, dus het laaste commando is dan ```gcc hello.o -o hello.exe```
+ Directory of C:\Users\A590649\mijn_eerste_programma
 
-### Linken en compilen tegelijk met GCC  
+02/02/2017  14:35    <DIR>          .
+02/02/2017  14:35    <DIR>          ..
+02/02/2017  14:24                77 hello.c
+               1 File(s)             77 bytes
+               2 Dir(s)  123.094.589.440 bytes free
 
-Je kan gcc ook tegelijkertijd laten compileren en linken zodat je direct een uitvoerbaar bestand kijkt:
+C:\Users\A590649\mijn_eerste_programma>
+~~~
 
-```{.sh}
-$ ls
-hello.c
-$ gcc hello.c -o hello
-$ ls
-hello.c  hello
-$ ./hello
-!!!Hello World!!!
-$
-```
+#### Output van een file afleiden
 
-Dit is een veréénvoudigde manier die we de eerstvolgende lessen gaan gebruiken.  
-Het vorige voorbeeld is echter belangrijk om te beseffen dat achter het bouwen van een C-programmen hierachter verschillende processen zitten zoals:
+We kunnen de output van een programma (of een commando zoals DIR) afvangen en omleiden naar een andere file zoals hieronder.
 
-* Compilen
-* Linken
-* Preprocessing
-* ...
+~~~
+C:\Users\A590649\mijn_eerste_programma>dir > een_file
 
-We gaan in de volgende hoofdstukken deze verschillende bouwstenen/processen verder uitleggen en verdiepen.
+C:\Users\A590649\mijn_eerste_programma>type een_file
+ Volume in drive C is System
+ Volume Serial Number is E687-8D34
+
+ Directory of C:\Users\A590649\mijn_eerste_programma
+
+02/02/2017  14:50    <DIR>          .
+02/02/2017  14:50    <DIR>          ..
+02/02/2017  14:50                 0 een_file
+02/02/2017  14:24                77 hello.c
+               2 File(s)             77 bytes
+               2 Dir(s)  123.089.620.992 bytes free
+
+C:\Users\A590649\mijn_eerste_programma>del een_file
+~~~
+
+Met dit voorbeeld sluiten we deze oefening af, verwijder deze folder voorlopig nog niet gezien je dit nog nodig gaat hebben in het volgende deel...
+
