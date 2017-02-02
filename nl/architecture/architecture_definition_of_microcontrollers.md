@@ -12,10 +12,11 @@ Een microcontroller is:
 * Met de bedoeling een **controle-element** in de **hardware** in te bouwen  
 (controle-element kan een sturing zijn maar ook gewoon een data-logging of sampling)  
 
-#### ?Microcontroller == computer?
-Je kan een microcontroller programmeren met software net zoals een computer, is dit dan het zelfde als een computer?
+Je kan een microcontroller programmeren met software net zoals een computer.  
+Is dit dan het zelfde als een **computer?**
 
 #### Een microcontroller is een ... computer ...
+
 Ja dus, een **MCU** (een afkorting die we vanaf nu regelmatig gebruiken) bevat de typische elementen van een computer-systeem:  
 
 * CPU (processor) +- 1-20 MHz
@@ -26,7 +27,7 @@ Ja dus, een **MCU** (een afkorting die we vanaf nu regelmatig gebruiken) bevat d
 
 Een MCU Is programmeerbaar met **dezelfde programmeer-talen** die we gebruiken voor een **computer**(soms met wat beperkingen) zoals in ons geval C (of C++).
 
-#### Een microcontroller is een ... computer met zeer veel IO-functionaliteiten
+#### Een microcontroller is ook een ... IC
 
 Een klassieke microcontroller kan je voorstellen als een typische geïntegreerde schakeling zoals bv. de AVR Atmega328P hieronder .
 
@@ -63,12 +64,12 @@ Een MCU is dus in dat opzicht (relatief gezien) niet te vergelijken met een gewo
     * 20 Mhz is ook niet veel tov
 * Geen operating system die hardware voor je beheert
 
-Dus niet ten onrechte **MICRO**CONTROLLER
+Dus niet ten onrechte **MICRO**!!
 
 >Opmerking:
 >Wanneer we spreken over traag en klein is dat natuurlijk relatief als je dit vergelijkt met computers van 10 jaar terug.
 
-#### Een microcontroller is een "embedded" computer ... (gebruik)
+#### Verschil tussen MCU en computer (gebruik)
 
 Naast dit schaalverschil ligt het **essentiële verschil** (tussen een PC en MCU) eigenlijk vooral in het **gebruik**:  
 
@@ -87,7 +88,8 @@ Een computer is dus in principe:
 
 Een microntroller kan in dat opzicht niet rechtstreeks gebruikt worden als een "consumer"-apparaat.  
 
-Een MCU heeft als doel **ingebed** (embedded) te worden in **specifieke**/gespecialiseerde elektronische (en/of mechanische) **toepassingen**.
+Een MCU heeft als doel **geintegreerd** (embedded) te worden in **specifieke**/gespecialiseerde elektronische (en/of mechanische) **toepassingen**.  
+Meestal met de bedoeling iets aan te sturen of te meten...
 
 Zoals eerder vermeld heeft een MCU om die redenen beschikking tot low-level interfaces die het toelaten elektrische signalen te lezen en te genereren vanuit software.
 
@@ -101,26 +103,24 @@ Het woord embedded dekt **vele ladingen** , echter in essentie komt het er op ne
 
 Dit komt vandaag de dag neer op zowat alle elektronische apparatuur die wordt aangestuurd door een controle-element zoals:
 
-   * Huishoud-apparatuur: Wasmachines, TV's, Koffiezet-apparaten
-   * Robots, Drones, 3D Printers
-   * Industriële toepassingen en machines
-   * Auto's
-   * Dataloggers
-   * Internet Of Things en/of sensornetwerken
-   * M2M (Machine to Machine)
-   * USB toepassingen
-   * Betaalterminals  
-   * Sensornetwerken  
-   ...
+* Huishoud-apparatuur: Wasmachines, TV's, Koffiezet-apparaten
+* Robots, Drones, 3D Printers
+* Industriële toepassingen en machines
+* Auto's
+* Dataloggers
+* Internet Of Things en/of sensornetwerken
+* M2M (Machine to Machine)
+* USB toepassingen
+* Betaalterminals  
+* Sensornetwerken  
+...
 
 ##### Raspberry Pi, Beaglebone, OLinuXino, Cubieboard, ...  
-
 Het verschil tussen een computer en een microcontroller is tegenwoordig wel wat aan het vervagen ...   
 De laatste jaren komen - mede door de vooruitgang in mobiele technologieën - zeer krachtige SOC-systemen op de markt (dikwijls gebaseerd op **ARM**) die een volwaardig **OS** (zoals Linux of Android) kunnen draaien.   
 
 Net als de MCU bestaan deze **computers** uit een **SOC** waar de centrale componenten (CPU, RAM, ROM, hardware-controllers, ...) in 1 chip geïntegreerd zitten.  
-
-Dit laat het toe van **zeer compacte** en kleine **computers** te maken, voorbeelden hiervan vind je in nieuwe **mini-computers** op de markt (gebaseerd op het SOC-principe) zoals de **Raspberry PI, BeagleBone, ** e.a. ...   
+Dit laat het toe van **zeer compacte** en kleine **computers** te maken, voorbeelden hiervan vind je in nieuwe **mini-computers** op de markt (gebaseerd op het SOC-principe) zoals de **Raspberry PI, BeagleBone,** e.a. ...   
 
 ![](../../pictures/intro_beaglebone_picture_vs.jpg) ![](../../pictures/intro_rpi_picture.png)
 

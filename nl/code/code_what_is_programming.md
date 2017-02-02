@@ -46,7 +46,7 @@ Binnen zo een programma zijn er verschillende soorten **instructies** die door e
 
 Hoe deze instructies er uitzien voor cpu/processor wordt uitgedrukt aan de hand van een **instructieset**.   
 
-De beschikbare **instructies** (en hun representatie) verschillen van processor tot processor, de instructies die worden gebruikt voor x86 (klassieke computer) zijn bijvoorbeeld niet te vergelijken met die voor een microcontroller (bijvoorbeeld AVR) worden gebruikt. 
+De beschikbare **instructies** (en hun representatie) verschillen van processor tot processor, de instructies die worden gebruikt voor x86 (klassieke computer) zijn bijvoorbeeld niet te vergelijken met die voor een microcontroller (bijvoorbeeld AVR) worden gebruikt.
 
 We gaan hier (nog niet) over uitweiden, het enige dat we nu onthouden is dat zulk een instructie van een programma bestaat dit uit 2 componenten:
 
@@ -55,7 +55,7 @@ De code die de instructie voorstelt (bestaat uit 1 of meer bytes), informeert de
 
 * **Operand:**  
 De operand is de data die bij deze de instructie hoort (register-adress, geheugen-adres, ...),  
-Het kunnen meerdere zijn en bestaan uit 1 of meerdere bytes. 
+Het kunnen meerdere zijn en bestaan uit 1 of meerdere bytes.
 
 Schematisch kan een instructie er als volgt uit zien (in geval van AVR-instructies):
 ![Assembler instructie](../../pictures/avr_assembler_instruction.png)
@@ -63,9 +63,9 @@ Schematisch kan een instructie er als volgt uit zien (in geval van AVR-instructi
 > later zullen we hier nog over uitweiden als we de AVR-architectuur bestuderen
 
 ###  Programmeertalen: van instructies naar assembler
- 
+
 Een programma is dus eigenlijk een hoop byte-codes en als gevolg niet echt leesbaar door een gebruiker (tenzij je een computer bent of veel hebt geoefend), zelfs in hexadecimale voorstelling.  
- 
+
 Om deze instructies te kunnen beschrijven van uit een leesbare tekst bestaan er wat we noemen **programmeertalen**.
 
 De eerste groep van programmeertalen (die ooit werden geïntroduceerd) is wat we noemen **assembler**.  
@@ -78,7 +78,7 @@ Deze soort van programmeertalen staat zeer dicht bij deze instructies:
 
 Een voorbeeld van zulk een assembler-programma is hieronder beschreven (GNU Assembler voor X86 die de  AT&T syntax volgt):
 
-```{.as}
+```as
 .data
 hello:
         .string "Hello world\n"  # Een stukje constant geheugen
@@ -102,7 +102,7 @@ _start:
 
 Om deze code te **transformeren** of in vakjargon **"compilen"** voer je volgende 2 commando's uit (linux):
 
-```
+```bash
 $ as helloworld.s -o helloworld.o  
 $ ld -s -o helloworld helloworld.o  
 $ ./helloworld  
@@ -114,7 +114,7 @@ $ 0
 Volgende taken worden uitgevoerd:  
 
 * as zijnde het programma dat de assembly transformeert naar "bits en bytes"  
-* ld zijnde het programma dat deze assembly "linkt" met andere object-files (in dit geval slechts 1) 
+* ld zijnde het programma dat deze assembly "linkt" met andere object-files (in dit geval slechts 1)
 * Als je daarna dit programma uitvoert, zie dat dit de tekst "Hello World" uitprint
 * Met het commando $? zie je de return-code (0)  
 
@@ -145,7 +145,7 @@ Ter illustratie zie je hier enkele voorbeelden van hetzelfde programma - printen
 
 #### Voorbeeld in C
 
-```{.c}
+```c
 #include <stdio.h>
 
 int main(int argc, char** argv)
@@ -162,7 +162,7 @@ De transformatie naar een uitvoerbaar bestand van deze code noemen we **compiler
 Dit programma voert het zelfde uit als het bovenstaande assembler-programma.
 Dit programma kan je op een command-line compilen (transformeren naar byte-instructies) en uitvoeren.
 
-```
+```bash
 $ gcc helloworld.c -c helloworld.o
 $ gcc helloworld.o -o helloworld
 $ ./helloworld
@@ -182,7 +182,7 @@ Dit gebeurt ook - zoals bij assembler - in 2 fases:
 
 Een ander voorbeeld van een high-level taal is **Java**, zeer populair in web- en enterprise-development
 
-```{.java}
+```java
 public class HelloWorld {
     public static void main(String[] args) {  
         System.out.println("Welkom in de cursus microcontrollers");
@@ -190,7 +190,7 @@ public class HelloWorld {
 }
 ```
 
-```
+```bash
 $ javac HelloWorld.java
 $ java HelloWorld
 $ Hello World
@@ -198,11 +198,11 @@ $
 ```
 
 Als laatste voorbeeld Python, een andere zeer populaire programmeer-taal
-```{.py}
+```python
 print("hello world")
 ```
 
-```
+```bash
 $ python helloworld.py
 $ Hello World
 $
@@ -211,6 +211,3 @@ $
 ### En verder ...
 
 Vanaf de volgende hoofdstukken gaan verder met de programmeertaal C en gaan we proberen de eerste programma's te schrijven.  
-
-
-

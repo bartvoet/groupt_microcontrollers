@@ -141,12 +141,7 @@ Gelijkaardig aan Linux en Mac OS X
 
 Een zeer kort overzicht van commando die nodig heb om te navigeren en file-manipulatie:
 
-**ls**:  
-directory inhoud Mac/Linux  
-**ls -al**:  
-alle bestanden inclusief de verborgen bestanden met extra informatie  
-**dir**:  
-directory inhoud als je met de Windows-cmd werkt  
+#### Naar een directory gaan
 
 **cd** directorypath:  
 Wijzigen huidige directory  
@@ -155,11 +150,29 @@ Wijzigen huidige directory
 **cd**  
 naar je home directory  
 
-**pwd**  
-wat is je huidige directory in Mac/Linux
+#### Oplijsten van files binnen een directory
+
+**dir**:  
+directory inhoud Windows  
+**ls**:  
+directory inhoud Mac/Linux  
+**ls -al**:  
+alle bestanden inclusief de verborgen bestanden met extra informatie  
+
+#### Afdrukken huidige directory
+
 **echo %cd%**  
 wat is je huidige directory in Windows
 
+**pwd**  
+wat is je huidige directory in Mac/Linux
+
+#### Aanmaken van een directory
+
+**mkdir**  
+Maar een directory aan
+
+#### Output van een commando
 
 **>>**  
 de output van een commando naar een file afleiden (kan gemakkelijk zijn als je wil loggen naar een file)
@@ -179,7 +192,7 @@ Het commando ```ls -al > hello.txt``` zal bijvoorbeeld een file hello.txt maken 
 
 **Stap 3:** Maak een C-file in een teksteditor (dist\\tools\\Notepad++Portable\\Notepad++Portable.c) en bewaar die ergens op je harde schijf
 
-~~~{.c}
+~~~c
 #include <stdio.h>
 
 int main()
@@ -235,7 +248,7 @@ Compilen (van een C-programma) wordt uitgevoerd in 2 stappen:
 **Stap 1: code schrijven**  
 Je schrijft je code naar een bestand en geeft dit een naam met de extensie C.  
 
-```{.c}
+```c
 #include <stdio.h>
 
 int main()
