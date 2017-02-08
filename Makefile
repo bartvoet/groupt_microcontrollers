@@ -7,11 +7,28 @@ CHAPTER_01 += ../orientation/course_conventions.md
 CHAPTER_01 += ../../general/pandoc_page_break.txt
 CHAPTER_01 += ../architecture/architecture_definition_of_microcontrollers.md
 CHAPTER_01 += ../../general/pandoc_page_break.txt
+CHAPTER_01 += ../code/code_what_is_programming.md
+
+CHAPTER_01 += chapter01_tools.md
+CHAPTER_01 += ../../general/pandoc_page_break.txt
+CHAPTER_01 += ../tools/tools_editors_and_ides.md
+CHAPTER_01 += ../../general/pandoc_page_break.txt
 CHAPTER_01 += ../tools/tools_command_getting_started.md
 CHAPTER_01 += ../../general/pandoc_page_break.txt
+CHAPTER_01 += ../tools/tools_command_getting_started_windows.md
+CHAPTER_01 += ../../general/pandoc_page_break.txt
+CHAPTER_01 += ../tools/tools_command_getting_started_linux.md
+CHAPTER_01 += ../../general/pandoc_page_break.txt
+CHAPTER_01 += ../tools/tools_compilation_getting_started.md
+CHAPTER_01 += ../../general/pandoc_page_break.txt
+CHAPTER_01 += ../tools/tools_compilation_installing_windows.md
+CHAPTER_01 += ../../general/pandoc_page_break.txt
+CHAPTER_01 += ../tools/tools_compilation_installing_linux_and_mac.md
+CHAPTER_01 += ../../general/pandoc_page_break.txt
+CHAPTER_01 += ../tools/tools_compilation_getting_started_excercise.md
+
 
 CHAPTER_02 += chapter02_getting_started.md
-CHAPTER_02 += ../code/code_what_is_programming.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt
 CHAPTER_02 += ../code/code_c_introduction.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt

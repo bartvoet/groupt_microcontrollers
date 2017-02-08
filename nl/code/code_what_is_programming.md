@@ -1,4 +1,4 @@
-## Introductie in programmeren: van code naar bytes  
+## Wat is programmeren? (van code naar bytes)  
 
 Alvorens van start te gaan met c, een korte **introductie** en/of eerste kennismaking met programmeren.  
 De elementen die we hier bespreken gelden vanzelfsprekend voor C maar zijn natuurlijk ook toepasbaar voor andere (imperatieve) programmeertalen (zoals Java, C++, Python, Ruby, ...).  

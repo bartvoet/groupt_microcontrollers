@@ -269,7 +269,7 @@ Hieronder heb je code om op de setup daaronder (op basis van een atmega168p) de 
 > **Let wel**:  
 Dit is enkel ter voorbeeld, het werken met c-code en meer specifiek op MCU zal snel duidelijk worden in de volgende hoofdstukken.
 
-```
+```c
 #include <avr/io.h>
 #include <util/delay.h>
 

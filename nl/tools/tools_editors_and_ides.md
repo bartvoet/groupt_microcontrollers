@@ -1,4 +1,4 @@
-## Tools: werken met tekst-editors
+## Werken met tekst-editors
 
 Om te programmeren (zeker in C of Python) heb je een (goede) tekst-editor nodig.  
 Zo'n tekst-editor laat je toe een programma te schrijven en dit op te slagen als een tekst-file.  
@@ -43,11 +43,14 @@ Voor Linux heb je heel veel keuze:
 * Leaf-pad
 * ...
 
+![](../../pictures/gedit.png)
+![](../../pictures/atom.png)
+
 Elke linux-distribtrutie bevat wel 1 van deze tekst-editors, deze tools zijn allemaal vergelijkbaar op gebied van functionaliteit met elkaar.
 
 ### Mac
 
-Een aantal populaire editors op mac zijn 
+Een aantal populaire editors op mac zijn
 
 * TextMate
 * TextWrangler
@@ -80,4 +83,3 @@ Deze zijn zeer krachtige editors die wel een zekere leercurve hebben (dus als je
 
 > **Windows:**  
 > Deze command-line-editors zijn ook beschikbaar in Windows via Cygwin of Mingw (later meer hierover)
-
