@@ -134,7 +134,7 @@ CHAPTER_12 += ../code/code_python_serial.md
 
 pagebreak = ../../general/pandoc_page_break.txt
 
-CHAPTERS = part01_minimal_knowledge.md $(pagebreak) $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part02_foundation.md $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) $(CHAPTER_08) $(CHAPTER_09) $(CHAPTER_10) $(CHAPTER_11) $(CHAPTER_12)
+CHAPTERS = part01_minimal_knowledge.md $(pagebreak) $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) #part02_foundation.md $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) $(CHAPTER_08) $(CHAPTER_09) $(CHAPTER_10) $(CHAPTER_11) $(CHAPTER_12)
 
 graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
 grap_convert = gvpr -c '$(1)' ./graphviz/$(2).dot | dot -Tpng -o ./pictures/$(3).png
@@ -150,9 +150,9 @@ all:
 
 	cd nl/chapter && pandoc ../title.txt $(CHAPTERS) -o ../../dist/cursus.html  --self-contained -s -S --toc --toc-depth=2	-c ../../github-pandoc.css
 
-	cd nl/chapter && pandoc -S ../title.txt $(CHAPTERS) --latex-engine=xelatex -o ../../dist/cursus.pdf 	-c ../../github-pandoc.css
+	# cd nl/chapter && pandoc -S ../title.txt $(CHAPTERS) --latex-engine=xelatex -o ../../dist/cursus.pdf 	-c ../../github-pandoc.css
 
-	zip dist/cursus.zip dist/cursus.epub dist/cursus.html dist/cursus.pdf
+	zip dist/cursus.zip dist/cursus.epub dist/cursus.html #dist/cursus.pdf
 
 labos:
 	cd nl/labo && pandoc  \
