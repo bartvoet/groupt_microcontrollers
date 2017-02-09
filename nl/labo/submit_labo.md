@@ -1,4 +1,17 @@
-De opdrachten C kunnen toegevoegd worden dooe naar het betreffende labo te gaan  
+## Labo's indienen via Toledo
+
+Voor de meeste labo's dien je alleen maar code in te dienen (source-files, header-files, build-files), met als uitzondering soms een foto van één van de labo's
+
+### Waar de labo's te vinden
+
+De Labo's zijn iedere week te vinden onder de sectie "Opdrachten".  
+De oplossing voor dit labo dien je te submitten voor de aangegeven einddatum (meestal 2-3 weken na datum van labo).  
+
+Je kan dit trouwens zoveel keer opnieuw submitten als je wenst (voor de einddatum), dus probeer eerder vroegtijdig te commiten (het is de laatste ingave die telt).
+
+### Hoe deze indienen?
+
+De opdrachten C kunnen toegevoegd worden dooe naar het betreffende labo te gaan.  
 Op deze pagina, druk je op de knop “Bladeren in mijn computer”
 
 ![](../../pictures/toledo_send_1.png)
