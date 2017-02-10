@@ -1,5 +1,10 @@
 ## Een C-programma op command-line compileren (GCC)
 
+Nu de tools zijn geinstalleerd kunnen we starten met ons eerste programma te compilen.  
+We kunnen hier verder werken met de C file die we hebben gebruikt tijdens het "command-line"-hoofdstuk.  
+
+> De code wordt in het volgende hoofdstuk verder verklaard
+
 ### Je eerste programma compilen
 
 **Stap 1: code schrijven**  
@@ -24,7 +29,7 @@ Een object-file bevat reeds de machine instructies van je programma, maar moet i
 Binnen een paar lessen komen we hier nog uitgebreider op terug als we grotere programma's maken.
 
 
-```{.sh}
+```bash
 $ ls
 hello.c
 $ gcc -c hello.c
@@ -36,7 +41,7 @@ hello.c  hello.o
 Van 1 of meerdere object-files en libraries kan je een uitvoerbaar bestaand (programma) maken door te **linken**.  
 Voorlopig werken we met maar 1 source file dus onderstaande command-line volstaat.
 
-```{.sh}
+```bash
 $ gcc hello.o -o hello
 ```
 
@@ -44,7 +49,7 @@ $ gcc hello.o -o hello
 Daarna kan je het programma uitvoeren door de naam te typen  
 (voorafgegaan door ./  om aan te duiden dat het bestand in deze diretory staat, in Windows dit is .\\)
 
-```{.sh}
+```bash
 $ ./hello
 !!!Hello World!!!
 $
@@ -57,7 +62,7 @@ $
 
 Je kan gcc ook tegelijkertijd laten compileren en linken zodat je direct een uitvoerbaar bestand kijkt:
 
-```{.sh}
+```bash
 $ ls
 hello.c
 $ gcc hello.c -o hello

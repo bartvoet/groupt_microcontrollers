@@ -2,10 +2,10 @@
 
 Tot nu toe hebben we geleerd:
 
-* Data in te lezen uit een console (integers)
-* Deze data bij te houden in een variabele
-* Bewerkingen te doen hiermee
-* Data naar een console te schrijven (integers)
+* Data naar een console te schrijven (met printf)
+* Data in te lezen uit een console (met scanf)
+* Deze data bij te houden in het geheugen (variabelen)
+* Bewerkingen te doen hiermee (rekenkundige operatoren)
 
 We gaan in deze les bekijken hoe dat we een programma intelligenter kunnen maken door het zelf beslissingen te laten nemen
 
@@ -51,15 +51,16 @@ Er bestaan binnen de syntax van C 6 relationele operatoren:
 
 Een relationele operator geeft als resultaat een integer, weliswaar met 2 mogelijke waarden.
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     int is_5_smaller_compared_to_10 = 5 < 10;
     int is_5_bigger_compared_to_10 = 5 > 10;
     printf("%i\n",is_5_smaller_compared_to_10);
     printf("%i\n",is_5_bigger_compared_to_10);
+    return 0;
 }
 ```
 Als we deze code daarna uitvoeren
@@ -80,10 +81,10 @@ zien we bij het uitvoeren van deze code dat :
 
 Net zoals mathematische expressies kan je deze inline in een functie (of andere statements gebruiken).
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     printf("%i\n",(5 < 10));
     printf("%i\n",(5 > 10));
@@ -107,10 +108,10 @@ Een equality-operator bestaat uit 2 maal ```=``` omdat dit symbaal (1 maal) - zo
 Dus onthoudt **```=``` is niet hetzelfde als ```==```**.
 Dit is een veel voorkomende bug zelfs in professionele software, later bij condities gaan we dit nog verder bekijken.
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
 	int a=5;
 	int b=6;
@@ -131,10 +132,10 @@ Zoals je ziet geeft dit als resulaat ipv 0 een 6.
 ### Voorbeeld: ```!=``` geeft het omgekeerde resultaat van ```==```
 
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
 	printf("%i!=%i geeft %i\n",5,5,(5!=5));
 	printf("%i==%i geeft %i\n",5,5,(5==5));
@@ -145,7 +146,7 @@ void main()
 
 ```
 
-```
+```bash
 $ gcc not_equal.c -o not_equal
 $ ./not_equal
 $ 5!=5 geeft 0
@@ -159,20 +160,21 @@ $
 
 De >= en <= doen hetzelfde dan > en <, maar geven 1 terug als beide operanden gelijk aan elkaar zijn.
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
 	printf("%i<=%i geeft %i\n",5,5,(5<=5));
 	printf("%i<=%i geeft %i\n",5,6,(5<=6));
 
 	printf("%i>=%i geeft %i\n",5,5,(5>=5));
 	printf("%i>=%i geeft %i\n",5,6,(5>=6));
+  return 0;
 }
 ```
 
-```
+```bash
 $ gcc equal_gt_st.c -o equal_gt_st
 $ ./equal_gt_st
 $ 5<=5 geeft 1
@@ -200,31 +202,31 @@ We gaan direct van start met een aantal voorbeelden.
 
 We gebruiken hier als voorbeeld een programma dat een getal inleest en iets afdrukt op het scherm indien het een even getal is.
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     int input;
     printf("Gelieve een getal in te geven: ");
     scanf("%i",&input);
     if((input % 2) == 0) {
-	printf("Het getal %i is even",input);
+      printf("Het getal %i is even",input);
     }
-
+    return 0;
 }
 ```
 
 Het if-stament zal er voor zorgen dat alle code die tussen accolades staat wordt uitgevoerd enkel en alleen als de logische expressie waar is (verschillend van 0)
 
-> **Belangrijke nota:  **
+> **Belangrijke nota:**  
 > Ondanks het feit dat een logische expressie garandeert dat "true" naar 1 wordt vertaald en "false" naar 0 wordt vertaald, zal een if-statement (en aanverwanten) alles wat niet 0 is als "true" interpreteren.
 
 Als je het programma runt en een positief getal in geeft dan zal het programma antwoorden.
 
-```
+```bash
 $ gcc is_even.c -o is_even
-$ ./is_even.c
+$ ./is_even
 $ Gelieve een getal in te geven:
 $ 4
 $ Het getal 4 is even
@@ -232,8 +234,8 @@ $ Het getal 4 is even
 
 Als je hetzelfde opnieuw uitvoert maar dan met een oneven getal krijgt je niets als antwoord.
 
-```
-$ ./is_even.c
+```bash
+$ ./is_even
 $ Gelieve een getal in te geven:
 $ 3
 $
@@ -243,7 +245,7 @@ Het is wel een beetje ongelukkig dat het programma niets afdrukt wanneer het get
 
 Dit zouden we kunnen oplossen door in het programma een **2de if-statement** toe te voegen (waar we naar de omgekeerde conditie testen) maar daarvoor hebben we een betere oplossing.  
 
-> **Belangrijke nota:  **  
+> **Belangrijke nota:**       
 > Een goede programmeur is naast verstandig echter ook lui en dus zoeken we naar de meest optimale oplossing.
 
 ### Voorbeeld: "else"-clause
@@ -256,19 +258,20 @@ De statements die binnen deze clausule binnen de haakjes te voorschijn komen, wo
 
 We herschrijven als gevolg hiervan het programma
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     int input;
     printf("Gelieve een getal in te geven: ");
     scanf("%i",&input);
     if((input % 2) == 0) {
-	printf("Het getal %i is even",input);
+      printf("Het getal %i is even",input);
     } else {
-       printf("Het getal %i is oneven",input);
+      printf("Het getal %i is oneven",input);
     }
+    return 0;
 }
 ```
 Het programma zal het zelfde resultaat als het vorige, zoals je hieronder ziet...
@@ -304,10 +307,10 @@ Bedoeling is dat het programma 4 mogelijke zinnen afdrukt:
 
 We wijzigen ons programma door binnen de 2 verschillende clausules (if en else) een andere te plaatsen
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     int input;
     printf("Gelieve een getal in te geven: ");
@@ -325,12 +328,13 @@ void main()
     		printf("Het getal %i is een negatief oneven getal",input);
         }
     }
+    return 0;
 }
 ```
 
 Dit programma uitvoeren geeft ons het resultaat dat we wensen.
 
-```{.c}
+```c
 $ gcc check_pair_positive_and_negative.c -o check_pair_positive_and_negative.
 $ ./check_pair_positive_and_negative.
 $ Gelieve een getal in te geven:
@@ -344,10 +348,10 @@ $
 
 Aan dit programma is echter nog iets fout, wat als we het getal 0 ingeven?
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     int input;
     printf("Gelieve een getal in te geven: ");
@@ -365,6 +369,7 @@ void main()
     		printf("Het getal %i is een negatief oneven getal",input);
         }
     }
+    return 0;
 }
 ```
 
@@ -381,10 +386,10 @@ Er is nog een 3de soort clausule die je kan toevoegen namelijk "else if"
 * Men kan meerdere "if else"-clausules tussen de "if-" en "else-"clausules plaatsen
 * Maar wel maar 1 "if"- en 1 "else"-clausele (waarbij if verplicht is en else optioneel)
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     int input;
     printf("Gelieve een getal in te geven: ");
@@ -404,6 +409,7 @@ void main()
     		printf("Het getal %i is een negatief oneven getal",input);
         }
     }
+    return 0;
 }
 ```
 
@@ -437,10 +443,10 @@ Tot nog toe hebben we een if-statement enkel met logische expressies gebruikt.
 Een if-statement kan echter ook met getallen of mathematische expressies werken  
 (die een integer terug geven) zoals het voorbeeld hieronder
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
      if(5 + 5) {
     	 printf("hello\n");
@@ -448,6 +454,7 @@ void main()
      if(5 - 5) {
     	 printf("Deze statement print niet af\n");
      }
+     return 0;
 }
 ```
 
@@ -523,10 +530,10 @@ In dit programma voeren we 2 wijzigingen uit:
 * ((input % 2) == 0) wijzigen we naar !(input % 2)
 * (input == 0) wijzigen we naar !input
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     int input;
 
@@ -548,6 +555,7 @@ void main()
     		printf("Het getal %i is een negatief oneven getal",input);
         }
     }
+    return 0;
 }
 ```
 
@@ -588,10 +596,10 @@ $
 We bouwen voort op hetzelfde programma en vervangen de geneste statements door &&
 Om het programma overzichtelijk te maken houden we de testen bij in een variabele.
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     int input;
     int number_is_pair;
@@ -614,6 +622,7 @@ void main()
     } else {
     	printf("Het getal %i is een negatief oneven getal",input);
     }
+    return 0;
 }
 ```
 
@@ -621,10 +630,10 @@ void main()
 
 Voor het volgende deel schrijven we een programma dat nakijkt of een getal zich tussen 2 andere getallen bevindt.
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     int first,second;
 
@@ -639,14 +648,15 @@ void main()
     } else {
     	printf("beide getallen zijn positief");
     }
+    return 0;
 }
 ```
 ### Voorbeeld: Alles tesamen
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
     int first,second,test;
 
@@ -669,6 +679,7 @@ void main()
     } else {
     	printf("Getal %i ligt niet tussen %i en %i",test,first,second);
     }
+    return 0;
 }
 ```
 
@@ -687,10 +698,10 @@ We starten met een programma:
 * Dat een **vermenigvuldigings-tabel** afdrukt
 * Op **basis** van een **getal** dat de gebruiker **ingeeft**
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main(void) {
+int main() {
   int number_to_multiply,i;
   printf("Gelieve het basis-nummer in te geven voor de tafel: \n");
   scanf("%i",&number_to_multiply);
@@ -700,13 +711,14 @@ void main(void) {
     printf("%i * %i = %i\n",i,number_to_multiply,(i * number_to_multiply) );
     i=i+1;
   }
+  return 0;
 }
 ```
 
 * Dit programma zal de statements binnen de while-statement **blijven uitvoeren zolang i kleiner is dan 10**.  
 * **"i"** wordt **telkens verhoogt met 1** met het gevolg dat de vermenigvulding **9 maal** wordt afgedrukt.
 
-```
+```bash
 $ gcc multiplication.c -o multiplication
 $ ./multiplication
 $ Gelieve het basis-nummer in te geven voor de tafel:
@@ -722,8 +734,8 @@ $ 3 * 5 = 15
 Je kan deze loops ook in elkaar nesten (zoals we reeds bij de if's hebben gezien).  
 We wijzigen het voorgaande programma en drukken alle tafels af (geen input meer vereist).    
 
-```{.c}
-void main(void) {
+```c
+int main() {
 	int j,i;
 
 	i=1;
@@ -735,6 +747,7 @@ void main(void) {
 		}
 		i=i+1;
 	}
+  return 0;
 }
 
 ```
@@ -747,10 +760,10 @@ We gebruikten voor de vergelijking de expressie ```i < 10```, je kan dit ook wij
 > Welke optie je gebruikt is een kwestie van leesbaarheid, het hangt af van het geval (zoals we later bij de for-loop and arrays gaan zien).  
 
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main(void) {
+int main() {
 	int j,i;
 
 	i=1;
@@ -762,6 +775,7 @@ void main(void) {
 		}
 		i=i+1;
 	}
+  return 0;
 }
 
 ```
@@ -772,10 +786,10 @@ Je kan ook een verkorte versie gebruiken van het statment i=i+1, namelijk i++.
 Dit is een unitaire operator (1 operand) die na het getal komt.  
 We komen hier later nog op terug want er zijn meer varianten hierop.  
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main(void) {
+int main() {
 	int j,i;
 
 	i=1;
@@ -787,6 +801,7 @@ void main(void) {
 		}
 		i++;
 	}
+  return 0;
 }
 
 ```
@@ -795,38 +810,37 @@ void main(void) {
 
 Een laaste voorbeeld herneemt het voorbeeld dat we eerder hebben gezien en combineert een complexe logische expressie met een while loop.
 
-```{.c}
+```c
 #include <stdio.h>
 
-void main()
+int main()
 {
-    int first,second,test;
+	int first, second, test;
 
-    printf("Gelieve een getal in te geven: ");
-    scanf("%i",&first);
+	printf("Gelieve een getal in te geven: ");
+	scanf("%i", &first);
 
-    printf("Gelieve een 2de getal in te geven: ");
-    scanf("%i",&second);
+	printf("Gelieve een 2de getal in te geven: ");
+	scanf("%i", &second);
 
-    printf("Gelieve een test-getal in te geven: ");
-    scanf("%i",&test);
-	while( ((test <= first) &&  (test >= second))
-    	||
-		((test >= first) &&  (test <= second))
-    ) {
-    	        printf("Getal %i ligt tussen %i en %i\n",test,first,second);
+	printf("Gelieve een test-getal in te geven: ");
+	scanf("%i", &test);
+	while (((test <= first) && (test >= second))
+			|| ((test >= first) && (test <= second))) {
+		printf("Getal %i ligt tussen %i en %i\n", test, first, second);
 
 		printf("Gelieve een getal in te geven: ");
-		scanf("%i",&first);
+		scanf("%i", &first);
 
 		printf("Gelieve een 2de getal in te geven: ");
-		scanf("%i",&second);
+		scanf("%i", &second);
 
 		printf("Gelieve een test-getal in te geven: ");
-		scanf("%i",&test);
+		scanf("%i", &test);
 
 	}
-   	printf("Getal %i ligt niet tussen %i en %i, programma eindigt nu\n",test,first,second);
+	printf("Getal %i ligt niet tussen %i en %i, programma eindigt nu\n", test, first, second);
 
+	return 0;
 }
 ```
