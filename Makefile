@@ -152,7 +152,7 @@ all:
 
 	cd nl/chapter && pandoc ../title.txt $(CHAPTERS) -o ../../dist/cursus.html  --self-contained -s -S --toc --toc-depth=2	-c ../../github-pandoc.css
 
-	# cd nl/chapter && pandoc -S ../title.txt $(CHAPTERS) --latex-engine=xelatex -o ../../dist/cursus.pdf 	-c ../../github-pandoc.css
+	wkhtmltopdf dist/cursus.html dist/cursus.pdf 
 
 	zip dist/cursus.zip dist/cursus.epub dist/cursus.html #dist/cursus.pdf
 
