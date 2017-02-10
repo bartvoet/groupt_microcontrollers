@@ -39,8 +39,8 @@ Er bestaan binnen de syntax van C 6 relationele operatoren:
 
 | Operator | Vergelijking            |
 |:---------|:------------------------|
-| ```>```  | Kleiner dan             |
-| ```<```  | Groter dan              |
+| ```>```  | Groter dan              |
+| ```<```  | Kleiner dan             |
 | ```>=``` | Kleiner of gelijk dan   |
 | ```<=``` | Groter of gelijk dan    |
 | ```==``` | Gelijk aan              |
@@ -242,7 +242,7 @@ $
 Het is wel een beetje ongelukkig dat het programma niets afdrukt wanneer het getal oneven is.  
 
 Dit zouden we kunnen oplossen door in het programma een **2de if-statement** toe te voegen (waar we naar de omgekeerde conditie testen) maar daarvoor hebben we een betere oplossing.  
- 	
+
 > **Belangrijke nota:  **  
 > Een goede programmeur is naast verstandig echter ook lui en dus zoeken we naar de meest optimale oplossing.
 
@@ -684,7 +684,7 @@ Als je een stuk code wil **herhalen** op basis van een logische expressie kan je
 
 We starten met een programma:
 
-* Dat een **vermenigvuldigings-tabel** afdrukt 
+* Dat een **vermenigvuldigings-tabel** afdrukt
 * Op **basis** van een **getal** dat de gebruiker **ingeeft**
 
 ```{.c}
