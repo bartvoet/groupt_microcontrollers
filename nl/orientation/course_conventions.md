@@ -45,6 +45,11 @@ De **evaluatie** wordt gedaan op basis van:
 Zoals hierboven vermeld is dit een **labo-vak** en wordt er verwacht van de student **aanwezig** is.  
 In geval van **verwittigen** en/of goede reden kan een uitzonderlijke afwezigheid toegestaan worden zonder impact op de punten.
 
+### Labo's afgeven op Toledo
+
+Elke week/les verschijnt er een nieuwe labo,  deze  labo's dienen af gegeven te worden voor het verstrijken van de einddatum vermeld in het labo.  
+Deze labo's moeten via Toledo worden te verstuurd, labo's verstuurd per mail worden niet geevalueerd (vragen rond het labo mogen vanzelfsprekend wel per mail worden verstuurd).  
+
 ### Projecten en workshops
 
 Voor studenten die voorlopen op de cursus (reeds geprogrammeerd of met microcontrollers gewerkt) zullen extra projecten worden voorzien.
@@ -58,16 +63,3 @@ Het is wel de bedoeling dat we dezelfde software gebruiken, in geval van problem
 
 Aankondigingen gebeuren op Toledo en per mail.
 Per mail is dat naar het Groep T-adres, indien je wilt dat ik ook een ander adres stuur kan dit ook.
-
-### Labo's afgeven
-
-De labo's worden gepost op Toledo met volgende naming-conventions:
-
-     labo_$(opdracht)_$(deelvan)_(deeltot).c
-
-* Als je bijvoorbeeld van het eerste labo opdracht 1 deel A hebt gemaakt:  
-  ```labo_1_simpelestatements_1_A.c```
-* Als je meerdere delen van een opdracht hebt bijvoorbeeld opdracht deel A en deel B mag je dit als volgt benoemen:  
-  ```labo_1_simpelestatements_1_A_B.c```
-
-Gelieve geen zip of andere archieven te gebruiken.

@@ -20,17 +20,17 @@ Als je hierop klikt kan je een **file selecteren**
 
 ![](../../pictures/toledo_send_2.png)
 
-Als je de file hebt **geselecteerd** (en op **open** hebt **geklikt**) zou er normaal gezien een file (onder 
+Als je de file hebt **geselecteerd** (en op **open** hebt **geklikt**) zou er normaal gezien een file (onder
 dezelfde naam) moeten staan op deze pagina  
 
 ![](../../pictures/toledo_send_3.png)
 
-Je kan meerdere files toevoegen aan een opgave dooe opnieuwe via de button “Bladeren in mijn 
+Je kan meerdere files toevoegen aan een opgave dooe opnieuwe via de button “Bladeren in mijn
 computer” te werken.
 
 ![](../../pictures/toledo_send_4.png)
 
-Als alle files zijn toegevoegd (eventueel met wat commentaar) moet je op de knop verzenden 
+Als alle files zijn toegevoegd (eventueel met wat commentaar) moet je op de knop verzenden
 drukken.
 
 ![](../../pictures/toledo_send_5.png)
@@ -38,3 +38,17 @@ drukken.
 > **Belangrijk**  
 > Gelieve wel deze files niet als een zip-file op te laden.  
 > Inzendingen met een zip-file worden niet bekeken.
+
+
+### Conventie rond naamgeving van c-files
+
+De labo's worden gepost op Toledo met volgende naming-conventions:
+
+     labo_$(opdracht)_$(deelvan)_(deeltot).c
+
+* Als je bijvoorbeeld van het eerste labo opdracht 1 deel A hebt gemaakt:  
+  labo_1_simpelestatements_1_A.c
+* Als je meerdere delen van een opdracht hebt bijvoorbeeld opdracht deel A en deel B mag je dit als volgt benoemen:  
+  labo_1_simpelestatements_1_A_B.c
+
+Gelieve geen zip of andere archieven te gebruiken.
