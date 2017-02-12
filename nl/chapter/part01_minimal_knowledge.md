@@ -2,14 +2,14 @@
 
 Welkom in de cursus microcontrollers gegeven te Mobyus.
 
-**Kennismaking met programmeren**  
+##Kennismaking met programmeren
 
 In dit eerste eerste deel willen we een eerste kennismaking geven met de 2 hoofdelementen van deze cursus:
 
 * Programmeren in C
 * Werken met microcontrollers
 
-**Inhoud**
+##Inhoud
 
 Dit deel bestaat uit:
 
@@ -18,7 +18,7 @@ Dit deel bestaat uit:
 * Eerste kennismaking met microcontrollers in het algemeen en AVR specifiek
 * Introductie in GPIO
 
-**Minimale kennis**
+##Minimale kennis
 
 Dit "deel 1" heeft enkel als bedoeling het **absolute minimum** aan te leren om een zeer éénvoudig C-programma te schrijven op een microcontroller.  
 
@@ -27,7 +27,7 @@ Dit "deel 1" heeft enkel als bedoeling het **absolute minimum** aan te leren om 
 * Command-line programma schrijven op x86-computer
 * GPIO-programma op AVR (led laten branden)
 
-**En verder**
+##En verder...
 
 Veel succes (en vooral plezier) gewenst met deze kennismaking met programmeren
 en microcontrollers.
