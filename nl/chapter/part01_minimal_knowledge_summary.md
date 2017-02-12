@@ -4,19 +4,33 @@ Een kleine herhaling/samenvatting van de belangrijkst elementen
 
 ## Statement
 
-* Statement: een stuk code dat resulteert in een actie
-* Expressie: een stuk code dat in een waarde resulteert
-* Variabele: referentie naar een stukje geheugen
-* Declaratie: een variabele en stuk geheugen
-* Type: type van een variabele 
-* Types
-    * ```int``` voor numerieke waarden
-    * ```char*``` voor tekst
-* Enkelvoudige vs block-statements
-* String: tekst
-* Expressie 
-     * Bestaat uit een operanden en operatoren
-     * Unitaire opereranden hebben slechts 1 operand
+* **Statement:**
+    * een stuk code dat resulteert in een actie
+* **Expressie:** elke stuk code dat in een waarde resulteert
+    * Functie-aanroep
+    * Naam van een variabele
+    * Literal
+    *  Wiskundige expressie
+    *  Relationele expressie
+    * Logische expressie
+* **Wiskundige expressie**
+    * Bestaat uit een operanden en operatoren
+    * Unitaire opereranden hebben slechts 1 operand
+* **Variabele:**
+    * **referentie** naar een stukje **geheugen**
+    * daar kan je een **waarde** in bijhouden
+* Een variabele heeft en **type** dat
+    * bepaalt het gedrag bij bewerken
+    * bepaalt de hoeveelheid plaats van het geheugen deze inneemt
+* **Declaratie**:
+    * Aangeven dat je een variabele gaat gebruiken
+    * Opdat het programma weet hoeveel geheugen je gaat gebruiken
+* **String**
+    * Een stuk **tekst**
+* **Enkelvoudige statements**
+    * Assignment (of initialisatie van een variabele)
+    * Functie-aanroep
+* **block-statements**
 
 ## Overzicht van operatoren
 
@@ -36,6 +50,3 @@ Een kleine herhaling/samenvatting van de belangrijkst elementen
 * Deze werken met placeholders in een vast stuk tekst
     * %i voor getallen
     * %s voor tekst
-    
-
-     
