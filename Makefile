@@ -150,7 +150,7 @@ grap_convert = gvpr -c '$(1)' ./graphviz/$(2).dot | dot -Tpng -o ./pictures/$(3)
 all:
 	cd nl/chapter && pandoc ../title.txt $(CHAPTERS) -o ../../dist/cursus.epub --epub-stylesheet ../../base.css --epub-cover-image=../front_page.jpg\
 
-	cd nl/chapter && pandoc ../title.txt $(CHAPTERS) -o ../../dist/cursus.html  --self-contained -s -S --toc --toc-depth=2	-c ../../github-pandoc.css
+	cd nl/chapter && pandoc ../title.txt ../frontpage.md $(CHAPTERS) -o ../../dist/cursus.html  --self-contained -s -S --toc --toc-depth=2	-c ../../github-pandoc.css
 
 	wkhtmltopdf dist/cursus.html dist/cursus.pdf
 
