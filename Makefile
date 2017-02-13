@@ -148,13 +148,17 @@ grap_convert = gvpr -c '$(1)' ./graphviz/$(2).dot | dot -Tpng -o ./pictures/$(3)
 #debugging_code
 
 all:
-	cd nl/chapter && pandoc ../title.txt $(CHAPTERS) -o ../../dist/cursus.epub --epub-stylesheet ../../base.css --epub-cover-image=../front_page.jpg\
+	cd nl/chapter && pandoc ../title.txt $(CHAPTERS) -o ../../dist/cursus_nl.epub --epub-stylesheet ../../base.css --epub-cover-image=../front_page.jpg\
 
-	cd nl/chapter && pandoc ../title.txt ../frontpage.md $(CHAPTERS) -o ../../dist/cursus.html  --self-contained -s -S --toc --toc-depth=2	-c ../../github-pandoc.css
+	cd nl/chapter && pandoc ../frontpage.md -o ../../dist/front_page_nl.html  --self-contained -s -S -c ../../github-pandoc.css
 
-	wkhtmltopdf dist/cursus.html dist/cursus.pdf
+	cd nl/chapter && pandoc ../header.md -o ../../dist/header_nl.html  --self-contained -s -S -c ../../github-pandoc.css
 
-	zip dist/cursus.zip dist/cursus.epub dist/cursus.html #dist/cursus.pdf
+	cd nl/chapter && pandoc ../title.txt $(CHAPTERS) -o ../../dist/cursus_nl.html -B ../../dist/header_nl.html  --self-contained -s -S --toc --toc-depth=2	-c ../../github-pandoc.css
+
+	wkhtmltopdf dist/cursus_nl.html dist/cursus_nl.pdf
+
+	zip dist/cursus_nl.zip dist/cursus_nl.epub dist/cursus_nl.html dist/cursus_nl.pdf
 
 labos:
 	cd nl/labo && pandoc  \
