@@ -50,3 +50,54 @@ Een kleine herhaling/samenvatting van de belangrijkst elementen
 * Deze werken met placeholders in een vast stuk tekst
     * %i voor getallen
     * %s voor tekst
+    
+## Bit-level operaties
+
+**Basis**
+
+* Shift-operators:
+     * >>,<<
+     * Let op overflow
+* Bitwise-operators:
+     * inverter: ~
+     * bitwise and: &
+     * bitwise or: |
+     * bitwise xor: ^
+* BITMASK
+     * == PATROON
+     * Laat je toe in bits te denken zonder te rekenen
+
+**Kenmerken van bitwise-operatoren:**
+
+```c
+& => 0 is dominant
+| => 1 is dominant
+^ => 1 iverter, 0 is buffer
+```
+
+**Basis-bitmasks:**
+
+```c
+1 bit-positie                    => (1 << pos)
+1 volledige byte                 => (0xFF << pos)
+                                 => (0xFF << (pos * 8))
+combineren/plakken van bitmasks  => (1 << pos1) | (1 << pos2)
+inverteren van bitmasks          => ~(1 << pos)
+                                 => ~0xAA == 0x55
+```
+**Basis-operaties:**
+
+```c
+GET     =>   if( x &  (1 << pos))  
+SET     =>   x = x |  (1 << pos)  
+CLEAR   =>   x = x & ~(1 << pos)
+TOGGLE  =>   x = x ^  (1 << pos)
+INVERT  =>   ~0xFF == 0x00
+        =>   ~0xAA == 0x55
+```
+
+**Andere:**
+
+```c
+0xFF == ~0x00
+```
