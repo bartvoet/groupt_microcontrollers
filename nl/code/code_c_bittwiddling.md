@@ -141,7 +141,7 @@ Gezien er op elke positie bij beide getallen minstens één 0 voorkomt is het re
 
 > Dit kan gevaarlijk zijn als je dit in een if-conditie of loop zou gebruiken (& ipv &&)
 
-### Overzicht: bitwise operatoren  
+### Overzicht van de bitwise operatoren  
 
 Naast & heb je hier een overzicht van all bitwise operatoren:
 
@@ -157,7 +157,7 @@ Naast & heb je hier een overzicht van all bitwise operatoren:
 > Binaire getallen worden vanaf hier bits genoemd (binary digits)  
 > Als we in deze tekst bits vergelijken, vergelijken we bits op de zelfde positie bij 2 integers
 
-### Voorbeeld: Bitwise operator & (and)
+### Bitwise operator & (and)
 
 & (and) zal:  
 * in 0 resulteren als 1 van beide bits gelijk zijn aan 0  
@@ -200,7 +200,7 @@ $ ./example_bit_and
 $
 ```
 
-### Voorbeeld: Bitwise operator | (or)
+### Bitwise operator | (or)
 
 | (or) zal in 1 resulteren als minstens 1 van opereranden gelijk is aan 1 volgens de waarheidstabel.
 
@@ -237,7 +237,7 @@ $ ./example_bit_or
 $
 ```
 
-### Voorbeeld: Bitwise operator ^ (xor)
+### Bitwise operator ^ (xor)
 
 ^ (xor) zal in 1 resulteren als 1 van beide operanden 1, anders zal de uitslag altijd 0 zijn
 
@@ -276,7 +276,7 @@ $ ./example_bit_xor
 $
 ```
 
-### Voorbeeld: Bitwise operator ~ (invertor)
+### Bitwise operator ~ (invertor)
 
 De laatste bitwise operator die we zien is de invertor.  
 Dit is een unitaire operator (slechts 1 operand).  
@@ -300,7 +300,7 @@ Deze operator zal dus de waarde gaan om van elke individuele bit
 > **Nota:**  
 > Bij de laatste voorbeelden gaan we zien dat we de xor kunnen gebruiken voor individuele bits te inverteren
 
-### Duiding: Bit-shifting
+### Bit-shifting
 
 Een 2de soort van bit-operatoren zijn de bit-shift-operatoren
 
@@ -320,7 +320,7 @@ Belangrijke kenmerken van deze operatoren (logical shift):
 > Dit gedrag is trouwens niet 100 % overeenkomstig bij **signed** getallen waar een arithmatische shift wordt uitgevoerd.  
 > Hier komen we later in de cursus nog op terug.
 
-### Voorbeeld <<
+### Left-shift-operator (<<)
 
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
@@ -343,7 +343,7 @@ int main()
 ```
 
 
-### Voorbeeld >>
+### Right-shift-oeprator (>>)
 
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
@@ -365,7 +365,7 @@ int main()
     return 0;
 }
 ```
-### Voorbeeld: >> wegshiften van bits
+### Opletten, wegshiften van bits (right-shift)
 
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
@@ -374,7 +374,7 @@ int main()
 |      0x0a >> 3|         1|         1|  00000001|
 |      0x0a >> 4|         0|         0|  00000000|
 
-### Voorbeeld: << wegshiften van bits
+### Opletten, wegshiften van bits (left-shift)
 
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
