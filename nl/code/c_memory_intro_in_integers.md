@@ -219,7 +219,7 @@ Voor de rest van dit hoofdstuk gaan we voort met deze **unsigned integers**
 De bedoeling/**focus** van dit hoofdstuk is te leren werken met **bit**-operators.
 Daarom willen we ons **beperken** (in dit hoofdstuk) tot **unsigned integers**, deze zijn naamlijker eenvoudiger van opbouw en meer relevant voor een eerste kennismakig met bit-operatoren en expressies.
 
-### sizeof-operator
+### Gebruik van de sizeof-operator
 
 Vandaag beperken we ons in de meeste oefeningen en labo's tot de "unsigned char" (1 byte) en "unsigned short" (2 bytes) om op een eenvoudige manier een introductie te geven naar het werken met bit-operatoren.
 
@@ -264,13 +264,15 @@ sizeof(unsigned long) = 8 bytes
 sizeof(unsigned long long) = 8 bytes
 ```
 
-### Duiding: bit-representatie
+### Bit-representatie van unsigned integers
 
 De byte-encoding van een unsigned char is vrij éénvoudig vergeleken met de signed varianten.
 Bijvoorbeeld hieronder de representatie van:
 
-* unsigned short 0xAAAA (16 bits/2 bytes lang)
-* unsigned char 0xAA (8 bits/1 byte lang)
+~~~c
+unsigned short a = 0xAAAA;// (16 bits/2 bytes lang)
+unsigned char b = 0xAA;// (8 bits/1 byte lang)
+~~~
 
 |type  | hex      |15  | 14 | 13 | 12 | 11 | 10 |  9 |  8 |  7 |  6 |  5 |  4 |  3 |  2 |  1 |  0 |
 |------|----------|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|----|
@@ -324,8 +326,6 @@ int main()
     return 0;
 }
 ```
-
-### Voorbeeld: het is enkel een representatie
 
 Onderstaande code toont ook aan dat de hex-representatie dezelfde waarde geeft als  de decimale representatie...
 
