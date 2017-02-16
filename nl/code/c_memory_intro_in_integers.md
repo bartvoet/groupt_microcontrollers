@@ -1,8 +1,8 @@
-## Integers introductie
+## Introductie tot integers (in C)
 
 ### Wat is een integer (in C)?
 
-In C zijn er 2 soorten rekenkundige (aritmetic) getallen:
+In C maakt men een onderscheid tussen 2 soorten rekenkundige (of aritmetic) types van getallen:
 
 * Integers
 * Floating point getallen
@@ -12,22 +12,27 @@ Een integer is een geheel getal zoals we deze uit de wiskunde kennen.
 Deze gehele getallen omvatten de natuurlijke getallen, dus de getallen waarmee geteld wordt, en de tegengestelden daarvan, de negatieve gehele getallen.  
 Een geheel getal heet 'geheel' omdat het zonder fractionele of decimale componenten kan worden geschreven.
 
-> **Fractionele getallen**, waar we in C de floating-point versie gebruiken zullen **later** in de cursus bekijken.  
-> Maar eerst **stap voor stap**...
+Het andere type omvat **Fractionele getallen**, waar we in C de **floating-point** versie gebruiken.
+We gaan dit **later** in de cursus bekijken (**stap voor stap**...)
 
 ### Integer-type int
 
-Tot nu toe hebben we het type **int** gebruikt in onze code-voorbeelden, dit type heeft als kenmerken:
+In de voorgaande hoofdstukken hebben we het type **int** gebruikt in onze code-voorbeelden, dit type heeft een aantal **kenmerken**:
 
-* Minimum **2 bytes** in het geheugen volgens C-specificatie
-* Meestal echter **4 bytes** op intel-processoren
-* **Signed type**, het kan zowel positief als negatief getal voorstellen
-* **1 bit**, de MSB (most significant) wordt gebruikt voor het sign (negatief of positief)
+* Een **grootte**
+    * Minimum **2 bytes** in het geheugen volgens **C-specificatie**
+    * Meestal echter **4 bytes** op intel-processoren
+    * Beperkt de maximum grootte van dit getal
+* Een "Signednes"
+   * Het ondersteunen van hetzij enkel natuurljke (positieve) getallen of gehele getallen
+   * **Signed type**, het kan zowel positief als negatief getal voorstellen
+   * **1 bit**, de MSB (most significant) wordt gebruikt voor het sign (negatief of positief)
+   * Beinvloed o.a. het gedrag van de shift-operatoren (zoals we later in de cursus nog zien)
 
 ### Verschillende types (en groottes) van integers
 
-Naast deze **int** heb je ook een aantal andere **types** met verschillende groottes zoals **char, short, long, int, long en long long**.  
-Deze variëren allemaal  in lengte (het aantal bytes).
+Andere **types** - naast deze int - met verschillende groottes (maar dezelfde signedess) zijn **char, short, long, int, long en long long**.  
+Deze variëren allemaal  in lengte (het aantal bytes) zoals hieronder omschreven.
 
 |type         |minimum           | x86               |
 |-------------|------------------|-------------------|
@@ -59,9 +64,9 @@ Een variabele van het type char (1 byte) zal bijvoorbeeld minder plek in het geh
 
 Dit heeft als voordeel ervoor dat je programma niet meer plaats gaat innemen dan vereist, hetgeen voor het soort software waarmee men C schrijft geen overbodige luxe is.
 
-### Negatieve waardes encoderen
+### Negatieve en posieve waardes encoderen (systeem)
 
-De integer-types die we tot nog toe hebben gezien kunnen zowel negatieve als positieve getallen waardes bevatten.  
+De integer-types die we tot nog toe hebben gezien zijn signed, deze kunnen dus zowel negatieve als positieve getallen waardes bevatten.  
 Hoe kan een computer deze negatieve waardes encoderen?  
 We bekijken 3 mogelijkheden:
 
@@ -69,7 +74,7 @@ We bekijken 3 mogelijkheden:
 * One's complement
 * Two's complement
 
-### Signed magnitude
+### Systeem 1: "Signed magnitude"
 
 Bij **signed magnitude** gaan we er vanuit dat de MSB als teken bit telt.  
 Stel bijvoorbeeld als je een type zou hebben dat maar 3 bits lang is verkrijg je de volgende tabel.
@@ -101,7 +106,7 @@ Dit systeem wordt in de praktijk weinig gebruik omdat je moeillijk mee kunt reke
 
 Als je bijvoorbeeld een positief en een negatief getal wilt optellen krijg je de foutieve uitkomst, dus weg er mee...
 
-### One's complement
+### Systeem 2: "One's complement"
 
 One's complement zal daarentegen een negatief getal voorstellen als het complement (inversie) van zijn positieve tegenhanger.
 
@@ -142,7 +147,7 @@ Beschouw volgend voorbeeld:
 
 Er is echter een nog efficientere manier om zowel negatieve als positieve getallen te encoderen
 
-### Two's complement
+### Systeem 3: "Two's complement"
 
 Bij **2's complement** gaat men gelijkaardig te werk als het vorige systeem, maar na het uitvoeren van complement telt men nog het getal 1 bij.  
 Dit geeft de volgende tabel.
@@ -176,6 +181,8 @@ Het verschil tov vorige systemen:
 Dit systeem is nog éénvoudiger om met te rekenen en wordt door de meeste computer-systemen gebruikt.  
 
 ### Unsigned integers vs Signed integers
+
+De meeste systemen gebruiken "2-complement" om negatieve getallen te encoderen, de manier van encoderen heeft echter zijn invloed op hoe dat de bitwise-operatoren (die we dadelijk gaan zien).
 
 Later in de cursus komen we nog terug op **signed** integers, maar we nemen eerst echter een andere type onder de loep, namelijk de **unsigned integer**  
 Deze unsigned versie verschilt van een signed integer:
