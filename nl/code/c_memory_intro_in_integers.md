@@ -1,6 +1,6 @@
 ## Integers introductie
 
-### Wat is een integer in C?
+### Wat is een integer (in C)?
 
 In C zijn er 2 soorten rekenkundige (aritmetic) getallen:
 
