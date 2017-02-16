@@ -43,7 +43,7 @@ LED_REGISTER =  LED_REGISTER | ((1<<7) | (1<<4) | (1<<2) | (1<<1) | (1<<7));
 
 ![](../../pictures/leds_and_reg.png)
 
-### Duiding: Bitwise operatoren vs logische operatoren
+### Bitwise operatoren vs logische operatoren
 
 Tot nog toe hebben we **logische operatoren** gezien zoals **&&, || en !**, deze hadden als eigenschappen:
 
@@ -61,7 +61,7 @@ Bitwise operatoren werken echter op een andere manier:
 
 We gaan dit direct met een aantal voorbeelden **illustreren**.
 
-### Voorbeeld: verschil tussen logische en bitwise operatoren
+### Verschil tussen logische en bitwise operatoren
 
 ```c
 #include <stdio.h>
@@ -101,7 +101,7 @@ Bij de bitwise operator gaat deze de bits individueel met elkaar gaan matchen en
 |**2 blijft 2** |0    |1    |0    |
 |**2 & 2**      |0    |1    |0    |
 
-### Voorbeeld: verschil tussen logische en bitwise operatoren (2)
+### Verschil tussen logische en bitwise operatoren (voorbeeld 2)
 
 Nog een ander voorbeeld is de combinatie 5 en 2.  
 Hier is het verschil tussen beide nog opvallender (1 en 0),.
