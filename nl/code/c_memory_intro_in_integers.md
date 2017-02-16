@@ -15,7 +15,7 @@ Een geheel getal heet 'geheel' omdat het zonder fractionele of decimale componen
 > **Fractionele getallen**, waar we in C de floating-point versie gebruiken zullen **later** in de cursus bekijken.  
 > Maar eerst **stap voor stap**...
 
-### Type integer: int
+### Integer-type int
 
 Tot nu toe hebben we het type **int** gebruikt in onze code-voorbeelden, dit type heeft als kenmerken:
 
@@ -24,7 +24,7 @@ Tot nu toe hebben we het type **int** gebruikt in onze code-voorbeelden, dit typ
 * **Signed type**, het kan zowel positief als negatief getal voorstellen
 * **1 bit**, de MSB (most significant) wordt gebruikt voor het sign (negatief of positief)
 
-### Verschillende types en verschillende groottes
+### Verschillende types (en groottes) van integers
 
 Naast deze **int** heb je ook een aantal andere **types** met verschillende groottes zoals **char, short, long, int, long en long long**.  
 Deze variëren allemaal  in lengte (het aantal bytes).
@@ -59,7 +59,7 @@ Een variabele van het type char (1 byte) zal bijvoorbeeld minder plek in het geh
 
 Dit heeft als voordeel ervoor dat je programma niet meer plaats gaat innemen dan vereist, hetgeen voor het soort software waarmee men C schrijft geen overbodige luxe is.
 
-### Negatieve waardes
+### Negatieve waardes encoderen
 
 De integer-types die we tot nog toe hebben gezien kunnen zowel negatieve als positieve getallen waardes bevatten.  
 Hoe kan een computer deze negatieve waardes encoderen?  
@@ -175,7 +175,7 @@ Het verschil tov vorige systemen:
 
 Dit systeem is nog éénvoudiger om met te rekenen en wordt door de meeste computer-systemen gebruikt.  
 
-### Unsigned integers
+### Unsigned integers vs Signed integers
 
 Later in de cursus komen we nog terug op **signed** integers, maar we nemen eerst echter een andere type onder de loep, namelijk de **unsigned integer**  
 Deze unsigned versie verschilt van een signed integer:
@@ -191,7 +191,7 @@ Je heb bijvoorbeeld het type **unsigned int**.
 unsigned int = 5;
 ```
 
-### Duiding: er zijn verschillende soorten unsigned integers
+### Types van unsigned integers
 
 Net zoals bij de signed versie heb je deze in verschillende groottes.
 
@@ -211,6 +211,51 @@ Net zoals bij de signed versie heb je deze in verschillende groottes.
 Voor de rest van dit hoofdstuk gaan we voort met deze **unsigned integers**  
 De bedoeling/**focus** van dit hoofdstuk is te leren werken met **bit**-operators.
 Daarom willen we ons **beperken** (in dit hoofdstuk) tot **unsigned integers**, deze zijn naamlijker eenvoudiger van opbouw en meer relevant voor een eerste kennismakig met bit-operatoren en expressies.
+
+### sizeof-operator
+
+Vandaag beperken we ons in de meeste oefeningen en labo's tot de "unsigned char" (1 byte) en "unsigned short" (2 bytes) om op een eenvoudige manier een introductie te geven naar het werken met bit-operatoren.
+
+In c heb je trouwens een **operator** (geen functie) met de naam sizeof die toelaat van de **grootte** van een bepaald **type** te verkrijgen.
+
+```c
+#include <stdio.h>
+
+int main(int)
+{
+
+	unsigned char an_unsigned_char = 5;
+	printf("sizeof(unsigned char) = %zu bytes\n",  sizeof(unsigned char));
+	printf("sizeof(an_unsigned_char) = %zu bytes\n",  sizeof(an_unsigned_char));
+
+	unsigned short an_unsigned_short = 5;
+	printf("sizeof(unsigned short) = %zu bytes\n",  sizeof(unsigned short));
+	printf("sizeof(an_unsigned_short) = %zu bytes\n",  sizeof(an_unsigned_short));
+
+	printf("sizeof(unsigned int) = %zu bytes\n",  sizeof(unsigned int));
+
+	printf("sizeof(unsigned long) = %zu bytes\n", sizeof(unsigned long));
+
+	printf("sizeof(unsigned long long) = %zu bytes\n", sizeof(unsigned long long));
+	return 0;
+}
+```
+
+> **Bemerking:**
+> De size_of geeft het type size_t terug, daarom gebruiken we de placeholder
+> %zu.  We komen hier later nog op terug.
+
+Als je dit programma uitvoert krijg je volgend resultaat
+
+```c
+sizeof(unsigned char) = 1 bytes
+sizeof(an_unsigned_char) = 1 bytes
+sizeof(unsigned short) = 2 bytes
+sizeof(an_unsigned_short) = 2 bytes
+sizeof(unsigned int) = 4 bytes
+sizeof(unsigned long) = 8 bytes
+sizeof(unsigned long long) = 8 bytes
+```
 
 ### Duiding: bit-representatie
 
@@ -305,47 +350,3 @@ int main()
 }
 ```
 
-### Intermezzo: sizeof-operator
-
-Vandaag beperken we ons in de meeste oefeningen en labo's tot de "unsigned char" (1 byte) en "unsigned short" (2 bytes) om op een eenvoudige manier een introductie te geven naar het werken met bit-operatoren.
-
-In c heb je trouwens een **operator** (geen functie) met de naam sizeof die toelaat van de **grootte** van een bepaald **type** te verkrijgen.
-
-```c
-#include <stdio.h>
-
-int main(int)
-{
-
-	unsigned char an_unsigned_char = 5;
-	printf("sizeof(unsigned char) = %zu bytes\n",  sizeof(unsigned char));
-	printf("sizeof(an_unsigned_char) = %zu bytes\n",  sizeof(an_unsigned_char));
-
-	unsigned short an_unsigned_short = 5;
-	printf("sizeof(unsigned short) = %zu bytes\n",  sizeof(unsigned short));
-	printf("sizeof(an_unsigned_short) = %zu bytes\n",  sizeof(an_unsigned_short));
-
-	printf("sizeof(unsigned int) = %zu bytes\n",  sizeof(unsigned int));
-
-	printf("sizeof(unsigned long) = %zu bytes\n", sizeof(unsigned long));
-
-	printf("sizeof(unsigned long long) = %zu bytes\n", sizeof(unsigned long long));
-	return 0;
-}
-```
-
-> **Bemerking:**
-> De size_of geeft het type size_t terug, daarom gebruiken we de placeholder
-> %zu.  We komen hier later nog op terug.
-
-Als je dit programma uitvoert krijg je volgend resultaat
-
-```c
-sizeof(unsigned char) = 1 bytes
-sizeof(an_unsigned_char) = 1 bytes
-sizeof(unsigned short) = 2 bytes
-sizeof(an_unsigned_short) = 2 bytes
-sizeof(unsigned int) = 4 bytes
-sizeof(unsigned long) = 8 bytes
-sizeof(unsigned long long) = 8 bytes
-```
