@@ -308,7 +308,7 @@ Als we de onderliggende representatie (of encoding) gaan gebruiken - op bit-nive
 |14       |e       |    1110|
 |15       |f       |    1111|
 
-### Voorbeeld: een waarde uitdrukken als hex in c-code
+### Een waarde uitdrukken als hex in c-code
 
 Een unsigned char (maar ook andere integer-variante) kan hexadecimaal gerepresenteerd worden door "0x" te laten volgen door een hexadecimaal getal.
 
@@ -340,7 +340,7 @@ int main()
 }
 ```
 
-### Voorbeeld: printf in hex-formaat
+### Printen in hex-formaat
 
 De printf-functie geeft je ook de mogelijkheid om de waarde als hexadecimaal getal af te drukken.
 
