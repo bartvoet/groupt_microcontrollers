@@ -93,6 +93,12 @@ Het 2de if-statement echter zal in een 0 resulteren (en binnen een if geldt dit 
 > **Nota:**  
 > Denk terug (of herlees) de vorige les waar we de eigenschap van een if-statement bekeken (zal enkel uitvoeren wanneer de expressie <> 0)
 
+### Bitmask gebruik je om te selecteren
+
+![](../../pictures/bitmask_true.jpg)
+
+![](../../pictures/bitmask_false.jpg)
+
 ### Voorbeeld: een samengestelde bitmask
 
 We hebben dit nu toegepast om 1 enkele bit te selecteren.

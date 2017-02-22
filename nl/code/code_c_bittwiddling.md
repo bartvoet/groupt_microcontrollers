@@ -38,7 +38,7 @@ Het punt hier is dat we getallen niet meer om hun waarde gaan bekijken maar als 
 Bijvoorbeeld een block van 8 output-pinnen die bijvoorbeeld gecontrolleerd wordt via 1 byte in het geheugen (register).
 
 ~~~c
-LED_REGISTER =  LED_REGISTER | ((1<<7) | (1<<4) | (1<<2) | (1<<1) | (1<<7)); 
+LED_REGISTER =  LED_REGISTER | ((1<<7) | (1<<4) | (1<<2) | (1<<1) | (1<<7));
 ~~~
 
 ![](../../pictures/leds_and_reg.png)
@@ -302,7 +302,8 @@ Deze operator zal dus de waarde gaan om van elke individuele bit
 
 ### Bit-shifting
 
-Een 2de soort van bit-operatoren zijn de bit-shift-operatoren
+Een 2de soort van bit-operatoren zijn de bit-shift-operatoren, deze operatoren zullen de **individuele bits** een **bepaald** aantal verschuiven.  
+Er bestaan 2 soorten shift-operatoren:
 
 | Operator | Betekenis             | Voorbeeld    | Resultaat (per bit-positie)                                        |
 |----------|-----------------------|--------------|--------------------------------------------------------------------|
@@ -321,6 +322,8 @@ Belangrijke kenmerken van deze operatoren (logical shift):
 > Hier komen we later in de cursus nog op terug.
 
 ### Left-shift-operator (<<)
+
+Alvoorbeeld passen we een shift-operator toe op het getal 10 (hex A):
 
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
@@ -343,7 +346,9 @@ int main()
 ```
 
 
-### Right-shift-oeprator (>>)
+### Right-shift-operator (>>)
+
+Een gelijkaardig voorbeeld toegepast op het getal 160 (hex A0):
 
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
@@ -367,6 +372,11 @@ int main()
 ```
 ### Opletten, wegshiften van bits (right-shift)
 
+Het gedrag van de Right-shift-operator
+
+Aan de linkerkant (MSB-kant) worden 0-bits ingeschoven evenredig met het aantal bits dat wordt verschoven.  
+De bits aan de rechterkant die verdwijnen welliswaar, hetgeen tot data-verlies kan lijden.
+
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
 |      0x0a >> 0|        10|         a|  00001010|
@@ -375,6 +385,8 @@ int main()
 |      0x0a >> 4|         0|         0|  00000000|
 
 ### Opletten, wegshiften van bits (left-shift)
+
+Een vergelijkbaar effect heb je met de Left-shift-operator, daar zullen de bits langs de linkerkant verdwijnen...
 
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
