@@ -2,15 +2,15 @@
 
 ### Verzamelingen
 
-Je kan deze ook bekijken als bit-vectoren of **set** (verzameling) van getallen.  
+Een getal kan je ook bekijken als een verzameling van (unieke getallen).  
+Voor elke positie waar een 1 staat, noteer je de positie:
 
-~~~
-76543210
-01101001 => {0,3,5,6}
-01010101 => {0,2,4,6}
-~~~
+| 7   | 6   |   5 |   4 |   3 |   2 |   1 |   0 | vector          |
+|-----|-----|-----|-----|-----|-----|-----|-----|-----------------|
+| 0   |**1**|**1**|0    |**1**|0    |0    |**1**| => {6,5,3,0}    |
+| 0   |**1**| 0   |**1**| 0   |**1**| 0   |**1**| => {6,4,2,0}    |
 
-
+Zo verkrijg je een bit-vector of verzameling van getallen, zoals hierboven beschreven voor 2 verschillende getallen.  
 
 ~~~
   AND         OR          XOR         COMPLEMENT
@@ -20,8 +20,7 @@ Je kan deze ook bekijken als bit-vectoren of **set** (verzameling) van getallen.
   01000001    01111101    00111100    10101010
 ~~~
 
-
-Waar je dan aan de hand van bitwise-operatoren een aantal set-operaties kan uitvoeren:
+Elke bit-wise bewerking (and,or,xor,not) kan je vergelijken met een operatie op verzamelingen
 
 ~~~
 & intersectie          {0,3,5,6} &  {0,2,4,6} = {0,6}
