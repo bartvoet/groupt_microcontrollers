@@ -12,6 +12,8 @@ Voor elke positie waar een 1 staat, noteer je de positie:
 
 Zo verkrijg je een bit-vector of verzameling van getallen, zoals hierboven beschreven voor 2 verschillende getallen.  
 
+### Bitwise operaties vs Verzamelingen
+
 ~~~
   AND         OR          XOR         COMPLEMENT
   01101001    01101001    01101001  
