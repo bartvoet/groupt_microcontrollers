@@ -1,6 +1,6 @@
 ## Bit-level operaties in C
 
-### Denken in bits
+### Operaties op bit-level
 
 Tot nog toe hebben we getallen enkel bekeken naar hun totale waardes, in dit deel gaan we niet de waardes maar de bits (en bytes) van integers bekijken.  
 
@@ -14,22 +14,56 @@ Over het algemeen worden er in C (en andere) 4 operaties gebruikt:
   01000001    01111101    00111100    10101010
 ~~~
 
-Je kan deze ook bekijken als bit-vectoren of **set** (verzameling) van getallen.  
+Deze operators gaan we zodadelijk in meer detail bekijken.
+
+### Bit-vectoren
+
+Je kan deze ook bekijken als bit-vectoren of **set** (verzameling) van **getallen**.  
+Meer concreet je gaat naar de **posities** gaan kijken van de bits in een getal.
+
+Hieronder vormen we bovenstaande getallen om tot vectoren.
 
 ~~~
-76543210
-01101001 => {0,3,5,6}
-01010101 => {0,2,4,6}
+Posities: 7-6-5-4-3-2-1-0
+          --------
+          0 1 1 0 1 0 0 1 => {0,3,5,6}
+          0 1 0 1 0 1 0 1 => {0,2,4,6}
 ~~~
 
-Waar je dan aan de hand van bitwise-operatoren een aantal set-operaties kan uitvoeren:
+Voor elke getal noteer je de posities die op 1 staan in deze vector of set.  
+AWaarWaarls je dan aan de hand van bitwise-operatoren een aantal set-operaties kan uitvoeren:
 
 ~~~
-& intersectie          {0,3,5,6} &  {0,2,4,6} = {0,6}
-| unie                 {0,3,5,6} |  {0,2,4,6} = {0,2,3,4,5,6}
-^ symetrisch verschil  {0,3,5,6} ^  {0,2,4,6} = {2,3,4,5}
-~ complement                     ~  {0,2,4,6} = {1,3,5,7}
+  AND           INTERSECTIE
+  01101001      {0,3,5,6}
+& 01010101      {0,2,4,6}
+  --------      ---------
+  01000001      {0,6}    
 ~~~
+
+~~~
+  OR            UNIE   
+  01101001      {0,3,5,6}
+| 01010101      {0,2,4,6}
+  --------      ---------
+  01111101      {0,2,3,4,5,6}
+~~~
+
+~~~
+  XOR           SYMETRISCH VERSCHIL   
+  01101001      {0,3,5,6}
+^ 01010101      {0,2,4,6}
+  --------      ---------
+  00111100      {2,3,4,5}
+~~~
+
+~~~
+  INVERTOR      COMPLEMENT   
+~ 01010101      {0,2,4,6}
+  --------      ---------
+  10101010      {1,3,5,7}
+~~~
+
 
 Bij het programmeren van microcontrollers bijvoorbeeld gaan we in het volgende hoofdstuk gaan zien dat het heel belangrijk is deze operaties te kunnen uitvoeren om hardware te manipuleren.  
 
@@ -79,7 +113,6 @@ $ gcc twoandtwo.c -o twoandtwo
 $ ./twoandtwo
 2 && 2 = 1
 2 & 2 = 2
-
 ```
 
 Bij de eerste statement (&&) gaat men enkel kijken of de integer <> is van 0.  
@@ -302,8 +335,7 @@ Deze operator zal dus de waarde gaan om van elke individuele bit
 
 ### Bit-shifting
 
-Een 2de soort van bit-operatoren zijn de bit-shift-operatoren, deze operatoren zullen de **individuele bits** een **bepaald** aantal verschuiven.  
-Er bestaan 2 soorten shift-operatoren:
+Een 2de soort van bit-operatoren zijn de bit-shift-operatoren
 
 | Operator | Betekenis             | Voorbeeld    | Resultaat (per bit-positie)                                        |
 |----------|-----------------------|--------------|--------------------------------------------------------------------|
@@ -322,8 +354,6 @@ Belangrijke kenmerken van deze operatoren (logical shift):
 > Hier komen we later in de cursus nog op terug.
 
 ### Left-shift-operator (<<)
-
-Alvoorbeeld passen we een shift-operator toe op het getal 10 (hex A):
 
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
@@ -346,9 +376,7 @@ int main()
 ```
 
 
-### Right-shift-operator (>>)
-
-Een gelijkaardig voorbeeld toegepast op het getal 160 (hex A0):
+### Right-shift-oeprator (>>)
 
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
@@ -372,11 +400,6 @@ int main()
 ```
 ### Opletten, wegshiften van bits (right-shift)
 
-Het gedrag van de Right-shift-operator
-
-Aan de linkerkant (MSB-kant) worden 0-bits ingeschoven evenredig met het aantal bits dat wordt verschoven.  
-De bits aan de rechterkant die verdwijnen welliswaar, hetgeen tot data-verlies kan lijden.
-
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
 |      0x0a >> 0|        10|         a|  00001010|
@@ -385,8 +408,6 @@ De bits aan de rechterkant die verdwijnen welliswaar, hetgeen tot data-verlies k
 |      0x0a >> 4|         0|         0|  00000000|
 
 ### Opletten, wegshiften van bits (left-shift)
-
-Een vergelijkbaar effect heb je met de Left-shift-operator, daar zullen de bits langs de linkerkant verdwijnen...
 
 |      expressie|   base 10|   base 16|    base 2|
 |---------------|----------|----------|----------|
