@@ -61,9 +61,7 @@ CHAPTER_04 += ../../general/pandoc_page_break.txt
 CHAPTER_04 += ../labo/avr_arduino_firsttime.md
 CHAPTER_04 += ../../general/pandoc_page_break.txt
 
-CHAPTER_05 += chapter05_gpio.md
-CHAPTER_05 += ../../general/pandoc_page_break.txt
-CHAPTER_05 += ../tools/tools_eclipse_getting_started.md
+CHAPTER_05 += chapter05_gpio_output.md
 CHAPTER_05 += ../../general/pandoc_page_break.txt
 CHAPTER_05 += ../code/code_c_conditions_and_loops_2_for.md
 CHAPTER_05 += ../../general/pandoc_page_break.txt
@@ -72,6 +70,8 @@ CHAPTER_05 += ../../general/pandoc_page_break.txt
 CHAPTER_05 += ../tools/tools_eclipse_getting_started.md
 CHAPTER_05 += ../../general/pandoc_page_break.txt
 CHAPTER_05 += ../labo/labo_led.md
+
+CHAPTER_05 += chapter05_gpio_input.md
 CHAPTER_05 += ../code/code_avr_gpio_3_input.md
 CHAPTER_05 += ../../general/pandoc_page_break.txt
 CHAPTER_05 += ../code/code_c_conditions_and_loops_3_do_while.md
@@ -142,7 +142,7 @@ CHAPTER_12 += ../code/code_python_serial.md
 
 pagebreak = ../../general/pandoc_page_break.txt
 
-CHAPTERS = part01_minimal_knowledge.md $(pagebreak) $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part01_minimal_knowledge_summary.md #part02_foundation.md $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) $(CHAPTER_08) $(CHAPTER_09) $(CHAPTER_10) $(CHAPTER_11) $(CHAPTER_12)
+CHAPTERS = part01_minimal_knowledge.md $(pagebreak) $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part01_minimal_knowledge_summary.md part02_foundation.md $(CHAPTER_05) #$(CHAPTER_06) $(CHAPTER_07) $(CHAPTER_08) $(CHAPTER_09) $(CHAPTER_10) $(CHAPTER_11) $(CHAPTER_12)
 
 graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
 grap_convert = gvpr -c '$(1)' ./graphviz/$(2).dot | dot -Tpng -o ./pictures/$(3).png

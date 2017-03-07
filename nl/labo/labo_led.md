@@ -1,4 +1,4 @@
-## Labo: functies en macro's
+## Labo: leds laten blinken met for-loops
 
 Doel van de opdracht is het verwerken van 2 zaken die we hebben geleerd:
 

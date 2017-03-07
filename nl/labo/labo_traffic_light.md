@@ -1,4 +1,4 @@
-## Labo: loops en condities (uitgebreid)
+## Labo: verkeerslicht
 
 ### Opdracht 1: verkeerslicht
 

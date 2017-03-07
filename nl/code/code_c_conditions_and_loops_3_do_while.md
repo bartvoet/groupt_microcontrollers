@@ -1,6 +1,6 @@
 
 
-## Loops en condities (vervolg)
+## Loops en condities: do while en switch
 
 We hebben eerder condities en loops (herhalingen gezien):
 
