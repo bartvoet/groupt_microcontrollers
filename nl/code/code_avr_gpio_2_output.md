@@ -65,7 +65,7 @@ Bovenstaande schakeling LED geschakeld aan een MCU heeft een weerstand nodig:
 
 * Een pin op een MCU kan maar een maximum aantal stroom sinken (leveren van positieve stroom) of source (trekken van negatieve stroom)  
   Over het algemeen beperkt dit zich tot +- 30-40 mA maximum per pin
-* De stroom op een standaard LED dient beperkt worden tot 20 mA per LED
+* De stroom op een standaard LED dient beperkt worden tot **15-20 mA** per LED
 
 Dus we vervangen de voorgaande schema door:
 
@@ -90,16 +90,28 @@ De waarde van de weerstand die we voor een led schakelen is gemakkelijk te berek
 > I = V * R
 >```
 
-Wetende dat we werken (afhankelijk van de set-up) met een voltage van 5 V of wel 3.3 V op de output-pins:
+Wetende dat we werken (afhankelijk van de set-up) met een voltage van 5 V kunnen we de berekening maken, maar we moeten wel rekening houden met de spanningsval van het LED, meestal ligt dit rond de 2 volt (rode meestal richting 1,9 V)
 
-* In geval van 5 V spreken we meestal van waardes groter dan 250 ohm (afhangende van de helderheid):  
 ```
-R = 5 V   / 0.02 A = 250 ohm
+Uled = 2 V
+Ubron= 5 V
+R = (Ubron-Uled) / I
+
+R = (5 V -  2V) / 0,015 A = 300 ohm
+R = (5 V -  2V) / 0,020 A = 150 ohm
 ```
-* In geval van 3.3 V:
+
+Afhankelijk van de gewenste lichtsterkte en de beschikbare weerstanden kan je een weerstand gebruiken van tussen 150 en 300 Ohm.
+
+> Nota: bij deze weerstanden is wel wat marge, een weerstand van 1K zal nog altijd voldoende licht geven.  
+> Pas wel op bij lagere waarden om schade te vermijden.
+
+Stel dat je met een microcontroller van 3,3 V werkt moet je dit vanzelfsprekend omrekenen:
+
 ```
-R = 3.3 V / 0.02 A = 165 ohm
+R = (3.3 V - 2V) / 0.015 A = 86,6 ohm
 ```
+
 
 ### Duiding: opzoeken in datasheet  
 
