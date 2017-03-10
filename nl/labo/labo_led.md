@@ -17,7 +17,7 @@ We hebben eerder gezien dat elke pin van een poort indivueel kan aangesproken vi
 
 #### Deel A
 
-Er is maar 1 opdracht, schrijf een programma dat - gebruikmakende van for-loops - 3 leds laat blinken:
+Schrijf een programma dat - gebruikmakende van for-loops - 3 leds laat blinken:
 
 * Deze leds moeten 1 voor 1 aangaan
 * En vervolgens 1 voor 1 weer uitgaan (in omgekeerde volgorde)
@@ -34,7 +34,11 @@ Maak gebuik van :
 * Gebruik bitmasking zoals we eerder hebben gezien
 * Gebruik variabelen om te bepalen bij welke led je start en waar je stopt
 
-Hint je programma gaat grotendeels dit als structuur hebben
+Tips:
+
+* Als mogelijke oplossing ga je in de **eerste loop set-operaties** gebruiken, in de **tweede clear-operaties**
+* Je programma gaat grotendeels de volgende structuur hebben:
+
 
 ```C
 for-loop (optellen) {
@@ -57,3 +61,5 @@ while-loop (event-loop) {
 
 Als je dit uitvoert zal je waarschijnlijk een loop GET-operaties en 1 met CLEAR-operaties hebben.  
 Kan je dit ook op een andere manier?
+
+(je mag ook direct deze oplossing implementeren, dan geef je gewoon Deel B af ipv Deel A)
