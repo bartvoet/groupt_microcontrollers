@@ -10,52 +10,50 @@ In deze handleiding wordt kort beschreven:
 > Hier en daar worden wat hints gegeven, beschouw dit echter niet als een referentie.  
 > Een handleiding van Eclipse zou meerdere boeken vullen, dus je bent uitgenodigd Eclipse ook zelf ter verkennen aan de hand van de vele tutorials op het web.
 
-Eclipse is een opensourceframework van de Eclipse Foundation voor software-ontwikkellingsomgevingen (IDE of Integrated Development Environment).
-  
-Oorspronkelijk was Eclipse vooral populaire voor Java-ontwikkelin, maar vandaag de dag is Eclipse populair voor zowat alle programmeertalen (Java, C, Python, Ruby, C++, Javascript, Scala, Groovy, Cobol,...).  
+Eclipse is zoals de teksteditor die we tot nog toe hebben gebruikt, maar nog veel meer ... het is een IDE of Integrated Development Environment(en framework).
+
+Het verschil met een klassieke editor wordt na de introductie snel duildelijk, maar kort door de de bocht heeft een IDE alle functionaliteiten rond het programmeren (zoals compilen, downloaden...) geintegreerd in 1 omgeving (waardoor dat je bijvoorbeeld niet altijd moet terugvallen op de command-line).
+
+Eclipse kan je gebruiken voor verschillende programmeer-talen en/of -platformen.  
+Oorspronkelijk was Eclipse vooral populair voor Java-ontwikkeling, maar vandaag de dag is Eclipse populair voor zowat alle programmeertalen (Java, C, Python, Ruby, C++, Javascript, Scala, Groovy, Cobol,...).  
+
 Het is 1 van de meest populaire ontwikkelingsomgevingen die er bestaan (en bijna standaard als het om niet microsoft onwikkeling).
 
 Eclipse heeft ook een heel modulaire architectuur die het toelaat van zeer gemakkelijk uitbreidingen (of plugins) te schrijven.  
 Dit gaan we later in de cursus gebruik door bijvoorbeeld plugins te gebruiken die de integratie met AVR's vergemakkelijken.  
 
-### Instalatie van Eclipse
+### Instalatie van Eclipse voor C-grebruik
 
-Om eclipse te gebruiken heb moet je de volgende zaken (in volgorde) installeren:
+Om Eclipse te gebruiken heb moet je de volgende zaken (in volgorde) installeren:
 
 * GCC-compiler  
-  (Windows via Mingw, bij de meeste distributies standaard, Mac via XCode)
+  (Windows via Cygwin, bij de meeste distributies is deze standaard, Mac via XCode)
 * Een java (jdk or jre) bij voorkeur een recente versie  
   (download en installeren voor Mac en Windows, voor Linux gebruik je meestal een package-manager)
-* Eclipse (de CDT-versie)
+* Eclipse (de CDT-versie), voor installatie-instructies zie de website...
 
-### Workspace  
+### Workspace en projecten
 
-Als je eclipse opent krijg je een venster te zien om een workspace te selecteren(Workspace Launcher).  
-Of wel kies je een bestaande workspace ofwel maak je een nieuwe aan door een path te selecteren.    
-Deze workspace is een sandbox die een aantal projecten bevat (en eventueel wat extra configuratie-).  
- 
-### Projecten
-
-Een project (zeker in de context van een c-applicatie) stelt een c-applicatie voor.  
-Dit project mag verschillende c-files (en header files) bevatten.
-
-### Concept: Workspace en projecten 
-
-In Eclipse kan je de code structureren aan de hand van 2 elementen: 
+In Eclipse kan je de code structureren aan de hand van 2 elementen:
 
 * Workspace
 * Projecten
 
-Een project komt meestal overeen met een applicatie (in ons geval een C-applicatie).  
-In zo'n project plaats je alle verschillende files die je nodig hebt om zo een C-applicatie op te bouwen  
+Een **workspace** is je lokale sandbox waarin Eclipse al je projecten, voorkeuren en andere metadata gaat plaatsen.
+
+Een **project** komt (meestal) overeen met een **applicatie** (in ons geval een C-applicatie).  
+
+In zo'n project plaats je alle verschillende **files** die je nodig hebt om zo een **C-applicatie** op te bouwen.    
 (meetal C-files maar zoals we later gaan zien kunnen zijn er ook nog andere types).
 
-Eclipse organiseert deze projecten in zogeheten workspaces.  
-Een workspace is eigenlijk een map met een aantal referenties naar projecten die alle instellingen met elkaar delen. 
+### Eclipse openen  
+
+Als je eclipse opent krijg je een venster te zien om een workspace te selecteren (Workspace Launcher).  
+Of wel kies je een bestaande workspace ofwel maak je een nieuwe aan door een path te selecteren.    
 
 ### Stap: Van start gaan
 
-Als je Eclipse opent krijg je een venster "Workspace Launcher"; hierin kies je een 
+Als je Eclipse opent krijg je een venster **"Workspace Launcher"**; hierin kies je een
 bestaande workspace of wijs (via de knop Browse) een nieuwe workspace aan.  
 
 Je kan een workspace in Eclipse customizeren, deze kan je instellen door uit het menu Window | Preferences te selecteren.  
@@ -63,12 +61,12 @@ We gaan niet alle preferences overlopen (rtfm, in principe werkt Eclipse ook zon
 
 > Afhankelijk van het OS en environment-variabelen nog wat settings aanvullen om van start te kunnen gaan.  
 > De meegeleverde Window-Eclipse (geleverd in de cursus) is reeds pre-configureerd maar indien je zelf wil configureren moet je naar de OS-specifieke documentatie gaan kijken.  
-> Voor andere OS is dit gedocumenteerd in de OS-specifieke hoofdstukken. 
+> Voor andere OS is dit gedocumenteerd in de OS-specifieke hoofdstukken.
 
 ### Opbouw van eclipse
 
 ![](../../pictures/tools_eclipse.png)
- 
+
 De basisstructuur van Eclipse (na het openen) zie je hierboven.  
 Het bevat verschillende segmenten:
 
@@ -94,43 +92,28 @@ Bevat een overzicht en structuur van de c-code die in je editor is geopend.
 > Andere perspectieven (zoals bijvoorbeeld Java-perspectief, Debug-perspectief, Android-perspectief, ... zullen een specifiek samenstelling van "panes" openenen.  
 > Je kan je perspectief altijd aanpassen of selecteren via Window | Perspective | ...
 
-### Tip: shortcuts
+### Stap: Creatie/setup van een C-project  
 
-Zoals eerder vermeld dit is geen complete gids.  
-IDE's zoals Eclipse (en ook andere zoals IntelliJ en Netbeans) hebben een uitgebreid gamma als shortcuts (key-combinaties).  
-Een overzicht van deze shortcuts kan je consulteren door ctrl + shift + L te kiezen.  
-Een aantal interessante shortcuts die je moet uitproberen als labo-oefening:
-
-* ctrl + s
-* ctrl + l
-* alt + pijltje
-* ctrl + d
-* ctrl + shirt + r
-* ctrl + o
-* ctrl + shift + pijltje
-* ctrl + e
-* f3
-* ...
-
-
-### Stap: Creatie van een C-project  
 Als je nog geen project hebt aangemaakt (of een nieuwe oefening wil starten) dan dien je een nieuw project aan te maken.  
 
-* Kies File | New C Project 
+* Kies File | New C Project
 * Voer een projectnaam in en klik op Finish
 * Selecteer onder Executable/Empty Project aan
-* Selecteer dan MingW GCC, Linux GCC of GCC (afhankelijk van het OS), kies geen Cross GCC dit dient als je wil compilen naar een ander target dan je eigen PC (bijvoorbeeld als we de komende lessen voor AVR gaan compilen)
+* Selecteer dan Cygwin GCC, Linux GCC of GCC (afhankelijk van het OS)
+
+> Kies voorlopig nog geen Cross GCC, deze optie wordt gebruikt als je wil compilen naar een target verschillend van je eigen PC  
+> Dit komt snel terug als we de komende lessen met AVR gaan werken binnen Eclpse
 
 ![](../../pictures/tools_eclipse_new_project_s.png)
- 
-Daarna zie je het bestaande project beschikbaar in de "Project Explorer" 
+
+Daarna zie je het bestaande project beschikbaar in de "Project Explorer"
 
 > By default zal een project in de map van een workspace worden gecreëerd.  
-> Je kan hier echter van afwijken bij de creatie van een project. 
+> Je kan hier echter van afwijken bij de creatie van een project.
 
 ### Step: Code schrijven  
 
-Als je binnen een project een nieuw c-file willen aangemaken je dit door:
+Als je binnen een project een **nieuwe c-file** willen aangemaken je dit door:
 
 * Het project aan te klikken
 * In het menu kiezen File | New File | Source File (of door op het project met de rechtermuisknop te klikken)  
@@ -138,7 +121,7 @@ Als je binnen een project een nieuw c-file willen aangemaken je dit door:
 
 Daarna zie je file in de src-folder van het betreffende project
 
-!!!! **Let wel:** !!!! 
+!!!! **Let wel:** !!!!
 
 * vergeet niet de extensie .c na de file te zetten
 * gebruik een eenvoudige maar duidelijke naam
@@ -146,7 +129,7 @@ Daarna zie je file in de src-folder van het betreffende project
 
 ### Builden/Compilen
 
-Alvorens je code uit te voeren dien je deze te compilen (we zien later hoe dat je dit via command line kan doen).  
+Alvorens je code uit te voeren dien je deze te **compilen** (of builden) zoals we dit eerder per command-line hebben gedaan.  
 Dit kan je doen door:
 
 * Het project aan te klikken
@@ -165,4 +148,23 @@ Dit kan je doen door:
 Je kan dit ook door op het groene pijltje te klikken (midden onder het menu).  
 Let wel, op dit pijltje klikken zal de laatste uitgevoerde applicatie opnieuw uitvoeren (in het geval er meerdere applicaties zijn).    
 
+### Tip: shortcuts
 
+
+Er zijn nog honderd(duizenden) features in Eclipse die de moeite waard zijn om te ontdekken, maar zoals eerder vermeld is dit geen complete gids.
+
+IDE's zoals Eclipse (en ook andere zoals IntelliJ en Netbeans) hebben een uitgebreid gamma als shortcuts (key-combinaties).  
+Om je productiviteit te verhogen, een overzicht van deze shortcuts kan je consulteren door ctrl + shift + L te kiezen.  
+
+Een aantal **interessante shortcuts** die je moet uitproberen als labo-oefening:
+
+* ctrl + s
+* ctrl + l
+* alt + pijltje
+* ctrl + d
+* ctrl + shirt + r
+* ctrl + o
+* ctrl + shift + pijltje
+* ctrl + e
+* f3
+* ...

@@ -23,40 +23,47 @@ In dit 3de deel bekijken de resterende fucntionaliteiten:
 * **switch**-statements
 
 
-### Voorbeeld: do while
+### De "do while"-loop
 
-De while- en for-loop die we tot nog toe hebben gezien zijn entry-condition-loops.
-Dit wil zeggen dat je een stuk-code enkel en alleen uitvoert als het de conditie voldaan is.
+De **while- en for-loop** die we tot nog toe hebben gezien zijn **entry-condition-loops**.
+Dit wil zeggen dat je een stuk **code** (binnen de brackets) enkel en alleen **uitvoert als het de conditie voldaan is**.
 
-C bevat ook een exit-condition-loop, namelijk een loop die eindigt als een conditie niet voldaan is.
+In C bestaat er ook nog de "do while"-loop, deze is een voorbeeld van een **exit-condition-loop**.   
+Namelijk een loop die **eindigt als een conditie niet voldaan is**, maw de code inde loop zal minstens 1 maal worden uitgevoerd.
 
-```{.c}
+#### Voorbeeld "do-while"
+
+Als **voorbeeld** nemen we een programma dat blijf loopen zolang je geen **geldige toegangs-code** ingeeft:
+
+```c
 #include <stdio.h>
-
-#define GELDIGE_CODE     13
 
 int main(void)
 {
- int code;
+    int code;
     do
     {
         printf("Om toegang te verkrijgen, \n");
         printf("voer de geheime code in : ");
         scanf("%d", &code);
-    } while (code != GELDIGE_CODE);
+    } while (code != 13);
     printf("Welkom!\n");
 
     return 0;
 }
 ```
 
-Als je dezelfde functionaliteit zou willen schrijven met een gewone while-loop zou
-duplicatie krijgen:
+De code binnen de loop - het inlezen van de geheime code -  moet zowiezo minstens 1 maal uitgevoerd worden.  
+De test (is de code verschillend van de toegangscode 13) wordt na het uivoeren van deze code pas uitgevoerd.  
+Als de test true oplevert (code is verschillend van 13) zal de code binnen de loop opnieuw worden uitgevoerd.  
 
-```{.c}
+#### Do-while vs while
+
+Je kan dezelfde functionaliteit ook schrijven met een gewone while-loop.
+In dat geval moet je echter 2 maal de "inlees"-code schrijven...
+
+```c
 #include <stdio.h>
-
-#define GELDIGE_CODE     13
 
 int main(void)
 {
@@ -66,41 +73,36 @@ int main(void)
   printf("voer de geheime code in : ");
   scanf("%d", &code);
 
- while (code != GELDIGE_CODE) {
+ while (code != 13) {
         printf("Om toegang te verkrijgen, \n");
         printf("voer de geheime code in : ");
         scanf("%d", &code);
-    } ;
-    printf("Welkom!\n");
+  }
+  printf("Welkom!\n");
 
-    return 0;
+  return 0;
 }
 ```
 
-### Duiding: wanneer do while gebruiken
+#### Wanneer do while gebruiken?
 
-In het vorige voorbeeld zien we dat we do-while kunnen gebruiken om herhaling te vermijden.
+In het vorige voorbeeld zien we dat we do-while kunnen gebruiken om **herhaling te vermijden**.
 
 In de praktijk wordt deze do while minder gebruikt als while- en for-loops
 
-De regel is simpel hier, gebruik do while enkel als je code er leesbaarder door wordt (door bijvoorbeeld herhaling te vermijden)
+De regel is simpel hier, gebruik do while **enkel als je code er leesbaarder** door wordt (door bijvoorbeeld herhaling te vermijden)
 
-### Duiding: Break- en continue-statements
+### Break- en continue-statements
 
-In bepaalde gevallen wil op onverwachte ogenblikken een loop verlaten of een aantal stappen overslaan.
-Hiervoor bestaan 2 keywords:
+In bepaalde gevallen wil op onverwachte ogenblikken een **loop verlaten of** een aantal stappen **overslaan**.
+Hiervoor bestaan 2 keywords, namelijk **break** en **continue** ...
 
-* **break**  
-  Onderbreken van de code in de clausule vanaf de lijn van deze statement (en de loop).
-  De test-evaluatie wordt niet meer uitgevoerd
+#### Break-statement
 
-* **continue**  
-  Onderbreken van de code in de clausule.
-  De test-evaluatie wordt wel opnieuw uitgevoerd
+Break zorgt ervoor dat je **loop** wordt **afgebroken**.  
 
-### Voorbeeld: continue-statement
-
-```{.c}
+In het voorbeeld hieronder zal de loop worden afgebroken als i gelijk is aan 3.
+```c
 #include <stdio.h>
 
 int main()
@@ -108,41 +110,53 @@ int main()
    int i;
 
    for(i=0;i<5;i++) {
-    if(i%2 == 0) {
+      if(i==3) {
+        break;
+      }
+      printf("%i ",i);
+   }
+   printf("\nNa de loop...\n");
+   return 0;
+}
+```
+
+Waar deze loop zonder break "0 1 2 3 4" zou afdrukken, wordt er met break maar tem 2 afgedrukt 
+
+```
+0 1 2
+Na de loop
+```
+
+#### Continue-statement
+
+Een continue is gelijkaardig aan een break, de code volgende op de continue wordt niet meer uitgevoerd.  
+Het grote verschil echter is dat de loop wel wordt verdergezet, in het
+
+
+```c
+#include <stdio.h>
+
+int main()
+{
+   int i;
+
+   for(i=0;i<5;i++) {
+    if(i == 3) {
      continue;
     }
      printf("%i ",i);
    }
+   printf("\nNa de loop...\n");
    return 0;
 }
 ```
 
 ```
-1 3
+0 1 2 4
+Na de loop
 ```
 
-### Voorbeeld: break-statement
 
-```{.c}
-#include <stdio.h>
-
-int main()
-{
-   int i;
-
-   for(i=0;i<5;i++) {
-    if(i==3) {
-     break;
-    }
-       printf("%i ",i);
-   }
-   return 0;
-}
-```
-
-```
-0 1 2
-```
 
 
 ### Duiding: Conditionele expressie/operator
