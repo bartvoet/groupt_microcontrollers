@@ -14,18 +14,18 @@ Gegeven:
 * De USART-abstracties die was meegegegeven uit de USART
 * De code om de een L3G4200D aan te spreken
 
-### Deel A: download de datasheet 
+### Deel A: download de datasheet
 
 We werken met een gyroscoop L3G4200D.
-Download de datasheet, zet de url naar deze datasheet in commentaar in de code (deel C) 
+Download de datasheet, zet de url naar deze datasheet in commentaar in de code (deel C)
 
-#### Deel B: 
+#### Deel B:
 
 Maak een header-file aan met de naam i2c.h.
 
 Deze bevat volgende operaties:
 
-```{.c}
+```c
 i2c_start_conditie();
 i2c_versturen(unsigned char byte);
 i2c_start_conditie();
@@ -44,12 +44,12 @@ Gebruik hiervoor de datasheet en wat we gezien hebben in de les.
 
 De code om de gyroscoop aan te roepen is gegeven (dus je moet enkel het TWI/I2C gedeelte impementeren)
 
-### Deel D: maak een connectie tussen de PMOD Gyro en test 
+### Deel D: maak een connectie tussen de PMOD Gyro en test
 
 Test deze code uit.
 Belangrijk is de gyroscoop te connecteren op 3.3 VCC en niet op de 5 V
 
-### Deel E: documenteer 
+### Deel E: documenteer
 
 Vul aan verklaring?? in de gegeven code
 
@@ -76,14 +76,14 @@ Vul aan verklaring?? in de gegeven code
 void schrijf_naar_register(int deviceAddress, unsigned char reg, unsigned char val) {
     i2c_start_conditie();
     i2c_versturen((deviceAddress << 1) + 0);
-    i2c_versturen(reg); 
-    i2c_versturen(val); 
+    i2c_versturen(reg);
+    i2c_versturen(val);
     i2c_stop_conditie();
 }
 
 unsigned char lees_uit_register(int deviceAddress, unsigned char code) {
     i2c_start_conditie();
-    i2c_versturen((deviceAddress << 1) + 0); 
+    i2c_versturen((deviceAddress << 1) + 0);
     i2c_versturen(code);
 
     i2c_start_conditie();
@@ -162,7 +162,3 @@ int main(void) {
     return 0;
 }
 ```
-
-
-
-

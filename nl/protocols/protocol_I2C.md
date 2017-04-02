@@ -21,11 +21,11 @@ Deze 2 draden – SDA (seriele data) en SCL (seriele clock) – zijn bidirection
 Zowel de transmissie van de master naar slave als het antwoord van de slave(s) naar de master worden gedeeld over dezelfde (SDA) data-lijn (dit in tegenstelling tot SPI die voor beide richtingen een data-lijn nodig heeft).  
 Deze bi-directionaliteit wordt mogelijk gemaakt door dat de pinnen (of drivers) van zowel de i2c-slave(s) als i2c-masters open-collector (of open-drain voor FET's) zijn.  
 
-![I2C bus](../../pictures/i2c_lines.png)
+![](../../pictures/i2c_lines.png)
 
 Beide draden (SDA en SCL) moeten verbonden aan een positieve spannings-bron via een **pull-up-weerstand**, hierdoor kunnen de pinnen (drivers) van de aangesloten IC's de spanning op deze lijn naar beneden trekken (zie transactie).
 
-![Open collector](../../pictures/opencollector.png)
+![](../../pictures/opencollector.png)
 
 Deze open-collector-pins op de IC kunnen de spanning naar beneden trekken door (principe van open collector via een transistor  zoals de tekening hierboven) stroom te trekken via deze pull-up weerstand.  
 Wanneer deze interne transistor echter gesloten wordt zal de spanning natuurlijk hoog blijven (tenzij een andere aangesloten IC deze naar beneden trekt.
@@ -37,7 +37,7 @@ Bij niet-activiteit (idle) blijven deze lijnen dus hoog, een master kan echter e
 * De SDA-lijn naar beneden te trekken (laag)
 * Gevolgd door SCL.
 
-![Start transactie](../../pictures/i2c_start_transaction.png)
+![](../../pictures/i2c_start_transaction.png)
 
 Dit signaleert alle ontvangers op de de bus dat een transmissie van een pakket zal starten.  
 Wanneer dan SCL laag is zal de master over SDA de eerste bit overbrengen (laag of hoog). Dit wordt de **start-conditie** genoemd.    
@@ -48,7 +48,7 @@ Deze transactie wordt beëindigd via een **stop-conditie**:
 * De SDA-lijn lost te laten (hoog)
 * Gevolgd door SCL (hoog)
 
-![Einde transactie](../../pictures/i2c_end_transaction.png)
+![](../../pictures/i2c_end_transaction.png)
 
 Door dit **aankondiging-systeem** kunnen er zich ook meerdere masters zich bevinden op deze ```I2C```-bus, bij gelijktijdig gebruik zal de bus die de lijn hoog wil laten maar laag wordt getrokken zijn transactie stoppen en een error-conditie genereren.
 

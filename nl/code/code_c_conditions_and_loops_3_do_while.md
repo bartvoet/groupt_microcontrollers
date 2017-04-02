@@ -100,8 +100,8 @@ Hiervoor bestaan 2 keywords, namelijk **break** en **continue** ...
 #### Break-statement
 
 Break zorgt ervoor dat je **loop** wordt **afgebroken**.  
-
 In het voorbeeld hieronder zal de loop worden afgebroken als i gelijk is aan 3.
+
 ```c
 #include <stdio.h>
 
@@ -120,7 +120,7 @@ int main()
 }
 ```
 
-Waar deze loop zonder break "0 1 2 3 4" zou afdrukken, wordt er met break maar tem 2 afgedrukt 
+Waar deze loop zonder break "0 1 2 3 4" zou afdrukken, wordt er met break maar tem 2 afgedrukt
 
 ```
 0 1 2
@@ -129,7 +129,7 @@ Na de loop
 
 #### Continue-statement
 
-Een continue is gelijkaardig aan een break, de code volgende op de continue wordt niet meer uitgevoerd.  
+Bij een continue-statement wordt de code volgende op de continue wordt niet meer uitgevoerd (net zoals bij ).  
 Het grote verschil echter is dat de loop wel wordt verdergezet, in het
 
 

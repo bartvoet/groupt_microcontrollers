@@ -47,7 +47,7 @@ Indien CPHA = 1 en CPOL = 1 wordt de data gewijzigd op de falling en gesampled o
 Net zoals voor de tellers, TWI, Uart enzovoort, beschikt de Atmega ook over een hardwarematige SPI-eenheid.  
 Het blokdiagram hiervan is geillustreerd op de onderstaande figuur:
 
-![SPI op de ATMEGA](../../pictures/spi_on_atmega.png)
+![](../../pictures/spi_on_atmega.png)
 
 De slave select uitgang zal niet door de SPI-logica worden aangestuurd wanneer deze als master staat ingesteld. De bedoeling van een slave select is immers "om een slave te selecteren" dit kan men moeilijk in hardware implementeren omdat men niet kan voorzien hoeveel slaves er zullen zijn (per slave moet er een fysieke lijn gemaakt worden), en men weet ook niet welke slave(s) jij zal willen adresseren met een bepaald bericht.  
 Indien daarentegen de SPI controller als slave staat ingesteld, hoeft deze enkel zijn eigen CS (chip

@@ -132,6 +132,10 @@ CHAPTER_10 += ../code/code_c_character_classes_2.md
 CHAPTER_11 += ../chapter/chapter11_i2c_spi.md
 CHAPTER_11 += ../../general/pandoc_page_break.txt
 CHAPTER_11 += ../protocols/protocol_I2C.md
+CHAPTER_11 += ../../general/pandoc_page_break.txt
+CHAPTER_11 += ../protocols/protocol_SPI.md
+CHAPTER_11 += ../../general/pandoc_page_break.txt
+CHAPTER_11 += ../labo/labo_i2c.md
 
 CHAPTER_12 += ../chapter/chapter12_python.md
 CHAPTER_12 += ../../general/pandoc_page_break.txt
@@ -142,7 +146,7 @@ CHAPTER_12 += ../code/code_python_serial.md
 
 pagebreak = ../../general/pandoc_page_break.txt
 
-CHAPTERS = part01_minimal_knowledge.md $(pagebreak) $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part01_minimal_knowledge_summary.md part02_foundation.md $(CHAPTER_05) $(CHAPTER_06) #$(CHAPTER_07) $(CHAPTER_08) $(CHAPTER_09) $(CHAPTER_10) $(CHAPTER_11) $(CHAPTER_12)
+CHAPTERS = part01_minimal_knowledge.md $(pagebreak) $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part01_minimal_knowledge_summary.md part02_foundation.md $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) $(CHAPTER_08) $(CHAPTER_09) $(CHAPTER_10) $(CHAPTER_11) $(CHAPTER_12)
 
 graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
 grap_convert = gvpr -c '$(1)' ./graphviz/$(2).dot | dot -Tpng -o ./pictures/$(3).png
