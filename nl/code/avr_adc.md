@@ -23,7 +23,7 @@ Zulke sensors zullen:
 ![](../../pictures/sensors_transduction.png)
 
 Deze elektronische (analoge) signalen moeten door de **digitale** processoren van onze microcontrollers (AVR, ARM, PIC,...) omgezet worden in discrete getallen en bytes.  
-Om dit te kunnen uitvoeren gebruiken we ADC (ofwel **A**nalog **D**igital **C**onversion), een mechanisme dat samples van een analoog signaal zal nemen en deze omrekenen naar een discrete waarde.
+Om dit te kunnen uitvoeren gebruiken we ADC (ofwel Analog Digital Conversion), een mechanisme dat samples van een analoog signaal zal nemen en deze omrekenen naar een discrete waarde.
 
 
 ### Duiding: ADC-hardware
@@ -73,8 +73,8 @@ We leggen dit uit aan de hand van een voorbeeld (cijfers abritrair gekozen):
 
 * De referentie-spanning is 8 v
 * De input is 2.76
-* Het resultaat van onze meting wordt opgevangen in een 4 bit register  
-  (in werkelijkheid is het een 10-bit register)
+* Het resultaat van onze meting wordt opgevangen in een **4 bit register**  
+  (in werkelijkheid is het een 10-bit register, we proberen het gemakkelijk uit te leggen)
 
 ![](../../pictures/table_succesive_aproximation.png)
 
@@ -102,8 +102,8 @@ Als we hier nu de volgende berekeningen op los laten:
 ```
 Max-waarde 2 ^ 16       = 16
 ADC        0101         =  5
-Verhouding 16/5         =  0,3125
-Spanning   0,3125 * 8 v =  2,5
+Verhouding 5/16         =  0,3125
+Spanning   0,3125 * 8 v =  2,5 (= 5/16 * 8 v)
 ```
 
 #### Nauwkeurigheid
@@ -111,8 +111,6 @@ Spanning   0,3125 * 8 v =  2,5
 We hebben in dit geval de spanning kunnen bepalen met een nauwkeurigheid van ```0.5 V = 8 V / 2 ^ 4```
 
 Om het voorbeeld éénvoudig te houden gebruikten we een 4 bit nauwkeurigheid , in werkelijkheid hebben we een 10-bit nauwkeurigheid (8 / 2 ^ 10 = 0,0078125).  
-Als je dan de werkelijke waarde zou willen weten moet je de volgende formule toepassen:
-
 
 ### Setup: LDR en spannings-deling
 

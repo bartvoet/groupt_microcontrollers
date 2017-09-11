@@ -1,4 +1,4 @@
-## Directe output met timers
+## Van timer naar generator (en PWM)
 
 Tot nog toe bekeken we de timer/counter-architectuur puur **vanuit het gebruik als timer**.  
 Vanuit interrupt-code (of via directe interactie met het TIFR-register in de main) stuurden we 1 van de gpio-pinnen aan.
@@ -20,7 +20,7 @@ Voor bijvoorbeeld timer 1 noemen deze **OC1A** en **OC1B** en komen deze respect
 ### Voorbeeld: compare output mode
 
 Het gebruik van deze pinnen is een basis-bouwsteun naar de andere PWM-modes toe.  
-We starten met een kleine demonstratie in de al vertrouwde CTC-mode.  
+We starten met een kleine demonstratie in de al vertrouwde CTC-mode (clear timer on compare).  
 
 > **Let wel:**  
 > Je moet nog altijd de betreffende pinnen al output aanduiden.  
@@ -50,7 +50,7 @@ int main(void)
       return 0;
 }
 ```
-Het grootste deel van de code is identiek aan vorige voorbeelden:
+Het grootste deel van de code is identiek aan voorgaande timers-voorbeelden:
 
 * Initialiseren van de pinnen
 * Configuratie van de prescaler (clock-select)
@@ -60,9 +60,9 @@ Het grootste deel van de code is identiek aan vorige voorbeelden:
 We zien echter 2 verschillen:
 
 * **Geen rechtstreeks** setten of clearen van **GPIO's**
-* Het instelen van een andere **Compare Output Mode**
+* Het instelen van een andere **Compare Output Mode** (zie tabel met in datasheet)
 
-Deze configuratie (COM1A0 en COM1B0) zorgt ervoor dat OC1A/OC1B worden getoggled als een compare wordt bereikt op een respectievelijk OCR1A/OCR1B.
+Deze configuratie van de **Compare Output Mode**, (COM1A0 en COM1B0 waren daarvoor 00) zorgt ervoor dat OC1A/OC1B worden getoggled als een compare wordt bereikt op een respectievelijk OCR1A/OCR1B.
 
 > Kijk als oefening in de datasheet voor de tabel die dit gedrag beschrijft   
 > (hint: vlak bij de beschrijving van TCCR1A-register)
@@ -77,12 +77,12 @@ Als je de code wijzigt en beide OCR1A en OCR1B op 100 zet krijg je volgend resul
 
 ### Vervolg...
 
-Door CTC te gebruiken kunnen we:
+Door CTC (met deze nieuwe Compare Output Mode) te gebruiken kunnen we:
 
 * **Zonder software-acties** (buiten configuratie) 2 blok-golven aansturen
 * Op 2 uitgangen
 * Wijzigen van **OCR1A** stelt ons in staat de frequentie te wijzigen
 * Door **OCR1B** te manipuleren kunnen we de fase wijzigen
 
-Wat er nog ontbreekt echter, om PWM te kunnen genereren, is het genereren van een duty-cycle.  
+Wat er nog ontbreekt echter, om PWM te kunnen genereren, is het genereren van een duty-cycle (momenteel staat deze vast op 50 %).  
 Dit kan door het gebruik van andere PWM-Modes, hier komen we nog snel op terug...

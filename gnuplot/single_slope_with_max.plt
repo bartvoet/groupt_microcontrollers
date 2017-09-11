@@ -12,8 +12,8 @@ set grid xtics lt 0 lw 1 lc rgb "#880000"
 set xtics 256
 
 
-set label "TOP==MAX==255" center at 384,256 offset 0, 0.8
-set label "TOP<>MAX==128" center at 820,127 offset 0, 0.8
+set label "MAX==TOP==255" center at 384,256 offset 0, 0.8
+set label "MAX<>TOP==128" center at 820,127 offset 0, 0.8
 
 set label "256" center at 128,0 offset 0, 0.8
 set arrow from 0,0 to 256,0 heads

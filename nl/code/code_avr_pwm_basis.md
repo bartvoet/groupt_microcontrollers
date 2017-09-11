@@ -86,13 +86,13 @@ Een teller met zo'n **zaagtand**-vorm benoemen we **single-slope**-teller (1 hel
 * Tot de top-waarde 255 (top-waarde voor 8-bit resolutie)
 * Zal terug naar de bodem-waarde gaan
 
-### Bottom en Top
+### Bottom en Max
 
 Aan deze zaagtand zijn dus 2 belangrijke **boundaries** verbonden:
 
 * Een **BOTTOM**-waarde:  
   De "bodem"-waarde vanaf waar men (terug) begint naar boven te tellen.
-* een **TOP**-waarde:   
+* een **MAX**-waarde:   
   De hoogste waarde die deze teller kan bevatten (afhankelijk van de resolutie).    
 
 In dit voorbeeld werken we met een **8-bit** teller en is deze **TOP** gelijk aan **0xFF** (255).   
@@ -103,22 +103,22 @@ Bij een **16-bit** teller zou dit **0xFFFF** (65535) zijn
 > **Gemakkelijkshalve** laten we de **werkelijke snelheid** van de klok **achterwege**, we gaan er van uit dat deze snelheid een **constante** is.  
 > Als we over de implementatie op de **AVR** starten zullen we deze frequentie afleiden van de basis-klok zoals we dat eerder bij timers dede.  
 
-### Max (en frequentie)
+### TOP (vs frequentie)
 
-Met de vaste **BOTTOM** en **TOP** blijft de **frequentie** echter op een **constant** niveau zitten  van **256** ticks (0-255 bij 8-bit).
+Met de vaste **BOTTOM** en **MAX** blijft de **frequentie** echter op een **constant** niveau zitten  van **256** ticks (0-255 bij 8-bit).  
+(ook natuurlijk afhankelijk van de onderliggene counter/timer + prescaler)
 
-Bij **PWM** is kan je natuurlijk niet voor elke toepassing de zelfde frequentie toe te passen.   
-Daarom voegen we het concept **MAX** toe:
+Bij **PWM** kan je frequentie-keuze nog verfijnen door het concept van **MAX** toe te voegen:
 
 ![](../../gnuplot/single_slope_with_max.png)
 
-Waar **TOP** de absolute grens was is **MAX** nu de feitelijke maximum waarde tot waar we kunnen tellen.  
-Deze hoeft (zie hierboven) niet gelijk te zijn aan **TOP** (maar dient vanzelfsprekend welk kleiner te zijn).  
+Waar **MAX** de absolute grens was, is **TOP** nu de **feitelijke maximum waarde** tot waar we kunnen tellen.  
+Deze hoeft (zie hierboven) niet gelijk te zijn aan **MAX** (maar dient vanzelfsprekend welk kleiner te zijn).  
 
-Door max te laten varieren kunnen we de **frequentie** of **periode** van het het **optellen** **wijzigen**:  
+Door top te laten varieren kunnen we de **frequentie** of **periode** van het het **optellen** **wijzigen** zonder de onderliggende timer te manipuleren:  
 
 * Bij de eerste 2 slopes is deze MAX==TOP en zitten we op een periode van 256 ticks
-* Bij de slopes die daarop volgen brengen MAX naar 128 waardoor we een kortere periode krijgen (ook 128 gezien de BOTTOM==0)
+* Bij de slopes die daarop volgen brengen we TOP naar 128 waardoor we een kortere periode krijgen (ook 128 gezien de BOTTOM==0)
 
 ### PWM maken met een teller?
 
@@ -134,7 +134,7 @@ We passen de volgende sequentie toe:
 
 1. Wanneer de **teller** aan de **BOTTOM**-waarde zit **set** je een signaal => lijn gaat **HOOG**
 2. Wanneer de teller een **COMPARE** OF **MATCH**-waarde hebt **clear** je dit signaal => lijn gaat **LAAG**
-3. Bij het bereiken van de **MAX**-waarde zal de teller zich naar de **BOTTOM**-waarde
+3. Bij het bereiken van de **TOP**-waarde zal de teller zich naar de **BOTTOM**-waarde
 4. ... Het process herhaalt zich bij punt 1:
      * Het signaal zet zich terug **HOOG** zetten (zie punt 1)
      * We tellen terug omhoog richting punt 2
@@ -168,7 +168,7 @@ In bovenstaand voorbeeld:
 
 ![](../../gnuplot/single_slope_with_one_output_varying_freq.png)
 
-In bovenstaand voorbeeld zien we ook dat als we het **MAXIMUM** ook onrechtstreeks van invloed is op de **duty-cycle** als je niet tegelijkertijd de **MATCH** aanpast:
+In bovenstaand voorbeeld zien we ook dat als we de **TOP** ook onrechtstreeks van invloed is op de **duty-cycle** als je niet tegelijkertijd de **MATCH** aanpast:
 
 * De eerste **2 pulsen**, zoals voorgaande voorbeelden geven een duty-cycle van ~50 %.
 * Bij de **3de puls** echter **wijzigt** de **frequentie**.  
@@ -223,11 +223,11 @@ Het gedeelte dat de teller onder deze **COMPARE**-waarde zit bepaalt (net zoals 
 De **duty-cycle** **verspreidt** zich bij een **dual slope** als ware over **2 delen**/helften van de puls.  
 
 
-### Voor -en nadelen van Dual Slope
+### Voor- en nadelen van Dual Slope
 
 Dit heeft 2 belangrijke **(zij-)effecten**:
 
-* De puls zal **2 * zo traag** zijn in verhouding tot een type **single slope** **(nadeel)**  
+* De puls zal **2 maal zo traag** zijn in verhouding tot een type **single slope** **(nadeel)**  
   Je telt 1 maal naar top en naar bottom
 * De puls zal echter altijd in **dezelfde fase** blijven **(voordeel)**  
  ongeacht de **match**-waarde  
@@ -242,3 +242,21 @@ Het in fase blijven van de 2 outputs wordt nog meer duidelijk als je een **dual 
 ook al verander je de duty-cycle behouden we dezelfde verhouding:
 
 ![](../../gnuplot/dual_slope_with_two_outputs_and_duty_cycle_change.png)
+
+### Samengevat
+
+We hebben een **teller-functie** grafisch voorgesteld:
+
+* In functie van tijd (x-as)
+* Als tellerwaarden (y-as)
+* Die lineair stijgt (en daalt in geval van een dual slope)
+* Tot dat we aan een TOP-waarde geraken
+* zich reset naar BOTTOM (0)
+
+Op basis van deze teller-functie hebben we de eigenlijde **pwm-functie**
+
+* (ook) in functie van tijd (x-as)
+* met als waarde 0 of 1
+* die togglet als de teller-functie een COMPARE-waarde bereikt
+
+**TOP** zal de frequentie bepalen waar **COMPARE** de duty-cycle zal bepalen
