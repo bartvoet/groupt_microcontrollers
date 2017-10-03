@@ -15,7 +15,7 @@ Linux en Max hebben verschillende programma's waarmee je toegang kan hebben tot 
 ![](../../pictures/bash_terminal.png)
 
 
-Afhankelijk van de windows-versie open je via het menu (onder "accessoires" of "administrative tools") het programma CMD.  
+ 
 Eenmaal gestart krijg je een scherm zoals hieronder:  
 
 ~~~bash
@@ -80,7 +80,7 @@ bart@bvpers4 ~/een_eerste_programma $ pwd
 bart@bvpers4 ~/een_eerste_programma $
 ~~~
 
-Dit start altijd me een verwijzing naar de root-directory (in het geval van Windows is dit een schijf)
+Dit start altijd me een verwijzing naar de root-directory
 
 * **relatief** verwijst naar een locatie relatief naar je huidige directory
 
