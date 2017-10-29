@@ -599,6 +599,10 @@ void print_hello()
 Dit kan je echter oplossen door een **functie-prototype** te gebruiken.  
 Dit is een declaratie om de compiler aan te geven dat deze functie later in het programma zal worden gedefiniëerd.
 
+> Je komt in literatuur ook soms de term **"Forward Declaration"** tegen.  
+> Je declareert als het ware op voorhand een functie aan...
+
+
 ```c
 #include <stdio.h>
 
