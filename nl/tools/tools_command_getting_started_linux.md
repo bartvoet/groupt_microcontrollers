@@ -6,23 +6,19 @@ Ondanks het feit dat sommige commando's bekend voorkomen uit de DOS-prompt, zijn
 We gaan nu een overzicht maken van de meest gebruikte commando en principes.  
 We doen dit aan de hand van hetzelfde voorbeeld, dat we achteraf terug gebruiken voor onze eerste oefening met een compiler.  
 
-
-
 ### Bash-shell openen
 
 Linux en Max hebben verschillende programma's waarmee je toegang kan hebben tot de shell.
 
 ![](../../pictures/bash_terminal.png)
 
-
- 
 Eenmaal gestart krijg je een scherm zoals hieronder:  
 
 ~~~bash
 bart@bvpers4 ~ $
 ~~~
 
-Deze **promp** :
+Deze **prompt** :
 
 * geeft mee welke **user** ingelogd is
 * geeft aan welk **path** momenteel is gereferenceerd  
