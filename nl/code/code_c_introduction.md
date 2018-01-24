@@ -741,6 +741,39 @@ Om een waarde in een variabele in te lezen in een getal:
 > Deze & gaan we momenteel nog niet verklaren (werken met pointers zal een volledig aparte les innemen), ga er voorlopig van uit je dit moet doen.  
 > Ook van deze printf- en scanf-methoden hebben we enkel nog maar het tipje van de ijsberg gezien, voorlopig leggen we enkel het nodige uit om zo snel mogelijk aan de slag te gaan.
 
+### Commentaar
+
+Alle elementen tot nog toe gezien, worden vertaald (tijdens het compilen) naar uitvoerbare code.  
+De C-taal voorziet echter ook de mogelijk tekst toe te voegen aan je code die enkel als commmentaar dienen.
+
+Deze stukken tekst kan je aanduiden op 2 manieren:
+
+* Na een dubbele slash (```//```) wordt alles op 1 lijn gezien als commentaar
+* Alles tussen ```/*``` en ```*/```
+
+```c
+//je kan eender waar in je programma commentaar plaatsen
+#include <stdio.h>
+
+/*
+Dit is een demonstratie programma
+*/
+
+int main() /*de main-functie is de start van elk c-programma*/
+{
+  //dit is de declaratie van 2 variabelen
+  int getal1,getal2;
+
+  //we gebruiken deze
+  printf("Geef getal 1 in ");//commentaar hoeft niet op een apparte lijn te staan
+  scanf("%i",&getal1);
+  printf("Geef getal 2 in ");
+  scanf("%i",&getal2);
+  printf("Het resultaat van %i + %i is %i", getal1, getal2, (getal1 + getal2));
+  return 0;
+}
+```
+
 ### Tot hier toe ...
 
 Hebben we de eerste stap gezet in het programmeren
