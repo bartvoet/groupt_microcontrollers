@@ -1,18 +1,18 @@
 
 ## Het vak "Microcontrollers"
 
-* Wat houdt de cursus microcontrollers gegeven in ACE Groep T?
+* Wat houdt de cursus microcontrollers gegeven in Mobyus?
 * Hoe past deze cursus binnen de opleiding?
 * Wat ga je hier leren?
 
 ### Situering van de module binnen de opleiding
 
-In de opleidingen 
+In de opleidingen
 
 * **digitale combinatorische**
 * **digitale sequentiële**
 
-heb je geleerd van - **hardwarematig** - logische devices te maken door te werken met: 
+heb je geleerd van - **hardwarematig** - logische devices te maken door te werken met:
 
 * Combinatorische logica te maken met logiche poorten
 * Geheugen-elementen hier aan toe te voegen (flipflops, shift-registers, ...)
@@ -38,15 +38,14 @@ In deze cursus leren we omgaan met deze **"kleine computers"** of **microcontrol
 We weken in deze cursus met AVR-microcontrollers, maar het uiteindelijke **doel/resultaat** van/na de cursus:
 
 * Voldoende (minimale) **basiskennis** van C relevant voor het werken met MCU
-* **Zelfstandig** met microcontrollers werken door datasheets te analyzeren
+* **Zelfstandig** met microcontrollers werken door **datasheets te analyzeren**
 * En al doende een **nieuwe microcontroller**-architectuur te begrijpen
-* **Basis-kennis/pakket** hebben van de belangrijkste en voornaamste 
+* **Basis-kennis/pakket** hebben van de belangrijkste en voornaamste
       * **technieken** (registers, interrupts, timers, ...)
-      * **peripherals** (gpio,pwm, adc, i2c, spi, ...) 
+      * **peripherals** (gpio,pwm, adc, i2c, spi, ...)
 
 > Met andere woorden, na deze cursus wordt je in je eindwerk (en andere vakken) heel waarschijnlijk geconfronteerd met een microcontroller.  
 > Met deze cursus willen je klaarstomen om dit op een zo zelfstandige basis te kunnen verwerken.
-
 
 ### Samenstelling cursus/Verschillende aspecten
 
@@ -59,10 +58,11 @@ Het low-level en embedded programmeren steunt op een goede kennis van het platfo
 Afhangende van het onderwerp zullen we dieper ingaan op instructie-sets, processsor-architectuur, opbouw van communicatie-protocols, ADC, ...  
 
 * **Toepassing: tools en labo's**  
-Het leren werken de benodigde tools zoals compilers, flash-tools, debuggers,  ...
+Het leren werken de benodigde tools zoals compilers, flash-tools, debuggers, versie-beheer, ...
 
 * **Elektronica** en **integratie**
-Herhaling vanuit de andere elektronica-vakken waar nodig (bijvoorbeeld pull-up en pull-down, PWM, ...)
+Herhaling vanuit de andere elektronica-vakken waar nodig (bijvoorbeeld pull-up en pull-down, PWM, ...)  
+(er is in principe buiten een basiskennis van elektronica geen grote voorkennis vereist op dit gebied)
 
 * **Vrij Project**-werk  
 Naast het labo-werk wordt er wat extra aanvullend materiaal ter beschikking gesteld om een gemeenschappelijk projectje te doen.  

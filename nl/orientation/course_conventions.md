@@ -1,5 +1,5 @@
 
-## Principes en afspraken
+## Afspraken en conventies
 
 ### We starten van nul
 
@@ -43,11 +43,15 @@ De **evaluatie** wordt gedaan op basis van:
 ### Aanwezigheden
 
 Zoals hierboven vermeld is dit een **labo-vak** en wordt er verwacht van de student **aanwezig** is.  
-In geval van **verwittigen** en/of goede reden kan een uitzonderlijke afwezigheid toegestaan worden zonder impact op de punten.
+In geval van **verwittigen** en/of **goede reden** kan een uitzonderlijke afwezigheid toegestaan worden zonder impact op de punten.
+
+Het kan gebeuren dat een student **reeds ervaring** heeft met één van de onderdelen van de cursus (bv met programmeren).  
+Voor deze studenten - indien zij sneller klaar zijn met de labo's - zullen er verdiepings-oefeningen (of extra project) worden voorzien (zoals eerder vermeld).  
+maw in deze gevallen wordt dus niet vroeger naar huis gegaan, tenzij hier een goede reden voor is.
 
 ### Labo's afgeven op Toledo
 
-Elke week/les verschijnt er een nieuwe labo,  deze  labo's dienen af gegeven te worden voor het verstrijken van de einddatum vermeld in het labo.  
+**Elke week/les** verschijnt er een **nieuwe labo**,  deze  labo's dienen af gegeven te worden voor het verstrijken van de einddatum vermeld in het labo.  
 Deze labo's moeten via Toledo worden te verstuurd, labo's verstuurd per mail worden niet geevalueerd (vragen rond het labo mogen vanzelfsprekend wel per mail worden verstuurd).  
 
 ### Projecten en workshops
@@ -56,10 +60,9 @@ Voor studenten die voorlopen op de cursus (reeds geprogrammeerd of met microcont
 
 ### Gebruik van eigen PC (of labo-PC)
 
-De oefeningen worden uitgevoerd op eigen PC bij voorkeur, de gebruikte software en toolchains zijn open en beschikbaar (+ getest) op de meeste besturingssystemen (Windows,Linux,Mac).
+De oefeningen worden uitgevoerd op eigen PC bij voorkeur, de gebruikte software en toolchains zijn open en beschikbaar (+ getest) op de meeste besturingssystemen (Windows,Linux,Mac).  
 Het is wel de bedoeling dat we dezelfde software gebruiken, in geval van problemen is het dan gemakkelijk een gemeenschappelijke oplossing te zoeken voor alle studenten.
 
 ### Aankondigingen
 
-Aankondigingen gebeuren op Toledo en per mail.
-Per mail is dat naar het Groep T-adres, indien je wilt dat ik ook een ander adres stuur kan dit ook.
+Aankondigingen gebeuren op Toledo en per mail (mail is het mail-adres zoals geregistreerd op Toledo).
