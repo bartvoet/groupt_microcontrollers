@@ -41,8 +41,8 @@ Er bestaan binnen de syntax van C 6 relationele operatoren:
 |:---------|:------------------------|
 | ```>```  | Groter dan              |
 | ```<```  | Kleiner dan             |
-| ```>=``` | Kleiner of gelijk dan   |
-| ```<=``` | Groter of gelijk dan    |
+| ```>=``` | Groter of gelijk aan   |
+| ```<=``` | Kleiner of gelijk aan    |
 | ```==``` | Gelijk aan              |
 |```!=```  | Niet gelijk aan         |
 
@@ -400,8 +400,8 @@ int main()
     	} else {
     		printf("Het getal %i is een positief oneven getal",input);
         }
-    } else if(input==0) {
-	printf("Het getal %i is noch even of oneven",input);
+    } else if(input == 0) {
+	     printf("Het getal %i is noch even of oneven",input);
     } else {
     	if((input % 2) == 0) {
     		printf("Het getal %i is een negatief even getal",input);
