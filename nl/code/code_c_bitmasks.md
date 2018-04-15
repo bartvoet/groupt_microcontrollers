@@ -111,9 +111,9 @@ int main()
     int test_getal= 0xAA;
 
     if(test_getal &  (1 << 3) | (1 << 6) {
-        printf("bit %i van testgetal %x is gezet\n",2,test_getal);
+        printf("bit %i of bit %i van testgetal %x is gezet\n",3,6,test_getal);
     } else {
-        printf("bit %i van testgetal %x is niet gezet\n",2,test_getal);
+        printf("zowel bit %i als bit %i van testgetal %x is niet gezet\n",3,6,test_getal);
     }
     return 0;
 }
