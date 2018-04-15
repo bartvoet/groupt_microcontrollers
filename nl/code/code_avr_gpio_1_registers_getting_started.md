@@ -7,7 +7,7 @@ In dit deel van de cursus (getting started) gebruiken we Arduino-borden (meer sp
 ![](../../pictures/intro_arduino_uno.jpg)
 
 
-De keuze op dit bord is gevallen om 2 belangrijke redenen: 
+De keuze op dit bord is gevallen om 2 belangrijke redenen:
 
 * Het programmeren van Arduino (en AVR in het algemeen) is goed gesupporteerd op zowat alle operating systemen (Linux, Mac OS X, Windows, ...)
 * Meest gebruikt microcontroller-bord ter wereld (voor starters en hobbyisten) met als gevolg  
@@ -22,7 +22,7 @@ De keuze op dit bord is gevallen om 2 belangrijke redenen:
 
 Arduino is eigenlijk niet alleen hardware, het bestaat uit de volgende onderdelen (die je in principe los van elkaar kunnen gebruiken):
 
-* Een volledig ontwikkel-board (MCU, geintegreerde USB-2-SERIAL, kristal, ...) uniform aan bepaalde specificaties dat het mogelijk maken van verschillende extensies (of  shields te produceren 
+* Een volledig ontwikkel-board (MCU, geintegreerde USB-2-SERIAL, kristal, ...) uniform aan bepaalde specificaties dat het mogelijk maken van verschillende extensies (of  shields te produceren
   (er bestaan trouwens meerdere fabrikanten die Arduino's of compatibele versies aanmaken)
 * Een bootloader (software die al op de MCU is geladen die andere programma's laadt en initialiseert)
 * Een ontwikkelingsomgeving die er voor zorgt dat je kan ontwikkelen zonder de specifieke (en low-level) details van het programmeren met de microcontroller moet kennen
@@ -32,7 +32,7 @@ De ontwikkel-omgeving is gebaseerd:
 * op de taal processing (sterk verwant met C++)
 * komt met zijn eigen libraries die het mgoelijk maken te programmeren op Arduino zonder de onderliggende architectuur
 
-Het voorbeeld hieronder toont de typische "Hello World" schrijft voor een Arduino 
+Het voorbeeld hieronder toont de typische "Hello World" schrijft voor een Arduino
 
 ```{.c}
 int led = 13;
@@ -62,7 +62,7 @@ om de volgende redenen:
 #### Programmeren in C
 
 Programmeren in C is een essentiële vaardigheid voor ieder die professioneel met MCU's wil werken (of zelfs elektronica in zijn geheel vandaag de dag).  
-Deze taal werkt in alle omgevingen, in alle situaties en laat je toe 
+Deze taal werkt in alle omgevingen, in alle situaties en laat je toe
 
 Deze taal is nog altijd (+- samen met/op deze zelfde hoogte als Java) de meest gebruikte programmeer-taal op deze planeet.  
 
@@ -73,13 +73,13 @@ Deze taal is nog altijd (+- samen met/op deze zelfde hoogte als Java) de meest g
 De vaardigheden die we willen aanleren is niet hoe dat je kan leren werken met een specifieke architectuur en omgeving.  
 Na deze cursus zou zelfstandig moeten kunnen leren een andere architectuur en/of setup te gebruiken zoals ARM, MSP, ...  
 
-Dit kan je enkel als je de vaardigheden: 
+Dit kan je enkel als je de vaardigheden:
 
 * De basis-principes van embedded programmeren kent, low-level memory, pointers, ...
 * Datasheets hebt leren lezen om een embedded omgeving te ontwikkelen
-	
+
 #### Het gaat hier om een opleiding naar het beroep van embedded ontwikkelaar (of elektronicus)   
-  
+
 De kans is groot dat als je in een beroepssituatie je niet zo maar kan kiezen welke ontwikkelings-omgeving en hardware je mag gebruiken.  
 Je moet daar ook met meestal zeer specifieke requirements of consideraties rekening houden, zoals onder andere:
 
@@ -112,18 +112,38 @@ Elk van deze bytes heeft een adres waarmee je vanuit een programma dit kan adres
 ![](../../pictures/avr_atmega_data_memorymap.png)
 
 Hierboven zie je het overzicht van alle data-memory (het geheugen dat je programma kan aanspreken).  
-224 (64 gemeenschappelijk voor de gehele atmega-famillie) van deze zijn IO-registers die je vanuit je code kan aanspreken. 
+224 (64 gemeenschappelijk voor de gehele atmega-famillie) van deze zijn IO-registers die je vanuit je code kan aanspreken.
 
-```{.c}
-uint8_t *an_io_port = (int *) 0x2B;
-*an_io_port = *an_io_port | 1;
+In onderstaande code zie je het voorgaande "Arduino"-voorbeeld vertaald naar code die pointers gebruikt om dit IO-geheugen rechtstreeks aan te spreken.
+
+```c
+int main(void)
+{
+  volatile unsigned char* portb = (unsigned char*)0x25;
+  volatile unsigned char* ddrb = (unsigned char*)0x24;
+  int led_number = 5;
+
+  volatile unsigned long busy_counter;
+  unsigned long count_until = 500000;
+
+  *ddrb |= (1<<led_number);
+
+  while (1) {
+	  *portb ^= (1<<led_number);
+	  busy_counter = 0;
+	  while(busy_counter < count_until) {
+		  busy_counter++;
+	  }
+  }
+  return 0;
+}
 ```
 
 > Voor een overzicht van deze adressen en andere details rond deze processoren gaan we in het volgende deel van de cursus dieper ingaan door de datasheets te bestuderen.
 
 ### Hardware-abstractie via header-files
 
-In de code die nu gaat volgen ga je zien dat deze steeds beginnen met deze 2 **include-directives**: 
+In de code die nu gaat volgen ga je zien dat deze steeds beginnen met deze 2 **include-directives**:
 
 ```{.c}
 #include <avr/io.h>
@@ -139,7 +159,7 @@ Voorlopig is het voldoende te weten dat je via deze macro's toegang hebt tot dez
 
 > **Nota:**   
 > We komen later ook nog terug op wat macro's en header-files zijn.  
-> Bekijk het voorlopig als een manier om algeme variabelen te declareren 
+> Bekijk het voorlopig als een manier om algeme variabelen te declareren
 
 
 ### GPIO
@@ -238,7 +258,7 @@ Het eerste dat je doet (eigenlijk in elk c-programma) is het importeren van een 
 
 Deze variabele die wordt gebruikt op meerdere plekken in het programma.
 
-``` 
+```
 int LED_NUMMER = PB5;
 ```
 
@@ -288,4 +308,4 @@ In bepaalde gevallen kan je bijvoorbeeld een register-bit kunnen aanraken die je
 
 * Dit maakt de code meestal veel leesbaarder (aangezien je met bits werkt)
 * Dit vermijdt risico's (de verkeerde pin aanraken)
-* Later gaan we zien dat we dit nog kunnen optimaliseren met het gebruik van macro's 
+* Later gaan we zien dat we dit nog kunnen optimaliseren met het gebruik van macro's
