@@ -21,8 +21,6 @@ De basis van programmeren bij bijna alle talen begint bij de 3 verschillende pri
 
 ![](../../pictures/programm_logic.png)
 
-### Sequentiele logica
-
 Vandaag bekijken we het sequentiele aspect van C:
 
 * **Input:** inlezen van data van de commmand-line
@@ -112,9 +110,9 @@ Dit illustreren we aan de hand van een leeg programma zonder statements.
 Als je dit programma zou aanroepen zou dit direct beëindigen zonder iets te doen maar het is zeker een **geldig programma**.
 
 ~~~c
-void main ()
+int main ()
 {
-
+  return 0;
 }
 ~~~
 
@@ -131,29 +129,41 @@ $
 
 "main" zelf is - naast de body van het programma - wat we noemen een **functie**, meer details over functies volgt later.  
 
-> Bemerking:  
-> Soms zie je ook in plaats van ```void main()``` andere vormen/notaties terug:  
->  
-*  ```int main()``` met ``` return 0``` (of ```return EXIT_SUCCESS;```) tussen de accolades toegevoegd
-*  ```int main(int argc, char *argv[])```  (met zelfde return-statements)
->  
->
-> Voorlopig houden we het in deze voorbeelden bij de oorspronkelijke versie, de volgende les gaan we hier dieper op ingaan maar voorlopig hebben we deze niet nodig om onze eerste programma's te schrijven.
+#### Andere notaties voor main
+
+Soms zie je een main onder de volgende **verkorte vorm** verschijnen,
+
+~~~c
+void main ()
+{
+
+}
+~~~
+
+Bij deze notatie moet je geen return-statement toevoegen, void betekent dat deze functie geen waarde teruggeeft.
+
+Soms wordt een main onder deze uitgebreidere vorm geshreven:
+
+~~~c
+int main(int argc, char* argv[])
+{
+  return 0;
+}
+~~~
+
+Voorlopig houden we het in deze voorbeelden bij de eerstbeschreven versie, de volgende les gaan we hier dieper op ingaan maar voorlopig hebben we de voorgaande notatie niet nodig om onze eerste programma's te schrijven.
 
 **Wat je echter moet onthouden naar de volgende voorbeelden toe:**
 
-* Een c-programma **start** met **"void main()"**
+* Een c-programma **start** met **"int main()"**
 * **Tussen** de **accolades** kan je een **sequentie** van **statements** schrijven.
+* Deze sequentie van statements eindigt met het **statement "return 0"** (kan ook een ander getal zijn)
 * Wat er tussen deze accolades staat wordt ook wel de **body** van je programma genoemd.
 
 
 ### Voorbeeld: return-code van een programma
 
-Als je voorbeelden uit boeken of van het internet gaat zoeken ga je dikwijls andere vormen (signaturen) van zo'n een main-functie tegenkomen.  
-
-Bijvoorbeeld ~~~int main()~~~ ipv ~~~void main()~~~
-Dit houdt in dat je programma een status-code terug naar je command-line kan sturen, hierdoor ben je wel verplicht een return-statement toe te voegen aan het einde van je programma.
-
+Wat is nu de rol van dit return-statement?  
 Beschouw de 2 volgende voorbeelden:
 
 ~~~c
@@ -231,16 +241,6 @@ In C bestaat er voor het afdrukken een specifieke functie genaamd "printf", zoal
 
 ```c
 #include <stdio.h>
-void main ()
-{
-  printf("Hello World\n");
-}
-```
-
-of alternatief (om compiler-warnings te vermijden)
-
-```c
-#include <stdio.h>
 int main ()
 {
   printf("Hello World\n");
@@ -250,7 +250,7 @@ int main ()
 
 Als je nu dit programma compileert en uitvoert op de command line, zie je dat het programma deze boodschap afprint op de console.
 
-```
+```bash
 $ gcc helloworld.c -o helloworld
 $ ls
 $ helloworld helloworld.c
@@ -328,10 +328,11 @@ In het programma hieronder, hebben we 2-maal een printf-functie-aanroep geplaats
 
 ```c
 #include <stdio.h>
-void main ()
+int main ()
 {
     printf("Hello world");
     printf(" is een typisch voorbeeld-programma");
+    return 0;
 }
 ```
 Als je dit programma uitvoert krijg je het volgende resultaat:  
@@ -424,10 +425,14 @@ $ De getallen zijn Het getal is: 5,6 en 7
 
 Let ook dat we aan het eind van deze string altijd **\\n** toevoegen, dit is een trucje om het programma na het afdrukken de cursus naar een nieuwe lijn te brengen.
 
-### Voorbeeld: Variabelen en data-types  
+### Variabelen  
 
 De C-programmeertaal laat je ook toe van - tijdens het uitvoeren van je programma - bepaalde waardes bij te houden in het geheugen.
 Deze waardes worden bijgehouden in wat noemen variabelen.  
+
+Een variabele is due een **plekje geheugen** waar je een waarde (in dit geval 5) kan opslaan en een naam kan toekennen (in dit geval een integer-getal).
+
+> Fast-forward: Later gaan we ook zien dat we kunnen zien waar dit stuk geheugen zich in het geheugen bevindt
 
 ```c
 #include <stdio.h>n
@@ -449,11 +454,9 @@ $ ./printnumber
 $ Het getal is: 5
 $ Nog 1 maal printen van 5
 ```
-### Duiding: Wat is een variabele?
+### Kenmerken van variabelen:  
 
-Een variabele is een plekje geheugen waar je een waarde (in dit geval 5) kan opslaan en een naam kan toekennen (in dit geval een integer-getal).
-
-Kenmerken van variabelen:  
+Waar moet je rekening met houden bij het gebruik van een variabele:
 
 * Heeft een naam, deze vrij te kiezen (liefst betekenisvolle namen gebruiken) Vb. L123, appel, rekeningNummer, ... )
 * Met wel een aantal beperkingen zoals
@@ -481,7 +484,7 @@ Een variabele zoals we zullen zien in de volgende voorbeelden kunnen we dan verd
    * de variabele gebruiken in een expressie (zie later)
    * de variabele gebruiken om een andere variabele in te stellen
 
-### Voorbeeld: Assignment operator =
+### Assignment operator (=)
 
 Bij deze zien we ook onze eerste **operator** in C, de assignment-operator.  
 Een operator is binnen een programmeer taal (C in ons geval):  
@@ -498,7 +501,7 @@ In dit geval heeft een assignment:
 * Een **linker-operand** als **variabele** (zijn naam)
 * Een **rechter-operand** als **waarde** (constante, andere variabele, expressie, ...)
 
-### Voorbeeld: declaratie en assignment in 1 statement
+### Declaratie en assignment binnen 1 statement
 Tot nog toe hebben we de declaratie en assignment van ene variabele gescheiden gehouden.  
 Het onderstaande programma doet hetzelfde als het voorgaande programma
 
@@ -520,7 +523,7 @@ Welke stijl dat je kiest is afhankelijk van de situatie (en soms ook persoonlijk
 > **Nota:**  
 > Sommige compilers (en oudere versie van de C-specificatie ondersteunen deze combinatie niet) en verplichten je declaratie en assignment altijd gescheiden te houden.
 
-### Voorbeeld: variabelen gebruiken voor initialisatie
+### Variabelen gebruiken voor initialisatie
 
 Je kan met een variabele ook een andere variabele initialiseren.  
 
@@ -540,7 +543,7 @@ Dit gedeelte gebruikt nu 2 variabelen die dezelfde waarde bevatten
 Het resultaat zal ook opnieuw hetzelfde zijn zoals de vorige getallen
 
 
-### Voorbeeld: variabelen bevatten waardes
+### Variabelen bevatten waardes
 
 Het is belangrijk om te weten (maar ook wel logisch) dat als je een variabele initialiseert met een waarde van een andere variabele deze de waarde overneemt.
 
@@ -564,7 +567,7 @@ De zal het de waarde van getal_dat_we_wijzigen wijzigen naar 10:
 
 De eerste variabele (getal) blijft de waarde 5 behouden want beide variabelen wijzen naar een andere geheugenlocatie.  De statement ```int getal_dat_we_wijzigen = getal;``` zal dus enkel de waarde overdragen.
 
-### Voorbeeld: operatoren en expressies (getallen)
+### Operatoren en expressies (getallen)
 
 Belangrijk om met onze variabelen iets dynamischer te kunnen doen dan deze enkel maar af te drukken.  
 Daarvoor introduceren we het laatste element van deze les namelijk expressies.
@@ -592,9 +595,9 @@ $ ./firstexpression
 $ Het resultaat is 12
 ```
 
-### Duiding: Operatoren en operanden (arithmetic)
+### Rekenkundige expressie (arithmetic expression)
 
-Een expressie bestaat uit 2 soorten elementen (herinner operator en operanden bij de assignment) :  
+Een rekenkundige (arithmetic) expressie bestaat uit 2 soorten elementen (herinner operator en operanden bij de assignment) :  
 
 * Operatoren die een specifieke bewerking voorstellen (zie tabel hieronder)   
   Elke operator is meestal **binair**, dit wil zeggen omringd door 2 operanden  
@@ -629,7 +632,7 @@ Zoals je ziet volgt een expressie in C dezelfde regels als algemene wiskunde (ha
 | /        | delen            |
 | %        | rest             |
 
-### Voorbeeld: expressies met waardes en variabelen
+### Expressies met waardes en variabelen
 
 Een expressie bestaat niet noodzakelijk uit variabelen, je kan deze ook wisselen met constante waardes:  
 (```int som = getal1 + 7;``` in plaats van ```int som = getal1 + getal2;```)
@@ -645,7 +648,7 @@ int main ()
 }
 ```
 
-### Voorbeeld: expressies als argument van een functie
+### Expressies als argument van een functie
 
 Of je kan zelfs een expressie gebruiken rechtstreeks als argument van een functie:
 
@@ -660,7 +663,7 @@ int  main ()
 ```
 (hetgeen vanzelfsprekend hetzelfde resultaat oplevert)
 
-### Voorbeeld: expressies met meerdere operatoren
+### Expressies met meerdere operatoren
 
 Een expressie is niet beperkt tot slechts 2 operatoren
 
@@ -675,7 +678,7 @@ int  main ()
 }
 ```
 
-### Voorbeeld: expressies met verschillende soorten operatoren
+### Expressies met verschillende soorten operatoren
 
 En je kan verschillende soorten operatoren combineren:
 
@@ -708,10 +711,10 @@ int main ()
 Bij de evaluatie van deze expressie wordt de waarde van getal1 eerst negatief gemaakt alvorens dat hier 17 wordt bij opgeteld.  
 Belangrijk is te weten dat net als in de wiskunde unitaire operatoren 1st worden uitgevoerd.
 
-### Voorbeeld: Lezen van een getal
+### Lezen van een getal (vanuit command line)
 
-Een programma zonder input is meestal niet veel waard.  
-Naast de mogelijkheid naar de console te printen kan je in C ook data uit deze console uitlezenen.  
+Een programma zonder input is (meestal) niet veel waard.  
+Naast de mogelijkheid naar de console te schrijven kan je in C ook data uit deze console uitlezenen.  
 Dit kan via de functie **scanf**, de tegenhanger van de functie **printf** die we eerder hebben gebruikt om af te drukken.
 
 ```c
