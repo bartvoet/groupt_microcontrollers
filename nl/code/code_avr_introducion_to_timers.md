@@ -381,7 +381,7 @@ Als alles goed loopt zal er het volgende gebeuren:
 * Eenmaal de teller (en TCNT0) de waarde 10 moet bereikt (00001010) zal TCNT automatisch resetten naar naar 0 (00000000) bij het volgende *event*
 * Het gevolg is dat de leds na de waarde 10 (00001010) zullen overflowen naar de waarde 0 (00000000)
 
-Nieuw is dat we hier de CTC-mode gebruiken (clear timer on compare...)
+Nieuw is dat we hier de CTC-mode gebruiken (clear timer on compare...) ipv de normal mode...
 
 #### Duiding: configureren van de comparator registers (WGM-bits)
 
@@ -436,9 +436,7 @@ Als je dan deze  als je deze pulsen toepast op een bekende (en constante) snelhe
 
 ![](../../pictures/avr_clock_simple_overview.png)
 
-### Voorbeeld: tellen met een timer
-
-
+### Voorbeeld counter => timer: tellen met een timer
 
 **Opstelling:**  
 
@@ -627,7 +625,7 @@ int main(void)
 
 ### Duiding: TIFR-register en interrupts
 
-**TIFR1** uit voorgaand voorbeeld staat voor **T**imer/Counter**1 I**nterrupt **F**lag **R**egister
+**TIFR1** uit voorgaand voorbeeld staat voor Timer/Counter1 Interrupt Flag Register
 Dit is een register dat wordt "ge-refreshed" telkens een event gebeurt gerelateerd aan de counter.  
 In voorgaand voorbeeld zie je bijvoorbeeld de flag **OCF1A** die aangeeft of het compare-register 1 de waarde van **OCR1A** (zie eerder) heeft bereikt.
 (zie de datasheet voor meer details en overeenkomstige flags).
