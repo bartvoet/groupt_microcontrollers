@@ -16,21 +16,158 @@ Dit 3de basis-element - **Timers/Counters** - gaan we bekijken in dit hoofdstuk.
 > Deze cursus heeft als bedoeling het concept van een counter/timer uit te leggen zodat je in AVR of zelfs een ander platform zelfstandig kan werken aan de hand van de datasheet.  
 > Daarom leggen we de grondbeginselen en principes uit binnen dit hoofdstuk, voor meer specifieke details kan je altijd de datasheet lezen.
 
-### Duiding: Overzicht componenten van de timer/counter
 
-Zo'n **timer/counter** kan verschillende zaken:  
+### Duiding en herhaling: wat is een teller (counter)
 
-* Het tellen van events of pulsen in een register
-* Een klok koppelen aan deze teller
-* Deze klok prescalen (delen/vetragen)
-* Interrupts genereren op basis van deze klok
-* Verschillende soorten output genereren (zoals PWM)
+We starten bij het basis-element, de counter (zonder voorlopig rekening te houden met het timing en interrupt-aspect).  
+Wat is een teller (counter)?    
 
-De architectuur van deze counter/timer - als je naar onderstaande tekening kijkt - lijkt ingewikkeld maar we gaan deze geleidelijk aan met voorbeelden verklaren.
+* Het is een **hardware-component** (en 1 van vele registers)
+* Het bevindt zich in de meeste **moderne MCU's**
+* **Telt** in al zijn eenvoud **events**.  
+  (events wil zeggen in de betekenis van MCU's **elektrische pulsen**)
+* Telkens wanneer een **puls** wordt **geregistreerd**
+* Verhoogt de waarde **verhoogt** de waarde van deze teller **met 1**.
 
-![](../../pictures/avr_clock_simple_overview.png)
+### Werken met een teller (configuratie)
 
-### Duiding: AVR beschikt over 3 counter/timers
+Als je werkt met timers zijn er **3 niveaus** van **configuratie** van belang:
+
+```
++-----------------------------------------------------------------------------------+
+|                    +--------------------+      +--------------------+             |
+|                    |                    |      |                    |             |
+|                    |   Source-select    +--+---+      Prescale      |             |
+| IN                 |   (trigger)        |  |   |                    |             |
+|                    |                    |  |   |                    |             |
+|                    +--------------------+  |   +---------+----------+             |
++--------------------------------------------|--------------------------------------+
+|                                            |                                      |
+|                                            v                                      |
+|                                  +---------+----------+                           |
+|                                  |                    |                           |
+| COUNT                            |       Count        |                           |
+|                                  |                    |                           |
+|                                  |                    |                           |
+|                                  +---------+----------+                           |
+|                                            |                                      |
++--------------------------------------------|--------------------------------------+
+|                                            v                                      |
+|        +--------------------+    +--------------------+    +--------------------+ |
+|        |                    |    |                    |    |                    | |
+| OUT    |    Interrupt       +<---+      Compare       +--->+      Output        | |
+|        |                    |    |                    |    |                    | |
+|        |                    |    |                    |    |                    | |
+|        +--------------------+    +--------------------+    +--------------------+ |
+------------------------------------------------------------------------------------
+```
+
+* **IN**: Wat is **bron/trigger** om te tellen?
+* **COUNT**: Het eigenlijke **tellen**, configuratie, **lezen van** en **initialisatie** van de teller
+* **OUT**: Reageren op **teller-events** en eventueel output te genereren
+
+
+#### IN
+
+Een counter (zoals we deze kennen uit de lessen digitale) telt **events** komende van een **source** (in meeste gevallen een klok):
+
+```
+                         +--------------+        
+                         |            Q +==0:8==>
+                         |              |        
+                         |              |        
+                         |   COUNTER    |        
+       +-----------+     |              |        
+       |           |     |              |        
+       | PRESCALER |     |           UP <--------+
+       |           |     |              |
+ +-----> C         |     |              |
+       |           |     |              |
+       +-----------+----->  CE        D <==0:8===+
+                   +-----> C          L <--------+
+                         +------+-------+
+```
+
+2 **configuraties** zijn belangrijk hier:
+
+* **Source-select** (en trigger)  (C)
+  De teller heeft een **source** of **bron** (input-signaal) nodig waarvoor hij events gaat tellen.  
+  Dit kan een **externe** ingang zijn, maar dikwijls is dit een **interne klok** van de MCU (meestal systeem-klok van de MCU).
+* **Prescale** (of klokdeling)  (C en CE)
+  Om de snelheid van deze teller te manipuleren (vertragen) kan er meestal een klokdeling of prescaling worden geconfigureerd.  
+
+#### COUNT
+
+De waarde van de teller wordt dan opgeslagen in een **buffer** die je ten alle tijden kan uitlezen en in de meeste gevalen ook kan **resetten** naar een **startwaarde**
+
+```
+      +--------------+        +--------------+       
+      |            Q +==0:8==>|              |
+      |              |        |              |        
+      |              |        |              |        
+      |   COUNTER    |        |    CPU       |        
+      |              |        |              |        
+      |              |        |              |        
+      |           UP <--------+              |
+      |              |        |              |
+      |              |        |              |
+      |              |        |              |
++----->  CE        D <==0:8===+              |
++-----> C          L <--------+              |
+      +------+-------+        +--------------+
+```
+
+Een basis klok-ingang:
+
+* Een **klok-ingang** (C)  
+  Die **pulsen/signalen** geeft aan de counter om de volgende actie uit te voeren (meestal tellen).  
+* Een **clock enable** (CE)
+  Deze wordt meestal gebruikt voor/door een **prescaler** of om tellers aan elkaar te koppelen (MSB-counter wordt hieraan gekoppeld)
+
+Configuratie:
+
+* Een **direction-input** (UP)  
+  Je kan via deze input beslissen of je **optelt- of aftelt**
+* Een **start-waarde** (D) die bijvoorbeeld in geval van **reset** wordt gebruikt  
+* Als je de counter dan wil resetten kan je **load**-flag aanzetten (synchroon op de klok)
+
+Counter-waarde:
+
+* De **output** (Q)  
+  Een vector-uitgang met de telwaarde
+
+> Een ander aspect - waar we later nog op terugkomen - is het overflow-gedrag.  
+> Wat gebeurt er als de counter aan zijn maximum-waarde komt  
+
+
+#### COMPARE
+
+Je kan vanuit de CPU rechtstreeks de telwaarde gebruiken en controleren maar je kan
+meestal ook comparatoren een groot deel van het werk voor jou laten doen:  
+
+* Interrupts triggeren wanneer een bepaalde waarde is bereikt
+* Reset te initieren op de teller
+* Rechtstreeks een output aansturen
+
+
+```
+            +--------------+        +--------------+
+ Q +==0:8===>        CV[n] +==0:8===>              <==0:8== Q
+            |              |        |              |
+            |              |        |              |        
+            |    CPU       |        |    COMPARE   |        
+            |              <--------+ I   UNIT     |    
+            |              |        |       |      |      +---------+  
+UP <--------+              |        |--------------+------> l       |
+            |              |        |       |      |      | COUNTER |
+            |              |        |       V      |      |
+            |              |        |     OUTPUT   |      +---------+      
+ D <==0:8===+              |        |              |           (BLOCK)
+ L <--------+              |        |         O[n] +---------> (PWM)
+            +------+-------+        +--------------+
+```
+
+### AVR beschikt over 3 counter/timers
 
 Ter voorbeschouwing:
 
@@ -45,46 +182,22 @@ Ter voorbeschouwing:
 > Zoals je direct gaat zien zijn de timer en counter 2 onafhankelijke concepten in de AVR-architectuur.
 > Vandaar dat men niet zomaar timer zegt in de datasheets
 
-### Duiding en herhaling: wat is een counter
+### Counter in AVR Atmega
 
-We starten bij het basis-element, de counter (zonder voorlopig rekening te houden met het timing en interrupt-aspect).  
-Wat is een counter?    
-
-* Het is een **hardware-component** (en 1 van vele registers)
-* Het bevindt zich in de meeste **moderne MCU's**
-* **Telt** in al zijn eenvoud **events**.  
-  (events wil zeggen in de betekenis van MCU's **elektrische pulsen**)
-* Telkens wanneer een **puls** wordt **geregistreerd**
-* Verhoogt de waarde **verhoogt** de waarde van deze teller **met 1.
-
-Alvorens in de AVR-datasheet (en code) te duiken een korte samenvatting van wat we zouden moeten weten over een typische (synchrone) counter die we kennen vanuit de lessen digitale sequentiële technieken:  
-
-* Een **klok-ingang** (C)
-  Die pulsen/signalen geeft aan de counter om de volgende actie uit te voeren (meestal tellen)
-* Een **output-lijn** (Q)
-  Een vector-uitgang die het getal met (in dit geval) een 8-bit vector
-* Een **direction-input** (up)  
-  Een flag om aan te duiden of deze counter moet op- of aftrekken
-* Een **clock enable** (CE)
-  Die kan worden gebruikt om acties wel of niet uit te voeren.  
-  Meestal gebruikt om tellers aan elkaar te koppelen (MSB-counter wordt hieraan gekoppeld)
-* Een **clear**-ingang (C)
-  Waarmee je asynchroon (zonder rekening te houden met de klok) de timer kan resetten naar 0
-* Een **data-input** waarvan de data wordt geladen als de **load**-flag aanstaat (synchroon op de klok)
-
-![](../../pictures/8_bit_counter.png)
-
-### Duiding: counter in AVR Atmega
-
-De eigenlijke counter van AVR wordt in de datasheet als volgt voorgesteld.
+Het centrale element (eigenlijke counter) van AVR wordt in de datasheet als volgt voorgesteld.
 
 ![](../../pictures/avr_counter.png)
 
+Deze teller is beschikbaar voor de DATA-bus via het register TCNTn (waar n staat voor de nummer van de timer)
+
 We gaan met een paar code-voorbeelden bekijken om te bekijken hoe dat je dit bestuurt.  
 
-### Voorbeeld: een simpele teller
+### Voorbeeld counter => tellen van een externe input
 
-We starten met een eenvoudig voorbeeld om deze teller-functionaliteit te illustreren.  
+Een eerste voorbeeld, een counter gebruiken om de klok-pulsen een extern signaal...  
+We gebruiken hiervoor een opstellen met een button.
+
+
 **De basis-opstelling:**  
 
 * Een knop om een de pin T0 (zelfde locatie als PD4) aan te sturen
@@ -94,7 +207,7 @@ We starten met een eenvoudig voorbeeld om deze teller-functionaliteit te illustr
 
 **De bedoeling/functionaliteit:**
 
-* De counter gaat het **aantal pulsen** tellen
+* De counter gaat het **aantal pulsen** tellen (tellen op stijgende flank)
 * Deze pulsen worden gegenereerd door op de **knop/button** te drukken
 * De software zal deze waarde **binair via deze leds** tonen
 
@@ -105,13 +218,19 @@ We starten met een eenvoudig voorbeeld om deze teller-functionaliteit te illustr
 We passen de volgende code toe:
 
 ```c
+//avr-gcc-p
 #include <avr/io.h>
 
 int main(void)
 {
+    //the complete B-bank can be confiured as output
     DDRB = 0xFF;
+
+    //configure the external pin (input & pull-up)
     DDRD &= ~(1 << PD4);
     PORTD |= (1 << PD4);
+
+    //setting chip-select-bits to select externe clock
     TCCR0B |= (1 << CS02) | (1 << CS01) | (1 << CS00);
     while (1) {
         PORTB = TCNT0;
@@ -122,7 +241,7 @@ int main(void)
 
 **Het resultaat:**
 
-* Dit programma zal de binaire representatie op de leds per button-click optellen.  
+* Dit programma zal de **binaire representatie** op de leds **per button-click** optellen.  
 * Let wel dat we hier rekening moeten houden met "button-bounce" en het tellen soms een paar stappen kan overslagen (afhankelijk van button).
 
 **Het verloop van het programma:**
@@ -137,9 +256,9 @@ Belangrijk hieruit te onthouden is dat we **2 nieuwe registers** hebben gebruikt
 > **Nota**:  
 > Hoewel dit niet echt gebruikelijk is (en ook niet echt stabiel rekening houdende met button bounce) illustreert dit programma dat je éénvoudig een teller kan aansturen vanuit registers.
 
-### Duiding: Configureren van de counter (met TCCR0B)
+#### Duiding: Configureren van de counter (met TCCR0B)
 
-Het eerste register dat we tegen kwamen was **TCCR0B** (**T**imer/**C**ounter **C**ontrol **R**egister B)  
+Het eerste register dat we tegen kwamen was **TCCR0B** (Timer/Counter Control Register B)  
 Dit is 1 van de 2 registers die we gebruiken voor het configureren van de counter (het A-register zien we bij volgende voorbeelden).  
 
 > **Nota**:   
@@ -169,11 +288,11 @@ De 3 waardes die in dit stadium relevant zijn:
 > Als oefening bekijk in de datasheet van atmega328p de documentatie over TCCR0B (15.9.2)  
 > Zoek ook naar de tabel die de verschillende mogelijkheden van clock-select bevat
 
-### Duiding: lezen van de huidige waarde van de teller (met TCNT0)
+#### Duiding: lezen van de huidige waarde van de teller (met TCNT0)
 
 De waarde van counter 0 kan je uitlezen via het register TCNT0 zoals in voorgaand voorbeeld.  
 
-```
+```c
 PORTB = TCNT0;
 ```
 
@@ -220,9 +339,12 @@ De andere modus waar we in het voorgaand voorbeeld met werken noemt **normal mod
 
 Deze waarde wordt dan geconfigureerd in het **OCR0A**-register en kan gedurende de looptijd van het programma worden aangepast.
 
-### Voorbeeld: zetten van top-waarde
+### Voorbeeld counter => tellen tot een bepaalde (TOP-)waarde
 
-We passen het voorgaande voorbeeld aan zodat deze telt tot 10.
+Eerder hebben we gezien dat binnen een counter/timer een comparator-functionaliteit is voorzien.  
+Je kan deze bijvoorbeeld gebruiken om een reset te configureren van de teller naar 0 éénmaal een bepaalde waarde is bereikt.
+
+Dan kan je bijvoorbeeld voorgaand voorbeeld aanpassen om te tellen tot 10 (ipv tot 255):
 
 ```c
 #include <avr/io.h>
@@ -234,15 +356,21 @@ int main(void)
     DDRB = 0xFF;
     DDRD &= ~(1 << PD4);
     PORTD |= (1 << PD4);
+
+    //CTC-still external clock (or input)
     TCCR0B |= (1 << CS02) | (1 << CS01) | (1 << CS00);
-    //configureren van CTC-modes
-    TCCR0A |= (1 << WGM01) | (1 << WGM00);//gedeelte in A
-    TCCR0B |= (1 << WGM02);//gedeelte in B
-    //configureren van comparator-mode
+
+    //configuring  van CTC-mode
+    TCCR0A &= ~(1 << WGM00);
+    TCCR0A |= (1 << WGM01);
+    TCCR0B &= ~(1 << WGM02);
+    // pay attention => ctc-mode spread over 2 registers
+
+    //setting the TOP-value
     OCR0A = TELLEN_TOT;
 
     while (1) {
-        PORTB = TCNT0;
+        PORTB = TCNT0; //making leds represent the counter-value
     }
     return 0;
 }
@@ -253,13 +381,16 @@ Als alles goed loopt zal er het volgende gebeuren:
 * Eenmaal de teller (en TCNT0) de waarde 10 moet bereikt (00001010) zal TCNT automatisch resetten naar naar 0 (00000000) bij het volgende *event*
 * Het gevolg is dat de leds na de waarde 10 (00001010) zullen overflowen naar de waarde 0 (00000000)
 
-### Duiding: configureren van de comparator registers (WGM-bits)
+Nieuw is dat we hier de CTC-mode gebruiken (clear timer on compare...)
 
-Om CRC-modus te kunnen configureren zijn er 2 assignment-statements toegevoegd aan het vorige voorbeeld:
+#### Duiding: configureren van de comparator registers (WGM-bits)
+
+Om CTC-modus te kunnen configureren zijn er 2 assignment-statements toegevoegd aan het vorige voorbeeld:
 
 ```c
-    TCCR0A |= (1 << WGM01) | (1 << WGM00);
-    TCCR0B |= (1 << WGM02);
+    TCCR0A &= ~(1 << WGM00);
+    TCCR0A |= (1 << WGM01);
+    TCCR0B &= ~(1 << WGM02);
 ```
 
 Voor deze mode te configureren moet je de **WGM-bits (of flags)** configureren.  
@@ -275,7 +406,7 @@ Als je in de datasheet kijkt zie je een tabel met alle mogelijke combinaties (zo
 > Bij deze voorbeelden zie je ook hoe belanrijk het is van met bitmasks te kunnen werken.  
 > Als je deze code niet kan verstaan, gelieve terug het hoofdstuk rond bitmasking te herhalen
 
-### Duiding: initialiseren van compare-waarde (OCR0A)
+#### Duiding: initialiseren van compare-waarde (OCR0A)
 
 ```c
 OCR0A = TELLEN_TOT;
@@ -294,18 +425,20 @@ Er bestaat ook nog een OCR0B-register, hier komen we nog later op terug.
 > Equivalente registers bestaan ook voor de andere counter/timers
 > 0CR1A en OCR2A
 
-### Duiding: van counter naar timer
+### Van counter naar timer
 
-Tot nog toe hebben we deze hardware enkel gebruikt als een gewone teller.  
+**Tot nog toe** hebben we deze hardware enkel gebruikt als een gewone **teller**.  
 Wat we eigenlijk deden was het simuleren van een externe klok via een button.  
 In praktijk echter ga je een externe klok koppelen aan deze pin.  
 
-Er is echter ook de mogelijkheid van de interne systeem-klok te gebruiken.  
+Er is echter ook de mogelijkheid van de **interne systeem-klok** te gebruiken.  
 Als je dan deze  als je deze pulsen toepast op een bekende (en constante) snelheid, wordt deze teller ook een timer.
 
 ![](../../pictures/avr_clock_simple_overview.png)
 
 ### Voorbeeld: tellen met een timer
+
+
 
 **Opstelling:**  
 
