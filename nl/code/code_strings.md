@@ -1,17 +1,19 @@
 ## Strings
 
-### Duiding: ASCCI
+### Duiding: ASCII
 
 Tot nu toe hebben we de unsigned char gebruikt om bytes (8 bits) in variabelen op te slagen.  
 char (afkorting van character) wordt ook gebruikt om assci-karakters voor te stellen.
 
-**ASCCI** is een internationale conventie die bepaalt welke cijfer-waarde overeenkomt met welke code:
+**ASCII** is een internationale conventie die bepaalt welke cijfer-waarde overeenkomt met welke code:
 
 ![](../../pictures/chars-table-landscape.jpg)
 
+> ASCII (American Standard Code for Information Interchange), ook US-ASCII en ANSI_X3.4-1968 genoemd[1], is een standaard 7-bits tekencodering om Latijnse letters, cijfers, leestekens en enkele andere tekens en stuurcodes te representeren en aan ieder teken in die reeks een geheel getal te koppelen, waarmee dat teken kan worden aangeduid.
+
 ### Voorbeeld: char-datatype als tekst
 
-Deze ASCCI wordt ook door c-programma's gebruikt als conventie voor encoderen van karakter-waardes en het printen van tekst.
+Deze ASCII wordt ook door c-programma's gebruikt als conventie voor encoderen van karakter-waardes en het printen van tekst.
 
 ```c
 #include <stdio.h>
