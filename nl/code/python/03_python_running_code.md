@@ -6,7 +6,7 @@ Alle voorbeelden op "dag 1" worden uitgevoerd op de command line, zoals eerder v
 ### Python is een scripting-taal
 
 Een script daarentegen wordt door een speciaal programma - de **interpreter** - gelezen en uitgevoerd.  
-De code/instructies worden als het ware **"at runtime" geinterpreteerd** en **uitgevoerd** op de computer als tekst.  
+De code/instructies worden als het ware **"at runtime" geïnterpreteerd** en **uitgevoerd** op de computer als tekst.  
 Deze instructies noemen we ook wel **statements**
 
 ### Uitvoeren van Python-code
@@ -85,7 +85,7 @@ SyntaxError: EOL while scanning string literal
 De Python-interpreter gaat ook meestal naar goed vermogen proberen aan te duiden:
 
 * **Waar het probleem** zich in de code is voorgekomen
-    * Lijn-nummer code
+    * Lijnnummer code
     * Positie binnen lijn
 * Welke **soort fout** je hebt gemaakt
 * Eventueel een **hint** wat je moet doen om te corrigeren

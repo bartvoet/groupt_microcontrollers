@@ -10,7 +10,7 @@ In deze eerste les gaan we:
 * Eerste **programma schrijven**
   * sequentieel programmeren
   * statement en expressies
-  * variabelen en literals
-  * text vs nummers
+  * variabelen en literair
+  * tekst vs nummers
   * input en output van een programma
 * **Oefening(en)** maken..

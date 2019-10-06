@@ -1,7 +1,7 @@
 ## Commentaar
 
 Het eerste element was een statement, als het waarde een commando dat je kan geven aan de python-interpreter.  
-In python-code kan je ook **tekst** toevoegen die **niet wordt geinterpreteerd**.
+In python-code kan je ook **tekst** toevoegen die **niet wordt geïnterpreteerd**.
 
 ### Single-line comment
 
@@ -14,7 +14,7 @@ print("hello world") # You can insert comments also after your code
 # Avoid writing more comment than code...
 ~~~
 
-De regel is simpel, alles wat achter de eerste hash-tag komt op een lijn wordt geinterpreteerd
+De regel is simpel, alles wat achter de eerste hash-tag komt op een lijn wordt geïnterpreteerd
 
 ### Multi-line comment
 

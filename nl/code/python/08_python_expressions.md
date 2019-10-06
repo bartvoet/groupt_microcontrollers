@@ -94,7 +94,7 @@ Er zijn verschillende soorten expressies of bewerkingen, naast de **rekenkundige
 Wat deze wel gemeenschappelijk hebben is dat deze allen uit **operatoren** en **operanden** bestaan:
 
 * Een **operator** zijnde het symbool dat de bewerking voorstelt
-* De **operanden** zijnde de waardes (of andere expressies) die aan de **linker- en rechter-kant** staan van de **operator**
+* De **operanden** zijnde de waardes (of andere expressies) die aan de **linker- en rechterkant** staan van de **operator**
 
 Bijvoorbeeld als ik de **variabele a** vermenigvuldig met de **literal 2** als volgt:
 
@@ -128,7 +128,7 @@ In bovenstaand geval zal eerst worden vermenigvuldigd (a * 2) en dan pas de som 
 
 De volgende volgorde wordt gerespecteerd:
 
-* ales binnen de haakjes
+* alles binnen de haakjes
 * machten uitwerken
 * vermenigvuldigen, delen en rest
 * optellen en aftrekken

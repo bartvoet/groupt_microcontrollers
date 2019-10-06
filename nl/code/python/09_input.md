@@ -2,7 +2,7 @@
 
 ### Input vragen aan de gebruiker
 
-**Tot nog toe** hebben enkel **literals** gebruikt om **variabelen** te intialiseren.  
+**Tot nog toe** hebben enkel **literals** gebruikt om **variabelen** te initialiseren.  
 Om **input** van de **gebruiker** te verkrijgen voorzien Python 3 de **input-functie**.  
 
 ~~~python
@@ -11,7 +11,7 @@ print("text " + text)
 ~~~
 
 Bovenstaand **voorbeeld** gebruikt de **input-functie **om een **tekst** op te vragen aan de gebruiker.  
-Als parameter geef je een (optionele) prompt-tekst mee en als return ontva
+Als parameter geef je een (optionele) prompt-tekst mee en als return ontvang je de tekst als een string-object
 
 ~~~
                                                        +-------------------------+

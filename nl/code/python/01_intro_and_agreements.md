@@ -5,7 +5,7 @@
 Dit is een **praktische cursus**, dus we vliegen er direct in met praktijk.  
 Het motto van deze cursus, **"eerst coderen, dan leren"** (of eerst schieten dan praten)
 
-Een aantal jaren ervaring in het aanleren van programmeren (en programmeer-talen) leert dat de studenten veel gemakkelijker theorie oppikken als ze eerst al hebben gexperimenteerd dus vandaar het onderstaand verloop.
+Een aantal jaren ervaring in het aanleren van programmeren (en programmeertalen) leert dat de studenten veel gemakkelijker theorie oppikken als ze eerst al hebben geëxperimenteerd dus vandaar het onderstaand verloop.
 
 ### Verloop van de les
 
@@ -42,7 +42,7 @@ Voor de moment wordt deze les gegeven van 18.00 tem 22.00 met de volgende activi
 **(1) 18.00-18.30: Quiz en Herhaling**
 
 * We starten met een **Quiz** over de **vorige les**
-* Vervolgens - tesamen met het overlopen van de quiz - is er tijd voorzien voor **Q&A** over de leerstof van vorige les
+* Vervolgens - tezamen met het overlopen van de quiz - is er tijd voorzien voor **Q&A** over de leerstof van vorige les
 
 **(2) 18.30-19.45: Leerstof en Coderen**
 
@@ -99,17 +99,17 @@ Je laadt de pyhton-files (.py-files) op tenzij anders beschreven in de opdracht 
 
 ### Leren programmeren met Python?
 
-De keuze voor deze introductie-cursus is gevallen op **Python**, waarom?  
+De keuze voor deze introductiecursus is gevallen op **Python**, waarom?  
 
-* Python is zeer **éénvoudig** aan te leren
+* Python is zeer **eenvoudig** aan te leren
   (wordt ook veel gebruikt om kinderen te leren programmeren)
 * Een taal gebruikt om **kleine tot grote applicaties** te bouwen
 * **Uitstekend** **gedocumenteerd**
 * Python is enorm **populair**
 * Python heeft enorm veel **libraries** en **utilities** om allerlei **taken** uit te voeren
-* **Eénvoudig en snel** applicaties (command line of gui) bouwen **zonder al te veel voorkennis.**  
+* **Eenvoudig en snel** applicaties (command line of gui) bouwen **zonder al te veel voorkennis.**  
 * Python heeft  zeer grote **community** en online **support**
-* Python is **open-source**, vrij beschikbaar en gesupporteerd voor **alle operating systems**
+* Python is **open-source**, vrij beschikbaar en ondersteund voor **alle operating systems**
 * ...
 
 
@@ -123,7 +123,7 @@ De keuze voor deze introductie-cursus is gevallen op **Python**, waarom?
 * interfacing
 * api's
 * text
-* scriping
+* scripting
 * automatisatie
 * encryptie
 * web

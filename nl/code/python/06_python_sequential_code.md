@@ -1,4 +1,4 @@
-## Sequentiele uitvoering
+## Sequentiële uitvoering
 
 ### Een 2de programma ... met meerdere statements
 
@@ -11,7 +11,7 @@ print("world")
 ~~~
 
 In welke **volgorde** wordt deze aangeroepen?  
-Heel éénvoudig, de **statements** worden **uitgevoerd** in de volgorde zoals **jij** ze in de **file** **plaatst**.
+Heel eenvoudig, de **statements** worden **uitgevoerd** in de volgorde zoals **jij** ze in de **file** **plaatst**.
 
 ~~~bash
 $ python hello.py
@@ -46,19 +46,19 @@ Het komt dus neer op:
 * *(3)* Uitvoeren van de volgende 2de statement
 * *(...)* Tot dat er geen statements meer zijn
 
-### Basis-blok "sequentiele uitvoering"
+### Basisblok "sequentiële uitvoering"
 
-Dit is wat we noemen **sequentiele uitvoering**  
+Dit is wat we noemen **sequentiële uitvoering**  
 **Sequentieel** betekent hier, dat alle **statements** die je in een Python-script plaatst:
 
 * **1 voor 1** worden **uitgevoerd**
 * In de **volgorde** dat jij ze hebt geplaatst (eerst print("hello") dan print("world"))
 
-Dit is een **basis-principe (fundering)** waarop (bijna) alle (imperatieve) **programmeertalen** op gebaseerd zijn.  
+Dit is een **basisprincipe (fundering)** waarop (bijna) alle (imperatieve) **programmeertalen** op gebaseerd zijn.  
 
 ### Maar het gaat verder...
 
-Het principe van **sequentiele uitvoering** alleen is echter **niet voldoende** om een **volledig functionerend programma** te schrijven.  
+Het principe van **sequentiële uitvoering** alleen is echter **niet voldoende** om een **volledig functionerend programma** te schrijven.  
 **Boven op** dit principe heb je een **aantal andere principes** die we de komende hoofdstukken gaan uitleggen, namelijk:
 
 * **Conditionele** uitvoering  
@@ -66,21 +66,21 @@ Het principe van **sequentiele uitvoering** alleen is echter **niet voldoende** 
   We zullen dit zien onder de vorm van **if-else-statements**
 * **Repetitieve** uitvoering  
   statements blijven **uitvoeren** **zolang** aan een bepaalde **voorwaarde** is voldaan.  
-  In het vak-jargon wordt dit ook meestal **looping** genoemd
+  In het vakjargon wordt dit ook meestal **looping** genoemd
 * **Hergebruik** van uitvoering  
   statements **groeperen** om **herhaaldelijk** te kunnen **uitvoeren**  
 
-Het meest **elementaire hergebruik** vinden we bij **functies**, maar later gaan we ook zien dat we deze functies kunnen groeperen in **modules** en **object-georienteerd programmeren**
+Het meest **elementaire hergebruik** vinden we bij **functies**, maar later gaan we ook zien dat we deze functies kunnen groeperen in **modules** en **objectgeoriënteerd programmeren**
 
 ### Verschillende basis-uitvoerings-principes
 
-Al deze **basis-principes** steunen bovenop elkaar of zijn **op elkaar gebouwd**.
+Al deze **basisprincipes** steunen bovenop elkaar of zijn **op elkaar gebouwd**.
 Bij het aanleren van de meeste programmeertalen (zoals Python in dit geval) leer je een taal aan in 
 
-Om **conditionele uitvoering** te kunnen doen heb je **sequentiele uitvoering** nodig.  
-**Repitieve uitvoering** heeft **condities** nodig om te weten of deze verder mag worden **uitgevoerd**.  
+Om **conditionele uitvoering** te kunnen doen heb je **sequentiële uitvoering** nodig.  
+**Repetitieve uitvoering** heeft **condities** nodig om te weten of deze verder mag worden **uitgevoerd**.  
 
-**Hergebruik van uitvoering** staat hier een beetje **los/onafhankelijk** van maar meestal begin je pas dit te leren als je de andere basis-principes onder de knie hebt.
+**Hergebruik van uitvoering** staat hier een beetje **los/onafhankelijk** van maar meestal begin je pas dit te leren als je de andere basisprincipes onder de knie hebt.
 
 ~~~
                             +------------------------------+
@@ -97,7 +97,7 @@ Om **conditionele uitvoering** te kunnen doen heb je **sequentiele uitvoering** 
                     |                                              |
                 +---+----------------------------------------------+---+
                 |                                                      |
-                |                Sequentiele uitvoering                |
+                |                Sequentiële uitvoering                |
                 |                                                      |
                 |   +------------+   +------------+   +------------+   |
                 |   | Statements |   | Variabelen |   | Expressies |   |
@@ -106,12 +106,12 @@ Om **conditionele uitvoering** te kunnen doen heb je **sequentiele uitvoering** 
 
 ### First thing first...
 
-We moeten echter **eerst leren kruipen alvorens te fietsen**, dus we beginnen bij de **3 basis-elementen** van **sequentiele uitvoering**
+We moeten echter **eerst leren kruipen alvorens te fietsen**, dus we beginnen bij de **3 basiselementen** van **sequentiële uitvoering**
 
 ~~~
                 +------------------------------------------------------+
                 |                                                      |
-                |                Sequentiele uitvoering                |
+                |                Sequentiële uitvoering                |
                 |                                                      |
                 |   +------------+   +------------+   +------------+   |
                 |   | Statements |   | Variabelen |   | Expressies |   |
@@ -122,10 +122,10 @@ We moeten echter **eerst leren kruipen alvorens te fietsen**, dus we beginnen bi
   Elementaire unit van functionaliteit in python zoals
     * Aanroepen van functies (function-call)
     * Berekening uitvoeren en opslaan in variabele (assignment-statement)
-    * Beindigen van een functie (return-statement)
+    * Beëindigen van een functie (return-statement)
     * ...
 * **Variabelen** (en **literals**)  
-  Tussentijds opslaan van waardes in het geheugen om in een latere statement te herbruiken
-* **Epressies**  
+  Tussentijds opslaan van waardes in het geheugen om in een latere statement te hergebruiken
+* **Expressies**  
     * Eender welk **uitvoering van code** dat een **resultaat** oplevert
     * Bestaat **operatoren** en **operanden**

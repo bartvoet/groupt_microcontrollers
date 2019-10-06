@@ -1,6 +1,6 @@
 ## Conditionele uitvoering
 
-### Van sequentiele naar conditionele uitvoering
+### Van sequentiële naar conditionele uitvoering
 
 
 ~~~
@@ -18,24 +18,24 @@
              /      |                                              |
            _/   +---+----------------------------------------------+---+
                 |                                                      |
-                |                Sequentiele uitvoering                |
+                |                Sequentiële uitvoering                |
                 |                                                      |
                 |   +------------+   +------------+   +------------+   |
                 |   | Statements |   | Variabelen |   | Expressies |   |
                 +---+------------+---+------------+---+------------+---+
 ~~~
 
-We hebben nu kennis gemaakt met een aantal basis-elementen uit de sequentiele uitvoering:
+We hebben nu kennis gemaakt met een aantal basiselementen uit de sequentiële uitvoering:
 
 * **Statements**: assignment, function-call, ...
 * **Variabelen**: int, string
 * Rekenkundig **Expressies**
 
 We starten nu aan meer **complexere code**, namelijk we gaan nu naar **conditionele uitvoering** kijken.  
-Dit principe bouwt zich **bovenop sequentiele uitvoering** gebouwd maar voegt het element van **keuze** toe.
+Dit principe bouwt zich **bovenop sequentiële uitvoering** gebouwd maar voegt het element van **keuze** toe.
 
 Door een combinatie van **relationele expressies** en de **if-else-statements** kunnen we kiezen - at runtime - welke
-blok van code er wordt uitgevoerd (waar we deze keuse niet hadden bij zuiver sequentiele uitvoering).  
+blok van code er wordt uitgevoerd (waar we deze keuze niet hadden bij zuiver sequentiële uitvoering).  
 Deze combinatie benoemen we als een **conditie**.
 
 ~~~
@@ -100,8 +100,8 @@ print(type(d)) # prints <class 'bool'>
 
 ### Variabelen van het type boolean
 
-Het resultaat van een relationele expressie (ofwel **True** en **False**) is niet van een numeriek t ype zoals bij rekenkundige expressies maar een boolean.  
-Dit type van variabele kan je gebruiken in condtionele en repetitieve statements
+Het resultaat van een relationele expressie (ofwel **True** en **False**) is niet van een numeriek type zoals bij rekenkundige expressies maar een boolean.  
+Dit type van variabele kan je gebruiken in conditionele en repetitieve statements
 
 
 ### if-else-statement

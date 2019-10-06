@@ -8,12 +8,12 @@ Om het eerste deel van de cursus te kunnen uitvoeren heb je 2 componenten nodig 
 
 ### Leren met command-line te werken
 
-Alvorens te installeren heb je eerste een minimale kennis nodig van het werken met een **command-line** op je besturingsysteem.  
+Alvorens te installeren heb je eerste een minimale kennis nodig van het werken met een **command-line** op je besturingssysteem.  
 
 * Op **Linux/Mac/Unix** is de meest gebruikte command-line omgeving **Bash**
 * Op **Windows** heb je keuze tussen de klassieke **CMD-applicatie of** het iets uitgebreidere **Powershell**
 
-Als je jezelf **niet confortabel** voelt op de **command-line** (of erger je hebt er nog **nooit** van **gehoord**), kan je naar **Appendix A** kijken voor een introductie voor zowel Linux als Windows.
+Als je jezelf **niet comfortabel** voelt op de **command-line** (of erger je hebt er nog **nooit** van **gehoord**), kan je naar **Appendix A** kijken voor een introductie voor zowel Linux als Windows.
 
 ### Installatie van Python
 
@@ -57,7 +57,7 @@ Zie https://www.python.org/downloads/ en installeer de laatste versie Python-ver
 
 #### Installeren op Mac
 
-Mac komt meestal met Python pre-geinstalleerd, mocht dit niet het geval zijn of enkel Python 2 is geinstalleerd, gelieve hier ook de link https://www.python.org/downloads/ te gebruiken.
+Mac komt meestal met Python geïnstalleerd, mocht dit niet het geval zijn of enkel Python 2 is geïnstalleerd, gelieve hier ook de link https://www.python.org/downloads/ te gebruiken.
 
 #### Installeren op Linux
 
@@ -73,7 +73,7 @@ Python 3.6.8
 ...
 ~~~
 
-Python 3 wordt geinstalleerd onder het allias python3 dus gelieve deze te gebruiken.
+Python 3 wordt geïnstalleerd onder het alias python3 dus gelieve deze te gebruiken.
 
 *Fedora/Red Hat:*
 
@@ -95,5 +95,5 @@ Er zijn buiten deze editors zeer veel goede teksteditor op de markt (Atom, Subli
 Mocht je hier reeds ervaring met hebben mag je deze ook gebruiken.
 
 > Nota:  
-> Word, Libreoffice of Pages (Mac) zijn geen text-editors maar text-verwerkers.  
+> Word, Libreoffice of Pages (Mac) zijn geen text-editors maar tekstverwerkers.  
 > Deze worden gebruikt voor text-formattering, een text-editor enkel voor "zuivere tekst"

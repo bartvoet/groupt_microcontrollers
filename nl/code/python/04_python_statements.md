@@ -2,7 +2,7 @@
 
 ### Eerste programma onder de loep
 
-Ons eerste programma had dus als **functionaliteit** het **afprinten** van **een stuk tekst** naar de console.
+Ons eerste programma had dus als **functionaliteit** het **afdrukken** van **een stuk tekst** naar de console.
 
 ~~~python
 print("hello world")

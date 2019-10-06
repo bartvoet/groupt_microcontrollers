@@ -1,10 +1,10 @@
 ## Variabelen
 
-Nu dat we éénmaal weten hoe te printen (en functies aan te roepen) introduceren we **variabelen** en **assignment-statements**.
+Nu dat we eenmaal weten hoe te printen (en functies aan te roepen) introduceren we **variabelen** en **assignment-statements**.
 
 ### Voorbeeld van gebruik variabele
 
-We schrijven de volgende **voorbeeld-code** om het **gebruik van variabelen** te illustreren:
+We schrijven de volgende **voorbeeldcode** om het **gebruik van variabelen** te illustreren:
 
 ~~~python
 say_hello = "hello"
@@ -24,7 +24,7 @@ Er zijn hier 2 nieuwe elementen:
 * Een **variabele** met de **naam say_hello**
 * Een **assignment-statement** dat wordt gebruikt om de variabele say_hello de waarde "hello" toe te kennen (assign)
 
-Door het gebruik van een **variabele** kan je dus een **waarde** in het geheugen steken en deze **herbruiken** in latere **statements**.
+Door het gebruik van een **variabele** kan je dus een **waarde** in het geheugen steken en deze **hergebruiken** in latere **statements**.
 
 ### Variabele is een stuk geheugen
 
@@ -39,9 +39,9 @@ Een **variabele** is dus:
 
 De **essentie**/**doel** van zo'n **variabele** is 
 
-* het **herbruiken of delen van data** 
+* het **hergebruiken of delen van data** 
 * tussen verschillende **statements** 
-* binnen een **sequentiele uitvoering**.
+* binnen een **sequentiële uitvoering**.
 
 ~~~
                         +------------------+
@@ -66,7 +66,7 @@ De **essentie**/**doel** van zo'n **variabele** is
 
 Om met variabelen te kunnen werken gebruiken we een **nieuw soort statement** (of **commando**), namelijk het **assignment-statement**.   
 Zo'n statement kent (of **"assigns"**) een **waarde** (**value**) toe aan een **naam**.  
-Deze waarde kan je dan herbruiken in latere **statements** (de function-calls die de waarde 2 maal afprinten).
+Deze waarde kan je dan hergebruiken in latere **statements** (de function-calls die de waarde 2 maal afdrukken).
 
 ### Vorm assignment-statment
 
@@ -137,7 +137,7 @@ Daarnaast heeft een **variabele** ook van een bepaald **type**.
 ~~~
 
 Dit type bepaalt wat je met de waarde (een hoop bytes...) kan doen.  
-Python supporteert verschillende types, tot nog toe hebben we gebruik gemaakt van het type **String**.
+Python ondersteunt verschillende types, tot nog toe hebben we gebruik gemaakt van het type **String**.
 
 In onderstaand stuk code maken we 3 variabelen aan van verschillende types.  
 De functie type zorgt er voor dat we het type van de variabele kunnen opvragen.
@@ -155,8 +155,8 @@ Python leidt direct het type af bij creatie van de variabele (principe wordt som
 In dit geval kan de python-interpreter vanuit de **literal** afleiden tot **welk type** deze variabele is:
 
 * "hello" is omgeven door quotes
-* 10 is niet omgeven door quotes en betaat enkel uit cijfers
-* 0.5 is een getal met een punt-scheiding (komma-getal)
+* 10 is niet omgeven door quotes en bestaat enkel uit cijfers
+* 0.5 is een getal met een decimaal punt (komma-getal)
 
 Als we dan bovenstaand programma uitvoeren
 
@@ -211,24 +211,24 @@ print(c) #prints 7
 ~~~
 
 Naast het decimale stelsel is er ook support om deze getallen te binair, octaal of hexadecimaal te noteren.  
-Dit doe je door dit getal te typen startende met 0 respectieverlijk gevolgd door 
+Dit doe je door dit getal te typen startende met 0 respectievelijk gevolgd door 
 
 * **o** of O voor **octaal**
 * **x** of X voor **hexadecimaal**
 * **b** of B voor **binair**
 
-zoals geillustreerd in onderstaand voorbeeld
+zoals geïllustreerd in onderstaand voorbeeld
 
 ~~~
 print(0o10) # prints 8 (octal notation)
 print(0x10) # prints 16 (hexadecimal notation)
-print(0b1110) # prints 15 (binary notation)
+print(0b1110) # prints 14444 (binary notation)
 ~~~
 
 ### Floats
 
 Python gebruikt ook floating-type types.  
-Dit wordt gebruikt voor komma-getallen, dus waar je precisie nodig hebt na de komma
+Dit wordt gebruikt voor kommagetallen, dus waar je precisie nodig hebt na de komma
 
 ~~~
 a = -3.0
