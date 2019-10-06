@@ -145,8 +145,37 @@ CHAPTER_12 += ../chapter/chapter12_python.md
 CHAPTER_12 += ../../general/pandoc_page_break.txt
 CHAPTER_12 += ../code/code_python_serial.md
 
+PY_CHAPTER_01 += ../code/python/00_part_one.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_01 += ../code/python/01_intro_and_agreements.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_01 += ../code/python/02_python_tooling_to_get_started.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_01 += ../code/python/03_python_running_code.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_01 += ../code/python/04_python_statements.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_01 += ../code/python/05_python_comments.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_01 += ../code/python/06_python_sequential_code.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_01 += ../code/python/07_python_variables_and_types.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_01 += ../code/python/08_python_expressions.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_01 += ../code/python/09_input.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_01 += ../code/python/10_python_conditional_flow.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_01 += ../code/python/tools_command_getting_started.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_01 += ../code/python/tools_command_getting_started_windows.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_01 += ../code/python/tools_command_getting_started_linux.md
 
 #CHAPTER_09 += ../labo/labo_interrupts.md
+
+PY_CHAPTERS += $(PY_CHAPTER_01)
 
 pagebreak = ../../general/pandoc_page_break.txt
 
@@ -174,6 +203,19 @@ all:
 	wkhtmltopdf dist/cursus_nl.html dist/cursus_nl.pdf
 
 	zip dist/cursus_nl.zip dist/cursus_nl.epub dist/cursus_nl.html dist/cursus_nl.pdf
+
+python_all:
+	cd nl/chapter && pandoc ../title.txt $(PY_CHAPTERS) -o ../../dist/py_cursus_epub_nl.epub --epub-stylesheet ../../base.css --epub-cover-image=../front_page.jpg\
+
+	cd nl/chapter && pandoc ../frontpage.md -o ../../dist/front_page_nl.html  --self-contained -s -S -c ../../github-pandoc.css
+
+	cd nl/chapter && pandoc ../header.md -o ../../dist/header_nl.html  --self-contained -s -S -c ../../github-pandoc.css
+
+	cd nl/chapter && pandoc ../title.txt $(PY_CHAPTERS) -o ../../dist/py_cursus_nl.html -B ../../dist/header_nl.html  --self-contained -s -S --toc --toc-depth=2  -c ../../github-pandoc.css
+
+	wkhtmltopdf dist/py_cursus_nl.html dist/py_cursus_nl.pdf
+
+	zip dist/py_cursus_nl.zip dist/py_cursus_nl.epub dist/py_cursus_nl.html dist/py_cursus_nl.pdf
 
 labos:
 	cd nl/labo && pandoc  \
