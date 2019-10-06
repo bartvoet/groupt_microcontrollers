@@ -63,10 +63,10 @@ Deze snelheid wordt bepaald door een klok, die wordt afgeleid van de systeem-klo
 
 ![](../../pictures/Atmega168PinMap2.png)
 
-### Duiding: succesive aproximation
+### Duiding: successive approximation
 
 Hoe werken deze onderdelen samen?  
-Het antwoord ligt in een mechanisme/proces dat men **"succesive aproximation"** noemt (zie alsook datasheet).  
+Het antwoord ligt in een mechanisme/proces dat men **"successive approximation"** noemt (zie alsook datasheet).  
 Eénvoudig gezegd is eigenlijk een intelligente manier van het benaderen van een specifieke input-spanning tov een referentie-spanning.
 
 We leggen dit uit aan de hand van een voorbeeld (cijfers abritrair gekozen):
@@ -78,7 +78,7 @@ We leggen dit uit aan de hand van een voorbeeld (cijfers abritrair gekozen):
 
 ![](../../pictures/table_succesive_aproximation.png)
 
-Succesive zal een aantal **opeenvolgende stappen** nemen om tot een schatting te geraken:
+Successive zal een aantal **opeenvolgende stappen** nemen om tot een schatting te geraken:
 
 * **Stap 1:**    
   De DAC genereert een spanning die in het midden ligt **tussen 0 v en 8 v** (8v referentie-spanning), namelijk **4 v**.  
