@@ -195,9 +195,9 @@ int main(void)
     	  if(button_was_ingeduwd==0) {
     		  PORTB = PORTB ^ (1 << LED_NUMBER);
     		  button_was_ingeduwd = 1;
-    	  } else {
-    		  button_was_ingeduwd = 0;
-    	  }
+    	  } 
+      } else {
+    	  button_was_ingeduwd = 0;
       }
   }
   return 0;
@@ -238,6 +238,7 @@ AVR-GCC (compiler) voorziet voor zulke requirements een bibliotheek die je kan g
 #include <util/delay.h>
 
 int main(void)
+
 {
 	int LED_NUMBER = PB2;
 	int BUTTON_NUMBER = PB3;
@@ -259,10 +260,10 @@ int main(void)
 					PORTB = PORTB ^ (1 << LED_NUMBER);
 					button_was_ingeduwd = 1;
 				}
-			} else {
-				button_was_ingeduwd = 0;
 			}
-		}
+		} else {
+			 button_was_ingeduwd = 0;
+	    }
 	}
 	return 0;
 }

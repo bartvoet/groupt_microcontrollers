@@ -54,7 +54,7 @@ Dan kijg je volgende **gemiddelde) spanningen** bij overeenkomstige **duty-cycle
 | 0      | 1      | duty cycle | spanning |
 |--------|--------|------------|----------|
 | 0.9 ms | 0.1 ms | 10 %       | 0.5 v    |
-| 0.3 ms | 0.7 ms | 30 %       | 1.5 v    |
+| 0.7 ms | 0.3 ms | 30 %       | 1.5 v    |
 | 0.5 ms | 0.5 ms | 50 %       | 2.5 v    |
 | 0.1 ms | 0.9 ms | 90 %       | 4.5 v    |
 | 0.0 ms | 1.0 ms | 100 %      | 5.0 v    |

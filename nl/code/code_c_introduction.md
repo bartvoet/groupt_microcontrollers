@@ -1,8 +1,8 @@
-## Sequentiele logica in C
+## Sequentiële logica in C
 
 De basis van programmeren bij bijna alle talen begint bij de 3 verschillende principes:
 
-* **Sequentiele logica**
+* **Sequentiële logica**
     * We voeren de statements **1 voor 1** uit (na elkaar)  
      (input, output, processing)
     * Bijvoorbeeld:
@@ -21,7 +21,7 @@ De basis van programmeren bij bijna alle talen begint bij de 3 verschillende pri
 
 ![](../../pictures/programm_logic.png)
 
-Vandaag bekijken we het sequentiele aspect van C:
+Vandaag bekijken we het sequentiële aspect van C:
 
 * **Input:** inlezen van data van de commmand-line
 * **Processing:** bewerkingen doen op integers
@@ -32,7 +32,7 @@ Vandaag bekijken we het sequentiele aspect van C:
 
 ### Anatomie van een C-programma
 
-Als voorbereiding op de labo's, gaan we een aantal elementaire kenmerken van een software-programma in C verder onder de loep nemen:
+Als voorbereiding op de labo's, gaan we een aantal elementaire kenmerken van een softwareprogramma in C verder onder de loep nemen:
 
 We starten met een kort voorbeeld:
 
@@ -78,7 +78,7 @@ Waar een declaratie dient om het werkgeheugen van een programma te organiseren, 
 Er zijn veel verschillende soorten statements in c, degene die we vandaag bekijken kunnen we definiëren als we **simpele statements**, deze :  
 
 * Doen slechts 1 (functionele) taak
-* Worden in C altijd beindigd met een ; (semicolon in het Engels)
+* Worden in C altijd beëindigd met een ; (semicolon in het Engels)
 * Kunnen (en worden meestal op 1 lijn) geschreven worden
 
 ![](../../pictures/code_focus_on_simple_statements.png)
@@ -142,7 +142,7 @@ void main ()
 
 Bij deze notatie moet je geen return-statement toevoegen, void betekent dat deze functie geen waarde teruggeeft.
 
-Soms wordt een main onder deze uitgebreidere vorm geshreven:
+Soms wordt een main onder deze uitgebreidere vorm geschreven:
 
 ~~~c
 int main(int argc, char* argv[])
@@ -151,7 +151,7 @@ int main(int argc, char* argv[])
 }
 ~~~
 
-Voorlopig houden we het in deze voorbeelden bij de eerstbeschreven versie, de volgende les gaan we hier dieper op ingaan maar voorlopig hebben we de voorgaande notatie niet nodig om onze eerste programma's te schrijven.
+Voorlopig houden we het in deze voorbeelden bij de eerst beschreven versie, de volgende les gaan we hier dieper op ingaan maar voorlopig hebben we de voorgaande notatie niet nodig om onze eerste programma's te schrijven.
 
 **Wat je echter moet onthouden naar de volgende voorbeelden toe:**
 
@@ -229,7 +229,7 @@ Ook zullen sommige compilers warnings geven als je de void-variant gebruikt (maa
 
 ### Voorbeeld: Schrijven van tekst naar een console  
 
-Een eerste stap bij het aanleren van programmeertalen is het schrijven van programma dat een éénvoudige tekst-boodschap afdrukt.  
+Een eerste stap bij het aanleren van programmeertalen is het schrijven van programma dat een eenvoudige tekst-boodschap afdrukt.  
 Dit noemt men ook wel een "Hello World"-programma, de meeste voorbeelden die je op het internet terugvindt printen ook effectief de tekst "Hello World" af.  
 
 > Bemerking:  
@@ -462,7 +462,7 @@ Waar moet je rekening met houden bij het gebruik van een variabele:
 * Met wel een aantal beperkingen zoals
    * Mag niet starten met een cijfer
    * Mag een aantal gereserveerde karakters niet bevatten  
-Voornamlijk karakters die worden gebruikt voor operatoren (*,+,-,/,%,..)  
+Voornamelijk karakters die worden gebruikt voor operatoren (*,+,-,/,%,..)  
 "```int een*variable;```" is bijvoorbeeld geen geldige variabele-naam en -definitie
    * Mag geen **keyword** van de C-taal zijn zoals datatype-definities (int, float, ..) of andere (zoals include, void, volatile, ...)
 * Heeft een bepaalde waarde of inhoud  
@@ -479,7 +479,7 @@ Om een variabele te gebruiken moeten we - net zoals in het eerste voorbeeld - de
 * daarna initialiseren met een waarde ```getal = 5;```
 
 
-Een variabele zoals we zullen zien in de volgende voorbeelden kunnen we dan verder in het programma herbruiken in andere statements (ipv de waarde zelf)
+Een variabele zoals we zullen zien in de volgende voorbeelden kunnen we dan verder in het programma hergebruiken in andere statements (ipv de waarde zelf)
    * als argument van een functie
    * de variabele gebruiken in een expressie (zie later)
    * de variabele gebruiken om een andere variabele in te stellen
@@ -490,7 +490,7 @@ Bij deze zien we ook onze eerste **operator** in C, de assignment-operator.
 Een operator is binnen een programmeer taal (C in ons geval):  
 
 * een **symbool** ondersteund door je compiler  
-* dat een bewerking of actie voorsteld
+* dat een bewerking of actie voorstelt
 * werkt met operanden
     * 2 operanden in dit geval (binaire operator)
     * 1 operand gaan we later zien (unitaire operator)
@@ -714,7 +714,7 @@ Belangrijk is te weten dat net als in de wiskunde unitaire operatoren 1st worden
 ### Lezen van een getal (vanuit command line)
 
 Een programma zonder input is (meestal) niet veel waard.  
-Naast de mogelijkheid naar de console te schrijven kan je in C ook data uit deze console uitlezenen.  
+Naast de mogelijkheid naar de console te schrijven kan je in C ook data uit deze console uitlezen.  
 Dit kan via de functie **scanf**, de tegenhanger van de functie **printf** die we eerder hebben gebruikt om af te drukken.
 
 ```c

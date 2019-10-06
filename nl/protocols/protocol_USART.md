@@ -140,8 +140,12 @@ Pariteit van data natrekken is zeer eenvoudig:
 
 Bijvoorbeeld:
 
-* Voor bit-sequentie "01000000", is de pariteits-bit "1" bij even pariteit en "0" voor oneven parity
-* Voor bit-sequentie "01100000", is de pariteits-bit "0" bij even pariteit en "1" voor oneven parity
+* Voor bit-sequentie "01000000"
+    * is de pariteits-bit "1" bij even pariteit
+    * "0" voor oneven parity
+* Voor bit-sequentie "01100000"
+    * is de pariteits-bit "0" bij even pariteit
+    * "1" voor oneven parity
 
 > Werken met pariteit-bits is verre van bullet-proof, er zijn (zoals we bij andere protocollen zullen zien)
 > vele effectievere manieren om aan Error-detectie te doen zoals crc...
@@ -248,7 +252,7 @@ De flag UDRE0 wordt gebruikt om na te kijken dat we data naar de buffer kunnen s
 #define BAUD_RATE 9600
 #define BAUD_RATE_DIVISOR (F_CPU / 16 / BAUD_RATE - 1)
 
-#define LOOP_TOT_BIT_SET(sfr, bit) do { } while (sfr & (1 << bit))
+#define LOOP_TOT_BIT_SET(sfr, bit) do { } while (!(sfr & (1 << bit)))
 
 int main(void) {
 

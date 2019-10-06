@@ -1,43 +1,111 @@
-## Python
+## Welkom
 
-### Een les python?
+Welkom bij de cursus "Basis Programmeren".  
+In deze eerste les gaan we:
 
-We hebben in de geleerd hoe we vanuit onze **MCU** (AVR) kunnen **communiceren** naar een **computer** toe (serieel -> USB).  
-We gebruikten hiervoor een programmas zoals putty, picocom, ... om data door te sturen of te ontvangen.  
+* Installeren van tools
+* Eerste programma schrijven
+  * sequentieel programmeren
+  * statement en expressies
+  * variabelen en literals
+  * text vs nummers
+  * input en output van een programma
+* Afspraken en andere ...
+* Oefening...
 
-Dit was mogelijk - over een **seriële verbinding** - dankzij de **ftdi-converter** (die op de Arduino zit) die de conversie tussen **uart- en usb-communicatie** verzorgt.  
+### Verloop van de les
 
-Het doel van deze les is nog iets verder te gaan.  
-We gaan dit principe nog iets verder te trekken en een **applicatie** op je computer te bouwen, die deze seriële communicatie gebruikt om **instructies** te geven aan de **microcontroller**.
+~~~
 
-#### Using the right tool for the job
+18.00     (1)                  Thuis      (6)
++-----------+                  +------------+
+|   Quiz    |                  |  Oefenen   |
+|    en     <------------------+    en      |
+| Herhaling |                  |  studeren  |
++-----+-----+                  +------^-----+
+      |                               |
+      |                               |
+18.30 |    (2)                 21.30  |   (5)
++-----v------+                 +------+-----+
+|  Leerstof  |                 |  Slides    |
+|    en      |                 |    en      |
+|  Coderen   |                 |  Herhaling |
++------------+                 +------^-----+
+      |                               |
+      |                               |
+19.45 |    (3)                 20.15  |   (4)
++-----v------+                 +------+-----+
+|            |                 |Opdracht(en)|
+|   Pauze    +----------------->     en     |
+|            |                 |   Support  |
++------------+                 +------------+
+~~~
 
-We gaan dit echter **niet in C** programmeren **maar** gaan hier **Python** voor gebruiken.  
 
-**Waarom?**  
+**(1) 18.00-18.30: Quiz en Herhaling**
 
-C is een taal die wordt gebruikt om **systeem**-software (mcu, drivers, os, real time, weinig resources...) te gebruiken.  
-Als je een toepassing of applicatie maakt op je PC (GUI, Webapp, command-line, ...) is C zeker niet de meest éénvoudige oplossing.  
+* We starten met een **Quiz** over de **vorige les**
+* Vervolgens - tesamen met het overlopen van de quiz - is er tijd voorzien voor Q&A over de leerstof van vorige les
 
-Hiervoor zijn er talen zoals Python, Java, Ruby, C#, ... die je de job kunnen gemakkelijker maken.  
-Deze talen/platformen zijn gemaakt om **applicatie**-software te schrijven (computer, smartphone, web).  
 
-* Veel **toegankelijker**, flebiler, ...
-* **Veiliger en stabieler**
-     * Je kan bijvoorbeeld niet zomaar rechtstreeks memory met pointers aanspreken
-     * Dynamisch geheugen wordt door het platform beheert
-* Enorm veel libraries en extensies...
-* ...
+**(2) 18.30-19.45: Leerstof en Coderen**
 
-> Nota: Al deze voordelen hebben vanzelfsprekend gevolgen op de performantie en memory-vereisten, het gaat dus altijd om de afweging...
+* Op basis van de slides
+* Maken oefeningen in groep
+* Studenten 
+* Q&A over deze oefeningen
 
-#### Kenmerken/voordelen Python
+> Nota: de slides worden getoond
 
-We gaan hier dus een andere taal gebruiken namelijk **Python**.  
 
-* Een taal gebruikt om **kleine tot grote applicaties** te bouwen   
-* Python is zeer **éénvoudig** aan te leren, zeker in vergelijking met C
+**(3) 19.45-20.15 => PAUZE!!!**
+
+
+**(4) 20.15-21.30: Opdrachten (met support)**
+
+* Opdracht maken
+* Lector loopt rond en helpt
+
+
+**(5) 21.30-22.00: Slides en herhaling**
+
+* Slides worden ter beschikking gesteld
+* Belangrijkste punten worden herhaald
+* Q&A
+
+**(6) After class: Oefenen en studeren**
+
+* Slides bestuderen ter voorbereiding quiz
+* Vragen en antwoorden per mail
+* Bemerkingen en feedback op cursus
+* Extra oefeningen worden beschikbaar gesteld
+
+## Een stuk tekst
+
+
+De functie print heeft in dit geval een stuk tekst als argument.  
+
+
+Zo'n stuk tekst wordt een **string** genoemd en wordt in python altijd **omgeven** door **quotes**.  
+
+Dit kunnen **dubbele quote**s zijn zoals in *"Hello World"* als enkele quotes zoals *'Hello World'*.
+
+
+
+
+### Wat is python
+
+* Programmeer- en scripting-taal
+* Uitgevonden door Guido Van Rossum
+* Naam gebaseerd op "Monty Python" (een programmeer-taal moet ook fun zijn)
+
+### Waarom Python?
+
+De keuze voor deze introductie-cursus is gevallen op **Python**, waarom?  
+
+* Python is zeer **éénvoudig** aan te leren
   (wordt ook veel gebruikt om kinderen te leren programmeren)
+* Een taal gebruikt om **kleine tot grote applicaties** te bouwen  
 * Python is enorm **populair**
 * Python heeft enorm veel **libraries** en **utilities** om allerlei **taken** uit te voeren
 * **Eénvoudig en snel** applicaties (command line of gui) bouwen **zonder al te veel voorkennis.**  
@@ -45,100 +113,141 @@ We gaan hier dus een andere taal gebruiken namelijk **Python**.
 * Python is **open-source**, vrij beschikbaar en gesupporteerd voor **alle operating systems**
 * ...
 
-#### Java, C#???
 
-Waarom geen Java, C#, Ruby of anderen ... ?
 
-Er is een combinatie van kenmerken die we niet overal terugvinden:
+### Waar gaan we python voor gebruiken binnen de cursus?
 
-* Het is een script-taal (tov Java en C#), en laat ons toe snel kleine applicaties te maken zonder al te veel overhead...
-* Bevat veel functionaliteiten en libraries
-* Heeft een enorme populariteit tov andere scripting-talen (vergeleken met Ruby, Groovy, ...)
-* Werkt op eender welk OS
+* scripting en automatisatie
+* destop-gui
+* data-verwerking
+* plotting
+* scientific programming (ipv matlab of maple)
+* interfacing
+* api's
+* text
+* scriping
+* automatisatie
+* encryptie
+* web
+* netwerken
+* embedded programming
+* ...
 
-> Nota: We komen direct nog terug op scripting-talen...
+### Let op, introductie in programmeren!!
 
-#### Waarschuwing: crashcourse
-
-Let wel, deze les is enkel te beschouwen als een **introductie** in python, niets meer.  
-Bedoeling is een voorbeeld-applicatie te maken om met de MCU samen te werken.
-
-Hierbij wordt enkel het minimum aangeleerd nodig om een kleine support-applicatie te schrijven voor je MCU.
+Let wel, het betreft een **introductie** in programmeren in python, niets meer.  
+We zien nog maar het tipje van de ijsberg...
 
 ![](../../pictures/tip-of-the-iceberg.jpg)
 
-### Installatie
+## Voorbereiding
 
-#### Python 2.7
+Dit is een **praktische cursus**, dus we vliegen er direct in.  
+Het motto van deze cursus, **"eerst coderen, dan leren"** (of eerst schieten dan praten)
 
-We gaan voor deze cursus python 2.7 installeren.  
-Er bestaat ook python 3 maar deze is niet volledig compatibel met 2.7 (en 2.7 is momenteel nog het meest gebruikt)
+Alvorens te kunnen starten heb je op de desbetreffende computer 2 zaken
+Om het eerste deel van de cursus te kunnen uitvoeren heb je 2 componenten nodig op je PC:
 
-#### Installeren van 3 componenten
+* "**Python** 3"-interpreter
+* **Texteditor**
 
-Voor deze les willen moeten er volgende zaken aanwezig zijn:
+### Leren met command-line te werken
 
-* Python runtime (-interpreter)
-* 2 libraries
-     * Py-serial (seriële communicaties)
-     * Tkinter (gui)
+Alvorens te installeren heb je eerste een minimale kennis nodig van het werken met een **command-line** op je besturingsysteem.  
 
-Deze installatie is getest op Windows, Linux en Mac...
+* Op **Linux/Mac/Unix** is de meest gebruikte command-line omgeving **Bash**
+* Op **Windows** heb je keuze tussen de klassieke **CMD-applicatie of** het iets uitgebreidere **Powershell**
 
-#### Installatie op Windows
+Als je jezelf **niet confortabel** voelt op de **command-line** (of erger je hebt er nog **nooit** van **gehoord**), kan je naar **Appendix A** kijken voor een introductie voor zowel Linux als Windows.
 
-In tegenstelling tot Mac en Linux is bij Windows is Python niet by default voorzien, volgende stappen moet je uitvoeren:
+### Installatie van Python
 
-* Installeren van python  
-https://www.python.org/ftp/python/2.7.10/python-2.7.10.amd64.msi
-* Installeren van gui  
-http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.6.4.1/ActiveTcl8.6.4.1.299124-win32-x86_64-threaded.exe
-* Download vanaf https://pypi.python.org/pypi/pyserial en installeer de msi
+**Eerst** installeren we de **Python-interpreter**, dit is de software die zorgt dat je Python-programma's worden uitgevoerd.
 
-#### Installatie op Mac
+#### Python 3.7
 
-Voor de meer recentere versies van Mac OS X is Python geïnstalleerd by default:
+Voor deze cursus gebruiken we als referentie versie **Python 3.7**.  
+Als je een eerdere versie mocht hebben van Python 3 is dit ook OK.  
 
-* Installeren van gui-library  
-http://www.activestate.com/activetcl/downloads/thank-you?dl=http://downloads.activestate.com/ActiveTcl/releases/8.5.18.0/ActiveTcl8.5.18.0.298892-macosx10.5-i386-x86_64-threaded.dmg
-* Installeren van pyserial
-     * Download vanaf https://pypi.python.org/pypi/pyserial
-     * Je krijgt tar-file, deze kan je gewoon extracten vanaf de command-line (tar -xvf ${naam_tar_file})
-     * python setup.py install (in de directory waar je de tar hebt uitgepakt)
+> Nota:  
+> Python 2 kan je bij aanvang van de cursus ook gebruiken maar later in de cursus gaan we toch Python 3 moeten gebruiken.
 
-#### Installatie op Linux
+#### Testen installatie
 
-Python is by default geïnstalleerd op vrijwel elke Linux-distributie en in de meeste gevallen is dit ook de versie die wij gebruiken, namelijk python 2.7.
+Alvorens te installeren kan je **nakijken** of je systeem **reeds** een **Python-installatie** bevat en **welke versie** deze is.  
+Dit kan je doen via de **command-line**:
+
+Op Linux/Mac/Unix:
+
+~~~bash_terminal
+a@a:~$ python --version
+Python 3.6.8
+a@a:~$
+~~~
+
+Op Windows komt dit neer op
+
+~~~
+C:\users\py> python --version
+Python 3.6.8
+C:\users\py>
+~~~
+
+> Nota:  
+> Als je de installatie kan je dit ook gebruiken om je installatie te testen.
+
+#### Installeren op Windows
+
+Zie https://www.python.org/downloads/ en installeer de laatste versie Python-versie
+
+#### Installeren op Mac
+
+Mac komt meestal met Python pre-geinstalleerd, mocht dit niet het geval zijn of enkel Python 2 is geinstalleerd, gelieve hier ook de link https://www.python.org/downloads/ te gebruiken.
+
+#### Installeren op Linux
 
 *Debian/Ubuntu:*
 
-Voor Debian of Ubuntu, voer de 2 volgende aptitude-commando's uit om support voor tk (gui) en seriële connecties te gebruiken:
-
 ~~~bash
-$ sudo apt-get install python-tk
+$ sudo apt-get install python3
 ...
-$ sudo apt-get install python-serial
+bart@bvomini:~/Projects/ucll_python$ python --version
+Python 2.7.15+
+bart@bvomini:~/Projects/ucll_python$ python3 --version
+Python 3.6.8
 ...
 ~~~
+
+Python 3 wordt geinstalleerd onder het allias python3 dus gelieve deze te gebruiken.
 
 *Fedora/Red Hat:*
 
 Voor Fedora of Red Hat, voor de 2 volgende dnf-commando's uit:
 
 ~~~bash
-# dnf install pyserial
-...
-# dnf install tkinter
-...
+# dnf install python3
 ~~~
 
-### Python-code uitvoeren
+### Texteditor
 
-Als de eerste stap is uitgevoerd (of toch ten minste Python zelf), kunnen we onze eerste Python-code schrijven...
+Om een programma te schrijven hebben we een goede "**text-editor"** nodig.  
 
-Het enige wat je nodig hebt is een goede text-editor (GEdit, Notepad++, TextMate, Vi, ...) en je command-line (Bash voor Mac en Linux, CMD of Powershell voor Windows).
+* Voor Windows-gebruikers is dit Notepad++
+* MacOS gebruikers maken veelal gebruik van TextMate
+* Voor Linux hangt dit af van de distribtrutie (Gedit, Xedit, Kate, Vi, ...)
 
-#### Python is een scripting-taal
+Er zijn buiten deze editors zeer veel goede teksteditor op de markt (Atom, Sublime, Brackets, ...).  
+Mocht je hier reeds ervaring met hebben mag je deze ook gebruiken.
+
+> Nota:  
+> Word, Libreoffice of Pages (Mac) zijn geen text-editors maar text-verwerkers.  
+> Deze worden gebruikt voor text-formattering, een text-editor enkel voor "zuivere tekst"
+
+## Python-code uitvoeren
+
+Als we eerder vermelde installaties hebben uitgevoerd kunnen we starten met ons eerste programma.
+
+### Python is een scripting-taal
 
 Python is een scripting-taal, net zoals bij C schrijf je **code** in 1 of meerdere **tekst-files** **maar** je moet deze code **niet compilen**.  
 
@@ -146,102 +255,85 @@ Zoals geillustreerd hieronder moet je c-code (oranje==tekst-files) eerst via een
 
 ![](../../pictures/scripting_vs_compile.png)
 
-Een script daarentegen wordt door een speciaal programma - de interpreter - gelezen en uitgevoerd.
+Een script daarentegen wordt door een speciaal programma - de **interpreter** - gelezen en uitgevoerd.
 
 De code/instructies worden als het ware (at runtime) geinterpreteerd en uitgevoerd op de computer als tekst.
 
 
-#### Interactief python of file based
+### Interactief python of file based
 
 **Python: interactief of vanuit een file**
 
 Python-code kan je uitvoeren op 2 manieren:
 
+* **File-based:** python-statements vanuit in een file uitvoeren
 * **Interactief:** van uit een shell statement per statement uitvoeren
-* **File:** python-statements vanuit in een file uitvoeren
 
 We gaan beide manieren afwisselen waar van toepassing...  
-Laten we van start gaan met de eerste manier...
+In deze les **beperken** we ons voorlopig nog tot het **file-based uitvoeren**
 
-#### Interactief code uitvoeren (of REPL)
+### File-based "Hello World"
 
-Je kan python-code (statements) rechtstreeks vanuit een interactieve shell uitvoeren.  
-Men noemt die ook soms wel **REPL** of **R**ead **E**val **P**rint **L**oop.  
+Nu eindelijk het langverwachte allereerste Python-programma...  
 
-* **R**ead: lezen van een expressie van de gebruiker
-* **E**val: evaluatie van deze expressie en uiteindelijk uitvoering hiervan
-* **P**rint: uitprinten van het resultaat van deze expressie (als er één is)
-* **L**oop: wacht opnieuw op de volgende expressie of statement
-
-Je krijgt als het ware onmiddelijk feedback op je statements...
-
-#### Interactieve "Hello World"
-
-Als Python correct is geïnstalleerd is het voldoende om:
-
-* Naar de **command-line** te gaan (cmd of bash afhangende van je OS)
-* Het **commando python** in te te **typen**
-
-Als alles goed verloopt krijg je min of meer volgend resultaat:
-
-~~~bash
-$ python
-Python 2.7.10 (default, Oct 14 2015, 16:09:02)
-[GCC 5.2.1 20151010] on linux2
-Type "help", "copyright", "credits" or "license" for more information.
->>>
-~~~
-
-Vanaf dat er **>>>** verschijnt (voorafgegaan door wat systeem-info) kan je aan de slag en Python-statement of commando's uitvoeren.  
-We gaan verder met het volgende voorbeeld:
+**Stap 1:** Open je favoriete text-editor en type de volgende tekst in
 
 ~~~python
-$ python
-Python 2.7.10 (default, Oct 14 2015, 16:09:02)
-[GCC 5.2.1 20151010] on linux2
-Type "help", "copyright", "credits" or "license" for more information.
->>> 5 + 5
-10
->>> print("hello world")
-hello
->>> exit()
-$
+print("hello world")
 ~~~
 
-**3 (voorbeeld-)acties** zijn hier uitgevoerd:
+**Stap 2:** **Bewaar** dit op je harde schijf als **hello_world.py**  
+Bijvoorbeeld bewaar dit op je home-folder in een subfolder "python_projects"
 
-* Een **expressie** (in dit geval een wiskundige) kan **direct** uitvoeren (in een C programma kan je dat niet een expressie op zich uitvoeren)  
-  Als je enkel een expressie typt (wiskundige, naam van een variabele, ...) zal je direct het resultaat **uitprinten** naar de interpreter (print uit RE**P**L)
-* Vervolgens roepen we onze eerste python-**functie** aan **print**, deze zal een tekst afdrukken naar de stdout (gelijkaardig aan de printf uit C)
-* Om uit deze interactieve shell te geraken typ je **exit()** (gevolgd door enter) en je komt gewoon **terug** op de **command-line**.  
+**Stap 3:** **Navigeer** op de command-line naar deze folder:
 
-> **Nota:**  
-> Je ziet dat het aanroepen van een methode heel veel lijkt op de manier zoals we dat in c deden.  
-> We komen hier zodadelijk nog op terug
+~~~
+C:\users\python> cd my_first_programm
+C:\users\python\my_first_programm> 
+~~~
 
-Deze interactieve modus hadde we nog niet gezien bij C-ontwikkeling, dit is echter wel zeer courant bij scripting-talen zoals Python, Ruby, Groovy, ....  
-Het laat je toe om je code "uit te proberen" in een omgeving waar je direct feedback krijgt.  
+**Stap 4:** Voer dit programma uit.  
+Dit doe je door de python-interpreter aan te roepen met als argument hello_world.py (naam van het python-programma)
 
+~~~
+C:\users\python\my_first_programm> python hello_world.py
+Hello World
+C:\users\python\my_first_programm> 
+~~~
 
-#### "Hello World" vanuit een file
+> Nota: afhankelijk van de installatie moet je py typen ipv python
 
-Deze REPL- of Interpreter-modus is heel handig om te ontwikkelen en snel feedback te krijgen.
+### Wat hebben we zo net gedaan...
 
-In het geval je een programma wil bouwen, is het interessant deze "statements" sequentieel in een file te plaatsen (zoals we tot nog toe bij C hebben gezien).  
-Dit doe je door een file te creeren met een text-editor (gedit, notepad++, vi, ...), bijvoorbeeld met de volgende inhoud:   
+We hebben de python-interpreter een text-file gegeven.
+
+Zo'n python text-file bevat 1 of meerdere statements die door deze interpreter worden uitgevoerd.  
+Zo'n statement is "unit of work" dat een bepaalde actie uitvoert. 
+
+### Functie-aanroep
+
+Het statement dat we hier uitvoeren, is de aanroep naar de systeem-functie genaamd print.  
+Functies zijn herbruikbare stukken code die je kan aanroepen vanuit je programma onder de volgende vorm.
+
+~~~
+<functie-naam>(<argument>)
+~~~
+
+Je schrijft eerst de naam van de functie gevolgd - tussen haakjes - door het argument.  
+Je kan ook meerdere argumenten meegeven aan sommige functies maar dan moeten deze gescheiden zijn door komma's.  
+We komen hier later nog op terug...
+
+### Een 2de programma ... met meerdere statements
+
+Je bent niet beperkt tot 1 statement, je kan er meerdere aanroepen.
 
 ~~~python
 print("hello")
 print("world")
 ~~~
 
-Het eerste wat hier opvalt is dat:
-
-* Je hebt geen main-methode nodig
-* Je hebt geen ";" nodig
-
-Deze inhoud plaats je (via een tekst-editor) in een file met de extensie py (dit voorbeeld noemen we deze hello.py)  
-Net als bij het interactieve voorbeeld gebruik je het commando python, maar nu dan gevolgd door de naam (of beter gezegd het path) van de file.
+In welke volgorde wordt deze aangeroepen?  
+Heel éénvoudig, de statements worden uitgevoerd in de volgorde zoals jij ze er in zet.
 
 ~~~bash
 $ python hello.py
@@ -250,15 +342,19 @@ world
 $
 ~~~
 
-Zo'n een file kan je meerdere malen aanroepen en zoals we verder gaan zien een volledige gui-applicatie mee maken.
+Zoals je ziet zal deze eerst hello  en dan pas world afdrukken.
 
-### Sequentieel programmaren met python
+### Sequentiele uitvoering met python
 
-De taal C hebben we in het eerste deel als volgt geintroduceerd:
+Dit is wat noemen **sequentiele uitvoering**  
+**Sequentieel** betekent hier, alle **statements** die je in een Python-script plaatst:
+
+* Worden **1 voor 1** uitgevoerd
+* In de **volgorde** dat jij ze hebt geplaatst (eerst print("hello") dan print("world"))
 
 ![](../../pictures/programm_logic.png)
 
-We starten met de basis namelijk sequentieel programmeren
+We starten met de basis namelijk **sequentiele uitvoering**, zeer snel in de cursus gaan we hier ook nog **conditionele** en **repetitieve** **uitvoering** aan toevoegen, maar first things first.
 
 
 #### Variabelen
@@ -521,7 +617,7 @@ Naast if-conditie heb je ook loops
 
 Een while-loop is ook zeer vergelijkbaar met C.
 
-Bijzonder is dat je bij Python ook een else-clausule kan worden toegevoegd.   
+Bijzonder is dat je bij Python ook een else-clausule kan worden toegevoegd.  
 Deze wordt uitgevoerd wanneer de while-conditie false evalueert, maar niet als er een break of exceptie (komen we nog op terug) wordt gegenereerd
 
 ~~~python
@@ -860,7 +956,7 @@ print('1ste macht: {0:2d} 2de macht: {1:3d} 3de macht{2:4d}'.format(x, x*x, x*x*
 
 ### Werken met lijsten (vs arrays in C)
 
-Arrays zoals we ze uit C kennen bestaan niet in Python.   
+Arrays zoals we ze uit C kennen bestaan niet in Python.  
 In de plaats daarvan spreken we in Python van het datatype list.  
 Deze heeft dezelfde gedrag als een array
 
@@ -1068,7 +1164,7 @@ Dit kan door een assignment-operator toe te voegen aan het betreffende argument.
 
 ~~~python
 def macht(x,y=1):
-		return x**y
+ return x**y
 
 print(macht(x=5,y=6))
 print(macht(x=6))
@@ -1106,10 +1202,10 @@ Laten we starten met een voorbeeld:
 
 ~~~python
 def say_hello():
-	print("hello")
+print("hello")
 
 def say_world():
-	print("world")
+print("world")
 ~~~
 
 Dit is een stuk code dat we nu gaan aanroepen vanuit een programma dat zich in een andere python-file begint
@@ -1140,7 +1236,7 @@ $
 ~~~
 
 De modules die we zelf aanmaken dienen zich in dezelfde directory te bevinden.  
-Net zoals bij header-files 
+Net zoals bij header-files
 
 #### Vanuit de REPL hergebruiken...
 
@@ -1227,9 +1323,9 @@ Python laat je echter toe hierop te anticiperen door een try-except-constructie
 
 ~~~python
 try:
-	10 * (1/0)
+10 * (1/0)
 except ZeroDivisionError:
-	print("OK, we weten het wel")
+print("OK, we weten het wel")
 ~~~
 
 In bovenstaand voorbeeld "intercepteren" we de exceptie en printen we zelf een boodschap in de plaats
@@ -1247,13 +1343,13 @@ Je kan ook zelf excepties genereren
 
 ~~~python
 def function_with_exception():
-	raise Exception('hello', 'world')
+raise Exception('hello', 'world')
 
 try:
-	function_with_exception()
+function_with_exception()
 except Exception as inst:
-	print type(inst)
-	print inst.args
+print type(inst)
+print inst.args
 ~~~
 
 En vervolgens intercepteren
@@ -1288,25 +1384,25 @@ class MyClass:
 
 ~~~python
 class Student:
-	def __init__(self, a, b, c):
-		self.name = a
-		self.exam = b
-		self.labo = c
+def __init__(self, a, b, c):
+ self.name = a
+ self.exam = b
+ self.labo = c
 
 def average(student):
-	return (student.exam + student.labo)/2
+return (student.exam + student.labo)/2
 
 def succeeded_or_not(student):
-	return average(student) >= 10
+return average(student) >= 10
 
 
 studenten = [Student("C#",16,15),Student("Java",15,16)]
 
 for student in studenten:
-	if succeeded_or_not(student):
-		print(student.name + " is geslaagd met " + str(average(student)))
-	else :
-		print(student.name + " is niet geslaagd met " + str(average(student)))
+if succeeded_or_not(student):
+ print(student.name + " is geslaagd met " + str(average(student)))
+else :
+ print(student.name + " is niet geslaagd met " + str(average(student)))
 ~~~
 
 
@@ -1315,25 +1411,25 @@ for student in studenten:
 
 ~~~python
 class Student:
-	def __init__(self, name, exam,labo):
-		self.name = name
-		self.exam = exam
-		self.labo = labo
+def __init__(self, name, exam,labo):
+ self.name = name
+ self.exam = exam
+ self.labo = labo
 
-	def average(self):
-		return (self.exam + self.labo)/2
+def average(self):
+ return (self.exam + self.labo)/2
 
-	def succeeded_or_not(self):
-		return self.average() >= 10
+def succeeded_or_not(self):
+ return self.average() >= 10
 
 
 studenten = [Student("C#",16,15),Student("Java",15,16)]
 
 for student in studenten:
-	if student.succeeded_or_not():
-		print(student.name + " is geslaagd met " + str(student.average()))
-	else :
-		print(student.name + " is niet geslaagd met " + str(student.average()))
+if student.succeeded_or_not():
+ print(student.name + " is geslaagd met " + str(student.average()))
+else :
+ print(student.name + " is niet geslaagd met " + str(student.average()))
 ~~~
 
 
@@ -1402,16 +1498,16 @@ class Led:
         row_number = self.led_number        
         self.scale = Scale(master, from_=1, to=10,command=self.set_value_led,orient=HORIZONTAL)
         self.scale.grid(row=row_number,column=1)
-	Button(master,text='-',command=self.decrement_led).grid(row=row_number,column=0)
+Button(master,text='-',command=self.decrement_led).grid(row=row_number,column=0)
         Button(master,text='+',command=self.increment_led).grid(row=row_number,column=2)
 
     def increment_led(self):
         print("increment led {}".format(self.led_number))
-	self.scale.set(self.scale.get() + 1)
+self.scale.set(self.scale.get() + 1)
 
     def decrement_led(self):
         print("decrement led {}".format(self.led_number))
-	self.scale.set(self.scale.get() - 1)
+self.scale.set(self.scale.get() - 1)
 
     def set_value_led(self,value):
         print("set value led {} to value {}".format(self.led_number,value))
@@ -1433,14 +1529,14 @@ import serial
 class SerialConnection:
     def __init__(self,connection_string,baud):
         self.ser = serial.Serial(port=connection_string,
-			baudrate=baud,
-		  	bytesize=serial.EIGHTBITS,
-                     	parity=serial.PARITY_NONE,
-                     	stopbits=serial.STOPBITS_ONE,
-                     	timeout=1,
-                     	xonxoff=0,
-                     	rtscts=0)
-	sleep(2)
+  baudrate=baud,
+    bytesize=serial.EIGHTBITS,
+                      parity=serial.PARITY_NONE,
+                      stopbits=serial.STOPBITS_ONE,
+                      timeout=1,
+                      xonxoff=0,
+                      rtscts=0)
+sleep(2)
 
 
     def write_command(self,command):
