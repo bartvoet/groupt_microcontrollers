@@ -13,15 +13,15 @@
                         |        Repetitieve uitvoering        |
                         |                                      |
            _        +---+--------------------------------------+---+
-            \       |                                              |
-       _____ \      |           Conditionele uitvoering            |
-             /      |                                              |
+            \       |                                              |     * if-else if-else
+       _____ \      |           Conditionele uitvoering            |     * clausules
+             /      |                                              |     * blocks
            _/   +---+----------------------------------------------+---+
-                |                                                      |
-                |                Sequentiële uitvoering                |
-                |                                                      |
-                |   +------------+   +------------+   +------------+   |
-                |   | Statements |   | Variabelen |   | Expressies |   |
+                |                                                      | * Statements 
+                |                Sequentiële uitvoering                |    * Function-calls
+                |                                                      |    * Assignments
+                |   +------------+   +------------+   +------------+   | * Expressions
+                |   | Statements |   | Variabelen |   | Expressies |   | * Variables
                 +---+------------+---+------------+---+------------+---+
 ~~~
 
@@ -35,7 +35,7 @@ We starten nu aan meer **complexere code**, namelijk we gaan nu naar **condition
 Dit principe bouwt zich **bovenop sequentiële uitvoering** gebouwd maar voegt het element van **keuze** toe.
 
 Door een combinatie van **relationele expressies** en de **if-else-statements** kunnen we kiezen - at runtime - welke
-blok van code er wordt uitgevoerd (waar we deze keuze niet hadden bij zuiver sequenti�le uitvoering).  
+blok van code er wordt uitgevoerd (waar we deze keuze niet hadden bij zuiver sequentiële uitvoering).  
 Deze combinatie benoemen we als een **conditie**.
 
 ~~~
@@ -282,11 +282,11 @@ Een if-statement is samengesteld uit 2 (soorten) onderdelen of componenten
     * enkel **"if"** is **verplicht**
     * elke **clausule** **eindigend** op een **:**  
       (zoniet zal de interpreter een fout aan geven)
-* telkens gevolgd door een **block** 
-    * die (minimum) 1 of meerdere statements bevat
-    * geindenteerd tov de clausule die voorafgaat
-    * indentatie betekent 1 tab of 4 spaties  
-      (pas op, geen spaties mixen)
+* telkens gevolgd door een **block**
+    * die (minimum) **1 of meerdere statements** bevat
+    * **geindenteerd** tov de clausule die voorafgaat
+    * indentatie betekent **1 tab of 4 spaties**  
+      (pas op, geen spaties mixen met tabs)
 
 > Nota: je kan kiezen tussen het gebruik van een tab of 4 spaties
 > maar binnen 1 file/programma moet je consequent zijn.
@@ -313,23 +313,296 @@ Bovenstaande code toont aan dat je **1 of meerdere statements** in zo'n block ka
 
 if-statements zijn ook statements, dus naast enkelvoudige statements (1 lijn) kunnen dus ook andere block-statements (if, while, ...) in vervat zijn.
 
-Stel dat we voorgaande voorbeeld herscrhijven als volgt
+Stel dat we een boodschap wilen afdrukken dat een **getal a** zich **tussen** een getal **b en c** ligt.  
+Voorlopig **gaan** we er van **uit** dat we dat **a** altijd **kleiner **is dan **b**.  
+Dit houdt in dat je aan 2 vergelijkingen moet voldoen:
+
+* **c** moet **groter** (of gelijk) zijn aan **a**
+* **c** moet **kleiner** (of gelijk) zijn aan **b**
 
 ~~~python
 a = int(input("Enter number a: "))
-b = int(input("Enter number b in: "))
+b = int(input("Enter number b: (should be bigger then a"))
+c = int(input("Enter number c: "))
 
-if a != b:
-    print("a is not equal to b")
-    if a > b:
-        print("a is bigger than b")
-    else if (b - a) == 1:
-        print("a is -1 compared to b") #  
-    else:
-        print("b is bigger than a")
-else:
-    print("a is equal to b")
+if c  >= a:
+    if c <= b:
+        print("c is inbetween a and b")
 ~~~
 
-Binnen de eerste block/clausule (a verschillend van b) voegen we na de boodschap (a is not equal...) nod een 
+Door in bovenstaande oplossing de **1ste conditie (c >= a)** te **nesten binnen **de **2de conditie (c <=b)** test je tegen beide combinaties.
 
+### Logische expressies (en operatoren)
+
+De **relationele expressies** die we net hebben bekeken zijn **boolean-expressies** (expressie die een boolean produceert en geen nummer).  
+Daarnaast kan je ook nog letterlijk de waarden **True** en **False** als **literal** gebruiken in je code (zelden nodig...).
+
+~~~
+
+
+                               +--------------------------+  "Logische expressie combineert
+                               | Boolean expressies       |   Boolean-expressies met elkaar"
+                               | (boolean als resultaat)  +<---------------------+
+                               +----------+---------------+                      |
+                                          |                                      |
+            +-----------------------------+--------------------------------+     |
+            |                             |                                |     |
+    +-------+----------+       +----------+--------------+       +---------+-----+-----+
+    | Boolean-literals |       | Relationele expressies  |       | Logische expressies |
+    | (True of False)  |       | (==,>,<,>=,<=,!=)       |       | (and,or,not)        |
+    +------------------+       +-------------------------+       +---------------------+
+
+    
+~~~
+
+Een **3de** type boolean-expressie is de **logische expressie**, deze combineert (met uitzondering van not) 2 boolean-expressies met elkaar in een **logische relatie**
+
+### Logische and-operator
+
+Een eerste voorbeeld is de **and**-operator, deze zal **True** als resultaat hebben **enkel en alleen** als de beide logische
+expressies True zijn.
+
+~~~
+               +-------+                               +-------+
+               | True  +<------"Enkel als beide        | False |
+               +---+---+        relationele            +---+---+
+                   ^            epressies True             ^
+                   |            zijn is resultaat          |
+               +---+---+        True"                  +---+---+
+        +------+  AND  +-------+                +------+  AND  +-------+
+        |      +-------+       |                |      +-------+       |
+        |                      |                |                      |
+    +---+---+              +---+---+        +---+---+              +---+---+
+    | True  |              | True  |        |  True |              | False |
+    +-------+              +-------+        +-------+              +-------+
+
+
+               +-------+       "In alle andere         +-------+
+               | False |        gevallen False"        | False |
+               +---+---+                               +---+---+
+                   ^                                       ^
+                   |                                       |
+               +---+---+                               +---+---+
+        +------+  AND  +-------+                +------+  AND  +-------+
+        |      +-------+       |                |      +-------+       |
+        |                      |                |                      |
+    +---+---+              +---+---+        +---+---+              +---+---+
+    | False |              | True  |        | False |              | False |
+    +-------+              +-------+        +-------+              +-------+
+~~~
+
+Ter **verduidelijkig** passen we dit toe op voorgaand **voorbeeld** waar een getal a tussen b en c moest vallen...
+
+~~~python
+a = int(input("Enter number a: "))
+b = int(input("Enter number b: (should be bigger then a"))
+c = int(input("Enter number c: "))
+
+if c >= a and c <= b:
+    print("c is inbetween a and b")
+~~~
+
+Net zoals daarvoor zal de **print** **enkel uitgevoerd** worden onder de conditie dat **beide vergelijkingen True zijn**  
+Nu dat we beide elementen hebben gecombineerd hebben in 1 if-clausule kunnen we ook de tegengestelde boodschap zetten
+
+~~~python
+a = int(input("Enter number a: "))
+b = int(input("Enter number b: (should be bigger then a"))
+c = int(input("Enter number c: "))
+
+if c >= a and c <= b:
+    print("c is inbetween a and b")
+else:
+    print("c is not inbetween a and b")
+~~~
+
+Dit laat ons trouwens toe van code-duplicatie te vermijden, anders was je verplicht van de tegengestelde boodschp ("c is not inbetween...")
+af te drukken op 2 locataties binnen je code (zoals hieronder).
+
+~~~python
+a = int(input("Enter number a: "))
+b = int(input("Enter number b: (should be bigger then a"))
+c = int(input("Enter number c: "))
+
+if c  >= a:
+    if c <= b:
+        print("c is inbetween a and b")
+    else:
+        print("c is not inbetween a and b")
+else:
+    print("c is not inbetween a and b")
+
+~~~
+
+### Logische or-operator
+
+De **or-operator** kan je gebruiken om te checken of er aan (minstens) **1 van de 2 condities** voldaan is.  
+Deze zal **enkel False** teruggeven als **beide expressie ook False (onwaar)** zijn
+
+~~~
+               +-------+                               +-------+
+               | False +<------"Enkel als beide        | True  |
+               +---+---+        relationele            +---+---+
+                   ^            epressies False            ^
+                   |            zijn is resultaat          |
+               +---+---+        False"                 +---+---+
+        +------+  OR   +-------+                +------+  OR   +-------+
+        |      +-------+       |                |      +-------+       |
+        |                      |                |                      |
+    +---+---+              +---+---+        +---+---+              +---+---+
+    | False |              | False |        |  True |              | False |
+    +-------+              +-------+        +-------+              +-------+
+
+
+               +-------+       "In alle andere         +-------+
+               | True  |        gevallen True"         | True  |
+               +---+---+                               +---+---+
+                   ^                                       ^
+                   |                                       |
+               +---+---+                               +---+---+
+        +------+  OR   +-------+                +------+  OR   +-------+
+        |      +-------+       |                |      +-------+       |
+        |                      |                |                      |
+    +---+---+              +---+---+        +---+---+              +---+---+
+    | False |              | True  |        | True  |              | True  |
+    +-------+              +-------+        +-------+              +-------+
+~~~
+
+Ter illustratie, in onderstaand voorbeeld kijken we na of een getal c groter is dan 1 van beide getallen a of b.  
+c moet niet groter zijn van beide maar slecht groter dan 1 van beide, hiervoor kunnen we een or-combinatie gebruiken
+
+~~~python
+a = int(input("Enter number a: "))
+b = int(input("Enter number b: "))
+c = int(input("Enter number c: "))
+
+if a > c or b > c:
+    print("c is bigger then a or b")
+else:
+    print("c is smaller then both a and b")
+~~~
+
+### Logische not-operator
+
+De not-operator of logische inverter draait het resultaat van een boolean-expressie om.  
+
+~~~
+print(4 >5)      # prints False
+print(not(4 > 5)) # prints not False => True
+print(5 > 4)     # prints True
+print(not(5 > 4)) # prints not True => False 
+~~~
+
+> Nota: haakjes rond de expressie die volgt op not is niet verplicht maar vermijdt verwarring bij grotere expressies
+
+Anders gezegd als het resultaat True/Waar is, wijzigt dit naar False/Onwaar en omgekeerd
+
+~~~
+
+            +-------+        +-------+
+            |  True |        | False |
+            +---+---+        +---+---+
+                ^                ^
+                |                |
+            +---+---+        +---+---+
+            |  NOT  |        |  NOT  |
+            +---+---+        +---+---+
+                ^                ^
+                |                |
+            +---+---+        +---+---+
+            | False |        | True  |
+            +-------+        +-------+
+~~~
+
+Je kan bijvoorbeeld ook het voorgaande voorbeeld (uit de or-operator) omdraaien door een not te gebruiken:
+
+~~~python
+a = int(input("Enter number a: "))
+b = int(input("Enter number b: "))
+c = int(input("Enter number c: "))
+
+if not(a > c or b > c): # same as a < c and 
+    print("c is smaller then both a and b")
+else:
+    print("c is bigger then a or b")
+~~~
+
+### Complexer voorbeeld
+
+We hernemen het voorbeeld "getal a tussen b en c".  
+Probleem - met de laatste oplossing - is nog altijd dat b kleiner moet zijn als c om de vergelijking te doen kloppen.
+
+~~~python
+a = int(input("Enter number a: "))
+b = int(input("Enter number b: (should be bigger then a"))
+c = int(input("Enter number c: "))
+
+if c >= a and c <= b:
+    print("c is inbetween a and b")
+else:
+    print("c is not inbetween a and b")
+~~~
+
+Bijvoorbeeld het volgende zal worden gedetecteerd (3 tussen 1 en 5)
+
+~~~
+a=1 <--- c=3 ---> b=5
+~~~
+
+Maar als we onderstaande zouden testen dan zouden we dit met bovenstaande code niet detecteren.  
+(zou c is not inbetween a and b) afdrukken
+
+~~~
+b=5 <--- c=3 ---> a=1
+~~~
+
+Daarvoor zou je volgende code moeten voor schrijven:
+
+~~~python
+a = int(input("Enter number a: "))
+b = int(input("Enter number b: (should be bigger then a"))
+c = int(input("Enter number c: "))
+
+if c >= b and c <= a:
+    print("c is inbetween a and b")
+else:
+    print("c is not inbetween a and b")
+~~~
+
+Waar we dan weer niet het eerste geval herkennen (wanneer a kleiner is dan b).  
+De oplossing is **beide logische expressies te combineren** met een **logische or-expressie**
+
+~~~python
+a = int(input("Enter number a: "))
+b = int(input("Enter number b: (should be bigger then a"))
+c = int(input("Enter number c: "))
+
+if (c >= a and c <= b) or (c >= b and c <= a):
+    print("c is inbetween a and b")
+else:
+    print("c is not inbetween a and b")
+~~~
+
+Als we dit testen zien we dat beide gevallen worden gedekt:
+
+~~~
+$ python between.py
+Enter number a: 1
+Enter number b: 5
+Enter number c: 3
+print("c is inbetween a and b)
+$ python between.py
+Enter number a: 5
+Enter number b: 1
+Enter number c: 3
+print("c is inbetween a and b)
+$ python between.py
+Enter number a: 5
+Enter number b: 1
+Enter number c: 7
+print("c is not inbetween a and b)
+~~~
+
+> Nota:  
+> Er zijn verschillende algoritmes om na te kijken of een getal tussen 2 andere getallen ligt.  
+> Dit voorbeeld heeft als doel relationele en logische expressies samen te stellen.
