@@ -24,4 +24,5 @@ In dit eerste deel gaan we:
 
 ## Uitbreidingen in annex
 
-In de annex vind je ook 
+In de cursus wordt er verwacht basis command-line-skills the hebben.  
+Mocht je hier geen (beperkte) ervaring met hebben kan je altijd terecht bij de annex.
