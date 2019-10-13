@@ -167,15 +167,16 @@ PY_CHAPTER_01 += ../code/python/09_input.md
 PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
 PY_CHAPTER_01 += ../code/python/10_python_conditional_flow.md
 PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
-PY_CHAPTER_01 += ../code/python/tools_command_getting_started.md
-PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
-PY_CHAPTER_01 += ../code/python/tools_command_getting_started_windows.md
-PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
-PY_CHAPTER_01 += ../code/python/tools_command_getting_started_linux.md
+PY_ANNEX += ../code/python/annex.md
+PY_ANNEX += ../code/python/tools_command_getting_started.md
+PY_ANNEX += ../../general/pandoc_page_break.txt
+PY_ANNEX += ../code/python/tools_command_getting_started_windows.md
+PY_ANNEX += ../../general/pandoc_page_break.txt
+PY_ANNEX += ../code/python/tools_command_getting_started_linux.md
 
 #CHAPTER_09 += ../labo/labo_interrupts.md
 
-PY_CHAPTERS += $(PY_CHAPTER_01)
+PY_CHAPTERS += $(PY_CHAPTER_01) $(PY_ANNEX)
 
 pagebreak = ../../general/pandoc_page_break.txt
 

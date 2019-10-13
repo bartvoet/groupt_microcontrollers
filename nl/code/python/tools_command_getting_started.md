@@ -11,7 +11,6 @@ Het kunnen omgaan met de command-line is meestal noodzakelijk builden en deploye
 
 Voor vele microcontrollers en toolchains bestaan er grafische tools, maar deze steunen in de meeste gevallen op command-line-tools in de achtergrond.  
 
-
 ### Wat is een shell?
 
 Een shell is een programma waarmee je rechtstreeks toegang hebt tot **systeem-operaties** via tekst-commando's.
