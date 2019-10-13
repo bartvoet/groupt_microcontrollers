@@ -2,7 +2,6 @@
 
 ### Van sequentiële naar conditionele uitvoering
 
-
 ~~~
                             +------------------------------+
                             |                              |
@@ -352,10 +351,25 @@ Daarnaast kan je ook nog letterlijk de waarden **True** en **False** als **liter
     | (True of False)  |       | (==,>,<,>=,<=,!=)       |       | (and,or,not)        |
     +------------------+       +-------------------------+       +---------------------+
 
-    
+
 ~~~
 
 Een **3de** type boolean-expressie is de **logische expressie**, deze combineert (met uitzondering van not) 2 boolean-expressies met elkaar in een **logische relatie**
+
+### and, or en not
+
+We gaan 3 operatoren/expressies zien:
+
+| Operator   |   Betekenis                              |
+|------------|------------------------------------------|
+| and        | alle boolean-expressies moeten waar zijn |
+| or         | 1 van de ingesloten expressies           |
+| not        | omgekeerde van een boolean-expressie     |
+
+**and en or** zijn (zoals de meeste operatoren tot nog toe) **binaire operatoren** waar zij 2 of meerdere (boolean-)expressies commbineren.  
+**not** zoals we gaan zien is een **unitaire operator**, met slechte 1 operand
+
+We starten met de and-operator...
 
 ### Logische and-operator
 
@@ -481,6 +495,21 @@ if a > c or b > c:
 else:
     print("c is smaller then both a and b")
 ~~~
+
+Je kan deze or-expressie trouwens uitbriden met meerdere logische operatoren zoals hieronder vermeld
+
+~~~python
+a = int(input("Enter number a: "))
+b = int(input("Enter number b: "))
+c = int(input("Enter number c: "))
+c = int(input("Enter number d: "))
+
+if a > d or b > d or c > d:
+    print("d is bigger then a or b or c")
+else:
+    print("d is smaller then both a and b and c")
+~~~
+
 
 ### Logische not-operator
 
