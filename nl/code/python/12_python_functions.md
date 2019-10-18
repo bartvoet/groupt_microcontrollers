@@ -1,13 +1,13 @@
 ## Functies
 
-Om dit deel ven de cursus - basis van programmeren - te beindigen bekijken we functies.
+De laatste grote blok die we bespreken in de basis introductie is het hergebruik van uitvoering.
 
 ~~~
 
                     _
                      \          +------------------------------+
                 ______\         |                              |             * functies
-                      /         |     Hergebruik uitvoering    |             * modules (2de deel cursus)
+                      /         |     Hergebruik uitvoering    |             * modules (implementatie 2de deel cursus)
                     _/          |                              |             * classes en objecten (2de deel cursus)
                             +---+------------------------------+---+
                             |                                      |         * while+loops
@@ -26,14 +26,27 @@ Om dit deel ven de cursus - basis van programmeren - te beindigen bekijken we fu
                     +---+------------+---+------------+---+------------+---+
 ~~~
 
-### Functies => hergebruik
+Hergebruik van uitvoering bestaat uit 3 grote stukken:
 
-Het **sleutelwoord** bij **functies** is **hergebruik**
+* Functies
+    * **Stuk code** dat je **meermaals** kan **aanroepen**
+    * Heeft een **naam** zoals een variabele
+* Modules
+    * (Logische) **groepering** van **functies**, klassen en variabelen
+    * Bijvoorbeeld math, serial, random, ...
+    * Gebruik voor dit deel van cursus
+    * Ontwikkeling voor volgend deel
+* Objecten en klassen
+    * Groepering van **variabelen** en **functies**
+    * Verschillende **instanties** mogelijk
+    * Voor **2de deel van cursus**
 
-We hebben we al **eerder** **hergebruik** gezien ... namelijk met **variabelen**.  
-**Variabelen**
+### Functies en hergebruik
 
-* voorzien **hergebruik** van **data/geheugen** 
+Het **sleutelwoord** bij **functies** is dus **hergebruik**
+We hebben we al **eerder** **hergebruik** gezien ... namelijk met **variabelen**:
+
+* voorzien **hergebruik** van **data/geheugen**
 * **tussen** verschillende **statements**
 * en je kan via de naam deze variabelen gebruiken
 
@@ -42,14 +55,14 @@ Nu bekijken we **ander soort hergebruik**, namelijk **hergebruik van statements*
 
 ### Ingebouwde functies
 
-Python heeft een aantal **ingebouwde functies** die we reeds hebben gebruikt.  
+Python heeft een aantal **ingebouwde functies** die we reeds hebben gebruikt.
 We hebben al eerdere functies gebruikt zoals input, int, str en print:
 
 ~~~python
 # input() gets a string from the user
 input_a = input("Number a: ")
 # int() converts the input-string into an int we can use to calculate
-a = int(input_a) 
+a = int(input_a)
 # str() converts an int back to a string
 output_a = str(a + 1)
 # the concatenated result is printed back through the string-function
@@ -58,39 +71,102 @@ print(input_a + " + 1  = " + output_a)
 
 ### Gebruiken van functies
 
-Om een functies te gebruiken gebruik je de **naam**, **gevolgd** door **haakjes**.
+We hebben al eerder function-calls (statements) gebruikt.  
+Hoe gebruik je deze?
+
+Om te starten, voor een functie-call gebruik je de **naam**, **gevolgd** door **haakjes**.
+
+> Nota: de functies hieronder is enkel een voorbeeld om het gebruik te illustreren
+> We zien zo dadelijk echte voorbeelden
+
+Stel dat er een functie "an_example_function" zou bestaan, dan je de inhoud van deze functie uitvoeren als volgt:
 
 ~~~python
 an_example_function()
 ~~~
 
-Van deze functie kan je (optioneel) een **waarde opvangen** in een variabele, we noemen dit ook 
+### Return-waardes
+
+Sommige functies geven een **waarde terug**, deze kan je dan **opvangen** in een variabele, we noemen dit ook de **return-value** van de functie.
+Bijvoorbeeld een **(fictieve) functie hour** die het uur teruggeeft als String.
 
 ~~~python
-result = an_example_function()
+result = hour()
+print(result) # prints e.g. 12:12
 ~~~
 
-Daarnaast kan je een **argument** meegeven die door de functie wordt gebruikt om iets mee te doen (zoals een bewerking)
+Een return-waarde is de eerste manier van communiceren met de code in de functie.
 
-~~~python
-result = an_example_function(1)
+### Argumenten
+
+Daarnaast kan je een parameter of  **argument** meegeven aan een functie, voor zover deze functie argument(en) definieert.
+
+~~~
+                         """Functie kan meerdere
+                            inputs hebben (argumenten)
+     +-------------------+  maar slechts 1 output"""  +--------------------+
+     |      INPUT        |                            |     OUTPUT         |
+     +-------------------+                            +--------------------+
+     |  +------------+   |                            |                    |
+     |  | Argument 1 +---+--+                         |                    |
+     |  +------------+   |  |      +-------------+    |   +------------+   |
+     |                   |  |----->+   FUNCTIE   +----+-->+   return   |   |
+     |  +------------+   |  |      +-------------+    |   +------------+   |
+     |  | Argument 2 +---+--+                         |                    |
+     |  +------------+   |                            |                    |
+     |   ...             |                            |                    |
+     +-------------------+                            +--------------------+
 ~~~
 
-Je ben ook niet beperkt tot 1 argument, een functie kan van **0 tot oneindig aantal argumenten** opvragen.
+Deze wordt dan door de code van de functie gebruikt om iets mee te doen (zoals een bewerking).  
+Stel dat je een functie maakt die een getal maal 2 doet.
 
 ~~~python
-result = an_example_function(1,2)
+result = times_two(1)
+print(result) # print 2
+~~~
+
+Je kan een waarde, variabele (of andere expressies) meegeven als argument
+
+### Meerdere argumenten
+
+Je ben ook trouwens **niet beperkt tot 1 argument**, een functie kan van **0 tot oneindig aantal argumenten** definieren.
+
+~~~python
+result = multiply(3,2)
+print(result) # prints 6
 ~~~
 
 Deze argumenten zijn "by default verplicht" maar sommige functies hebben ook nog optionele argumenten (we komen hier zo dadelijk op terug...)
 
 ### Gebruik Python-modules
 
-int(), str(), print(), input() zijn direct beschikbaar in Python  
+int(), str(), print(), input() zijn direct beschikbaar in Python
 Andere - meer gespecialiseerde - functies zijn gegroepeerd in modules
 
-Bijvoorbeeld als je wiskundige functies wil gebruiken heb je de math module
+~~~
+                +---------------------+
+                |                     |
+                |  Module             |
+                |                     |
+                |   +------------+    |
+                |   | Functie    |    |
+                |   +------------+    |
+                |                     |
+                |   +------------+    |
+                |   | Functie    |    |
+                |   +------------+    |
+                |                     |
+                |   +------------+    |
+                |   | Functie    |    |
+                |   +------------+    |
+                |                     |
+                +---------------------+
+~~~
 
+Bijvoorbeeld als je wiskundige functies wil gebruiken kan je bijvoorbeeld gebruik maken van de math-module (die standaard voorzien is in Python)
+
+Bijvoorbeeld onderstaande gebruikt een aantal functies en constanten van deze module.
 
 ~~~python
 import math
@@ -101,58 +177,69 @@ math.sin(radians)
 math.sqrt(2) / 2.0
 ~~~
 
+Om een module te kunnen gebruiken dien je een import-clause toe te voegen, deze maakt de functies in je applicatie beschikbaar.
+
+Om dan de functies te gebruiken volstaat het niet de naam van deze functies te gebruiken
+
+* je moet deze naam prefixen met de module-naam
+* gevolgd door een **punt**
+
+Voor de math-module specifiek kan je volgende gebruiken.
+https://docs.python.org/3/tutorial/stdlib.html#mathematics
+
+Een ander voorbeeld is de random-module.  
+Onderstaande code demonstreert het gebruik van deze module.
+
 ~~~python
 import random
 
-for i in range(10):
-    x = random.random()
-    print(x)
+x = random.random()
+print(x) # prints a float between 0 and 1 (not included)
+x = random.randint(0, 100)
+print(x) #prints an int between 0 and 100 (not included)
 ~~~
+
+Voor een volledig overzicht van de standaard-functies (en andere dingen) kan je terecht https://docs.python.org/3/tutorial/stdlib.html (RTFM...)
+
+### Zelf functies schrijven
+
+Later gaan we nog zien hoe we zelf modules kunnen ontwikkelen, maar laten we al starten met lokale functies...  
+We starten met een functie die je naam afdrukt:
 
 ~~~python
-random.randint(5, 10)
+def greeting(): # <----------- function-header def + name + () + :
+    print("hello ")     #|<--- function-body ==> block
+    print(" from bart") #|
 ~~~
 
+### header en body
 
-~~~
-+---------------------+
-|                     |
-|  Module             |
-|                     |
-|   +------------+    |
-|   | Functie    |    |
-|   +------------+    |
-|                     |
-|   +------------+    |
-|   | Functie    |    |
-|   +------------+    |
-|                     |
-|   +------------+    |
-|   | Functie    |    |
-|   +------------+    |
-|                     |
-+---------------------+
-~~~
+Deze functie bevat 2 onderdelen:
 
-### Werken met functies
+* Een **functie-definitie** of **-header**
+    * Start met keyword **def**
+    * Een **naam** (net zoals bij een variabele)
+    * **Haakjes** (waar je argumenten kan tussenplaatsen)
+    * **Eindigend** op een **dubbel punt** (dat een code-block aankondigt)
+* Een **block** (van statements)
+    * Geindenteerd tov de functie
 
-Functies in python hebben 2 grote verschillen:
+Dit dubbel punt hadden we al eerder gezien bij condities en loops.   
+Dit teken duidt altijd het einde aan van een clausule die vooraf gaat aan een code-block.  
 
-* Ze starten met het keyword "def"
-* Zoals andere blocks geen accolades
-     * Functie-definitie eindigt met ":"
-     * Inhoud van de functie wordt geindenteerd
 
-~~~python
-def greeting():
-    print("hello ")
-    print(" from bart") 
-~~~
+
+
+### Gebruik van (zelfgeschreven) functies
+
+Deze code zal echter niet veel doen als je deze uitvoert
+
+
 
 ~~~python
 def greeting():
     print("hello ")
-    print(" from bart") 
+    print(" from bart")
 greeting()
 ~~~
 
@@ -160,14 +247,14 @@ greeting()
 ~~~python
 def greeting(name):
     print("hello ")
-    print(" from " + name) 
+    print(" from " + name)
 greeting("Bart")
 ~~~
 
 ~~~python
 def greeting(name):
     print("hello ")
-    print(" from " + name) 
+    print(" from " + name)
 greeting("Bart")
 greeting("Fons")
 ~~~
@@ -176,7 +263,7 @@ greeting("Fons")
 ~~~python
 def greeting(name,surname):
     print("hello ")
-    print(" from " + name + " " + surname) 
+    print(" from " + name + " " + surname)
 greeting("Bart")
 ~~~
 
@@ -184,7 +271,7 @@ greeting("Bart")
 ~~~python
 def polite_conversation(surname,last_name):
     print("hello ")
-    print(" from " + surname + " " + last_name) 
+    print(" from " + surname + " " + last_name)
     name = input("What's your name?")
     return name
 polite_conversation("bart","voet")
@@ -195,7 +282,7 @@ polite_conversation("bart","voet")
 ~~~python
 def greeting(name,surname):
     print("hello ")
-    print(" from " + name + " " + surname) 
+    print(" from " + name + " " + surname)
 
 def polite_conversation(surname,name):
     greetin(surname,name)
@@ -204,12 +291,14 @@ def polite_conversation(surname,name):
 polite_conversation("bart","voet")
 ~~~
 
-### header en body
+
 
 ### block
 
 ### Uitvoering van functies
 
 ### Functie zijn geen statements
+
+### Procedure vs functies
 
 ### Waarom functies?

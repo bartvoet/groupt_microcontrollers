@@ -216,8 +216,8 @@ In het volgende voorbeeld berekenen we de macht van een getal (basis en exponent
 De state die wordt geevalueerd is de exponent-counter die wordt uitgevoerd zolant deze kleiner is dan de de exponent.
 
 ~~~python
-base = int(input("Give base: ")
-exponent = int(input("Give exponent: ")
+base = int(input("Give base: "))
+exponent = int(input("Give exponent: "))
 result = 1
 exponent_counter = 0
 
@@ -342,8 +342,8 @@ Zowel de **state-update** als de **state-evaluatie** wordt door de for-loop uitg
 Als we dit toepassen op het **exponent-voorbeeld**:
 
 ~~~python
-base = int(input("Give base: ")
-exponent = int(input("Give exponent: ")
+base = int(input("Give base: "))
+exponent = int(input("Give exponent: "))
 result = 1
 exponent_counter = 0
 
@@ -357,8 +357,8 @@ print(result)
 kunnen we dit **herwerken** naar
 
 ~~~python
-base = int(input("Give base: ")
-exponent = int(input("Give exponent: ")
+base = int(input("Give base: "))
+exponent = int(input("Give exponent: "))
 result = 1
 
 for exponent_counter in range(exponent):
