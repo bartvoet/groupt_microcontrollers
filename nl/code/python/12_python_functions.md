@@ -225,16 +225,15 @@ Deze functie bevat 2 onderdelen:
     * Geindenteerd tov de functie
 
 Dit dubbel punt hadden we al eerder gezien bij condities en loops.   
-Dit teken duidt altijd het einde aan van een clausule die vooraf gaat aan een code-block.  
+Dit teken duidt altijd het einde aan van een clausule die vooraf gaat aan een code-block.
 
-
-
+> Nota: een functie is een herbruikbare block van statements.  
+> Op zich zelf is het echter geen statement, want deze wordt niet uitgevoerd als je deze niet aanroept.
 
 ### Gebruik van (zelfgeschreven) functies
 
-Deze code zal echter niet veel doen als je deze uitvoert
-
-
+Een functie op zich zal nooit uitgevoerd worden, dus als je deze niet aanroept zal er niet veel gebeuren.  
+Je kan deze functie aanroepen net zoals andere functies.
 
 ~~~python
 def greeting():
@@ -243,6 +242,43 @@ def greeting():
 greeting()
 ~~~
 
+Met als resultaat:
+
+~~~
+$ python3 greeting.py
+hello
+ from bart
+$
+~~~
+
+### Volgorde is belangrijk
+
+Belangrijk is dat je functie gedeclareerd is voor dat je ze aanroept.  
+Stel dat je de functie "greeting" zou aanroepen voor de declaraite...
+
+~~~python
+greeting()
+def greeting():
+    print("hello ")
+    print(" from bart")
+~~~
+
+...dan zal de python-interpreter een error genereren zoals hieronder...
+
+~~~
+$ python3 test.py
+Traceback (most recent call last):
+  File "test.py", line 1, in <module>
+    greeting()
+NameError: name 'greeting' is not defined
+~~~
+
+Opdat code een functie kan aanroepen/gebruiken betekent dit ook dat deze eerder in de "sequentiele uitvoering" dient te worden uitgevoerd.
+
+### Argumenten
+
+Je kan een functie **flexibeler** maken door er **argumenten** of parameters er aan toe te voegen.  
+In onderstaand voorbeeld voegen we een argument *"name"* toe, met dit argument kan je de naam bepalen van uit de 
 
 ~~~python
 def greeting(name):
@@ -250,6 +286,9 @@ def greeting(name):
     print(" from " + name)
 greeting("Bart")
 ~~~
+
+Dit **argument** gedraagt zich als (en is in feite) een soort van variabele.   
+Je kan als gevolg dezelfde functie meerdere malen **hergebruiken** met een verschillende naam.
 
 ~~~python
 def greeting(name):
@@ -259,14 +298,86 @@ greeting("Bart")
 greeting("Fons")
 ~~~
 
+Als je deze code dan uitvoert krijg je 2 maal de zelfde uitvoering maar met een andere naam.
+
+~~~
+$ python3 greeting.py
+hello
+ from bart
+hello
+ from fons
+$
+~~~
+
+### Meerdere argumenten
+
+Een functie is niet enkel enkel beperkt tot 1 argument maar kan er meerdere gebruiken.  
+In volgend voorbeeld geven we zowel een voor- als achternaam mee...
 
 ~~~python
 def greeting(name,surname):
     print("hello ")
     print(" from " + name + " " + surname)
-greeting("Bart")
+greeting("Bart","Voet")
+greeting("Fons","Student")
 ~~~
 
+Met als resulaat:
+
+~~~
+$ python3 greeting.py
+hello
+ from Bart Voet
+hello
+ from Fons Student
+$
+~~~
+
+### Output via een return-statement
+
+Naast input kan zo'n functie ook een output hebben.
+
+~~~
+                         """Functie kan meerdere
+                            inputs hebben (argumenten)
+     +-------------------+  maar slechts 1 output"""  +--------------------+
+     |      INPUT        |                            |     OUTPUT         |
+     +-------------------+                            +--------------------+
+     |  +------------+   |                            |                    |
+     |  | Argument 1 +---+--+                         |                    |
+     |  +------------+   |  |      +-------------+    |   +------------+   |
+     |                   |  |----->+   FUNCTIE   +----+-->+   return   |   |
+     |  +------------+   |  |      +-------------+    |   +------------+   |
+     |  | Argument 2 +---+--+                         |                    |
+     |  +------------+   |                            |                    |
+     |   ...             |                            |                    |
+     +-------------------+                            +--------------------+
+~~~
+
+In de code kan dit via een **return-statement**
+
+Stel dat je een (onnodige) functie schrijf om de som van 2 variabelen te bereken kan je dit al volt.
+
+~~~python
+def sum(a,b)
+    result = a + b
+    return result
+~~~
+
+Via het **return-statement** kan je dan het resultaat van deze som teruggevren aan de aanroepende code opdat deze die kan opvangen in bijvoorbeeld een variabele.
+
+~~~python
+def sum(a,b)
+    result = a + b
+    return result
+a = sum(2,5)
+print(a) # prints 7
+~~~
+
+### Nog een voorbeeld...
+
+We kunnen bijvoorbeeld ook ons eerder voorbeeld (printen van naam en naam) ook nog omvormen naar een functie die - na het geven vna de naam- ook nog de naam opvraagt.  
+We noemen deze voor de gelegenheid "polite_conversation"
 
 ~~~python
 def polite_conversation(surname,last_name):
@@ -274,10 +385,13 @@ def polite_conversation(surname,last_name):
     print(" from " + surname + " " + last_name)
     name = input("What's your name?")
     return name
-polite_conversation("bart","voet")
+your_name = polite_conversation("Bart","Voet")
+print("OK, thank you, so your name is " + name)
 ~~~
 
+### Opsplitsen van functies
 
+Een functie kan natuurlijk ook nog een anderen functie aanroepen.
 
 ~~~python
 def greeting(name,surname):
@@ -285,20 +399,9 @@ def greeting(name,surname):
     print(" from " + name + " " + surname)
 
 def polite_conversation(surname,name):
-    greetin(surname,name)
+    greeting(surname,name)
     name = input("What's your name?")
     return name
 polite_conversation("bart","voet")
 ~~~
 
-
-
-### block
-
-### Uitvoering van functies
-
-### Functie zijn geen statements
-
-### Procedure vs functies
-
-### Waarom functies?
