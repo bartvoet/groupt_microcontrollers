@@ -402,6 +402,62 @@ def polite_conversation(surname,name):
     greeting(surname,name)
     name = input("What's your name?")
     return name
+
 polite_conversation("bart","voet")
 ~~~
+
+### Lokale variabelen
+
+Je kan binnen een functie variabelen declareren.  
+
+~~~python
+def sum(a,b):
+    c = a + b
+    return c
+
+result = sum(2,5)
+print(result) #renders NameError
+~~~
+
+Je hebt deze vaak nodig - zoals in bovenstaand voorbeeld - om tussenresultaten in op te slagen.  
+Wel kan je deze **lokale variabelen** **niet buiten** deze **functie** gebruiken, zoals in de functie hieronder...
+
+~~~python
+def sum(a,b):
+    c = a + b
+    return c
+
+sum(2,5)
+print(c) #renders NameError
+~~~
+
+Deze code probeert c (intern voor functie sum) rechtstreeks te gebruiken.  
+Als je deze code echter uitvoert zal de python-interpreter de volgende error genereren:
+
+~~~
+$python3 test.py
+Traceback (most recent call last):
+  File "/home/bart/test.py", line 6, in <module>
+    print(result)
+NameError: name 'result' is not defined
+~~~
+
+### Scope
+
+Variabelen **binnen een functie** zijn dus **niet bereikbaar** vanuit aanroepende code.   
+
+Variabelen hebben - afhankelijk waar ze worden gedefineerd - een **scope**.  
+Deze scope vanuit welke code deze variabele **bereikbaar** is maar ook de **levenduur** van de variabele.  
+Een lokale variabele wordt namelijk telkens opnieuw geinstantieerd bij het aanroepen van de functie.
+
+### En verder...
+
+We gaan hier dieper op in het 2de deel van de cursus, onthoudt voorlopig dat **lokale variabelen alleen bestaan binnen het bereik/scope van een functie**
+
+In het volgende deel van de cursus gaan we hier nog verder op in samen met wat meer geavanceerde toepassingen met functies.
+
+Onthoudt vooral ook waarom (en wanneer) je functies moet gebruiken.
+
+* **Leesbaarheid** en **modulariteit** -> Opdelen van je code in stukken
+* **Hergebruik** -> Code die je meerdere malen wil gebruiken zonder copy/paste
 
