@@ -173,6 +173,17 @@ PY_CHAPTER_01 += ../code/python/12_python_functions.md
 PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
 PY_CHAPTER_01 += ../code/python/00_part_one_excercises.md
 PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+
+PY_CHAPTER_02 += ../code/python/200_part_two.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_02 += ../code/python/201_console.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_02 += ../code/python/202_lists.md
+PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_02 += ../code/python/203_strings.md
+PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
+
+
 PY_ANNEX += ../code/python/annex.md
 PY_ANNEX += ../code/python/tools_command_getting_started.md
 PY_ANNEX += ../../general/pandoc_page_break.txt
@@ -182,7 +193,7 @@ PY_ANNEX += ../code/python/tools_command_getting_started_linux.md
 
 #CHAPTER_09 += ../labo/labo_interrupts.md
 
-PY_CHAPTERS += $(PY_CHAPTER_01) $(PY_ANNEX)
+PY_CHAPTERS += $(PY_CHAPTER_01) $(PY_CHAPTER_02) $(PY_ANNEX)
 
 pagebreak = ../../general/pandoc_page_break.txt
 
