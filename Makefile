@@ -182,6 +182,7 @@ PY_CHAPTER_02 += ../code/python/202_lists.md
 PY_CHAPTER_01 += ../../general/pandoc_page_break.txt
 PY_CHAPTER_02 += ../code/python/203_strings.md
 PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_02 += ../code/python/200_part_two_excercises.md
 
 
 PY_ANNEX += ../code/python/annex.md
