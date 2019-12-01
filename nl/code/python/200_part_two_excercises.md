@@ -53,9 +53,9 @@ print(days_from_start_year(12))  # prints 365
 Zorg er ook voor dat net zoals voorgaande functie nakijkt of je een **geldige input** hebt.  
 Bij een ongeldige input geeft de functie 0 terug.
 
-#### Functie "days_until_start_year"
+#### Functie "days_until_end_year"
 
-Een gelijkaardige functie **days_until_start_year**, maar je rekent uit hoeveel dagen tot het einde van het jaar overblijven startende van een maand....
+Een gelijkaardige functie **days_until_end_year**, maar je rekent uit hoeveel dagen tot het einde van het jaar overblijven startende van een maand....
 
 ~~~python
 print(days_until_end_year(1))   # prints 334
@@ -65,7 +65,7 @@ print(days_until_end_year(12))  # prints 0
 
 #### Functie "days_between_months"
 
-Maak een functie **days_between_months** die uitrekent hoeveel dagen er zitten tussen het einde van de 1ste maand en het einde van de 2de maakd.
+Maak een functie **days_between_months** die uitrekent hoeveel dagen er zitten tussen het einde van de 1ste maand en het einde van de 2de maand.
 
 ~~~python
 print(days_between_months(1,2))   # prints 28 
@@ -74,3 +74,36 @@ print(days_between_months(1,3))   # prints 59
 
 Input validatie, geeft 0 terug als de 1ste maand groter is dan de 2de dan 0.
 O is toegelaten, in het geval dat 0 het eerste argument reken je gewoon het aantal dagen vanaf het begin van het jaar (zoals days_from_start_year).
+
+### Car management
+
+Implementeer een python-programma dat voertuigen gaat beheren
+
+~~~
+$ python carmanagement.py 
+Welkom, gelieve keuze te maken
+1. Voertuig toevoegen
+2. Voertuigen printen
+3. Afsluiten
+> 1
+Geef merk: Lada
+Geef kleur: Geel
+Geef brandstof 1 voor Diesel, 2 voor Benzine: 1
+Geef kw: 50
+Welkom, gelieve keuze te maken
+1. Voertuig toevoegen
+2. Voertuigen printen
+3. Afsluiten
+1
+Geef merk: Ferrari
+Geef kleur: Rood
+Geef brandstof 1 voor Diesel, 2 voor Benzine: 1
+Geef kw: 500
+Welkom, gelieve keuze te maken
+1. Voertuig toevoegen
+2. Voertuigen printen
+3. Afsluiten
+2
+Lada, kleur = Geel, brandstof = Benzine, KW = 50
+Ferrari, kleur = Rood, brandstof = Benzine, KW = 500
+~~~

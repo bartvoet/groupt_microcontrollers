@@ -251,3 +251,51 @@ $ python test.python
 6
 7
 ~~~
+
+### Bewerken van een List 
+
+Een lijst kan je ook nog vergroten éénmaal gecreeerd:
+
+* append(): element toevoegen aan einde van de lijst
+* extend(): zelfde maar een ineens een andere lijst of iterable toevoegen 
+* count(): aantal elementen met een bepaalde waarde  
+* index():	index van het eerste element voor een specifieke waarde
+* insert(): element toevoegen op een bepaalde positie
+* pop() : verwijderen van element op een inde
+* remove() : eerste item met een bepaalde waarde verwijderen   Removes the first item with the specified value
+* reverse() : inverteren van volgorde items/elementen
+* sort() : sorteren van de lijst
+
+Zie volgende sequentie in de console
+
+~~~python
+>>> car_park = ["Lada","Skoda","Lambo"]
+>>> print(car_park)
+['Lada', 'Skoda', 'Lambo']
+>>> print(len(car_park))
+3
+>>> car_park.append("Ferrari")
+>>> print(car_park)
+['Lada', 'Skoda', 'Lambo', 'Ferrari']
+>>> car_park.remove("Lambo")
+>>> print(car_park)
+['Lada', 'Skoda', 'Ferrari']
+>>> car_park.pop(1)
+'Skoda'
+>>> print(car_park)
+['Lada', 'Ferrari']
+>>> car_park.insert(1,"Volvo")
+>>> print(car_park)
+['Lada', 'Volvo', 'Ferrari']
+>>> car_park.reverse()
+>>> print(car_park)
+['Ferrari', 'Volvo', 'Lada']
+>>> car_park.sort()
+>>> print(car_park)
+['Ferrari', 'Lada', 'Volvo']
+>>> del car_park[:]
+>>> print(car_park)
+[]
+>>>
+~~~
+
