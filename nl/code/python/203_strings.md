@@ -1,5 +1,55 @@
 ## Werken met tekst
 
+### Data-type String
+
+Eerder hebben we reeds kennisgemaakt met het dataype string in Python.  
+Een korte herhaling van wat we al gezien hebben
+
+### String als literal
+
+Je kan deze gebruiken als literal:
+
+~~~
+text = "Hello World"
+print(text)
+~~~
+
+### Opvragen van tekst over console
+
+Je kan tekst opvragen van de console met de input-methode
+
+~~~
+name = input("Geef naam aub")
+print(name)
+~~~
+
+### String-concatenatie
+
+Je kan via de +-operator verschillende strings concateneren
+
+~~~
+text = "Hello"
+print(text + " world")
+~~~
+
+### Concatenatie met Strings
+
+En je kan zelf concateneren met andere data types
+
+~~~
+text = "Hello"
+a_number = 2
+print(text + " world" + str(5))
+~~~
+
+### String vermenigvuldigen
+
+Naast de +-operator heb je ook de \*-operator
+
+~~~
+print("Hello " * 2)
+~~~
+
 ### ASCII
 
 ~~~
