@@ -3,7 +3,6 @@
 ### Data-type String
 
 Eerder hebben we reeds kennisgemaakt met het dataype string in Python.  
-Een korte herhaling van wat we al gezien hebben
 
 ### String als literal
 
@@ -14,11 +13,30 @@ text = "Hello World"
 print(text)
 ~~~
 
+### Enkele en dubbele qoutes
+
+Een literal wordt **gedemarceerd** door quotes, dit kunnen enkele of dubbele quotes zijn.  
+Belangrijk is wel als je start met de ene (" of ') ook eindigt met de andere.
+
+~~~
+a = "A string in double quotes can contain 'single quote' characters."
+b = 'A string in single quotes can contain "double quote" characters.'
+~~~
+
+Dit geeft als voordeel dat je binnen enkele quotes dubbele kan gebruiken en omgekeerd zoals hierboven geillustreerd.
+
+~~~
+c = '''\This string starts with a tab and ends with a newline character.\n'''
+d = """This is a triple double quoted string, the only kind that can
+    contain real newlines."""
+~~~
+
+
 ### Opvragen van tekst over console
 
 Je kan tekst opvragen van de console met de input-methode
 
-~~~
+~~~python
 name = input("Geef naam aub")
 print(name)
 ~~~
@@ -27,7 +45,7 @@ print(name)
 
 Je kan via de +-operator verschillende strings concateneren
 
-~~~
+~~~python
 text = "Hello"
 print(text + " world")
 ~~~
@@ -36,10 +54,26 @@ print(text + " world")
 
 En je kan zelf concateneren met andere data types
 
-~~~
+~~~python
 text = "Hello"
 a_number = 2
-print(text + " world" + str(5))
+print(text + " world" + str(a_number))
+~~~
+
+
+
+~~~python
+text = "Hello"
+a_number = 2
+print(text + " world" + str(a_number))
+~~~
+
+### Concatenatie via print
+
+~~~python
+text = "Hello"
+a_number = 2
+print(text, " world",5)
 ~~~
 
 ### String vermenigvuldigen
@@ -72,31 +106,15 @@ Dec Hex    Dec Hex    Dec Hex  Dec Hex  Dec Hex  Dec Hex   Dec Hex   Dec Hex
  15 0F SI   31 1F US   47 2F /  63 3F ?  79 4F O  95 5F _  111 6F o  127 7F DEL
 ~~~
 
-### String literals
+### Lengte van strings
 
-~~~
-a = "A string in double quotes can contain 'single quote' characters."
-b = 'A string in single quotes can contain "double quote" characters.'
-c = '''\This string starts with a tab and ends with a newline character.\n'''
-d = """This is a triple double quoted string, the only kind that can
-    contain real newlines."""
-
+~~~python
+print(len("testje")) # prints 6
+print(len("")) # prints 0
 ~~~
 
+### Meerdere argumenten aan print
 
-### Enkele vs dubbele quotes
-
-### """3 quotes""" 
-
-### Lengte van stringhe
-
-### Concatenatie van strings
-
-Zoals eerder vermeld zin
-
-Meerdere argumenten aan print
-
-### hexbyt
 
 ### Formatteren van een string
 
