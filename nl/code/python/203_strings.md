@@ -1,90 +1,97 @@
 ## Werken met tekst
 
-### Data-type String
+Eerder hebben we reeds kennisgemaakt met het dataype string in Python. 
 
-Eerder hebben we reeds kennisgemaakt met het dataype string in Python.  
+* a
+* b
+* c
 
-### String als literal
 
-Je kan deze gebruiken als literal:
+### Literals
 
-~~~
+#### String als literal
+
+Het eerste gebruik dat we hebben gezien was als **literal**:
+
+~~~python
 text = "Hello World"
 print(text)
 ~~~
 
-### Enkele en dubbele qoutes
+#### Enkele en dubbele qoutes
 
-Een literal wordt **gedemarceerd** door quotes, dit kunnen enkele of dubbele quotes zijn.  
+Zon'n literal wordt **gedemarkeerd** door quotes, dit kunnen enkele of dubbele quotes zijn.  
 Belangrijk is wel als je start met de ene (" of ') ook eindigt met de andere.
 
-~~~
+~~~python
 a = "A string in double quotes can contain 'single quote' characters."
 b = 'A string in single quotes can contain "double quote" characters.'
 ~~~
 
 Dit geeft als voordeel dat je binnen enkele quotes dubbele kan gebruiken en omgekeerd zoals hierboven geillustreerd.
 
-~~~
-c = '''\This string starts with a tab and ends with a newline character.\n'''
-d = """This is a triple double quoted string, the only kind that can
-    contain real newlines."""
-~~~
+#### Backslash als escape-character
 
-
-### Opvragen van tekst over console
-
-Je kan tekst opvragen van de console met de input-methode
+Als je echter toch een een double quote wil gebruiken binnen een double quoted string kan je altijd een backslash gebruiken als escape character.
 
 ~~~python
-name = input("Geef naam aub")
-print(name)
+print("\"Double quotes\" with backslash.")
+print('\'Singe quotes\' with backslash.')
 ~~~
 
-### String-concatenatie
+Een **escape charachter** laat je toe karakters in een literal te zetten die er normaal niet kunnen instaan.
 
-Je kan via de +-operator verschillende strings concateneren
+~~~
+\\	      Backslash (\)
+\'	      Single quote (')
+\"	      Double quote (")
+~~~
+
+Naast het escapen van deze quotes, gebruik je de backslash om er voor te zorgen dat je deze backslash zelf in een literal kan plaatsen.
 
 ~~~python
-text = "Hello"
-print(text + " world")
+print("Een backslash \\ gebruik je in python als escape-character")
 ~~~
 
-### Concatenatie met Strings
+#### Speciale karakters
 
-En je kan zelf concateneren met andere data types
+Een backslash kan ook worden gebruikt om specifieke karakters af te drukken zoals een tab, een nieuwe lijn of een tab... 
+
+~~~
+\n	      ASCII Linefeed (LF)
+\r	      ASCII Carriage Return (CR)
+\t	      ASCII Horizontal Tab (TAB)
+~~~
+
+Bijvoorbeeld...
 
 ~~~python
-text = "Hello"
-a_number = 2
-print(text + " world" + str(a_number))
+print("Deze tekst wordt gevolgd door een tab\t en \n een new line ")
+~~~
+
+...zal het volgende afprinten
+
+~~~
+Deze tekst wordt gevolgd door een tab	    en 
+ een new line 
 ~~~
 
 
+#### Triple quotes
+
+Een gewone string-literal kan je maar over 1 lijn worden ingegeven.   
 
 ~~~python
-text = "Hello"
-a_number = 2
-print(text + " world" + str(a_number))
+print("""This is a triple double quoted string.
+It can contain more then one line""")
+print('''Same thing for 
+single triple single quoted string''')
 ~~~
 
-### Concatenatie via print
+#### ASCII-codes
 
-~~~python
-text = "Hello"
-a_number = 2
-print(text, " world",5)
-~~~
-
-### String vermenigvuldigen
-
-Naast de +-operator heb je ook de \*-operator
-
-~~~
-print("Hello " * 2)
-~~~
-
-### ASCII
+Een stuk tekst bestaat eigenlijk uit cijfers.  
+Dit zie je in de encodering van een tekst-file, maar dit wordt evenwel zo intern in het datatype van een python-string.
 
 ~~~
 Dec Hex    Dec Hex    Dec Hex  Dec Hex  Dec Hex  Dec Hex   Dec Hex   Dec Hex  
@@ -106,15 +113,87 @@ Dec Hex    Dec Hex    Dec Hex  Dec Hex  Dec Hex  Dec Hex   Dec Hex   Dec Hex
  15 0F SI   31 1F US   47 2F /  63 3F ?  79 4F O  95 5F _  111 6F o  127 7F DEL
 ~~~
 
+Met python kan je met deze ascii-codes een string construeren.  
+Volgend stuk code zal de string hello afdrukken.
+
+~~~python
+print("\x68\x65llo")
+~~~
+
+### Opvragen van tekst over console
+
+Je kan tekst opvragen van de console met de input-methode
+
+~~~python
+name = input("Geef naam aub")
+print(name)
+~~~
+
+### String-concatenatie
+
+Je kan via de +-operator verschillende strings concateneren
+
+~~~python
+text = "Hello"
+print(text + " world")
+~~~
+
+### Concatenatie met andere types
+
+En je kan zelf concateneren met andere data-types
+
+~~~python
+text = "Hello"
+a_number = 2
+print(text + " world " + str(a_number))
+~~~
+
+Dit drukt de tekst "Hello world 2" af.  
+Let wel dat je de integer-variabele moet converteren naar een string...
+
+~~~python
+text = "Hello"
+a_number = 2
+print(text + " world " + a_number)
+~~~
+
+...als je dit niet doet krijg je een error
+
+~~~
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: must be str, not int
+~~~
+
+Je kan geen string optellen met een getal via de +-operator
+
+### Concatenatie via print
+
+De concatenatie kan echter ook wel via de print-methode.  
+
+~~~python
+text = "Hello"
+a_number = 2
+print(text, " world", a_hello)
+~~~
+
+Je kan hier alle types gebruiken gezien de print-functie zelf de conversie zal uitvoeren via str()
+
+### String vermenigvuldigen
+
+Naast de +-operator heb je ook de \*-operator
+
+~~~
+print("Hello " * 2)
+~~~
+
+
 ### Lengte van strings
 
 ~~~python
 print(len("testje")) # prints 6
 print(len("")) # prints 0
 ~~~
-
-### Meerdere argumenten aan print
-
 
 ### Formatteren van een string
 
@@ -153,11 +232,3 @@ https://docs.python.org/2/tutorial/inputoutput.html
 > Nota:  
 > In dit geval zien we dat we dat we een methode aanroepen op een manier die we nog niet kennen vanuit C, namelijk vanuit een object (string.methode()).  
 > Dit is Object-Georienteerd programmeren, hier komen zo direct nog even op terug
-
-
-
-### Knippen van strings
-
-### String is een collectie
-
-### Zoeken in een string

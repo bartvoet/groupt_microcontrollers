@@ -57,13 +57,15 @@ Traceback (most recent call last):
 ZeroDivisionError: integer division or modulo by zero
 ~~~
 
-In dit geval zien we dat er ook duidelijk een error wordt aangegeven.  
-In dit geval een ZeroDivisionError
+In dit geval zien we dat er ook duidelijk een **error** wordt aangegeven, in dit geval een ZeroDivisionError
 
 ### Een exceptie stopt het programma
 
-Als je niets met deze exceptie aanvangt stopt de uitvoering van je programma.  
-Wel belangrijk (verschil met syntax-error) is dat de rest van het programma is uitgevoerd.
+Belangrijk in bovenstaande code, is dat voorgaande code (afprinten van hello) wel degelijk wordt **uitgevoerd**.
+
+Het programma start wel degelijk maar stopt bij het aangegeven punt van error.
+
+In tegenstelling tot een syntax-error kan een python-programma niet bij het parsen van de python-code bepalen dat er eer error is.
 
 ### Excepties en functies
 
@@ -80,11 +82,10 @@ print(a)
 
 ### Excepties opvangen
 
-Je kan in je code ervoor zorgen dat deze excepties worden opgevangen.  
-Dit kan via een **try-block** in combinatie met **except-block**
+Je kan in je code ervoor zorgen dat deze excepties worden **opgevangen** zonder dat ze het programma beeindigen.
 
+Dit kan via een **try-block** in combinatie met **except-block**  
 In onderstaande code proberen we een variabele af te printen die niet bestaat.  
-We kunnen dit doen aan de hand van een default except-block, deze gaat eender welke error (buiten SyntaxError) opvangen.
 
 ~~~python
 print("Before try-catch")
@@ -96,7 +97,9 @@ except:
 print("After try-catch")
 ~~~
 
-...met volgende uitvoering...
+We kunnen dit doen aan de hand van een default except-block, deze gaat eender welke error (buiten SyntaxError) opvangen.
+
+Dit heeft volgende uitvoering als resultaat...
 
 ~~~
 Before try-catch
@@ -107,26 +110,28 @@ After try-catch
 We zien hier dat:
 
 * Het programma wordt uitgevoerd
-* De try-block wordt onderbroken
+* De try-block wordt onderbroken (bij print(x))
 * De except wordt uitgevoerd
 * De code verder loopt na de except
 
 ### Excepties opvangen per type
 
-Je kan ook het type aangeven waarvoor je deze error wil opvangen.  
-In dit geval beperk je het overgen tot een specifieke error, in dit geval de Nameerror
+Je kan ook het **type van exceptie aangeven** dat je wil opvangen.  
+In dit geval beperk je het opvangen tot een specifieke error, de NameError
 
 ~~~python
 print("Before try-catch")
 try:
   print(x)
   print("After error")
-except  NameError:
+except NameError:
   print("An exception occurred")
 print("After try-catch")
 ~~~
 
-Als je echter een andere error genereert (bijvoorbeeld een ZeroDivisionError)
+Het volstaan hier het type te definieren na het except-keyword.
+
+Als je echter een andere error genereert (bijvoorbeeld een ZeroDivisionError)...
 
 ~~~python
 print("Before try-catch")
@@ -139,17 +144,17 @@ except  NameError:
 print("After try-catch")
 ~~~
 
-...met als gevolg...
+...zal dit echter niet worden opgevangen...
 
 ~~~
 ZeroDivisionError: integer division or modulo by zero
 ~~~
 
-...dat de error niet wordt opgevangen
+...en wordt het programma beeindigd (prints daarna worden niet afgedrukt)
 
 ### Meerdere except-blokken
 
-Om dit probleem te verhelpen kan je meerdere except-blocks plaatsen.  
+Om dit probleem te verhelpen - en meerdere excepties op te vangen - kan je meerdere except-blocks plaatsen.  
 Met onderstaande except-block op ZeroDivisionError te plaatsen vermijd je dat het programma wordt beeindigd.
 
 ~~~python
@@ -219,9 +224,95 @@ finally:
   f.close() 
 ~~~
 
+### Zelf excepties opwerpen
 
-### raise
+Naast het afvangen van excepties kan je deze ook zelf opwerpen met het keyword **raise**
+
+Praktisch, stel als je maakt een functie:
+
+* Die de oppervlakte van een circel berekent
+* Je wenst echter geen negatieve input
 
 ~~~python
-def
+import math
+
+def circumference(radius): 
+  if radius < 0:
+    raise Exception("Sorry, no numbers below zero")
+  return 2 * radius * math.pi
+
+circumference(1)  # prints +- 6,283...
+circumference(-1) # raises error
 ~~~
+
+De functie-aanroep op de laaste lijn zal het het programma doen crashen en beindigen.
+
+~~~
+6.283185307179586
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 3, in circumference
+Exception: Sorry, no numbers below zero
+~~~
+
+### Zelf (custom) excepties aanmaken
+
+~~~python
+import math
+
+class RadiusException(Exception):
+  pass
+
+def circumference(radius): 
+  if radius < 0:
+    raise RadiusException()
+  return 2 * radius * math.pi
+
+circumference(1)  # prints +- 6,283...
+circumference(-1) # raises error
+~~~
+
+### En opvangen...
+
+Je kan deze exceptie dan ook naar type opvangen zoals we eerder hebben gezien.
+
+~~~python
+import math
+
+class RadiusException(Exception):
+  pass
+
+def circumference(radius): 
+  if radius < 0:
+    raise RadiusException()
+  return 2 * radius * math.pi
+
+try:
+  circumference(1)  # prints +- 6,283...
+  circumference(-1) # raises error
+except RadiusException:
+  print("Problem with radius...")
+~~~
+
+Stel dan dat je toch nog een andere exception zou opwerpen...
+
+~~~python
+import math
+
+class RadiusException(Exception):
+  pass
+
+def circumference(radius): 
+  if radius < 0:
+    raise RadiusException()
+  return 2 * radius * math.pi
+
+try:
+  a = 5/0
+  circumference(1)  # prints +- 6,283...
+  circumference(-1) # raises error
+except RadiusException:
+  print("Problem with radius...")
+~~~
+
+... wordt deze niet opgevangen
