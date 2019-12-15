@@ -64,11 +64,38 @@ Een klasse:
   (name, lab_points, theory_points)
 
 
+### Aanmaken van een object
+
+Als je een variabele aanmaakt van zo'n type noemen we dit een **object**.  
+Onderstaande code maakt een object aan.
+
+~~~python
+class Student:
+    name = ""
+    lab_points = 0
+    theory_points = 0
+
+jan = Student()
+~~~
+
+Een **object** wordt aangemaakt dooe een speciale functie (Student()), genaamd de **constructor**. 
+
+### Constructor
+
+Deze **constructor**:
+
+* is een **functie**
+* die **automatisch** wordt **aangemaakt**  
+  (als je deze zelf niet maakt, zien direct)
+* met **dezelfde naam** heeft als de **klasse**
+* die je **aanroept** om een **object** (of instantie) van de klasse aan te maken
+
+Zo direct gaan we ook zien dat deze constructor kunnen aanpassen, maar laten we eerst iets doen met het object.
+
 ### Werken met attributen
 
-Deze attributen (name, lab_points, theory_points) bevatten de data van deze klasse.
-
-Onderstaand voorbeeld illustreert hoe je zo'n datatype gebruikt
+Een object bestaat uit attributen (name, lab_points, theory_points), zoals deze in de klasse werden beschreven.  
+Onderstaand voorbeeld illustreert hoe je deze attributen gebruikt.
 
 ~~~python
 class Student:
@@ -86,13 +113,35 @@ print(jan.lab_points)     # prints 15
 print(jan.theory_points)  # prints 17
 ~~~
 
-### Constructor
+Je kan dez variabelen via de dot-notatie - object-naam gevolgd door punt gevolgd door naam -  uitlezen en bewerken, net zoals je dit zou doen bij een gewone variabelen.
 
-De klasse-variabele wordt aangemaakt door de **constructor** aan te roepen naam (jan = Student()).  
-Deze **constructor**:
+### Meerdere objecten
 
-* is een **functie**
-* die **automatisch** wordt **aangemaakt**  
-  (als je deze zelf niet maakt, zien direct)
-* met **dezelfde naam** heeft als de **klasse**
-* die je **aanroept** om een **object** (of instantie) van de klasse aan te maken
+
+~~~python
+class Student:
+    name = ""
+    lab_points = 0
+    theory_points = 0
+
+jan = Student()
+jan.name = "Jan Janssens"
+jan.lab_points = 15
+jan.theory_points = 17
+
+print(jan.lab_points)
+print(jan.lab_points)
+print(jan.theory_points)
+
+piet = Student()
+piet.name = "Piet Pieters"
+piet.lab_points = 15
+piet.theory_points = 17
+
+print(piet.lab_points)
+print(piet.lab_points)
+print(.theory_points) 
+
+
+~~~
+

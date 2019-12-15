@@ -1519,6 +1519,10 @@ led = Led(master,1)
 mainloop()
 ~~~
 
+
+https://pyserial.readthedocs.io/en/latest/tools.html
+
+
 #### Stap 4
 
 ~~~python
