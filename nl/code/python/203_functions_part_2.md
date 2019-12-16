@@ -82,8 +82,8 @@ De volgende functie/code telt af vanaf 10
 
 ~~~python
 def countdown_function(count):
-    for i in range(count,0,count,-1):
-        print(i + 1)
+    for i in range(count,0,-1):
+        print(i)
 
 countdown_function(10)
 ~~~
