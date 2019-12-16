@@ -117,6 +117,7 @@ Je kan dez variabelen via de dot-notatie - object-naam gevolgd door punt gevolgd
 
 ### Meerdere objecten
 
+Vanzelfsprekend kan je dan meerdere objecten toevoegen
 
 ~~~python
 class Student:
@@ -141,7 +142,153 @@ piet.theory_points = 17
 print(piet.lab_points)
 print(piet.lab_points)
 print(.theory_points) 
-
-
 ~~~
 
+
+### Meerdere objecten in een lijst
+
+
+~~~python
+class Student:
+    name = ""
+    lab_points = 0
+    theory_points = 0
+
+students = []
+
+jan = Student()
+jan.name = "Jan Janssens"
+jan.lab_points = 15
+jan.theory_points = 17
+students.add(jan)
+
+
+piet = Student()
+piet.name = "Piet Pieters"
+piet.lab_points = 15
+piet.theory_points = 17
+students.add(piet)
+
+for student in students:
+    print(student.lab_points)
+    print(student.lab_points)
+    print(student.theory_points) 
+~~~
+
+
+### Constructor
+
+~~~python
+class Student:
+    def __init__(self,name,lab,theory):
+        self.name = name
+        self.lab_points = lab
+        self.theory_points = 0
+
+students = []
+
+jan = Student("Jan Janssens",15,17)
+students.add(jan)
+piet = Student("Piet Pieters",15,17)
+students.add(piet)
+
+for student in students:
+    print(student.lab_points)
+    print(student.lab_points)
+    print(student.theory_points) 
+~~~
+
+### Constructor (2)
+
+~~~python
+class Student:
+    def __init__(self,name,lab,theory):
+        self.name = name
+        self.lab_points = lab
+        self.theory_points = 0
+
+students = []
+
+students.add(Student("Jan Janssens",15,17))
+students.add(Student("Piet Pieters",15,17))
+
+for student in students:
+    print(student.lab_points)
+    print(student.lab_points)
+    print(student.theory_points) 
+~~~
+
+### Constructor (3)
+
+~~~python
+class Student:
+    def __init__(self,name,lab=0,theory=0):
+        self.name = name
+        self.lab_points = lab
+        self.theory_points = 0
+
+students = []
+
+students.add(Student("Jan Janssens",15,17))
+students.add(Student("Piet Pieters",15,17))
+
+for student in students:
+    print(student.lab_points)
+    print(student.lab_points)
+    print(student.theory_points) 
+~~~
+
+### Function
+
+~~~python
+class Student:
+    def __init__(self,name,lab=0,theory=0):
+        self.name = name
+        self.lab_points = lab
+        self.theory_points = 0
+
+    def points(self):
+        return (self.lab_points + self.theory_points)/2
+
+students = []
+
+students.add(Student("Jan Janssens",15,17))
+students.add(Student("Piet Pieters",15,17))
+
+for student in students:
+    print(student.lab_points)
+    print(student.lab_points)
+    print(student.theory_points) 
+    print(student.theory_points)
+~~~
+
+### As string
+
+
+~~~python
+class Student:
+    def __init__(self,name,lab=0,theory=0):
+        self.name = name
+        self.lab_points = lab
+        self.theory_points = 0
+
+def points(self):
+    return (self.lab_points + self.theory_points)/2
+
+def succeeded(self):
+    return points(self) >= 10    
+    
+def __str___(self):
+    return "Student {} has {} for lab and {} for theory, so average of {}
+
+students = []
+
+students.add(Student("Jan Janssens",15,17))
+students.add(Student("Piet Pieters",15,17))
+
+for student in students:
+    print(student.lab_points)
+    print(student.lab_points)
+    print(student.theory_points) 
+    print(student.theory_points)
+~~~
