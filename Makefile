@@ -186,6 +186,14 @@ PY_CHAPTER_02 += ../code/python/204_exceptions.md
 PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
 PY_CHAPTER_02 += ../code/python/204_files.md
 PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_02 += ../code/python/203_functions_part_2.md
+PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_02 += ../code/python/205_objects_and_classes.md
+PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_02 += ../code/python/206_tkinter.md
+PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_02 += ../code/python/207_gui_and_serial.md
+PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
 PY_CHAPTER_02 += ../code/python/200_part_two_excercises.md
 
 
