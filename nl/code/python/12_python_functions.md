@@ -14,7 +14,7 @@ De laatste grote blok die we bespreken in de basis introductie is het hergebruik
                             |        Repetitieve uitvoering        |         * loop+state
                             |                                      |         * for+loops
                         +---+--------------------------------------+---+
-                        |                                              |     * if+else if+else
+                        |                                              |     * if+elif+else
                         |           Conditionele uitvoering            |     * clausules
                         |                                              |     * blocks
                     +---+----------------------------------------------+---+

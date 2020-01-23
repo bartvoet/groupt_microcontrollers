@@ -15,7 +15,7 @@ In dit eerste deel gaan we:
 * **Conditionele** uitvoering
     * if
     * if-else
-    * if-else if - else
+    * if-elif - else
 * **Repititieve** uitvoering
     * while
     * for

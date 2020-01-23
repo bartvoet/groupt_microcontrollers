@@ -10,7 +10,7 @@
               /          |        Repetitieve uitvoering        |         * loop-state
             _/           |                                      |         * for-loops
                      +---+--------------------------------------+---+
-                     |                                              |     * if+else if+else
+                     |                                              |     * if+elif+else
                      |           Conditionele uitvoering            |     * clausules
                      |                                              |     * blocks
                  +---+----------------------------------------------+---+
@@ -64,7 +64,7 @@ Via **condities** hebben we met de **if-else-structuur** **beslissingen** kunnen
 ~~~
 
 Je kiest al dan niet een een **stuk code** of **block** uit te voeren.  
-Optioneel kan je dan ook een **ander stuk code** uitvoeren als de conditie onwaar (False) is (else- en else-if clausules)
+Optioneel kan je dan ook een **ander stuk code** uitvoeren als de conditie onwaar (False) is (else- en elif clausules)
 
 ### Naar repititieve uitvoering
 
