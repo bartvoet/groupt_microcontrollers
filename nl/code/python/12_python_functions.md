@@ -14,7 +14,7 @@ De laatste grote blok die we bespreken in de basis introductie is het hergebruik
                             |        Repetitieve uitvoering        |         * loop+state
                             |                                      |         * for+loops
                         +---+--------------------------------------+---+
-                        |                                              |     * if+else if+else
+                        |                                              |     * if+elif+else
                         |           Conditionele uitvoering            |     * clausules
                         |                                              |     * blocks
                     +---+----------------------------------------------+---+
@@ -416,7 +416,7 @@ def sum(a,b):
     return c
 
 result = sum(2,5)
-print(result) #renders NameError
+print(result)
 ~~~
 
 Je hebt deze vaak nodig - zoals in bovenstaand voorbeeld - om tussenresultaten in op te slagen.  
@@ -438,8 +438,8 @@ Als je deze code echter uitvoert zal de python-interpreter de volgende error gen
 $python3 test.py
 Traceback (most recent call last):
   File "/home/bart/test.py", line 6, in <module>
-    print(result)
-NameError: name 'result' is not defined
+    print(c) #renders NameError
+NameError: name 'c' is not defined
 ~~~
 
 ### Scope

@@ -40,7 +40,7 @@ def coding(key, value, format, meta):
         if result:
              filename = result.group(1)
              create_and_write_new_file(filename,code)
-        else if partial_result:
+        elif partial_result:
              filename = result.group(2)
              if result.group(1) == "1"
                  create_and_write_new_file(filename,code)

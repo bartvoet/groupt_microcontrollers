@@ -141,7 +141,7 @@ piet.theory_points = 17
 
 print(piet.lab_points)
 print(piet.lab_points)
-print(.theory_points) 
+print(piet.theory_points)
 ~~~
 
 
@@ -160,14 +160,14 @@ jan = Student()
 jan.name = "Jan Janssens"
 jan.lab_points = 15
 jan.theory_points = 17
-students.add(jan)
+students.append(jan)
 
 
 piet = Student()
 piet.name = "Piet Pieters"
 piet.lab_points = 15
 piet.theory_points = 17
-students.add(piet)
+students.append(piet)
 
 for student in students:
     print(student.lab_points)
@@ -188,9 +188,9 @@ class Student:
 students = []
 
 jan = Student("Jan Janssens",15,17)
-students.add(jan)
+students.append(jan)
 piet = Student("Piet Pieters",15,17)
-students.add(piet)
+students.append(piet)
 
 for student in students:
     print(student.lab_points)
@@ -209,8 +209,8 @@ class Student:
 
 students = []
 
-students.add(Student("Jan Janssens",15,17))
-students.add(Student("Piet Pieters",15,17))
+students.append(Student("Jan Janssens",15,17))
+students.append(Student("Piet Pieters",15,17))
 
 for student in students:
     print(student.lab_points)
@@ -229,8 +229,8 @@ class Student:
 
 students = []
 
-students.add(Student("Jan Janssens",15,17))
-students.add(Student("Piet Pieters",15,17))
+students.append(Student("Jan Janssens",15,17))
+students.append(Student("Piet Pieters",15,17))
 
 for student in students:
     print(student.lab_points)
@@ -252,8 +252,8 @@ class Student:
 
 students = []
 
-students.add(Student("Jan Janssens",15,17))
-students.add(Student("Piet Pieters",15,17))
+students.append(Student("Jan Janssens",15,17))
+students.append(Student("Piet Pieters",15,17))
 
 for student in students:
     print(student.lab_points)
@@ -279,12 +279,12 @@ def succeeded(self):
     return points(self) >= 10    
     
 def __str___(self):
-    return "Student {} has {} for lab and {} for theory, so average of {}
+    return "Student {} has {} for lab and {} for theory, so average of {}"
 
 students = []
 
-students.add(Student("Jan Janssens",15,17))
-students.add(Student("Piet Pieters",15,17))
+students.append(Student("Jan Janssens",15,17))
+students.append(Student("Piet Pieters",15,17))
 
 for student in students:
     print(student.lab_points)

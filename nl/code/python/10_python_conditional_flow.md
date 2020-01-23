@@ -12,7 +12,7 @@
                         |        Repetitieve uitvoering        |
                         |                                      |
            _        +---+--------------------------------------+---+
-            \       |                                              |     * if-else if-else
+            \       |                                              |     * if-elif-else
        _____ \      |           Conditionele uitvoering            |     * clausules
              /      |                                              |     * blocks
            _/   +---+----------------------------------------------+---+
@@ -232,10 +232,10 @@ else:
     print("a is smaller or equal to b")
 ~~~
 
-### else if
+### elif
 
-Een derde mogelijkheid is het toevoegen van één (of meerdere) else-if-clausule(s)  
-Stel dat je ook expliciet wil afdrukken wanneer de parameters aan elkaar gelijk zijn kan je een else if-clausule toevoegen.
+Een derde mogelijkheid is het toevoegen van één (of meerdere) elif-clausule(s)  
+Stel dat je ook expliciet wil afdrukken wanneer de parameters aan elkaar gelijk zijn kan je een elif-clausule ("else if") toevoegen.
 
 ~~~python
 a = int(input("Enter number a: "))
@@ -243,18 +243,18 @@ b = int(input("Enter number b in: "))
 
 if a > b:
     print("a is bigger then b")
-else if a == b:
+elif a == b:
     print("a is equal to b")
 else:
     print("a is smaller or equal to b")
 ~~~
 
-### Meerdere else-if-clausules
+### Meerdere elif-clausules
 
-Je kan ook meerdere else-if-clausules aan deze statement toevoegen.  
-Stel dat je bijvoorbeeld ook nog wil afdrukken als a 1 kleiner is dan b kan je nog een 2de else-if-clausule toevoegen.  
+Je kan ook meerdere elif-clausules aan deze statement toevoegen.  
+Stel dat je bijvoorbeeld ook nog wil afdrukken als a 1 kleiner is dan b kan je nog een 2de elif-clausule toevoegen.  
 
-> Nota: je kan trouwens zo veel else-if-clausules toevoegen als je wil 
+> Nota: je kan trouwens zo veel elif-clausules toevoegen als je wil 
 
 ~~~python
 a = int(input("Enter number a: "))
@@ -262,9 +262,9 @@ b = int(input("Enter number b in: "))
 
 if a > b:
     print("a is bigger then b")
-else if a == b:
+elif a == b:
     print("a is equal to b")
-else if (b - a) == 1:
+elif (b - a) == 1:
     print("a is -1 compared to b")
 else:
     print("a is smaller or equal to b")
@@ -277,7 +277,7 @@ Een if-statement is samengesteld uit 2 (soorten) onderdelen of componenten
 * 1 of meerdere **clausules**
     * **1 "if"-clausule**
         * **optioneel** **1 "else"**
-        * **optioneel 1 of meerdere "else if"**
+        * **optioneel 1 of meerdere "elif"**
     * enkel **"if"** is **verplicht**
     * elke **clausule** **eindigend** op een **:**  
       (zoniet zal de interpreter een fout aan geven)
@@ -297,12 +297,12 @@ if a > b:  # <--------------------------------- if-clausule (eindigt op :)
     print("a is bigger then b") #         |
     print("2nd time a is bigger then b")# |---- block (3 lines geindenteerd)
     print("3rd time a is bigger then b")# |
-else if a == b: # <---------------------------- else-if-clausule
+elif a == b: # <---------------------------- elif-clausule
     print("a is equal to b")#             |
     print("2nd time a is equal to b")#    |---- block (2 lines) 
-else if (b - a) == 1: #                   <---- else-if-clausule
+elif (b - a) == 1: #                   <---- elif-clausule
     print("a is -1 compared to b") #      |---- block (1 line)
-else: #                                   <---- else-if-clausule (2nd)
+else: #                                   <---- elif-clausule (2nd)
     print("a is smaller or equal to b") # |---- block (1 line)
 ~~~
 

@@ -877,7 +877,7 @@ De nieuwe manier, zowel in Python 2 als Python 3 gesupporteerd:
 print("{:d}-{:d}".format(1,2))
 1-2
 >>> print("{}-{}".format(1,2))
-1-2-1
+1-2
 ~~~
 
 Bij dezei (nieuwe) manier ben je niet verplicht een formaat aan tegen een {} is voldoende.  
