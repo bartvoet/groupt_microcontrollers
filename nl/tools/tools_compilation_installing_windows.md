@@ -6,19 +6,6 @@ Cygwin vooorziet in een Unix compatibele omgeving voor Windows, dit zorgt ervoor
 
 ### Installatie Cygwin
 
-Cygwin voor deze cursus kan op 2 manieren
-
-#### Pre-geconfigureerd
-
-Je kan een gepregeconfigureerde versie van cygwin downloaden via de volgende zip-file.  
- https://www.dropbox.com/s/tyolq8n73swoo83/cygwin.zip?dl=0
-
-Je vind deze ook in de sectie cursusdocumenten/varia op Toledo...
-
-Je hoeft enkel deze unzippen (bij voorkeur direct op de C-schijf) en de instructies rond de PATH-variabele te volgen.
-
-#### Standaard download
-
 Standaard kan  je Cygwin installeren door de installer te downloaden, deze vind je  
 
 * Te https://cygwin.com/setup-x86_64.exe voor 64-bit
