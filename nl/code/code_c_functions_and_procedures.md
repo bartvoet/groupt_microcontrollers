@@ -675,3 +675,290 @@ $
 ```
 
 In Windows kan je dit doen via de shell-variabele ```%errorlevel%```
+
+## Oefeningen of functies (+ herhaling bitmasking)
+
+We starten van volgende code:
+
+~~~c
+#include <stdio.h>
+
+unsigned char bit_is_set(int target, int position)
+{
+    unsigned char result = (target & (1 << position));
+    return result;
+}
+
+unsigned char set_bit(int target, int position)
+{
+    unsigned char result = (target | (1 << position));
+    return result;
+}
+
+void print_hex(unsigned char target)
+{
+	printf("0x%02x\n", target);
+}
+
+int main()
+{
+    unsigned char test_byte = 0x0A;
+    print_hex(test_byte);  //0w0A
+
+    test_byte = set_bit(test_byte,2);
+    print_hex(test_byte);  //0E => bit on pos 2 set
+
+    if(bit_is_set(test_byte, 2)) {
+    	printf("Bit 2 is set");
+    }
+
+    return 0;
+}
+~~~
+
+Deze code demonstreert 2 belangrijke redenen om functies te gebruiken:
+
+* Verbergen van complexe operaties achter een éénvoudige function-call
+* Vermijden van herhaling
+
+### Oefening: functie print_bits
+
+Schrijf nu een functie **print_bits** met als argument de byte (unsigned char).  
+Deze functie print een bit-representatie af van deze byte.  
+
+In onderstaande code wordt de aanroep van print_hex vervangen door print_bits 
+
+~~~c
+#include <stdio.h>
+
+unsigned char bit_is_set(unsigned char target, int position)
+{
+    unsigned char result = (target & (1 << position));
+    return result;
+}
+
+unsigned char set_bit(unsigned char target, int position)
+{
+    unsigned char result = (target | (1 << position));
+    return result;
+}
+
+void print_bits(unsigned char target)
+{
+	//TODO: implement this code
+}
+
+int main()
+{
+    unsigned char test_byte = 0x0A;
+    print_bits(test_byte);   //00001010
+
+    test_byte = set_bit(test_byte,2);
+    print_bits(test_byte);   //00001110 => bit on pos 2 set
+
+    if(bit_is_set(test_byte, 2)) {
+    	printf("Bit 2 is set");
+    }
+
+    return 0;
+}
+~~~
+
+### Oefening: functies voor clear, toggle
+
+We hebben in de cursus 4 primaire bitmask-operaties geleerd (get, set, clear en toggle). 
+
+Schrijf nu een 2 functies (naast de reeds voorziene functies set_bit en bit_is_set) om de clear en toggle-operaties uit te voeren.  
+Noem deze functies set_bit en toggle_bit, beide functies nemen (zoals set_bit) 2 argumenten (target en position)
+
+~~~c
+#include <stdio.h>
+
+unsigned char bit_is_set(unsigned char target, int position)
+{
+    unsigned char result = (target & (1 << position));
+    return result;
+}
+
+unsigned char set_bit(unsigned char target, int position)
+{
+    unsigned char result = (target | (1 << position));
+    return result;
+}
+
+void print_bits(unsigned char target)
+{
+	//TODO: implement this code
+}
+
+//TODO add functions set_bit en toggle_bit
+
+int main()
+{
+    unsigned char test_byte = 0x0A;
+    print_bits(test_byte);   //00001010
+
+    test_byte = set_bit(test_byte,2);
+    print_bits(test_byte);   //00001110 => bit on pos 2 set
+
+    if(bit_is_set(test_byte, 2)) {
+    	printf("Bit 2 is set");
+    }
+
+    test_byte = toggle_bit(test_byte,5);
+    print_bits(test_byte);   //00101110 => bit on pos 5 toggled to 1
+
+    test_byte = toggle_bit(test_byte,5);
+    print_bits(test_byte);   //00001110 => bit on pos 5 toggled (back) to 0
+
+    test_byte = clear_bit(test_byte,2);
+    print_bits(test_byte);   //00001010 => bit on pos 2 cleared
+
+    return 0;
+}
+~~~
+
+### Oefening: rotate-functie (gevorderd)
+
+Zoals we eerder hebben gezien zal een bitshift-operatie de bits verschuiven binnen een getal.  
+Wat we eerder hebben gezien is dat een overflow kunnen krijgen.
+
+Schrijf een functie rotate die een bitshift-operatie uitvoert maar er ook voor zorgt dat de bits die weg worden geshift (langs links) terug inshift aan de andere kant.  
+Het is mogelijk deze functies te implementeren zonder een loop te schrijven...
+
+~~~c
+#include <stdio.h>
+
+unsigned char bit_is_set(unsigned char target, int position)
+{
+    unsigned char result = (target & (1 << position));
+    return result;
+}
+
+unsigned char set_bit(unsigned char target, int position)
+{
+    unsigned char result = (target | (1 << position));
+    return result;
+}
+
+void print_bits(unsigned char target)
+{
+	//TODO: implement this code
+}
+
+//TODO add functions set_bit en 
+
+//TODO add function rotate_bits
+
+int main()
+{
+    unsigned char test_byte = 0x0A;
+    print_bits(test_byte);   //00001010
+
+    test_byte = set_bit(test_byte,2);
+    print_bits(test_byte);   //00001110 => bit on pos 2 set
+
+    if(bit_is_set(test_byte, 2)) {
+    	printf("Bit 2 is set");
+    }
+
+    test_byte = toggle_bit(test_byte,5);
+    print_bits(test_byte);   //00101110 => bit on pos 5 toggled to 1
+
+    test_byte = toggle_bit(test_byte,5);
+    print_bits(test_byte);   //00001110 => bit on pos 5 toggled (back) to 0
+
+    test_byte = clear_bit(test_byte,2);
+    print_bits(test_byte);   //00001010 => bit on pos 2 cleared
+
+    test_byte = rotate_bits(test_byte,2);
+    print_bits(test_byte);   //00101000 => 2 positions shifted
+
+    test_byte = rotate_bits(test_byte,3);
+    print_bits(test_byte);   //01000001  => 3 positions shifted
+                             //             observe the 1 being rated
+    test_byte = rotate_bits(test_byte,3);
+    print_bits(test_byte);   //00001010 => 3 positions shifted
+                             //            back to the original (shifted 8 in total)
+
+
+    return 0;
+}
+~~~
+
+### Oefening: set_bits en clear_bits (gevorderd)
+
+Schrijf 3 extra functies, set_bits, clear_bits and toggle_bits.  
+Deze functies zullen de bit-operaties uitvoeren voor een aansluitende reeks bits.  
+Het is mogelijk deze functies te implementeren zonder een loop te schrijven...
+
+~~~c
+#include <stdio.h>
+
+unsigned char bit_is_set(unsigned char target, int position)
+{
+    unsigned char result = (target & (1 << position));
+    return result;
+}
+
+unsigned char set_bit(unsigned char target, int position)
+{
+    unsigned char result = (target | (1 << position));
+    return result;
+}
+
+void print_bits(unsigned char target)
+{
+	//TODO: implement this code
+}
+
+//TODO add functions set_bit en 
+
+//TODO add function rotate_bits
+
+//TODO add function set_bits, clear_bits ,toggle_bits
+
+int main()
+{
+    unsigned char test_byte = 0x0A;
+    print_bits(test_byte);   //00001010
+
+    test_byte = set_bit(test_byte,2);
+    print_bits(test_byte);   //00001110 => bit on pos 2 set
+
+    if(bit_is_set(test_byte, 2)) {
+    	printf("Bit 2 is set");
+    }
+
+    test_byte = toggle_bit(test_byte,5);
+    print_bits(test_byte);   //00101110 => bit on pos 5 toggled to 1
+
+    test_byte = toggle_bit(test_byte,5);
+    print_bits(test_byte);   //00001110 => bit on pos 5 toggled (back) to 0
+
+    test_byte = clear_bit(test_byte,2);
+    print_bits(test_byte);   //00001010 => bit on pos 2 cleared
+
+    test_byte = rotate_bits(test_byte,2);
+    print_bits(test_byte);   //00101000 => 2 positions shifted
+
+    test_byte = rotate_bits(test_byte,3);
+    print_bits(test_byte);   //01000001  => 3 positions shifted
+                             //             observe the 1 being rated
+    test_byte = rotate_bits(test_byte,3);
+    print_bits(test_byte);   //00001010 => 3 positions shifted
+                             //            back to the original (shifted 8 in total)
+
+    test_byte = set_bits(test_byte,4,3);
+    print_bits(test_byte);   //01111010 => 3 positions set starting from pos 4
+
+    test_byte = clear_bits(test_byte,4,2);
+    print_bits(test_byte);   //01001010 => 2 positions cleared starting from pos 4
+
+    test_byte = toggle_bits(test_byte,2,3);
+    print_bits(test_byte);   //01010110 => 3 positions toggled starting from pos 2
+
+
+    return 0;
+}
+~~~

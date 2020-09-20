@@ -1,8 +1,34 @@
-## Installatie GCC op Windows
+## Installatie GCC (of TCC) op Windows
 
-GCC kan je installeren op Windows via Cygwin.  
+GCC (of Gnu Compiler Collection) is de meest gebruikte C-compiler en is beschikbaar voor verscheidene CPU-architecturen (X86, arm, mips, RISC-V, ...) en verschillende platformen (Linux, Mac, Windows,...)
 
+GCC kan je installeren op Windows via Cygwin (of alternatief via Mingw).  
 Cygwin vooorziet in een Unix compatibele omgeving voor Windows, dit zorgt ervoor dat je tools bedoeld voor POSIX-systemen (Linux, Unix, BSD, ...) kan gebruiken op Windows.
+
+Een installatie van Cygwin kan (afhankelijk van je netwerk-verbinden) +- tot een half-uur duren.  
+Vandaar dat we bij de start van de cursus een alternatief gebruiken genaamd TCC.
+
+Bedoeling is dat je dan Cygwin van thuis installeert en 
+
+
+### Installatie TCC
+
+Een light-versie van GCC is TCC (of wel Tiny C Compiler), we gaan deze gebruiken bij de start gebruiken omdat het ons toelaat op een heel korte tijd te starten met met het compilen van een C-programma.
+
+
+#### Download
+
+TCC kan je downloaden als een zip file van de volgende website:
+
+https://bellard.org/tcc/
+
+
+#### Installatie
+
+1 maal gedownload moet je deze zip file uitpakken
+
+
+
 
 ### Installatie Cygwin
 

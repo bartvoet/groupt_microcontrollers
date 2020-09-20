@@ -21,7 +21,7 @@ We starten met gcc te installeren
 
 ### GCC
 
-De tool die we in deze cursus hiervoor gebruiken is GCC
+De tool die we in deze cursus hiervoor gebruiken is GCC (of als alternatief GCC)
 
 GCC is een command-line-tool die c-code kan omzetten naar een uitvoerbaar bestand en is de standaard-implementatie van de Unix C-compiler.  
 Een goed alternatief dat mag gebruikt worden in de cursus is CLang maar we beperken voorlopig de instructies tot GCC.
