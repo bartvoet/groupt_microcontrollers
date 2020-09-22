@@ -95,7 +95,7 @@ Dit zal standaard op 3 weken na de les komen, tenzij anders aangeduid.
 
 #### Uploaden in Toledo
 
-Je laadt de pyhton-files (.py-files) op tenzij anders beschreven in de opdracht (geen zip-files of andere documenten)
+Je laadt de Python-files (.py-files) op tenzij anders beschreven in de opdracht (geen zip-files of andere documenten)
 
 ### Leren programmeren met Python?
 

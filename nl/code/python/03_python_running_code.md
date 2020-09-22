@@ -50,9 +50,9 @@ Hello World
 C:\users\python\my_first_programm> 
 ~~~
 
-> Nota: afhankelijk van de installatie (op Windows) moet je py typen ipv python
+> Nota: afhankelijk van de installatie (op Windows) kan het zijn dat je py moet typen ipv python
 
-> Nota: "Hello World" is de klassieker om de basiswerking van een programmeer-taal te demonstreren
+> Weetje: "Hello World" is de klassieker om de basiswerking van een programmeer-taal te demonstreren
 
 ### Wat hebben we zo net gedaan...
 
@@ -63,10 +63,10 @@ aangeroepen met deze text-file als argument.
 Python-scripts eindigen altijd met de **extensie ".py"**.  
 Dit is technisch gezien niet verplicht, maar er is geen reden om deze conventie te negeren dus in de kader van de cursus is dit wel verplicht...
 
-### Programmeertalen zijn gevoelig
+### Programmeertalen zijn voor fouten
 
 Een **programmeer-taal is gevoelig voor fouten**, nog meer als mensen (en lectoren...)  
-Als je bijvoorbeeld de syntax niet respecteert
+Als je bijvoorbeeld de syntax niet respecteert zoals gedemonstreerd hieronder:
 
 ~~~python
 print("hello world"

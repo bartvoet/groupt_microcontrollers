@@ -2,7 +2,7 @@
 
 ### Eerste programma onder de loep
 
-Ons eerste programma had dus als **functionaliteit** het **afdrukken** van **een stuk tekst** naar de console.
+Ons (eerste) programma had dus als **functionaliteit** het **afdrukken** van **een stuk tekst** naar de console.
 
 ~~~python
 print("hello world")
@@ -10,19 +10,20 @@ print("hello world")
 
 ### Enkelvoudig of simpele statements
 
-Dit python-programma bevat 1 **enkelvoudig statement**
-Een **enkelvoudige statement** is:
+Zo'n lijn code is wat we noemen een **statement**, simpel gezegd is een statement een stuk code dat min of meer op zich zelf staande iets kan uitvoeren.
 
-* Een **opdracht** of **commando**
-    * dat je aan de **Python-interpreter** geeft
-    * die een **actie** daarmee uitvoert
-    * zoals **bijvoorbeeld** 
-        * **printen** van een boodschap naar de **console**
-        * **input** opvragen van een gebruiker op de **console**
-* De **kleinste** 
-    * **éénheid** van **uitvoering** 
-    * (**unit of execution**)
-    * Dat **op zich zelf** staat
+Je kan het bekijken als een soort van **opdracht** of **commando** die je aan je computer meegeeft (in dit geval de Python-interpreter).
+
+Dit commando zal dan effectief **een actie uitvoeren** zoals **bijvoorbeeld** 
+        
+* **printen** van een boodschap naar de **console**
+* **input** opvragen van een gebruiker op de **console**
+* ...
+
+Een statement dat uit **1 lijn code** bestaat noemen we ook wel enkelvoudige statements:
+
+* De **kleinste **éénheid** van **uitvoering** (of unit of execution)
+* Dat **op zich zelf** staat
 * Is altijd **1 lijn code**
 
 > Nota:  
@@ -31,7 +32,8 @@ Een **enkelvoudige statement** is:
 ### Function-call
 
 De **statement** dat we hier uitvoeren, is de **aanroep** naar een **functie** ofwel een **function-call**.  
-Naast function-call's zijn er nog meerdere types van statements
+
+> Naast function-call's zijn er nog meerdere types van statements
 
 
 **Functies** zijn **herbruikbare** stukken **code** die je kan **aanroepen** vanuit je **programma** onder de volgende vorm.  

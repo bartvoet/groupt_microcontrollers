@@ -61,7 +61,7 @@ Mac komt meestal met Python geïnstalleerd, mocht dit niet het geval zijn of enk
 
 #### Installeren op Linux
 
-*Debian/Ubuntu:*
+*Debian/Mint/Ubuntu:*
 
 ~~~bash
 $ sudo apt-get install python3
@@ -86,14 +86,21 @@ Voor Fedora of Red Hat, voor de 2 volgende dnf-commando's uit:
 ### Texteditor
 
 Om een programma te schrijven hebben we een goede "**text-editor"** nodig.  
+Dit is de belangrijkste tool voor een software-ontwikkelaar om code te kunnen schrijven.
 
-* Voor Windows-gebruikers is dit Notepad++
-* MacOS gebruikers maken veelal gebruik van TextMate
-* Voor Linux hangt dit af van de distribtrutie (Gedit, Xedit, Kate, Vi, ...)
+Een aantal editors zijn vrij beschikbaar:
 
-Er zijn buiten deze editors zeer veel goede teksteditor op de markt (Atom, Sublime, Brackets, ...).  
+* Voor Windows-gebruikers is dit **Notepad++**
+* MacOS gebruikers maken veelal gebruik van **TextMate**
+* Voor Linux hangt dit af van de distributie (**Gedit**, Xedit, Kate, Vi, ...)
+
+Er zijn buiten deze editors zeer veel goede teksteditor op de markt (Visual Studio Code, Atom, Sublime, Brackets, ...).  
+
+> Nota: als je ervaring mocht hebben met IDE's (integrated development environment) zoals
+> Eclipse, PyCharm, ... mag je deze ook gebruiken, deze komen later in de cursus nog aan bod.
+
 Mocht je hier reeds ervaring met hebben mag je deze ook gebruiken.
 
 > Nota:  
-> Word, Libreoffice of Pages (Mac) zijn geen text-editors maar tekstverwerkers.  
+> Word, Libreoffice of Pages (Mac) zijn geen text-editors maar tekstverwerkers!!!  
 > Deze worden gebruikt voor text-formattering, een text-editor enkel voor "zuivere tekst"
