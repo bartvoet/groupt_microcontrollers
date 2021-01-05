@@ -7,35 +7,34 @@ Tot nu toe hebben we geleerd:
 * Deze data bij te houden in het geheugen (variabelen)
 * Bewerkingen te doen hiermee (rekenkundige operatoren)
 
-We gaan in deze les bekijken hoe dat we een programma intelligenter kunnen maken door het zelf beslissingen te laten nemen
+We gaan in deze les bekijken hoe dat we een programma intelligenter kunnen maken door het zelf **beslissingen** te laten nemen
 
 ![](../../pictures/code_focus_on_conditions.png)
 
-Eerst gaan we kennis maken met een nieuw soort van expressies van operators.
+Tot nog toe hebben we "arithmetic" (wiskundige) operatoren gezien, die zijn gemaakt om met getallen te werken (berekeningen).
 
-### Duiding: Logische expressies
+Om beslissingen te kunnen maken in code echter bestaan er in C
+2 nieuwe soort expressies (en operatoren):
 
-Een logische expressie - zoals we die nu gaan zien - heeft als resultaat een integer, net zoals de "arithmetic"-expressies die we eerder hebben gezien.  
-Het grote verschil is echter dat zulk een expressie die slechts 2 mogelijke waarden kan opleveren, namelijk 0 of 1.  
+* **Relationele expressies** 
+    * Expressies en operatoren die (2) waardes (variabelen, literals) vergelijken
+    * bijvoorbeeld groter dan, kleiner dan, ...
+* **Logische expressies**
+    * Logisch combineren van 2 waardes of andere expressies
+    * We kennen dit ook uit boolean algebra (logische and, or, ...)
 
-We noemen deze expressies (vergelijkingen in dit geval) ook wel boolean-expressies aangezien 0 false voorstelt en elke andere waarden (1 inclusief) true.
+Beide soorten expressies gaan ons een logische true of false geven.  
+In C-programma's worden logische true en false vertaald naar een getalwaarde:
 
-### Duiding: Relationele operatoren
+* **false** komt overeen met 0
+* **true** komt overeen met 1 en in uitbreiding eender welke andere verschillend van 0
+
+### Relationele operatoren
 
 Om te kunnen beslissen moet je meestal kunnen vergelijken (zoals je in de winkel ook prijs en/of kwaliteit gaat vergelijken).
 
-Dus voor met condities te kunnen werken bekijken we eerst wat we noemen "relationele operatoren"
-
-Tot nog toe hebben we "arithmetic" (wiskundige) operatoren gezien, die zijn gemaakt om met getallen te werken (berekeningen).
-
-De werking en kenmerken van deze relationele operatoren zij vrij eenvoudig:
-
-* Het zijn ook binaire operatoren (2 operanden)
-* Ze vergelijken 2 getallen
-
-### Overzicht: Relationele operatoren:
-
-Er bestaan binnen de syntax van C 6 relationele operatoren:
+We starten dus met relationele operatoren.  
+Daarvan bestaan binnen de C-taal 6 relationele operatoren:
 
 | Operator | Vergelijking            |
 |:---------|:------------------------|
@@ -47,7 +46,7 @@ Er bestaan binnen de syntax van C 6 relationele operatoren:
 |```!=```  | Niet gelijk aan         |
 
 
-### Voorbeeld: resultaat relationele expressie 0 of 1
+### Resultaat relationele expressie 0 of 1
 
 Een relationele operator geeft als resultaat een integer, weliswaar met 2 mogelijke waarden.
 
@@ -75,11 +74,11 @@ $
 zien we bij het uitvoeren van deze code dat :
 
 * 0 wordt gebruikt als representatie van een logische "false"
-* 1 wordt gebruikt als representatie van een logische "true"
+* 1 (of eender welk getal <> 0) wordt gebruikt als representatie van een logische "true"
 
 ### Voorbeeld: inline vergelijking
 
-Net zoals mathematische expressies kan je deze inline in een functie (of andere statements gebruiken).
+Net zoals mathematische expressies kan je deze **inline** in een functie (of binnen andere statements) gebruiken.
 
 ```c
 #include <stdio.h>
@@ -90,8 +89,8 @@ int main()
     printf("%i\n",(5 > 10));
 }
 ```
-Vanzelfsprekend geeft dit hetzelfde resultaat
 
+Vanzelfsprekend geeft dit hetzelfde resultaat
 
 ```
 $ gcc comparing_inline.c -o comparing_inline
@@ -101,9 +100,9 @@ $ 0
 $
 ```
 
-### Voorbeeld: Opletten het verschil tussen = en == (assignment vs equality)
+### Opletten het verschil tussen = en ==, assignment vs equality (klassieker...)
 
-Een equality-operator bestaat uit 2 maal ```=``` omdat dit symbaal (1 maal) - zoals we eerder hadden gezien - gereserveerd is voor assignemnts.
+Een **equality-operato**r bestaat uit 2 maal ```=``` omdat dit symbaal (1 maal) - zoals we eerder hadden gezien - gereserveerd is voor **assignements**.
 
 Dus onthoudt **```=``` is niet hetzelfde als ```==```**.
 Dit is een veel voorkomende bug zelfs in professionele software, later bij condities gaan we dit nog verder bekijken.
@@ -127,9 +126,9 @@ $ 6
 $
 ```
 
-Zoals je ziet geeft dit als resulaat ipv 0 een 6.
+Zoals je ziet geeft dit als **resultaat** ipv 0 een 6.
 
-### Voorbeeld: ```!=``` geeft het omgekeerde resultaat van ```==```
+### ```!=``` geeft het omgekeerde resultaat van ```==```
 
 
 ```c
@@ -156,7 +155,7 @@ $ 5==6 geeft 0
 $
 ```
 
-### Voorbeeld: <= en >=
+### <= en >=, groter/kleiner of gelijk aan
 
 De >= en <= doen hetzelfde dan > en <, maar geven 1 terug als beide operanden gelijk aan elkaar zijn.
 

@@ -248,7 +248,7 @@ int main ()
 }
 ```
 
-Als je nu dit programma compileert en uitvoert op de command line, zie je dat het programma deze boodschap afprint op de console.
+Als je nu dit programma compileert en uitvoert op de command line, zie je dat het programma deze boodschap print op de console.
 
 ```bash
 $ gcc helloworld.c -o helloworld

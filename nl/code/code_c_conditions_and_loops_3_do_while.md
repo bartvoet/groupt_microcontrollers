@@ -156,9 +156,6 @@ int main()
 Na de loop
 ```
 
-
-
-
 ### Duiding: Conditionele expressie/operator
 
 Tot nog toe hebben we condities enkel in complexe statements gebruikt.
