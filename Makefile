@@ -38,6 +38,8 @@ CHAPTER_02 += ../labo/x86_statements.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt
 CHAPTER_02 += ../code/code_c_conditions_and_loops_1_if_else_while.md
 CHAPTER_02 += ../../general/pandoc_page_break.txt
+CHAPTER_02 += ../code/code_c_conditions_and_loops_2_for.md
+CHAPTER_02 += ../../general/pandoc_page_break.txt
 CHAPTER_02 += ../labo/x86_loops_and_conditionals.md
 
 CHAPTER_03 += chapter03_bits_and_bytes.md
@@ -64,8 +66,6 @@ CHAPTER_04 += ../code/code_c_pointers_part1.md
 CHAPTER_04 += ../../general/pandoc_page_break.txt
 
 CHAPTER_05 += chapter05_gpio_output.md
-CHAPTER_05 += ../../general/pandoc_page_break.txt
-CHAPTER_05 += ../code/code_c_conditions_and_loops_2_for.md
 CHAPTER_05 += ../../general/pandoc_page_break.txt
 CHAPTER_05 += ../code/code_avr_gpio_2_output.md
 CHAPTER_05 += ../../general/pandoc_page_break.txt
@@ -190,14 +190,20 @@ PY_CHAPTER_02 += ../code/python/203_functions_part_2.md
 PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
 PY_CHAPTER_02 += ../code/python/205_objects_and_classes.md
 PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
+PY_CHAPTER_02 += ../code/python/205_objects_ex_basket.md
+PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
 PY_CHAPTER_02 += ../code/python/206_tkinter.md
 PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
-PY_CHAPTER_02 += ../code/python/207_gui_and_serial.md
-PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
-PY_CHAPTER_02 += ../code/python/200_part_two_excercises.md
+#PY_CHAPTER_02 += ../code/python/207_gui_and_serial.md
+#PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
+#PY_CHAPTER_02 += ../code/python/200_part_two_excercises.md
+
+PY_CHAPTER_03 += ../code/python/300_part_three_data.md
+PY_CHAPTER_03 += ../code/python/302_databases.md
 
 
 PY_ANNEX += ../code/python/annex.md
+PY_ANNEX += ../../general/pandoc_page_break.txt
 PY_ANNEX += ../code/python/tools_command_getting_started.md
 PY_ANNEX += ../../general/pandoc_page_break.txt
 PY_ANNEX += ../code/python/tools_command_getting_started_windows.md
@@ -206,11 +212,12 @@ PY_ANNEX += ../code/python/tools_command_getting_started_linux.md
 
 #CHAPTER_09 += ../labo/labo_interrupts.md
 
-PY_CHAPTERS += $(PY_CHAPTER_01) $(PY_CHAPTER_02) $(PY_ANNEX)
+PY_CHAPTERS += $(PY_CHAPTER_01) $(PY_CHAPTER_02) $(PY_CHAPTER_03) $(PY_ANNEX)
 
 pagebreak = ../../general/pandoc_page_break.txt
 
-CHAPTERS = part01_minimal_knowledge.md $(pagebreak) $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part01_minimal_knowledge_summary.md part02_foundation.md $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) $(CHAPTER_08) $(CHAPTER_09) part03_next.md $(CHAPTER_10) $(CHAPTER_11) $(CHAPTER_12) ../extra.md
+CHAPTERS = part01_minimal_knowledge.md $(pagebreak) $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03)
+#$(CHAPTER_04) part01_minimal_knowledge_summary.md part02_foundation.md $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) $(CHAPTER_08) $(CHAPTER_09) part03_next.md $(CHAPTER_10) $(CHAPTER_11) $(CHAPTER_12) ../extra.md
 #CHAPTERS = part01_minimal_knowledge.md $(pagebreak) $(CHAPTER_01) $(CHAPTER_02) $(CHAPTER_03) $(CHAPTER_04) part01_minimal_knowledge_summary.md part02_foundation.md $(CHAPTER_05) $(CHAPTER_06) $(CHAPTER_07) $(CHAPTER_08) $(CHAPTER_09)
 
 graph_to_png = dot -Tpng ./graphviz/$(1).dot -o ./pictures/$(1).png
@@ -223,26 +230,26 @@ grap_convert = gvpr -c '$(1)' ./graphviz/$(2).dot | dot -Tpng -o ./pictures/$(3)
 #debugging_code
 
 all:
-	cd nl/chapter && pandoc ../title.txt $(CHAPTERS) -o ../../dist/cursus_nl.epub --epub-stylesheet ../../base.css --epub-cover-image=../front_page.jpg\
+	cd nl/chapter && pandoc ../title.txt $(CHAPTERS) -o ../../dist/cursus_nl.epub --css ../../base.css --epub-cover-image=../front_page.jpg\
 
-	cd nl/chapter && pandoc ../frontpage.md -o ../../dist/front_page_nl.html  --self-contained -s -S -c ../../github-pandoc.css
+	cd nl/chapter && pandoc ../frontpage.md -o ../../dist/front_page_nl.html  --self-contained -c ../../github-pandoc.css
 
-	cd nl/chapter && pandoc ../header.md -o ../../dist/header_nl.html  --self-contained -s -S -c ../../github-pandoc.css
+	cd nl/chapter && pandoc ../header.md -o ../../dist/header_nl.html  --self-contained -c ../../github-pandoc.css
 
-	cd nl/chapter && pandoc ../title.txt $(CHAPTERS) -o ../../dist/cursus_nl.html -B ../../dist/header_nl.html  --self-contained -s -S --toc --toc-depth=2	-c ../../github-pandoc.css
+	cd nl/chapter && pandoc ../title.txt $(CHAPTERS) -o ../../dist/cursus_nl.html -B ../../dist/header_nl.html  --self-contained --toc --toc-depth=2	-c ../../github-pandoc.css
 
 	wkhtmltopdf dist/cursus_nl.html dist/cursus_nl.pdf
 
 	zip dist/cursus_nl.zip dist/cursus_nl.epub dist/cursus_nl.html dist/cursus_nl.pdf
 
 python_all:
-	cd nl/chapter && pandoc ../title.txt $(PY_CHAPTERS) -o ../../dist/py_cursus_epub_nl.epub --epub-stylesheet ../../base.css --epub-cover-image=../front_page.jpg\
+	cd nl/chapter && pandoc ../title.txt $(PY_CHAPTERS) -o ../../dist/py_cursus_epub_nl.epub --css ../../base.css --epub-cover-image=../front_page.jpg\
 
-	cd nl/chapter && pandoc ../frontpage.md -o ../../dist/front_page_nl.html  --self-contained -s -S -c ../../github-pandoc.css
+	cd nl/chapter && pandoc ../frontpage.md -o ../../dist/front_page_nl.html  --self-contained -s -c ../../github-pandoc.css
 
-	cd nl/chapter && pandoc ../header.md -o ../../dist/header_nl.html  --self-contained -s -S -c ../../github-pandoc.css
+	cd nl/chapter && pandoc ../header.md -o ../../dist/header_nl.html  --self-contained -s -c ../../github-pandoc.css
 
-	cd nl/chapter && pandoc ../title.txt $(PY_CHAPTERS) -o ../../dist/py_cursus_nl.html -B ../../dist/header_nl.html  --self-contained -s -S --toc --toc-depth=2  -c ../../github-pandoc.css
+	cd nl/chapter && pandoc ../title.txt $(PY_CHAPTERS) -o ../../dist/py_cursus_nl.html -B ../../dist/header_nl.html  --self-contained -s --toc --toc-depth=2  -c ../../github-pandoc.css
 
 	wkhtmltopdf dist/py_cursus_nl.html dist/py_cursus_nl.pdf
 

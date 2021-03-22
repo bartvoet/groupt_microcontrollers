@@ -167,7 +167,7 @@ Het gebruik van een variabele om een loop te besturen is een **patroon** dat bij
   (in vele gevallen een teller)
 * Deze state wordt geinitialiseerd (stap **0**)  
   (bijvoorbeeld de teller wordt op 0 gezet bij start)
-* Deze state wordt **geevalueerd** (stap **1**)  
+* Deze state wordt **geëvalueerd** (stap **1**)  
   (bijvoorbeeld teller kleiner dan een maximum)
 * Op basis van deze evaluatie wordt de **loop-block uitgevoerd** (stap **3**)  
   (bijvoorbeeld teller is niet meer kleiner dan maximum)
@@ -213,7 +213,7 @@ In het volgende voorbeeld berekenen we de macht van een getal (basis en exponent
 > Vanzelfsprekend is deze code nutteloos gezien er al een operator bestaat in python ~~~**~~~
 > die een macht berekent, de bedoeling is het gebruik van een loop te demonstreren.
 
-De state die wordt geevalueerd is de exponent-counter die wordt uitgevoerd zolant deze kleiner is dan de de exponent.
+De state die wordt geëvalueerd is de exponent-counter die wordt uitgevoerd zolang deze kleiner is dan de de exponent.
 
 ~~~python
 base = int(input("Give base: "))
@@ -256,15 +256,7 @@ Zolang c tussen a en b ligt zal deze loop getallen blijven vragen.
 ### Niet eindigende loops
 
 Wat iedereen als fout maakt in de code is een een loop die niet stopt.  
-Bijvoorbeeld als we in onderstaande ~~~python
-number_of_stars = int(input("Number of stars to print? "))
-counter = 0
-
-while counter < number_of_stars:
-    print("*")
-    counter = counter + 1
-~~~
- (zie ook eerder)
+Bijvoorbeeld als we in onderstaande code:
 
 ~~~python
 number_of_stars = int(input("Number of stars to print? "))
@@ -286,7 +278,7 @@ while counter < number_of_stars:
 counter = counter + 1
 ~~~
 
-Zie je het **verschil**???  
+Zie je het **verschil**!!!  
 In de laatste lijn is de **indentatie** namelijk **weggenomen**, 
 dit zorgt er namelijk voor dat de **update** van de **state** wordt **weggenomen** ...
 

@@ -22,7 +22,7 @@ Deze zal de GUI starten en in de background een oneindige loop draaien, die er v
 
 Als resultaat krijg je dan een lege applicatie.
 
-![](tkinter_empty.png)
+![](../../pictures/tkinter_empty.png)
 
 Deze kan je minimaliseren, maximaliseren en sluiten (via het kruisje) zoals een standaard GUI-applicatie.
 
@@ -39,7 +39,7 @@ window.title("Let's make some gui")
 window.mainloop()
 ~~~
 
-![](tkinter_title.png)
+![](../../pictures/tkinter_title.png)
 
 ### Label
 
@@ -59,7 +59,7 @@ window.mainloop()
 
 Zo'n eerste element dat je kan plaatsen is een **label**, dit is een stuk tekst (dat je programmatorisch kan manipuleren)
 
-![](tkinter_label.png)
+![](../../pictures/tkinter_label.png)
 
 ### button
 
@@ -77,7 +77,7 @@ button.pack()
 mainloop()
 ~~~
 
-![](tkinter_button.png)
+![](../../pictures/tkinter_button.png)
 
 
 ### Font-size aanpassen
@@ -94,7 +94,7 @@ button.pack()
 mainloop()
 ~~~
 
-![](tkinter_font.png)
+![](../../pictures/tkinter_font.png)
 
 ### Grootte van het scherm aanpassen
 
@@ -111,7 +111,7 @@ button.pack()
 mainloop()
 ~~~
 
-![](tkinter_sized.png)
+![](../../pictures/tkinter_sized.png)
 
 ### Een actie koppelen aan aan een button (1)
 
@@ -134,9 +134,9 @@ message_button.pack()
 mainloop()
 ~~~
 
-![](tkinter_button2.png)
+![](../../pictures/tkinter_button2.png)
 
-![](tkinter_button2_after.png)
+![](../../pictures/tkinter_button2_after.png)
 
 
 ### Een actie koppelen aan aan een button (2)
@@ -162,9 +162,9 @@ txt.pack()
 mainloop()
 ~~~
 
-![](tkinter_button3.png)
+![](../../pictures/tkinter_button3.png)
 
-![](tkinter_button3_after.png)
+![](../../pictures/tkinter_button3_after.png)
 
 ### Dropdown
 
@@ -193,6 +193,6 @@ mainloop()
 ~~~
 
 
-![](tkinter_combo.png)
+![](../../pictures/tkinter_combo.png)
 
-![](tkinter_combo_after.png)
+![](../../pictures/tkinter_combo_after.png)

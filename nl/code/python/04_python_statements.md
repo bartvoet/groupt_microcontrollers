@@ -4,13 +4,15 @@
 
 Ons (eerste) programma had dus als **functionaliteit** het **afdrukken** van **een stuk tekst** naar de console.
 
+Dit is min of meer het meest éénvoudige programma dat we kunnen schrijven, namelijk het printen van een stuk tekst.
+
 ~~~python
 print("hello world")
 ~~~
 
-### Enkelvoudig of simpele statements
+### Enkelvoudige of simpele statements
 
-Zo'n lijn code is wat we noemen een **statement**, simpel gezegd is een statement een stuk code dat min of meer op zich zelf staande iets kan uitvoeren.
+Zo 1 lijn code is wat we noemen een **statement**, simpel gezegd is een statement een stuk code dat min of meer op zich zelf staande iets kan uitvoeren.
 
 Je kan het bekijken als een soort van **opdracht** of **commando** die je aan je computer meegeeft (in dit geval de Python-interpreter).
 
@@ -22,12 +24,24 @@ Dit commando zal dan effectief **een actie uitvoeren** zoals **bijvoorbeeld**
 
 Een statement dat uit **1 lijn code** bestaat noemen we ook wel enkelvoudige statements:
 
-* De **kleinste **éénheid** van **uitvoering** (of unit of execution)
+* De **kleinste éénheid** van **uitvoering** (of **unit of execution**)
 * Dat **op zich zelf** staat
 * Is altijd **1 lijn code**
 
 > Nota:  
 > Later zien we ook nog **complexe of meervoudige statements** (of block-statements) maar dat is voor zo direct
+
+### Sequentiële programmatie
+
+Je kan ook meerdere statements achter elkaar schrijven, dit noemt een **sequentie** of opéénvolging van statements.
+
+~~~python
+print("Hello world")
+print("Welcome to Python")
+print("Make sure to keep track")
+~~~
+
+De Python-interpreter zal deze commando's dan 1 voor 1 uitlezen en uitvoeren in volgorde die jij ze hebt ingegeven.
 
 ### Function-call
 

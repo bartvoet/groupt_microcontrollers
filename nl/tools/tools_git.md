@@ -1,12 +1,30 @@
-## Waarom een versionerings-systeem?
+## Werken met git
 
-Een versionerings-systeem houdt zal voor een groep tekst-files de historiek en wijzigingen bijhouden en stelt je in staat 
+### Software-ontwikkellings-tool
 
+Als software-ontwikkelaar heb je tools nodig om programma's te bouwen, installeren, deployen...
 
+De tools die we tot nog toe hebben gebruikt zijn nog vrij beperkt.  
 
-Waarom git, dit kan het best uitgelegd worden wanneer je 
+* Een **text-editor** om Python-programma's te schrijven
+* De **Python-interpreter** om deze programma's te runnen
 
-Git is een versionerings-systeem, het 
+De volgende tool die **onmisbaar** is voor fatsoenlijke software-ontwikkelling is een source-control systeem.
+
+### Source control
+
+Een source-control of "version-control"-system stelt je in staat:
+
+* Historiek/evolutie van je code bij te houden
+* Code delen tussen verschillende 
+* Code versioneren, verschillende versies van je code bijhouden
+
+## Waarom
+
+Wat is het nut van git en andere "version-control"-systemen?
+Dat kan je best bekijken door te zien wat je zou doen zonder zou controle-systeem.
+
+...
 
 ## Aanmaken van een lokale git-repository
 
@@ -14,13 +32,14 @@ Om een lokale git-repo (of repository) aan te maken voer je de 2 volgende acties
 
 * Je maakt een directory aan, in het geval van de oefening noemen we deze "hello_git"
 * Binnen deze directory voer het je het git-subcommando "git init" uit
-
+~~~
 $ mkdir hello_git
 $ cd hello_git
 $ git init
 Initialized empty Git repository in /home/bart/Data/Tryout/hello_git/.git/
 $ ls -a
 .  ..  .git
+~~~
 
 Het resultaat hiervan is dat de folder "hello_git" een folder ".git" bevat.  
 De aanwezigheid .git zorgt er voor dat de git-client (command line voor deze oefening) hello_git herkent als een git-repo.  
@@ -29,14 +48,13 @@ Deze .git-folder wordt gebruikt door de git-client om commits en andere (meta-da
 
 ## Een file toevoegen
 
-
-
+~~~
 $ touch a.txt
 $ ls -a
 $ git status
 $ git add a.txt
 $ git status
-
+~~~
 
 echo "test" >> a.txt
 ls
