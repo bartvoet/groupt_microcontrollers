@@ -1,16 +1,141 @@
-## Data opslaan met databases (primer)
+## Data opslaan met databases (sql-primer)
 
-De meeste applicaties slagen data op, we noemen dit ook wel persisteren.  
+Software-applicatie dienen in de meeste gevallen data op te slagen, we noemen dit process ook wel **persisteren**.  
 
-Sommige applicaties slagen dit op als een file (zoals eerder gezien), als we echter veel of complexe data willen opslagen kunnen we gebruik maken van databases.  
-
-Binnen de cursus gaan we dit doen aan de hand van **sql** op een een relationele database genaamd **sqlite**
+Een eerste manier is data opslagen via een file (zoals eerder gezien).   
+Als we echter veel of complexe data willen opslagen kunnen we gebruik maken van databases.  
 
 ### Wat is een database
 
-Zo'n database is een apart stuk software dat op een **gestructureerde manier** **data** duurzaam kan opslaan of **persisteren**.  
+Een **database** is een apart stuk **software of service** dat:
 
-### Wat is SQL?
+* **data** kan opslaan
+* op een **gestructureerde manier** 
+* op een **duurzame** manier (**persisteren**)
+* en deze nadien terug kan **ondervragen** of **querien**
+
+#### CRUD en queries
+
+Een database voorziet voor het opslagen van data in **CRUD**-operaties:
+
+* **C**reate: je kan **nieuwe data** aanmaken
+* **R**ead: je kan deze data opnieuw **opvragen** via **zoekopdrachten** of **queries**
+* **U**pdate: je kan deze data - die je eerder hebt gecreerd - opnieuw **wijzigen**
+* **D**elete: je kan de data ook (selectief indien nodig) verwijderen
+
+### Relationele databases
+
+Er bestaan verschillende soorten database; **relationele**, **grafische**, **document-gebaseerde**, ...  
+
+De database-technologie die wij gaan gebruiken zijn **relationele databases**, of ook wel **RDBMS** (relational database management system) genoemt.
+
+Zo'n database is in de **kern** gebaseerd op een aantal **basisprincipes**:
+
+* Data wordt gestructuureerd opgeslagen in **tabellen**
+* Deze tabellen bestaan uit **kolommen** of **velden**
+* Men kan **relaties** ofverbanden leggen **tussen** deze **tabellen**  
+  dit is het **relationeel** gedeelte...
+* Om deze **verbanden** te kunnen leggen maakt men gebruik van **sleutels** of **keys**
+* Men kan een aantal **regels** of constraints toekennen op deze tabellen of velden
+* Deze data kan worden ondervraagd via **SQL** (Structured Query Language)
+
+#### Tabellen, kolommen en rijen
+
+Een database bestaat uit **1 of meerdere tabellen**:
+
+* Een tabel kan je best vergelijken met een tabel zoals je ze uit documenten of excels kent
+* Zo'n tabel definieert **kolommen of velden**, die hebben een **naam** en een **type**
+* Dataéénheden noemen we **rijen**, deze bevatten een waarde voor elke kolom-definitie
+
+Ter illustratie zie je hier een voorbeeld van een tabel **student** met 3 kolommen en 5 rijen met (studenten-)data.
+
+~~~
+        Tabel: student
+            kolom 1         kolom 2          kolom 3
+            type: text      type: int        type: int 
+               |               |                |
+         +---------------+---------------+---------------+
+         | student_name  |      lab      |     theory    |
+         +---------------+---------------+---------------+  
+  rij -- |  Bart Voet    |      15       |      16       |
+         +---------------+---------------+---------------+  
+  rij -- | Jan Janssens  |      17       |      14       |
+         +---------------+---------------+---------------+
+  rij -- | Piet Pieters  |      15       |      14       |
+         +---------------+---------------+---------------+
+  rij -- | Korneel Kos   |      11       |      12       |
+         +---------------+---------------+---------------+
+  rij -- | Joris Jos     |      10       |      14       |
+         +---------------+---------------+---------------+
+~~~
+
+#### Sleutels, relaties en verbanden
+
+Een database is vanzelfsprekend niet beperkt tot 1 tabel.  
+Er kunnen meerdere tabellen worden gedefinieerd en gebruikt
+
+Stel dat je 
+
+~~~
+         +---------------+                                                      
+         | student       | 
+         +---------------+---------------+---------------+---------------++--------------+---------------+     
+         | student_name  |      lab      |     theory    |  class_name   |    Teacher    |     Room      |
+         +---------------+---------------+---------------+---------------+---------------+---------------+  
+         |  Bart Voet    |      15       |      16       |      1        |    Wim        |      A        |
+         +---------------+---------------+---------------+---------------+---------------+---------------+
+         | Jan Janssens  |      17       |      14       |      1        |    Wim        |      A        |
+         +---------------+---------------+---------------+---------------+---------------+---------------+
+         | Piet Pieters  |      15       |      14       |      2        |    Thierry    |      B        |
+         +---------------+---------------+---------------+---------------+---------------+---------------+
+         | Korneel Kos   |      11       |      12       |      2        |    Thierry    |      B        |
+         +---------------+---------------+---------------+---------------+---------------+---------------+
+         | Joris Jos     |      10       |      14       |      2        |    Thierry    |      B        |
+         +---------------+---------------+---------------+---------------+---------------+---------------+
+~~~
+
+
+In onderstaand voorbeeld voegen we een tabel class toe die informatie bevat over de klas zelf.  
+
+
+
+
+
+
+~~~
+         +---------------+                                                      
+         | student       | 
+         +---------------+---------------+---------------+---------------+     
+         | student_name  |      lab      |     theory    |  class_name   |
+         +---------------+---------------+---------------+---------------+  
+         |  Bart Voet    |      15       |      16       |      1        +------+
+         +---------------+---------------+---------------+---------------+      |
+         | Jan Janssens  |      17       |      14       |      1        +------+
+         +---------------+---------------+---------------+---------------+      |
+         | Piet Pieters  |      15       |      14       |      2        +--+   |
+         +---------------+---------------+---------------+---------------+  |   |
+         | Korneel Kos   |      11       |      12       |      2        +--+   |
+         +---------------+---------------+---------------+---------------+  |   |
+         | Joris Jos     |      10       |      14       |      2        +--+   |
+         +---------------+---------------+---------------+---------------+  |   |
+                                                                            |   |
++--------------------------------------<------------------------------------+   |
+|                                                                               |
+|   +----------------------------------<----------------------------------------+
+|   |   
+|   |    +---------------+                                                      
+|   |    |    class      |                                                      
+|   |    +---------------+---------------+---------------+                      
+|   |    | class_name    |    Teacher    |     Room      |                      
+|   |    +---------------+---------------+---------------+                      
+|   +--->|      1        |      Wim      |      A        |
+|        +---------------+---------------+---------------+
++------->|      2        |    Thierry    |      B        |
+         +---------------+---------------+---------------+
+
+~~~
+
+### SQL?
 
 SQL of **Structured Query Language** is een taal die we gebruiken om met een **database** te praten.  
 Deze SQL bestaat uit 3 onderdelen
@@ -19,53 +144,69 @@ Deze SQL bestaat uit 3 onderdelen
 * **DML** - Data Modification Language => Ondervragen en wijzigen van data
 * **DCL** - Data Control Language => Controleren van toegang tot de data
 
-We gaan ons grotendeels bezig houden met DML (en een beetje met DDL).
+We gaan ons **grotendeels** bezig houden met **DML** (en een **beetje** met **DDL**).
 
 > Nota: er bestaan nog andere manieren naast SQL, daar komen we later nog op terug
 
-### Client-server vs embedded applicaties
+### Client-server vs embedded databases
 
-**DBMS** (Database Management Systemen) zijn meestal beschikbaar als een client-server-service op een netwerk en worden gedeeld door meerdere gebruikers.
+**DBMS** (Database Management Systemen) zijn meestal beschikbaar als een **client-server-service** op een netwerk en worden gedeeld door meerdere gebruikers.
 
-Zo'n applicatie maakt dan over het netwerk verbinding met een database om data op te vragen of te manipuleren (SQL) en krijgt data terug.
+#### Client-server
+
+Zo'n applicatie maakt dan over het **netwerk** **verbinding** met een **database** om data op te vragen of te manipuleren (via SQL) en krijgt data terug.
 
 ~~~
-+---------------+                             +----------------+
-|               +---------------------------->|                |
-|               |            SQL              |                |
-|  Applicatie   |                             |  Database      |
-|               |            DATA             |                |
-|               |<----------------------------+                |
-+---------------+                             +----------------+
++-------------------+  NETWORK   +----------------+
+|                   |            |                |
+|                   +----------->|                |
+|                 A |    SQL     |                |
+|  Applicatie     P |            |    Database    |
+|                 I |    DATA    |                |
+|                   |<-----------+                |
+|                   |            |                |
++-------------------+            +----------------+
 ~~~
 
 Bekende voorbeelden van zulke databases zijn bijvoorbeeld MySQL, MariaDB, Oracle DB, SqlServer, ...  
-Een applicatie gaat meestal niet rechtstreeks praten met de database, om complexiteit te verbergen bieden de meeste datatabases een API (en/of driver) aan om de communicatie te verzorgen met de database 
+
+#### SQL-api's
+
+Een applicatie gaat meestal **niet rechtstreeks** praten met de database, om complexiteit te verbergen (netwerk-verbinding, sql en parameters aanbrengen, ....) bieden de meeste datatabases een **API** (en/of **driver**) aan om de **communicatie** te verzorgen met de database.
 
 ~~~
-+---------------+---+                         +----------------+
-|               |   +------------------------>|                |
-|               | A |         SQL             |                |
-|  Applicatie   | P |                         |  Database      |
-|               | I |         DATA            |                |
-|               |   |<------------------------+                |
-+---------------+---+                         +----------------+
++---------------+---+  NETWORK   +----------------+
+|               |   |            |                |
+|               |   +----------->|                |
+|               | A |    SQL     |                |
+|  Applicatie   | P |            |    Database    |
+|               | I |    DATA    |                |
+|               |   |<-----------+                |
+|               |   |            |                |
++---------------+---+            +----------------+
 ~~~
 
-Tegenover deze **client-server-systemen** bestaan er ook **embedded databases**.  
-Hier draait database **op dezelfde machine** en in **meeste gevallen** is de database ook **ingebed** (embedded) is in dezelfde **applicatie**.
+#### Embedded databases
+
+In vele gevallen kan het zijn dat de data niet noodzakelijk moet gedeeld worden tussen verschillende applicaties or devices op het netwerk.  
+Een voorbeeld is een Smartphone (of een applicatie of de smartphone) die wat lokale applicatie-gegevens of configuratie wenst bij te houden, de historiek van een browser, ...
+
+Deze tegenhanger van  **client-server-systemen** noemen we een **embedded database**.  
+In dit geval draait de database **op dezelfde machine** en in **meeste gevallen** is de database ook **ingebed** (embedded) is in dezelfde **applicatie**.
 
 ~~~
-+---------------+---+-------+----------------+
-|               |   +------>|                |
-|               | A |  SQL  |                |
-|  Applicatie   | P |       |  Database      |
-|               | I |  DATA |                |
-|               |   |<------+                |
-+---------------+---+-------+----------------+
++---------------+---+------------+----------------+
+|               |   |            |                |
+|               |   +----------->|                |
+|               | A |    SQL     |                |
+|  Applicatie   | P |            |    Database    |
+|               | I |    DATA    |                |
+|               |   |<-----------+                |
+|               |   |            |                |
++---------------+---+------------+----------------+
 ~~~
 
-### Sqlite
+### Sqlite (een relationele database in praktijk)
 
 Eén van de belangrijkste (of toch meest gebruikte) is **Sqlite** (https://www.sqlite.org/index.html).
 

@@ -371,7 +371,7 @@ Een nieuwe student aanmaken doe we via een functie save_new_student (met als arg
         save_new_student(Student(student_name,lab=lab_points,theory=theory_points))
 ~~~
 
-Deze
+Deze functie neemt als argument een object schrijft deze naar de database weg
 
 ~~~python
 def save_new_student(student):
