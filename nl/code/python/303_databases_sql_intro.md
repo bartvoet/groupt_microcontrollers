@@ -7,50 +7,6 @@ Als vervolg gaan we nu leren werken relationele databases
 * Als **eerste stap** is leren **werken met SQL**, hier voor gebruiken we een sql-browser-tool
 * Vervolgens gaan we een **database** gebruiken vanuit **Python** door middel van een **api** 
 
-### Sqlite (een relationele database in praktijk)
-
-Eerder maakten we melding van het **verschil** tussen **client-server** en **embedded databases**.  
-In dit deel van de cursus (kennismaking met sql) gaan we gebruik maken van een **embedded database** vanwege de **gebruiksvriendelijkheid** en de **snelheid van ontwikkeling**.  
-
-We kiezen hier voor **Sqlite**, een veel (meest) gebruikte embedded database (zie ook https://www.sqlite.org/index.html).  
-Deze wordt binnen de industrie gebruikt door verschillende toepassingen:
-
-* Storage voor Android-systeem en -applicaties
-* Office-toepassingen
-* CAD-systemen
-* History voor internetbrowsers
-* Embedded Systemen
-* Configuratie van desktop-toepassingen
-* Educationele redenen als deze applicatie
-* ...
-
-#### Sqlitebrowser
-
-Om met Sqlite te werken starten we met het gebruik van een handige tool om sql-commando's toe te passen op deze database.
-
-Download sqlitebrowser vanaf https://sqlitebrowser.org/ of via de packagemanager van je Linux-distro.  
-
-#### Database aanmaken
-
-Zo'n sqlite-database betaat uit **1 file**, meestal met de extensie **db**.  
-
-Onze eerste stap is zo'n nieuwe database aan te maken, hiervoor open je de sqlite-browser die we eerder hebben gedownloaded
-
-Binnen dit scherm selecteer je linksboven de optie nieuwe database (zie screenshot)
-
-![](../../pictures/sqlite_new_db.png)
-
-Bij het bewaren geef je deze de naam **students.db** (meest gebruikte extensie voor sqlite-databases)
-
-### Werken met SQL
-
-We gaan SQL gebruiken om de database te manipuleren.  
-Om **SQL-scripts** uit te voeren selecteer je (na het opstarten van sqlitebrowser) de tab "Execute SQL".  
-
-Binnen dit venster kan je dan SQL-commando's (of queries) typen om je database te ondervragen (select) of te wijzigen (insert, update, delete)
-
-![](../../pictures/sqlite_exec_sql.png)
-
 ### Tabellen aanmaken (DDL)
 
 We gaan dus **van start**, **stap 1** is het aanmaken van **tabellen** die je eerst moet definieren vooraleer deze te gebruiken.
@@ -191,10 +147,9 @@ At line 1:
 insert into student(student_name,lab,theory) values("Jan Janssens",17,14);
 ~~~
 
+### Lezen van data met SQL (select)
 
-### Lezen van data met SQL
-
-Om de data (die we zojuist hebben geinjecteerd) te kunnen **lezen** gebruiken we een 2de soort SQL-statements, namelijk **select-statments**.  
+Om de data (die we zojuist hebben geinjecteerd) te kunnen **lezen** gebruiken we een 2de soort SQL-statements, namelijk **select-statements** of korter gezegd **queries**.  
 Typ het volgende statement in de sql-editor:
 
 ~~~sql
@@ -221,6 +176,8 @@ Jan Janssens  17          14
 
 ### Beperken van de velden (projectie)
 
+Het \*-symbool zal er voor zorgen dat alle velden worden geprojecteerd.  
+
 Als je niet alle velden nodig hebt kan je ook de de velden die je wil zien gescheiden door een komma (ipv een) \*)
 
 ~~~sql
@@ -236,8 +193,7 @@ Bart Voet     15
 Jan Janssens  17
 ~~~
 
-Dit bepalen of beperken van de kolommen is wat we noemen een **projectie**.
-
+Dit bepalen of beperken van de kolommen is wat we noemen een **projectie**, dit houdt in welke kolommen of velden je wil tonen.
 
 ### Gebruik van where-clausules (selectie)
 
@@ -479,7 +435,7 @@ Error: no such table: student
 ### Primary key
 
 Tot nu gebruikte we de name-kolom om een student uniek te identifieren.  
-Je kan zorgen dat je database controleerd dat deze naam uniek is via een **"primary key"-constraint**:
+Je kan ervoor zorgen dat de database voor jou controleert dat deze naam uniek is via een **"primary key"-constraint**:
 
 * **Primary key** slaagt op het feit dat deze kolom uniek is en de primaire sleutel is om een record op te zoeken
 * **Constraints** zijn controles of voorwaardes die een database voor jou kan controlleren en forceren

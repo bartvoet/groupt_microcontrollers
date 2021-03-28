@@ -136,13 +136,15 @@ Hiervoor gaan we deze code omvormen om de data in een database bij te houden.
 De sql-commando's die we eerder hebben gezien, kan je vanuit een api doorsturen naar een database
 
 ~~~
-+---------------+---+-------+----------------+
-|               |   +------>|                |
-|               | A |  SQL  |                |
-|  Applicatie   | P |       |  Database      |
-|               | I |  DATA |                |
-|               |   |<------+                |
-+---------------+---+-------+----------------+
++---------------+---+---------+----------------+
+|               |   |         |                |
+|               |   +-------->|                |
+|               | A |   SQL   |                |
+|  Applicatie   | P |         |  Database      |
+|               | I |   DATA  |                |
+|               |   |<--------+                |
+|               |   |         |                |
++---------------+---+---------+----------------+
 ~~~
 
 Gedetailleerde documentatie rond het gebruik hiervan vind je te https://docs.python.org/3/library/sqlite3.html maar we proberen de basis-principes te hernemen:
@@ -359,17 +361,9 @@ En roepen dit aan bij optie 2
             print(student)
 ~~~
 
-### Aanmaken van een student
+#### Aanmaken van een student
 
 Een nieuwe student aanmaken doe we via een functie save_new_student (met als argument een Student-object)
-
-~~~python
-    if menu_input == "1":
-        student_name = input("Naam student(e): ")
-        lab_points = input_number("Labo-punten: ")
-        theory_points = input_number("Theorie-punten: ")
-        save_new_student(Student(student_name,lab=lab_points,theory=theory_points))
-~~~
 
 Deze functie neemt als argument een object schrijft deze naar de database weg
 
@@ -382,4 +376,13 @@ def save_new_student(student):
     con.close()
 ~~~
 
+Deze wordt dan aangeroepen vanuit optie 1:
+
+~~~python
+    if menu_input == "1":
+        student_name = input("Naam student(e): ")
+        lab_points = input_number("Labo-punten: ")
+        theory_points = input_number("Theorie-punten: ")
+        save_new_student(Student(student_name,lab=lab_points,theory=theory_points))
+~~~
 

@@ -200,8 +200,9 @@ PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
 
 PY_CHAPTER_03 += ../code/python/300_part_three_data.md
 PY_CHAPTER_03 += ../code/python/301_databases_intro.md
-PY_CHAPTER_03 += ../code/python/302_databases_sql_intro.md
-PY_CHAPTER_03 += ../code/python/303_python_en_sql.md
+PY_CHAPTER_03 += ../code/python/302_databases_sqlite_intro.md
+PY_CHAPTER_03 += ../code/python/303_databases_sql_intro.md
+PY_CHAPTER_03 += ../code/python/304_python_en_sql.md
 
 PY_ANNEX += ../code/python/annex.md
 PY_ANNEX += ../../general/pandoc_page_break.txt
