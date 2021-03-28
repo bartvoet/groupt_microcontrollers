@@ -199,7 +199,8 @@ PY_CHAPTER_02 += ../../general/pandoc_page_break.txt
 #PY_CHAPTER_02 += ../code/python/200_part_two_excercises.md
 
 PY_CHAPTER_03 += ../code/python/300_part_three_data.md
-PY_CHAPTER_03 += ../code/python/302_databases.md
+PY_CHAPTER_03 += ../code/python/301_databases_intro.md
+PY_CHAPTER_03 += ../code/python/302_databases_sql_intro.md
 PY_CHAPTER_03 += ../code/python/303_python_en_sql.md
 
 PY_ANNEX += ../code/python/annex.md
