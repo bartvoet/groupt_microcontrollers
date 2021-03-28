@@ -1,21 +1,101 @@
-## Werken met relationele databases en SQL (sql-primer)
+## Werken met SQL
 
 ### "Getting started" met SQL
 
-Als vervolg gaan we nu leren werken relationele databases
+Om te kunnen werken met een (relationele) database heb je dus SQL nodig, we gaan dat doen in 2 trappen:
 
-* Als **eerste stap** is leren **werken met SQL**, hier voor gebruiken we een sql-browser-tool
-* Vervolgens gaan we een **database** gebruiken vanuit **Python** door middel van een **api** 
+#### SQL via de sqlitebrowser
+
+Om een goed begrip te krijgen van SQL, gaan we eerst leren **werken met SQL**.  
+Hiervoor gebruiken we de sqlitebrowser-tool om tabellen aan te maken, data te manipuleren en op the halen.
+
+~~~
++-------------------+------------+----------------+
+|                   |            |                |
+|                   +----------->|                |
+|                   |    SQL     |                |
+|   Sqlitebrower    |            |    Database    |
+|                   |    DATA    |                |
+|                   |<-----------+                |
+|                   |            |                |
++-------------------+------------+----------------+
+~~~
+
+#### SQL vanuit een Python-applicatie
+
+Vervolgens gaan we een **database** sturen/gebruiken vanuit **Python**, waar we door middel van een **API** waarme we deze SQL-commando's gaan sturen.
+
+~~~
++---------------+---+------------+----------------+
+|               |   |            |                |
+|               |   +----------->|                |
+|               | A |    SQL     |                |
+|  Applicatie   | P |            |    Database    |
+|               | I |    DATA    |                |
+|               |   |<-----------+                |
+|               |   |            |                |
++---------------+---+------------+----------------+
+~~~
+
+### Wat is SQL?
+
+SQL of **Structured Query Language** is een taal die we gebruiken om met een **database** te praten.  
+Deze SQL-taal is onderverdeeld in 3 delen:
+
+* **DDL** - Data Definition Language  => Beschrijven van datastructuren in ons geval tabellen
+* **DML** - Data Modification Language => Ondervragen en wijzigen van data
+* **DCL** - Data Control Language => Controleren van toegang tot de data
+
+We gaan ons grotendeels bezig houden met **DML** om de inhoud van de database te wijzigen en te consulteren.  
+We gaan echter van start met DDL om tabellen te definieren waarin we onze data gaan opslaan.
+
+#### ANSI/ISO-standaard
+
+SQL is ook een **ANSI/ISO-standaard** die ondersteund wordt door **diverse** **databasemanagementsystemen** (DBMS).  
+Alle moderne (relationele) databaseproducten gebruiken vandaag dezelfde taal om data te definieren en te manipulere.  
+Wel dient er op gewezen worden dat vele system wel **eigen uitbreidingen of dialecten** voorzien...
+
+#### Declaratieve programmeer-taal
+
+SQL wordt ook bekeken als een programmeertaal, maar het is zeker geen programmeer-taal zoals we deze hebben gezien met Python.  
+
+SQL is wat ze noemen een **declaratieve programmeertaa**l, je **beschrijft** eerder **welke data** je wil hebben.  
+Dit in tegenstelling tot **imperatieve** programmeertalen waar je ook beschrijft **hoe** je deze wil verkrijgen (adhv van variabelen, condities, loops, ...)
+
+#### SQL-statements en -scripts
+
+SQL maakt gebruik van verschillende soorten statements zoals we gaan zien:
+
+* **create-** en **drop-statements** om tabellen aan te maken (DDL)
+* **select-statements** of **queries** om data op te halen
+* **insert-** en **update-** en **delete-**statements om de data op te halen
+
+Een voorbeeld hieronder is een select-statement om gegevens op te halen uit een de studenten-tabel.
+
+~~~sql
+select * from student;
+~~~
+
+Deze statements worden bijna altijd ook beeindigd met een **;**, dit is zeker van belang als je met SQL-scripts werkt je meerdere statements combineert om uit te voeren.
+
+In onderstaand voorbeeld voeren we 3 insert-statements in 1 script uit.  
+
+~~~sql
+INSERT INTO student (student_id, name, lab, theory) VALUES (1, 'Joe Biden', 12, 10);
+INSERT INTO student (student_id, name, lab, theory) VALUES (2, 'Donald Trump', 10, 12);
+INSERT INTO student (student_id, name, lab, theory) VALUES (3, 'George Bush', 10, 12);
+~~~
+
+Om de verschillende statements van elkaar te kunnen onderscheiden dienen deze dan ook gescheiden te worden van elkaar doormiddels van een **;**
 
 ### Tabellen aanmaken (DDL)
 
-We gaan dus **van start**, **stap 1** is het aanmaken van **tabellen** die je eerst moet definieren vooraleer deze te gebruiken.
+Alvorens de database te kunnen gebruiken dien je echter eerst tabellen aan te maken voor je deze kan gebruiken, dus we gaan van **start** met **create-statements**.
 
-In de eerdere hoofdstukken hadden we een studenten-applicatie gemaakt.  
+In de eerdere hoofdstukken hadden we een studenten-applicatie gemaakt, we gaan hier op verder bouwen om SQL te kunnen demonstreren.  
 We gaan van start met een tabel aan te maken om **studenten-data op te slaan** 
 
-Deze tabel zal dan de data bevatten van 
-Ter herhaling, de klasse student bevat 3:
+Deze tabel zal dan de data bevatten van, ter herhaling de klasse student bevatte 3 velden:
 
 * Naam
 * Labo-punten
@@ -24,7 +104,7 @@ Ter herhaling, de klasse student bevat 3:
 Deze velden gaan we aanmaken binnen een **tabel** en noemen we ook wel een **kolom**.  
 Een  tabel bestaat uit:
 
-* Kollommen of de velden die zo'n tabel bevat (projectie)
+* Kolommen of de velden die zo'n tabel bevat (projectie)
 * Rijen van data, in het voorbeeld hieronder bevat de tabal al 2 lijnen or rijen met studenten-data
 
 ~~~
@@ -59,7 +139,7 @@ We klikken vervolgens op de play-button om dit statement uit te voeren ... en we
 
 ![](../../pictures/sql_error.png)
 
-Deze error is normaalS want dit is nog geen geldig statement, een tabel moet echtern minstens 1 kolom/veld bevatten.
+Deze error is normaal want dit is nog **geen geldig statement**, een tabel moet echter **minstens** **1 kolom**/veld bevatten.
 
 ~~~
 Result: near ")": syntax error
@@ -107,9 +187,22 @@ Als je navigeert naar de tab "Database Structure" zie je ook dat deze tabel is a
 
 ![](../../pictures/sql_structure.png)
 
+#### Tabel verwijderen
+
+Als je deze tabel wil verwijderen uit de database is dit ook mogelijk via het drop-statement of commando.  
+Om bijvoorbeeld de student-tabel te verwijderen gebruik je:
+
+~~~sql
+DROP TABLE student;
+~~~
+
+Let wel, dit verwijdert zowel de definitie als de data en is onherroepbaar!!!
+
 ### Data toevoegen via insert
 
-We keren ondertussen terug naar het sql-venster om te zien hoe we data moeten toevoegen.  
+Eénmaal de tabellen aangemaakt kan je beginnen met er data aan toe te voegen.
+
+We keren hiervoor terug naar het sql-venster om te zien hoe we data moeten toevoegen.  
 Om data toe te voegen gebruiken we een insert-statement:
 
 ~~~sql

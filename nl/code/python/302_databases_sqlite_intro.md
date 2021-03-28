@@ -105,3 +105,4 @@ student_id  name                lab          theory
 ~~~
 
 In het volgende deel gaan we deze sql-syntax onder de loep nemen.
+
