@@ -656,7 +656,7 @@ student_id  name        lab         theory
 
 ### Meerdere tabellen
 
-We starten vanuit voorgaande situatie
+We starten vanuit voorgaande situatie:
 
 ~~~
 +------------------+
@@ -668,6 +668,9 @@ We starten vanuit voorgaande situatie
 | lab              |
 +------------------+
 ~~~
+
+
+
 
 ~~~
 student_id  name        lab         theory    
@@ -721,6 +724,15 @@ student_id  name        lab         theory       group   teacher          room
 
 ~~~
 
+~~~sql
+create table if not exists student_group
+(
+    group_name text primary key,
+    teacher text,
+    room text
+);
+~~~
+
 
 ~~~
 student_id  name        lab         theory    
@@ -772,7 +784,7 @@ A       Linus Torvalds
 B       Bill Gates
 ~~~
 
-#### Relaties in SQL
+#### Relaties leggen
 
 
 ~~~
@@ -787,6 +799,25 @@ B       Bill Gates
 +------------------+
 ~~~
 
+
+~~~
+student_id  name        lab         theory       fk_student_group
+----------  ----------  ----------  ----------   ----------------
+1           Bart Voet   15          16           A
+2           Jan Jansse  17          14           A
+3           Piet Piete  9           12           A
+4           Joris Jori  11          12           B
+8           Piet Piete  9           12           B
+9           Korneel Ko  9           12           B
+
+
+group   teacher
+------  -------  
+A       Linus Torvalds
+B       Bill Gates
+~~~
+
+#### Relaties leggen in SQL
 
 ~~~sql
 drop table if exists student;
@@ -808,3 +839,5 @@ create table if not exists student
     fk_student_group integer references student_group
 );
 ~~~
+
+Het keyword **references** duidt aan dat het hier gaat om een **verwijzing** naar de **primairy key** van een tabel (meestal een andere tabel).
