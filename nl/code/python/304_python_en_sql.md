@@ -2,10 +2,10 @@
 
 We hebben nu een eerste basis-introductie gehad in 
 
-* Principe van een database en SQL
-* Toegepast op een SQL-datbase, in dit geval de embedded database Sqlite
-* Het aanmaken van zo'n database en creatie van tabllen
-* Het ondervragen en aanvullen van data via CRUD-statements
+* Principe van een **database** en SQL
+* **Toegepast** op een SQL-datbase, in dit geval de embedded database **Sqlite**
+* Het **aanmaken** van zo'n **database** en **creatie** van **tabellen**
+* Het **ondervragen** en **aanvullen** van data via **CRUD-statements**
 
 ### Voorbereiding 1: Hernemen van studenten-applicatie
 
@@ -185,7 +185,7 @@ for row in query_result:
 con.close()
 ~~~
 
-#### Gebruik van pameter-substution
+#### Gebruik van parameter-substution
 
 Eerder hadden we gezien dat we binnen een where-clausule condities konnen bepalen om een filtering/selectie toe te passen.  
 Hiervoor voorziet de api de mogelijkheid van substutie, stel dat je enkel studenten wil query-en die meer dan 10 punten hebben kan je dit als volgt doen.
@@ -363,9 +363,9 @@ En roepen dit aan bij optie 2
 
 #### Aanmaken van een student
 
-Een nieuwe student aanmaken doe we via een functie save_new_student (met als argument een Student-object)
+Een nieuwe student aanmaken doe we via een functie **save_new_student** (met als argument een Student-object)
 
-Deze functie neemt als argument een object schrijft deze naar de database weg
+Deze functie neemt als **argument** een object (van de klasse student) schrijft deze naar de database weg
 
 ~~~python
 def save_new_student(student):
@@ -376,7 +376,7 @@ def save_new_student(student):
     con.close()
 ~~~
 
-Deze wordt dan aangeroepen vanuit optie 1:
+Deze wordt dan **aangeroepen** vanuit **optie 1**:
 
 ~~~python
     if menu_input == "1":

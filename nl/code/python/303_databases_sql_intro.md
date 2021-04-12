@@ -620,7 +620,7 @@ Zulk een auto-increment-mechanisme bestaat voor elke datbase (mysql, postgres, s
 Hier wordt nog op teruggekomen als we met postgres-sql gaan werken als gedeelde database.
 
 
-Deze autoincrement-feature houdt niet tegen dat je deze waarde meegeeft (we hardcoderen 8)
+Deze **autoincrement**-feature houdt niet tegen dat je deze waarde meegeeft (we hardcoderen 8)
 
 ~~~sql  
 insert into student(student_id,name,lab,theory) values(8,"Piet Pieters",9,12);
@@ -654,3 +654,157 @@ student_id  name        lab         theory
 9           Korneel Ko  9           12  
 ~~~
 
+### Meerdere tabellen
+
+We starten vanuit voorgaande situatie
+
+~~~
++------------------+
+| student          |
++------------------+
+| student_id (*)   |
+| name             |
+| theory           |
+| lab              |
++------------------+
+~~~
+
+~~~
+student_id  name        lab         theory    
+----------  ----------  ----------  ----------
+1           Bart Voet   15          16        
+2           Jan Jansse  17          14        
+3           Piet Piete  9           12        
+4           Joris Jori  11          12        
+8           Piet Piete  9           12        
+9           Korneel Ko  9           12  
+~~~
+
+#### Gedupliceerde data
+
+~~~
++------------------+
+| student          |
++------------------+
+| student_id (*)   |
+| name             |
+| theory           |
+| lab              |
+| group            |
+| teacher          |
++------------------+
+~~~
+
+
+~~~
+student_id  name        lab         theory       group   teacher          room
+----------  ----------  ----------  ----------   ------  -------          ----
+1           Bart Voet   15          16           A       Linus Torvalds   1b
+2           Jan Jansse  17          14           A       Linus Torvalds   1b
+3           Piet Piete  9           12           A       Linus Torvalds   1b
+4           Joris Jori  11          12           B       Bill Gates       2c
+8           Piet Piete  9           12           B       Bill Gates       2c
+9           Korneel Ko  9           12           B       Bill Gates       2c
+~~~
+
+#### Normalisatie
+
+
+~~~
++------------------+             +------------------+
+| student          |             |   student_group  |
++------------------+             +------------------+
+| student_id  (*)  |             | group_name (*)   |
+| theory           |             | teacher          |
+| lab              |             | room             |
++------------------+             +------------------+
+
+~~~
+
+
+~~~
+student_id  name        lab         theory    
+----------  ----------  ----------  ----------
+1           Bart Voet   15          16        
+2           Jan Jansse  17          14        
+3           Piet Piete  9           12        
+4           Joris Jori  11          12        
+8           Piet Piete  9           12        
+9           Korneel Ko  9           12        
+
+
+group   teacher
+------  -------  
+A       Linus Torvalds
+B       Bill Gates
+~~~
+
+
+#### Relaties leggen
+
+
+~~~
++------------------+             +------------------+
+| student          |             |   student_group  |
++------------------+             +------------------+
+| student_id  (*)  |             | group_name (*)   |
+| theory           |             | teacher          |
+| lab              |             | room             |
+| fk_student_group |             +------------------+
++------------------+
+~~~
+
+
+~~~
+student_id  name        lab         theory    
+----------  ----------  ----------  ----------
+1           Bart Voet   15          16        
+2           Jan Jansse  17          14        
+3           Piet Piete  9           12        
+4           Joris Jori  11          12        
+8           Piet Piete  9           12        
+9           Korneel Ko  9           12        
+
+
+group   teacher
+------  -------  
+A       Linus Torvalds
+B       Bill Gates
+~~~
+
+#### Relaties in SQL
+
+
+~~~
++------------------+             +--------------------+
+| student          |             |   student_group    |
++------------------+             +--------------------+
+| student_id (*)   |    +------->| group_name (*)     |
+| name             |    |        | teacher            |
+| theory           |    |        | room               |
+| lab              |    |        +--------------------+
+| fk_student_group +----- 
++------------------+
+~~~
+
+
+~~~sql
+drop table if exists student;
+drop table if exists student_group;
+
+create table if not exists student_group
+(
+    group_name text primary key,
+    teacher text,
+    room text
+);
+
+create table if not exists student
+(
+    student_id INTEGER PRIMARY KEY,
+    name TEXT,
+    lab INTEGER,
+    theory INTEGER,
+    fk_student_group integer references student_group
+);
+~~~
