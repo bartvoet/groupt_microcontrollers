@@ -83,12 +83,14 @@ In onderstaand voorbeeld voeren we 3 insert-statements in 1 script uit.
 ~~~sql
 INSERT INTO student (student_id, name, lab, theory) VALUES (1, 'Joe Biden', 12, 10);
 INSERT INTO student (student_id, name, lab, theory) VALUES (2, 'Donald Trump', 10, 12);
-INSERT INTO student (student_id, name, lab, theory) VALUES (3, 'George Bush', 10, 12);
+insert into student (student_id, name, lab, theory) values (3, 'George Bush', 10, 12);
 ~~~
+
+> Nota: merk ook op dat deze taal case-insentive is, de laatste statement van vorige block is in lower-case geschreven ter verduidelijking
 
 Om de verschillende statements van elkaar te kunnen onderscheiden dienen deze dan ook gescheiden te worden van elkaar doormiddels van een **;**
 
-### Tabellen aanmaken (DDL)
+### DDL => Tabellen aanmaken
 
 Alvorens de database te kunnen gebruiken dien je echter eerst tabellen aan te maken voor je deze kan gebruiken, dus we gaan van **start** met **create-statements**.
 
@@ -117,7 +119,9 @@ Een  tabel bestaat uit:
 +---------------+---------------+---------------+
 ~~~
 
-#### Poging 1
+#### CREATE TABLE
+
+##### Poging 1 (zonder velden)
 
 Om deze structuur aan te namen gebruiken we een create-statement:
 
@@ -150,7 +154,7 @@ CREATE TABLE student
 )
 ~~~
 
-#### Poging 2: velden toevoegen
+##### Poging 2 (met velden)
 
 Deze velden kan je toevoegen tussen de haakjes:
 
@@ -183,33 +187,57 @@ CREATE TABLE student
 );
 ~~~
 
-Als je navigeert naar de tab "Database Structure" zie je ook dat deze tabel is aangemaakt
+Als je navigeert naar de **tab "Database Structure"** zie je ook dat deze tabel is **aangemaakt**.
 
 ![](../../pictures/sql_structure.png)
 
-#### Tabel verwijderen
+#### DROP TABLE: Tabellen verwijderen
 
-Als je deze tabel wil verwijderen uit de database is dit ook mogelijk via het drop-statement of commando.  
-Om bijvoorbeeld de student-tabel te verwijderen gebruik je:
+Een andere DDL-statement (naast create) is **drop**.  
+Dit kan men gebruiken om een tabel te verwijderen uit een database.
+
+We gaan dit vervolgens doen om daarna de tabel terug aan te maken (om primary en foreign keys te demonsteren)
 
 ~~~sql
-DROP TABLE student;
+drop table student;
 ~~~
 
-Let wel, dit verwijdert zowel de definitie als de data en is onherroepbaar!!!
+Als je dan probeert de tabel te querien krijg je de melding geen data meer te hebben.
 
-### Data toevoegen via insert
+~~~
+sqlite> select * from student;
+Error: no such table: student
+~~~
 
-Eénmaal de tabellen aangemaakt kan je beginnen met er data aan toe te voegen.
+> **Waarschuwing:**  Let wel, dit verwijdert zowel de definitie als de data en is onherroepbaar!!!
 
-We keren hiervoor terug naar het sql-venster om te zien hoe we data moeten toevoegen.  
-Om data toe te voegen gebruiken we een insert-statement:
+### Data manipuleren (DML)
+
+Met de voorgaande operaties (**DDL**) kunnen we dus tabellen **definieren**.  
+Om de data er in te krijgen in te vullen hebben we DML nodig.
+
+#### CRUD
+
+Algemeen bij het werken met data spreken we dikwijls van CRUD
+CRUD staat voor de vier **basisoperaties** die op date uitgevoerd kunnen worden zoals:
+
+* **Create** (of insert): Toevoegen van nieuwe data.
+* **Read** (of select): Opvragen van gegevens.
+* **Update**: Wijzigen van gegevens.
+* **Delete**: Verwijderen van gegevens.
+
+De vertaing van deze CRUD-operaties gebeurt binnen SQL via DML-statements
+
+#### Data toevoegen via het insert-statement
+
+We keren hiervoor terug naar het sql-venster om te zien hoe we **data** moeten **toevoegen** aan een **tabel**.  
+Hiervoor gebruiken we het insert-statement zoals hieronder geillustreerd en we **voeren dit uit**:
 
 ~~~sql
 insert into student(student_name,lab,theory) values("Bart Voet",15,16);
 ~~~
 
-Als dit successvol is krijg je een vergelijkbare input:
+Als dit **successvol** is krijg je een vergelijkbare **output** zoals **hieronder**:
 
 ~~~
 Result: query executed successfully. Took 0ms, 1 rows affected
@@ -217,13 +245,14 @@ At line 1:
 insert into student(student_name,lab,theory) values("Bart Voet",15,16)
 ~~~
 
-Dit statement bestaat uit:
+Dit **insert-statement** bestaat uit:
 
 * De **keyword**-combo **insert into**
 * Gevolgd door de **tabel-naam** student
 * De **velden** die je wil **updaten** (tussen de haakjes gescheiden door komma's)
 * Gevolgd door de het **keyword** **values**
-* En daarna de **waarden** tussen **haakjes**, ook **gescheiden door komma's**
+* En daarna de **waarden** tussen **haakjes** die je wil injecteren, ook **gescheiden door komma's** (zoals bij de kolomnamen)
+
 
 Bemerk ook dat **string** hier ook worden gemarkeerd door **quotes**, net zoals we in Python gewoon zijn.  
 Om de volgende stappen te doen voegen we nog een **2de rij** toe aan de database via:
@@ -240,7 +269,7 @@ At line 1:
 insert into student(student_name,lab,theory) values("Jan Janssens",17,14);
 ~~~
 
-### Lezen van data met SQL (select)
+#### Data lezen via het select-statement
 
 Om de data (die we zojuist hebben geinjecteerd) te kunnen **lezen** gebruiken we een 2de soort SQL-statements, namelijk **select-statements** of korter gezegd **queries**.  
 Typ het volgende statement in de sql-editor:
@@ -267,11 +296,11 @@ Bart Voet     15          16
 Jan Janssens  17          14  
 ~~~
 
-### Beperken van de velden (projectie)
+#### Beperken van de velden (projectie)
 
-Het \*-symbool zal er voor zorgen dat alle velden worden geprojecteerd.  
+Het \*-symbool zal er voor zorgen dat **alle velden** worden **geprojecteerd** in de uitkomst.  
 
-Als je niet alle velden nodig hebt kan je ook de de velden die je wil zien gescheiden door een komma (ipv een) \*)
+Als je echter niet alle velden nodig hebt kan je ook de **velden projecteren** die **je wil zien** **gescheiden** door een **komma** (ipv een) \*)
 
 ~~~sql
 select student_name, lab from student;
@@ -288,18 +317,18 @@ Jan Janssens  17
 
 Dit bepalen of beperken van de kolommen is wat we noemen een **projectie**, dit houdt in welke kolommen of velden je wil tonen.
 
-### Gebruik van where-clausules (selectie)
+#### Gebruik van where-clausules (selectie)
 
-Naast de **projectie** kunnen we ook de **selectie** gaan beperken.  
+Naast de **projectie** kunnen we ook het aantal rijen beperken in het resultaat door middel van **selectie** (of filteren).  
 
 Dit doen we via een **where-clausule** toe te voegen...  
-We passen bijvoobeeld de vorige query aan om de studenten te selecteren met meer dan 16 punten
+We passen bijvoorbeeld de vorige query aan om de studenten te selecteren met meer dan 16 punten
 
 ~~~sql
 select student_name, lab from student where lab > 16;
 ~~~
 
-Het resultaat wordt filterd en we krijgen enkel de student te zien met meer meer dan 16 punten.
+Het resultaat wordt **gefilterd** en we krijgen **enkel de student** te zien met **meer dan 16 punten**.
 
 ~~~
 student_name  lab       
@@ -320,7 +349,7 @@ Je kan voor dit filteren verschillende operatoren gebruiken zoals:
 ~~~
 
 Deze zijn  - met **uitzondering** van **<>** dat overeenkomt met != in Python - **hetzelfde** zoals je deze in **Python-code** zou gebruiken voor condities en loops.  
-Als je de statement omdraait...
+Als je de statement omdraait... (minder dan 16 ipv meer)
 
 ~~~sql
 select student_name, lab from student where lab < 16;
@@ -334,24 +363,23 @@ student_name  lab
 Bart Voet     15    
 ~~~
 
-### Where combineren met and of or
+#### where combineren met and of or
 
-Om de volgende oefeningen te kunnen verder zetten voegen we nog wat rijen toe:
+Om de volgende oefeningen te kunnen verder zetten voegen we eerst nog wat rijen toe:
 
 ~~~sql
 insert into student(student_name,lab,theory) values("Piet Pieters",9,12);
 insert into student(student_name,lab,theory) values("Joris Jorissen",11,12);
 ~~~
 
-
 Je kan (net zoals in Python) ook **condities** **combineren** met **and** of **or**.  
-Bijvoorbeeld willen we de studenten die meer (of gelijk) aan 15 op hun theorie hebben
+Bijvoorbeeld willen we de studenten die meer (of gelijk) aan 15 op hun theorie hebben...
 
 ~~~sql
 select student_name, lab from student where lab > 14 or theory >= 14;
 ~~~
 
-Krijg je meer studenten geselecteerd (die zowel op labo als theorie hoger scoren als 14):
+...krijg je meer studenten geselecteerd (die zowel op labo als theorie hoger scoren als 14):
 
 ~~~
 student_name  lab       
@@ -360,7 +388,7 @@ Bart Voet     15
 Jan Janssens  17  
 ~~~
 
-De 2 nieuwe studenten krijg je niet te zien, als we nu een combineren met and om de studenten te zien die zowel op theorie als labo minder hebben dan 14...
+De 2 nieuwe studenten krijg je niet te zien, als we nu een combineren met **and** om de studenten te zien die zowel op theorie als labo minder hebben dan 14...
 
 ~~~sql
 select student_name, lab, theory from student where lab < 14 and theory < 14;
@@ -375,7 +403,7 @@ Piet Pieters  9           12
 Joris Joriss  11          12    
 ~~~
 
-### Update
+#### Data bewerken met update
 
 Tot nog toe kunnen we:
 
@@ -384,7 +412,7 @@ Tot nog toe kunnen we:
 * Data ophalen via **select** 
 * Filteren via een **where-clausule**
 
-De volgende vraag, wat als je data wil aanpassen in een bestaande rij, dit kan je via een update-statement.
+Wat als je data wil **aanpassen** in een **bestaande rij**, dit kan je via een update-statement.
 
 ~~~sql
 update student set lab = 10 where student_name = "Piet Pieters";
@@ -404,7 +432,7 @@ Joris Joriss  11          12
 De syntax is hier:
 
 * keyword **update**
-* gevolgd door de tabel-naam
+* gevolgd door de **tabel-naam**
 * dan het keyword **set**
 * gevolgd door de eigenlijke update met de vorm **column-name = waarde**
 * en als laaste een **where-conditie** die aangeeft welke rijen moeten worden geupdated
@@ -412,9 +440,9 @@ De syntax is hier:
 > **Waarshuwing:**  
 > Als je deze where-conditie of clausule vergeet loop je het **risico** alle rijen aan te **passen**
 
-### Update meerdere velden
+#### Update meerdere velden
 
-Je kan ook meerdere velden te gelijk updaten, hiervoor voeg je een nieuwe update-deel toe (gescheiden door een komma)
+Je kan ook **meerdere velden tegelijk** updaten, hiervoor voeg je een nieuw update-veld/onderdeel toe (gescheiden door een komma)
 
 ~~~sql
 update student set lab = 16, theory=15 where student_name = "Jan Janssens";
@@ -431,11 +459,12 @@ Piet Pieters  10          12
 Joris Joriss  11          12   
 ~~~
 
+#### Update meerdere rijen
 
-### Update meerdere rijen
+Een update werkt met een **where-clausule** waarmee je de rij selecteert die je wilt aanpassen.  
+Meerdere rijen tegelijk is ook mogelijk naargelang de conditie.  
 
-Meerdere rijen tegelijk is ook mogelijk (zelfs alle rijen).  
-Stel dat we alle studenten een punt will bij geven op het labo (die minder dan 12 hebben), wegens goed medewerking in de klass
+Stel dat we alle studenten een punt will bijgeven op het labo (die minder dan 12 hebben), wegens goed medewerking in de klass
 
 ~~~sql
 update student set lab = lab +1 where lab < 12;
@@ -452,7 +481,8 @@ Piet Pieters  11          12
 Joris Joriss  12          12  
 ~~~
 
-Een 2de voorbeeld, we willen studenten die meer labo-punten hebben dan theori een puntje bij geven op theorie...
+Je zag trouwens dat je in de update kan verwijzen naar een waarde van deze rij zelf,n door bij lab 1 bij te tellen.  
+Een **2de voorbeeld**, we willen studenten die meer labo-punten hebben dan theorie een puntje bij geven op theorie...
 
 ~~~sql
 update student set theory = theory +1 where lab > theory;
@@ -467,17 +497,7 @@ Piet Pieters  11          12
 Joris Joriss  12          12   
 ~~~
 
-### CRUD
-
-De operaties die we tot nog toe hebben gedaan via SQL resorteren eigelijk onder **CRUD**.  
-CRUD staat voor de vier **basisoperaties** die op date kunnen uitgevoerd kunnen worden zoals:
-
-* **Create** (of insert): Toevoegen van nieuwe data.
-* **Read** (of select): Opvragen van gegevens.
-* **Update**: Wijzigen van gegevens.
-* **Delete**: Verwijderen van gegevens.
-
-### Delete
+#### Delete
 
 De laatste operatie die we nog niet in SQL hebben gezien is **delete**, net zoals bij **update** die, je een where-clausule (eigenlijk niet verplicht maar anders verwijder je alle gegevens).
 
@@ -498,34 +518,16 @@ Joris Joriss  12          12
 ~~~
 
 > **Waarschuwing:**  
-> Opnieuw dezelfde waarschuwing als bij update, pas op dat je
-> where-clausule correct is gefinieerd want je kan meerdere 
-> studenten tot en met de hele tabel deleten.
+> Opnieuw dezelfde waarschuwing als bij update, **pas op** dat je
+> where-clausule **correct** is **gedefinieerd** want je kan **meerdere** 
+> **studenten** tot en met de **hele** **tabel** deleten.
 
-### Tabel verwijderen via drop
+### Identiteit en sleutels
 
-De voorgaande crud-statements (select, insert, update, delete) verwijzen we als DML (Data Modification Language).  
-Om een tabel aan te maken hebben we eerder gebruik gemaakt van een create-statement, dit is wat verwijzen als een DDL (Data Definition Language).  
+Belangrijk binnen een database is dat je rijen **uniek** kan identifieren/herkennen.  
+Dit gebeurt door 1 of een combinatie van meerdere velden te gebruiken als sleutel.
 
-Een andere DDL-statement (naast create) is **drop**.  
-Dit kan men gebruiken om een tabel te verwijderen uit een database.
-
-We gaan dit vervolgens doen om daarna de tabel terug aan te maken (om primary en foreign keys te demonsteren)
-
-~~~sql
-drop table student;
-~~~
-
-Als je dan probeert de tabel te querien krijg je de melding geen data meer te hebben.
-
-~~~
-sqlite> select * from student;
-Error: no such table: student
-~~~
-
-> **Waarschuwing:**  Dit verwijdert vanzelfsprekend ook de data...
-
-### Primary key
+#### Primary key
 
 Tot nu gebruikte we de name-kolom om een student uniek te identifieren.  
 Je kan ervoor zorgen dat de database voor jou controleert dat deze naam uniek is via een **"primary key"-constraint**:
@@ -535,7 +537,7 @@ Je kan ervoor zorgen dat de database voor jou controleert dat deze naam uniek is
 
 > Nota: dit kan ook via een "unique-key"-constraint, daar komen we later nog op terug...
 
-We maken een nieuwe create-statement aan:
+We maken een nieuwe create-statement aan en we kennen aan de name-kolom de primary key-constraint toe:
 
 ~~~sql
 CREATE TABLE student 
@@ -547,14 +549,20 @@ CREATE TABLE student
 ~~~
 
 We hebben hier een keyword **PRIMARY KEY** toegevoegd aan de 1ste kolom.  
-Vervolgens voegeven we 2 nieuwe studenten toe:
+Hierdoor zal de database er voor zorgen dat de tabel altijd consistent gaat zijn volgens deze constraint:
+
+* Er kan geen student zijn met dezeflde naam
+* Elke student heeft verplicht een naam
+
+ 
+Vervolgens voegen we 2 nieuwe studenten toe:
 
 ~~~sql
 insert into student(name,lab,theory) values("Bart Voet",15,16);
 insert into student(name,lab,theory) values("Jan Janssens",17,14);
 ~~~
 
-Tot nog toe zien we het zelfde resulatat als voorheen, 2 lijnen toegevoegd:
+Tot nog toe zien we het zelfde resultaat als voorheen, 2 lijnen toegevoegd:
 
 ~~~
 name        lab         theory    
@@ -563,22 +571,22 @@ Bart Voet   15          16
 Jan Jansse  17          14      
 ~~~
 
-Daarna voegen we een student toe, let wel deze student bestaat reeds in de database...
+Daarna voegen we een student toe, let wel deze naam bestaat reeds in de database...
 
 ~~~sql
 insert into student(name,lab,theory) values("Bart Voet",17,18);
 ~~~
 
-De database zal dit echter niet toestaan door de constraint die je eerder hebt toegevoegd.
+De **database** zal dit echter **niet toestaan** dankzij de **constraint** die je eerder hebt toegevoegd.
 
 ~~~
 Error: UNIQUE constraint failed: student.name
 ~~~
 
-### Automatische primary-keys
+#### Automatische primary-keys (incrementatie)
 
-1 van de problemen die je kan hebben met voorgaande approach is dat het technisch wel mogelijk is van 2 studenten te hebben met dezelfde naam.  
-Wat daarom veel wordt gedaan is gebruik maken van numerieke id's om op zich de verschillende studenten een unieke nummer te geven (een beetje zoals jullie studenten nummers)
+1 van de problemen die je kan hebben met voorgaande approach is dat het **technisch** wel **mogelijk** is van **2 studenten** te hebben met **dezelfde naam**.  
+Wat daarom veel wordt gedaan is gebruik maken van **numerieke id's** om op zich de verschillende studenten een unieke nummer te geven (een beetje zoals jullie studenten nummers)
 
 Om dit te doen voegen we een veld/kolom **student_id** toe en maken we definieren we deze als unieke identifier. 
 
@@ -594,8 +602,8 @@ CREATE TABLE IF NOT EXISTS student
 );
 ~~~
 
-Deze nieuwe id kan je toevoegen aan je insert-statement maar kan automatisch worden aangemaakt door de databasse...  
-
+Als je bij een integer een **primary key** maakt kan je gebruik maken van autoincrement.  
+Dit houdt in dat deze waarde - indien je ze niet meegeeft aan de insert - automatisch de hoogste waarde + 1 verkrijgt.
 
 ~~~sql
 insert into student(name,lab,theory) values("Bart Voet",15,16);
@@ -604,7 +612,7 @@ insert into student(name,lab,theory) values("Piet Pieters",9,12);
 insert into student(name,lab,theory) values("Joris Jorissen",11,12);
 ~~~
 
-Als we in de databasqe kijken zien we dat dit veld automatisch wordt aangevult
+Als we hierna in de databasqe kijken zien we dat dit veld automatisch wordt aangevult
 
 ~~~
 student_id  name        lab         theory    
@@ -615,16 +623,16 @@ student_id  name        lab         theory
 4           Joris Jori  11          12   
 ~~~
 
-
-Zulk een auto-increment-mechanisme bestaat voor elke datbase (mysql, postgres, sqlserver, ...) maar het mechanisme om dit te definieren kan verschillen per database.   
+Zulk een **auto-increment-mechanisme** bestaat voor elke relationele database (mysql, postgres, sqlserver, ...) maar het mechanisme om dit te definieren **kan verschillen** per database.  
 Hier wordt nog op teruggekomen als we met postgres-sql gaan werken als gedeelde database.
 
-
-Deze **autoincrement**-feature houdt niet tegen dat je deze waarde meegeeft (we hardcoderen 8)
+Deze **autoincrement**-feature houdt trouwens niet tegen dat je deze waarde meegeeft, in onderstaande code hardcoderen we 8:
 
 ~~~sql  
 insert into student(student_id,name,lab,theory) values(8,"Piet Pieters",9,12);
 ~~~
+
+We zien vervolgens dat deze waarde ook effectief wordt aangenomen (gezien deze nog niet bestaande was)
 
 ~~~
 student_id  name        lab         theory    
@@ -636,12 +644,13 @@ student_id  name        lab         theory
 8           Piet Piete  9           12        
 ~~~
 
-Als je nadien terug een student zonder id toevoegt zal ded hoogste id terug opnieuw worden geincrementeerd.
+Als je nadien terug een student zonder id toevoegt zal de **hoogste id** terug opnieuw worden **geincrementeerd**.
 
 ~~~sql
 insert into student(name,lab,theory) values("Korneel Kortens",9,12);
 ~~~
 
+De student heeft hier de id 9 verkregen, hetgeen 1 hoger is als de (eerder) hoogste id (die we handmatig hadden geupdated)
 
 ~~~
 student_id  name        lab         theory    
@@ -654,9 +663,13 @@ student_id  name        lab         theory
 9           Korneel Ko  9           12  
 ~~~
 
-### Meerdere tabellen
+### Werken met meerdere tabellen
 
-We starten vanuit voorgaande situatie:
+In een relationele database werk je in de meeste gevallen met meerdere tabellen en is het de bedoeling van relaties te leggen tussen deze tabellen.
+
+#### Startsituatie
+
+We starten vanuit de voorgaande tabel:
 
 ~~~
 +------------------+
@@ -669,8 +682,7 @@ We starten vanuit voorgaande situatie:
 +------------------+
 ~~~
 
-
-
+met volgende  data
 
 ~~~
 student_id  name        lab         theory    
@@ -685,6 +697,8 @@ student_id  name        lab         theory
 
 #### Gedupliceerde data
 
+Laten we starten met het toevoegen van **3 nieuwe velden**
+
 ~~~
 +------------------+
 | student          |
@@ -695,9 +709,11 @@ student_id  name        lab         theory
 | lab              |
 | group            |
 | teacher          |
+| room             |
 +------------------+
 ~~~
 
+Als we naar de data kijken zien we echter dat deze nieuwe velden zich herhalen per group.
 
 ~~~
 student_id  name        lab         theory       group   teacher          room
@@ -710,8 +726,11 @@ student_id  name        lab         theory       group   teacher          room
 9           Korneel Ko  9           12           B       Bill Gates       2c
 ~~~
 
+Er is dus eigenlijk sprake van **duplicatie** over de verschildend
+
 #### Normalisatie
 
+Om deze duplicatie te vermijden kunnen we informatie - rond een studenten-groep - isoleren in een specifieke tabel
 
 ~~~
 +------------------+             +------------------+
@@ -723,6 +742,8 @@ student_id  name        lab         theory       group   teacher          room
 +------------------+             +------------------+
 
 ~~~
+
+We maken in de database een **nieuwe tabel** aan genaams **student_group** dewelke **3 velden** bevatte
 
 ~~~sql
 create table if not exists student_group
@@ -733,6 +754,7 @@ create table if not exists student_group
 );
 ~~~
 
+De inhoud van de tabellen zou er als volgt kunnen uitzien...
 
 ~~~
 student_id  name        lab         theory    
@@ -751,41 +773,16 @@ A       Linus Torvalds
 B       Bill Gates
 ~~~
 
+We noemen dit proces **normalisatie**, we ontdubbelen gegevens door ze in een aparte tabel te plaatsen.
 
-#### Relaties leggen
+#### Relaties: Verwijzen vanuit tabellen
 
+Wat er echter nog **ontbreekt** echter is een **link** **tussen** beide **tabellen**.  
+Binnen relationele databases wordt dit gedaan door een **veld** toe te voegen waarin men de **waarde** van de **primary key** bewaard op dat men de link kan leggen.
 
-~~~
-+------------------+             +------------------+
-| student          |             |   student_group  |
-+------------------+             +------------------+
-| student_id  (*)  |             | group_name (*)   |
-| theory           |             | teacher          |
-| lab              |             | room             |
-| fk_student_group |             +------------------+
-+------------------+
-~~~
+Binnen ons voorbeeld kan je dit doen door aan de tabel **student** een veld **fk_student_group** toe te voegen dat dan kan gebruikt worden om een **link** te leggen tussen een **student** en haar/zijn **groep**.
 
-
-~~~
-student_id  name        lab         theory    
-----------  ----------  ----------  ----------
-1           Bart Voet   15          16        
-2           Jan Jansse  17          14        
-3           Piet Piete  9           12        
-4           Joris Jori  11          12        
-8           Piet Piete  9           12        
-9           Korneel Ko  9           12        
-
-
-group   teacher
-------  -------  
-A       Linus Torvalds
-B       Bill Gates
-~~~
-
-#### Relaties leggen
-
+> Nota: je mag dit veld noemen zoals je wilt maar we nemen voorlopig de conventie "fk_" te laten volgen op de naam van de tabel waar je naar verwijst...
 
 ~~~
 +------------------+             +--------------------+
@@ -799,6 +796,7 @@ B       Bill Gates
 +------------------+
 ~~~
 
+Als je dan naar de inhoud kijkt zie je dat elke student - binnen het veld fk_student_group - een verwijzing bevat naar de betreffende group.
 
 ~~~
 student_id  name        lab         theory       fk_student_group
@@ -817,7 +815,41 @@ A       Linus Torvalds
 B       Bill Gates
 ~~~
 
+De bijhorende tabel-definities zouden dan zijn als volgt:
+
+~~~sql
+drop table if exists student;
+drop table if exists student_group;
+
+create table if not exists student_group
+(
+    group_name text primary key,
+    teacher text,
+    room text
+);
+
+create table if not exists student
+(
+    student_id integer primary key,
+    name text,
+    lab integer,
+    theory integer,
+    fk_student_group integer
+);
+~~~
+
+
 #### Relaties leggen in SQL
+
+##### Foreign keys
+
+Eerder vermelden we dat we de database konden laten verzekeren/controleren dat een veld uniek is.  
+Naast deze eerder vermelde **primary key** bieden relationele database om deze link te maken via een **foreign key**.  
+
+Deze foreign key is een constraint die er gaat voor zorgen dat eender welke waarde die je in het veld **fk_student_group** gaat zetten een waarde is die effectief ook voorkomt in de database.
+
+Om een **kolom** aan te duiden als een **foreign key** gebruik je het **keyword** **references**.  
+Bekijk hieronder de **gewijzigde tabel-definitie** voor **student**
 
 ~~~sql
 drop table if exists student;
@@ -836,8 +868,272 @@ create table if not exists student
     name TEXT,
     lab INTEGER,
     theory INTEGER,
-    fk_student_group integer references student_group
+    fk_student_group text references student_group
 );
 ~~~
 
-Het keyword **references** duidt aan dat het hier gaat om een **verwijzing** naar de **primairy key** van een tabel (meestal een andere tabel).
+##### Referentiele integriteit
+
+Er zijn 2 belangrijke redenn voor het gebruik van een foreign key?
+
+* Garanderen van **referentiele integriteit**
+* Peformantie en creatie indexen (wordt later verklaard)  
+
+**Referentiele integriteit** zorgt er voor dat de database controleert dat de links tussen tabellen integer zijn.  
+maw deze zal er voor zorgen dat je geen data kan toevoegen met een foutieve link.
+
+Bijvoorbeeld stel dat je een student wil toevoegen maar verwijst naar een niet bestaande studenten-groep...
+
+~~~sql
+insert into student(name,lab,theory,fk_student_group) values("bart",10,10,"C");
+~~~
+
+...zal de sql-engine jou een error (FOREIGN KEY constraint) geven...
+
+~~~
+Result: FOREIGN KEY constraint failed
+At line 1:
+insert into student(name,lab,theory,fk_student_group) values("bart",10,10,"C")
+~~~
+
+Een foreign key zorgt er dus voor dat de links tussen tabellen kloppen en integer zijn.  
+Als ik daarintegen eerst een student_group-record aanmaak met deze primaire sleutel...
+
+~~~sql
+insert into student_group(group_name,teacher,room) values("C","Jan Janssens","5B");
+insert into student(name,lab,theory,fk_student_group) values("bart",10,10,"C")
+~~~
+
+...zal deze wel worden aangemaakt zonder error...
+
+~~~
+Result: query executed successfully. Took 2ms, 1 rows affected
+At line 2:
+insert into student(name,lab,theory,fk_student_group) values("bart",10,10,"C");
+~~~
+
+##### Foreign key en lege velden
+
+Een foreign key-contraint zal het wel toelaten dat de link/referentie geen waarde bevat (null).  
+
+~~~sql
+insert into student(name,lab,theory,fk_student_group) values("jan",10,10,null);
+/*
+Is the same as:
+insert into student(name,lab,theory) values("bart",10,10);
+*/
+select * from student;
+~~~
+
+...met als resultaat van de laatste select-query...
+
+~~~
+1   bart   10   10   C
+2   jan    10   10
+~~~
+
+### Joins
+
+Als je werkt met je data verspreid over meerdere tabellen is het heel interessant om het principe achter een SQL-join te kennen.
+
+#### Start-situatie
+
+~~~sql
+drop table if exists student;
+drop table if exists student_group;
+
+create table if not exists student_group
+(
+    group_name text primary key,
+    teacher text,
+    room text
+);
+
+create table if not exists student
+(
+    student_id INTEGER PRIMARY KEY,
+    name TEXT,
+    lab INTEGER,
+    theory INTEGER,
+    fk_student_group text references student_group
+);
+
+insert into student_group(group_name, teacher, room) values("A","Linus Torvalds","1A");
+insert into student_group(group_name, teacher, room) values("B","Bill Gates","2A");
+
+insert into student(name,lab,theory,fk_student_group) values("Bart",15,16,"A");
+insert into student(name,lab,theory,fk_student_group) values("Jan",17,14,"A");
+insert into student(name,lab,theory,fk_student_group) values("Piet",9,12,"B");
+insert into student(name,lab,theory,fk_student_group) values("Joris",11,12,"B");
+~~~
+
+... met de volgende inhoud als resultaat...
+
+~~~
+select * from student;
+student_id  name        lab         theory      fk_student_group
+----------  ----------  ----------  ----------  ----------------
+1           Bart        15          16          A               
+2           Jan         17          14          A               
+3           Piet        9           12          B               
+4           Joris       11          12          B
+
+select * from student_group;
+group_name  teacher         room      
+----------  --------------  ----------
+A           Linus Torvalds  1A        
+B           Bill Gates      2A         
+~~~
+
+#### Zonder joins...
+
+Als we - met wat we tot nu toe weten - alle data willen bekijken voor 1 student moeten we hier altijd 2 queries voor aanmaken:
+
+* Een eerste waar we de data zoeken voor de student (bijvoorbeeld met id 1)
+
+~~~sql
+select * from student where student_id = 2;
+~~~
+
+...met als resultaat...
+
+~~~
+student_id  name        lab         theory      fk_student_group
+----------  ----------  ----------  ----------  ----------------
+2           Jan         17          14          A               
+~~~
+
+* Een 2de waar de studentengroep-data oproepen aan de hand van de fk_student_group
+
+~~~sql
+select * from student_group where group_name = "A";
+~~~
+
+...met als resultaat...
+
+~~~
+group_name  teacher         room      
+----------  --------------  ----------
+A           Linus Torvalds  1A        
+~~~
+
+#### Carthesisch product
+
+Er is een manier om de data in 1 maal binnen te trekken, SQL geeft ons namelijk de mogelijkheid om data van meerdere tabellen binnen te trekken in 1 maal.  
+
+In onderstaande select-statement vragen we de data op van zowel de student- als student_group-tabel
+
+~~~sql
+select name, lab, theory, group_name, teacher, room from student, student_group where student_id = 2;
+~~~
+
+...met als resultaat...
+
+~~~
+name        lab         theory      group_name  teacher         room      
+----------  ----------  ----------  ----------  --------------  ----------
+Jan         17          14          A           Linus Torvalds  1A        
+Jan         17          14          B           Bill Gates      2A 
+~~~
+
+Dit **resultaat** is echter **niet correct** of toch niet wat we wensen...  
+Dit is het resultaat van een **carthesisch product**, namelijk dat als je meerdere tabellen adresseert de SQL-engine alle rijen van de ene tabel (student) met die van andere tabel (student_group) zal **combineren**.
+
+Dit wordt nog duidelijker als je de where-conditie weglaat:
+
+~~~sql
+select name, lab, theory, group_name, teacher, room from student, student_group;
+~~~
+
+Hier zie je ook dat je alle rijen van student en student_group worden gecombineerd.  
+
+Het **aantal rijen** in dit **resultaat** is dus ook het **aantal rijen** van **student** **vermenigvuldigd** met het **aantal rijen** van **student_group**.  
+
+Gezien we 4 studenten hebben en 2 groepen zitten we aan een totaal van 8 rijen...
+
+~~~
+name        lab         theory      group_name  teacher         room      
+----------  ----------  ----------  ----------  --------------  ----------
+Bart        15          16          A           Linus Torvalds  1A        
+Bart        15          16          B           Bill Gates      2A        
+Jan         17          14          A           Linus Torvalds  1A        
+Jan         17          14          B           Bill Gates      2A        
+Piet        9           12          A           Linus Torvalds  1A        
+Piet        9           12          B           Bill Gates      2A        
+Joris       11          12          A           Linus Torvalds  1A        
+Joris       11          12          B           Bill Gates      2A 
+~~~
+
+#### joins (impliciete syntax)
+
+Als we er willen voor zorgen dat we **enkel** de **info** zien van de **studenten-groepen** die **gelinkt** zijn aan de **betreffende studenten** kunnen we dit oplossen door een **where-conditie** toe te voegen
+
+~~~sql
+select name, lab, theory, group_name, teacher, room 
+from student, student_group 
+where student.fk_student_group = student_group.group_name;
+~~~
+
+> Nota: als de sql-queries complexer worden, wordt het interessant 
+> (of eigenlijk noodzakelijk)
+> om de query te verspreiden over meerdere lijnen
+
+Hier zien we een dat de studenten worden **getoond** **met** hun **groep** die is **gerefenceerd** vanuit de **foreign-key**
+
+~~~
+name        lab         theory      group_name  teacher         room      
+----------  ----------  ----------  ----------  --------------  ----------
+Bart        15          16          A           Linus Torvalds  1A        
+Jan         17          14          A           Linus Torvalds  1A        
+Piet        9           12          B           Bill Gates      2A        
+Joris       11          12          B           Bill Gates      2A  
+~~~
+
+Het toevoegen en beperken van deze conditie/filter is wat we noemen een join.  
+Als we dit nu toepassen op ons oorspronkelijk voorbeeld (student met id 2) moet je enkel deze where conditie toevoegen met een **and-combinatie**.
+
+~~~sql
+select name, lab, theory, group_name, teacher, room 
+from student, student_group 
+where student_id = 2
+and student.fk_student_group = student_group.group_name;
+~~~
+
+...met als resultaat...
+
+~~~
+name        lab         theory      group_name  teacher         room      
+----------  ----------  ----------  ----------  --------------  ----------
+Jan         17          14          A           Linus Torvalds  1A        
+~~~
+
+...alle informatie over 1 student in 1 query
+
+#### joins (expliciete syntax)
+
+Gezien dit join-patroon constant wordt gebruikt heeft SQL hier ook een officiele syntax voor voorzien.  
+Het voorbeeld - equivalent aan voorgaande query - met deze syntax is als volgt:
+
+~~~sql
+select name, lab, theory, group_name, teacher, room 
+from student
+inner join student_group on fk_student_group = group_name
+where student_id = 2;
+~~~
+
+* **ipv** een **2de tabel** toe te voegen aan de **where-clausule** voeg je een **inner-join-clausule** toe
+* **ipv** de conditie toe te voegen aan de where (via and) wordt deze verwerkt in deze **inner join**-clausule
+
+#### en verder...
+
+Later komen we echter nog terug op deze joins:
+
+* Performantie en indexen
+* Andere join-operaties
+  * outer-join
+  * left-join
+  * cross-join
+* Diverse constraints
+* ...
+
+Maar eerst starten we dit te integreren met Python.  
