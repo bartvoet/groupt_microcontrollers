@@ -809,6 +809,8 @@ while True:
 
 #### Extra tabel
 
+Eerste wijziging die we moeten uitvoeren is zorgen dat er een nieuwe tabel wordt aangemaakt.  
+
 ~~~python
         con.execute("""
             create table if not exists student

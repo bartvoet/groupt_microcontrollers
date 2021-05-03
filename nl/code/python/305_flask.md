@@ -72,6 +72,8 @@ Als alles goed gegaan is krijg je een vester
 * post - create
 * delete - delete
 
+#### static vs dynamic
+
 #### REST
 
 ### HTTP-clients
@@ -108,3 +110,5 @@ def login():
 def profile(username):
     return 'user {}'.format(username)
 ~~~
+
+### Encoding
