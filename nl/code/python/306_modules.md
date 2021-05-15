@@ -1,5 +1,20 @@
 ## Python modules
 
+Modulair programmeren houdt in dat je leert je code te ordenen binnen verschillende modules of groepen van code.
+
+Een module is een geheel van klassen, functies en variabelen die logisch bij elkaar horen.  
+De reden om deze te groeperen zijn divers:
+
+* Je programma logisch onder te verdelen te groeperen om het overzichtelijk en onderhoudsvriendelijk te houden
+* Je code te laten herbruiken binnen andere programma's
+* Een stuk van je code te isoleren om het gemakkelijker te tesen
+* ...
+
+### Python modules
+
+Een Python module aanmaken is zeer éénvoudig, een **Python-file** is een **module**
+Stel **onderstaande code**...
+
 ~~~python
 def hello():
     print("hello")
@@ -8,15 +23,39 @@ def world():
     print("world")
 ~~~
 
+... we bewaren deze file onder de **naam hello.py**
+
+### Een module hergebruiken via import
+
+Als we een Python console openen vanuit dezelfde locatie waar deze python-file is bewaard kunnen we deze **functies importeren**:
+
 ~~~python
 >>> import hello
 >>> hello.hello()
 hello
 >>> hello.world()
 world
->>> hello.__name__
-'hello'
 ~~~
+
+De eerste statement "import hello" zorgt ervoor dat de functies (en ook variabelen als die er zijn) beschikbaar worden gesteld.  
+
+De naam van deze import dient overéén te komen met de naam van de file (op voorwaarde dat deze in dezelfde file staat)
+
+Let wel, om deze aan te roepen ben je wel verplicht deze te prefixen met de naam van deze module.  
+Als je dit niet doet zal Python een error te voorschijn toveren (van het type NameError):
+
+~~~python
+>>> hello()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'hello' is not defined
+~~~
+
+### import vanuit een andere python-file
+
+Het voorgaand voorbeeld was vanit de **console** maar je kan dat ook het zelfde doen vanuit een andere Python-file.
+
+Maar hiervoor - opnieuw binnen dezelfde directory - een andere file aan (bijvoorbeeld met de naam hello_application.py)
 
 ~~~python
 import hello
@@ -24,12 +63,73 @@ hello.hello()
 hello.world()
 ~~~
 
-~~~
-$ python hello_test.py
+Vanuit deze file kan je dan respectievelijk beide functies hergebruiken:
+
+~~~bash
+$ ls 
+hello_application.py hello.py
+$ python hello_application.py
 hello
 world
 ~~~
 
+### De naam van modules
+
+Een module krijgt ook automatisch een naam mee (die dan ook overeenkomt me de naam die je gebruikt om deze te importeren)
+
+~~~python
+>>> import hello
+>>> hello.__name__
+'hello'
+>>> __name__
+'__main__'
+>>> 
+~~~
+
+Deze variabele is ook beschikbaar als globale variabele, en deze heeft een specifieke waarde afhankelijk van de modus waar de code zich in bevindt.  
+In normale omstandigheden zal de waarde van deze functie **__main__** zijn, maar dit kan ook verschillend zijn zoals we zo dadelijk gaan zien...
+
+### name-variabele met verschillende waardes
+
+Om dit te illustreren printen voegen we een lijntje toe aan onze voor Python-file
+
+~~~python
+def hello():
+    print("hello")
+
+def world():
+    print("world")
+
+print("Name: ", __name__)
+~~~
+
+Als je deze dan uitvoert print deze zoals verwacht __main__ af
+
+~~~
+$ python3 hello.py
+Name: __main__
+~~~
+
+Als we echter nu echter hello_application.py uitvoeren zien we het volgende:
+
+~~~
+python3 hello_application.py
+Name:  hello
+hello
+world
+~~~
+
+Eerst en vooral zien we dat - ondanks dat we enkel importeren - de code effectief wordt uitgevoerd.  
+De naam is echter hello en niet __main__ maar hello.  
+
+Bij het importeren van een file wordt dus alle code van deze file uitgevoerd, doordat deze code wordt uitgevoerd worden deze functies dan ook beschikbaar gesteld.  
+Door dat de globale name-variabele echter op hello staat worden deze functies trouwens gekoppeld aan deze naam en niet aan de globale (main)-namespace (waardoor dat je hello als prefix dient te gebruiken)
+
+
+### Uitvoerbare modules
+
+Deze name-variabele heeft echter nog een belangrijke functie.  
+Stel dat je volgende code schrijft:
 
 ~~~python
 def hello():
@@ -42,40 +142,21 @@ hello()
 world()
 ~~~
 
-~~~python
-Python 3.8.5 (default, Jan 27 2021, 15:41:15) 
-[GCC 9.3.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import hello
-hello
-world
->>> 
-~~~
-
+...dan zal deze inderdaad de functies en hello en world afdrukken...
 
 ~~~
-$ python hello.py
+$ python3 hello.py
 hello
 world
-$ python hello_test.py
+$ python3 hello_application.py
 hello
 world
 hello
 world
 ~~~
 
-~~~python
-Python 3.8.5 (default, Jan 27 2021, 15:41:15) 
-[GCC 9.3.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import hello
-hello
-world
->>> 
-~~~
-
-
-#### Verbetering
+...maar deze code gaat echter ook worden uitgevoerd als je deze vanuit een andere file importeerd (hello_application.py)  
+Om er voor te kunnen zorgen dat je hello.py zowel als module als uitvoerbare file kan gebruiken kan je het volgende toevoegen:
 
 ~~~python
 def hello():
@@ -89,47 +170,43 @@ if __name__ == "__main__":
     world()
 ~~~
 
-~~~python
-Python 3.8.5 (default, Jan 27 2021, 15:41:15) 
-[GCC 9.3.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import hello
->>> 
-~~~
-
-### 
-
-~~~python
-import hello
-hello.world()
-hello.hello()
-~~~
-
+Door te gaan kijkne of de globale name-variabele main is of hello kan je vermijden dat de code wordt uitgevoerd als je in de import-modus zit.
 
 ~~~
-$ python hello.py
+$ python3 hello.py
 hello
 world
-$ python hello_test.py
-world
+$ python3 hello_application.py
 hello
+world
 ~~~
 
-###
+### from-keyword
 
+Eerdoer hebben het import-keyword gebruikt om de functies vanuit voorgaande module te importeren.  
+
+Om die functies (en klasses als die er zouden zijn) te gebruiken diende je te prefixen met de module-naam (hello).
+Dit had als voordeel dat je niet zomaar conflicten kan hebben met functies uit andere modules (of je eigen code) maar geeft wel wat extra type-werk.
+
+Soms kunnen er situaties zijn waar je de functies in hoofd-namespace van het programma wil krijgen (zonder te moeten prefixen).  
+Dit kan je doen met de volgende from ... import ... constructie zoals in onderstaande code.
 
 ~~~python
 from hello import world
 world()
 ~~~
 
-~~~
+Deze heeft dezelfde eigenschap als import (alle code wordt daar ook uitgevoerd) maar enkel functies aangeduid achter import worden geimporteerd.  
+In onderstaande uitvoering zie je 2 zaken:
+
+* Je kan de functie world() aanroepen zonder prefix
+* hello() is niet beschrikbaar
+
+~~~python
 Python 3.8.5 (default, Jan 27 2021, 15:41:15) 
 [GCC 9.3.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> from hello import world
-hello
-world
 >>> world()
 world
 >>> hello()
@@ -138,17 +215,45 @@ Traceback (most recent call last):
 NameError: name 'hello' is not defined
 ~~~
 
+Als je wilt dat hello ook beschikbaar is kan je dit op 2 manieren.  
+Of je importeert beide (gescheiden door komma's)
+
+~~~python
+from hello import hello,world
+world()
+hello()
+~~~
+
+...met als resultaat...
+
+~~~python
+Python 3.8.5 (default, Jan 27 2021, 15:41:15) 
+[GCC 9.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from hello import world
+>>> world()
+world
+>>> hello()
+hello
+~~~
+
+...of je gebruik \* om alle functies te importeren (met hetzelfde resultaat)
+
 ~~~python
 from hello import *
 world()
 hello()
 ~~~
 
+### Python-path
+
 ~~~python
 >>> import sys
 >>> print(sys.path)
 ['', '/usr/lib/python38.zip', '/usr/lib/python3.8', '/usr/lib/python3.8/lib-dynload', '/home/bart/.local/lib/python3.8/site-packages', '/usr/local/lib/python3.8/dist-packages', '/usr/lib/python3/dist-packages', '/usr/lib/python3.8/dist-packages']
 ~~~
+
+### Module-cache
 
 ~~~
 $ ls
@@ -157,16 +262,13 @@ $ ls __pycache__/
 hello.cpython-38.pyc
 ~~~
 
+### dir-functie
+
 ~~~python
 >>> dir(hello)
 ['__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__', 'hello', 'world']
 ~~~
 
-~~~python
->>> import builtins
->>> dir(builtins)
-['ArithmeticError', 'AssertionError', 'AttributeError', 'BaseException', 'BlockingIOError', 'BrokenPipeError', 'BufferError', 'BytesWarning', 'ChildProcessError', 'ConnectionAbortedError', 'ConnectionError', 'ConnectionRefusedError', 'ConnectionResetError', 'DeprecationWarning', 'EOFError', 'Ellipsis', 'EnvironmentError', 'Exception', 'False', 'FileExistsError', 'FileNotFoundError', 'FloatingPointError', 'FutureWarning', 'GeneratorExit', 'IOError', 'ImportError', 'ImportWarning', 'IndentationError', 'IndexError', 'InterruptedError', 'IsADirectoryError', 'KeyError', 'KeyboardInterrupt', 'LookupError', 'MemoryError', 'ModuleNotFoundError', 'NameError', 'None', 'NotADirectoryError', 'NotImplemented', 'NotImplementedError', 'OSError', 'OverflowError', 'PendingDeprecationWarning', 'PermissionError', 'ProcessLookupError', 'RecursionError', 'ReferenceError', 'ResourceWarning', 'RuntimeError', 'RuntimeWarning', 'StopAsyncIteration', 'StopIteration', 'SyntaxError', 'SyntaxWarning', 'SystemError', 'SystemExit', 'TabError', 'TimeoutError', 'True', 'TypeError', 'UnboundLocalError', 'UnicodeDecodeError', 'UnicodeEncodeError', 'UnicodeError', 'UnicodeTranslateError', 'UnicodeWarning', 'UserWarning', 'ValueError', 'Warning', 'ZeroDivisionError', '_', '__build_class__', '__debug__', '__doc__', '__import__', '__loader__', '__name__', '__package__', '__spec__', 'abs', 'all', 'any', 'ascii', 'bin', 'bool', 'breakpoint', 'bytearray', 'bytes', 'callable', 'chr', 'classmethod', 'compile', 'complex', 'copyright', 'credits', 'delattr', 'dict', 'dir', 'divmod', 'enumerate', 'eval', 'exec', 'exit', 'filter', 'float', 'format', 'frozenset', 'getattr', 'globals', 'hasattr', 'hash', 'help', 'hex', 'id', 'input', 'int', 'isinstance', 'issubclass', 'iter', 'len', 'license', 'list', 'locals', 'map', 'max', 'memoryview', 'min', 'next', 'object', 'oct', 'open', 'ord', 'pow', 'print', 'property', 'quit', 'range', 'repr', 'reversed', 'round', 'set', 'setattr', 'slice', 'sorted', 'staticmethod', 'str', 'sum', 'super', 'tuple', 'type', 'vars', 'zip']
-~~~
 
 ~~~python
 >>> dir(bytearray)
@@ -193,11 +295,44 @@ TypeError: 'type' object is not subscriptable
 >>> 
 ~~~
 
-### Standard posules
+### builtin-module
+
+~~~python
+>>> import builtins
+>>> dir(builtins)
+['ArithmeticError', 'AssertionError', 'AttributeError', 'BaseException', 'BlockingIOError', 'BrokenPipeError', 'BufferError', 'BytesWarning', 'ChildProcessError', 'ConnectionAbortedError', 'ConnectionError', 'ConnectionRefusedError', 'ConnectionResetError', 'DeprecationWarning', 'EOFError', 'Ellipsis', 'EnvironmentError', 'Exception', 'False', 'FileExistsError', 'FileNotFoundError', 'FloatingPointError', 'FutureWarning', 'GeneratorExit', 'IOError', 'ImportError', 'ImportWarning', 'IndentationError', 'IndexError', 'InterruptedError', 'IsADirectoryError', 'KeyError', 'KeyboardInterrupt', 'LookupError', 'MemoryError', 'ModuleNotFoundError', 'NameError', 'None', 'NotADirectoryError', 'NotImplemented', 'NotImplementedError', 'OSError', 'OverflowError', 'PendingDeprecationWarning', 'PermissionError', 'ProcessLookupError', 'RecursionError', 'ReferenceError', 'ResourceWarning', 'RuntimeError', 'RuntimeWarning', 'StopAsyncIteration', 'StopIteration', 'SyntaxError', 'SyntaxWarning', 'SystemError', 'SystemExit', 'TabError', 'TimeoutError', 'True', 'TypeError', 'UnboundLocalError', 'UnicodeDecodeError', 'UnicodeEncodeError', 'UnicodeError', 'UnicodeTranslateError', 'UnicodeWarning', 'UserWarning', 'ValueError', 'Warning', 'ZeroDivisionError', '_', '__build_class__', '__debug__', '__doc__', '__import__', '__loader__', '__name__', '__package__', '__spec__', 'abs', 'all', 'any', 'ascii', 'bin', 'bool', 'breakpoint', 'bytearray', 'bytes', 'callable', 'chr', 'classmethod', 'compile', 'complex', 'copyright', 'credits', 'delattr', 'dict', 'dir', 'divmod', 'enumerate', 'eval', 'exec', 'exit', 'filter', 'float', 'format', 'frozenset', 'getattr', 'globals', 'hasattr', 'hash', 'help', 'hex', 'id', 'input', 'int', 'isinstance', 'issubclass', 'iter', 'len', 'license', 'list', 'locals', 'map', 'max', 'memoryview', 'min', 'next', 'object', 'oct', 'open', 'ord', 'pow', 'print', 'property', 'quit', 'range', 'repr', 'reversed', 'round', 'set', 'setattr', 'slice', 'sorted', 'staticmethod', 'str', 'sum', 'super', 'tuple', 'type', 'vars', 'zip']
+~~~
 
 ### Herwerken van studenten-applicatie
 
-student_entities.py
+Als voorbeeld van een modularisatie gaan we onze voorgaande studenten-applicatie modulariseren.  
+Als je de code bekijkt zou je deze kunnen verknippen in 3 delen:
+
+* student_command.py => code die zich bezig houdt met de command-line-interactie
+* student_service.py => code die zich bezig houtd met de applicatie-logica en het opslagen in de database
+* student_entities.py => code die de studenten-datatypes bevatten
+
+~~~
+                                 +-------------------------------+
+                                 |                               |
+               +-----------------+       STUDENT_COMMAND         +------------------+
+               |                 |                               |                  |
+               |                 +-------------------------------+                  |
+               v                                                                    |
++------------------------------+                                                    |
+|                              |                                                    |
+|        STUDENT_SERVICE       |                                                    |
+|                              |                                                    |
++---------------+--------------+                                                    V
+                |                                                    +------------------------------+
+                |                                                    |                              |
+                +--------------------------------------------------->+        STUDENT_ENTITIES      |
+                                                                     |                              |
+                                                                     +------------------------------+
+~~~
+
+
+#### student_entities.py
 
 ~~~python
 class Student:
@@ -228,7 +363,7 @@ class StudentGroup:
             self.name, self.teacher, self.room)   
 ~~~
 
-student_db.py
+#### student_db.py
 
 ~~~python
 import sqlite3 as sl
@@ -314,7 +449,7 @@ def delete_student(id):
 init_database()
 ~~~
 
-student_cmd.py
+#### student_cmd.py
 
 ~~~python
 from students import *

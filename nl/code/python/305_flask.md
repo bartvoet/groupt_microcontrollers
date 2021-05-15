@@ -27,7 +27,17 @@ def hello_world():
 
 ### Programma draaien
 
-Om dit te draaien dien je te doen vanaf
+Om dit te draaien dien je te doen vanaf de command line
+
+~~~
+$ export FLASK_APP=hello.py
+$ python -m flask run
+ * Running on http://127.0.0.1:5000/
+~~~
+
+De flask-module zal zoeken naar deze m
+
+
 
 ~~~
 $ export FLASK_APP=hello.py
@@ -35,13 +45,8 @@ $ flask run
  * Running on http://127.0.0.1:5000/
 ~~~
 
-Als deze 
 
-~~~
-$ export FLASK_APP=hello.py
-$ python -m flask run
- * Running on http://127.0.0.1:5000/
-~~~
+
 
 Als je nu een brower opent en suft naar http://127.0.0.1:5000/
 
@@ -73,6 +78,10 @@ Als alles goed gegaan is krijg je een vester
 * delete - delete
 
 #### static vs dynamic
+
+~~~
+python3 -m http.server
+~~~
 
 #### REST
 
