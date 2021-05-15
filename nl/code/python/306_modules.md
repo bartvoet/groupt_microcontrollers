@@ -1,18 +1,67 @@
 ## Python modules
 
-Modulair programmeren houdt in dat je leert je code te ordenen binnen verschillende modules of groepen van code.
+### Modulariteit
 
+**Modulair** programmeren of modulariteit houdt in dat je leert je **code** te **ordenen**  en te groeperen.  
+Tot nu toe hebben we al 2 elementen gezien die ons daarbij kunnen helpen, namelijk **functies** en **klasses**.
+
+#### Modulariteit met functies
+
+**Functies** stelde ons in staat stukken code te isoleren:
+
+* Om code **op te delen** in logische onderdelen (en je code leesbaar te houden)
+* Om code te **hergebruiken** en herhalingen te vermijden
+  
+#### Modulariteit met objecten...
+
+**Klasses** stelde ons in staat data te groeperen in een structuur.  
+Herinner bijvoorbeeld de student met een naam, labo-punten en theorie-punten.  
+
+~~~python
+class Student:
+    name = ""
+    labo = 0
+    theory = 0
+
+bart = Student()
+bart.labo = 16
+bart.theory = 12
+~~~
+
+Wat klasses nog bijzonder maakt is de mogelijkheid functies te koppelen aan deze data.  
+Zo konden we bijvoorbeeld een functie average die - via de self-referentie - kon opereren op de data ban het object
+
+~~~python
+class Student:
+    name = ""
+    labo = 0
+    theory = 0
+
+    def points(self):
+        return self.labo / self.theory
+
+bart = Student()
+bart.labo = 16
+bart.theory = 12
+
+print(bart.points()) # prints 14
+~~~
+
+### Python modules
+
+Een module zit nog een niveau hoger dan functies en objecten.  
 Een module is een geheel van klassen, functies en variabelen die logisch bij elkaar horen.  
+
 De reden om deze te groeperen zijn divers:
 
 * Je programma logisch onder te verdelen te groeperen om het overzichtelijk en onderhoudsvriendelijk te houden
 * Je code te laten herbruiken binnen andere programma's
-* Een stuk van je code te isoleren om het gemakkelijker te tesen
-* ...
+* Een stuk van je code te isoleren om het gemakkelijker te testen
+* ... en vele andere redenen die je nog zal ontdekken
 
-### Python modules
+### Python modules in praktijk
 
-Een Python module aanmaken is zeer éénvoudig, een **Python-file** is een **module**
+Een Python module aanmaken is **zeer éénvoudig**, een **Python-file** is een **module**
 Stel **onderstaande code**...
 
 ~~~python
@@ -23,7 +72,9 @@ def world():
     print("world")
 ~~~
 
-... we bewaren deze file onder de **naam hello.py**
+... we bewaren deze file onder de **naam hello.py**  
+
+**Let op, deze naam (hello.py) moeten we onthouden voor de volgende stap**
 
 ### Een module hergebruiken via import
 
@@ -51,7 +102,7 @@ Traceback (most recent call last):
 NameError: name 'hello' is not defined
 ~~~
 
-### import vanuit een andere python-file
+### Import vanuit een andere python-file
 
 Het voorgaand voorbeeld was vanit de **console** maar je kan dat ook het zelfde doen vanuit een andere Python-file.
 
@@ -59,9 +110,14 @@ Maar hiervoor - opnieuw binnen dezelfde directory - een andere file aan (bijvoor
 
 ~~~python
 import hello
+
 hello.hello()
 hello.world()
 ~~~
+
+> *Nota:*  
+> Probeer voor leesbaarheid een lege lijn tussen de imports (meestal bovenaan de code)
+> en de rest van je code
 
 Vanuit deze file kan je dan respectievelijk beide functies hergebruiken:
 
@@ -75,7 +131,7 @@ world
 
 ### De naam van modules
 
-Een module krijgt ook automatisch een naam mee (die dan ook overeenkomt me de naam die je gebruikt om deze te importeren)
+Een module krijgt ook **automatisch** een **naam** mee (die dan ook **overeenkomt** me de naam die je gebruikt om deze te **importeren**)
 
 ~~~python
 >>> import hello
@@ -86,7 +142,8 @@ Een module krijgt ook automatisch een naam mee (die dan ook overeenkomt me de na
 >>> 
 ~~~
 
-Deze variabele is ook beschikbaar als globale variabele, en deze heeft een specifieke waarde afhankelijk van de modus waar de code zich in bevindt.  
+Deze variabele is ook beschikbaar als globale variabele, en deze heeft een specifieke waarde afhankelijk van de modus waar de code zich in bevindt.
+
 In normale omstandigheden zal de waarde van deze functie **__main__** zijn, maar dit kan ook verschillend zijn zoals we zo dadelijk gaan zien...
 
 ### name-variabele met verschillende waardes
@@ -122,9 +179,9 @@ world
 Eerst en vooral zien we dat - ondanks dat we enkel importeren - de code effectief wordt uitgevoerd.  
 De naam is echter hello en niet __main__ maar hello.  
 
-Bij het importeren van een file wordt dus alle code van deze file uitgevoerd, doordat deze code wordt uitgevoerd worden deze functies dan ook beschikbaar gesteld.  
-Door dat de globale name-variabele echter op hello staat worden deze functies trouwens gekoppeld aan deze naam en niet aan de globale (main)-namespace (waardoor dat je hello als prefix dient te gebruiken)
+Bij het importeren van een file wordt dus alle code van deze file uitgevoerd, doordat deze code wordt uitgevoerd worden deze functies dan ook beschikbaar gesteld.
 
+Door dat de globale name-variabele echter op hello staat worden deze functies trouwens gekoppeld aan deze naam en niet aan de globale (main)-namespace (waardoor dat je hello als prefix dient te gebruiken)
 
 ### Uitvoerbare modules
 
@@ -183,16 +240,17 @@ world
 
 ### from-keyword
 
-Eerdoer hebben het import-keyword gebruikt om de functies vanuit voorgaande module te importeren.  
+Eerdoer hebben het **import-keyword** gebruikt om de functies vanuit voorgaande module te importeren.  
 
-Om die functies (en klasses als die er zouden zijn) te gebruiken diende je te prefixen met de module-naam (hello).
-Dit had als voordeel dat je niet zomaar conflicten kan hebben met functies uit andere modules (of je eigen code) maar geeft wel wat extra type-werk.
+Om die functies (en klasses als die er zouden zijn) te gebruiken diende je te **prefixen** met de module-naam (hello).  
+Dit had als voordeel dat je niet zomaar **conflicten** kan hebben met **functies** uit andere modules (of je eigen code) maar geeft wel wat extra type-werk.
 
 Soms kunnen er situaties zijn waar je de functies in hoofd-namespace van het programma wil krijgen (zonder te moeten prefixen).  
-Dit kan je doen met de volgende from ... import ... constructie zoals in onderstaande code.
+Dit kan je doen met de volgende **from ... import ... constructie** zoals in onderstaande code.
 
 ~~~python
 from hello import world
+
 world()
 ~~~
 
@@ -220,6 +278,7 @@ Of je importeert beide (gescheiden door komma's)
 
 ~~~python
 from hello import hello,world
+
 world()
 hello()
 ~~~
@@ -241,66 +300,9 @@ hello
 
 ~~~python
 from hello import *
+
 world()
 hello()
-~~~
-
-### Python-path
-
-~~~python
->>> import sys
->>> print(sys.path)
-['', '/usr/lib/python38.zip', '/usr/lib/python3.8', '/usr/lib/python3.8/lib-dynload', '/home/bart/.local/lib/python3.8/site-packages', '/usr/local/lib/python3.8/dist-packages', '/usr/lib/python3/dist-packages', '/usr/lib/python3.8/dist-packages']
-~~~
-
-### Module-cache
-
-~~~
-$ ls
-hello.py  __pycache__
-$ ls __pycache__/
-hello.cpython-38.pyc
-~~~
-
-### dir-functie
-
-~~~python
->>> dir(hello)
-['__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__', 'hello', 'world']
-~~~
-
-
-~~~python
->>> dir(bytearray)
-['__add__', '__alloc__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'capitalize', 'center', 'clear', 'copy', 'count', 'decode', 'endswith', 'expandtabs', 'extend', 'find', 'fromhex', 'hex', 'index', 'insert', 'isalnum', 'isalpha', 'isascii', 'isdigit', 'islower', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'partition', 'pop', 'remove', 'replace', 'reverse', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']
-~~~
-
-~~~
->>> dir(list)
-['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
->>> a = [1,2,3]
->>> dir a
-  File "<stdin>", line 1
-    dir a
-        ^
-SyntaxError: invalid syntax
->>> dir(a)
-['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
->>> type[a]
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: 'type' object is not subscriptable
->>> type(a)
-<class 'list'>
->>> 
-~~~
-
-### builtin-module
-
-~~~python
->>> import builtins
->>> dir(builtins)
-['ArithmeticError', 'AssertionError', 'AttributeError', 'BaseException', 'BlockingIOError', 'BrokenPipeError', 'BufferError', 'BytesWarning', 'ChildProcessError', 'ConnectionAbortedError', 'ConnectionError', 'ConnectionRefusedError', 'ConnectionResetError', 'DeprecationWarning', 'EOFError', 'Ellipsis', 'EnvironmentError', 'Exception', 'False', 'FileExistsError', 'FileNotFoundError', 'FloatingPointError', 'FutureWarning', 'GeneratorExit', 'IOError', 'ImportError', 'ImportWarning', 'IndentationError', 'IndexError', 'InterruptedError', 'IsADirectoryError', 'KeyError', 'KeyboardInterrupt', 'LookupError', 'MemoryError', 'ModuleNotFoundError', 'NameError', 'None', 'NotADirectoryError', 'NotImplemented', 'NotImplementedError', 'OSError', 'OverflowError', 'PendingDeprecationWarning', 'PermissionError', 'ProcessLookupError', 'RecursionError', 'ReferenceError', 'ResourceWarning', 'RuntimeError', 'RuntimeWarning', 'StopAsyncIteration', 'StopIteration', 'SyntaxError', 'SyntaxWarning', 'SystemError', 'SystemExit', 'TabError', 'TimeoutError', 'True', 'TypeError', 'UnboundLocalError', 'UnicodeDecodeError', 'UnicodeEncodeError', 'UnicodeError', 'UnicodeTranslateError', 'UnicodeWarning', 'UserWarning', 'ValueError', 'Warning', 'ZeroDivisionError', '_', '__build_class__', '__debug__', '__doc__', '__import__', '__loader__', '__name__', '__package__', '__spec__', 'abs', 'all', 'any', 'ascii', 'bin', 'bool', 'breakpoint', 'bytearray', 'bytes', 'callable', 'chr', 'classmethod', 'compile', 'complex', 'copyright', 'credits', 'delattr', 'dict', 'dir', 'divmod', 'enumerate', 'eval', 'exec', 'exit', 'filter', 'float', 'format', 'frozenset', 'getattr', 'globals', 'hasattr', 'hash', 'help', 'hex', 'id', 'input', 'int', 'isinstance', 'issubclass', 'iter', 'len', 'license', 'list', 'locals', 'map', 'max', 'memoryview', 'min', 'next', 'object', 'oct', 'open', 'ord', 'pow', 'print', 'property', 'quit', 'range', 'repr', 'reversed', 'round', 'set', 'setattr', 'slice', 'sorted', 'staticmethod', 'str', 'sum', 'super', 'tuple', 'type', 'vars', 'zip']
 ~~~
 
 ### Herwerken van studenten-applicatie
@@ -308,29 +310,78 @@ TypeError: 'type' object is not subscriptable
 Als voorbeeld van een modularisatie gaan we onze voorgaande studenten-applicatie modulariseren.  
 Als je de code bekijkt zou je deze kunnen verknippen in 3 delen:
 
-* student_command.py => code die zich bezig houdt met de command-line-interactie
-* student_service.py => code die zich bezig houtd met de applicatie-logica en het opslagen in de database
-* student_entities.py => code die de studenten-datatypes bevatten
+* **student_command.py**   
+  Code die zich bezig houdt met de command-line-interactie
+* **student_service.py**  
+  Code die zich bezig houtd met de applicatie-logica en het opslagen in de database
+* **student_entities.py**  
+  Code die de studenten-datatypes bevatten.
+
+Elk stuk code heeft zijn eigen verantwoordelijkheid.
+
+#### Afhankelijkheden
+
+In onderstaand diagram zien je ook de relaties en afhankelijkheden tussen de modules onderling.
+
+* Bovenaan staat de command-line-module, deze heeft de service-module nodig om de studenten in de database op te slagen
+* Zowel de command- als de service- zijn op hun beurt afhankelijk van de entities
+* entities staat op zich zelf en heeft geen afhankelijheden
 
 ~~~
-                                 +-------------------------------+
-                                 |                               |
-               +-----------------+       STUDENT_COMMAND         +------------------+
-               |                 |                               |                  |
-               |                 +-------------------------------+                  |
-               v                                                                    |
-+------------------------------+                                                    |
-|                              |                                                    |
-|        STUDENT_SERVICE       |                                                    |
-|                              |                                                    |
-+---------------+--------------+                                                    V
-                |                                                    +------------------------------+
-                |                                                    |                              |
-                +--------------------------------------------------->+        STUDENT_ENTITIES      |
-                                                                     |                              |
-                                                                     +------------------------------+
+                             +-------------------------------+
+                             |                               |
+                +------------+       STUDENT_COMMAND         +------------+
+                |            |                               |            |
+                |            +-------------------------------+            |
+                v                                                         |
++---------------+--------------+                                          |
+|                              |                                          |
+|        STUDENT_SERVICE       |                                          |
+|                              |                                          |
++---------------+--------------+                                          V
+                |                                         +---------------+--------------+
+                |                                         |                              |
+                +---------------------------------------->+        STUDENT_ENTITIES      |
+                                                          |                              |
+                                                          +------------------------------+
 ~~~
 
+#### Nut van modules
+
+Modules zijn zeer nuttig voor verschillende doeleinden: 
+
+* Code (bij grotere projectjes) op te splitsten in kleinere beheersbare delen zodat.
+* Code te herbruiken binnen andere applicaties
+* Code individueel testen (je wil bijvoorbeeld je service-applicatie testen zonder de command-line)
+  
+Stel nu dat we naast onze command-line-module nu ook een web-api willen maken dan kan deze nieuwe module ook de service-module gebruiken
+
+(we passen dit toe in het volgend hoofdstuk)
+
+~~~
+                     +-------------------------------+
+                     |                               |
+                +----+       STUDENT_API             +--------------------+
+                |    |                               |                    |
+                |    +-------------------------------+                    |
+                |                                                         |
+                |                    +-------------------------------+    |
+                |                    |                               |    |
+                +--------------------+       STUDENT_COMMAND         +----+
+                |                    |                               |    |
+                |                    +-------------------------------+    |
+                v                                                         |
++---------------+--------------+                                          |
+|                              |                                          |
+|        STUDENT_SERVICE       |                                          |
+|                              |                                          |
++---------------+--------------+                                          V
+                |                                         +---------------+--------------+
+                |                                         |                              |
+                +---------------------------------------->+        STUDENT_ENTITIES      |
+                                                          |                              |
+                                                          +------------------------------+
+~~~
 
 #### student_entities.py
 
@@ -533,3 +584,53 @@ while True:
     else:
         print("ongekende input")
 ~~~
+
+### Andere weetjes
+
+Een aantal andere interessante weetjes ivm modules zijn
+
+#### Waar vindt Python modules
+
+Om je een module te gebruiken moesten de python-module-file in dezelfde directory plaatsen.  
+
+Python voorziet echter - naast je eigen modules - ook een veel standaard-modules, waar bevinden zich deze modules nu.
+
+De locaties waar Python deze gaan halen bevindt zich in een variable binnen de standard-module sys.path
+
+~~~python
+>>> import sys
+>>> print(sys.path)
+['', '/usr/lib/python38.zip', '/usr/lib/python3.8', '/usr/lib/python3.8/lib-dynload', '/home/bart/.local/lib/python3.8/site-packages', '/usr/local/lib/python3.8/dist-packages', '/usr/lib/python3/dist-packages', '/usr/lib/python3.8/dist-packages']
+~~~
+
+
+#### dir-functie
+
+De dir-functie kan je gebruiken om de verschillende onderdelen (functies, klassen, variabelen, ...) 
+
+~~~python
+>>> dir(hello)
+['__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__', 'hello', 'world']
+~~~
+
+De dir-functie kan je trouwens ook gebruiken op klasses, hieronder zie alle functies die betaan voor het type bytearray
+
+~~~python
+>>> dir(bytearray)
+['__add__', '__alloc__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'capitalize', 'center', 'clear', 'copy', 'count', 'decode', 'endswith', 'expandtabs', 'extend', 'find', 'fromhex', 'hex', 'index', 'insert', 'isalnum', 'isalpha', 'isascii', 'isdigit', 'islower', 'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'partition', 'pop', 'remove', 'replace', 'reverse', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate', 'upper', 'zfill']
+~~~
+
+Voor het type list...
+
+~~~python
+>>> dir(list)
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+>>> a = [1,2,3]
+>>> dir(a)
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'extend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+>>> type(a)
+<class 'list'>
+>>> 
+~~~
+
+Bemerk ook in bovenstaande code dat deze dir-functie ook kan toepassen op een object van het type zelf...
