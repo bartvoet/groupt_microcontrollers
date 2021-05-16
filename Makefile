@@ -203,6 +203,7 @@ PY_CHAPTER_03 += ../code/python/301_databases_intro.md
 PY_CHAPTER_03 += ../code/python/302_databases_sqlite_intro.md
 PY_CHAPTER_03 += ../code/python/303_databases_sql_intro.md
 PY_CHAPTER_03 += ../code/python/304_python_en_sql.md
+PY_CHAPTER_03 += ../code/python/306_modules.md
 PY_CHAPTER_03 += ../code/python/305_flask.md
 
 PY_ANNEX += ../code/python/annex.md

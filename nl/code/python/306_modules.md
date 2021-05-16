@@ -162,14 +162,14 @@ print("Name: ", __name__)
 
 Als je deze dan uitvoert print deze zoals verwacht __main__ af
 
-~~~
+~~~bash
 $ python3 hello.py
 Name: __main__
 ~~~
 
 Als we echter nu echter hello_application.py uitvoeren zien we het volgende:
 
-~~~
+~~~bash
 python3 hello_application.py
 Name:  hello
 hello
