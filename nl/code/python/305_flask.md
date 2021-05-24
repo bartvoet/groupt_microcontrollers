@@ -35,22 +35,15 @@ $ python -m flask run
  * Running on http://127.0.0.1:5000/
 ~~~
 
-De flask-module zal zoeken naar deze m
-
-
+De flask-module zal zoeken naar deze environment-variabele
 
 ~~~
 $ export FLASK_APP=hello.py
 $ flask run
  * Running on http://127.0.0.1:5000/
 ~~~
-
-
-
-
 Als je nu een brower opent en suft naar http://127.0.0.1:5000/
-
-Als alles goed gegaan is krijg je een vester
+Als alles goed gegaan is krijg je een venster
 
 ### HTTP
 
@@ -83,27 +76,17 @@ Als alles goed gegaan is krijg je een vester
 python3 -m http.server
 ~~~
 
-#### REST
-
-### HTTP-clients
-
 ### Werken met routes
 
-~~~python
-@app.route('/')
-def index():
-    return 'Index Page'
-
-@app.route('/hello')
-def hello():
-    return 'Hello, World'
-~~~
-
-### Werken met parameters
+Om een iets geavanceerder voorbeeld te tonen voegen we een module students_flask.py toe aan de student-applicatie.
 
 ~~~python
-from flask import Flask, url_for
+from flask import Flask, request, url_for,jsonify
 from markupsafe import escape
+import json
+
+from students_entities import Student, StudentGroup
+from students_service import *
 
 app = Flask(__name__)
 
@@ -111,13 +94,77 @@ app = Flask(__name__)
 def index():
     return 'index'
 
-@app.route('/hello')
-def login():
-    return 'login'
+def group_to_json(group):
+    return group.__dict__
 
-@app.route('/user/<username>')
-def profile(username):
-    return 'user {}'.format(username)
+def student_to_json(student):
+    return student.__dict__
+
+@app.route('/groups', methods=['GET'])
+def groups():
+    groups = list(map(group_to_json, get_groups()))
+    return jsonify(groups)
+
+@app.route('/groups',  methods=['POST'])
+def group_post():
+    group_name = request.json["name"]
+    teacher = request.json["teacher"]
+    room = request.json["room"]
+    save_new_group(group_name, teacher, room)
+    return jsonify(group_to_json(get_group(group_name)))
+
+@app.route('/groups/<groupname>')
+def group(groupname):
+    return group_to_json(get_group(groupname))
+
+@app.route('/groups/<groupname>/students', methods=['GET'])
+def students(groupname):
+    print("a")
+    students = list(map(student_to_json, get_students_for_group(groupname)))
+    return jsonify(students)
+
+@app.route('/groups/<groupname>/students', methods=['POST'])
+def student_post(groupname):
+    name = request.json["name"]
+    lab = int(request.json["lab_points"])
+    theory = int(request.json["theory_points"])
+    student = save_new_student(Student(name, lab, theory), groupname)
+    return jsonify(student_to_json(student))
 ~~~
 
-### Encoding
+### Client-code
+
+~~~bash
+$ curl http://localhost:5000/groups
+
+$ curl http://localhost:5000/groups/hello/students
+
+$^curl curl -d '{"name":"hello", "room":"D118", "teacher":"Jos"}' -X POST -H "Content-Type: application/json" -X POST http://localhost:5000/groups
+
+^curl curl -d '{"name":"hello", "theory_points":"D118", "teacher":"Jos"}' -X POST -H "Content-Type: application/json" -X POST http://localhost:5000/groups
+
+$ curl http://localhost:5000/groups/1/students 
+
+$ curl -d  '{"lab_points":10,"name":"bb","theory_points":15}'  -X POST -H "Content-Type: application/json" -X POST http://localhost:5000/groups/1/students
+$ curl -d  '{"lab_points":10,"name":"cc","theory_points":15}'  -X POST -H "Content-Type: application/json" -X POST http://localhost:5000/groups/1/students
+$ curl -d  '{"lab_points":10,"name":"cc","theory_points":15}'  -X POST -H "Content-Type: application/json" -X POST http://localhost:5000/groups/1/students
+{"id":3,"lab_points":10,"name":"cc","student_id":0,"theory_points":15}
+
+~~~
+
+~~~python
+>>> response = requests.post("http://localhost:5000/groups/1/students",json={"lab_points":12,"name":"dd","theory_points":15})
+>>> response
+<Response [200]>
+>>> response.con
+response.connection  response.content     
+>>> response.con
+response.connection  response.content     
+>>> response.content
+b'{"id":4,"lab_points":12,"name":"dd","student_id":0,"theory_points":15}\n'
+>>> response.json
+<bound method Response.json of <Response [200]>>
+>>> response.json()
+{'id': 4, 'lab_points': 12, 'name': 'dd', 'student_id': 0, 'theory_points': 15}
+>>> 
+~~~
